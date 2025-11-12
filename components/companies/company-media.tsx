@@ -33,7 +33,7 @@ export function CompanyMedia({ mediaItems }: CompanyMediaProps) {
   }
 
   return (
-    <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Newspaper className="h-5 w-5 text-primary" />
@@ -61,7 +61,7 @@ export function CompanyMedia({ mediaItems }: CompanyMediaProps) {
               <Card
                 key={item.id}
                 className={cn(
-                  "group relative overflow-hidden rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all",
+                  "group relative overflow-hidden rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all",
                   "hover:border-primary/50 hover:shadow-md",
                 )}
               >

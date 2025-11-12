@@ -270,7 +270,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
         </TabsList>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-3 sm:gap-4 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-3 sm:p-4 shadow-xs">
+        <div className="flex flex-wrap gap-3 sm:gap-4 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-3 sm:p-4 shadow-xs">
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Status" />
@@ -349,15 +349,15 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
         <TabsContent value="all" className="space-y-4">
           {/* Combined view - show summary counts */}
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-4">
+            <div className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs p-4">
               <p className="text-sm font-medium text-muted-foreground">Influencerzy</p>
               <p className="text-2xl font-bold">{influencers.length}</p>
             </div>
-            <div className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-4">
+            <div className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs p-4">
               <p className="text-sm font-medium text-muted-foreground">Opinie</p>
               <p className="text-2xl font-bold">{reviews.length}</p>
             </div>
-            <div className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-4">
+            <div className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs p-4">
               <p className="text-sm font-medium text-muted-foreground">Błędy danych</p>
               <p className="text-2xl font-bold">{dataIssues.length}</p>
             </div>

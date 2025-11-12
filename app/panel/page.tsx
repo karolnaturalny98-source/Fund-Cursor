@@ -425,10 +425,9 @@ export default function UserPanelPage() {
     <div className="relative min-h-screen">
       {/* Gradient background */}
       <div 
-        className="fixed inset-0 -z-10" 
+        className="fixed inset-0 -z-10 h-[150vh]" 
         style={{
           background: 'linear-gradient(135deg, #0f1726 0%, #1f2a3c 50%, #2446a6 100%)',
-          height: '150vh'
         }}
       />
       <div className="container space-y-8 py-8 relative z-10">
@@ -460,7 +459,7 @@ export default function UserPanelPage() {
         </div>
 
         <SignedOut>
-          <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+          <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
             <CardContent className="flex flex-col items-center justify-center gap-4 px-6 py-12 text-center">
               <h3 className="text-lg font-semibold">
                 Zaloguj się, aby uzyskać dostęp do panelu
@@ -496,7 +495,7 @@ export default function UserPanelPage() {
             </Card>
           ) : data ? (
             <Tabs value={view} onValueChange={(value) => setView(value as typeof view)} className="w-full">
-              <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-1 shadow-xs">
+              <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-background/60 p-1 shadow-xs">
                 <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Przegląd
                 </TabsTrigger>

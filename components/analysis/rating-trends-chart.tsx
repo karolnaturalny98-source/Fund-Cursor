@@ -91,7 +91,7 @@ export function RatingTrendsChart({ companies, ratingHistory }: RatingTrendsChar
   const hasHistoricalData = chartData.length > 0;
 
   return (
-    <Card className="col-span-full rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="col-span-full rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader>
         <CardTitle>Trendy Ocen</CardTitle>
         <CardDescription>
@@ -104,7 +104,7 @@ export function RatingTrendsChart({ companies, ratingHistory }: RatingTrendsChar
           {ratingStats.map((stat, idx) => (
             <div
               key={stat.name}
-              className="rounded-lg border border-border/60 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-4"
+              className="rounded-lg border border-border/60 bg-background/60 backdrop-blur-[36px]! p-4"
               style={{ borderLeftWidth: "4px", borderLeftColor: getCompareColor(idx) }}
             >
               <h4 className="mb-2 font-semibold">{stat.name}</h4>
@@ -160,7 +160,7 @@ export function RatingTrendsChart({ companies, ratingHistory }: RatingTrendsChar
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-3 shadow-xs">
+                        <div className="rounded-lg border border-border/60 bg-card/72 p-3 shadow-xs">
                           <p className="text-xs text-muted-foreground mb-1">
                             {payload[0].payload.date}
                           </p>

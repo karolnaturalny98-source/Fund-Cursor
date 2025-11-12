@@ -26,7 +26,7 @@ export function SocialLinksClient({ socialLinks, tosUrl }: SocialLinksClientProp
         <Link
           key={entry.key}
           href={entry.url}
-          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
+          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
           target="_blank"
           rel="noreferrer"
         >
@@ -37,7 +37,7 @@ export function SocialLinksClient({ socialLinks, tosUrl }: SocialLinksClientProp
       {tosUrl ? (
         <Link
           href={tosUrl}
-          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
+          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
           target="_blank"
           rel="noreferrer"
         >

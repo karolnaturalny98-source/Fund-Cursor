@@ -10,7 +10,7 @@ export function ContentHistoryTab() {
         title="Historia zmian treści"
         description="Przeglądaj historię zmian w firmach, planach i innych treściach."
       >
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Historia zmian</CardTitle>
             <CardDescription>

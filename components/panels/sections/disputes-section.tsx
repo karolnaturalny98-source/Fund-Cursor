@@ -254,7 +254,7 @@ export function DisputesSection({
 
   return (
     <div className="space-y-4">
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Zgłoszenia i pomoc
@@ -265,7 +265,7 @@ export function DisputesSection({
             <Label className="flex items-center gap-2">
               <span>Status</span>
               <Select value={status} onValueChange={(value) => onStatusChange(value as DisputeStatusFilter)}>
-                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]">
+                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-border/40 bg-background/60">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -310,7 +310,7 @@ export function DisputesSection({
       {/* List */}
       <div className="space-y-3">
         {disputes.map((item) => (
-          <Card key={item.id} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs transition-all hover:shadow-md">
+          <Card key={item.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
             <CardContent className="p-4">
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-3">
@@ -376,7 +376,7 @@ export function DisputesSection({
       </div>
 
       {/* Create form */}
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Zgłoś problem</CardTitle>
         </CardHeader>
@@ -405,7 +405,7 @@ export function DisputesSection({
                 disabled={submitting || companiesLoading || noCompaniesAvailable}
                 required
               >
-                <SelectTrigger className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]">
+                <SelectTrigger className="rounded-lg border border-border/40 bg-background/60">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -421,37 +421,37 @@ export function DisputesSection({
             <div className="grid gap-3 md:grid-cols-2">
               <div className="space-y-2">
                 <Label>Tytuł</Label>
-                <Input value={form.title} onChange={handleChange("title")} required className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+                <Input value={form.title} onChange={handleChange("title")} required className="rounded-lg border border-border/40 bg-background/60" />
               </div>
               <div className="space-y-2">
                 <Label>Kategoria</Label>
-                <Input value={form.category} onChange={handleChange("category")} required className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+                <Input value={form.category} onChange={handleChange("category")} required className="rounded-lg border border-border/40 bg-background/60" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label>Opis</Label>
-              <Textarea rows={4} value={form.description} onChange={handleChange("description")} required className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+              <Textarea rows={4} value={form.description} onChange={handleChange("description")} required className="rounded-lg border border-border/40 bg-background/60" />
             </div>
 
             <div className="grid gap-3 md:grid-cols-3">
               <div className="space-y-2">
                 <Label>Kwota roszczenia (opcjonalnie)</Label>
-                <Input inputMode="decimal" placeholder="np. 99.99" value={form.requestedAmount} onChange={handleChange("requestedAmount")} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+                <Input inputMode="decimal" placeholder="np. 99.99" value={form.requestedAmount} onChange={handleChange("requestedAmount")} className="rounded-lg border border-border/40 bg-background/60" />
               </div>
               <div className="space-y-2">
                 <Label>Waluta</Label>
-                <Input maxLength={3} value={form.requestedCurrency} onChange={handleChange("requestedCurrency")} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+                <Input maxLength={3} value={form.requestedCurrency} onChange={handleChange("requestedCurrency")} className="rounded-lg border border-border/40 bg-background/60" />
               </div>
               <div className="space-y-2">
                 <Label>ID planu (opcjonalnie)</Label>
-                <Input value={form.planId} onChange={handleChange("planId")} placeholder="cuid planu" className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+                <Input value={form.planId} onChange={handleChange("planId")} placeholder="cuid planu" className="rounded-lg border border-border/40 bg-background/60" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label>Linki dowodów (po jednym w wierszu)</Label>
-              <Textarea rows={3} value={form.evidenceLinks} onChange={handleChange("evidenceLinks")} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]" />
+              <Textarea rows={3} value={form.evidenceLinks} onChange={handleChange("evidenceLinks")} className="rounded-lg border border-border/40 bg-background/60" />
             </div>
 
             <CardFooter className="px-0 pb-0 flex justify-end gap-2">

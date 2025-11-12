@@ -220,11 +220,11 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
   return (
     <div
       className={cn(
-        "relative flex h-screen flex-col border-r border-border/50 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! transition-all duration-300 shadow-lg",
+        "relative flex h-screen flex-col border-r border-border/50 bg-card/82 backdrop-blur-[36px]! transition-all duration-300 shadow-lg",
         collapsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex h-16 items-center border-b border-border/50 px-3 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]!">
+      <div className="flex h-16 items-center border-b border-border/50 px-3 bg-card/72 backdrop-blur-[36px]!">
         {!collapsed ? (
           <div className="flex flex-1 items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">

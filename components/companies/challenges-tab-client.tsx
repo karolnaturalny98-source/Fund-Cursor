@@ -33,7 +33,7 @@ export function ChallengeHighlightCard({ item }: ChallengeHighlightCardProps) {
   const Icon = IconMap[item.iconName] || Award;
 
   return (
-    <Card ref={cardAnim.ref} className={cn("group rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]", cardAnim.className)}>
+    <Card ref={cardAnim.ref} className={cn("group rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! shadow-xs transition-all hover:border-border/60 hover:bg-card/66", cardAnim.className)}>
       <CardContent className="flex flex-col gap-2 p-3">
         <div className="flex items-center gap-2">
           <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
@@ -84,7 +84,7 @@ export function ChallengeSegmentCard({ group, onClick, isActive }: ChallengeSegm
       ref={cardAnim.ref}
       onClick={onClick}
       className={cn(
-        "group relative h-full cursor-pointer overflow-hidden rounded-xl border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-3 shadow-xs transition-all duration-200",
+        "group relative h-full cursor-pointer overflow-hidden rounded-xl border border-border/40 bg-background/60 backdrop-blur-[36px]! p-3 shadow-xs transition-all duration-200",
         "hover:border-primary/30 hover:shadow-xs",
         group.plans.length === 0 && "opacity-50",
         "bg-linear-to-br",
@@ -185,7 +185,7 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
               key={group.id}
               value={group.id}
               className={cn(
-                "rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! transition-all",
+                "rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! transition-all",
                 "hover:border-primary/50 hover:shadow-xs",
                 isActive && "border-primary/50 ring-1 ring-primary/20",
                 !hasPlans && "opacity-50",
@@ -231,7 +231,7 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
                       {group.plans.map((plan) => (
                         <li
                           key={plan.id}
-                          className="flex items-start gap-2 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] px-3 py-2 transition-colors hover:bg-[rgba(10,12,15,0.72)]!"
+                          className="flex items-start gap-2 rounded-lg border border-border/40 bg-background/60 px-3 py-2 transition-colors hover:bg-card/72"
                         >
                           <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/80" />
                           <div className="flex-1 space-y-0.5">
@@ -258,7 +258,7 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
                         }, 100);
                       }}
                       className={cn(
-                        "w-full rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! px-3 py-2 text-xs font-medium transition-all",
+                        "w-full rounded-lg border border-border/60 bg-card/72 px-3 py-2 text-xs font-medium transition-all",
                         "hover:border-primary/50 hover:bg-primary/5 hover:text-primary",
                       )}
                     >

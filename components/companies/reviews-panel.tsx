@@ -192,7 +192,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
       {/* Quick Stats */}
       {reviews.length > 0 && (
         <div ref={statsAnim.ref} className={`grid gap-4 sm:grid-cols-2 md:grid-cols-4 ${statsAnim.className}`}>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {averageRating.toFixed(1)}
@@ -201,7 +201,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
               <CardDescription className="text-xs font-medium">Średnia ocena</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {reviews.length}
@@ -209,7 +209,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
               <CardDescription className="text-xs font-medium">Wszystkich opinii</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {verifiedPercentage}%
@@ -217,7 +217,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
               <CardDescription className="text-xs font-medium">Zweryfikowanych</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {recommendedPercentage}%
@@ -245,7 +245,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                 placeholder="Szukaj w opiniach..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+                className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
               />
             </div>
           </div>
@@ -263,7 +263,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             )}
             {/* Sort Dropdown */}
             <Select value={sort} onValueChange={(value) => setSort(value as SortOption)}>
-              <SelectTrigger className="w-[180px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+              <SelectTrigger className="w-[180px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                 <ArrowUpDown className="mr-2 h-4 w-4" />
                 <SelectValue />
               </SelectTrigger>
@@ -298,7 +298,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">Szybkie filtry:</span>
           <Tabs value={filter} onValueChange={(value) => setFilter(value as FilterId)}>
-            <TabsList className="gap-1 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-1 shadow-xs">
+            <TabsList className="gap-1 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! p-1 shadow-xs">
               <TabsTrigger value="all" className="rounded-full px-4 py-1.5 text-xs font-semibold data-[state=active]:border-primary/50">
                 Wszystkie ({reviews.length})
               </TabsTrigger>
@@ -333,7 +333,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
       )}
 
       {filteredReviews.length === 0 ? (
-        <Card className="rounded-2xl border border-border/60 border-dashed bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <div className="mb-4 rounded-full bg-muted/30 p-4">
               <MessageSquare className="h-10 w-10 text-muted-foreground/50" />
@@ -388,7 +388,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             >
               <Card
                 data-testid="review-card"
-                className="group h-full rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+                className="group h-full rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
               >
               <CardHeader className="space-y-3 pb-3">
                 <div className="flex items-start justify-between gap-3">
@@ -544,7 +544,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                   </Alert>
                 ) : null}
                 {review.resourceLinks.length > 0 ? (
-                  <div className="space-y-2 rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-3 shadow-xs">
+                  <div className="space-y-2 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! p-3 shadow-xs">
                     <p className="text-xs font-semibold text-foreground">Materiały:</p>
                     <ul className="space-y-1 text-xs">
                       {review.resourceLinks.map((link) => (

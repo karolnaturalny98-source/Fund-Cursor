@@ -290,7 +290,7 @@ function FiltersPanel({
   };
 
   return (
-    <Card className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-base font-semibold">
           <Filter className="h-5 w-5 text-primary" />
@@ -352,7 +352,7 @@ function FiltersPanel({
                   placeholder="Szukaj firmy po nazwie lub slugu..."
                   value={searchDraft}
                   onChange={(event) => onSearchChange(event.target.value)}
-                  className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+                  className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
                   aria-label="Szukaj firmy"
                 />
               </div>
@@ -377,11 +377,11 @@ function FiltersPanel({
                   inputMode="numeric"
                   value={filters.minReviews}
                   onChange={(event) => handleMinReviewsChange(event.target.value)}
-                  className="h-9 w-20 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! text-center text-xs shadow-xs"
+                  className="h-9 w-20 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! text-center text-xs shadow-xs"
                   aria-label="Minimalna liczba opinii"
                 />
               </label>
-              <label className="flex cursor-pointer items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground">
+              <label className="flex cursor-pointer items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground">
                 <Checkbox
                   checked={filters.onlyRecent}
                   onCheckedChange={(checked) =>
@@ -399,7 +399,7 @@ function FiltersPanel({
               value={filters.sortBy}
               onValueChange={(value) => handleSortChange(value as SortBy)}
             >
-              <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+              <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                 <ArrowUpDown className="mr-2 h-4 w-4" />
                 <SelectValue />
               </SelectTrigger>

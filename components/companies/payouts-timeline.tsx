@@ -111,7 +111,7 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
         </Select>
       </div>
 
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
         <CardContent className="p-4">
           <div className="relative">
             {/* Timeline line */}

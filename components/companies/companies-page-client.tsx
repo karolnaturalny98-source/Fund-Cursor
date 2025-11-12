@@ -155,7 +155,7 @@ export function CompaniesPageClient({
                 placeholder="Szukaj po nazwie firmy..."
                 value={searchDraft}
                 onChange={(e) => setSearchDraft(e.target.value)}
-                className="w-full rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+                className="w-full rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
                 disabled={isPending}
               />
               {isPending && (
@@ -268,7 +268,7 @@ export function CompaniesPageClient({
                 {Array.from({ length: 6 }).map((_, index) => (
                   <div
                     key={`skeleton-${index}`}
-                    className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs"
+                    className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs"
                   >
                     <div className="space-y-5">
                       <div className="flex items-start justify-between gap-4">
@@ -332,7 +332,7 @@ export function CompaniesPageClient({
                 ))}
               </div>
             ) : (
-              <div className="rounded-3xl border border-dashed border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-12 text-center">
+              <div className="rounded-3xl border border-dashed border-border/60 bg-card/72 backdrop-blur-[36px]! p-12 text-center">
                 <div className="mx-auto max-w-md space-y-4">
                   <p className="text-base font-semibold text-foreground">
                     Brak firm spelniajacych wybrane kryteria

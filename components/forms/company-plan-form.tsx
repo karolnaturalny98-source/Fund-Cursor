@@ -307,7 +307,7 @@ export function CreateCompanyPlanForm({
   };
 
   return (
-    <div className="rounded-lg border bg-[rgba(8,10,13,0.82)]! p-4">
+    <div className="rounded-lg border bg-card/82 p-4">
       <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         {isEditMode ? "Edytuj plan" : "Dodaj plan"}
       </h3>

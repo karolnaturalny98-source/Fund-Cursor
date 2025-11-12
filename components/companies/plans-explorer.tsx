@@ -212,7 +212,7 @@ export function PlansExplorer({
                 })
               }
             >
-              <SelectTrigger className="w-[120px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-3 py-1 text-xs font-semibold text-foreground shadow-xs">
+              <SelectTrigger className="w-[120px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-1 text-xs font-semibold text-foreground shadow-xs">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -228,7 +228,7 @@ export function PlansExplorer({
             <span className="text-xs uppercase text-muted-foreground">
               Widok
             </span>
-            <div className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-1 shadow-xs">
+            <div className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! p-1 shadow-xs">
               <button
                 type="button"
                 className={cn(
@@ -267,7 +267,7 @@ export function PlansExplorer({
               placeholder="Szukaj planu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+              className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
             />
           </div>
         </div>
@@ -296,7 +296,7 @@ export function PlansExplorer({
               onModelFilterChange?.(newValue);
             }}
           >
-            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
               <Filter className="mr-2 h-4 w-4" />
               <SelectValue />
             </SelectTrigger>
@@ -309,7 +309,7 @@ export function PlansExplorer({
           </Select>
           {/* Sort Dropdown */}
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
-            <SelectTrigger className="w-[140px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+            <SelectTrigger className="w-[140px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
               <ArrowUpDown className="mr-2 h-4 w-4" />
               <SelectValue />
             </SelectTrigger>
@@ -385,7 +385,7 @@ export function PlansExplorer({
       </div>
 
       {plansWithComputed.length === 0 ? (
-        <div className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 text-center shadow-xs">
+        <div className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 text-center shadow-xs">
           <p className="text-sm text-muted-foreground">
             Brak planów spełniających wybrane kryteria.
           </p>
@@ -432,7 +432,7 @@ function PlanCard({
         : "text-muted-foreground";
 
   return (
-    <article className="group flex flex-col gap-4 rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border border-border/60-premium hover:shadow-sm-lg">
+    <article className="group flex flex-col gap-4 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border border-border/60-premium hover:shadow-sm-lg">
       <header className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-foreground">
@@ -466,7 +466,7 @@ function PlanCard({
       />
 
       {plan.changeLabel ? (
-        <div className={`flex items-center gap-2 rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-3 py-2 ${changeBadge === "text-emerald-600" ? "border-emerald-500/20 bg-emerald-500/5" : changeBadge === "text-rose-600" ? "border-rose-500/20 bg-rose-500/5" : "border-border/60"}`}>
+        <div className={`flex items-center gap-2 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 ${changeBadge === "text-emerald-600" ? "border-emerald-500/20 bg-emerald-500/5" : changeBadge === "text-rose-600" ? "border-rose-500/20 bg-rose-500/5" : "border-border/60"}`}>
           <PremiumIcon icon={LineChart} variant={plan.changeDirection === "flat" ? "default" : "glow"} size="sm" />
           <p className={`text-xs font-medium ${changeBadge}`}>
             {plan.changeLabel}
@@ -474,7 +474,7 @@ function PlanCard({
         </div>
       ) : null}
 
-      <div className="grid gap-3 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs sm:grid-cols-2">
+      <div className="grid gap-3 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs sm:grid-cols-2">
         <PlanStat
           label="Max drawdown"
           value={formatMoney(plan.convertedMaxDrawdown, displayCurrency)}
@@ -510,7 +510,7 @@ function PlanCard({
       </div>
 
       {plan.features.length ? (
-        <div className="space-y-2 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs text-sm">
+        <div className="space-y-2 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs text-sm">
           <p className="font-semibold text-foreground">Co wyroznia plan</p>
           <ul className="space-y-1.5 text-muted-foreground">
             {plan.features.map((feature) => (
@@ -523,7 +523,7 @@ function PlanCard({
         </div>
       ) : null}
 
-      <div className="space-y-2 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs text-sm text-muted-foreground">
+      <div className="space-y-2 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs text-sm text-muted-foreground">
         {plan.accountType ? (
           <div className="flex items-center gap-2">
             <span>Typ konta:</span>
@@ -572,7 +572,7 @@ function PlanComparisonTable({
 }) {
   if (plans.length < 2) {
     return (
-      <div className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 text-sm text-muted-foreground shadow-xs">
+      <div className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 text-sm text-muted-foreground shadow-xs">
         Dodaj wiecej planow, aby zobaczyc porownanie.
       </div>
     );
@@ -626,7 +626,7 @@ function PlanComparisonTable({
   ];
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <div className="overflow-x-auto rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <table className="min-w-full divide-y divide-border text-sm">
         <thead>
           <tr className="border-b border border-border/60 bg-muted/20 text-left text-xs uppercase tracking-wide text-muted-foreground">
@@ -640,7 +640,7 @@ function PlanComparisonTable({
         </thead>
         <tbody className="divide-y divide-border">
           {rows.map((row, index) => (
-            <tr key={row.label} className={index % 2 === 0 ? "bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]!" : "bg-muted/20"}>
+            <tr key={row.label} className={index % 2 === 0 ? "bg-card/72 backdrop-blur-[36px]!" : "bg-muted/20"}>
               <td className="px-4 py-3 font-medium text-foreground">
                 {row.label}
               </td>

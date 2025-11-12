@@ -13,7 +13,7 @@ export function AffiliateStatistics({ approvedCount, pendingCount }: AffiliateSt
 
   return (
     <section className="container space-y-6 py-12">
-      <div ref={statsAnim.ref} className={`rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 shadow-xs ${statsAnim.className}`}>
+      <div ref={statsAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${statsAnim.className}`}>
         <div className="space-y-3 mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
             Statystyki
@@ -23,7 +23,7 @@ export function AffiliateStatistics({ approvedCount, pendingCount }: AffiliateSt
           </h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
             <CardHeader className="pb-3">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-2">
@@ -45,7 +45,7 @@ export function AffiliateStatistics({ approvedCount, pendingCount }: AffiliateSt
               </p>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
             <CardHeader className="pb-3">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-2">

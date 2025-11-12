@@ -33,7 +33,7 @@ export function ReviewsRankingTable({
 }: ReviewsRankingTableProps) {
   if (items.length === 0) {
     return (
-      <div className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-10 text-center text-sm text-muted-foreground shadow-xs">
+      <div className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-10 text-center text-sm text-muted-foreground shadow-xs">
         Brak firm spelniajacych wybrane kryteria. Sprobuj poluzowac filtry lub
         wyszukaj inna nazwe.
       </div>
@@ -43,15 +43,15 @@ export function ReviewsRankingTable({
   return (
     <div className="relative">
       {loading ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur-sm">
+        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-card/72 backdrop-blur-sm">
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </div>
       ) : null}
 
-      <div className="overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <div className="overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <div className="max-h-[70vh] overflow-x-auto">
           <Table className="min-w-full table-fixed">
-            <TableHeader className="bg-[rgba(8,10,13,0.82)]!">
+            <TableHeader className="bg-card/82">
               <TableRow className="border-b border-border/40">
                 <HeaderCell className="w-16">#</HeaderCell>
                 <HeaderCell className="w-64">Firma</HeaderCell>
@@ -108,7 +108,7 @@ function RankingRow({
     : "";
 
   return (
-    <TableRow className={`transition-all hover:bg-[rgba(12,14,18,0.6)] border-b border-border/40 ${top3Class}`}>
+    <TableRow className={`transition-all hover:bg-background/60 border-b border-border/40 ${top3Class}`}>
       <Cell>
         <div className="flex items-center gap-2">
           {isTop3 && (
@@ -258,7 +258,7 @@ function FirmAvatar({
           width={44}
           height={44}
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! object-contain shadow-xs"
+          className="h-11 w-11 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! object-contain shadow-xs"
         />
         <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">
           <CheckCircle2 className="h-3 w-3 text-white" />
@@ -276,7 +276,7 @@ function FirmAvatar({
 
   return (
     <div className="relative">
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! text-sm font-semibold text-muted-foreground shadow-xs">
+      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! text-sm font-semibold text-muted-foreground shadow-xs">
         {initials}
       </div>
       <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">

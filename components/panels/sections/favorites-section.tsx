@@ -13,7 +13,7 @@ interface FavoritesSectionProps {
 export function FavoritesSection({ favorites }: FavoritesSectionProps) {
   if (!favorites.length) {
     return (
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -34,7 +34,7 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
   }
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -48,7 +48,7 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
       <CardContent>
         <div className="space-y-3">
           {favorites.map((company) => (
-            <Card key={company.id} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs transition-all hover:shadow-md">
+            <Card key={company.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
               <CardContent className="p-4">
                 <Link
                   className="font-medium hover:underline hover:text-primary transition-colors"

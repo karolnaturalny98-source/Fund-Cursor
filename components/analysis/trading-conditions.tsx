@@ -24,7 +24,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
       </div>
 
       {/* Instruments Comparison */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5" />
@@ -39,7 +39,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -91,7 +91,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
       </Card>
 
       {/* Leverage Tiers */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5" />
@@ -106,7 +106,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -146,7 +146,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
       </Card>
 
       {/* Trading Commissions */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <DollarSign className="h-5 w-5" />
@@ -161,7 +161,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -194,7 +194,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
       </Card>
 
       {/* Platforms */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Laptop className="h-5 w-5" />
@@ -209,7 +209,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -234,7 +234,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
       </Card>
 
       {/* Trading Rules */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Zasady Handlu</CardTitle>
           <CardDescription>
@@ -246,7 +246,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-4 font-semibold">{company.name}</h4>

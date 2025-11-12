@@ -29,7 +29,7 @@ export function ReviewsRankingMobileList({
 }: ReviewsRankingMobileListProps) {
   if (items.length === 0) {
     return (
-      <div className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 text-center text-sm text-muted-foreground shadow-xs">
+      <div className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 text-center text-sm text-muted-foreground shadow-xs">
         Brak firm spelniajacych wybrane kryteria.
       </div>
     );
@@ -38,7 +38,7 @@ export function ReviewsRankingMobileList({
   return (
     <div className="relative">
       {loading ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur-sm">
+        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-card/72 backdrop-blur-sm">
           <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
         </div>
       ) : null}
@@ -71,7 +71,7 @@ function RankingCard({
   const overall = item.averageRating ?? 0;
 
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-5 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+    <article className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-5 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-1 items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-muted text-sm font-semibold text-muted-foreground">

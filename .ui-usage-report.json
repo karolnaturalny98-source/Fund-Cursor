@@ -1,0 +1,113 @@
+{
+  "summary": {
+    "totalPages": 26,
+    "usingUI": 0,
+    "notUsingUI": 26
+  },
+  "details": [
+    {
+      "page": "app\\(auth)\\sign-in\\[[...index]]\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\(auth)\\sign-up\\[[...index]]\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\blog\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\cashback\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\community\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\content\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\marketing\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\newsletter\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\overview\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\shop\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\(tabs)\\support\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\admin\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\affilacja\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\analizy\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\analizy\\[...slugs]\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\baza-wiedzy\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\baza-wiedzy\\[slug]\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\firmy\\compare\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\firmy\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\firmy\\[slug]\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\o-nas\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\opinie\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\panel\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\rankingi\\page.tsx",
+      "usesUI": false
+    },
+    {
+      "page": "app\\sklep\\page.tsx",
+      "usesUI": false
+    }
+  ]
+}

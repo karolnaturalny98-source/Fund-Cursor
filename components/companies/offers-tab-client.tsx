@@ -138,7 +138,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
 
   if (plansWithComputed.length === 0) {
     return (
-      <Card className="flex flex-col items-center justify-center rounded-2xl border border-border/60 border-dashed bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-16 text-center shadow-xs">
+      <Card className="flex flex-col items-center justify-center rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! p-16 text-center shadow-xs">
         <div className="mb-4 rounded-full bg-muted/30 p-4">
           <ShoppingCart className="h-10 w-10 text-muted-foreground/50" />
         </div>
@@ -162,13 +162,13 @@ export function PlansShopList({ company }: PlansShopListProps) {
       {/* Quick Stats */}
       {stats && (
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">{plansWithComputed.length}</div>
               <CardDescription className="text-xs">Dostępnych planów</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {formatCurrencyLocalized(stats.avgPrice, currency)}
@@ -176,7 +176,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
               <CardDescription className="text-xs">Średnia cena</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {formatCurrencyLocalized(stats.minPrice, currency)}
@@ -184,7 +184,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
               <CardDescription className="text-xs">Najniższa cena</CardDescription>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {formatCurrencyLocalized(stats.maxPrice, currency)}
@@ -204,7 +204,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
               placeholder="Szukaj planu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+              className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
             />
           </div>
         </div>
@@ -222,7 +222,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
           )}
           {/* Model Filter */}
           <Select value={modelFilter || "all"} onValueChange={(value) => setModelFilter(value === "all" ? null : value)}>
-            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
               <Filter className="mr-2 h-4 w-4" />
               <SelectValue />
             </SelectTrigger>
@@ -235,7 +235,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
           </Select>
           {/* Sort Dropdown */}
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
-            <SelectTrigger className="w-[140px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+            <SelectTrigger className="w-[140px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
               <ArrowUpDown className="mr-2 h-4 w-4" />
               <SelectValue />
             </SelectTrigger>
@@ -312,7 +312,7 @@ export function PlansShopList({ company }: PlansShopListProps) {
 
       {/* Plans List */}
       {filteredAndSortedPlans.length === 0 ? (
-        <Card className="rounded-2xl border border-border/60 border-dashed bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <div className="mb-4 rounded-full bg-muted/30 p-4">
               <Search className="h-10 w-10 text-muted-foreground/50" />
@@ -385,7 +385,7 @@ function PlanProductCard({ plan, company }: PlanProductCardProps) {
 
   return (
     <Card className={cn(
-      "group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-3 shadow-xs transition-all duration-200",
+      "group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-border/40 bg-background/60 backdrop-blur-[36px]! p-3 shadow-xs transition-all duration-200",
       "hover:border-primary/30 hover:shadow-xs",
       "lg:flex-row lg:items-center"
     )}>
@@ -446,7 +446,7 @@ function PlanProductCard({ plan, company }: PlanProductCardProps) {
           ) : null}
 
           {/* Cena */}
-          <div className="flex items-center gap-1.5 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! px-2.5 py-1 shadow-xs">
+          <div className="flex items-center gap-1.5 rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! px-2.5 py-1 shadow-xs">
             <DollarSign className="h-3 w-3 text-muted-foreground/70" />
             <div className="flex items-baseline gap-1.5">
               <span className="text-base font-semibold text-foreground">

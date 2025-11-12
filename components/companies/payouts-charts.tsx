@@ -135,7 +135,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
       <div className="grid gap-4 md:grid-cols-2">
         {/* Bar Chart - Cykle wypłat */}
         {cycleChartData.length > 0 && (
-          <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+          <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <BarChart3 className="h-4 w-4 text-primary" />
@@ -175,7 +175,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
                         if (active && payload && payload.length) {
                           const data = payload[0].payload;
                           return (
-                            <div className="rounded-md border border-border/60 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! p-2 shadow-md">
+                            <div className="rounded-md border border-border/60 bg-card/82 backdrop-blur-[36px]! p-2 shadow-md">
                               <p className="text-xs font-semibold text-foreground">{data.fullName}</p>
                               <p className="text-xs text-primary">
                                 {data.cycle} {data.cycle === 1 ? "dzień" : "dni"}
@@ -196,7 +196,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
 
         {/* Pie Chart - Rozkład profit split */}
         {profitSplitChartData.length > 0 && (
-          <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+          <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <PieChartIcon className="h-4 w-4 text-primary" />
@@ -238,7 +238,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
                         if (active && payload && payload.length) {
                           const data = payload[0];
                           return (
-                            <div className="rounded-md border border-border/60 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! p-2 shadow-md">
+                            <div className="rounded-md border border-border/60 bg-card/82 backdrop-blur-[36px]! p-2 shadow-md">
                               <p className="text-xs font-semibold text-foreground">{data.name}</p>
                               <p className="text-xs text-muted-foreground">
                                 {data.value} {data.value === 1 ? "plan" : "planów"}
@@ -259,7 +259,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
 
       {/* Line Chart - Timeline pierwszej wypłaty */}
       {timelineChartData.length > 0 && (
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+        <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-primary" />
@@ -296,7 +296,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-md border border-border/60 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! p-2 shadow-md">
+                          <div className="rounded-md border border-border/60 bg-card/82 backdrop-blur-[36px]! p-2 shadow-md">
                             <p className="text-xs font-semibold text-foreground">
                               {data.day} {data.day === 1 ? "dzień" : "dni"}
                             </p>

@@ -81,7 +81,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
 
       <div className="space-y-4">
         {reviews.map((review) => (
-        <Card key={review.id} className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card key={review.id} className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="space-y-1">

@@ -129,7 +129,7 @@ export function OverviewHeroSection({
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-2 py-1.5 text-xs shadow-lg">
+                          <div className="rounded-lg border border-border/40 bg-card/82 px-2 py-1.5 text-xs shadow-lg">
                             <p className="font-semibold text-foreground">
                               Score: {data.score.toFixed(1)}
                             </p>

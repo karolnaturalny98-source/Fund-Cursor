@@ -75,7 +75,7 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {summaryStats.map((stat, idx) => (
-          <Card key={stat.companyId} className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card key={stat.companyId} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader className="pb-3">
               <CardTitle className="text-base">{stat.companyName}</CardTitle>
             </CardHeader>
@@ -124,7 +124,7 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
       </div>
 
       {/* Rating Distribution Chart */}
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Rozkład Ocen</CardTitle>
           <CardDescription>
@@ -153,7 +153,7 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-3 shadow-xs">
+                        <div className="rounded-lg border border-border/60 bg-card/72 p-3 shadow-xs">
                           <p className="text-xs text-muted-foreground mb-2">
                             {payload[0].payload.rating}
                           </p>

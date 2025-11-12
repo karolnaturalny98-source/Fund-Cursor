@@ -106,7 +106,7 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
       {/* Sentiment Overview */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sentimentData.map((data) => (
-          <Card key={data.companyId} className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card key={data.companyId} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle className="text-base">{data.companyName}</CardTitle>
               <CardDescription>
@@ -139,7 +139,7 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
 
       {/* Detailed Pros and Cons */}
       {sentimentData.map((data) => (
-        <Card key={`detail-${data.companyId}`} className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card key={`detail-${data.companyId}`} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="text-lg">{data.companyName}</CardTitle>
           </CardHeader>
@@ -196,7 +196,7 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
       {/* Recent Reviews */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {recentHighlights.map((company) => (
-          <Card key={`recent-${company.companyId}`} className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card key={`recent-${company.companyId}`} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle className="text-base">{company.companyName}</CardTitle>
               <CardDescription>Ostatnie opinie</CardDescription>

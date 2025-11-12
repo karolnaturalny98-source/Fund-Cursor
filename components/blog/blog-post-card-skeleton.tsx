@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function BlogPostCardSkeleton() {
   return (
-    <Card className="h-full overflow-hidden rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs">
+    <Card className="h-full overflow-hidden rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! shadow-xs">
       <Skeleton className="h-48 w-full" />
       <CardContent className="p-6">
         <div className="mb-3 flex flex-wrap gap-2">

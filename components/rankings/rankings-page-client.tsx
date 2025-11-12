@@ -111,7 +111,7 @@ export function RankingsPageClient({
         />
       </div>
 
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs transition-all duration-300 hover:shadow-md">
+      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all duration-300 hover:shadow-md">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-3">
             <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors hover:bg-primary/20">
@@ -142,7 +142,7 @@ export function RankingsPageClient({
                 return (
                   <Card
                     key={company.id}
-                    className="group relative overflow-hidden rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:scale-[1.02] hover:-translate-y-0.5"
+                    className="group relative overflow-hidden rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:scale-[1.02] hover:-translate-y-0.5"
                   >
                     <CardHeader className="space-y-2 pb-2">
                       <div className="flex items-center justify-between gap-3">
@@ -214,7 +214,7 @@ function StatCard({
   isVisible?: boolean;
 }) {
   return (
-    <Card className={`group relative overflow-hidden rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-2.5 shadow-xs transition-all duration-300 hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)] hover:scale-[1.02] hover:-translate-y-0.5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+    <Card className={`group relative overflow-hidden rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-2.5 shadow-xs transition-all duration-300 hover:border-border/60 hover:bg-card/66 hover:scale-[1.02] hover:-translate-y-0.5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
       <div className="flex items-center gap-1.5">
         <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70 transition-colors group-hover:text-primary" />
         <div className="flex flex-col min-w-0 flex-1 gap-0.5">
@@ -268,7 +268,7 @@ export function RankingsMethodologyClient({
           mogly pokazac swoje mocne strony.
         </p>
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
             <CardHeader className="space-y-2 pb-3">
               <CardTitle className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Zrodla danych
@@ -282,7 +282,7 @@ export function RankingsMethodologyClient({
               </p>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
             <CardHeader className="space-y-2 pb-3">
               <CardTitle className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Modele i konta
@@ -295,7 +295,7 @@ export function RankingsMethodologyClient({
               </p>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 sm:col-span-2 lg:col-span-1">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 sm:col-span-2 lg:col-span-1">
             <CardHeader className="space-y-2 pb-3">
               <CardTitle className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Wagi filarow
@@ -320,7 +320,7 @@ export function RankingsMethodologyClient({
           <h3 className="text-2xl font-semibold text-foreground">FAQ</h3>
         </div>
         <Accordion type="single" collapsible className="grid gap-4 md:grid-cols-2">
-          <AccordionItem value="faq-1" className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-6 shadow-xs">
+          <AccordionItem value="faq-1" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
             <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
               Jak czesto odswiezacie dane?
             </AccordionTrigger>
@@ -333,7 +333,7 @@ export function RankingsMethodologyClient({
               </p>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq-2" className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-6 shadow-xs">
+          <AccordionItem value="faq-2" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
             <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
               Co robi filtr &quot;Min. opinii&quot;?
             </AccordionTrigger>
@@ -345,7 +345,7 @@ export function RankingsMethodologyClient({
               </p>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq-3" className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-6 shadow-xs md:col-span-2">
+          <AccordionItem value="faq-3" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs md:col-span-2">
             <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
               Czy planujecie dodatkowe filtry?
             </AccordionTrigger>

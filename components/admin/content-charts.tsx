@@ -105,7 +105,7 @@ export function ContentCharts({
   return (
     <div className="space-y-6">
       {/* Line Chart: Content Trends */}
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Aktywność treści w czasie</CardTitle>
           <CardDescription>
@@ -175,7 +175,7 @@ export function ContentCharts({
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Pie Chart: Company Distribution by Country */}
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład firm według kraju</CardTitle>
             <CardDescription>Rozkład firm według kraju pochodzenia.</CardDescription>
@@ -210,7 +210,7 @@ export function ContentCharts({
         </Card>
 
         {/* Pie Chart: Plan Distribution by Model */}
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład planów według modelu</CardTitle>
             <CardDescription>Rozkład planów według modelu wyzwania.</CardDescription>
@@ -246,7 +246,7 @@ export function ContentCharts({
       </div>
 
       {/* Bar Chart: Top Companies */}
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top Firmy</CardTitle>
           <CardDescription>Firmy z największą liczbą planów i FAQ.</CardDescription>

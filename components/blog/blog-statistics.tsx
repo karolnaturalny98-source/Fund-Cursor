@@ -16,7 +16,7 @@ export function BlogStatistics({
 }: BlogStatisticsProps) {
   return (
     <div className="grid gap-3 sm:grid-cols-3">
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+      <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
         <div className="flex items-center gap-2">
           <FileText className="h-4 w-4 shrink-0 text-muted-foreground/70" />
           <div className="flex items-center gap-1.5 min-w-0 flex-1">
@@ -26,7 +26,7 @@ export function BlogStatistics({
         </div>
       </Card>
 
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+      <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4 shrink-0 text-muted-foreground/70" />
           <div className="flex items-center gap-1.5 min-w-0 flex-1">
@@ -36,7 +36,7 @@ export function BlogStatistics({
         </div>
       </Card>
 
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+      <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-3 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
         <div className="flex items-center gap-2">
           <FolderTree className="h-4 w-4 shrink-0 text-muted-foreground/70" />
           <div className="flex items-center gap-1.5 min-w-0 flex-1">

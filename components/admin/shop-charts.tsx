@@ -46,7 +46,7 @@ export function ShopCharts({ topCompanies, topPlans }: ShopChartsProps) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top Firmy</CardTitle>
           <CardDescription>
@@ -93,7 +93,7 @@ export function ShopCharts({ topCompanies, topPlans }: ShopChartsProps) {
         </CardContent>
       </Card>
 
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top Plany</CardTitle>
           <CardDescription>

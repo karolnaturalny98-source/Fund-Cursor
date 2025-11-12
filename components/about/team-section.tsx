@@ -87,7 +87,7 @@ export function TeamSection() {
         {teamMembers.map((member, index) => (
           <Card
             key={member.name}
-            className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md hover:scale-[1.02] ${
+            className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md hover:scale-[1.02] ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
             style={{ transitionDelay: `${index * 100}ms`, transitionDuration: "700ms" }}

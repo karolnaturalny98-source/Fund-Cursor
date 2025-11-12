@@ -72,7 +72,7 @@ export function BlogPostsPanel({ initialPosts }: BlogPostsPanelProps) {
 
   return (
     <>
-      <div className="overflow-x-auto rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <div className="overflow-x-auto rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <table className="min-w-full divide-y divide-border text-sm">
           <thead>
             <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">

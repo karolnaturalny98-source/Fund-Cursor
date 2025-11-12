@@ -129,7 +129,7 @@ export function RankingsCharts({
   return (
     <div className="space-y-6">
       {/* Bar Chart: Top 10 Companies */}
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top 10 firm - {TAB_LABELS[activeTab]}</CardTitle>
           <CardDescription>
@@ -162,7 +162,7 @@ export function RankingsCharts({
                     if (active && payload && payload.length) {
                       const data = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-3 shadow-xs">
+                        <div className="rounded-lg border border-border/60 bg-card/72 p-3 shadow-xs">
                           <p className="font-semibold text-foreground">{data.fullName}</p>
                           <p className="text-sm text-muted-foreground">
                             Pozycja: #{data.rank}
@@ -192,7 +192,7 @@ export function RankingsCharts({
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Pie Chart: Score Distribution */}
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład ocen</CardTitle>
             <CardDescription>
@@ -227,7 +227,7 @@ export function RankingsCharts({
                       if (active && payload && payload.length) {
                         const data = payload[0];
                         return (
-                          <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-xs">
+                          <div className="rounded-lg border border-border/60 bg-card/72 p-2 shadow-xs">
                             <p className="text-sm font-semibold text-foreground">
                               {data.name}
                             </p>
@@ -248,7 +248,7 @@ export function RankingsCharts({
 
         {/* Pie Chart: Countries Distribution */}
         {countriesDistributionData.length > 0 && (
-          <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle>Top 5 krajów</CardTitle>
               <CardDescription>
@@ -283,7 +283,7 @@ export function RankingsCharts({
                         if (active && payload && payload.length) {
                           const data = payload[0];
                           return (
-                            <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-xs">
+                            <div className="rounded-lg border border-border/60 bg-card/72 p-2 shadow-xs">
                               <p className="text-sm font-semibold text-foreground">
                                 {data.name}
                               </p>

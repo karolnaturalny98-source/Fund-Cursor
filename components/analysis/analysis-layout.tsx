@@ -50,7 +50,7 @@ export function AnalysisLayout({
   return (
     <div className="relative">
       {/* Aurora background */}
-      <div className="fixed inset-0 -z-10" style={{ height: '100vh' }}>
+      <div className="fixed inset-0 -z-10 h-screen">
         <Aurora
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
@@ -101,7 +101,7 @@ export function AnalysisLayout({
             {companies.map((company) => (
               <Card
                 key={company.id}
-                className="group flex items-center gap-3 rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-gradient hover:shadow-premium"
+                className="group flex items-center gap-3 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-gradient hover:shadow-premium"
               >
                 {company.logoUrl ? (
                   <Avatar className="h-12 w-12 rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">

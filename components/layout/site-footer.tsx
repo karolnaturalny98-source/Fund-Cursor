@@ -75,7 +75,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-border/40 bg-[rgba(10,12,15,0.72)] backdrop-blur-md">
+    <footer className="border-t border-border/40 bg-card/72 backdrop-blur-md">
       <div className="w-full px-6 py-12">
         <div className="mx-auto max-w-7xl">
         {/* Górna sekcja - Logo + Newsletter */}
@@ -111,7 +111,7 @@ export function SiteFooter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="bg-[rgba(13,15,19,0.54)] border-border/60 focus:border-primary backdrop-blur-[36px]!"
+                className="bg-card/54 border-border/60 focus:border-primary backdrop-blur-[36px]!"
               />
               <Button
                 type="submit"

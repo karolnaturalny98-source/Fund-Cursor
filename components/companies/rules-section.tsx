@@ -81,7 +81,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
     >
       {/* Quick Stats */}
       <div className="grid gap-3 sm:grid-cols-3">
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Wszystkie zasady</p>
@@ -89,7 +89,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
             </div>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Dozwolone</p>
@@ -97,7 +97,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
             </div>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Zabronione</p>
@@ -109,7 +109,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
 
       {/* Pie Chart */}
       {totalRules > 0 && (
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base font-semibold">
               <PieChartIcon className="h-4 w-4 text-primary" />
@@ -164,7 +164,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
             placeholder="Szukaj w zasadach..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-9 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 pr-3 text-xs shadow-xs"
+            className="h-9 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 pr-3 text-xs shadow-xs"
           />
         </div>
       )}
@@ -172,7 +172,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
       {/* Rules Cards */}
       <div className="grid gap-4 sm:grid-cols-2">
         {/* Allowed Rules */}
-        <Card className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md border-emerald-500/20 bg-emerald-500/10`}>
+        <Card className={`rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md border-emerald-500/20 bg-emerald-500/10`}>
           <CardHeader 
             className="cursor-pointer space-y-2 pb-3"
             onClick={() => setExpandedAllowed(!expandedAllowed)}
@@ -221,7 +221,7 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
         </Card>
 
         {/* Restricted Rules */}
-        <Card className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md border-rose-500/20 bg-rose-500/10`}>
+        <Card className={`rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md border-rose-500/20 bg-rose-500/10`}>
           <CardHeader 
             className="cursor-pointer space-y-2 pb-3"
             onClick={() => setExpandedRestricted(!expandedRestricted)}

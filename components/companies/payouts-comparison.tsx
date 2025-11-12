@@ -62,7 +62,7 @@ export function PayoutsComparison({ company }: PayoutsComparisonProps) {
                 "cursor-pointer transition-all hover:border-primary/50 hover:shadow-md",
                 isSelected
                   ? "border-primary/50 bg-primary/5 shadow-md"
-                  : "border-border/40 bg-[rgba(12,14,18,0.6)]"
+                  : "border-border/40 bg-background/60"
               )}
               onClick={() => togglePlan(plan.id)}
             >
@@ -94,7 +94,7 @@ export function PayoutsComparison({ company }: PayoutsComparisonProps) {
 
       {/* Comparison table */}
       {selectedPlansData.length > 0 && (
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+        <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
               <GitCompare className="h-4 w-4 text-primary" />

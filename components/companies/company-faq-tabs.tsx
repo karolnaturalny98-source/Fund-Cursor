@@ -85,7 +85,7 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
               placeholder="Szukaj w FAQ..."
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              className="rounded-full border border-border/60 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! pl-9 shadow-xs"
+              className="rounded-full border border-border/60 bg-background/60 backdrop-blur-[36px]! pl-9 shadow-xs"
             />
           </div>
         </div>
@@ -128,7 +128,7 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 p-6 text-sm text-muted-foreground shadow-xs bg-[rgba(10,12,15,0.72)]!">
+        <div className="rounded-2xl border border-dashed border-border/60 p-6 text-sm text-muted-foreground shadow-xs bg-card/72">
           Brak wynikow dla wybranej kategorii i zapytania.
         </div>
       )}

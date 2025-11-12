@@ -76,7 +76,7 @@ export function PayoutCalculator({
   }
 
   return (
-    <section ref={sectionAnim.ref} className={`space-y-6 rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs ${sectionAnim.className}`}>
+    <section ref={sectionAnim.ref} className={`space-y-6 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs ${sectionAnim.className}`}>
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="text-xl font-semibold">Kalkulator wypłaty</h2>
@@ -91,7 +91,7 @@ export function PayoutCalculator({
             <select
               value={selectedPlanId}
               onChange={(event) => setSelectedPlanId(event.target.value)}
-              className="mt-1 rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-3 py-2 text-sm font-medium text-foreground shadow-xs transition-all hover:border border-border/60-premium"
+              className="mt-1 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 text-sm font-medium text-foreground shadow-xs transition-all hover:border border-border/60-premium"
             >
               {plans.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -133,7 +133,7 @@ export function PayoutCalculator({
         />
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs text-sm text-muted-foreground">
+      <div className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs text-sm text-muted-foreground">
         <p className="font-semibold text-foreground">Jak obliczamy wynik?</p>
         <ul className="mt-3 space-y-2">
           <CalculatorHint>
@@ -172,7 +172,7 @@ function SummaryCard({
   hint: string;
 }) {
   return (
-    <div className="group rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border border-border/60-premium hover:shadow-sm-lg">
+    <div className="group rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border border-border/60-premium hover:shadow-sm-lg">
       <p className="text-xs uppercase text-muted-foreground">{title}</p>
       <p className="mt-2 text-2xl font-semibold text-foreground">{amount}</p>
       <p className="mt-1 text-xs text-muted-foreground">{hint}</p>

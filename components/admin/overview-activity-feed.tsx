@@ -113,7 +113,7 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
                 <Link
                   key={activity.id}
                   href={activity.href}
-                  className="flex items-start gap-3 rounded-lg border border-border/50 bg-[rgba(10,12,15,0.72)]! p-3 transition-all hover:bg-accent/50 hover:shadow-xs"
+                  className="flex items-start gap-3 rounded-lg border border-border/50 bg-card/72 p-3 transition-all hover:bg-accent/50 hover:shadow-xs"
                 >
                   <div className="mt-0.5 rounded-lg bg-primary/10 p-2">
                     <Icon className="h-4 w-4 text-primary" />

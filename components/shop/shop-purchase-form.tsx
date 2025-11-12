@@ -107,7 +107,7 @@ export function ShopPurchaseForm({
             </div>
           </div>
           <div className="mt-5 grid grid-cols-2 gap-4">
-            <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! p-3">
+            <div className="rounded-lg border border-border/60 bg-card/72 p-3">
               <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Cena</div>
               <div className="mt-1 text-xl font-bold">${price.toLocaleString("pl-PL")}</div>
             </div>
@@ -139,7 +139,7 @@ export function ShopPurchaseForm({
         </SignedOut>
 
         <SignedIn>
-          <div className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! p-4">
+          <div className="rounded-xl border border-border/60 bg-card/72 p-4">
             <div className="text-sm font-medium text-muted-foreground">Zalogowany jako</div>
             <div className="mt-1 text-lg font-semibold">
               {user?.emailAddresses[0]?.emailAddress}

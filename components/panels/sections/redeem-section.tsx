@@ -234,7 +234,7 @@ export function RedeemSection({
   const companyFieldError = lowerError.includes("firm");
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -290,7 +290,7 @@ export function RedeemSection({
                 onValueChange={handleCompanyChange}
                 disabled={submitting || offersState === "loading" || offersState === "error" || !offers?.length}
               >
-                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]">
+                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-background/60">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -310,7 +310,7 @@ export function RedeemSection({
                 onValueChange={handlePlanChange}
                 disabled={submitting || !availablePlans.length}
               >
-                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]">
+                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-background/60">
                   <SelectValue placeholder={selectedCompany ? "Wybierz plan" : "Najpierw wybierz firmę"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -357,7 +357,7 @@ export function RedeemSection({
                 aria-readonly
                 aria-invalid={lowerError.includes("punkt") || undefined}
                 aria-describedby={lowerError.includes("punkt") ? "wallet-redeem-error" : undefined}
-                className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                className="rounded-lg border border-border/40 bg-background/60"
               />
             </div>
 
@@ -370,7 +370,7 @@ export function RedeemSection({
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
                 disabled={submitting}
-                className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                className="rounded-lg border border-border/40 bg-background/60"
               />
             </div>
           </div>

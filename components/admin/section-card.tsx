@@ -21,7 +21,7 @@ export function SectionCard({
   footer,
 }: SectionCardProps) {
   return (
-    <Card className={cn("rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs", className)}>
+    <Card className={cn("rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs", className)}>
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="space-y-1.5">

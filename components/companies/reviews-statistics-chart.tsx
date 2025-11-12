@@ -87,7 +87,7 @@ export function ReviewsStatisticsChart({ reviews }: ReviewsStatisticsChartProps)
     <div ref={chartAnim.ref} className={`space-y-6 ${chartAnim.className}`}>
       {/* Bar Chart - Rozkład ocen */}
       {ratingDistribution.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
@@ -129,7 +129,7 @@ export function ReviewsStatisticsChart({ reviews }: ReviewsStatisticsChartProps)
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
+                          <div className="rounded-lg border border-border/40 bg-card/82 px-3 py-2 shadow-lg backdrop-blur-[36px]!">
                             <p className="text-sm font-semibold text-foreground">{data.rating}</p>
                             <p className="text-xs text-muted-foreground">
                               {data.value} opin{data.value === 1 ? "ia" : data.value < 5 ? "ie" : "ii"}
@@ -150,7 +150,7 @@ export function ReviewsStatisticsChart({ reviews }: ReviewsStatisticsChartProps)
 
       {/* Pie Chart - Rozkład rekomendacji */}
       {recommendationDistribution.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />
@@ -194,7 +194,7 @@ export function ReviewsStatisticsChart({ reviews }: ReviewsStatisticsChartProps)
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
+                          <div className="rounded-lg border border-border/40 bg-card/82 px-3 py-2 shadow-lg backdrop-blur-[36px]!">
                             <p className="text-sm font-semibold text-foreground">{data.name}</p>
                             <p className="text-xs text-muted-foreground">
                               {data.value} opin{data.value === 1 ? "ia" : data.value < 5 ? "ie" : "ii"} ({(data.percent * 100).toFixed(1)}%)

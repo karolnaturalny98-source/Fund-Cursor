@@ -17,11 +17,11 @@ const buttonVariants = cva(
         premium:
           "bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(var(--primary)/0.7)_100%)] text-primary-foreground shadow-glass hover:brightness-115 hover:-translate-y-px hover:shadow-[0_0_18px_hsl(var(--primary)/0.25)] active:translate-y-0",
         secondary:
-          "border border-border/60 bg-[rgba(15,17,20,0.6)] text-foreground/90 backdrop-blur-xs hover:bg-[rgba(15,17,20,0.8)] hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+          "border border-border/60 bg-card/60 text-foreground/90 backdrop-blur-xs hover:bg-card/80 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
         outline:
-          "border border-border/70 bg-transparent text-foreground/90 hover:bg-[rgba(20,22,25,0.4)] hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+          "border border-border/70 bg-transparent text-foreground/90 hover:bg-card/40 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
         ghost:
-          "text-muted-foreground hover:text-foreground hover:bg-[rgba(20,22,25,0.3)] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
+          "text-muted-foreground hover:text-foreground hover:bg-card/30 focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
         destructive:
           "bg-destructive text-destructive-foreground shadow-soft hover:bg-destructive/85 focus-visible:ring-2 focus-visible:ring-destructive/80 focus-visible:ring-offset-2 active:translate-y-0",
         link: "text-primary underline-offset-4 hover:underline",

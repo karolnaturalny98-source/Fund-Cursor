@@ -91,18 +91,18 @@
 
 @utility glass-card {
   @apply rounded-3xl border border-border/55 shadow-lg transition-all duration-300;
-  background-color: rgba(10, 12, 15, 0.6); /* jaśniejsze szkło */
+  background-color: hsl(var(--card) / 0.6);
   backdrop-filter: blur(32px) saturate(170%);
 
   &:hover {
-    background-color: rgba(10, 12, 15, 0.7);
+    background-color: hsl(var(--card) / 0.7);
     backdrop-filter: blur(38px) saturate(180%);
   }
 }
 
 @utility glass-panel {
   @apply rounded-3xl border border-border/45 transition-all duration-300;
-  background-color: rgba(10, 12, 15, 0.55);
+  background-color: hsl(var(--card) / 0.55);
   backdrop-filter: blur(28px) saturate(150%);
 }
 

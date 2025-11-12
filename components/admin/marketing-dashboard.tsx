@@ -439,7 +439,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
   if (!hasSection) {
     return (
       <div className="flex h-full items-center justify-center">
-        <Card className="max-w-xl border border-border/60 bg-[rgba(10,12,15,0.72)] backdrop-blur-[36px]!">
+        <Card className="max-w-xl border border-border/60 bg-card/72 backdrop-blur-[36px]!">
           <CardHeader>
             <CardTitle>Marketing</CardTitle>
             <CardDescription>
@@ -476,7 +476,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
         </div>
       </div>
 
-      <Card className="border border-border/60 bg-[rgba(11,13,16,0.66)] backdrop-blur-[36px]!">
+      <Card className="border border-border/60 bg-card/66 backdrop-blur-[36px]!">
         <CardHeader>
           <CardTitle>Sekcja: {section?.title}</CardTitle>
           <CardDescription>

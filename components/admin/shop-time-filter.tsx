@@ -105,7 +105,7 @@ export function ShopTimeFilter({
   };
 
   return (
-    <div className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs">
+    <div className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           <label className="text-sm font-medium text-foreground">Okres:</label>

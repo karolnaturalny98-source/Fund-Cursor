@@ -46,7 +46,7 @@ export function MetricCard({
   return (
     <Card
       className={cn(
-        "rounded-xl border bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! transition-all duration-200 hover:shadow-md",
+        "rounded-xl border bg-card/72 backdrop-blur-[36px]! transition-all duration-200 hover:shadow-md",
         variantStyles[variant],
         className
       )}

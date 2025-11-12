@@ -160,7 +160,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
   const statusClass = profile ? INFLUENCER_STATUS_STYLES[profile.status] : "bg-muted text-muted-foreground";
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
+    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="influencer-program" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">
@@ -197,7 +197,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                       value={formState.platform}
                       onChange={handleChange("platform")}
                       required
-                      className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                      className="rounded-lg border border-border/40 bg-background/60"
                     />
                   </div>
 
@@ -208,7 +208,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                       value={formState.handle}
                       onChange={handleChange("handle")}
                       required
-                      className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                      className="rounded-lg border border-border/40 bg-background/60"
                     />
                   </div>
 
@@ -219,7 +219,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                       inputMode="numeric"
                       value={formState.audienceSize}
                       onChange={handleChange("audienceSize")}
-                      className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                      className="rounded-lg border border-border/40 bg-background/60"
                     />
                   </div>
 
@@ -229,7 +229,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                       placeholder="np. media@twojadomena.com"
                       value={formState.contactEmail}
                       onChange={handleChange("contactEmail")}
-                      className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                      className="rounded-lg border border-border/40 bg-background/60"
                     />
                   </div>
                 </div>
@@ -241,7 +241,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                     placeholder="Opisz swoją społeczność, format treści i doświadczenie."
                     value={formState.bio}
                     onChange={handleChange("bio")}
-                    className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                    className="rounded-lg border border-border/40 bg-background/60"
                   />
                 </div>
 
@@ -252,7 +252,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                     placeholder="https://youtube.com/..."
                     value={formState.socialLinks}
                     onChange={handleChange("socialLinks")}
-                    className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                    className="rounded-lg border border-border/40 bg-background/60"
                   />
                 </div>
 
@@ -263,7 +263,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                     placeholder="np. apex, fundingpips"
                     value={formState.preferredCompanies}
                     onChange={handleChange("preferredCompanies")}
-                    className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)]"
+                    className="rounded-lg border border-border/40 bg-background/60"
                   />
                 </div>
 

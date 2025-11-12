@@ -89,15 +89,15 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
 
         {/* Stats */}
         <div className="mx-auto grid max-w-3xl grid-cols-3 gap-4">
-          <div className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+          <div className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
             <div className="text-2xl font-bold">{totalCompanies}</div>
             <div className="text-xs text-muted-foreground">Firm</div>
           </div>
-          <div className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+          <div className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
             <div className="text-2xl font-bold">{totalPlans}</div>
             <div className="text-xs text-muted-foreground">Planów</div>
           </div>
-          <div className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+          <div className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
             <div className="text-2xl font-bold">{avgCashback}%</div>
             <div className="text-xs text-muted-foreground">Śr. cashback</div>
           </div>
@@ -121,7 +121,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-6">
-          <Card className="border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle className="text-xl font-semibold">Wybierz firmę</CardTitle>
               <CardDescription>
@@ -143,7 +143,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
       {selectedCompany && (
         <>
           <Separator />
-          <Card className="border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle className="text-xl font-semibold">Wybierz plan</CardTitle>
               <CardDescription>
@@ -171,7 +171,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
       {selectedPlan && selectedCompany && (
         <>
           <Separator />
-          <Card className="border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader>
               <CardTitle className="text-xl font-semibold">Kup teraz</CardTitle>
               <CardDescription>

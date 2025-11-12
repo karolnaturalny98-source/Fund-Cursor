@@ -74,7 +74,7 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
       </div>
 
       {/* Card */}
-      <Card className="relative w-full max-w-[280px] rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+      <Card className="relative w-full max-w-[280px] rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md">
         <CardContent className="space-y-3 p-0">
           {/* Year badge */}
           <div className="flex items-center justify-between">

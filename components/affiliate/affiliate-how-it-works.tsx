@@ -41,7 +41,7 @@ export function AffiliateHowItWorks() {
 
   return (
     <section className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
+      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
         <div className="space-y-3 mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
             Jak to działa
@@ -64,7 +64,7 @@ export function AffiliateHowItWorks() {
             style={{ transitionDelay: `${index * 100}ms` }}
           >
           <Card 
-            className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+            className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
           >
             <CardContent className="flex h-full flex-col gap-4 p-6">
               <div className="flex items-center gap-3">

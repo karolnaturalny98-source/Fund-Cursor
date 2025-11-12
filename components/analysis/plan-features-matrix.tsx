@@ -135,7 +135,7 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
 
   if (allPlans.length === 0) {
     return (
-      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardContent className="flex h-[200px] items-center justify-center">
           <p className="text-sm text-muted-foreground">
             Brak planów do wyświetlenia
@@ -146,7 +146,7 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
   }
 
   return (
-    <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader>
         <CardTitle>Matryca Porównania Planów</CardTitle>
         <CardDescription>

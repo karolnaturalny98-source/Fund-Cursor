@@ -70,7 +70,7 @@ export function DiscountCoupon({
       </div>
       
       {/* Bottom section with action */}
-      <div className="flex items-center justify-center gap-2 bg-[rgba(8,10,13,0.82)] px-3 py-2">
+      <div className="flex items-center justify-center gap-2 bg-card/82 px-3 py-2">
         <span
           className={cn(
             "text-[10px] font-bold uppercase tracking-wider text-white",

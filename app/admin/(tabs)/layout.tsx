@@ -19,7 +19,7 @@ export default function AdminTabsLayout({ children }: AdminTabsLayoutProps) {
         </aside>
 
         {/* Mobile Header */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 border-b bg-[rgba(8,10,13,0.82)] backdrop-blur-sm supports-backdrop-filter:bg-[rgba(12,14,18,0.6)]">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 border-b bg-card/82 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
           <div className="container flex h-16 items-center justify-between">
             <Link className="text-lg font-semibold text-foreground" href="/admin">
               Panel <span className="text-primary">Admina</span>

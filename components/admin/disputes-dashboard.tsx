@@ -309,7 +309,7 @@ export function AdminDisputesDashboard({
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((card) => (
-          <div key={card.key} className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs">
+          <div key={card.key} className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">{card.label}</p>
             <p className="mt-2 text-2xl font-semibold">{card.value}</p>
           </div>
@@ -441,7 +441,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
   };
 
   return (
-    <article className="space-y-3 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs">
+    <article className="space-y-3 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
           <p className="text-sm font-semibold text-foreground">{dispute.title}</p>

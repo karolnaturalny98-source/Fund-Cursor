@@ -52,7 +52,7 @@ export function OpiniePageClient({ totalReviews, newReviews30d, averageRating }:
       </div>
 
       <div className="grid gap-2 grid-cols-1 sm:grid-cols-3">
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+        <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
           <div className="flex items-center gap-1.5">
             <MessageSquare className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
             <div className="flex items-center gap-1.5 min-w-0 flex-1">
@@ -61,7 +61,7 @@ export function OpiniePageClient({ totalReviews, newReviews30d, averageRating }:
             </div>
           </div>
         </Card>
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+        <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
           <div className="flex items-center gap-1.5">
             <TrendingUp className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
             <div className="flex items-center gap-1.5 min-w-0 flex-1">
@@ -70,7 +70,7 @@ export function OpiniePageClient({ totalReviews, newReviews30d, averageRating }:
             </div>
           </div>
         </Card>
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-[rgba(11,13,16,0.66)]">
+        <Card className="rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-2.5 shadow-xs transition-all hover:border-border/60 hover:bg-card/66">
           <div className="flex items-center gap-1.5">
             <Star className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
             <div className="flex items-center gap-1.5 min-w-0 flex-1">

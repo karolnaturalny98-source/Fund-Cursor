@@ -340,7 +340,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
   };
 
   return (
-    <div className="rounded-xl border bg-[rgba(10,12,15,0.72)] p-6 shadow-xs">
+    <div className="rounded-xl border bg-card/72 p-6 shadow-xs">
       <h2 className="text-lg font-semibold">{isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         {isEditMode 

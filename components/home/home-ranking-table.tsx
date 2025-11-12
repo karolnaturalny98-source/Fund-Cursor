@@ -43,7 +43,7 @@ function CompanyAvatar({
           width={44}
           height={44}
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 bg-[rgba(12,14,18,0.6)] object-contain shadow-xs"
+          className="h-11 w-11 rounded-2xl border border-border/60 bg-background/60 object-contain shadow-xs"
         />
       </div>
     );
@@ -211,7 +211,7 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
     <div className="glass-card overflow-hidden">
       <div className="overflow-x-auto">
         <Table className="min-w-full table-fixed" aria-label="Ranking premium">
-          <TableHeader className="bg-[rgba(14,16,20,0.48)]">
+          <TableHeader className="bg-card/48">
             <TableRow className="border-b border-border/40">
               <TableHead className="w-16 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 #

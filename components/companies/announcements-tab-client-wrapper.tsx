@@ -148,7 +148,7 @@ export function AnnouncementsTabClientWrapper({
       {/* Quick Stats Section */}
       <section className="space-y-6">
         <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="space-y-2 pb-2 pt-4">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <BarChart3 className="h-4 w-4" />
@@ -157,7 +157,7 @@ export function AnnouncementsTabClientWrapper({
               <div className="text-xl font-semibold">{announcements.length}</div>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="space-y-2 pb-2 pt-4">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <BarChart3 className="h-4 w-4" />
@@ -168,7 +168,7 @@ export function AnnouncementsTabClientWrapper({
               </div>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="space-y-2 pb-2 pt-4">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <BarChart3 className="h-4 w-4" />
@@ -177,7 +177,7 @@ export function AnnouncementsTabClientWrapper({
               <div className="text-xl font-semibold">{uniqueTags.length}</div>
             </CardContent>
           </Card>
-          <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="space-y-2 pb-2 pt-4">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <BarChart3 className="h-4 w-4" />
@@ -213,7 +213,7 @@ export function AnnouncementsTabClientWrapper({
                   placeholder="Szukaj ogłoszeń..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
+                  className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
                 />
               </div>
             </div>
@@ -238,7 +238,7 @@ export function AnnouncementsTabClientWrapper({
                   value={tagFilter || "all"}
                   onValueChange={(value) => setTagFilter(value === "all" ? null : value)}
                 >
-                  <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+                  <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                     <Filter className="mr-2 h-4 w-4" />
                     <SelectValue />
                   </SelectTrigger>
@@ -254,7 +254,7 @@ export function AnnouncementsTabClientWrapper({
               )}
               {/* Sort Dropdown */}
               <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
-                <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+                <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                   <ArrowUpDown className="mr-2 h-4 w-4" />
                   <SelectValue />
                 </SelectTrigger>
@@ -394,7 +394,7 @@ export function AnnouncementsTabClientWrapper({
             })}
           </div>
         ) : filteredAndSortedAnnouncements.length === 0 && (searchQuery.trim() || tagFilter) ? (
-          <Card className="rounded-2xl border border-border/60 border-dashed bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center py-16 text-center">
               <div className="mb-4 rounded-full bg-muted/30 p-4">
                 <Search className="h-10 w-10 text-muted-foreground/50" />
@@ -418,7 +418,7 @@ export function AnnouncementsTabClientWrapper({
             </CardContent>
           </Card>
         ) : (
-          <Card className="rounded-2xl border border-border/60 border-dashed bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+          <Card className="rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center py-16 text-center">
               <div className="mb-4 rounded-full bg-muted/30 p-4">
                 <BarChart3 className="h-10 w-10 text-muted-foreground/50" />
@@ -441,7 +441,7 @@ export function AnnouncementsTabClientWrapper({
       <section
         ref={reportFormAnim.ref}
         className={cn(
-          "group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border-primary/50 hover:shadow-md",
+          "group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border-primary/50 hover:shadow-md",
           reportFormAnim.className,
         )}
       >

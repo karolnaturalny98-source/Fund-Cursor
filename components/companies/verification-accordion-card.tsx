@@ -42,7 +42,7 @@ export function VerificationAccordionCard({ company, alerts = [] }: Verification
   // Card zawsze się wyświetla, bo zawsze pokazujemy sekcję alertów
 
   return (
-    <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+    <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
       <CardHeader>
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-5 w-5 text-primary" />

@@ -101,7 +101,7 @@ export function BlogCharts({
   return (
     <div className="space-y-6">
       {/* Line Chart: Blog Trends */}
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Trendy artykułów w czasie</CardTitle>
           <CardDescription>
@@ -162,7 +162,7 @@ export function BlogCharts({
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Pie Chart: Status Distribution */}
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład statusów artykułów</CardTitle>
             <CardDescription>Rozkład artykułów według statusu.</CardDescription>
@@ -197,7 +197,7 @@ export function BlogCharts({
         </Card>
 
         {/* Bar Chart: Top Categories */}
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Top kategorie</CardTitle>
             <CardDescription>Kategorie z największą liczbą artykułów.</CardDescription>
@@ -236,7 +236,7 @@ export function BlogCharts({
       </div>
 
       {/* Bar Chart: Top Authors */}
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top autorzy</CardTitle>
           <CardDescription>Autorzy z największą liczbą artykułów.</CardDescription>

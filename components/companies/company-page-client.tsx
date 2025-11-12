@@ -21,7 +21,7 @@ export function CompanyInfoClient({ paymentMethods, platforms, instruments }: Co
   }
 
   return (
-    <Card className="rounded-2xl border border-border/60 p-4 shadow-xs bg-[rgba(10,12,15,0.72)]!">
+    <Card className="rounded-2xl border border-border/60 p-4 shadow-xs bg-card/72">
       <div className="grid gap-3 sm:grid-cols-3">
         {paymentMethods.length ? (
           <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export function ChecklistItemClient({ item }: ChecklistItemClientProps) {
   const Icon = IconMap[item.iconName] || Check;
 
   return (
-    <Card className="group rounded-lg border border-border/40 shadow-xs transition-all bg-[rgba(12,14,18,0.6)]! hover:border-border/60 hover:bg-[rgba(14,16,20,0.48)]!">
+    <Card className="group rounded-lg border border-border/40 shadow-xs transition-all bg-background/60 hover:border-border/60 hover:bg-card/48">
       <CardContent className="flex items-start gap-2.5 p-3">
         <Icon className="h-3.5 w-3.5 shrink-0 mt-0.5 text-muted-foreground/70" />
         <div className="min-w-0 flex-1 space-y-1">
@@ -110,7 +110,7 @@ export function ResourceCardClient({ link, resourceType, index }: ResourceCardCl
   const ResourceIcon = IconMap[resourceType.iconName] || ExternalLink;
 
   return (
-    <Card className="group rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-[rgba(10,12,15,0.72)]!">
+    <Card className="group rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-card/72">
       <CardHeader className="space-y-3 pb-3">
         <div className="flex items-start justify-between gap-3">
           <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors group-hover:bg-primary/20">
@@ -142,7 +142,7 @@ interface DefaultPlanCardClientProps {
 
 export function DefaultPlanCardClient({ planName, cashbackRate }: DefaultPlanCardClientProps) {
   return (
-    <Card className="group relative overflow-hidden rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-[rgba(10,12,15,0.72)]!">
+    <Card className="group relative overflow-hidden rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-card/72">
       <CardHeader className="space-y-3 pb-3">
         <div className="flex items-center gap-3">
           <div className="rounded-lg bg-primary/20 p-2 text-primary transition-colors group-hover:bg-primary/30">
@@ -191,7 +191,7 @@ export function RulesGridClient({ rows }: RulesGridClientProps) {
         return (
           <Card
             key={row.label}
-            className="group rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-[rgba(10,12,15,0.72)]!"
+            className="group rounded-2xl border border-border/60 shadow-xs transition-all hover:border-primary/50 hover:shadow-md bg-card/72"
           >
             <CardContent className="flex items-start gap-4 p-5">
               <div className="mt-0.5 rounded-lg bg-primary/10 p-2.5 text-primary transition-colors group-hover:bg-primary/20">

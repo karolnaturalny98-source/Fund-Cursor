@@ -59,7 +59,7 @@ export function AffiliateHero() {
             </Button>
           </div>
         </div>
-        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-primary/50 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-md">
+        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md">
           <div className="border-b border-border/40 bg-primary/10 px-6 py-5">
             <p className="text-sm font-semibold tracking-wide text-muted-foreground">
               Program Affilacyjny
@@ -69,7 +69,7 @@ export function AffiliateHero() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-4 px-6 py-6">
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">
                 Dedykowany kod polecający
               </span>
@@ -77,7 +77,7 @@ export function AffiliateHero() {
                 Twój unikalny kod
               </span>
             </div>
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">
                 Wcześniejszy dostęp
               </span>

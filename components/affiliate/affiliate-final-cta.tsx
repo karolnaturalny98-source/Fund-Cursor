@@ -21,7 +21,7 @@ export function AffiliateFinalCta() {
 
   return (
     <section className="container space-y-6 py-12">
-      <Card ref={ctaAnim.ref} className={`rounded-3xl border border-primary/50 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-md ${ctaAnim.className}`}>
+      <Card ref={ctaAnim.ref} className={`rounded-3xl border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md ${ctaAnim.className}`}>
         <CardHeader className="space-y-4 text-center">
           <PremiumBadge variant="glow" className="mx-auto w-fit rounded-full px-4 py-1 text-xs font-semibold">
             Gotowy do startu?

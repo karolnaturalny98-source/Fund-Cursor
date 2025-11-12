@@ -55,7 +55,7 @@ export function CompanyPopularityChart({
 
   if (chartData.length === 0) {
     return (
-      <Card ref={chartAnim.ref} className={`rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs ${chartAnim.className}`}>
+      <Card ref={chartAnim.ref} className={`rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs ${chartAnim.className}`}>
         <CardHeader>
           <div className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" />
@@ -95,7 +95,7 @@ export function CompanyPopularityChart({
       });
 
       return (
-        <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
+        <div className="rounded-lg border border-border/40 bg-card/82 px-3 py-2 shadow-lg backdrop-blur-[36px]!">
           <p className="text-xs font-medium text-muted-foreground">{date}</p>
           <p className="text-sm font-semibold text-foreground">
             Score: {data.score.toFixed(1)}
@@ -107,7 +107,7 @@ export function CompanyPopularityChart({
   };
 
   return (
-    <Card ref={chartAnim.ref} className={`rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs ${chartAnim.className}`}>
+    <Card ref={chartAnim.ref} className={`rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs ${chartAnim.className}`}>
       <CardHeader>
         <div className="flex items-center gap-2">
           <TrendingUp className="h-5 w-5 text-primary" />

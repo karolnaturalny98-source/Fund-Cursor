@@ -90,7 +90,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
     }} className={`space-y-6 ${sectionAnim.className}`}>
       {/* Quick Stats */}
       <div className="grid gap-3 sm:grid-cols-3">
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Liczba tierów</p>
@@ -98,7 +98,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
             </div>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Max dźwignia</p>
@@ -106,7 +106,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
             </div>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Sortowanie</p>
@@ -135,7 +135,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
 
       {/* Comparison Chart */}
       {barChartData.length > 0 && (
-        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+        <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base font-semibold">
               <BarChart3 className="h-4 w-4 text-primary" />
@@ -184,7 +184,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
           return (
             <Card
               key={`${tier.label}-${tier.accountSize ?? "default"}`}
-              className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${
+              className={`rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${
                 itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{
@@ -219,7 +219,7 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
                     <span className="font-medium text-foreground">{tier.accountSize ?? "N/A"}</span>
                   </div>
                   {tier.notes && (
-                    <div className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-2 text-xs text-muted-foreground">
+                    <div className="rounded-lg border border-border/40 bg-background/60 p-2 text-xs text-muted-foreground">
                       {tier.notes}
                     </div>
                   )}

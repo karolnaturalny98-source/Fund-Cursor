@@ -37,7 +37,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <CompareProvider initialSelection={selection}>
       <div className="relative">
         {/* Aurora background from top to end of hero section */}
-        <div className="fixed inset-0 -z-10" style={{ height: '150vh' }}>
+        <div className="fixed inset-0 -z-10 h-[150vh]">
           <Aurora
             colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
             blend={0.5}

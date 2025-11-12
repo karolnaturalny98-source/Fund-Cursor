@@ -69,7 +69,7 @@ function SummaryCard({
   description: string;
 }) {
   return (
-    <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader className="pb-3">
         <CardTitle className="text-sm font-medium text-muted-foreground">
           {label}
@@ -88,7 +88,7 @@ function SummaryCard({
 function CompanyTable({ companies }: { companies: CompanyClickSummary[] }) {
   if (companies.length === 0) {
     return (
-      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+      <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardContent className="pt-6">
           <div className="rounded-lg border border-dashed border-border/50 bg-muted/40 p-6 text-center text-sm text-muted-foreground">
             Brak zarejestrowanych kliknięć – panel wypełni się po pierwszych
@@ -100,7 +100,7 @@ function CompanyTable({ companies }: { companies: CompanyClickSummary[] }) {
   }
 
   return (
-    <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
+    <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader>
         <CardTitle>Top firmy</CardTitle>
         <CardDescription>
