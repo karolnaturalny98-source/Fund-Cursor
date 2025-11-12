@@ -1,0 +1,401 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "FundedRank" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e6]:
+          - link "Ranking" [ref=e7] [cursor=pointer]:
+            - /url: /#ranking
+          - link "Firmy" [ref=e8] [cursor=pointer]:
+            - /url: /firmy
+          - link "Opinie" [ref=e9] [cursor=pointer]:
+            - /url: /opinie
+          - link "Influencerzy" [ref=e10] [cursor=pointer]:
+            - /url: /#influencerzy
+          - link "Baza wiedzy" [ref=e11] [cursor=pointer]:
+            - /url: /#baza-wiedzy
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Waluta
+            - combobox "Waluta" [ref=e15]:
+              - option "USD (USD)" [selected]
+              - option "€ (EUR)"
+              - option "zł (PLN)"
+              - option "CZK (CZK)"
+              - option "GBP (GBP)"
+          - button "Panel uzytkownika" [ref=e16] [cursor=pointer]
+          - button "Zaloguj" [ref=e17] [cursor=pointer]
+    - main [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - generic [ref=e23]: 1+ twórców • Cashback • Ranking
+            - generic [ref=e24]:
+              - heading "FundedRank. Twój kompas w świecie prop tradingu." [level=1] [ref=e25]
+              - paragraph [ref=e26]: Odkrywaj firmy, porównuj plany i wymieniaj punkty 1:1 na kolejne konta. Cały ekosystem prop tradingu — w jednym, nowoczesnym panelu.
+            - generic [ref=e27]:
+              - link "Przeglądaj ranking" [ref=e28] [cursor=pointer]:
+                - /url: "#ranking"
+              - link "Jak to działa?" [ref=e29] [cursor=pointer]:
+                - /url: "#jak-to-dziala"
+          - generic [ref=e30]:
+            - generic [ref=e31]:
+              - paragraph [ref=e32]: Ostatnie 30 dni ekosystemu
+              - paragraph [ref=e33]: 1050 pkt cashback
+            - generic [ref=e34]:
+              - generic [ref=e35]:
+                - generic [ref=e36]: Firmy w rankingu
+                - generic [ref=e37]: "3"
+              - generic [ref=e38]:
+                - generic [ref=e39]: Aktywne plany
+                - generic [ref=e40]: "6"
+              - generic [ref=e41]:
+                - generic [ref=e42]: Zweryfikowane opinie
+                - generic [ref=e43]: "5"
+              - generic [ref=e44]:
+                - generic [ref=e45]: Cashback (pkt)
+                - generic [ref=e46]: "1050"
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: Zaufali nam partnerzy i prop firmy
+          - generic [ref=e50]:
+            - generic [ref=e51]: Apex Funding
+            - generic [ref=e52]: Nordic Traders
+            - generic [ref=e53]: Flash Funding
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: Ranking premium
+              - heading "Wybierz najlepszą firmę dla swojego stylu" [level=2] [ref=e58]
+              - paragraph [ref=e59]: Porównujemy modele kont, zasady i cashback. Zmieniaj zakładkę, aby zobaczyć firmy wyróżnione przez społeczność.
+            - link "Zobacz pełny ranking" [ref=e60] [cursor=pointer]:
+              - /url: /firmy
+          - generic [ref=e61]:
+            - tablist [ref=e62]:
+              - tab "Najwyższe oceny" [selected] [ref=e63] [cursor=pointer]
+              - tab "Najlepszy cashback" [ref=e64] [cursor=pointer]
+              - tab "Nowości" [ref=e65] [cursor=pointer]
+            - tabpanel "Najwyższe oceny" [ref=e66]:
+              - paragraph [ref=e67]: Firmy z najwyższą średnią ocen społeczności.
+              - generic [ref=e68]:
+                - article [ref=e69]:
+                  - generic [ref=e70]:
+                    - generic [ref=e71]:
+                      - generic [ref=e72]:
+                        - generic [ref=e73]:
+                          - heading "Apex Funding" [level=3] [ref=e74]
+                          - generic [ref=e75]: APEX5
+                        - paragraph [ref=e76]: Prop firm nastawiona na szybkie wyplaty i elastyczne zasady zarzadzania ryzykiem.
+                        - generic [ref=e77]:
+                          - generic [ref=e78]: United States
+                          - generic [ref=e79]: Od 2021
+                          - generic [ref=e80]: Wyplaty co 14 dni
+                      - generic [ref=e81]:
+                        - generic [ref=e82]:
+                          - img [ref=e83]
+                          - text: "4.6"
+                        - generic [ref=e85]:
+                          - button [ref=e86] [cursor=pointer]:
+                            - img [ref=e87]
+                          - button "Por" [ref=e89] [cursor=pointer]
+                    - generic [ref=e90]:
+                      - paragraph [ref=e91]: Najpopularniejszy plan
+                      - generic [ref=e92]:
+                        - generic [ref=e93]:
+                          - paragraph [ref=e94]: Account 50K
+                          - paragraph [ref=e95]: Dwuetapowe
+                        - generic [ref=e96]:
+                          - paragraph [ref=e97]: Cena
+                          - paragraph [ref=e98]: 249,00 USD
+                      - generic [ref=e99]:
+                        - generic [ref=e100]: Cashback 5%
+                        - generic [ref=e101]: DD 5000
+                        - generic [ref=e102]: Target 5000
+                  - generic [ref=e103]:
+                    - generic [ref=e104]:
+                      - img [ref=e105]
+                      - text: Szczegóły & cashback
+                    - generic [ref=e108]:
+                      - link "Profil firmy" [ref=e109] [cursor=pointer]:
+                        - /url: /firmy/apex-funding
+                      - button "Strona partnera" [ref=e110] [cursor=pointer]:
+                        - text: Strona partnera
+                        - img [ref=e111]
+                - article [ref=e115]:
+                  - generic [ref=e116]:
+                    - generic [ref=e117]:
+                      - generic [ref=e118]:
+                        - generic [ref=e119]:
+                          - heading "Nordic Traders" [level=3] [ref=e120]
+                          - generic [ref=e121]: NORDIC10
+                        - paragraph [ref=e122]: Europejska firma prop tradingowa nastawiona na stabilne strategie i wsparcie mentorow.
+                        - generic [ref=e123]:
+                          - generic [ref=e124]: Sweden
+                          - generic [ref=e125]: Od 2019
+                          - generic [ref=e126]: Wyplaty co 30 dni
+                      - generic [ref=e127]:
+                        - generic [ref=e128]:
+                          - img [ref=e129]
+                          - text: "4.3"
+                        - generic [ref=e131]:
+                          - button [ref=e132] [cursor=pointer]:
+                            - img [ref=e133]
+                          - button "Por" [ref=e135] [cursor=pointer]
+                    - generic [ref=e136]:
+                      - paragraph [ref=e137]: Najpopularniejszy plan
+                      - generic [ref=e138]:
+                        - generic [ref=e139]:
+                          - paragraph [ref=e140]: Starter 25K
+                          - paragraph [ref=e141]: Jednoetapowe
+                        - generic [ref=e142]:
+                          - paragraph [ref=e143]: Cena
+                          - paragraph [ref=e144]: 194,57 USD
+                      - generic [ref=e145]:
+                        - generic [ref=e146]: Cashback 7%
+                        - generic [ref=e147]: DD 2500
+                        - generic [ref=e148]: Target 1750
+                  - generic [ref=e149]:
+                    - generic [ref=e150]:
+                      - img [ref=e151]
+                      - text: Szczegóły & cashback
+                    - generic [ref=e154]:
+                      - link "Profil firmy" [ref=e155] [cursor=pointer]:
+                        - /url: /firmy/nordic-traders
+                      - button "Strona partnera" [ref=e156] [cursor=pointer]:
+                        - text: Strona partnera
+                        - img [ref=e157]
+                - article [ref=e161]:
+                  - generic [ref=e162]:
+                    - generic [ref=e163]:
+                      - generic [ref=e164]:
+                        - generic [ref=e165]:
+                          - heading "Flash Funding" [level=3] [ref=e166]
+                          - generic [ref=e167]: FLASH3
+                        - paragraph [ref=e168]: Specjalizacja w kontach instant funding bez tradycyjnego wyzwania.
+                        - generic [ref=e169]:
+                          - generic [ref=e170]: United Arab Emirates
+                          - generic [ref=e171]: Od 2023
+                          - generic [ref=e172]: Natychmiastowe wyplaty po 7 dniach
+                      - generic [ref=e173]:
+                        - generic [ref=e174]:
+                          - img [ref=e175]
+                          - text: "4.1"
+                        - generic [ref=e177]:
+                          - button [ref=e178] [cursor=pointer]:
+                            - img [ref=e179]
+                          - button "Por" [ref=e181] [cursor=pointer]
+                    - generic [ref=e182]:
+                      - paragraph [ref=e183]: Najpopularniejszy plan
+                      - generic [ref=e184]:
+                        - generic [ref=e185]:
+                          - paragraph [ref=e186]: Instant 5K
+                          - paragraph [ref=e187]: Instant funding
+                        - generic [ref=e188]:
+                          - paragraph [ref=e189]: Cena
+                          - paragraph [ref=e190]: 299,00 USD
+                      - generic [ref=e191]:
+                        - generic [ref=e192]: Cashback 3%
+                        - generic [ref=e193]: DD 500
+                  - generic [ref=e194]:
+                    - generic [ref=e195]:
+                      - img [ref=e196]
+                      - text: Szczegóły & cashback
+                    - generic [ref=e199]:
+                      - link "Profil firmy" [ref=e200] [cursor=pointer]:
+                        - /url: /firmy/flash-funding
+                      - button "Strona partnera" [ref=e201] [cursor=pointer]:
+                        - text: Strona partnera
+                        - img [ref=e202]
+        - generic [ref=e206]:
+          - generic [ref=e207]:
+            - generic [ref=e208]:
+              - paragraph [ref=e209]: Społeczność FundedRank
+              - heading "Najnowsze doświadczenia traderów" [level=2] [ref=e210]
+              - paragraph [ref=e211]: Zanim podejmiesz decyzję, sprawdź, jak inni traderzy oceniają swoje konta fundingowe. Każda opinia jest moderowana i wymaga realnego zakupu.
+            - generic [ref=e212]: 1 punkt = 1 USD cashback
+          - generic [ref=e213]:
+            - generic [ref=e214]:
+              - img [ref=e215]
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - generic [ref=e220]:
+                    - img [ref=e221]
+                    - text: "5.0"
+                  - generic [ref=e223]: Zaawansowany
+                  - generic [ref=e224]: Poleca
+                - heading "Nordic Traders" [level=3] [ref=e225]:
+                  - link "Nordic Traders" [ref=e226] [cursor=pointer]:
+                    - /url: /firmy/nordic-traders
+              - generic [ref=e227]:
+                - paragraph [ref=e228]: testtesttesttesttesttesttesttesttesttest
+                - generic [ref=e229]:
+                  - generic [ref=e230]: "Styl: test"
+                  - generic [ref=e231]: "Interwał: h4"
+                  - generic [ref=e232]: 5 mies. z firmą
+                - generic [ref=e233]:
+                  - generic [ref=e234]: Char Nat
+                  - generic [ref=e235]: 28 paź 2025
+            - generic [ref=e236]:
+              - img [ref=e237]
+              - generic [ref=e240]:
+                - generic [ref=e241]:
+                  - generic [ref=e242]:
+                    - img [ref=e243]
+                    - text: "5.0"
+                  - generic [ref=e245]: Początkujący
+                  - generic [ref=e246]: Poleca
+                - heading "Apex Funding" [level=3] [ref=e247]:
+                  - link "Apex Funding" [ref=e248] [cursor=pointer]:
+                    - /url: /firmy/apex-funding
+              - generic [ref=e249]:
+                - paragraph [ref=e250]: jest ok ale czasami mogli by szybciej wyplacac te dauny
+                - generic [ref=e251]:
+                  - generic [ref=e252]: "Styl: swing"
+                  - generic [ref=e253]: "Interwał: h4"
+                  - generic [ref=e254]: 5 mies. z firmą
+                - generic [ref=e255]:
+                  - generic [ref=e256]: Char Nat
+                  - generic [ref=e257]: 28 paź 2025
+            - generic [ref=e258]:
+              - img [ref=e259]
+              - generic [ref=e262]:
+                - generic [ref=e264]:
+                  - img [ref=e265]
+                  - text: "4.0"
+                - heading "Flash Funding" [level=3] [ref=e267]:
+                  - link "Flash Funding" [ref=e268] [cursor=pointer]:
+                    - /url: /firmy/flash-funding
+              - generic [ref=e269]:
+                - paragraph [ref=e270]: Dobre dla osób, które chcą zacząć handlować od razu.
+                - generic [ref=e271]:
+                  - generic [ref=e272]: "@anon"
+                  - generic [ref=e273]: 28 paź 2025
+            - generic [ref=e274]:
+              - img [ref=e275]
+              - generic [ref=e278]:
+                - generic [ref=e280]:
+                  - img [ref=e281]
+                  - text: "4.0"
+                - heading "Nordic Traders" [level=3] [ref=e283]:
+                  - link "Nordic Traders" [ref=e284] [cursor=pointer]:
+                    - /url: /firmy/nordic-traders
+              - generic [ref=e285]:
+                - paragraph [ref=e286]: Jednoetapowe wyzwanie jest wygodne, ale trzeba liczyć się z 30 dniami na wypłatę.
+                - generic [ref=e287]:
+                  - generic [ref=e288]: "@anon"
+                  - generic [ref=e289]: 28 paź 2025
+            - generic [ref=e290]:
+              - img [ref=e291]
+              - generic [ref=e294]:
+                - generic [ref=e296]:
+                  - img [ref=e297]
+                  - text: "5.0"
+                - heading "Apex Funding" [level=3] [ref=e299]:
+                  - link "Apex Funding" [ref=e300] [cursor=pointer]:
+                    - /url: /firmy/apex-funding
+              - generic [ref=e301]:
+                - paragraph [ref=e302]: Testowałem wiele firm, ale Apex ma najlepsze warunki dla scalpingu.
+                - generic [ref=e303]:
+                  - generic [ref=e304]: "@anon"
+                  - generic [ref=e305]: 28 paź 2025
+        - generic [ref=e306]:
+          - generic [ref=e307]:
+            - generic [ref=e308]: Program influencerów FundedRank
+            - heading "Twórz treści, odbieraj cashback i indywidualne kody" [level=2] [ref=e309]
+            - paragraph [ref=e310]: Dołącz do programu partnerskiego dla twórców. Zyskasz dedykowany kod, wcześniejszy dostęp do promocji oraz bezpłatne konta na wymianę punktów dla swojej społeczności.
+            - button "Dołącz jako influencer" [ref=e311] [cursor=pointer]
+          - generic [ref=e313]:
+            - generic [ref=e314]:
+              - generic [ref=e315]:
+                - heading "nezrok" [level=3] [ref=e316]
+                - paragraph [ref=e317]: lubie gielde
+              - generic [ref=e318]: youtube
+            - generic [ref=e319]:
+              - generic [ref=e320]: 10 000 obserwujących
+              - link "Link" [ref=e322] [cursor=pointer]:
+                - /url: https://www.youtube.com
+                - text: Link
+                - img [ref=e323]
+        - generic [ref=e326]:
+          - generic [ref=e327]:
+            - paragraph [ref=e328]: Jak to działa
+            - heading "Cashback, który zamienisz na kolejne konto tradingowe" [level=2] [ref=e329]
+            - paragraph [ref=e330]: FundedRank łączy rankingi firm z przejrzystym systemem cashback. Punkty są równoważne dolarom, a proces wymiany trwa tyle, co złożenie prostego wniosku.
+          - generic [ref=e331]:
+            - generic [ref=e333]:
+              - img [ref=e335]
+              - generic [ref=e338]:
+                - paragraph [ref=e339]: Krok 1
+                - heading "Wybierz sprawdzoną firmę" [level=3] [ref=e340]
+                - paragraph [ref=e341]: Przeglądaj ranking, filtry i opinie społeczności. Każda firma ma aktualne zasady, plany i wskaźniki cashback.
+            - generic [ref=e343]:
+              - img [ref=e345]
+              - generic [ref=e348]:
+                - paragraph [ref=e349]: Krok 2
+                - heading "Kup z kodem FundedRank" [level=3] [ref=e350]
+                - paragraph [ref=e351]: Kod przypisany do firmy daje punkty cashback 1:1 do USD. Rejestrujemy transakcję i śledzimy status płatności.
+            - generic [ref=e353]:
+              - img [ref=e355]
+              - generic [ref=e358]:
+                - paragraph [ref=e359]: Krok 3
+                - heading "Wymień punkty na nowe konto" [level=3] [ref=e360]
+                - paragraph [ref=e361]: Z poziomu panelu składzasz wniosek. My opłacamy kolejne konto lub pakiet, wykorzystując zebrane punkty.
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - img [ref=e368]
+              - text: Portfel cashback
+            - heading "Zobacz swoje punkty i historię w panelu użytkownika" [level=2] [ref=e370]
+            - paragraph [ref=e371]: Panel pozwala śledzić status cashbacku, kopiować kody i składać wnioski o nowe konto. Wymiana punktów na USD zajmuje mniej niż minutę.
+          - button "Otwórz panel" [ref=e372] [cursor=pointer]:
+            - text: Otwórz panel
+            - img [ref=e373]
+        - generic [ref=e375]:
+          - generic [ref=e376]:
+            - generic [ref=e377]:
+              - paragraph [ref=e378]: Baza wiedzy
+              - heading "Ucz się razem ze społecznością FundedRank" [level=2] [ref=e379]
+              - paragraph [ref=e380]: Pracujemy nad pełnym centrum wiedzy dla traderów. Poniżej znajdziesz tematy, nad którymi aktualnie pracujemy — daj znać, które chcesz przeczytać jako pierwsze.
+            - button "Zgłoś temat artykułu" [ref=e381] [cursor=pointer]
+          - generic [ref=e382]:
+            - generic [ref=e383]:
+              - heading "Porównanie modeli fundingowych 2025" [level=3] [ref=e385]
+              - generic [ref=e386]:
+                - paragraph [ref=e387]: Które konta evaluation są najbardziej opłacalne, a kiedy warto przejść na model instant?
+                - button "Czytaj wkrótce" [ref=e388] [cursor=pointer]:
+                  - text: Czytaj wkrótce
+                  - img [ref=e389]
+            - generic [ref=e392]:
+              - heading "Checklist przed zakupem konta" [level=3] [ref=e394]
+              - generic [ref=e395]:
+                - paragraph [ref=e396]: 10 punktów, które warto sprawdzić w regulaminie firmy prop tradingowej przed pierwszą wpłatą.
+                - button "Czytaj wkrótce" [ref=e397] [cursor=pointer]:
+                  - text: Czytaj wkrótce
+                  - img [ref=e398]
+            - generic [ref=e401]:
+              - 'heading "Case study: cashback w praktyce" [level=3] [ref=e403]'
+              - generic [ref=e404]:
+                - paragraph [ref=e405]: Jak trader zebrał 380 pkt cashback i wymienił je na kolejne konto 100K bez dodatkowych kosztów.
+                - button "Czytaj wkrótce" [ref=e406] [cursor=pointer]:
+                  - text: Czytaj wkrótce
+                  - img [ref=e407]
+    - contentinfo [ref=e410]:
+      - generic [ref=e411]:
+        - paragraph [ref=e412]: (c) 2025 FundedRank. Wszelkie prawa zastrzezone.
+        - list [ref=e413]:
+          - listitem [ref=e414]:
+            - link "Program partnerski" [ref=e415] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e416]:
+            - link "Regulamin" [ref=e417] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e418]:
+            - link "Polityka prywatnosci" [ref=e419] [cursor=pointer]:
+              - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=e425] [cursor=pointer]:
+    - img [ref=e426]
+  - alert [ref=e429]
+```

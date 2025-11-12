@@ -1,0 +1,195 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "FundedRank" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e6]:
+          - link "Ranking" [ref=e7] [cursor=pointer]:
+            - /url: /#ranking
+          - link "Firmy" [ref=e8] [cursor=pointer]:
+            - /url: /firmy
+          - link "Opinie" [ref=e9] [cursor=pointer]:
+            - /url: /opinie
+          - link "Influencerzy" [ref=e10] [cursor=pointer]:
+            - /url: /#influencerzy
+          - link "Baza wiedzy" [ref=e11] [cursor=pointer]:
+            - /url: /#baza-wiedzy
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Waluta
+            - combobox "Waluta" [ref=e15]:
+              - option "USD (USD)" [selected]
+              - option "€ (EUR)"
+              - option "zł (PLN)"
+              - option "CZK (CZK)"
+              - option "GBP (GBP)"
+          - button "Panel uzytkownika" [ref=e16] [cursor=pointer]
+          - button "Zaloguj" [ref=e17] [cursor=pointer]
+    - main [ref=e18]:
+      - generic [ref=e19]:
+        - link "Powrót do listy firm" [ref=e20] [cursor=pointer]:
+          - /url: /firmy
+          - img [ref=e21]
+          - text: Powrót do listy firm
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]:
+              - img "Apex Funding" [ref=e26]
+              - generic [ref=e27]:
+                - generic [ref=e28]:
+                  - heading "Apex Funding" [level=1] [ref=e29]
+                  - button [ref=e30] [cursor=pointer]:
+                    - img [ref=e31]
+                  - button "Porównaj" [ref=e33] [cursor=pointer]
+                - paragraph [ref=e34]: Dwustopniowe wyzwania z szybkimi wypłatami
+                - generic [ref=e35]:
+                  - generic [ref=e36]: 2-etapowe wyzwanie
+                  - generic [ref=e37]:
+                    - img [ref=e38]
+                    - text: "4.6"
+                  - generic [ref=e40]: United States
+                  - generic [ref=e41]: od 2021
+            - paragraph [ref=e42]: Prop firm nastawiona na szybkie wyplaty i elastyczne zasady zarzadzania ryzykiem.
+            - generic [ref=e43]:
+              - generic [ref=e44]: "Płatności: Karta, Przelew, Kryptowaluty"
+              - generic [ref=e45]: "Platformy: MT5, cTrader"
+              - generic [ref=e46]: "Instrumenty: Forex, Indeksy, Towary"
+            - generic [ref=e47]:
+              - link "Discord" [ref=e48] [cursor=pointer]:
+                - /url: https://discord.gg/apex
+                - img [ref=e49]
+                - text: Discord
+              - link "Twitter" [ref=e53] [cursor=pointer]:
+                - /url: https://twitter.com/apex
+                - img [ref=e54]
+                - text: Twitter
+              - link "Strona" [ref=e58] [cursor=pointer]:
+                - /url: https://example.com/apex
+                - img [ref=e59]
+                - text: Strona
+              - link "YouTube" [ref=e63] [cursor=pointer]:
+                - /url: https://youtube.com/apex
+                - img [ref=e64]
+                - text: YouTube
+              - link "Regulamin / ToS" [ref=e68] [cursor=pointer]:
+                - /url: https://example.com/apex/terms
+                - img [ref=e69]
+                - text: Regulamin / ToS
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - heading "Cashback" [level=3] [ref=e74]
+                - generic [ref=e75]:
+                  - img [ref=e76]
+                  - generic [ref=e79]: 5 pkt
+              - generic [ref=e80]:
+                - heading "Cz?stotliwoĹ‚ wypĹ‚at" [level=3] [ref=e82]
+                - generic [ref=e83]:
+                  - img [ref=e84]
+                  - generic [ref=e87]: Wyplaty co 14 dni
+              - generic [ref=e88]:
+                - heading "Support" [level=3] [ref=e90]
+                - generic [ref=e98]: support@example.com
+          - complementary [ref=e99]:
+            - generic [ref=e100]:
+              - paragraph [ref=e101]: Kod rabatowy
+              - generic [ref=e102]:
+                - generic [ref=e103]: APEX5
+                - button "Kopiuj" [ref=e104] [cursor=pointer]
+              - paragraph [ref=e105]:
+                - text: "Cashback:"
+                - strong [ref=e106]: 5%
+                - text: wartosci zakupu.
+              - paragraph [ref=e107]:
+                - text: "Przy planie Account 50K: zwrot"
+                - strong [ref=e108]: 12,45 USD
+                - text: (~12,45 pkt).
+              - paragraph [ref=e109]: Badz pierwsza osoba, ktora skopiuje ten kod w tym tygodniu.
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: Najpopularniejszy plan
+              - paragraph [ref=e112]: Account 50K
+              - generic [ref=e113]:
+                - generic [ref=e114]: Cena
+                - generic [ref=e115]: 249,00 USD
+            - generic [ref=e116]:
+              - link "Przejdz do planow" [ref=e117] [cursor=pointer]:
+                - /url: "#plany"
+              - button "Zakup z kodem" [ref=e118] [cursor=pointer]:
+                - text: Zakup z kodem
+                - img [ref=e119]
+        - generic [ref=e123]:
+          - tablist [ref=e124]:
+            - tab "Overview" [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]: Overview
+            - tab "Challenges 2" [ref=e127] [cursor=pointer]:
+              - generic [ref=e128]: Challenges
+              - generic [ref=e129]: "2"
+            - tab "Reviews 2" [selected] [ref=e130] [cursor=pointer]:
+              - generic [ref=e131]: Reviews
+              - generic [ref=e132]: "2"
+            - tab "Offers 3" [ref=e133] [cursor=pointer]:
+              - generic [ref=e134]: Offers
+              - generic [ref=e135]: "3"
+            - tab "Announcements 6" [ref=e136] [cursor=pointer]:
+              - generic [ref=e137]: Announcements
+              - generic [ref=e138]: "6"
+            - tab "Payouts New" [ref=e139] [cursor=pointer]:
+              - generic [ref=e140]: Payouts
+              - generic [ref=e141]: New
+          - tabpanel "Reviews 2" [ref=e142]:
+            - generic [ref=e144]:
+              - generic [ref=e145]:
+                - heading "Opinie spolecznosci" [level=2] [ref=e146]
+                - paragraph [ref=e147]: Zebrane wsrod traderow FundedRank. Opinie sa moderowane przed publikacja.
+              - generic [ref=e148]:
+                - tablist [ref=e150]:
+                  - tab "Wszystkie (2)" [ref=e151] [cursor=pointer]
+                  - tab "Zweryfikowane (0)" [active] [selected] [ref=e152] [cursor=pointer]
+                  - tab "Polecaja (0)" [ref=e153] [cursor=pointer]
+                - button "Najwyzej oceniane" [ref=e154] [cursor=pointer]:
+                  - img [ref=e155]
+                  - text: Najwyzej oceniane
+                - button "Dodaj opinie" [ref=e157] [cursor=pointer]
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - heading "Podobne firmy" [level=2] [ref=e160]
+            - paragraph [ref=e161]: Rekomendacje na podstawie modelu finansowania, instrumentów i ocen społeczności.
+          - article [ref=e163]:
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - generic [ref=e166]:
+                  - link "Nordic Traders" [ref=e167] [cursor=pointer]:
+                    - /url: /firmy/nordic-traders
+                  - paragraph [ref=e168]: Cashback do 7 pkt
+                - button [ref=e169] [cursor=pointer]:
+                  - img [ref=e170]
+              - generic [ref=e172]:
+                - generic [ref=e173]: 1-etapowe wyzwanie
+                - generic [ref=e174]: 2-etapowe wyzwanie
+              - paragraph [ref=e175]: Europejska firma prop tradingowa nastawiona na stabilne strategie i wsparcie mentorow.
+            - generic [ref=e176]:
+              - link "Szczegóły" [ref=e177] [cursor=pointer]:
+                - /url: /firmy/nordic-traders
+              - button "Strona partnera" [ref=e178] [cursor=pointer]:
+                - text: Strona partnera
+                - img [ref=e179]
+    - contentinfo [ref=e183]:
+      - generic [ref=e184]:
+        - paragraph [ref=e185]: (c) 2025 FundedRank. Wszelkie prawa zastrzezone.
+        - list [ref=e186]:
+          - listitem [ref=e187]:
+            - link "Program partnerski" [ref=e188] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e189]:
+            - link "Regulamin" [ref=e190] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e191]:
+            - link "Polityka prywatnosci" [ref=e192] [cursor=pointer]:
+              - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=e198] [cursor=pointer]:
+    - img [ref=e199]
+  - alert [ref=e202]
+```

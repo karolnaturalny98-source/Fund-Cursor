@@ -1,0 +1,538 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String                 @id @default(cuid())
+  clerkId               String                 @unique
+  email                 String?
+  displayName           String?
+  favorites             Favorite[]
+  transactions          CashbackTransaction[]
+  clicks                ClickEvent[]
+  affiliateTransactions AffiliateTransaction[]
+  reviews               Review[]
+  dataIssues            DataIssueReport[]
+  disputes              DisputeCase[]
+  assignedDisputes      DisputeCase[]          @relation("DisputeAssignedAdmin")
+  influencerProfile     InfluencerProfile?
+  blogPosts             BlogPost[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+}
+
+model Company {
+  id                    String                  @id @default(cuid())
+  slug                  String                  @unique
+  name                  String
+  headline              String?
+  logoUrl               String?
+  shortDescription      String?
+  websiteUrl            String?
+  country               String?
+  foundedYear           Int?
+  discountCode          String?
+  cashbackRate          Int?
+  payoutFrequency       String?
+  rating                Decimal?                @db.Decimal(2, 1)
+  highlights            String[]                @default([])
+  socials               Json?
+  regulation            String?
+  kycRequired           Boolean                 @default(false)
+  paymentMethods        String[]                @default([])
+  instruments           String[]                @default([])
+  platforms             String[]                @default([])
+  educationLinks        String[]                @default([])
+  supportContact        String?
+  instrumentGroups      Json?
+  leverageTiers         Json?
+  tradingCommissions    Json?
+  firmRules             Json?
+  ceo                   String?
+  legalName             String?
+  headquartersAddress   String?
+  foundersInfo          String?
+  verificationStatus    String?
+  licenses              String[]                @default([])
+  registryLinks         String[]                @default([])
+  registryData          String?
+  plans                 CompanyPlan[]
+  favorites             Favorite[]
+  clicks                ClickEvent[]
+  transactions          CashbackTransaction[]
+  affiliateTransactions AffiliateTransaction[]
+  dataIssues            DataIssueReport[]
+  faqs                  FaqItem[]
+  reviews               Review[]
+  disputes              DisputeCase[]
+  teamMembers           TeamMember[]
+  timelineItems         CompanyTimeline[]
+  certifications        CompanyCertification[]
+  mediaItems            CompanyMedia[]
+  rankingHistory        CompanyRankingHistory[]
+  marketingSpotlights   MarketingSpotlight[]    @relation("CompanyMarketingSpotlights")
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+}
+
+model CompanyPlan {
+  id                   String            @id @default(cuid())
+  companyId            String
+  company              Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name                 String
+  price                Decimal           @db.Decimal(10, 2)
+  currency             String            @default("USD")
+  evaluationModel      String
+  maxDrawdown          Decimal?          @db.Decimal(10, 2)
+  maxDailyLoss         Decimal?          @db.Decimal(10, 2)
+  profitTarget         Decimal?          @db.Decimal(10, 2)
+  profitSplit          String?
+  description          String?
+  features             String[]          @default([])
+  minTradingDays       Int?
+  payoutFirstAfterDays Int?
+  payoutCycleDays      Int?
+  leverage             Int?
+  trailingDrawdown     Boolean?          @default(false)
+  refundableFee        Boolean?          @default(false)
+  scalingPlan          Boolean?          @default(false)
+  accountType          String?
+  affiliateUrl         String?
+  affiliateCommission  Decimal?          @db.Decimal(5, 2)
+  notes                String?
+  priceHistory         PriceHistory[]
+  dataIssues           DataIssueReport[]
+  disputes             DisputeCase[]
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  @@index([companyId])
+}
+
+model CashbackTransaction {
+  id                   String                @id @default(cuid())
+  companyId            String
+  userId               String?
+  transactionRef       String                @unique
+  points               Int                   @default(0)
+  status               CashbackStatus        @default(PENDING)
+  purchasedAt          DateTime?
+  approvedAt           DateTime?
+  fulfilledAt          DateTime?
+  notes                String?
+  company              Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user                 User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  affiliateTransaction AffiliateTransaction? @relation("AffiliateCashback")
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  @@index([companyId])
+  @@index([userId])
+  @@index([status])
+}
+
+enum AffiliateStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model AffiliateTransaction {
+  id                    String               @id @default(cuid())
+  companyId             String
+  userId                String?
+  platform              String?
+  source                String?
+  externalId            String               @unique
+  userEmail             String?
+  amount                Decimal?             @db.Decimal(10, 2)
+  currency              String?              @default("USD")
+  points                Int                  @default(0)
+  purchaseAt            DateTime?
+  status                AffiliateStatus      @default(PENDING)
+  userConfirmed         Boolean?
+  notes                 String?
+  verifiedAt            DateTime?
+  cashbackTransactionId String?              @unique
+  company               Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user                  User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  cashbackTransaction   CashbackTransaction? @relation("AffiliateCashback", fields: [cashbackTransactionId], references: [id], onDelete: SetNull)
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+
+  @@index([status])
+  @@index([companyId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  companyId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, companyId])
+}
+
+model ClickEvent {
+  id        String   @id @default(cuid())
+  companyId String
+  userId    String?
+  ipAddress String?
+  userAgent String?
+  source    String?
+  clickedAt DateTime @default(now())
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([companyId])
+  @@index([userId])
+}
+
+model PriceHistory {
+  id         String      @id @default(cuid())
+  planId     String
+  plan       CompanyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  price      Decimal     @db.Decimal(10, 2)
+  currency   String      @default("USD")
+  recordedAt DateTime    @default(now())
+
+  @@index([planId, recordedAt])
+}
+
+model Review {
+  id          String       @id @default(cuid())
+  companyId   String
+  userId      String?
+  rating      Int
+  pros        String[]     @default([])
+  cons        String[]     @default([])
+  body        String?
+  status      ReviewStatus @default(PENDING)
+  publishedAt DateTime?
+  metadata    Json?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  company     Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user        User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([companyId])
+  @@index([userId])
+  @@index([status])
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  companyId String
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, order])
+}
+
+enum CashbackStatus {
+  PENDING
+  APPROVED
+  REDEEMED
+  REJECTED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum InfluencerStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model InfluencerProfile {
+  id                 String           @id @default(cuid())
+  userId             String           @unique
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  platform           String
+  handle             String
+  audienceSize       Int?
+  referralCode       String?          @unique
+  socialLinks        String[]         @default([])
+  bio                String?
+  status             InfluencerStatus @default(PENDING)
+  preferredCompanies String[]         @default([])
+  notes              String?
+  metadata           Json?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@index([status])
+}
+
+enum DataIssueStatus {
+  PENDING
+  RESOLVED
+  DISMISSED
+}
+
+enum DisputeStatus {
+  OPEN
+  IN_REVIEW
+  WAITING_USER
+  RESOLVED
+  REJECTED
+}
+
+model DisputeCase {
+  id                String        @id @default(cuid())
+  userId            String?
+  companyId         String?
+  planId            String?
+  assignedAdminId   String?
+  status            DisputeStatus @default(OPEN)
+  title             String
+  category          String
+  description       String
+  requestedAmount   Decimal?      @db.Decimal(10, 2)
+  requestedCurrency String?
+  evidenceLinks     String[]      @default([])
+  resolutionNotes   String?
+  metadata          Json?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  user              User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  company           Company?      @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  plan              CompanyPlan?  @relation(fields: [planId], references: [id], onDelete: SetNull)
+  assignedAdmin     User?         @relation("DisputeAssignedAdmin", fields: [assignedAdminId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([companyId])
+  @@index([planId])
+  @@index([status])
+}
+
+model DataIssueReport {
+  id          String          @id @default(cuid())
+  companyId   String?
+  planId      String?
+  userId      String?
+  email       String?
+  category    String
+  description String
+  status      DataIssueStatus @default(PENDING)
+  source      String?
+  metadata    Json?
+  company     Company?        @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  plan        CompanyPlan?    @relation(fields: [planId], references: [id], onDelete: SetNull)
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([companyId])
+  @@index([planId])
+  @@index([userId])
+  @@index([status])
+}
+
+model TeamMember {
+  id              String   @id @default(cuid())
+  companyId       String
+  name            String
+  role            String
+  linkedInUrl     String?
+  profileImageUrl String?
+  level           Int      @default(0)
+  position        String? // "left", "right", "center"
+  order           Int      @default(0)
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+model CompanyTimeline {
+  id          String   @id @default(cuid())
+  companyId   String
+  title       String
+  description String?
+  date        DateTime
+  type        String? // "milestone", "achievement", "update", "award"
+  icon        String? // nazwa ikony z lucide-react
+  order       Int      @default(0)
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+model CompanyCertification {
+  id          String    @id @default(cuid())
+  companyId   String
+  name        String
+  issuer      String? // wydawca certyfikatu
+  description String?
+  url         String? // link do certyfikatu
+  imageUrl    String? // zdjęcie certyfikatu
+  issuedDate  DateTime?
+  expiryDate  DateTime?
+  company     Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([companyId])
+}
+
+model CompanyMedia {
+  id          String   @id @default(cuid())
+  companyId   String
+  title       String
+  source      String? // źródło (np. "Forbes", "TradingView")
+  url         String
+  publishedAt DateTime
+  description String?
+  imageUrl    String?
+  type        String? // "article", "interview", "press-release", "review"
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+model CompanyRankingHistory {
+  id           String   @id @default(cuid())
+  companyId    String
+  overallScore Decimal  @db.Decimal(5, 2)
+  recordedAt   DateTime @default(now())
+  company      Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([recordedAt])
+}
+
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model BlogPost {
+  id               String             @id @default(cuid())
+  slug             String             @unique
+  title            String
+  content          String             @db.Text
+  excerpt          String?
+  featuredImageUrl String?
+  metaTitle        String?
+  metaDescription  String?
+  ogImageUrl       String?
+  status           BlogPostStatus     @default(DRAFT)
+  authorId         String
+  publishedAt      DateTime?
+  views            Int                @default(0)
+  readingTime      Int? // w minutach
+  tags             String[]           @default([])
+  categories       BlogPostCategory[]
+  author           User               @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([authorId])
+  @@index([publishedAt])
+}
+
+model BlogCategory {
+  id          String             @id @default(cuid())
+  slug        String             @unique
+  name        String
+  description String?
+  order       Int                @default(0)
+  posts       BlogPostCategory[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([slug])
+  @@index([order])
+}
+
+model BlogPostCategory {
+  postId     String
+  categoryId String
+  post       BlogPost     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  category   BlogCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime     @default(now())
+
+  @@id([postId, categoryId])
+  @@index([categoryId])
+}
+
+model MarketingSpotlightSection {
+  id          String                @id @default(cuid())
+  slug        String                @unique
+  title       String
+  subtitle    String?
+  emoji       String?
+  isActive    Boolean               @default(true)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  spotlights  MarketingSpotlight[]
+}
+
+model MarketingSpotlight {
+  id             String                     @id @default(cuid())
+  sectionId      String
+  companyId      String?
+  title          String
+  headline       String?
+  badgeLabel     String?
+  badgeTone      String? // maps to design tokens e.g. "pink", "violet"
+  discountValue  Int?
+  rating         Decimal?                   @db.Decimal(2, 1)
+  ratingCount    Int?
+  ctaLabel       String?                    @default("Sprawdź ofertę")
+  ctaUrl         String?
+  imageUrl       String?
+  isActive       Boolean                    @default(true)
+  order          Int                         @default(0)
+  startsAt       DateTime?
+  endsAt         DateTime?
+  metadata       Json?
+  createdAt      DateTime                    @default(now())
+  updatedAt      DateTime                    @updatedAt
+  section        MarketingSpotlightSection   @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  company        Company?                    @relation("CompanyMarketingSpotlights", fields: [companyId], references: [id], onDelete: SetNull)
+
+  @@index([sectionId, order])
+  @@index([companyId])
+  @@index([isActive])
+  @@index([startsAt])
+  @@index([endsAt])
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now())
+  status       String   @default("active") // active, unsubscribed
+  source       String?  // np. "footer", "popup"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("newsletter_subscribers")
+}

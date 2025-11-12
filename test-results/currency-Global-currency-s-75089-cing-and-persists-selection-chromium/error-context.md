@@ -1,0 +1,377 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "FundedRank" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e6]:
+          - link "Ranking" [ref=e7] [cursor=pointer]:
+            - /url: /#ranking
+          - link "Firmy" [ref=e8] [cursor=pointer]:
+            - /url: /firmy
+          - link "Opinie" [ref=e9] [cursor=pointer]:
+            - /url: /opinie
+          - link "Influencerzy" [ref=e10] [cursor=pointer]:
+            - /url: /#influencerzy
+          - link "Baza wiedzy" [ref=e11] [cursor=pointer]:
+            - /url: /#baza-wiedzy
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Waluta
+            - combobox "Waluta" [ref=e15]:
+              - option "USD (USD)" [selected]
+              - option "€ (EUR)"
+              - option "zł (PLN)"
+              - option "CZK (CZK)"
+              - option "GBP (GBP)"
+          - button "Panel uzytkownika" [ref=e16] [cursor=pointer]
+          - button "Zaloguj" [ref=e17] [cursor=pointer]
+    - main [ref=e18]:
+      - generic [ref=e19]:
+        - link "Powrót do listy firm" [ref=e20] [cursor=pointer]:
+          - /url: /firmy
+          - img [ref=e21]
+          - text: Powrót do listy firm
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]:
+              - img "Apex Funding" [ref=e26]
+              - generic [ref=e27]:
+                - generic [ref=e28]:
+                  - heading "Apex Funding" [level=1] [ref=e29]
+                  - button [ref=e30] [cursor=pointer]:
+                    - img [ref=e31]
+                  - button "Porównaj" [ref=e33] [cursor=pointer]
+                - paragraph [ref=e34]: Dwustopniowe wyzwania z szybkimi wypłatami
+                - generic [ref=e35]:
+                  - generic [ref=e36]: 2-etapowe wyzwanie
+                  - generic [ref=e37]:
+                    - img [ref=e38]
+                    - text: "4.6"
+                  - generic [ref=e40]: United States
+                  - generic [ref=e41]: od 2021
+            - paragraph [ref=e42]: Prop firm nastawiona na szybkie wyplaty i elastyczne zasady zarzadzania ryzykiem.
+            - generic [ref=e43]:
+              - generic [ref=e44]: "Płatności: Karta, Przelew, Kryptowaluty"
+              - generic [ref=e45]: "Platformy: MT5, cTrader"
+              - generic [ref=e46]: "Instrumenty: Forex, Indeksy, Towary"
+            - generic [ref=e47]:
+              - link "Discord" [ref=e48] [cursor=pointer]:
+                - /url: https://discord.gg/apex
+                - img [ref=e49]
+                - text: Discord
+              - link "Twitter" [ref=e53] [cursor=pointer]:
+                - /url: https://twitter.com/apex
+                - img [ref=e54]
+                - text: Twitter
+              - link "Strona" [ref=e58] [cursor=pointer]:
+                - /url: https://example.com/apex
+                - img [ref=e59]
+                - text: Strona
+              - link "YouTube" [ref=e63] [cursor=pointer]:
+                - /url: https://youtube.com/apex
+                - img [ref=e64]
+                - text: YouTube
+              - link "Regulamin / ToS" [ref=e68] [cursor=pointer]:
+                - /url: https://example.com/apex/terms
+                - img [ref=e69]
+                - text: Regulamin / ToS
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - heading "Cashback" [level=3] [ref=e74]
+                - generic [ref=e75]:
+                  - img [ref=e76]
+                  - generic [ref=e79]: 5 pkt
+              - generic [ref=e80]:
+                - heading "Cz?stotliwoĹ‚ wypĹ‚at" [level=3] [ref=e82]
+                - generic [ref=e83]:
+                  - img [ref=e84]
+                  - generic [ref=e87]: Wyplaty co 14 dni
+              - generic [ref=e88]:
+                - heading "Support" [level=3] [ref=e90]
+                - generic [ref=e98]: support@example.com
+          - complementary [ref=e99]:
+            - generic [ref=e100]:
+              - paragraph [ref=e101]: Kod rabatowy
+              - generic [ref=e102]:
+                - generic [ref=e103]: APEX5
+                - button "Kopiuj" [ref=e104] [cursor=pointer]
+              - paragraph [ref=e105]:
+                - text: "Cashback:"
+                - strong [ref=e106]: 5%
+                - text: wartosci zakupu.
+              - paragraph [ref=e107]:
+                - text: "Przy planie Account 50K: zwrot"
+                - strong [ref=e108]: 12,45 USD
+                - text: (~12,45 pkt).
+              - paragraph [ref=e109]: Badz pierwsza osoba, ktora skopiuje ten kod w tym tygodniu.
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: Najpopularniejszy plan
+              - paragraph [ref=e112]: Account 50K
+              - generic [ref=e113]:
+                - generic [ref=e114]: Cena
+                - generic [ref=e115]: 249,00 USD
+            - generic [ref=e116]:
+              - link "Przejdz do planow" [ref=e117] [cursor=pointer]:
+                - /url: "#plany"
+              - button "Zakup z kodem" [ref=e118] [cursor=pointer]:
+                - text: Zakup z kodem
+                - img [ref=e119]
+        - generic [ref=e123]:
+          - tablist [ref=e124]:
+            - tab "Overview" [selected] [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]: Overview
+            - tab "Challenges 2" [ref=e127] [cursor=pointer]:
+              - generic [ref=e128]: Challenges
+              - generic [ref=e129]: "2"
+            - tab "Reviews 2" [ref=e130] [cursor=pointer]:
+              - generic [ref=e131]: Reviews
+              - generic [ref=e132]: "2"
+            - tab "Offers 3" [ref=e133] [cursor=pointer]:
+              - generic [ref=e134]: Offers
+              - generic [ref=e135]: "3"
+            - tab "Announcements 6" [ref=e136] [cursor=pointer]:
+              - generic [ref=e137]: Announcements
+              - generic [ref=e138]: "6"
+            - tab "Payouts New" [ref=e139] [cursor=pointer]:
+              - generic [ref=e140]: Payouts
+              - generic [ref=e141]: New
+          - tabpanel "Overview" [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - generic [ref=e145]:
+                  - img [ref=e146]
+                  - heading "Dla kogo?" [level=2] [ref=e151]
+                - generic [ref=e152]:
+                  - generic [ref=e153]:
+                    - generic [ref=e154]:
+                      - heading "Klasyczny challenge" [level=3] [ref=e155]
+                      - paragraph [ref=e156]: Dla osób preferujących niższe koszty startu i standardowe dwuetapowe wyzwania.
+                    - generic [ref=e157]:
+                      - generic [ref=e158]:
+                        - generic [ref=e159]: Niższy koszt wejścia
+                        - generic [ref=e160]: Większa tolerancja na błędy
+                      - paragraph [ref=e161]: "Polecany plan: Account 50K"
+                  - generic [ref=e162]:
+                    - generic [ref=e163]:
+                      - heading "Skalowanie konta" [level=3] [ref=e164]
+                      - paragraph [ref=e165]: Traderzy planujący długoterminowo – programy z możliwością zwiększania kapitału.
+                    - generic [ref=e166]:
+                      - generic [ref=e168]: Opcje skalowania
+                      - paragraph [ref=e170]: "Polecany plan: Account 50K"
+                  - generic [ref=e171]:
+                    - generic [ref=e172]:
+                      - heading "Wysoka dźwignia" [level=3] [ref=e173]
+                      - paragraph [ref=e174]: Traderzy intraday i scalperzy oczekujący wysokiej dźwigni i elastycznych instrumentów.
+                    - generic [ref=e175]:
+                      - generic [ref=e176]:
+                        - generic [ref=e177]: Dźwignia do 100x
+                        - generic [ref=e178]: Szeroka lista instrumentów
+                      - paragraph [ref=e179]: "Polecany plan: Account 50K"
+              - generic [ref=e180]:
+                - generic [ref=e181]:
+                  - img [ref=e182]
+                  - heading "Lista kontrolna przed startem" [level=2] [ref=e184]
+                - generic [ref=e185]:
+                  - generic [ref=e187]:
+                    - img [ref=e189]
+                    - generic [ref=e191]:
+                      - paragraph [ref=e192]: Przygotuj dokumenty KYC
+                      - paragraph [ref=e193]: Potrzebne b?dzie potwierdzenie to?samo?ci przed pierwsz? wypĹ‚at?.
+                  - generic [ref=e195]:
+                    - img [ref=e197]
+                    - generic [ref=e199]:
+                      - paragraph [ref=e200]: Dobierz plan pod styl handlu
+                      - paragraph [ref=e201]: PorĂłwnaj modele evaluation (1 etap, 2 etapy, instant) i wymagania minimalne.
+                  - generic [ref=e203]:
+                    - img [ref=e205]
+                    - generic [ref=e207]:
+                      - paragraph [ref=e208]: Zweryfikuj regulamin i ToS
+                      - paragraph [ref=e209]: Przeczytaj zasady payout?w, polityk? zwrot?w oraz limity dzienne.
+                  - generic [ref=e211]:
+                    - img [ref=e213]
+                    - generic [ref=e215]:
+                      - paragraph [ref=e216]: Zaplanuj pierwszy payout
+                      - paragraph [ref=e217]: Ustaw przypomnienie na pierwszy dost?pny termin wypĹ‚aty i przygotuj kana? p?atno?ci.
+                  - generic [ref=e219]:
+                    - img [ref=e221]
+                    - generic [ref=e223]:
+                      - paragraph [ref=e224]: Odwied? materia?y edukacyjne
+                      - paragraph [ref=e225]: Firma udost?pnia dodatkowe materia?y, kt?re warto pozna? przed startem.
+                  - generic [ref=e227]:
+                    - img [ref=e229]
+                    - generic [ref=e231]:
+                      - paragraph [ref=e232]: Dodaj kontakt do supportu
+                      - paragraph [ref=e233]: "Wsparcie: support@example.com"
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - img [ref=e236]
+                  - heading "Instrumenty i aktywa" [level=2] [ref=e240]
+                - generic [ref=e242]:
+                  - heading "INSTRUMENTY" [level=3] [ref=e244]
+                  - list [ref=e246]:
+                    - listitem [ref=e247]:
+                      - img [ref=e248]
+                      - generic [ref=e250]: FX
+                    - listitem [ref=e251]:
+                      - img [ref=e252]
+                      - generic [ref=e254]: CFD
+                    - listitem [ref=e255]:
+                      - img [ref=e256]
+                      - generic [ref=e258]: CRYPTO
+              - generic [ref=e259]:
+                - generic [ref=e260]:
+                  - img [ref=e261]
+                  - heading "Profil dźwigni" [level=2] [ref=e264]
+                - table [ref=e266]:
+                  - rowgroup [ref=e267]:
+                    - row "Segment Konto Max dźwignia Notatki" [ref=e268]:
+                      - cell "Segment" [ref=e269]
+                      - cell "Konto" [ref=e270]
+                      - cell "Max dźwignia" [ref=e271]
+                      - cell "Notatki" [ref=e272]
+                  - rowgroup [ref=e273]:
+                    - row "FX 100k 1:100 ?" [ref=e274]:
+                      - cell "FX" [ref=e275]
+                      - cell "100k" [ref=e276]
+                      - cell "1:100" [ref=e277]
+                      - cell "?" [ref=e278]
+              - generic [ref=e279]:
+                - generic [ref=e280]:
+                  - img [ref=e281]
+                  - heading "Prowizje" [level=2] [ref=e284]
+                - generic [ref=e285]:
+                  - generic [ref=e286]:
+                    - generic [ref=e287]:
+                      - heading "FX" [level=3] [ref=e288]
+                      - paragraph [ref=e289]: 4$
+                    - generic [ref=e290]: lot
+                  - generic [ref=e291]:
+                    - generic [ref=e292]:
+                      - heading "CRYPTO" [level=3] [ref=e293]
+                      - paragraph [ref=e294]: 5$
+                    - generic [ref=e295]: LOT
+                  - generic [ref=e296]:
+                    - generic [ref=e297]:
+                      - heading "CFD" [level=3] [ref=e298]
+                      - paragraph [ref=e299]: 3$
+                    - generic [ref=e300]: LOT
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - img [ref=e303]
+                  - heading "Zasady firmy" [level=2] [ref=e305]
+                - generic [ref=e306]:
+                  - generic [ref=e307]:
+                    - heading "Dozwolone" [level=3] [ref=e309]:
+                      - img [ref=e310]
+                      - text: Dozwolone
+                    - list [ref=e313]:
+                      - listitem [ref=e314]:
+                        - img [ref=e315]
+                        - generic [ref=e317]: GRID
+                      - listitem [ref=e318]:
+                        - img [ref=e319]
+                        - generic [ref=e321]: ALGO
+                  - generic [ref=e322]:
+                    - heading "Zabronione" [level=3] [ref=e324]:
+                      - img [ref=e325]
+                      - text: Zabronione
+                    - list [ref=e329]:
+                      - listitem [ref=e330]:
+                        - img [ref=e331]
+                        - generic [ref=e334]: BOT
+                      - listitem [ref=e335]:
+                        - img [ref=e336]
+                        - generic [ref=e339]: SCALP
+              - generic [ref=e340]:
+                - generic [ref=e341]:
+                  - img [ref=e342]
+                  - heading "FAQ w kontekście" [level=2] [ref=e344]
+                - generic [ref=e345]:
+                  - generic [ref=e346]:
+                    - generic [ref=e347]:
+                      - button "Wszystkie 2" [ref=e348] [cursor=pointer]:
+                        - text: Wszystkie
+                        - generic [ref=e349]: "2"
+                      - button "Wyplaty 0" [ref=e350] [cursor=pointer]:
+                        - text: Wyplaty
+                        - generic [ref=e351]: "0"
+                      - button "Challenge 0" [ref=e352] [cursor=pointer]:
+                        - text: Challenge
+                        - generic [ref=e353]: "0"
+                      - button "Konto 0" [ref=e354] [cursor=pointer]:
+                        - text: Konto
+                        - generic [ref=e355]: "0"
+                      - button "Trading 1" [ref=e356] [cursor=pointer]:
+                        - text: Trading
+                        - generic [ref=e357]: "1"
+                      - button "Inne 1" [ref=e358] [cursor=pointer]:
+                        - text: Inne
+                        - generic [ref=e359]: "1"
+                    - textbox "Szukaj w FAQ..." [ref=e360]
+                  - generic [ref=e361]:
+                    - group [ref=e363]:
+                      - generic "Czy Apex oferuje refundacje opłat?" [ref=e364] [cursor=pointer]
+                    - group [ref=e366]:
+                      - generic "Jakie są dostępne platformy?" [ref=e367] [cursor=pointer]
+              - generic [ref=e368]:
+                - generic [ref=e369]:
+                  - img [ref=e370]
+                  - heading "Materiały edukacyjne" [level=2] [ref=e372]
+                - generic [ref=e374]:
+                  - generic [ref=e375]:
+                    - 'heading "Zasób #1" [level=3] [ref=e376]'
+                    - paragraph [ref=e377]: example.com
+                  - link "Otwórz materiał" [ref=e379] [cursor=pointer]:
+                    - /url: https://example.com/apex/academy
+                    - text: Otwórz materiał
+                    - img [ref=e380]
+              - generic [ref=e385]:
+                - generic [ref=e386]:
+                  - heading "Skrót ofertowy" [level=3] [ref=e387]
+                  - paragraph [ref=e388]: Popularny plan Account 50K z cashbackiem do 5 pkt.
+                - link "Zobacz wszystkie oferty" [ref=e389] [cursor=pointer]:
+                  - /url: "#offers"
+        - generic [ref=e390]:
+          - generic [ref=e391]:
+            - heading "Podobne firmy" [level=2] [ref=e392]
+            - paragraph [ref=e393]: Rekomendacje na podstawie modelu finansowania, instrumentów i ocen społeczności.
+          - article [ref=e395]:
+            - generic [ref=e396]:
+              - generic [ref=e397]:
+                - generic [ref=e398]:
+                  - link "Nordic Traders" [ref=e399] [cursor=pointer]:
+                    - /url: /firmy/nordic-traders
+                  - paragraph [ref=e400]: Cashback do 7 pkt
+                - button [ref=e401] [cursor=pointer]:
+                  - img [ref=e402]
+              - generic [ref=e404]:
+                - generic [ref=e405]: 1-etapowe wyzwanie
+                - generic [ref=e406]: 2-etapowe wyzwanie
+              - paragraph [ref=e407]: Europejska firma prop tradingowa nastawiona na stabilne strategie i wsparcie mentorow.
+            - generic [ref=e408]:
+              - link "Szczegóły" [ref=e409] [cursor=pointer]:
+                - /url: /firmy/nordic-traders
+              - button "Strona partnera" [ref=e410] [cursor=pointer]:
+                - text: Strona partnera
+                - img [ref=e411]
+    - contentinfo [ref=e415]:
+      - generic [ref=e416]:
+        - paragraph [ref=e417]: (c) 2025 FundedRank. Wszelkie prawa zastrzezone.
+        - list [ref=e418]:
+          - listitem [ref=e419]:
+            - link "Program partnerski" [ref=e420] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e421]:
+            - link "Regulamin" [ref=e422] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e423]:
+            - link "Polityka prywatnosci" [ref=e424] [cursor=pointer]:
+              - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=e430] [cursor=pointer]:
+    - img [ref=e431]
+  - alert [ref=e434]
+```
