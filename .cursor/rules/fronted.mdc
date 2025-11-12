@@ -1,0 +1,31 @@
+---
+description: Frontend UI rules (React/Tailwind/shadcn)
+globs:
+  - "app/**/*.{ts,tsx}"
+  - "components/**/*.{ts,tsx}"
+  - "lib/ui/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Frontend Rules
+
+## Components & Client/Server
+- Preferuj Server Components; `use client` tylko dla interakcji (state/effects).
+- Reużywaj shadcn/ui; nie dodawaj nowych UI-libów.
+- Nazewnictwo: komponenty PascalCase, pliki kebab-case.
+
+## Styling & A11y
+- Tailwind + `clsx` + `tailwind-merge`; trzymaj motyw dark/green.
+- Zapewnij focus states, aria-* i `sr-only` dla komunikatów/feedbacku.
+
+## Pages & Layouts
+- Zakładkowy layout firm (shadcn `Tabs`), osobne server components na sekcję.
+- Compare: max 3 firmy; używaj `CompareProvider`.
+
+## SEO & Telemetry
+- Aktualizuj JSON-LD/OG przy zmianach kontentu.
+- Emituj eventy: `purchase_click`, `faq_expand`, `open_tos`, `copy_code`, `favorites`.
+
+## Performance
+- Minimalizuj klient-hydration; wynoś fetch do RSC.
+- Obrazy przez `next/image`; pilnuj LCP (priorytet hero).

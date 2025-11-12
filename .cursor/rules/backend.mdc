@@ -1,0 +1,32 @@
+---
+description: Backend/API rules (Route Handlers, Prisma, caching)
+globs:
+  - "app/api/**/*.{ts,tsx}"
+  - "lib/queries/**/*.{ts,tsx}"
+  - "lib/services/**/*.{ts,tsx}"
+  - "prisma/**/*"
+alwaysApply: false
+---
+
+# Backend Rules
+
+## API & Validation
+- Route Handlers pod `/api/*` (REST).
+- Każdy handler: walidacja Zod + egzekwowanie ról (Clerk).
+- Admin-only: `/api/admin/*` i `/admin`.
+
+## Data & Prisma
+- Schemat w `prisma/schema.prisma`; migracje przez `prisma migrate dev`.
+- Modele PascalCase, pola snake_case; enums (np. DisputeStatus).
+- Seed w `prisma/seed.js`. Baza: Neon.
+
+## Caching & Revalidate
+- Stosuj tagged revalidation zamiast `force-dynamic`.
+- Cache selektywny (historia cen, rankingi, podobne firmy).
+
+## Security
+- Sanitizacja wejść, limity payload, brak sekretów w logach.
+- `.env` poza repo; rotacja testowych kluczy.
+
+## Telemetry & Analytics
+- Rejestruj kliknięcia CTA; UTM w linkach zakupowych.

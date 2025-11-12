@@ -1,0 +1,118 @@
+---
+description: FundedRank Project Rules (single-source, living document)
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "app/**/*"
+  - "components/**/*"
+  - "lib/**/*"
+  - "prisma/**/*"
+alwaysApply: true
+---
+
+# FundedRank – Project Rules (Living Doc)
+
+> Ten plik jest **jedynym źródłem prawdy** dla zasad projektu, skrótu PRD/ARCH i workflow.  
+> **Nie** utrzymujemy osobnych README/PRD/ARCHITECTURE na tym etapie — aktualizujemy **ten plik**.  
+> Każdą zmianę odnotuj w **Changelog** poniżej.
+
+## 0) Snapshot (Stack & Constraints)
+- App: **Next.js 15 (App Router)** + **React 19**, **TypeScript 5**, **ESLint 9**.
+- UI: **Tailwind CSS 3.4** + **shadcn/ui** (motyw dark/green).
+- Auth: **Clerk** (role via `publicMetadata.role`).
+- Data: **Prisma** → **PostgreSQL (Neon)**, seed: `prisma/seed.js`.
+- E2E: Playwright (szkielet).
+- Hosting: **Vercel**.
+- ⚠️ **Nie dodajemy** bibliotek poza stackiem powyżej.
+
+## 1) Architecture & Structure
+- Routing: `app/` (feature groups jak `(auth)`, `admin/(tabs)` etc.).
+- UI współdzielone: `components/` (feature folders + `components/ui`).
+- Dostęp do danych: `lib/queries/*` (reads); logika biznesowa: `lib/services/*`.
+- Baza/ORM: `prisma/` (schema, migrations, seed).
+- Statyczne: `public/`. Artefakty testów: `test-results/`.
+- Domyślnie **Server Components**; `use client` tylko gdy niezbędne.
+
+## 2) Product Brief (PRD — skrót)
+**Cel:** porównywarka prop-firm z rankingiem, filtrowaniem, detalami firm, kodami zniżkowymi i cashbackiem (punkty → nagrody).  
+**Grupy:** doświadczeni traderzy, nowicjusze, influencerzy.  
+**MVP:** ranking+filtry, detale firmy (kody/linki + telemetry), logowanie (Clerk), panel użytkownika (wallet/historia/ulubione), rejestrowanie klików, ręczne przyznawanie punktów, panel admina.  
+**KPI:** kliknięcia CTA, przychody afiliacyjne, liczba/realizacja punktów, powracający użytkownicy.
+
+## 3) Feature Rules & UX
+- Ranking: filtry (model, min cashback, kraj, typ konta, min payout), sorty (`popular`, `newest`, `cashback`, `rating`, `name`).
+- Firma: zakładki (Overview/Challenges/Reviews/Offers/Announcements/Payouts), JSON-LD w sync z danymi.
+- CTA/UTM + telemetry: `purchase_click`, `faq_expand`, `open_tos`, `copy_code`, favorites.
+- Compare: max 3 firmy; używaj `CompareProvider`; re-use `parseCompareParam`.
+- Wallet: `/api/wallet/{transactions,available,redeem}` + overlay historii i redeem.
+- Disputes: `DisputeCase` + API (`/api/disputes`, `/api/user/disputes`, `/api/admin/disputes[/{id}]`).
+
+## 4) Coding Style
+- TS + ES Modules, 2 spacje, unikaj `any`.
+- Komponenty **PascalCase**, zmienne/funkcje **camelCase**, pliki **kebab-case**.
+- Kolumny DB **snake_case**.
+- Tailwind + `clsx` + `tailwind-merge`. A11y (aria, sr-only, focus mgmt).
+- Zawsze `npm run lint` przed commit/PR.
+
+## 5) API & Data
+- Route Handlers pod `/api/*` (REST), walidacja **Zod**.
+- Role: `user`, `admin` w `publicMetadata.role`. `/admin` i `/api/admin/*` wymagają admina (np. `requireAdmin`).
+- Prisma: twórz **migrations** (nie edytuj wygenerowanego SQL). Seed: `prisma/seed.js`.
+- Enums dla statusów (np. `DisputeStatus`), jawne relacje, spójność referencyjna.
+
+## 6) Caching & Performance
+- Zamień `force-dynamic` na **tagged revalidation**:
+  - `fetch(url, { next: { tags: ['companies'], revalidate: 60 } })`
+  - Invalidate: `revalidateTag('companies')`
+- Stosuj selektywny cache (historia cen, rankingi). Minimalizuj klient-hydration.
+
+### Przykład (RSC fetch + revalidate)
+```ts
+// lib/queries/companies.ts
+export async function getCompanies() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`, {
+    next: { tags: ['companies'], revalidate: 60 },
+  });
+  return res.json();
+}
+
+// app/api/admin/companies/route.ts (po mutacji)
+import { revalidateTag } from 'next/cache';
+export async function POST(req: Request) {
+  // ...zapis w DB...
+  revalidateTag('companies');
+  return Response.json({ ok: true });
+}
+## 7) SEO & Analytics
+- Aktualizuj JSON-LD Product/Offer w `lib/seo.ts` przy każdej zmianie stron detalu.
+- OG/Twitter metadata w sync.
+- UTM dopinane do linków zakupowych; spójna telemetry na listach/detalach/similar.
+
+
+## 9) Commits & PRs
+- Commit: krótkie, imperatywne (`feat: add ranking tabs cache`).
+- PR: problem → rozwiązanie → output `npm run lint`/`npm run test` → ewentualne `prisma migrate ...`.
+- Merge tylko po zielonym CI.
+
+## 10) Security
+- Sanitizacja wejść, kontrola ról na backendzie.
+- Sekrety wyłącznie w `.env`. Zero sekretów w logach/commitach.
+- W prod wyłączaj nieużywane endpointy.
+
+## 11) Documentation (Embedded Policy)
+> Nie utrzymujemy osobnych README/PRD/ARCH teraz.  
+> Wszystkie wytyczne aktualizujemy **tutaj** + krótkie JSDoc w `lib/*` i komentarze przy złożonych hookach/flow.
+- Jak aktualizować: edytuj odpowiednią sekcję (0–10) i dopisz wpis w **Changelog**.
+- `AGENTS.md` (jeśli powstanie) to skrót tego pliku — nie alternatywa.
+
+## 12) Roadmap (aktywny wycinek)
+- Revalidate/cache tagami.
+- Global currency switch (SSR + cookie/localStorage).
+- UX polish: sticky card ↔ plan, copy tweaks, „report data issue”.
+
+---
+
+## Changelog
+- **2025-11-12:** Utworzono „living doc”; scalono PRD/ARCH/README do Project Rules; dodano sekcję z przykładami tagged revalidation.
+@fundedrank-project
+MDC
