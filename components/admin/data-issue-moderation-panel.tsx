@@ -82,7 +82,7 @@ export function DataIssueModerationPanel({
         {reports.map((report) => (
         <article
           key={report.id}
-          className="space-y-3 rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm p-4"
+          className="space-y-3 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-4"
         >
           <header className="flex flex-wrap items-start justify-between gap-3">
             <div className="space-y-1">

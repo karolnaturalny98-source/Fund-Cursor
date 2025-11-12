@@ -27,7 +27,7 @@ export function TeamHistoryTabsCard({ company }: TeamHistoryTabsCardProps) {
   const defaultTab = hasTeam ? "team" : "history";
 
   return (
-    <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+    <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Users className="h-5 w-5 text-primary" />
@@ -47,8 +47,8 @@ export function TeamHistoryTabsCard({ company }: TeamHistoryTabsCardProps) {
                 value="team"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-sm",
-                  "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm",
+                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
                 Zespół
@@ -59,8 +59,8 @@ export function TeamHistoryTabsCard({ company }: TeamHistoryTabsCardProps) {
                 value="history"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-sm",
-                  "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm",
+                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
                 Historia firmy

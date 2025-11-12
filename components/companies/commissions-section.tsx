@@ -86,7 +86,7 @@ export function CommissionsSection({ commissions }: CommissionsSectionProps) {
     <div ref={sectionAnim.ref} className={`space-y-6 ${sectionAnim.className}`}>
       {/* Quick Stats */}
       <div className="grid gap-3 sm:grid-cols-4">
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardContent className="pt-4">
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground">Liczba rynków</p>
@@ -95,7 +95,7 @@ export function CommissionsSection({ commissions }: CommissionsSectionProps) {
           </CardContent>
         </Card>
         {stats.average !== null && (
-          <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+          <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
             <CardContent className="pt-4">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground">Średnia prowizja</p>
@@ -105,7 +105,7 @@ export function CommissionsSection({ commissions }: CommissionsSectionProps) {
           </Card>
         )}
         {stats.min !== null && (
-          <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+          <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
             <CardContent className="pt-4">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground">Najniższa</p>
@@ -115,7 +115,7 @@ export function CommissionsSection({ commissions }: CommissionsSectionProps) {
           </Card>
         )}
         {stats.max !== null && (
-          <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+          <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
             <CardContent className="pt-4">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground">Najwyższa</p>
@@ -128,7 +128,7 @@ export function CommissionsSection({ commissions }: CommissionsSectionProps) {
 
       {/* Comparison Chart */}
       {barChartData.length > 0 && (
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base font-semibold">
               <BarChart3 className="h-4 w-4 text-primary" />

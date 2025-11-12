@@ -261,7 +261,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
       {/* Quick Filters */}
       <div className="flex flex-wrap gap-2 sm:gap-3">
         <Button
-          variant={statusFilter === "PENDING" ? "default" : "outline"}
+          variant={statusFilter === "PENDING" ? "default" : "outline-solid"}
           size="sm"
           onClick={() => applyQuickFilter("pending")}
           className="rounded-lg"
@@ -269,7 +269,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           Tylko oczekujące
         </Button>
         <Button
-          variant={statusFilter === "APPROVED" ? "default" : "outline"}
+          variant={statusFilter === "APPROVED" ? "default" : "outline-solid"}
           size="sm"
           onClick={() => applyQuickFilter("approved")}
           className="rounded-lg"
@@ -295,7 +295,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
       </div>
 
       {/* Filters */}
-      <div className="grid gap-3 sm:gap-4 rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-3 sm:p-4 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-3 sm:p-4 shadow-xs sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-2">
           <label className="text-xs font-medium text-muted-foreground">Status</label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -493,7 +493,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
                 Brak transakcji dla wybranych filtrów.
               </div>
             ) : (
-              <div className="overflow-hidden rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+              <div className="overflow-hidden rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
@@ -634,7 +634,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
                 Brak transakcji afiliacyjnych dla wybranych filtrów.
               </div>
             ) : (
-              <div className="overflow-hidden rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+              <div className="overflow-hidden rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>

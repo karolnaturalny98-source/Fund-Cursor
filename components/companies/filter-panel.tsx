@@ -198,7 +198,7 @@ export function CompaniesFilterPanel({
   };
 
   return (
-    <aside ref={panelAnim.ref} className={`space-y-6 rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm p-6 ${panelAnim.className}`}>
+    <aside ref={panelAnim.ref} className={`space-y-6 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-6 ${panelAnim.className}`}>
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
@@ -209,7 +209,7 @@ export function CompaniesFilterPanel({
           {sortOptions.map((option) => (
             <button
               key={option.value}
-              className={`w-full rounded-md border px-3 py-2 text-left transition-all ${sort === option.value ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+              className={`w-full rounded-md border px-3 py-2 text-left transition-all ${sort === option.value ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
               disabled={isPending}
               type="button"
               onClick={() => updateSort(option.value)}
@@ -237,7 +237,7 @@ export function CompaniesFilterPanel({
             return (
               <li key={option.value}>
                 <button
-                  className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+                  className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
                   disabled={isPending}
                   type="button"
                   onClick={() => toggleModel(option.value)}
@@ -268,7 +268,7 @@ export function CompaniesFilterPanel({
           {cashbackOptions.map((option) => (
             <button
               key={option.value || "any"}
-              className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedCashback === option.value ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+              className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedCashback === option.value ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
               disabled={isPending}
               type="button"
               onClick={() => updateCashback(option.value)}
@@ -293,7 +293,7 @@ export function CompaniesFilterPanel({
           </div>
           <div className="space-y-2">
             <button
-              className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedPayout === "" ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+              className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedPayout === "" ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
               disabled={isPending}
               type="button"
               onClick={() => updatePayout("")}
@@ -305,7 +305,7 @@ export function CompaniesFilterPanel({
               return (
                 <button
                   key={key}
-                  className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedPayout === key ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+                  className={`w-full rounded-md border px-3 py-2 text-left text-sm transition-all ${selectedPayout === key ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
                   disabled={isPending}
                   type="button"
                   onClick={() => updatePayout(key)}
@@ -336,7 +336,7 @@ export function CompaniesFilterPanel({
               return (
                 <li key={country}>
                   <button
-                    className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+                    className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
                     disabled={isPending}
                     type="button"
                     onClick={() => toggleCountry(country)}
@@ -371,7 +371,7 @@ export function CompaniesFilterPanel({
               return (
                 <li key={type}>
                   <button
-                    className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-sm text-primary" : "border-border/60 !bg-[rgba(10,12,15,0.72)] text-muted-foreground hover:border-primary/50 hover:!bg-[rgba(8,10,13,0.82)] hover:text-foreground"}`}
+                    className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left transition-all ${isActive ? "border-primary/50 bg-primary/10 shadow-xs text-primary" : "border-border/60 bg-[rgba(10,12,15,0.72)]! text-muted-foreground hover:border-primary/50 hover:bg-[rgba(8,10,13,0.82)]! hover:text-foreground"}`}
                     disabled={isPending}
                     type="button"
                     onClick={() => toggleAccountType(type)}

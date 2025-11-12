@@ -117,7 +117,7 @@ export function BlogCategoriesPanel({
           {categories.map((category) => (
             <div
               key={category.id}
-              className="flex items-center justify-between rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm p-4"
+              className="flex items-center justify-between rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs p-4"
             >
               <div>
                 <p className="font-medium text-foreground">{category.name}</p>

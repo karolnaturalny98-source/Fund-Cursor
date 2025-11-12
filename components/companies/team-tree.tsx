@@ -71,7 +71,7 @@ function TeamMemberNode({ member, isTopLevel, index, totalInLevel: _totalInLevel
           "group-hover:border-primary/50 group-hover:ring-primary/20 group-hover:scale-105"
         )}>
           <AvatarImage src={member.profileImageUrl || undefined} alt={member.name} />
-          <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/10 text-lg font-semibold md:text-xl">
+          <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10 text-lg font-semibold md:text-xl">
             {getInitials(member.name)}
           </AvatarFallback>
         </Avatar>
@@ -80,7 +80,7 @@ function TeamMemberNode({ member, isTopLevel, index, totalInLevel: _totalInLevel
             href={member.linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background bg-primary/90 text-primary-foreground transition-all hover:bg-primary hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background bg-primary/90 text-primary-foreground transition-all hover:bg-primary hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
             aria-label={`LinkedIn profil ${member.name}`}
           >
             <ExternalLink className="h-3 w-3" />

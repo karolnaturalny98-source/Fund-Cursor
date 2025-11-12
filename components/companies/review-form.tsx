@@ -137,7 +137,7 @@ export function ReviewForm({ companySlug }: ReviewFormProps) {
   };
 
   return (
-    <div className="rounded-2xl border bg-muted/40 p-5 shadow-sm">
+    <div className="rounded-2xl border bg-muted/40 p-5 shadow-xs">
       <SignedOut>
         <div className="flex flex-col gap-3 text-sm text-muted-foreground">
           <p>Zaloguj się, aby podzielić się doświadczeniem z tą firmą.</p>

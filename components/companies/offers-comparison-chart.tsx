@@ -97,7 +97,7 @@ export function OffersComparisonChart({ plans, currency }: OffersComparisonChart
   return (
     <div ref={chartAnim.ref} className={`space-y-6 ${chartAnim.className}`}>
       {/* Bar Chart - Price Comparison */}
-      <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <div className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-primary" />
@@ -137,7 +137,7 @@ export function OffersComparisonChart({ plans, currency }: OffersComparisonChart
                     if (active && payload && payload.length) {
                       const data = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(8,10,13,0.82)] !backdrop-blur-[36px] p-3 shadow-md">
+                        <div className="rounded-lg border border-border/60 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! p-3 shadow-md">
                           <p className="font-semibold text-foreground">{data.fullName}</p>
                           <p className="text-sm text-primary">
                             {data.formattedPrice}
@@ -156,7 +156,7 @@ export function OffersComparisonChart({ plans, currency }: OffersComparisonChart
       </Card>
 
       {/* Pie Chart - Model Distribution */}
-      <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <div className="flex items-center gap-2">
             <PieChartIcon className="h-5 w-5 text-primary" />
@@ -198,7 +198,7 @@ export function OffersComparisonChart({ plans, currency }: OffersComparisonChart
                     if (active && payload && payload.length) {
                       const data = payload[0];
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(8,10,13,0.82)] !backdrop-blur-[36px] p-3 shadow-md">
+                        <div className="rounded-lg border border-border/60 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! p-3 shadow-md">
                           <p className="font-semibold text-foreground">{data.name}</p>
                           <p className="text-sm text-muted-foreground">
                             {data.value} {data.value === 1 ? "plan" : "plany"}

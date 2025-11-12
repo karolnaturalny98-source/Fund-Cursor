@@ -72,7 +72,7 @@ export function ShopPlanCard({
           "mt-4 rounded-xl border p-4 transition-colors",
           isSelected 
             ? "border-primary/50 bg-primary/10" 
-            : "border-border/60 bg-gradient-to-br from-primary/5 to-primary/10"
+            : "border-border/60 bg-linear-to-br from-primary/5 to-primary/10"
         )}>
           <div className="flex items-center justify-between">
             <div>

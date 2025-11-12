@@ -26,7 +26,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
   const initials = getInitials(post.author.displayName || post.author.email);
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] shadow-sm">
+    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs">
       <CardHeader className="space-y-3 pb-3">
         <div className="flex items-start gap-3">
           <Avatar className="h-10 w-10 rounded-full border border-border/40">

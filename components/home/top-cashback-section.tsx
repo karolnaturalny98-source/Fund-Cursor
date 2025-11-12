@@ -26,7 +26,7 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
       <div className="container space-y-3">
         {/* Section Header Badge */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wider">
+          <div className="inline-flex items-center border font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wider">
             Top Cashback
           </div>
         </div>

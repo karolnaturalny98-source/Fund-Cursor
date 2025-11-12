@@ -126,7 +126,7 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
         {payoutData.map((data, idx) => (
           <Card
             key={data.companyId}
-            className="border-l-4 !bg-[rgba(8,10,13,0.82)]"
+            className="border-l-4 bg-[rgba(8,10,13,0.82)]!"
             style={{ borderLeftColor: getCompareColor(idx) }}
           >
             <CardHeader>

@@ -340,7 +340,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
   };
 
   return (
-    <div className="rounded-xl border bg-[rgba(10,12,15,0.72)] p-6 shadow-sm">
+    <div className="rounded-xl border bg-[rgba(10,12,15,0.72)] p-6 shadow-xs">
       <h2 className="text-lg font-semibold">{isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         {isEditMode 
@@ -476,7 +476,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
                 render={({ field }) => (
                   <select
                     {...field}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <option value="">Nie wybrano</option>
                     <option value="VERIFIED">Zweryfikowana</option>

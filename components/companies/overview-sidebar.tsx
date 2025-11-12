@@ -65,7 +65,7 @@ export function OverviewSidebar({
       )}
 
       {hasTechnicalDetails && (
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium !backdrop-blur-[36px]">
+        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Szczegóły techniczne</CardTitle>
             <p className="text-xs text-muted-foreground">
@@ -177,7 +177,7 @@ export function OverviewSidebar({
         </Card>
       )}
 
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium !backdrop-blur-[36px] transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Szybkie linki</CardTitle>
           <p className="text-xs text-muted-foreground">

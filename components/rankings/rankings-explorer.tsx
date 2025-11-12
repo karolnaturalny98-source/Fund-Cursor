@@ -734,7 +734,7 @@ export function RankingsExplorer({
         value={activeConfig.id}
         onValueChange={(value) => setActiveTab(value as RankingTabId)}
       >
-        <TabsList className="flex flex-wrap justify-start gap-2 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-1 shadow-sm">
+        <TabsList className="flex flex-wrap justify-start gap-2 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-1 shadow-xs">
           {RANKING_TABS.map((tab) => {
             const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
               Award,
@@ -869,7 +869,7 @@ function FilterPanel({
   }
 
   return (
-    <Card className="rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+    <Card className="rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-base font-semibold">
           <Filter className="h-5 w-5 text-primary" />
@@ -929,7 +929,7 @@ function FilterPanel({
                 value={searchDraft}
                 onChange={(event) => onSearchDraftChange(event.target.value)}
                 placeholder="Szukaj firmy po nazwie lub slugu..."
-                className="h-11 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] pl-9 shadow-sm"
+                className="h-11 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
               />
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -1084,14 +1084,14 @@ function RankingDesktopTable({
   return (
     <div className="relative">
       {loading && items.length > 0 ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur">
+        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur-sm">
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </div>
       ) : null}
-      <div className="overflow-hidden rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <div className="overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <div className="max-h-[70vh] overflow-x-auto">
           <Table className="min-w-full table-fixed" aria-busy={loading}>
-            <TableHeader className="!bg-[rgba(8,10,13,0.82)]">
+            <TableHeader className="bg-[rgba(8,10,13,0.82)]!">
               <TableRow className="border-b border-border/40">
                 <TableHead className="w-16 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">#</TableHead>
                 <TableHead className="w-72 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">Firma</TableHead>
@@ -1327,7 +1327,7 @@ function CompanyAvatar({
           width={44}
           height={44}
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] object-contain shadow-sm"
+          className="h-11 w-11 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! object-contain shadow-xs"
         />
         <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">
           <CheckCircle2 className="h-3 w-3 text-white" />
@@ -1345,7 +1345,7 @@ function CompanyAvatar({
 
   return (
     <div className="relative">
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] text-sm font-semibold text-muted-foreground shadow-sm">
+      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! text-sm font-semibold text-muted-foreground shadow-xs">
         {initials}
       </div>
       <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">
@@ -1369,7 +1369,7 @@ function RankingMobileList({
   return (
     <div className="relative space-y-4">
       {loading && items.length > 0 ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur">
+        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-[rgba(10,12,15,0.72)] backdrop-blur-sm">
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </div>
       ) : null}
@@ -1377,7 +1377,7 @@ function RankingMobileList({
         Array.from({ length: 3 }).map((_, index) => (
           <article
             key={`mobile-skeleton-${index}`}
-            className="space-y-4 rounded-3xl border border-border/60 !bg-[rgba(8,10,13,0.82)] p-5 shadow-sm !backdrop-blur-[36px] supports-[backdrop-filter]:bg-[rgba(10,12,15,0.72)] animate-pulse"
+            className="space-y-4 rounded-3xl border border-border/60 bg-[rgba(8,10,13,0.82)]! p-5 shadow-xs backdrop-blur-[36px]! supports-backdrop-filter:bg-[rgba(10,12,15,0.72)] animate-pulse"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
@@ -1413,7 +1413,7 @@ function RankingMobileList({
           return (
             <article
               key={company.id}
-              className="group relative overflow-hidden rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-5 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+              className="group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-5 shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">

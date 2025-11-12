@@ -111,7 +111,7 @@ export function SiteFooter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="bg-[rgba(13,15,19,0.54)] border-border/60 focus:border-primary !backdrop-blur-[36px]"
+                className="bg-[rgba(13,15,19,0.54)] border-border/60 focus:border-primary backdrop-blur-[36px]!"
               />
               <Button
                 type="submit"
@@ -194,7 +194,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-muted/20 !backdrop-blur-[36px] text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:scale-110"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-muted/20 backdrop-blur-[36px]! text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:scale-110"
                 >
                   <social.icon className="h-4 w-4" />
                 </a>

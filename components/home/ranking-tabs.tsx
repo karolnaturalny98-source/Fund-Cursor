@@ -57,7 +57,7 @@ export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="rounded-full border border-transparent px-5 py-2 text-sm font-semibold transition-all data-[state=active]:border-primary/50 data-[state=active]:bg-white/10 data-[state=active]:shadow-sm data-[state=inactive]:border-border/40 data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-white/5"
+              className="rounded-full border border-transparent px-5 py-2 text-sm font-semibold transition-all data-[state=active]:border-primary/50 data-[state=active]:bg-white/10 data-[state=active]:shadow-xs data-[state=inactive]:border-border/40 data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-white/5"
             >
               {tab.label}
             </TabsTrigger>

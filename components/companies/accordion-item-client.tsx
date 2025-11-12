@@ -35,7 +35,7 @@ export function AccordionItemClient({ value, iconName, label, count, children }:
   return (
     <AccordionItem
       value={value}
-      className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+      className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
     >
       <AccordionTrigger className="hover:no-underline">
         <div className="flex items-center gap-3">
@@ -117,7 +117,7 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
         sectionAnim.ref.current = node;
         sectionScrollAnim.ref.current = node;
       }}
-      className={`rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md ${sectionAnim.className}`}
+      className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${sectionAnim.className}`}
     >
       <CardHeader className="space-y-3 pb-4">
         <div className="flex items-start justify-between gap-2">
@@ -140,7 +140,7 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
               placeholder="Szukaj instrumentu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-9 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] pl-9 pr-3 text-xs shadow-sm"
+              className="h-9 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 pr-3 text-xs shadow-xs"
             />
           </div>
         )}
@@ -177,7 +177,7 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
                     return (
                       <div
                         key={item}
-                        className={`flex items-center gap-2 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] px-2.5 py-1.5 text-xs transition-all hover:border-primary/30 hover:!bg-[rgba(10,12,15,0.72)] ${
+                        className={`flex items-center gap-2 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] px-2.5 py-1.5 text-xs transition-all hover:border-primary/30 hover:bg-[rgba(10,12,15,0.72)]! ${
                           itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                         }`}
                         style={{
@@ -225,7 +225,7 @@ export function CommissionCard({ market, value, notes }: CommissionCardProps) {
   return (
     <Card 
       ref={sectionAnim.ref}
-      className={`rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md ${sectionAnim.className}`}
+      className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${sectionAnim.className}`}
     >
       <CardHeader className="space-y-3 pb-3">
         <div className="flex items-start justify-between gap-2">
@@ -256,7 +256,7 @@ export function RulesCard({ type, rules }: RulesCardProps) {
   const isAllowed = type === "allowed";
   
   return (
-    <Card className={`rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm ${isAllowed ? "border-emerald-500/20 bg-emerald-500/10" : "border-rose-500/20 bg-rose-500/10"}`}>
+    <Card className={`rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs ${isAllowed ? "border-emerald-500/20 bg-emerald-500/10" : "border-rose-500/20 bg-rose-500/10"}`}>
       <CardHeader className="space-y-2 pb-3">
         <CardTitle className={`flex items-center gap-2 text-sm font-semibold ${isAllowed ? "text-emerald-700" : "text-rose-700"}`}>
           <PremiumIcon icon={Icon} variant={isAllowed ? "glow" : "default"} size="md" />

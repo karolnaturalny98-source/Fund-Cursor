@@ -172,7 +172,7 @@ export function ShopOrdersTable({ orders: initialOrders }: ShopOrdersTableProps)
               variant={
                 status === "APPROVED"
                   ? "default"
-                  : "outline"
+                  : "outline-solid"
               }
             >
               {status}

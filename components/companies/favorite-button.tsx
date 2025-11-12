@@ -95,7 +95,7 @@ export function FavoriteButton({
         onClick={toggleFavorite}
         size="icon"
         type="button"
-        variant={isFavorite ? "secondary" : "outline"}
+        variant={isFavorite ? "secondary" : "outline-solid"}
       >
         {icon}
       </Button>
@@ -109,7 +109,7 @@ export function FavoriteButton({
       disabled={isPending}
       onClick={toggleFavorite}
       type="button"
-      variant={isFavorite ? "secondary" : "outline"}
+      variant={isFavorite ? "secondary" : "outline-solid"}
     >
       {icon}
       <span className="ml-2 text-sm">

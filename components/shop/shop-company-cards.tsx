@@ -41,7 +41,7 @@ function CompanyAvatar({
           alt={name}
           width={48}
           height={48}
-          className="h-12 w-12 rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] object-contain"
+          className="h-12 w-12 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! object-contain"
         />
       </div>
     );
@@ -55,7 +55,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] text-sm font-semibold text-muted-foreground">
+    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! text-sm font-semibold text-muted-foreground">
       {initials}
     </div>
   );
@@ -121,11 +121,11 @@ export function ShopCompanyCards({
     <div className="space-y-4">
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="rounded-lg border border-border/60 !bg-[rgba(10,12,15,0.72)] p-3">
+        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! p-3">
           <div className="text-xs text-muted-foreground">Firm</div>
           <div className="text-xl font-semibold">{totalCompanies}</div>
         </div>
-        <div className="rounded-lg border border-border/60 !bg-[rgba(10,12,15,0.72)] p-3">
+        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)]! p-3">
           <div className="text-xs text-muted-foreground">Planów</div>
           <div className="text-xl font-semibold">{totalPlans}</div>
         </div>
@@ -140,13 +140,13 @@ export function ShopCompanyCards({
               placeholder="Szukaj firm..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] pl-9 shadow-sm"
+              className="rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! pl-9 shadow-xs"
             />
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-            <SelectTrigger className="w-[160px] rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
               <ArrowUpDown className="mr-2 h-4 w-4" />
               <SelectValue />
             </SelectTrigger>

@@ -35,12 +35,12 @@ export function PersonaCardClient({ persona }: PersonaCardClientProps) {
   const Icon = IconMap[persona.iconName] || Users;
 
   const colorClasses = {
-    emerald: "hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-transparent",
-    blue: "hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-transparent",
-    purple: "hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-transparent",
-    amber: "hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-transparent",
-    rose: "hover:bg-gradient-to-r hover:from-rose-500/10 hover:to-transparent",
-    sky: "hover:bg-gradient-to-r hover:from-sky-500/10 hover:to-transparent",
+    emerald: "hover:bg-linear-to-r hover:from-emerald-500/10 hover:to-transparent",
+    blue: "hover:bg-linear-to-r hover:from-blue-500/10 hover:to-transparent",
+    purple: "hover:bg-linear-to-r hover:from-purple-500/10 hover:to-transparent",
+    amber: "hover:bg-linear-to-r hover:from-amber-500/10 hover:to-transparent",
+    rose: "hover:bg-linear-to-r hover:from-rose-500/10 hover:to-transparent",
+    sky: "hover:bg-linear-to-r hover:from-sky-500/10 hover:to-transparent",
   };
 
   return (

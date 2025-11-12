@@ -160,7 +160,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
   const statusClass = profile ? INFLUENCER_STATUS_STYLES[profile.status] : "bg-muted text-muted-foreground";
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="influencer-program" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">

@@ -154,10 +154,10 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
         onClick={handleClick}
         className={cn(
           "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-          "hover:bg-accent/50 hover:shadow-sm",
+          "hover:bg-accent/50 hover:shadow-xs",
           collapsed ? "justify-center" : "justify-start",
           isActive
-            ? "bg-primary/10 text-primary shadow-sm border-l-2 border-primary"
+            ? "bg-primary/10 text-primary shadow-xs border-l-2 border-primary"
             : "text-muted-foreground hover:text-foreground"
         )}
       >
@@ -174,7 +174,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
             <span className="flex-1 truncate font-medium">{item.label}</span>
             {item.badge !== undefined && item.badge !== null && (
               <Badge
-                variant={isActive ? "default" : "outline"}
+                variant={isActive ? "default" : "outline-solid"}
                 className={cn(
                   "ml-auto h-5 min-w-5 px-1.5 text-xs font-semibold transition-all duration-200",
                   isActive && "bg-primary text-primary-foreground"
@@ -220,14 +220,14 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
   return (
     <div
       className={cn(
-        "relative flex h-screen flex-col border-r border-border/50 bg-[rgba(8,10,13,0.82)] !backdrop-blur-[36px] transition-all duration-300 shadow-lg",
+        "relative flex h-screen flex-col border-r border-border/50 bg-[rgba(8,10,13,0.82)] backdrop-blur-[36px]! transition-all duration-300 shadow-lg",
         collapsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex h-16 items-center border-b border-border/50 px-3 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px]">
+      <div className="flex h-16 items-center border-b border-border/50 px-3 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]!">
         {!collapsed ? (
           <div className="flex flex-1 items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
+            <div className="h-8 w-8 rounded-lg bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
               <span className="text-primary font-bold text-sm">A</span>
             </div>
             <div className="flex flex-col">
@@ -237,7 +237,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
           </div>
         ) : (
           <div className="flex flex-1 items-center justify-center">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
+            <div className="h-8 w-8 rounded-lg bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
               <span className="text-primary font-bold text-sm">A</span>
             </div>
           </div>

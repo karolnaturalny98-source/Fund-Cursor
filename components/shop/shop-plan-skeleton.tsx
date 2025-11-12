@@ -7,7 +7,7 @@ export function ShopPlanSkeleton() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 3 }).map((_, i) => (
-        <Card key={i} className="border-border/60 !bg-[rgba(10,12,15,0.72)]">
+        <Card key={i} className="border-border/60 bg-[rgba(10,12,15,0.72)]!">
           <div className="p-5">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 space-y-2">

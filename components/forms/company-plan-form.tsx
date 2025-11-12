@@ -307,7 +307,7 @@ export function CreateCompanyPlanForm({
   };
 
   return (
-    <div className="rounded-lg border !bg-[rgba(8,10,13,0.82)] p-4">
+    <div className="rounded-lg border bg-[rgba(8,10,13,0.82)]! p-4">
       <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
         {isEditMode ? "Edytuj plan" : "Dodaj plan"}
       </h3>
@@ -444,7 +444,7 @@ export function CreateCompanyPlanForm({
 
         <Field label="Model oceny" error={errors.evaluationModel?.message}>
           <select
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             {...register("evaluationModel")}
           >
             <option value="one-step">1-etapowe wyzwanie</option>

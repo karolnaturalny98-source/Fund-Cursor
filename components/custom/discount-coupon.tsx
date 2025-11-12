@@ -63,7 +63,7 @@ export function DiscountCoupon({
       aria-label={`Skopiuj kod zniżkowy ${code}`}
     >
       {/* Top section with gradient */}
-      <div className="bg-gradient-to-r from-[#0F766E] via-[#14B8A6] to-[#3B82F6] px-3 py-2 text-center">
+      <div className="bg-linear-to-r from-[#0F766E] via-[#14B8A6] to-[#3B82F6] px-3 py-2 text-center">
         <code className="font-mono text-xs font-bold text-white">
           {code}
         </code>

@@ -93,7 +93,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                       <Link
                         key={link}
                         href={link}
-                        className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-sm"
+                        className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                         target="_blank"
                         rel="noreferrer"
                       >

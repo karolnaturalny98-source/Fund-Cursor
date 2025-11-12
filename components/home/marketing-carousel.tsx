@@ -60,14 +60,14 @@ function isLight(hex: string) {
 
 function getBadgeToneProps(tone?: string | null): BadgeToneProps {
   if (!tone) {
-    return { classNames: ["bg-gradient-to-r", gradientBadgeTones.pink] };
+    return { classNames: ["bg-linear-to-r", gradientBadgeTones.pink] };
   }
 
   const trimmed = tone.trim();
   const normalized = trimmed.toLowerCase();
 
   if (gradientBadgeTones[normalized]) {
-    return { classNames: ["bg-gradient-to-r", gradientBadgeTones[normalized]] };
+    return { classNames: ["bg-linear-to-r", gradientBadgeTones[normalized]] };
   }
 
   if (solidBadgeTones[normalized]) {
@@ -88,7 +88,7 @@ function getBadgeToneProps(tone?: string | null): BadgeToneProps {
     };
   }
 
-  return { classNames: ["bg-gradient-to-r", gradientBadgeTones.pink] };
+  return { classNames: ["bg-linear-to-r", gradientBadgeTones.pink] };
 }
 
 function getInitials(name: string | undefined | null) {
@@ -110,7 +110,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
     <Card
       className={cn(
         "group relative w-full max-w-[200px] md:max-w-[240px] mx-auto",
-        "aspect-[3/4] overflow-hidden",
+        "aspect-3/4 overflow-hidden",
         "border-gradient-premium glass-card transition-all duration-500",
         "hover:scale-105 hover:shadow-premium-lg hover:border-gradient-premium",
         "flex flex-col"
@@ -119,8 +119,8 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       {/* Discount Badge - HERO ELEMENT */}
       {hasDiscount && (
         <CardHeader className="p-3 pb-0">
-          <div className="relative flex flex-col items-center justify-center h-16 md:h-20 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/30 shadow-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
+          <div className="relative flex flex-col items-center justify-center h-16 md:h-20 rounded-lg bg-linear-to-br from-primary/20 via-primary/10 to-transparent border border-primary/30 shadow-lg overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-50" />
             <div className="relative z-10 text-center">
               <div 
                 className="text-4xl md:text-5xl font-black text-primary leading-none"
@@ -145,7 +145,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       )}>
         {/* Logo */}
         <div className="flex justify-center">
-          <div className="flex h-10 w-10 md:h-12 md:w-12 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 shadow-sm">
+          <div className="flex h-10 w-10 md:h-12 md:w-12 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 shadow-xs">
             {spotlight.company?.logoUrl ? (
               <Image
                 src={spotlight.company.logoUrl}
@@ -247,11 +247,11 @@ export function MarketingCarousel({ section }: MarketingCarouselProps) {
 
   return (
     <section className="relative overflow-hidden border-y border-border/40">
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-secondary/5 to-transparent !backdrop-blur-[36px]" />
+      <div className="absolute inset-0 bg-linear-to-b from-secondary/10 via-secondary/5 to-transparent backdrop-blur-[36px]!" />
       <div className="container relative z-10 space-y-6 md:space-y-8 py-8 md:py-12">
         {/* Section Header */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wider">
+          <div className="inline-flex items-center border font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wider">
             Promocje specjalne
           </div>
         </div>

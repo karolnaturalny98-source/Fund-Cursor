@@ -72,7 +72,7 @@ export function CommunityHighlights({ reviews }: { reviews: ReviewHighlight[] })
                 ) : null}
                 {review.recommended !== null ? (
                   <PremiumBadge
-                    variant={review.recommended ? "glow" : "outline"}
+                    variant={review.recommended ? "glow" : "outline-solid"}
                     className={`rounded-full text-xs ${review.recommended ? "border-primary/30" : "border-destructive/30 text-destructive"}`}
                   >
                     {review.recommended ? "Poleca" : "Nie poleca"}
@@ -105,7 +105,7 @@ export function CommunityHighlights({ reviews }: { reviews: ReviewHighlight[] })
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-primary/30 px-2 py-1 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-sm"
+                    className="rounded-full border border-primary/30 px-2 py-1 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                   >
                     Materiał dowodowy
                   </a>

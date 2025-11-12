@@ -22,7 +22,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
   if (affiliates.length === 0) {
     return (
       <section className="container space-y-6 py-12">
-        <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-8 shadow-sm ${sectionAnim.className}`}>
+        <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
           <div className="space-y-3 mb-6">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
               Nasi affilaci
@@ -34,7 +34,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
               Zobacz, kto już współpracuje z nami i promuje FundedRank w swoich kanałach.
             </p>
           </div>
-        <Card className="group relative overflow-hidden rounded-3xl border border-dashed border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md">
+        <Card className="group relative overflow-hidden rounded-3xl border border-dashed border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-foreground">
               Ty możesz być pierwszy
@@ -55,7 +55,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
 
   return (
     <section className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-8 shadow-sm ${sectionAnim.className}`}>
+      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
         <div className="space-y-3 mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
             Nasi affilaci
@@ -77,7 +77,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
             style={{ transitionDelay: `${index * 100}ms` }}
           >
           <Card 
-            className="group relative overflow-hidden rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
           >
             <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
               <div>
@@ -108,7 +108,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
                     <Link
                       key={link}
                       href={link}
-                      className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-sm"
+                      className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                       target="_blank"
                       rel="noreferrer"
                     >

@@ -10,7 +10,7 @@ interface DisclosureSectionProps {
 
 export function DisclosureSection({ companyName, tosUrl }: DisclosureSectionProps) {
   return (
-    <section className="group relative space-y-4 overflow-hidden rounded-3xl border border-border/60 p-6 text-sm shadow-sm transition-all hover:border-primary/50 hover:shadow-md text-muted-foreground !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px]">
+    <section className="group relative space-y-4 overflow-hidden rounded-3xl border border-border/60 p-6 text-sm shadow-xs transition-all hover:border-primary/50 hover:shadow-md text-muted-foreground bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]!">
       <h2 className="text-lg font-semibold text-foreground">Disclosure i etyka</h2>
       <p>
         FundedRank dziala w modelu afiliacyjnym. Kiedy kupujesz plan {companyName} z naszym kodem,
@@ -34,7 +34,7 @@ export function DisclosureSection({ companyName, tosUrl }: DisclosureSectionProp
             href={tosUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 font-medium text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-sm"
+            className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 font-medium text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
           >
             Terms of Service
             <PremiumIcon icon={ExternalLink} variant="glow" size="sm" hoverGlow />

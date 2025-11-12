@@ -103,7 +103,7 @@ export function PurchaseCard({
           Kod rabatowy
         </p>
         <div className="flex items-center gap-2">
-          <span className="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 font-mono text-sm font-semibold shadow-sm">
+          <span className="rounded-xl border-2 border-primary/30 bg-linear-to-r from-primary/10 to-primary/5 px-4 py-2 font-mono text-sm font-semibold shadow-xs">
             {code}
           </span>
           {discountCode ? (

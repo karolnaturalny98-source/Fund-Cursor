@@ -45,8 +45,8 @@ export function CurrencySwitcher({ layout = "default" }: CurrencySwitcherProps) 
         onChange={handleChange}
         className={
           layout === "compact"
-            ? "rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold text-foreground shadow-sm focus:outline-none focus:ring-1 focus:ring-primary/60"
-            : "rounded-md border bg-background px-3 py-1 text-sm font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/60"
+            ? "rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold text-foreground shadow-xs focus:outline-hidden focus:ring-1 focus:ring-primary/60"
+            : "rounded-md border bg-background px-3 py-1 text-sm font-medium text-foreground shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary/60"
         }
       >
         {SUPPORTED_CURRENCIES.map((code) => (

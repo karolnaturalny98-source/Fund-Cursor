@@ -101,17 +101,17 @@ export function AnalysisLayout({
             {companies.map((company) => (
               <Card
                 key={company.id}
-                className="group flex items-center gap-3 rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4 shadow-sm transition-all hover:border-gradient hover:shadow-premium"
+                className="group flex items-center gap-3 rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs transition-all hover:border-gradient hover:shadow-premium"
               >
                 {company.logoUrl ? (
                   <Avatar className="h-12 w-12 rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
                     <AvatarImage src={company.logoUrl} alt={company.name} className="object-cover" />
-                    <AvatarFallback className="rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-sm font-semibold">
+                    <AvatarFallback className="rounded-xl bg-linear-to-br from-primary/20 to-primary/10 text-sm font-semibold">
                       {company.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 ) : (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/10">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-primary/10">
                     <span className="text-sm font-semibold text-muted-foreground">
                       {company.name.charAt(0).toUpperCase()}
                     </span>

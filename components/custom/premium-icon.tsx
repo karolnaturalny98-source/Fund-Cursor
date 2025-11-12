@@ -11,7 +11,7 @@ const premiumIconVariants = cva(
       variant: {
         default: "text-foreground",
         glow: "text-primary glow-premium",
-        gradient: "bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent",
+        gradient: "bg-linear-to-r from-primary to-accent bg-clip-text text-transparent",
         animated: "text-primary animate-pulse-glow",
       },
       size: {

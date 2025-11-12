@@ -127,7 +127,7 @@ export default async function BlogPostPage({
         )}
 
         {/* Content */}
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs">
           <CardContent className="p-6 md:p-8">
             <div
               className="prose prose-invert max-w-none dark:prose-invert"

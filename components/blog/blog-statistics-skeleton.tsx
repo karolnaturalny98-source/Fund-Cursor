@@ -7,7 +7,7 @@ export function BlogStatisticsSkeleton() {
       {[1, 2, 3].map((i) => (
         <Card
           key={i}
-          className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] shadow-sm"
+          className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs"
         >
           <CardHeader className="pb-3">
             <div className="flex items-center gap-3">

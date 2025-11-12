@@ -12,7 +12,7 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link href={`/baza-wiedzy/${post.slug}`}>
-      <Card className="group h-full overflow-hidden rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
+      <Card className="group h-full overflow-hidden rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/30 hover:shadow-md">
         {post.featuredImageUrl && (
           <div className="relative h-40 w-full overflow-hidden">
             <Image

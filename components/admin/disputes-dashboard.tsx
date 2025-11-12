@@ -309,7 +309,7 @@ export function AdminDisputesDashboard({
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((card) => (
-          <div key={card.key} className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4 shadow-sm">
+          <div key={card.key} className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">{card.label}</p>
             <p className="mt-2 text-2xl font-semibold">{card.value}</p>
           </div>
@@ -322,7 +322,7 @@ export function AdminDisputesDashboard({
             <Button
               key={option}
               type="button"
-              variant={status === option ? "default" : "outline"}
+              variant={status === option ? "default" : "outline-solid"}
               size="sm"
               onClick={() => void handleStatusChange(option)}
             >
@@ -441,7 +441,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
   };
 
   return (
-    <article className="space-y-3 rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4 shadow-sm">
+    <article className="space-y-3 rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 shadow-xs">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
           <p className="text-sm font-semibold text-foreground">{dispute.title}</p>
@@ -504,7 +504,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
         <label className="space-y-1 text-xs font-medium">
           <span>Status sprawy</span>
           <select
-            className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             value={statusDraft}
             onChange={(event) => setStatusDraft(event.target.value as DisputeStatus)}
           >

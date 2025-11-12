@@ -111,7 +111,7 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
         </Select>
       </div>
 
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
         <CardContent className="p-4">
           <div className="relative">
             {/* Timeline line */}
@@ -121,7 +121,7 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
             <div className="relative space-y-6">
               {/* Today marker */}
               <div className="relative flex items-center gap-4">
-                <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary bg-background shadow-sm">
+                <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary bg-background shadow-xs">
                   <Clock className="h-4 w-4 text-primary" />
                 </div>
                 <div className="flex-1">
@@ -145,7 +145,7 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
                   <div key={`${event.days}-${index}`} className="relative flex items-start gap-4">
                     <div
                       className={cn(
-                        "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 shadow-sm transition-all",
+                        "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 shadow-xs transition-all",
                         isPast
                           ? "border-muted-foreground/30 bg-muted/30"
                           : isToday

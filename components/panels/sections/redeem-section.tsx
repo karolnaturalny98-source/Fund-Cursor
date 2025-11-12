@@ -234,7 +234,7 @@ export function RedeemSection({
   const companyFieldError = lowerError.includes("firm");
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">

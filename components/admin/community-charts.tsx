@@ -79,7 +79,7 @@ export function CommunityCharts({
   return (
     <div className="space-y-6">
       {/* Trend aktywności w czasie */}
-      <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Trend aktywności społecznościowej</CardTitle>
           <CardDescription>
@@ -145,7 +145,7 @@ export function CommunityCharts({
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Rozkład statusów */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład statusów</CardTitle>
             <CardDescription>
@@ -186,7 +186,7 @@ export function CommunityCharts({
         </Card>
 
         {/* Top influencerzy */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Top Influencerzy</CardTitle>
             <CardDescription>

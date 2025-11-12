@@ -43,7 +43,7 @@ function CompanyAvatar({
           width={44}
           height={44}
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 bg-[rgba(12,14,18,0.6)] object-contain shadow-sm"
+          className="h-11 w-11 rounded-2xl border border-border/60 bg-[rgba(12,14,18,0.6)] object-contain shadow-xs"
         />
       </div>
     );
@@ -57,7 +57,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-white/5 text-sm font-semibold text-primary shadow-sm">
+    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-white/5 text-sm font-semibold text-primary shadow-xs">
       {initials}
     </div>
   );

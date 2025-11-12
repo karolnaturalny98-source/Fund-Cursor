@@ -56,7 +56,7 @@ export function CompanyHeroStats({
       {stats.map((stat) => (
         <Card
           key={stat.label}
-          className="group relative overflow-hidden rounded-2xl border border-border/60 transition-all hover:border-primary/50 hover:shadow-md !bg-[rgba(10,12,15,0.72)]"
+          className="group relative overflow-hidden rounded-2xl border border-border/60 transition-all hover:border-primary/50 hover:shadow-md bg-[rgba(10,12,15,0.72)]!"
         >
           <CardHeader className="space-y-3 pb-3">
             <div className="flex items-center gap-3">

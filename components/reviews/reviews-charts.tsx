@@ -116,7 +116,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
   return (
     <div className="space-y-6">
       {/* Bar Chart: Top 10 Companies by Rating */}
-      <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Top 10 firm według średniej oceny</CardTitle>
           <CardDescription>
@@ -149,7 +149,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
                     if (active && payload && payload.length) {
                       const data = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-3 shadow-sm">
+                        <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-3 shadow-xs">
                           <p className="font-semibold text-foreground">{data.fullName}</p>
                           <p className="text-sm text-muted-foreground">
                             Pozycja: #{data.rank}
@@ -179,7 +179,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Pie Chart: Rating Distribution */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład ocen</CardTitle>
             <CardDescription>
@@ -214,7 +214,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
                       if (active && payload && payload.length) {
                         const data = payload[0];
                         return (
-                          <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-sm">
+                          <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-xs">
                             <p className="text-sm font-semibold text-foreground">
                               {data.name}
                             </p>
@@ -234,7 +234,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
         </Card>
 
         {/* Radar Chart: Category Comparison */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Porównanie kategorii</CardTitle>
             <CardDescription>
@@ -269,7 +269,7 @@ export function ReviewsCharts({ items }: ReviewsChartsProps) {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-sm">
+                          <div className="rounded-lg border border-border/60 bg-[rgba(10,12,15,0.72)] p-2 shadow-xs">
                             <p className="text-sm font-semibold text-foreground">
                               {data.category}
                             </p>

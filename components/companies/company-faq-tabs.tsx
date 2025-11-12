@@ -85,7 +85,7 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
               placeholder="Szukaj w FAQ..."
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              className="rounded-full border border-border/60 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] pl-9 shadow-sm"
+              className="rounded-full border border-border/60 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! pl-9 shadow-xs"
             />
           </div>
         </div>
@@ -111,7 +111,7 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
               className="h-7 rounded-full px-2.5 text-[11px] font-normal"
             >
               {category.label}
-              <PremiumBadge variant={active === category.id ? "glow" : "outline"} className="ml-1.5 rounded-full text-[10px] font-semibold">
+              <PremiumBadge variant={active === category.id ? "glow" : "outline-solid"} className="ml-1.5 rounded-full text-[10px] font-semibold">
                 {count}
               </PremiumBadge>
             </Button>
@@ -128,7 +128,7 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 p-6 text-sm text-muted-foreground shadow-sm !bg-[rgba(10,12,15,0.72)]">
+        <div className="rounded-2xl border border-dashed border-border/60 p-6 text-sm text-muted-foreground shadow-xs bg-[rgba(10,12,15,0.72)]!">
           Brak wynikow dla wybranej kategorii i zapytania.
         </div>
       )}

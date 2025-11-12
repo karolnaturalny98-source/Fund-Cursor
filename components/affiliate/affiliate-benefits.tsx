@@ -42,7 +42,7 @@ export function AffiliateBenefits() {
 
   return (
     <section id="affiliate-benefits" className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-8 shadow-sm ${sectionAnim.className}`}>
+      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
         <div className="space-y-3 mb-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
             Korzyści
@@ -65,7 +65,7 @@ export function AffiliateBenefits() {
             style={{ transitionDelay: `${index * 100}ms` }}
           >
           <Card 
-            className="group relative overflow-hidden rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
           >
             <CardHeader className="space-y-3 pb-3">
               <div className="flex items-start justify-between">

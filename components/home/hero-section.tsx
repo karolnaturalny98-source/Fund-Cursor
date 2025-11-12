@@ -71,7 +71,7 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
         <Card
           ref={statsCardAnim.ref}
           className={cn(
-            "glass-card !bg-[rgba(10,12,15,0.8)] !backdrop-blur-[36px] w-full max-w-lg overflow-hidden border border-border/70 shadow-premium transition-all duration-700",
+            "glass-card bg-[rgba(10,12,15,0.8)]! backdrop-blur-[36px]! w-full max-w-lg overflow-hidden border border-border/70 shadow-premium transition-all duration-700",
             statsCardAnim.isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
           )}
         >

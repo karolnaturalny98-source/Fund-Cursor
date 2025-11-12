@@ -29,7 +29,7 @@ export function MissionVision() {
         {items.map((item, index) => (
           <Card
             key={item.title}
-            className={`border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] transition-all hover:border-primary/50 hover:shadow-md ${
+            className={`border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! transition-all hover:border-primary/50 hover:shadow-md ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
             style={{ transitionDelay: `${index * 150}ms`, transitionDuration: "700ms" }}

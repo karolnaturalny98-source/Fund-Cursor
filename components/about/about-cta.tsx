@@ -13,7 +13,7 @@ export function AboutCta() {
     <section className="container py-16">
       <div
         ref={ctaAnim.ref}
-        className={`mx-auto max-w-3xl space-y-8 rounded-3xl border border-border/60 bg-muted/10 p-8 text-center !backdrop-blur-[36px] lg:p-12 ${ctaAnim.className}`}
+        className={`mx-auto max-w-3xl space-y-8 rounded-3xl border border-border/60 bg-muted/10 p-8 text-center backdrop-blur-[36px]! lg:p-12 ${ctaAnim.className}`}
       >
         <div className="space-y-4">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">

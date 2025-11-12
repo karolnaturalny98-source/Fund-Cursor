@@ -460,7 +460,7 @@ export default function UserPanelPage() {
         </div>
 
         <SignedOut>
-          <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+          <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
             <CardContent className="flex flex-col items-center justify-center gap-4 px-6 py-12 text-center">
               <h3 className="text-lg font-semibold">
                 Zaloguj się, aby uzyskać dostęp do panelu
@@ -496,7 +496,7 @@ export default function UserPanelPage() {
             </Card>
           ) : data ? (
             <Tabs value={view} onValueChange={(value) => setView(value as typeof view)} className="w-full">
-              <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-1 shadow-sm">
+              <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] p-1 shadow-xs">
                 <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Przegląd
                 </TabsTrigger>

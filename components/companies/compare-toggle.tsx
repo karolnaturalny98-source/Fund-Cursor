@@ -26,7 +26,7 @@ export function CompareToggle({ slug, className, size = "sm" }: CompareTogglePro
     <Button
       type="button"
       size={size === "icon" ? "icon" : size}
-      variant={selected ? "secondary" : "outline"}
+      variant={selected ? "secondary" : "outline-solid"}
       className={className}
       onClick={() => toggle(slug)}
       disabled={disabled}

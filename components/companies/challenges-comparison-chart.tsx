@@ -131,7 +131,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
     <div ref={chartAnim.ref} className={`space-y-6 ${chartAnim.className}`}>
       {/* Bar Chart - Ceny planów */}
       {priceData.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
@@ -176,7 +176,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg !backdrop-blur-[36px]">
+                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
                             <p className="text-xs font-medium text-muted-foreground">{data.fullName}</p>
                             <p className="text-sm font-semibold text-foreground">
                               {formatCurrencyLocalized(data.price, currency)}
@@ -197,7 +197,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
 
       {/* Pie Chart - Rozkład segmentów */}
       {segmentData.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />
@@ -241,7 +241,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg !backdrop-blur-[36px]">
+                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
                             <p className="text-sm font-semibold text-foreground">{data.name}</p>
                             <p className="text-xs text-muted-foreground">
                               {data.value} plan{data.value !== 1 ? "ów" : ""}
@@ -261,7 +261,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
 
       {/* Radar Chart - Porównanie parametrów */}
       {radarData.planData && radarData.planData.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />
@@ -313,7 +313,7 @@ export function ChallengesComparisonChart({ plans }: ChallengesComparisonChartPr
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg !backdrop-blur-[36px]">
+                          <div className="rounded-lg border border-border/40 bg-[rgba(8,10,13,0.82)] px-3 py-2 shadow-lg backdrop-blur-[36px]!">
                             <p className="text-sm font-semibold text-foreground">{data.category}</p>
                             <div className="mt-2 space-y-1 text-xs">
                               {radarData.planData.map((plan) => (

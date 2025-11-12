@@ -131,7 +131,7 @@ export function CompanyCertifications({ certifications, withoutCard = false }: C
   }
 
   return (
-    <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium !backdrop-blur-[36px]">
+    <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Award className="h-5 w-5 text-primary" />

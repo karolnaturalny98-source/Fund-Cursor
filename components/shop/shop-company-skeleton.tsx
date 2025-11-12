@@ -7,7 +7,7 @@ export function ShopCompanySkeleton() {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
-        <Card key={i} className="border-border/60 !bg-[rgba(10,12,15,0.72)]">
+        <Card key={i} className="border-border/60 bg-[rgba(10,12,15,0.72)]!">
           <div className="p-4">
             <div className="flex items-start gap-3">
               <Skeleton className="h-12 w-12 rounded-xl" />

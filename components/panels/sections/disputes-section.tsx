@@ -254,7 +254,7 @@ export function DisputesSection({
 
   return (
     <div className="space-y-4">
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Zgłoszenia i pomoc
@@ -310,7 +310,7 @@ export function DisputesSection({
       {/* List */}
       <div className="space-y-3">
         {disputes.map((item) => (
-          <Card key={item.id} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm transition-all hover:shadow-md">
+          <Card key={item.id} className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs transition-all hover:shadow-md">
             <CardContent className="p-4">
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-3">
@@ -376,7 +376,7 @@ export function DisputesSection({
       </div>
 
       {/* Create form */}
-      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+      <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Zgłoś problem</CardTitle>
         </CardHeader>

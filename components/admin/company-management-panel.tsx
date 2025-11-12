@@ -157,7 +157,7 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                   </div>
 
                   {editingCompany === company.slug && (
-                    <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+                    <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
                       <CardContent className="pt-6">
                         <CreateCompanyForm
                           editSlug={company.slug}
@@ -293,7 +293,7 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         {company.plans.length ? (
                           <div className="space-y-3">
                             {company.plans.map((planItem) => (
-                              <Card key={planItem.id} className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+                              <Card key={planItem.id} className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
                                 <CardContent className="pt-4">
                                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                                     <div className="flex-1">

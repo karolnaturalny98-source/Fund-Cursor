@@ -25,7 +25,7 @@ export function WalletSection({
   );
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+    <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
       <CardHeader>
         <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           SALDO PUNKTÓW

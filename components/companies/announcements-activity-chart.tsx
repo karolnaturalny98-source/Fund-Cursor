@@ -127,7 +127,7 @@ export function AnnouncementsActivityChart({
     <div ref={chartAnim.ref} className={`space-y-6 ${chartAnim.className}`}>
       {/* Pie Chart - Tag Distribution */}
       {tagDistribution.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <PieChartIcon className="h-5 w-5 text-primary" />
@@ -193,7 +193,7 @@ export function AnnouncementsActivityChart({
 
       {/* Bar Chart - Activity by Date Label */}
       {activityByDateLabel.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
@@ -260,7 +260,7 @@ export function AnnouncementsActivityChart({
 
       {/* Line Chart - Timeline Activity */}
       {timelineData.length > 0 && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />

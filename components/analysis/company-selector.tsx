@@ -89,7 +89,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
           placeholder="Szukaj firm po nazwie, slug lub kraju..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 rounded-2xl border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px]"
+          className="pl-10 rounded-2xl border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]!"
         />
       </div>
 
@@ -109,7 +109,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
             {selectedCompanies.map((company) => (
               <Card
                 key={company.slug}
-                className="relative overflow-hidden rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+                className="relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
               >
                 <CardContent className="p-4">
                   <button
@@ -124,13 +124,13 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                     {company.logoUrl ? (
                       <Avatar className="h-12 w-12 rounded-lg">
                         <AvatarImage src={company.logoUrl} alt={company.name} />
-                        <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-xs font-semibold">
+                        <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                     ) : (
                       <Avatar className="h-12 w-12 rounded-lg">
-                        <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-xs font-semibold">
+                        <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
@@ -188,7 +188,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                 onClick={() => handleToggle(company.slug)}
                 disabled={!isSelected && !canSelect}
                 className={cn(
-                  "group relative overflow-hidden rounded-3xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4 text-left transition-all shadow-sm",
+                  "group relative overflow-hidden rounded-3xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4 text-left transition-all shadow-xs",
                   "hover:border-primary/50 hover:shadow-md",
                   isSelected && "border-primary/50 bg-primary/5",
                   !isSelected && !canSelect && "cursor-not-allowed opacity-50"
@@ -198,13 +198,13 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                   {company.logoUrl ? (
                     <Avatar className="h-10 w-10 rounded-lg">
                       <AvatarImage src={company.logoUrl} alt={company.name} />
-                      <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-xs font-semibold">
+                      <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                   ) : (
                     <Avatar className="h-10 w-10 rounded-lg">
-                      <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-xs font-semibold">
+                      <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>
                     </Avatar>

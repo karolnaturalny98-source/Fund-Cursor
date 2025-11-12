@@ -64,7 +64,7 @@ export function AdminContent({ children }: AdminContentProps) {
 
             <header className="space-y-3 border-b border-border/50 pb-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tight sm:text-4xl bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold tracking-tight sm:text-4xl bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                   Panel administratora
                 </h1>
                 <p className="max-w-2xl text-sm text-muted-foreground sm:text-base leading-relaxed">

@@ -30,7 +30,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
         {companies.map((company, idx) => (
           <Card
             key={company.id}
-            className="border-l-4 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm"
+            className="border-l-4 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs"
             style={{ borderLeftColor: getCompanyColor(idx) }}
           >
             <CardHeader>
@@ -38,13 +38,13 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                 {company.logoUrl ? (
                   <Avatar className="h-16 w-16 rounded-lg">
                     <AvatarImage src={company.logoUrl} alt={company.name} />
-                    <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+                    <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10">
                       <Building2 className="h-8 w-8 text-muted-foreground" />
                     </AvatarFallback>
                   </Avatar>
                 ) : (
                   <Avatar className="h-16 w-16 rounded-lg">
-                    <AvatarFallback className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+                    <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10">
                       <Building2 className="h-8 w-8 text-muted-foreground" />
                     </AvatarFallback>
                   </Avatar>
@@ -121,7 +121,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
       </div>
 
       {/* Regulation & Licensing */}
-      <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5" />
@@ -136,7 +136,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4"
+                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -185,7 +185,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
       </Card>
 
       {/* Company Details */}
-      <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" />
@@ -200,7 +200,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4"
+                className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
                 style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -242,7 +242,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
 
       {/* Certifications */}
       {companies.some((c) => c.certifications && c.certifications.length > 0) && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Award className="h-5 w-5" />
@@ -257,7 +257,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
               {companies.map((company, idx) => (
                 <div
                   key={company.id}
-                  className="rounded-lg border-l-4 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4"
+                  className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
                   style={{ borderLeftColor: getCompanyColor(idx) }}
                 >
                   <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -294,7 +294,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
 
       {/* Team */}
       {companies.some((c) => c.teamMembers && c.teamMembers.length > 0) && (
-        <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users className="h-5 w-5" />
@@ -309,7 +309,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
               {companies.map((company, idx) => (
                 <div
                   key={company.id}
-                  className="rounded-lg border-l-4 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4"
+                  className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
                   style={{ borderLeftColor: getCompanyColor(idx) }}
                 >
                   <h4 className="mb-3 font-semibold">{company.name}</h4>
@@ -321,13 +321,13 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                           {member.profileImageUrl ? (
                             <Avatar className="h-10 w-10">
                               <AvatarImage src={member.profileImageUrl} alt={member.name} />
-                              <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/10">
+                              <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10">
                                 <Users className="h-5 w-5 text-muted-foreground" />
                               </AvatarFallback>
                             </Avatar>
                           ) : (
                             <Avatar className="h-10 w-10">
-                              <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/10">
+                              <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10">
                                 <Users className="h-5 w-5 text-muted-foreground" />
                               </AvatarFallback>
                             </Avatar>
@@ -357,7 +357,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
       )}
 
       {/* Payment Methods */}
-      <Card className="rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Metody Płatności</CardTitle>
           <CardDescription>
@@ -369,7 +369,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-              className="rounded-lg border-l-4 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-4"
+              className="rounded-lg border-l-4 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-4"
               style={{ borderLeftColor: getCompanyColor(idx) }}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>

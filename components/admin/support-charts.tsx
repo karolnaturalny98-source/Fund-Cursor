@@ -87,7 +87,7 @@ export function SupportCharts({
   return (
     <div className="space-y-6">
       {/* Line Chart: Support Trends */}
-      <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Trendy sporów w czasie</CardTitle>
           <CardDescription>
@@ -148,7 +148,7 @@ export function SupportCharts({
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Pie Chart: Status Distribution */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład statusów sporów</CardTitle>
             <CardDescription>Rozkład sporów według statusu.</CardDescription>
@@ -183,7 +183,7 @@ export function SupportCharts({
         </Card>
 
         {/* Bar Chart: Top Disputed Companies */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Top firmy ze sporami</CardTitle>
             <CardDescription>Firmy z największą liczbą sporów.</CardDescription>

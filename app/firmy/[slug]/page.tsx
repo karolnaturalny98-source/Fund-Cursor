@@ -216,7 +216,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
               {company.logoUrl ? (
                 <Avatar className="h-20 w-20 rounded-2xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
                   <AvatarImage src={company.logoUrl} alt={company.name} className="object-cover" />
-                  <AvatarFallback className="rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-xl font-semibold">
+                  <AvatarFallback className="rounded-2xl bg-linear-to-br from-primary/20 to-primary/10 text-xl font-semibold">
                     {company.name.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -235,7 +235,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
                 <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                   {company.rating ? (
                     <PremiumBadge variant="glow" className="gap-1 bg-amber-500/10 px-2 py-1 ring-1 ring-amber-500/20">
-                      <Star className="h-4 w-4 fill-amber-400 text-amber-400 drop-shadow-sm" />
+                      <Star className="h-4 w-4 fill-amber-400 text-amber-400 drop-shadow-xs" />
                       {company.rating.toFixed(1)}
                     </PremiumBadge>
                   ) : null}

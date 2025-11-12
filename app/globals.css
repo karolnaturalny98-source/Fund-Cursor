@@ -1,46 +1,349 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  /* neutralna ciemna baza */
-  --background: 220 20% 9%;
-  --foreground: 220 35% 96%;
+@custom-variant dark (&:is(.dark *));
 
-  /* neutralne powierzchnie */
-  --surface-glass: 220 10% 8%;
-  --surface-glass-soft: 220 10% 10%;
-  --card: 220 12% 11%;
-  --border: 220 12% 18%;
-  --muted: 220 10% 14%;
-  --muted-foreground: 220 10% 70%;
-
-  /* zielony brand */
-  --primary: 156 72% 44%;
-  --primary-foreground: 0 0% 98%;
-  --ring: 156 72% 44%;
-
-  --radius: 1.125rem;
-  --shadow-soft: 210 60% 6%;
-  --shadow-strong: 210 60% 3%;
-
-  --accent: 200 42% 32%;
-  --accent-foreground: 215 40% 92%;
-  --secondary: 229 26% 18%;
-  --secondary-foreground: 227 47% 90%;
-  --destructive: 0 78% 58%;
-  --destructive-foreground: 0 0% 98%;
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
 }
 
-:root[class~="dark"] {
-  --background: 220 20% 8%;
-  --foreground: 220 35% 96%;
-  --surface-glass: 220 10% 7%;
-  --surface-glass-soft: 220 10% 9%;
-  --card: 220 12% 10%;
-  --border: 220 12% 18%;
-  --muted: 220 10% 13%;
-  --muted-foreground: 220 10% 68%;
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility glass-card {
+  @apply rounded-3xl border border-border/55 shadow-lg transition-all duration-300;
+  background-color: rgba(10, 12, 15, 0.6); /* jaśniejsze szkło */
+  backdrop-filter: blur(32px) saturate(170%);
+
+  &:hover {
+    background-color: rgba(10, 12, 15, 0.7);
+    backdrop-filter: blur(38px) saturate(180%);
+  }
+}
+
+@utility glass-panel {
+  @apply rounded-3xl border border-border/45 transition-all duration-300;
+  background-color: rgba(10, 12, 15, 0.55);
+  backdrop-filter: blur(28px) saturate(150%);
+}
+
+@utility shadow-glass {
+  box-shadow:
+    0 20px 45px -25px hsl(var(--shadow-soft) / 0.4),
+    inset 0 0 0.5px hsl(var(--border) / 0.4);
+}
+
+@utility icon-accent {
+  color: hsl(var(--primary) / 0.9);
+  opacity: 0.9;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: hsl(var(--primary));
+    filter: drop-shadow(0 0 6px hsl(var(--primary) / 0.3));
+    opacity: 1;
+  }
+}
+
+@utility shadow-soft {
+  box-shadow:
+    0 28px 60px -40px hsl(var(--shadow-soft) / 0.32),
+    0 12px 32px -32px hsl(var(--shadow-soft) / 0.24);
+}
+
+@utility shadow-premium {
+  box-shadow:
+    0 32px 70px -38px hsl(var(--shadow-strong) / 0.38),
+    0 14px 34px -30px hsl(var(--shadow-soft) / 0.28);
+}
+
+@utility shadow-premium-lg {
+  box-shadow:
+    0 42px 90px -32px hsl(var(--shadow-strong) / 0.42),
+    0 20px 46px -24px hsl(var(--shadow-soft) / 0.34);
+}
+
+@utility border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+    linear-gradient(
+        135deg,
+        hsl(var(--primary) / 0.55),
+        hsl(var(--accent) / 0.45)
+      )
+      border-box;
+}
+
+@utility border-gradient-premium {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+    linear-gradient(
+        120deg,
+        hsl(var(--primary) / 0.7),
+        hsl(var(--accent) / 0.6),
+        hsl(var(--primary) / 0.8)
+      )
+      border-box;
+}
+
+@utility bg-gradient-card {
+  background: linear-gradient(
+    155deg,
+    hsl(var(--card) / 0.95) 0%,
+    hsl(var(--card) / 0.88) 55%,
+    hsl(var(--background) / 0.75) 100%
+  );
+}
+
+@utility bg-gradient-button-premium {
+  background-image: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.85) 100%
+  );
+}
+
+@utility bg-gradient-button-premium-hover {
+  background-image: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.92) 0%,
+    hsl(var(--primary)) 100%
+  );
+}
+
+@utility bg-gradient-button-premium-outline-hover {
+  background-image: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.3) 0%,
+    hsl(var(--primary) / 0.08) 100%
+  );
+}
+
+@utility backdrop-premium {
+  backdrop-filter: blur(18px);
+  background-color: hsl(var(--card) / 0.86);
+}
+
+@utility gradient-button {
+  @apply relative appearance-none cursor-pointer;
+  background: radial-gradient(
+    var(--spread-x) var(--spread-y) at var(--pos-x) var(--pos-y),
+    var(--color-1) var(--stop-1),
+    var(--color-2) var(--stop-2),
+    var(--color-3) var(--stop-3),
+    var(--color-4) var(--stop-4),
+    var(--color-5) var(--stop-5)
+  );
+  transition:
+    --pos-x 0.5s,
+    --pos-y 0.5s,
+    --spread-x 0.5s,
+    --spread-y 0.5s,
+    --color-1 0.5s,
+    --color-2 0.5s,
+    --color-3 0.5s,
+    --color-4 0.5s,
+    --color-5 0.5s,
+    --border-angle 0.5s,
+    --border-color-1 0.5s,
+    --border-color-2 0.5s,
+    --stop-1 0.5s,
+    --stop-2 0.5s,
+    --stop-3 0.5s,
+    --stop-4 0.5s,
+    --stop-5 0.5s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      var(--border-angle),
+      var(--border-color-1),
+      var(--border-color-2)
+    );
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  &:hover {
+    --pos-x: 0%;
+    --pos-y: 91.51%;
+    --spread-x: 120.24%;
+    --spread-y: 103.18%;
+    --color-1: #c96287;
+    --color-2: #c66c64;
+    --color-3: #cc7d23;
+    --color-4: #37140a;
+    --color-5: #000;
+    --border-angle: 190deg;
+    --border-color-1: hsla(340, 78%, 90%, 0.1);
+    --border-color-2: hsla(340, 75%, 90%, 0.6);
+    --stop-1: 0%;
+    --stop-2: 8.8%;
+    --stop-3: 21.44%;
+    --stop-4: 71.34%;
+    --stop-5: 85.76%;
+  }
+}
+
+@utility gradient-button-variant {
+  --color-1: #000022;
+  --color-2: #1f3f6d;
+  --color-3: #469396;
+  --color-4: #f1ffa5;
+  --border-angle: 200deg;
+  --border-color-1: hsla(320, 75%, 90%, 0.6);
+  --border-color-2: hsla(320, 50%, 90%, 0.15);
+
+  &:hover {
+    --pos-x: 0%;
+    --pos-y: 95.51%;
+    --spread-x: 110.24%;
+    --spread-y: 110.2%;
+    --color-1: #000020;
+    --color-2: #f1ffa5;
+    --color-3: #469396;
+    --color-4: #1f3f6d;
+    --color-5: #000;
+    --stop-1: 0%;
+    --stop-2: 10%;
+    --stop-3: 35.44%;
+    --stop-4: 71.34%;
+    --stop-5: 90.76%;
+    --border-angle: 210deg;
+    --border-color-1: hsla(320, 75%, 90%, 0.2);
+    --border-color-2: hsla(320, 50%, 90%, 0.75);
+  }
+}
+
+@layer utilities {
+  :root {
+    /* neutralna ciemna baza */
+    --background: 220 20% 9%;
+    --foreground: 220 35% 96%;
+
+    /* neutralne powierzchnie */
+    --surface-glass: 220 10% 8%;
+    --surface-glass-soft: 220 10% 10%;
+    --card: 220 12% 11%;
+    --border: 220 12% 18%;
+    --muted: 220 10% 14%;
+    --muted-foreground: 220 10% 70%;
+
+    /* zielony brand */
+    --primary: 156 72% 44%;
+    --primary-foreground: 0 0% 98%;
+    --ring: 156 72% 44%;
+
+    --radius: 1.125rem;
+    --shadow-soft: 210 60% 6%;
+    --shadow-strong: 210 60% 3%;
+
+    --accent: 200 42% 32%;
+    --accent-foreground: 215 40% 92%;
+    --secondary: 229 26% 18%;
+    --secondary-foreground: 227 47% 90%;
+    --destructive: 0 78% 58%;
+    --destructive-foreground: 0 0% 98%;
+  }
+
+  :root[class~='dark'] {
+    --background: 220 20% 8%;
+    --foreground: 220 35% 96%;
+    --surface-glass: 220 10% 7%;
+    --surface-glass-soft: 220 10% 9%;
+    --card: 220 12% 10%;
+    --border: 220 12% 18%;
+    --muted: 220 10% 13%;
+    --muted-foreground: 220 10% 68%;
+  }
 }
 
 @layer base {
@@ -62,101 +365,6 @@
 
   .section-shell {
     @apply mx-auto w-full max-w-7xl px-6 py-16 sm:px-10 lg:py-20;
-  }
-}
-
-@layer utilities {
-  .glass-card {
-    @apply rounded-3xl border border-border/55 shadow-lg transition-all duration-300;
-    background-color: rgba(10, 12, 15, 0.6); /* jaśniejsze szkło */
-    backdrop-filter: blur(32px) saturate(170%);
-  }
-
-  .glass-card:hover {
-    background-color: rgba(10, 12, 15, 0.7);
-    backdrop-filter: blur(38px) saturate(180%);
-  }
-
-  .glass-panel {
-    @apply rounded-3xl border border-border/45 transition-all duration-300;
-    background-color: rgba(10, 12, 15, 0.55);
-    backdrop-filter: blur(28px) saturate(150%);
-  }
-
-  .shadow-glass {
-    box-shadow:
-      0 20px 45px -25px hsl(var(--shadow-soft) / 0.4),
-      inset 0 0 0.5px hsl(var(--border) / 0.4);
-  }
-
-  .icon-accent {
-    color: hsl(var(--primary) / 0.9);
-    opacity: 0.9;
-    transition: all 0.15s ease;
-  }
-
-  .icon-accent:hover {
-    color: hsl(var(--primary));
-    filter: drop-shadow(0 0 6px hsl(var(--primary) / 0.3));
-    opacity: 1;
-  }
-
-  .shadow-soft {
-    box-shadow:
-      0 28px 60px -40px hsl(var(--shadow-soft) / 0.32),
-      0 12px 32px -32px hsl(var(--shadow-soft) / 0.24);
-  }
-
-  .shadow-premium {
-    box-shadow:
-      0 32px 70px -38px hsl(var(--shadow-strong) / 0.38),
-      0 14px 34px -30px hsl(var(--shadow-soft) / 0.28);
-  }
-
-  .shadow-premium-lg {
-    box-shadow:
-      0 42px 90px -32px hsl(var(--shadow-strong) / 0.42),
-      0 20px 46px -24px hsl(var(--shadow-soft) / 0.34);
-  }
-
-  .border-gradient {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-      linear-gradient(135deg, hsl(var(--primary) / 0.55), hsl(var(--accent) / 0.45)) border-box;
-  }
-
-  .border-gradient-premium {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-      linear-gradient(120deg, hsl(var(--primary) / 0.7), hsl(var(--accent) / 0.6), hsl(var(--primary) / 0.8)) border-box;
-  }
-
-  .bg-gradient-card {
-    background: linear-gradient(
-      155deg,
-      hsl(var(--card) / 0.95) 0%,
-      hsl(var(--card) / 0.88) 55%,
-      hsl(var(--background) / 0.75) 100%
-    );
-  }
-
-  .bg-gradient-button-premium {
-    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 100%);
-  }
-
-  .bg-gradient-button-premium-hover {
-    background-image: linear-gradient(135deg, hsl(var(--primary) / 0.92) 0%, hsl(var(--primary)) 100%);
-  }
-
-  .bg-gradient-button-premium-outline-hover {
-    background-image: linear-gradient(135deg, hsl(var(--primary) / 0.3) 0%, hsl(var(--primary) / 0.08) 100%);
-  }
-
-  .backdrop-premium {
-    backdrop-filter: blur(18px);
-    background-color: hsl(var(--card) / 0.86);
   }
 }
 
@@ -270,103 +478,5 @@
     syntax: "<percentage>";
     initial-value: 100%;
     inherits: false;
-  }
-}
-
-@layer components {
-  .gradient-button {
-    @apply relative appearance-none cursor-pointer;
-    background: radial-gradient(
-      var(--spread-x) var(--spread-y) at var(--pos-x) var(--pos-y),
-      var(--color-1) var(--stop-1),
-      var(--color-2) var(--stop-2),
-      var(--color-3) var(--stop-3),
-      var(--color-4) var(--stop-4),
-      var(--color-5) var(--stop-5)
-    );
-    transition:
-      --pos-x 0.5s,
-      --pos-y 0.5s,
-      --spread-x 0.5s,
-      --spread-y 0.5s,
-      --color-1 0.5s,
-      --color-2 0.5s,
-      --color-3 0.5s,
-      --color-4 0.5s,
-      --color-5 0.5s,
-      --border-angle 0.5s,
-      --border-color-1 0.5s,
-      --border-color-2 0.5s,
-      --stop-1 0.5s,
-      --stop-2 0.5s,
-      --stop-3 0.5s,
-      --stop-4 0.5s,
-      --stop-5 0.5s;
-  }
-
-  .gradient-button::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      var(--border-angle),
-      var(--border-color-1),
-      var(--border-color-2)
-    );
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  .gradient-button:hover {
-    --pos-x: 0%;
-    --pos-y: 91.51%;
-    --spread-x: 120.24%;
-    --spread-y: 103.18%;
-    --color-1: #c96287;
-    --color-2: #c66c64;
-    --color-3: #cc7d23;
-    --color-4: #37140a;
-    --color-5: #000;
-    --border-angle: 190deg;
-    --border-color-1: hsla(340, 78%, 90%, 0.1);
-    --border-color-2: hsla(340, 75%, 90%, 0.6);
-    --stop-1: 0%;
-    --stop-2: 8.8%;
-    --stop-3: 21.44%;
-    --stop-4: 71.34%;
-    --stop-5: 85.76%;
-  }
-
-  .gradient-button-variant {
-    --color-1: #000022;
-    --color-2: #1f3f6d;
-    --color-3: #469396;
-    --color-4: #f1ffa5;
-    --border-angle: 200deg;
-    --border-color-1: hsla(320, 75%, 90%, 0.6);
-    --border-color-2: hsla(320, 50%, 90%, 0.15);
-  }
-
-  .gradient-button-variant:hover {
-    --pos-x: 0%;
-    --pos-y: 95.51%;
-    --spread-x: 110.24%;
-    --spread-y: 110.2%;
-    --color-1: #000020;
-    --color-2: #f1ffa5;
-    --color-3: #469396;
-    --color-4: #1f3f6d;
-    --color-5: #000;
-    --stop-1: 0%;
-    --stop-2: 10%;
-    --stop-3: 35.44%;
-    --stop-4: 71.34%;
-    --stop-5: 90.76%;
-    --border-angle: 210deg;
-    --border-color-1: hsla(320, 75%, 90%, 0.2);
-    --border-color-2: hsla(320, 50%, 90%, 0.75);
   }
 }

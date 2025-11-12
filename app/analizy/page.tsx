@@ -34,7 +34,7 @@ export default async function AnalizyPage() {
       <div className="container py-12 animate-in fade-in duration-500">
         {/* Hero Section */}
         <div className="mb-12 space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 py-2 text-sm font-medium text-primary">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 py-2 text-sm font-medium text-primary">
             <BarChart3 className="h-4 w-4" />
             Narzędzie Analityczne
           </div>
@@ -50,19 +50,19 @@ export default async function AnalizyPage() {
 
           {/* Feature Pills */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="flex items-center gap-2 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 py-2 text-sm transition-all hover:!bg-[rgba(8,10,13,0.82)]">
+            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-[rgba(8,10,13,0.82)]!">
               <TrendingUp className="h-4 w-4 text-primary" />
               <span>Wykresy cenowe</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 py-2 text-sm transition-all hover:!bg-[rgba(8,10,13,0.82)]">
+            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-[rgba(8,10,13,0.82)]!">
               <FileText className="h-4 w-4 text-primary" />
               <span>Porównanie planów</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 py-2 text-sm transition-all hover:!bg-[rgba(8,10,13,0.82)]">
+            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-[rgba(8,10,13,0.82)]!">
               <Award className="h-4 w-4 text-primary" />
               <span>Analiza opinii</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] px-4 py-2 text-sm transition-all hover:!bg-[rgba(8,10,13,0.82)]">
+            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-[rgba(8,10,13,0.82)]!">
               <BarChart3 className="h-4 w-4 text-primary" />
               <span>Metryki wydajności</span>
             </div>
@@ -81,7 +81,7 @@ export default async function AnalizyPage() {
           <h2 className="text-center text-2xl font-bold">Co możesz analizować?</h2>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <TrendingUp className="h-6 w-6 text-primary" />
               </div>
@@ -91,7 +91,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <FileText className="h-6 w-6 text-primary" />
               </div>
@@ -101,7 +101,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <Award className="h-6 w-6 text-primary" />
               </div>
@@ -111,7 +111,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <BarChart3 className="h-6 w-6 text-primary" />
               </div>
@@ -121,7 +121,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <TrendingUp className="h-6 w-6 text-primary" />
               </div>
@@ -131,7 +131,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] p-6 shadow-sm transition-all hover:shadow-md">
+            <div className="space-y-3 rounded-2xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <Award className="h-6 w-6 text-primary" />
               </div>

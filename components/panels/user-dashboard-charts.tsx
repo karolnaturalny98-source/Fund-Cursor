@@ -107,7 +107,7 @@ export function UserDashboardCharts({ summary }: UserDashboardChartsProps) {
             Wykresy pojawią się po zgromadzeniu pierwszych punktów.
           </p>
         </div>
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
           <CardContent className="flex items-center justify-center p-12">
             <p className="text-sm text-muted-foreground">Brak danych do wyświetlenia</p>
           </CardContent>
@@ -126,7 +126,7 @@ export function UserDashboardCharts({ summary }: UserDashboardChartsProps) {
       </div>
       <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {/* Pie Chart - Rozkład statusów */}
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <PieChartIcon className="h-4 w-4 text-primary" />
@@ -160,7 +160,7 @@ export function UserDashboardCharts({ summary }: UserDashboardChartsProps) {
         </Card>
 
         {/* Line Chart - Trend */}
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-primary" />
@@ -202,7 +202,7 @@ export function UserDashboardCharts({ summary }: UserDashboardChartsProps) {
         </Card>
 
         {/* Bar Chart - Top firmy */}
-        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-sm">
+        <Card className="rounded-lg border border-border/40 bg-[rgba(12,14,18,0.6)] shadow-xs">
           <CardHeader>
             <div className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4 text-primary" />

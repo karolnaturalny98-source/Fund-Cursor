@@ -1686,7 +1686,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                   Zgłoś swój profil, aby otrzymać dedykowane materiały i kody polecające
                 </CardDescription>
               </div>
-              <PremiumBadge variant={profile?.status === "APPROVED" ? "glow" : profile?.status === "REJECTED" ? "outline" : "shimmer"} className={cn("rounded-full text-xs font-semibold", statusClass)}>
+              <PremiumBadge variant={profile?.status === "APPROVED" ? "glow" : profile?.status === "REJECTED" ? "outline-solid" : "shimmer"} className={cn("rounded-full text-xs font-semibold", statusClass)}>
                 {statusLabel}
               </PremiumBadge>
             </div>

@@ -78,7 +78,7 @@ export function CashbackCharts({
   return (
     <div className="space-y-6">
       {/* Trend transakcji w czasie */}
-      <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+      <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
           <CardTitle>Trend transakcji w czasie</CardTitle>
           <CardDescription>
@@ -147,7 +147,7 @@ export function CashbackCharts({
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Rozkład statusów */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Rozkład statusów</CardTitle>
             <CardDescription>
@@ -191,7 +191,7 @@ export function CashbackCharts({
         </Card>
 
         {/* Top firmy */}
-        <Card className="rounded-xl border border-border/60 !bg-[rgba(10,12,15,0.72)] !backdrop-blur-[36px] shadow-sm">
+        <Card className="rounded-xl border border-border/60 bg-[rgba(10,12,15,0.72)]! backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
             <CardTitle>Top Firmy</CardTitle>
             <CardDescription>

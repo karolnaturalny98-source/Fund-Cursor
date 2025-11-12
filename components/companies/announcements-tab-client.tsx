@@ -78,7 +78,7 @@ export function AnnouncementCard({ item }: AnnouncementCardProps) {
   const relativeDate = formatRelativeDate(item.dateLabel);
 
   return (
-    <Card className="group relative overflow-hidden rounded-xl border border-border/40 bg-[rgba(12,14,18,0.6)] !backdrop-blur-[36px] shadow-sm transition-all hover:border-primary/30 hover:shadow-sm">
+    <Card className="group relative overflow-hidden rounded-xl border border-border/40 bg-[rgba(12,14,18,0.6)] backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/30 hover:shadow-xs">
       <CardHeader className="space-y-2 pb-2.5 pt-3 px-3">
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-start gap-2 flex-1 min-w-0">
