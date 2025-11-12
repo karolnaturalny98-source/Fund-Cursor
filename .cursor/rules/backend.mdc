@@ -12,17 +12,19 @@ alwaysApply: false
 
 ## API & Validation
 - Route Handlers pod `/api/*` (REST).
-- Każdy handler: walidacja Zod + egzekwowanie ról (Clerk).
-- Admin-only: `/api/admin/*` i `/admin`.
+- Walidacja **Zod** i egzekwowanie ról (Clerk).
+- **Server Actions** z `"use server"` tam, gdzie ma to sens (mutacje blisko UI).
 
 ## Data & Prisma
-- Schemat w `prisma/schema.prisma`; migracje przez `prisma migrate dev`.
-- Modele PascalCase, pola snake_case; enums (np. DisputeStatus).
-- Seed w `prisma/seed.js`. Baza: Neon.
+- `schema.prisma`; migracje przez `prisma migrate dev`.
+- Po każdej zmianie schematu: **`npx prisma generate`**.
+- Modele PascalCase, pola snake_case; enums (np. `DisputeStatus`).
+- Seed: `prisma/seed.js`.
+
 
 ## Caching & Revalidate
-- Stosuj tagged revalidation zamiast `force-dynamic`.
-- Cache selektywny (historia cen, rankingi, podobne firmy).
+- **Tagged revalidation** (`revalidateTag`) — po mutacjach odśwież odpowiednie tagi.
+- Cache selektywny (historia cen, rankingi).
 
 ## Security
 - Sanitizacja wejść, limity payload, brak sekretów w logach.

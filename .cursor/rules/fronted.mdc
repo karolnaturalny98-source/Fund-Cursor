@@ -4,28 +4,33 @@ globs:
   - "app/**/*.{ts,tsx}"
   - "components/**/*.{ts,tsx}"
   - "lib/ui/**/*.{ts,tsx}"
+  - "components/ui/**/*.{ts,tsx}"
 alwaysApply: false
 ---
 
-# Frontend Rules
+# Frontend Rules (Next 15 + React 19 + Tailwind 4)
 
 ## Components & Client/Server
-- Preferuj Server Components; `use client` tylko dla interakcji (state/effects).
-- Reużywaj shadcn/ui; nie dodawaj nowych UI-libów.
-- Nazewnictwo: komponenty PascalCase, pliki kebab-case.
+- Preferuj **Server Components**; `use client` tylko dla interakcji (state/effects, event handlers).
+- Dla logiki zapisu używaj **Server Actions** z `"use server"`.
+- Reużywaj **shadcn/ui**; nie dodawaj nowych UI-libów.
+- Nazewnictwo: komponenty **PascalCase**, pliki **kebab-case**.
 
 ## Styling & A11y
-- Tailwind + `clsx` + `tailwind-merge`; trzymaj motyw dark/green.
-- Zapewnij focus states, aria-* i `sr-only` dla komunikatów/feedbacku.
+- **Tailwind v4** + `tailwind-merge` (+ opcjonalnie `clsx`).
+- W `globals.css` **tylko** `@import "tailwindcss";` (bez starych dyrektyw).
+- Tokeny kolorów shadcn jako CSS variables (HSL), wariant **dark** przez `@custom-variant dark`.
+- Focus states, aria-* i `sr-only` dla feedbacku.
 
 ## Pages & Layouts
-- Zakładkowy layout firm (shadcn `Tabs`), osobne server components na sekcję.
+- App Router (`app/`), sekcje jako server components.
+- Tab layouty shadcn (`Tabs`) zgodnie z projektem.
 - Compare: max 3 firmy; używaj `CompareProvider`.
 
-## SEO & Telemetry
-- Aktualizuj JSON-LD/OG przy zmianach kontentu.
-- Emituj eventy: `purchase_click`, `faq_expand`, `open_tos`, `copy_code`, `favorites`.
-
 ## Performance
-- Minimalizuj klient-hydration; wynoś fetch do RSC.
-- Obrazy przez `next/image`; pilnuj LCP (priorytet hero).
+- Minimalizuj klient-hydration; fetching przenieś do RSC.
+- Obrazy przez `next/image` z priorytetem dla LCP.
+
+## Build & Tools
+- **PostCSS**: jedyny plugin `@tailwindcss/postcss`. **Nie dodawać `autoprefixer`.**
+- **CLI**: nie używać `npx tailwindcss`; gdy konieczne → `npx @tailwindcss/cli`.

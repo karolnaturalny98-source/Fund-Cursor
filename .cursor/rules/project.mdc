@@ -17,21 +17,21 @@ alwaysApply: true
 > Każdą zmianę odnotuj w **Changelog** poniżej.
 
 ## 0) Snapshot (Stack & Constraints)
-- App: **Next.js 15 (App Router)** + **React 19**, **TypeScript 5**, **ESLint 9**.
-- UI: **Tailwind CSS 3.4** + **shadcn/ui** (motyw dark/green).
+- App: **Next.js 15 (App Router)** + **React 19**, **TypeScript 5**, **ESLint 9**, **Node ≥ 18.17**.
+- UI: **Tailwind CSS 4.1+** + **shadcn/ui** (dark tokens; HSL CSS vars).
+- Build: **ESM** – `"type": "module"` w `package.json`; configi w `.mjs` / `export default`.
+- CSS: **PostCSS** z jedynym pluginem `@tailwindcss/postcss` (bez `autoprefixer`).
 - Auth: **Clerk** (role via `publicMetadata.role`).
-- Data: **Prisma** → **PostgreSQL (Neon)**, seed: `prisma/seed.js`.
-- E2E: Playwright (szkielet).
+- Data: **Prisma** → PostgreSQL (Neon). Po zmianach schematu **zawsze** `npx prisma generate`.
 - Hosting: **Vercel**.
 - ⚠️ **Nie dodajemy** bibliotek poza stackiem powyżej.
 
 ## 1) Architecture & Structure
-- Routing: `app/` (feature groups jak `(auth)`, `admin/(tabs)` etc.).
-- UI współdzielone: `components/` (feature folders + `components/ui`).
-- Dostęp do danych: `lib/queries/*` (reads); logika biznesowa: `lib/services/*`.
-- Baza/ORM: `prisma/` (schema, migrations, seed).
+- Routing: `app/` (grupy `(auth)`, `admin/(tabs)` itd.). Domyślnie **Server Components**.
+- Współdzielone UI: `components/` (+ `components/ui` dla shadcn).
+- Dostęp do danych: `lib/queries/*`; logika domenowa: `lib/services/*`.
+- Prisma: schema/migrations/seed w `prisma/`.
 - Statyczne: `public/`. Artefakty testów: `test-results/`.
-- Domyślnie **Server Components**; `use client` tylko gdy niezbędne.
 
 ## 2) Product Brief (PRD — skrót)
 **Cel:** porównywarka prop-firm z rankingiem, filtrowaniem, detalami firm, kodami zniżkowymi i cashbackiem (punkty → nagrody).  
@@ -48,23 +48,21 @@ alwaysApply: true
 - Disputes: `DisputeCase` + API (`/api/disputes`, `/api/user/disputes`, `/api/admin/disputes[/{id}]`).
 
 ## 4) Coding Style
-- TS + ES Modules, 2 spacje, unikaj `any`.
+- **TS + ES Modules**, 2 spacje, unikać `any`.
 - Komponenty **PascalCase**, zmienne/funkcje **camelCase**, pliki **kebab-case**.
-- Kolumny DB **snake_case**.
-- Tailwind + `clsx` + `tailwind-merge`. A11y (aria, sr-only, focus mgmt).
-- Zawsze `npm run lint` przed commit/PR.
+- Tailwind 4: w `globals.css` **@import "tailwindcss"**; brak starych dyrektyw.
+- A11y (aria, focus, `sr-only`). Przed PR: `npm run lint`.
 
 ## 5) API & Data
-- Route Handlers pod `/api/*` (REST), walidacja **Zod**.
-- Role: `user`, `admin` w `publicMetadata.role`. `/admin` i `/api/admin/*` wymagają admina (np. `requireAdmin`).
-- Prisma: twórz **migrations** (nie edytuj wygenerowanego SQL). Seed: `prisma/seed.js`.
-- Enums dla statusów (np. `DisputeStatus`), jawne relacje, spójność referencyjna.
+- Route Handlers pod `/api/*` (REST). Walidacja **Zod**.
+- Role: `user`, `admin` (`publicMetadata.role`). `/admin` i `/api/admin/*` wymagają admina.
+- Prisma: **migrations** (nie edytować wygenerowanego SQL); po zmianie `schema.prisma` uruchomić `npx prisma generate`.
+
 
 ## 6) Caching & Performance
-- Zamień `force-dynamic` na **tagged revalidation**:
-  - `fetch(url, { next: { tags: ['companies'], revalidate: 60 } })`
-  - Invalidate: `revalidateTag('companies')`
-- Stosuj selektywny cache (historia cen, rankingi). Minimalizuj klient-hydration.
+- Preferuj **tagged revalidation** zamiast `force-dynamic`.
+- Cache selektywny (rankingi, historie).
+- Uważaj na klient-hydration; duże komponenty **lazy/dynamic**.
 
 ### Przykład (RSC fetch + revalidate)
 ```ts
@@ -90,14 +88,13 @@ export async function POST(req: Request) {
 
 
 ## 9) Commits & PRs
-- Commit: krótkie, imperatywne (`feat: add ranking tabs cache`).
-- PR: problem → rozwiązanie → output `npm run lint`/`npm run test` → ewentualne `prisma migrate ...`.
-- Merge tylko po zielonym CI.
+- Commity: krótkie, imperatywne.
+- PR: opis problemu/rozwiązania + output `npm run lint`/tests + ewentualne `prisma migrate`.
+
 
 ## 10) Security
 - Sanitizacja wejść, kontrola ról na backendzie.
-- Sekrety wyłącznie w `.env`. Zero sekretów w logach/commitach.
-- W prod wyłączaj nieużywane endpointy.
+- Sekrety wyłącznie w `.env`. Zero sekretów w commitach/logach.
 
 ## 11) Documentation (Embedded Policy)
 > Nie utrzymujemy osobnych README/PRD/ARCH teraz.  
@@ -110,7 +107,9 @@ export async function POST(req: Request) {
 - Global currency switch (SSR + cookie/localStorage).
 - UX polish: sticky card ↔ plan, copy tweaks, „report data issue”.
 
----
+---## Build Scripts (informacyjnie)
+- `"dev": "next dev"`, `"build": "next build"`, `"start": "next start"`,  
+  `"lint": "eslint . --ext .ts,.tsx"`.
 
 ## Changelog
 - **2025-11-12:** Utworzono „living doc”; scalono PRD/ARCH/README do Project Rules; dodano sekcję z przykładami tagged revalidation.
