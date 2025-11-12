@@ -369,9 +369,8 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-              className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-              style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
-            className="border-l-4 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs border-[var(--border-color)]"
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 

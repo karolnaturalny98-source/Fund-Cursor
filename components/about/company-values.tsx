@@ -54,11 +54,10 @@ export function CompanyValues() {
         {values.map((value, index) => (
           <Card
             key={value.title}
-            className={`border border-border/60 bg-card/72 backdrop-blur-[36px]! transition-all hover:border-primary/50 hover:shadow-md ${
+            className={`border border-border/60 bg-card/72 backdrop-blur-[36px]! transition-all duration-700 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
-            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardContent className="flex h-full flex-col gap-4 p-6">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary transition-all hover:bg-primary/30">

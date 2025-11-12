@@ -177,13 +177,12 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
                     return (
                       <div
                         key={item}
-                        className={`flex items-center gap-2 rounded-lg border border-border/40 bg-background/60 px-2.5 py-1.5 text-xs transition-all hover:border-primary/30 hover:bg-card/72 ${
+                        className={`flex items-center gap-2 rounded-lg border border-border/40 bg-background/60 px-2.5 py-1.5 text-xs transition-all duration-300 hover:border-primary/30 hover:bg-card/72 delay-[var(--delay)] ${
                           itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                         }`}
                         style={{
                           "--delay": `${index * 50}ms`,
                         } as React.CSSProperties}
-                        className="transition-all duration-300 delay-[var(--delay)]"
                       >
                         <PremiumIcon icon={Check} variant="glow" size="sm" className="h-3 w-3 shrink-0 text-primary" />
                         <span className="flex-1 text-muted-foreground">{item}</span>

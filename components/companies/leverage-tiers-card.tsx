@@ -184,13 +184,12 @@ export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
           return (
             <Card
               key={`${tier.label}-${tier.accountSize ?? "default"}`}
-              className={`rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${
+              className={`rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
                 itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{
                 "--delay": `${index * 50}ms`,
               } as React.CSSProperties}
-              className="transition-all duration-300 delay-[var(--delay)]"
             >
               <CardHeader className="space-y-3 pb-3">
                 <div className="flex items-start justify-between gap-2">

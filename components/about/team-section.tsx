@@ -87,11 +87,10 @@ export function TeamSection() {
         {teamMembers.map((member, index) => (
           <Card
             key={member.name}
-            className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md hover:scale-[1.02] ${
+            className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all duration-700 hover:border-primary/50 hover:shadow-md hover:scale-[1.02] delay-[var(--delay)] ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
-            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardHeader className="flex flex-row items-start gap-4 pb-4">
               <Avatar className="h-16 w-16 border-2 border-primary/30">

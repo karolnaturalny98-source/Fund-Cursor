@@ -124,7 +124,7 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
         {stats.map((stat, index) => (
           <Card
             key={stat.label}
-            className={`group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md ${
+            className={`group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
               visibleStaggerItems[index]
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
@@ -132,7 +132,6 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
             style={{
               "--delay": visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
             } as React.CSSProperties}
-            className="transition-all delay-[var(--delay)]"
           >
             <CardHeader className="space-y-2 pb-2">
               <div className="flex items-center gap-2">

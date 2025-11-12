@@ -45,11 +45,10 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
       <div className="grid gap-4">
         {influencers.length === 0 ? (
           <Card
-            className={`group relative overflow-hidden rounded-3xl border border-border/60 border-dashed transition-all hover:border-primary/50 hover:shadow-md ${
+            className={`group relative overflow-hidden rounded-3xl border border-border/60 border-dashed transition-all duration-700 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
               visibleStaggerItems[0] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
             style={{ "--delay": "0ms" } as React.CSSProperties}
-            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-foreground">

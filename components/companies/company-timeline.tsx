@@ -58,14 +58,13 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
   return (
     <div
       className={cn(
-        "group relative flex flex-col items-center transition-all duration-500",
+        "group relative flex flex-col items-center transition-all duration-500 delay-[var(--delay)]",
         "md:shrink-0 md:w-[280px]",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       )}
       style={{
         "--delay": `${index * 100}ms`,
       } as React.CSSProperties}
-      className="transition-all delay-[var(--delay)]"
     >
       {/* Timeline dot with icon */}
       <div className="relative z-10 mb-4">

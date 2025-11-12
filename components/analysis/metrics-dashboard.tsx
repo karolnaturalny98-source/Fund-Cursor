@@ -118,12 +118,11 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
                 <div className="h-1.5 overflow-hidden rounded-full bg-muted">
                   <div
                     className={cn(
-                      "h-full rounded-full transition-all duration-500",
+                      "h-full rounded-full transition-all duration-500 w-[var(--progress-width)]",
                       isBest 
                         ? "bg-primary" 
                         : "bg-primary/30"
                     )}
-                    className="h-full rounded-full transition-all w-[var(--progress-width)]"
                     style={{ "--progress-width": `${Math.max(5, Math.min(100, progress))}%` } as React.CSSProperties}
                   />
                 </div>

@@ -197,13 +197,12 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
                     return (
                       <li
                         key={rule}
-                        className={`flex items-start gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-2 transition-all ${
+                        className={`flex items-start gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-2 transition-all duration-300 delay-[var(--delay)] ${
                           itemAnim ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
                         }`}
                         style={{
                           "--delay": `${index * 30}ms`,
                         } as React.CSSProperties}
-                        className="transition-all duration-300 delay-[var(--delay)]"
                       >
                         <PremiumIcon icon={Check} variant="glow" size="sm" className="mt-0.5 shrink-0 h-3 w-3" />
                         <span className="flex-1">{rule}</span>
@@ -246,13 +245,12 @@ export function RulesSection({ allowed, restricted }: RulesSectionProps) {
                     return (
                       <li
                         key={rule}
-                        className={`flex items-start gap-2 rounded-lg border border-rose-500/20 bg-rose-500/5 p-2 transition-all ${
+                        className={`flex items-start gap-2 rounded-lg border border-rose-500/20 bg-rose-500/5 p-2 transition-all duration-300 delay-[var(--delay)] ${
                           itemAnim ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
                         }`}
                         style={{
                           "--delay": `${(allowed.length + index) * 30}ms`,
                         } as React.CSSProperties}
-                        className="transition-all duration-300 delay-[var(--delay)]"
                       >
                         <PremiumIcon icon={CircleSlash} variant="default" size="sm" className="mt-0.5 shrink-0 h-3 w-3" />
                         <span className="flex-1">{rule}</span>

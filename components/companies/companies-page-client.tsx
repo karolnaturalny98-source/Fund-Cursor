@@ -322,11 +322,10 @@ export function CompaniesPageClient({
                 {companies.map((company, index) => (
                   <div
                     key={company.id}
-                    className={`transition-all duration-700 ${
+                    className={`transition-all duration-700 delay-[var(--delay)] ${
                       visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                     }`}
                     style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
-                    className="transition-all delay-[var(--delay)]"
                   >
                     <CompanyCard company={company} />
                   </div>

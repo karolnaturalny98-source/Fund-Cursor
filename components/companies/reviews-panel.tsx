@@ -377,15 +377,14 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             {paginatedReviews.map((review, index) => (
             <div
               key={review.id}
-              className={
+              className={`transition-all delay-[var(--delay)] ${
                 visibleStaggerItems[index]
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
-              }
+              }`}
               style={{
                 "--delay": visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
               } as React.CSSProperties}
-              className="transition-all delay-[var(--delay)]"
             >
               <Card
                 data-testid="review-card"
