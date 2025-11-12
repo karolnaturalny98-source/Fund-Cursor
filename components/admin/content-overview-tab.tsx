@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ContentStatisticsOverview } from "./content-statistics-overview";
-import { ContentCharts } from "./content-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const ContentCharts = dynamic(
+  () => import("./content-charts").then((mod) => ({ default: mod.ContentCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type {
   ContentStats,
   ContentTimeSeriesPoint,

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";
+import { revalidateTag } from "@/lib/cache";
 import { prisma } from "@/lib/prisma";
 
 const optionalUrl = z.string().url().or(z.literal(""));
@@ -98,6 +99,8 @@ export async function POST(request: Request, { params }: PlanRouteProps) {
         },
       },
     });
+
+    revalidateTag("companies");
 
     return NextResponse.json({ data: plan }, { status: 201 });
   } catch (error) {

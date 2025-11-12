@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Edit2, Trash2, X } from "lucide-react";
 
@@ -37,10 +37,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import type { CompanyWithPlans } from "@/lib/queries/companies";
+import type { AdminCompany } from "@/lib/queries/companies";
 
 interface CompanyManagementPanelProps {
-  companies: CompanyWithPlans[];
+  companies: AdminCompany[];
 }
 
 export function CompanyManagementPanel({ companies }: CompanyManagementPanelProps) {
@@ -51,6 +51,71 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
   const [deletePlanDialog, setDeletePlanDialog] = useState<{ companySlug: string; planId: string; planName: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [formKeys, setFormKeys] = useState<Record<string, number>>({});
+  
+  // Persist tab state per company using localStorage
+  const [activeTabs, setActiveTabs] = useState<Record<string, string>>({});
+  
+  useEffect(() => {
+    // Load saved tab states from localStorage
+    const saved = localStorage.getItem("admin-company-tabs");
+    if (saved) {
+      try {
+        setActiveTabs(JSON.parse(saved));
+      } catch {
+        // Ignore parse errors
+      }
+    }
+  }, []);
+
+  // Create form keys based on company data hash to force remount when data changes
+  const companyDataHashes = useMemo(() => {
+    const hashes: Record<string, string> = {};
+    companies.forEach((company) => {
+      // Create a hash of all company data to detect changes
+      hashes[company.slug] = JSON.stringify({
+        name: company.name,
+        slug: company.slug,
+        headline: company.headline,
+        logoUrl: company.logoUrl,
+        shortDescription: company.shortDescription,
+        country: company.country,
+        foundedYear: company.foundedYear,
+        websiteUrl: company.websiteUrl,
+        discountCode: company.discountCode,
+        cashbackRate: company.cashbackRate,
+        payoutFrequency: company.payoutFrequency,
+        highlights: company.highlights,
+        regulation: company.regulation,
+        supportContact: company.supportContact,
+        socials: company.socials,
+        paymentMethods: company.paymentMethods,
+        instruments: company.instruments,
+        platforms: company.platforms,
+        educationLinks: company.educationLinks,
+        kycRequired: company.kycRequired,
+        ceo: company.ceo,
+        legalName: company.legalName,
+        headquartersAddress: company.headquartersAddress,
+        foundersInfo: company.foundersInfo,
+        verificationStatus: company.verificationStatus,
+        licenses: company.licenses,
+        registryLinks: company.registryLinks,
+        registryData: company.registryData,
+      });
+    });
+    return hashes;
+  }, [companies]);
+  
+  const getTabValue = (companySlug: string) => {
+    return activeTabs[companySlug] || "plans";
+  };
+  
+  const setTabValue = (companySlug: string, value: string) => {
+    const updated = { ...activeTabs, [companySlug]: value };
+    setActiveTabs(updated);
+    localStorage.setItem("admin-company-tabs", JSON.stringify(updated));
+  };
 
   const handleDeleteCompany = () => {
     if (!deleteCompanyDialog) return;
@@ -160,6 +225,7 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                     <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                       <CardContent className="pt-6">
                         <CreateCompanyForm
+                          key={`${company.slug}-${companyDataHashes[company.slug] || formKeys[company.slug] || 0}`}
                           editSlug={company.slug}
                           initialData={{
                             name: company.name,
@@ -182,10 +248,27 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                             platforms: company.platforms,
                             educationLinks: company.educationLinks,
                             kycRequired: company.kycRequired,
+                            ceo: company.ceo,
+                            legalName: company.legalName,
+                            headquartersAddress: company.headquartersAddress,
+                            foundersInfo: company.foundersInfo,
+                            verificationStatus: company.verificationStatus,
+                            licenses: company.licenses,
+                            registryLinks: company.registryLinks,
+                            registryData: company.registryData,
                           }}
-                          onSuccess={() => {
+                          onSuccess={async () => {
+                            // Close form first
                             setEditingCompany(null);
+                            // Refresh server data
                             router.refresh();
+                            // Small delay to ensure refresh completes, then update form key
+                            setTimeout(() => {
+                              setFormKeys((prev) => ({
+                                ...prev,
+                                [company.slug]: (prev[company.slug] || 0) + 1,
+                              }));
+                            }, 100);
                           }}
                         />
                       </CardContent>
@@ -194,13 +277,18 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
 
                   <Separator />
 
-                  <Tabs defaultValue="plans" className="w-full">
+                  <Tabs 
+                    value={getTabValue(company.slug)} 
+                    onValueChange={(value) => setTabValue(company.slug, value)}
+                    className="w-full"
+                  >
                     <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
                       <TabsTrigger
                         value="plans"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -210,7 +298,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="trading"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -220,7 +309,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="leverage"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -230,7 +320,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="commissions"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -240,7 +331,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="faq"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -250,7 +342,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="team"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -260,7 +353,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="timeline"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -270,7 +364,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="certifications"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >
@@ -280,7 +375,8 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                         value="media"
                         className={cn(
                           "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                          "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                          "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                           "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
                         )}
                       >

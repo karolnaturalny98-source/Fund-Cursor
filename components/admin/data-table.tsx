@@ -159,6 +159,11 @@ export function DataTable<TData, TValue>({
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows?.length ? (
+                // Note: For large datasets (>100 rows), consider virtualization (react-window/react-virtual)
+                // However, this requires adding a library outside the project stack. Current pagination
+                // approach is acceptable for most use cases. If performance becomes an issue, consider:
+                // 1. Server-side pagination with smaller page sizes
+                // 2. Adding virtualization library (requires project approval)
                 table.getRowModel().rows.map((row) => (
                   <TableRow
                     key={row.id}

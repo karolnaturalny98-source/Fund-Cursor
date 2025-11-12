@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { CommunityStatisticsOverview } from "./community-statistics-overview";
-import { CommunityCharts } from "./community-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const CommunityCharts = dynamic(
+  () => import("./community-charts").then((mod) => ({ default: mod.CommunityCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type { CommunityStats } from "@/lib/queries/community-stats";
 import type {
   CommunityTimeSeriesPoint,

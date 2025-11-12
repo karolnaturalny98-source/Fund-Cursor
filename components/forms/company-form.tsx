@@ -165,6 +165,45 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
     },
   });
 
+  // Reset form when initialData or editSlug changes
+  useEffect(() => {
+    if (initialData) {
+      reset({
+        name: initialData.name || "",
+        slug: initialData.slug || "",
+        headline: initialData.headline || "",
+        logoUrl: initialData.logoUrl || "",
+        shortDescription: initialData.shortDescription || "",
+        country: initialData.country || "",
+        foundedYear: initialData.foundedYear?.toString() || "",
+        websiteUrl: initialData.websiteUrl || "",
+        discountCode: initialData.discountCode || "",
+        cashbackRate: initialData.cashbackRate?.toString() || "",
+        payoutFrequency: initialData.payoutFrequency || "",
+        highlights: initialData.highlights?.join("\n") || "",
+        regulation: initialData.regulation || "",
+        supportContact: initialData.supportContact || "",
+        socialsWebsite: initialData.socials?.website || "",
+        socialsTwitter: initialData.socials?.twitter || "",
+        socialsDiscord: initialData.socials?.discord || "",
+        socialsYoutube: initialData.socials?.youtube || "",
+        paymentMethods: initialData.paymentMethods?.join("\n") || "",
+        instruments: initialData.instruments?.join("\n") || "",
+        platforms: initialData.platforms?.join("\n") || "",
+        educationLinks: initialData.educationLinks?.join("\n") || "",
+        kycRequired: initialData.kycRequired || false,
+        ceo: initialData.ceo || "",
+        legalName: initialData.legalName || "",
+        headquartersAddress: initialData.headquartersAddress || "",
+        foundersInfo: initialData.foundersInfo || "",
+        verificationStatus: parseVerificationStatus(initialData.verificationStatus),
+        licenses: initialData.licenses?.join("\n") || "",
+        registryLinks: initialData.registryLinks?.join("\n") || "",
+        registryData: initialData.registryData || "",
+      });
+    }
+  }, [initialData, editSlug, reset]);
+
   const onSubmit = async (values: FormValues) => {
     setServerMessage(null);
 
@@ -325,6 +364,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
         reset();
       }
 
+      // Refresh server data
       router.refresh();
       
       if (onSuccess) {

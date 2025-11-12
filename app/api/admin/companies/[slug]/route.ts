@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { revalidateTag } from "@/lib/cache";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";
@@ -115,9 +116,14 @@ export async function PATCH(request: Request, { params }: CompanyRouteParams) {
     });
 
     try {
+      // Clear cache for this specific company
+      revalidateTag("companies");
+      revalidateTag(`company-by-slug-${slug}`);
       revalidatePath("/admin");
       revalidatePath("/firmy");
       revalidatePath(`/firmy/${company.slug}`);
+      // Force revalidation of the company page
+      revalidatePath(`/firmy/${company.slug}`, "page");
     } catch (revalidateError) {
       console.warn("[admin/companies] revalidate failed", revalidateError);
     }
@@ -202,6 +208,7 @@ export async function DELETE(_request: Request, { params }: CompanyRouteParams) 
     });
 
     try {
+      revalidateTag("companies");
       revalidatePath("/admin");
       revalidatePath("/firmy");
     } catch (revalidateError) {

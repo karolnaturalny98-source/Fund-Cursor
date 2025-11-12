@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { BlogStatisticsOverview } from "./blog-statistics-overview";
-import { BlogCharts } from "./blog-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const BlogCharts = dynamic(
+  () => import("./blog-charts").then((mod) => ({ default: mod.BlogCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type {
   BlogStats,
   BlogTimeSeriesPoint,

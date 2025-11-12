@@ -1,5 +1,5 @@
 ﻿import { ContentDashboard } from "@/components/admin/content-dashboard";
-import { getCompanies } from "@/lib/queries/companies";
+import { getAdminCompanies } from "@/lib/queries/companies";
 import {
   getContentStats,
   getContentTimeSeries,
@@ -15,7 +15,7 @@ export default async function AdminContentPage() {
     contentStatusDistribution,
     topCompanies,
   ] = await Promise.all([
-    getCompanies(),
+    getAdminCompanies(),
     getContentStats(),
     getContentTimeSeries(30),
     getContentStatusDistribution(),

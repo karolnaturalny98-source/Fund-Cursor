@@ -2,10 +2,10 @@
 
 import { SectionCard } from "./section-card";
 import { CompanyManagementPanel } from "./company-management-panel";
-import type { CompanyWithPlans } from "@/lib/queries/companies";
+import type { AdminCompany } from "@/lib/queries/companies";
 
 interface ContentManagementTabProps {
-  companies: CompanyWithPlans[];
+  companies: AdminCompany[];
 }
 
 export function ContentManagementTab({ companies }: ContentManagementTabProps) {

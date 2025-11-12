@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Loader2, Star, CheckCircle2, Trophy, Medal } from "lucide-react";
@@ -42,13 +43,14 @@ export function ReviewsRankingTable({
 
   return (
     <div className="relative">
-      {loading ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-card/72 backdrop-blur-sm">
-          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+      {loading && (
+        <div className="mb-4 flex items-center justify-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm text-primary">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <span>Odświeżanie danych...</span>
         </div>
-      ) : null}
+      )}
 
-      <div className="overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+      <div className={`overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs ${loading ? "opacity-60" : ""}`}>
         <div className="max-h-[70vh] overflow-x-auto">
           <Table className="min-w-full table-fixed">
             <TableHeader className="bg-card/82">
@@ -83,7 +85,7 @@ export function ReviewsRankingTable({
   );
 }
 
-function RankingRow({
+const RankingRow = memo(function RankingRow({
   item,
   index,
   maxReviews,
@@ -210,7 +212,9 @@ function RankingRow({
       </Cell>
     </TableRow>
   );
-}
+});
+
+RankingRow.displayName = "RankingRow";
 
 function HeaderCell({
   children,
@@ -257,6 +261,7 @@ function FirmAvatar({
           alt={name}
           width={44}
           height={44}
+          sizes="44px"
           priority={priority}
           className="h-11 w-11 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! object-contain shadow-xs"
         />

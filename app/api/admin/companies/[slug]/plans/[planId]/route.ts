@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";
+import { revalidateTag } from "@/lib/cache";
 import { prisma } from "@/lib/prisma";
 
 const optionalUrl = z.string().url().or(z.literal(""));
@@ -131,6 +132,7 @@ export async function PATCH(request: Request, { params }: PlanRouteParams) {
     });
 
     try {
+      revalidateTag("companies");
       revalidatePath("/admin");
       revalidatePath("/firmy");
       revalidatePath(`/firmy/${slug}`);
@@ -213,6 +215,7 @@ export async function DELETE(_request: Request, { params }: PlanRouteParams) {
     });
 
     try {
+      revalidateTag("companies");
       revalidatePath("/admin");
       revalidatePath("/firmy");
       revalidatePath(`/firmy/${slug}`);

@@ -231,7 +231,8 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
             value="all"
             className={cn(
               "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-              "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+              "border-transparent bg-muted/30 text-muted-foreground",
+              "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
               "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
             )}
           >
@@ -241,7 +242,8 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
             value="influencers"
             className={cn(
               "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-              "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+              "border-transparent bg-muted/30 text-muted-foreground",
+              "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
               "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
             )}
           >
@@ -251,7 +253,8 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
             value="reviews"
             className={cn(
               "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-              "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+              "border-transparent bg-muted/30 text-muted-foreground",
+              "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
               "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
             )}
           >
@@ -261,7 +264,8 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
             value="data-issues"
             className={cn(
               "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-              "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+              "border-transparent bg-muted/30 text-muted-foreground",
+              "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
               "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
             )}
           >

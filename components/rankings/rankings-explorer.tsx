@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight, Globe, Layers, Box, Loader2, RefreshCw, Search, X, Filter, Award, Receipt, Users, Sparkles, TrendingUp, BarChart3, CheckCircle2, Trophy, Medal } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, memo } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
@@ -14,6 +14,12 @@ const RankingsCharts = dynamic(
   () => import("./rankings-charts").then((mod) => ({ default: mod.RankingsCharts })),
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
+
+const RankingMobileList = dynamic(
+  () => import("./rankings-mobile-list").then((mod) => ({ default: mod.RankingMobileList })),
+  { ssr: false, loading: () => <div className="space-y-4"><div className="h-32 animate-pulse rounded-3xl bg-muted" /><div className="h-32 animate-pulse rounded-3xl bg-muted" /></div> }
+);
+
 import { RankingsExportButton } from "./rankings-export-button";
 
 import type {
@@ -547,9 +553,20 @@ export function RankingsExplorer({
   const [data, setData] = useState<RankingsDataset>(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const hasMounted = useRef(false);
   const firstFetch = useRef(true);
+
+  // Detect desktop viewport for conditional rendering
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
 
   const hasActiveFilters =
     (filters.search?.length ?? 0) > 0 ||
@@ -787,22 +804,22 @@ export function RankingsExplorer({
             )}
           </div>
 
-            <div className="hidden lg:block">
+            {/* Conditional rendering instead of CSS hide for better performance */}
+            {isDesktop ? (
               <RankingDesktopTable
                 items={sortedCompanies}
                 config={tab}
                 context={context}
                 loading={loading}
               />
-            </div>
-            <div className="lg:hidden">
+            ) : (
               <RankingMobileList
                 items={sortedCompanies}
                 config={tab}
                 context={context}
                 loading={loading}
               />
-            </div>
+            )}
 
             {sortedCompanies.length > 0 && (
               <RankingsCharts
@@ -1089,12 +1106,13 @@ function RankingDesktopTable({
 }) {
   return (
     <div className="relative">
-      {loading && items.length > 0 ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-card/72 backdrop-blur-sm">
-          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+      {loading && items.length > 0 && (
+        <div className="mb-4 flex items-center justify-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm text-primary">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <span>Odświeżanie danych...</span>
         </div>
-      ) : null}
-      <div className="overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+      )}
+      <div className={`overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs ${loading && items.length > 0 ? "opacity-60" : ""}`}>
         <div className="max-h-[70vh] overflow-x-auto">
           <Table className="min-w-full table-fixed" aria-busy={loading}>
             <TableHeader className="bg-card/82">
@@ -1175,7 +1193,7 @@ function RankingDesktopTable({
   );
 }
 
-function RankingRow({
+const RankingRow = memo(function RankingRow({
   company,
   index,
   config,
@@ -1252,7 +1270,9 @@ function RankingRow({
       </TableCell>
     </TableRow>
   );
-}
+});
+
+RankingRow.displayName = "RankingRow";
 
 function getCompanyHref(company: RankingCompanySnapshot) {
   return company.slug ? `/firmy/${company.slug}` : "/firmy";
@@ -1267,12 +1287,7 @@ function getCompanyMeta(company: RankingCompanySnapshot) {
   return metaParts.join(" | ");
 }
 
-function getEngagementSummary(company: RankingCompanySnapshot) {
-  const reviews = company.reviewCount.toLocaleString("pl-PL") + " opinii";
-  const followers =
-    company.favoritesCount.toLocaleString("pl-PL") + " obserwujacych";
-  return reviews + " | " + followers;
-}
+// getEngagementSummary moved to rankings-mobile-list.tsx (no longer used here)
 
 function CompanyCell({ company, priority = false }: { company: RankingCompanySnapshot; priority?: boolean }) {
   const meta = getCompanyMeta(company);
@@ -1332,6 +1347,7 @@ function CompanyAvatar({
           alt={name}
           width={44}
           height={44}
+          sizes="44px"
           priority={priority}
           className="h-11 w-11 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! object-contain shadow-xs"
         />
@@ -1361,127 +1377,6 @@ function CompanyAvatar({
   );
 }
 
-function RankingMobileList({
-  items,
-  config,
-  context,
-  loading,
-}: {
-  items: RankingCompanySnapshot[];
-  config: RankingTabConfig;
-  context: RankingRenderContext;
-  loading: boolean;
-}) {
-  return (
-    <div className="relative space-y-4">
-      {loading && items.length > 0 ? (
-        <div className="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-card/72 backdrop-blur-sm">
-          <Loader2 className="h-6 w-6 animate-spin text-primary" />
-        </div>
-      ) : null}
-      {loading && items.length === 0 ? (
-        Array.from({ length: 3 }).map((_, index) => (
-          <article
-            key={`mobile-skeleton-${index}`}
-            className="space-y-4 rounded-3xl border border-border/60 bg-card/82 p-5 shadow-xs backdrop-blur-[36px]! supports-backdrop-filter:bg-card/72 animate-pulse"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-muted text-sm font-semibold text-muted-foreground">
-                  <span className="h-3 w-4 rounded bg-muted/40" />
-                </span>
-                <div className="space-y-2">
-                  <div className="h-4 w-32 rounded bg-muted/40" />
-                  <div className="h-3 w-40 rounded bg-muted/30" />
-                </div>
-              </div>
-              <div className="h-6 w-16 rounded-full bg-muted/30" />
-            </div>
-            <div className="space-y-2">
-              <div className="h-3 w-full rounded bg-muted/30" />
-              <div className="h-3 w-5/6 rounded bg-muted/20" />
-              <div className="h-3 w-2/3 rounded bg-muted/20" />
-            </div>
-            <div className="h-9 w-full rounded-full bg-muted/30" />
-          </article>
-        ))
-      ) : items.length === 0 ? (
-        <div className="rounded-3xl border border-border/60 bg-card/66 p-6 text-center text-sm text-muted-foreground">
-          Brak firm spelniajacych wybrane kryteria.
-        </div>
-      ) : (
-        items.map((company, index) => {
-          const metrics = config.mobileMetrics(company, context);
-          const summary = getEngagementSummary(company);
-          const profileHref = getCompanyHref(company);
-          const isGrowthLeader =
-            config.id === "growth" && context.growthLeaderIds.includes(company.id);
-          return (
-            <article
-              key={company.id}
-              className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-5 shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-muted text-sm font-semibold text-muted-foreground">
-                    #{index + 1}
-                  </span>
-                  <div>
-                    <Link
-                      href={profileHref}
-                      prefetch={false}
-                      className="text-sm font-semibold text-foreground transition hover:text-primary"
-                    >
-                      {company.name}
-                    </Link>
-                    <p className="text-xs text-muted-foreground">{summary}</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <ScoreBadge score={company.scores[config.id]} />
-                  {isGrowthLeader ? (
-                    <PremiumBadge
-                      variant="glow"
-                      title="Firma w Top 5 wzrostu"
-                      className="border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-300"
-                    >
-                      Top rosnacy
-                    </PremiumBadge>
-                  ) : null}
-                </div>
-              </div>
-
-              <div className="mt-4 space-y-2">
-                {metrics.map((metric) => (
-                  <div
-                    key={metric.label}
-                    className="flex items-center justify-between text-xs text-muted-foreground"
-                  >
-                    <span className="font-medium text-foreground">
-                      {metric.label}
-                    </span>
-                    <span className="text-sm text-foreground">{metric.value}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Button
-                asChild
-                variant="premium-outline"
-                className="mt-5 w-full justify-center rounded-full"
-              >
-                <Link href={profileHref} prefetch={false}>
-                  Zobacz szczegoly
-                  <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-1" hoverGlow />
-                </Link>
-              </Button>
-            </article>
-          );
-        })
-      )}
-    </div>
-  );
-}
 function ScoreBadge({ score }: { score: number }) {
   return (
     <PremiumBadge

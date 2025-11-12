@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { revalidateTag } from "@/lib/cache";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";
@@ -91,6 +92,8 @@ export async function PATCH(request: Request, { params }: TeamMemberRouteParams)
       data: updateData,
     });
 
+    revalidateTag("companies");
+
     return NextResponse.json({ data: updated });
   } catch (error) {
     if (
@@ -154,6 +157,8 @@ export async function DELETE(_request: Request, { params }: TeamMemberRouteParam
     await prisma.teamMember.delete({
       where: { id: memberId },
     });
+
+    revalidateTag("companies");
 
     return NextResponse.json({ status: "deleted" });
   } catch (error) {

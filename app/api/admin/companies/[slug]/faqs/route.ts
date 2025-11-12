@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";
+import { revalidateTag } from "@/lib/cache";
 import { prisma } from "@/lib/prisma";
 
 const faqSchema = z.object({
@@ -51,6 +52,8 @@ export async function POST(
       order: parsed.data.order ?? 0,
     },
   });
+
+  revalidateTag("companies");
 
   return NextResponse.json({ status: "created" }, { status: 201 });
 }

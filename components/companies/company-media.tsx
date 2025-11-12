@@ -73,6 +73,7 @@ export function CompanyMedia({ mediaItems }: CompanyMediaProps) {
                         alt={item.title}
                         width={96}
                         height={96}
+                        sizes="96px"
                         className="h-full w-full object-cover transition-transform group-hover:scale-105"
                         loading="lazy"
                       />

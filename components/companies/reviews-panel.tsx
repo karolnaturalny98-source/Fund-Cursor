@@ -299,14 +299,14 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
           <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">Szybkie filtry:</span>
           <Tabs value={filter} onValueChange={(value) => setFilter(value as FilterId)}>
             <TabsList className="gap-1 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! p-1 shadow-xs">
-              <TabsTrigger value="all" className="rounded-full px-4 py-1.5 text-xs font-semibold data-[state=active]:border-primary/50">
+              <TabsTrigger value="all" className="rounded-full px-4 py-1.5 text-xs font-semibold transition-all data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-primary/5 data-[state=active]:border-primary/50">
                 Wszystkie ({reviews.length})
               </TabsTrigger>
-              <TabsTrigger value="verified" className="rounded-full px-4 py-1.5 text-xs font-semibold data-[state=active]:border-primary/50">
+              <TabsTrigger value="verified" className="rounded-full px-4 py-1.5 text-xs font-semibold transition-all data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-primary/5 data-[state=active]:border-primary/50">
                 <ShieldCheck className="mr-1.5 h-3.5 w-3.5" />
                 Zweryfikowane ({verifiedCount})
               </TabsTrigger>
-              <TabsTrigger value="recommended" className="rounded-full px-4 py-1.5 text-xs font-semibold data-[state=active]:border-primary/50">
+              <TabsTrigger value="recommended" className="rounded-full px-4 py-1.5 text-xs font-semibold transition-all data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-primary/5 data-[state=active]:border-primary/50">
                 <ThumbsUp className="mr-1.5 h-3.5 w-3.5" />
                 Polecają ({recommendedCount})
               </TabsTrigger>

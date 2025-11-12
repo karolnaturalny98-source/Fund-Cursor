@@ -26,8 +26,15 @@ import type {
 } from "@/lib/types";
 import { useUserPanel } from "@/components/panels/user-panel-context";
 import { UserDashboardQuickStats } from "@/components/panels/user-dashboard-quick-stats";
-import { UserDashboardCharts } from "@/components/panels/user-dashboard-charts";
+import dynamic from "next/dynamic";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
 import { UserDashboardRecent } from "@/components/panels/user-dashboard-recent";
+
+// UserDashboardCharts requires ssr: false because it uses Recharts
+const UserDashboardCharts = dynamic(
+  () => import("@/components/panels/user-dashboard-charts").then((mod) => ({ default: mod.UserDashboardCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import { RedeemSection } from "@/components/panels/sections/redeem-section";
 import { DisputesSection } from "@/components/panels/sections/disputes-section";
 import { FavoritesSection } from "@/components/panels/sections/favorites-section";
@@ -491,19 +498,19 @@ export default function UserPanelPage() {
           ) : data ? (
             <Tabs value={view} onValueChange={(value) => setView(value as typeof view)} className="w-full">
               <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-background/60 p-1 shadow-xs">
-                <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="overview" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Przegląd
                 </TabsTrigger>
-                <TabsTrigger value="redeem" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="redeem" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Wymiana
                 </TabsTrigger>
-                <TabsTrigger value="disputes" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="disputes" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Zgłoszenia
                 </TabsTrigger>
-                <TabsTrigger value="favorites" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="favorites" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Ulubione
                 </TabsTrigger>
-                <TabsTrigger value="influencer" className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <TabsTrigger value="influencer" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   Influencer
                 </TabsTrigger>
               </TabsList>

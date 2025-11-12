@@ -176,7 +176,7 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
                     const { color: itemColor } = getInstrumentCategory(item);
                     return (
                       <div
-                        key={item}
+                        key={`${category}-${index}-${item}`}
                         className={`flex items-center gap-2 rounded-lg border border-border/40 bg-background/60 px-2.5 py-1.5 text-xs transition-all duration-300 hover:border-primary/30 hover:bg-card/72 delay-[var(--delay)] ${
                           itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                         }`}

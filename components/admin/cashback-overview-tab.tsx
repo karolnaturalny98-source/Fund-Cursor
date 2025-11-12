@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { CashbackStatisticsOverview } from "./cashback-statistics-overview";
-import { CashbackCharts } from "./cashback-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const CashbackCharts = dynamic(
+  () => import("./cashback-charts").then((mod) => ({ default: mod.CashbackCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type { CashbackStats } from "@/lib/queries/cashback-stats";
 import type {
   TransactionTimeSeriesPoint,

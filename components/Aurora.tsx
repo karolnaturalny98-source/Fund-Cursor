@@ -128,6 +128,10 @@ export default function Aurora(props: AuroraProps) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
+    // Check prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
@@ -194,12 +198,28 @@ export default function Aurora(props: AuroraProps) {
         renderer.render({ scene: mesh });
       }
     };
-    animateId = requestAnimationFrame(update);
 
+    // IntersectionObserver to pause animation when not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            cancelAnimationFrame(animateId);
+          } else {
+            animateId = requestAnimationFrame(update);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(ctn);
+
+    animateId = requestAnimationFrame(update);
     resize();
 
     return () => {
       cancelAnimationFrame(animateId);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);

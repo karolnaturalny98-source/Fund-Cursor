@@ -6,7 +6,7 @@ import {
 } from "@/lib/queries/companies";
 import { parseCompareParam } from "@/lib/compare";
 import type { CompanySortOption, EvaluationModel } from "@/lib/types";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 interface CompaniesPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -64,7 +64,7 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

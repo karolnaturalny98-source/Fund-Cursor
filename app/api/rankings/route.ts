@@ -49,7 +49,11 @@ export async function GET(request: NextRequest) {
     hasCashback,
   });
 
-  return NextResponse.json(dataset);
+  return NextResponse.json(dataset, {
+    headers: {
+      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+    },
+  });
 }
 
 function parseListParam(value: string | undefined): string[] | undefined {

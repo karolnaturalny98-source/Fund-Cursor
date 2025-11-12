@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import type { TopCashbackCompany } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -26,9 +28,9 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
       <div className="container space-y-3">
         {/* Section Header Badge */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wider">
+          <Badge variant="outline" className="px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             Top Cashback
-          </div>
+          </Badge>
         </div>
 
         {/* Cards Container */}
@@ -61,40 +63,41 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
 
 function CompanyCard({ company }: { company: TopCashbackCompany }) {
   return (
-    <Link 
-      href={`/firmy/${company.slug}`} 
-      className={cn(
-        "snap-center shrink-0 flex flex-col items-center gap-2",
-        "transition-all duration-300 hover:scale-105",
-        "group"
-      )}
-    >
-      {/* Logo */}
-      <div className="relative h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 flex items-center justify-center">
-        {company.logoUrl ? (
-          <Image
-            src={company.logoUrl}
-            alt={`${company.name} logo`}
-            width={96}
-            height={96}
-            className="object-contain w-full h-full rounded-xl"
-          />
-        ) : (
-          <div className="flex items-center justify-center w-full h-full rounded-xl bg-primary/10">
-            <span className="text-sm md:text-base font-semibold text-primary">
-              {getInitials(company.name)}
-            </span>
+    <Card className="snap-center shrink-0 border-border/60 bg-card/72 backdrop-blur-[36px]! transition-transform duration-300 hover:scale-105">
+      <CardContent className="p-4 sm:p-5">
+        <Link
+          href={`/firmy/${company.slug}`}
+          className={cn(
+            "group flex flex-col items-center gap-2",
+            "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          )}
+        >
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-xl md:h-20 md:w-20 lg:h-24 lg:w-24">
+            {company.logoUrl ? (
+              <Image
+                src={company.logoUrl}
+                alt={`${company.name} logo`}
+                width={96}
+                height={96}
+                className="h-full w-full rounded-xl object-contain"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-primary/10">
+                <span className="text-sm font-semibold text-primary md:text-base">
+                  {getInitials(company.name)}
+                </span>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      {/* Cashback Range */}
-      <div className="text-center">
-        <p className="text-[9px] md:text-[10px] text-primary font-semibold leading-tight">
-          ${company.minCashback} - ${company.maxCashback}
-        </p>
-      </div>
-    </Link>
+          <div className="text-center">
+            <p className="text-[9px] font-semibold leading-tight text-primary md:text-[10px]">
+              ${company.minCashback} - ${company.maxCashback}
+            </p>
+          </div>
+        </Link>
+      </CardContent>
+    </Card>
   );
 }
 

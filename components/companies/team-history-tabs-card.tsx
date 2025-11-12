@@ -47,7 +47,8 @@ export function TeamHistoryTabsCard({ company }: TeamHistoryTabsCardProps) {
                 value="team"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
@@ -59,7 +60,8 @@ export function TeamHistoryTabsCard({ company }: TeamHistoryTabsCardProps) {
                 value="history"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >

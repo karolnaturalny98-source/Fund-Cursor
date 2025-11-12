@@ -8,7 +8,7 @@ import { HowItWorksSection } from "@/components/home/how-it-works";
 import { KnowledgeGrid } from "@/components/home/knowledge-grid";
 import { WalletCtaBanner } from "@/components/home/wallet-cta";
 import { parseCompareParam } from "@/lib/compare";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { getHomeRanking, getHomepageMetrics, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
 import { getApprovedInfluencers } from "@/lib/queries/influencers";
@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className="relative">
         {/* Aurora background from top to end of hero section */}
         <div className="fixed inset-0 -z-10 h-[150vh]">
-          <Aurora
+          <AuroraWrapper
             colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
             blend={0.5}
             amplitude={1.0}

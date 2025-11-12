@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { revalidateTag } from "@/lib/cache";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -129,7 +130,18 @@ export async function PUT(request: Request, { params }: TradingProfileRouteParam
       data: updateData,
     });
 
-    revalidateTag("companies");
+    try {
+      // Clear cache for this specific company
+      revalidateTag("companies");
+      revalidateTag(`company-by-slug-${slug}`);
+      revalidatePath("/admin");
+      revalidatePath("/firmy");
+      revalidatePath(`/firmy/${slug}`);
+      // Force revalidation of the company page
+      revalidatePath(`/firmy/${slug}`, "page");
+    } catch (revalidateError) {
+      console.warn("[admin/trading-profile] revalidate failed", revalidateError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

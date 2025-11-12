@@ -11,6 +11,7 @@ import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animat
 import type { InfluencerProfile } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { useUserPanel } from "@/components/panels/user-panel-context";
+import { cn } from "@/lib/utils";
 
 export function InfluencerSpotlight({ influencers }: { influencers: InfluencerProfile[] }) {
   const { open } = useUserPanel();
@@ -67,11 +68,11 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
           influencers.map((profile, index) => (
             <Card
               key={profile.id}
-              className={`group relative overflow-hidden rounded-3xl border border-border/60 transition-all hover:border-primary/50 hover:shadow-md ${
-              visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-            }`}
+              className={cn(
+                "group relative overflow-hidden rounded-3xl border border-border/60 transition-all duration-700 delay-[var(--delay)] hover:border-primary/50 hover:shadow-md",
+                visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+              )}
               style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
-              className="transition-all duration-700 delay-[var(--delay)]"
             >
               <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
                 <div>

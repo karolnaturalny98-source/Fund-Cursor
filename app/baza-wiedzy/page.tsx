@@ -4,7 +4,7 @@ import { BlogStatistics } from "@/components/blog/blog-statistics";
 import { BlogCategoriesTabs } from "@/components/blog/blog-categories-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Cache blog index for 5 minutes - content changes infrequently
 export const revalidate = 300;
@@ -26,7 +26,7 @@ export default async function BlogPage() {
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

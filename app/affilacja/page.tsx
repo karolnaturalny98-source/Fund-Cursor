@@ -7,7 +7,7 @@ import { AffiliateFinalCta } from "@/components/affiliate/affiliate-final-cta";
 import { AffiliateStatistics } from "@/components/affiliate/affiliate-statistics";
 import { getApprovedInfluencers } from "@/lib/queries/influencers";
 import { prisma } from "@/lib/prisma";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Cache affiliate page for 10 minutes - affiliate list changes infrequently
 export const revalidate = 600;
@@ -27,7 +27,7 @@ export default async function AffiliatePage() {
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

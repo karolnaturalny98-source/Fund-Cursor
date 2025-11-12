@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 const benefits = [
   {
@@ -59,11 +60,12 @@ export function AffiliateBenefits() {
         {benefits.map((benefit, index) => (
           <div
             key={benefit.title}
-            className={`transition-all duration-700 ${
+            className={cn(
+              "transition-all duration-700",
+              `[--delay:${index * 100}ms]`,
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-            }`}
-            style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
-            className="transition-all delay-[var(--delay)]"
+            )}
+            style={{ transitionDelay: `var(--delay)` } as React.CSSProperties}
           >
           <Card 
             className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"

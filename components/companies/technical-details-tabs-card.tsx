@@ -4,9 +4,24 @@ import { Gauge, Layers, Receipt, Shield } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AccordionItemClient, InstrumentGroupCard, CommissionCard, RulesCard } from "@/components/companies/accordion-item-client";
-import { LeverageTiersCard } from "@/components/companies/leverage-tiers-card";
-import { CommissionsSection } from "@/components/companies/commissions-section";
-import { RulesSection } from "@/components/companies/rules-section";
+import dynamic from "next/dynamic";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+import type { CompanyCommission, CompanyInstrumentGroup, CompanyLeverageTier, CompanyRules } from "@/lib/types";
+
+const LeverageTiersCard = dynamic(
+  () => import("@/components/companies/leverage-tiers-card").then((mod) => ({ default: mod.LeverageTiersCard })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const CommissionsSection = dynamic(
+  () => import("@/components/companies/commissions-section").then((mod) => ({ default: mod.CommissionsSection })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const RulesSection = dynamic(
+  () => import("@/components/companies/rules-section").then((mod) => ({ default: mod.RulesSection })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type { Company } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -15,10 +30,15 @@ interface TechnicalDetailsTabsCardProps {
 }
 
 export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardProps) {
-  const hasInstruments = company.instrumentGroups.length > 0;
-  const hasLeverage = company.leverageTiers.length > 0;
-  const hasCommissions = company.tradingCommissions.length > 0;
-  const hasRules = company.firmRules.allowed.length > 0 || company.firmRules.restricted.length > 0;
+  const instrumentGroups = normalizeInstrumentGroups(company.instrumentGroups, company.instruments);
+  const leverageTiers = normalizeLeverageTiers(company.leverageTiers, company.plans ?? []);
+  const tradingCommissions = normalizeCommissions(company.tradingCommissions);
+  const firmRules = normalizeFirmRules(company.firmRules);
+
+  const hasInstruments = instrumentGroups.length > 0;
+  const hasLeverage = leverageTiers.length > 0;
+  const hasCommissions = tradingCommissions.length > 0;
+  const hasRules = firmRules.allowed.length > 0 || firmRules.restricted.length > 0;
 
   if (!hasInstruments && !hasLeverage && !hasCommissions && !hasRules) {
     return null;
@@ -56,7 +76,8 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
                 value="instruments"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
@@ -68,7 +89,8 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
                 value="leverage"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
@@ -80,7 +102,8 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
                 value="commissions"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
@@ -92,7 +115,8 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
                 value="rules"
                 className={cn(
                   "flex-1 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-primary/50 hover:shadow-xs",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:shadow-xs",
                   "data-[state=active]:border-primary/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-xs",
                 )}
               >
@@ -104,7 +128,7 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
           {hasInstruments && (
             <TabsContent value="instruments" className="mt-0">
               <div className="grid gap-4">
-                {company.instrumentGroups.map((group) => (
+                {instrumentGroups.map((group) => (
                   <InstrumentGroupCard
                     key={group.title}
                     title={group.title}
@@ -118,24 +142,119 @@ export function TechnicalDetailsTabsCard({ company }: TechnicalDetailsTabsCardPr
 
           {hasLeverage && (
             <TabsContent value="leverage" className="mt-0">
-              <LeverageTiersCard tiers={company.leverageTiers} />
+              <LeverageTiersCard tiers={leverageTiers} />
             </TabsContent>
           )}
 
           {hasCommissions && (
             <TabsContent value="commissions" className="mt-0">
-              <CommissionsSection commissions={company.tradingCommissions} />
+              <CommissionsSection commissions={tradingCommissions} />
             </TabsContent>
           )}
 
           {hasRules && (
             <TabsContent value="rules" className="mt-0">
-              <RulesSection allowed={company.firmRules.allowed} restricted={company.firmRules.restricted} />
+              <RulesSection allowed={firmRules.allowed} restricted={firmRules.restricted} />
             </TabsContent>
           )}
         </Tabs>
       </CardContent>
     </Card>
   );
+}
+
+function normalizeInstrumentGroups(
+  groups: CompanyInstrumentGroup[],
+  flatInstruments: string[],
+): CompanyInstrumentGroup[] {
+  const sanitizedGroups = groups
+    .map((group) => ({
+      title: group.title,
+      description: group.description,
+      instruments: (group.instruments ?? []).map((item) => item.trim()).filter(Boolean),
+    }))
+    .filter((group) => group.instruments.length > 0);
+
+  if (sanitizedGroups.length > 0) {
+    return sanitizedGroups;
+  }
+
+  const fallbackInstruments = flatInstruments.map((item) => item.trim()).filter(Boolean);
+
+  if (fallbackInstruments.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      title: "Instrumenty dostępne",
+      description: "Lista wygenerowana na podstawie danych ogólnych firmy.",
+      instruments: fallbackInstruments,
+    },
+  ];
+}
+
+function normalizeLeverageTiers(
+  tiers: CompanyLeverageTier[],
+  plans: Company["plans"],
+): CompanyLeverageTier[] {
+  const sanitizedTiers = tiers.map((tier) => ({
+    label: tier.label,
+    accountSize: tier.accountSize ?? null,
+    maxLeverage: typeof tier.maxLeverage === "number" ? tier.maxLeverage : null,
+    notes: tier.notes ?? null,
+  }));
+
+  if (sanitizedTiers.length > 0) {
+    return sanitizedTiers;
+  }
+
+  const fallback = (plans ?? [])
+    .filter((plan) => typeof plan.leverage === "number" && plan.leverage !== null)
+    .map((plan) => ({
+      label: plan.name,
+      accountSize: resolveAccountSize(plan),
+      maxLeverage: Number(plan.leverage),
+      notes: plan.notes ?? plan.description ?? null,
+    }));
+
+  return fallback;
+}
+
+function resolveAccountSize(plan: NonNullable<Company["plans"]>[number]): string | null {
+  if (plan.accountType && plan.accountType.trim().length > 0) {
+    return plan.accountType.trim();
+  }
+
+  if (typeof plan.price === "number" && plan.currency) {
+    try {
+      return new Intl.NumberFormat("pl-PL", {
+        style: "currency",
+        currency: plan.currency.toUpperCase(),
+        maximumFractionDigits: 0,
+      }).format(plan.price);
+    } catch {
+      return `${plan.price.toLocaleString("pl-PL")} ${plan.currency.toUpperCase()}`;
+    }
+  }
+
+  return null;
+}
+
+function normalizeCommissions(commissions: CompanyCommission[]): CompanyCommission[] {
+  return commissions
+    .map((commission) => ({
+      market: commission.market.trim(),
+      value: commission.value.trim(),
+      notes: commission.notes?.trim() ?? null,
+    }))
+    .filter((commission) => commission.market.length > 0 && commission.value.length > 0);
+}
+
+function normalizeFirmRules(rules: CompanyRules): CompanyRules {
+  const allowed = (rules.allowed ?? []).map((rule) => rule.trim()).filter(Boolean);
+  const restricted = (rules.restricted ?? []).map((rule) => rule.trim()).filter(Boolean);
+
+  return { allowed, restricted };
 }
 

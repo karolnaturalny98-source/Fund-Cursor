@@ -41,18 +41,12 @@ import { AnnouncementCard } from "@/components/companies/announcements-tab-clien
 import { PayoutCalendar } from "@/components/companies/payout-calendar";
 import { PayoutsQuickStats } from "@/components/companies/payouts-quick-stats";
 import { PayoutsTable } from "@/components/companies/payouts-table";
-import dynamic from "next/dynamic";
-import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
-
-const PayoutsCharts = dynamic(
-  () => import("@/components/companies/payouts-charts").then((mod) => ({ default: mod.PayoutsCharts })),
-  { ssr: false, loading: () => <ChartSkeleton /> }
-);
+import { PayoutsChartsWrapper } from "@/components/companies/payouts-charts-wrapper";
 import { PayoutsTimeline } from "@/components/companies/payouts-timeline";
 import { PayoutsComparison } from "@/components/companies/payouts-comparison";
 import { CompanyMedia } from "@/components/companies/company-media";
-import { CompanyPopularityChart } from "@/components/companies/company-popularity-chart";
 import { VerificationAccordionCard } from "@/components/companies/verification-accordion-card";
+import { CompanyPopularityChartWrapper } from "@/components/companies/company-popularity-chart-wrapper";
 import { TeamHistoryTabsCard } from "@/components/companies/team-history-tabs-card";
 import { TechnicalDetailsTabsCard } from "@/components/companies/technical-details-tabs-card";
 import { SocialLinksClient } from "@/components/companies/social-links-client";
@@ -77,7 +71,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { Company, CompanyPlan } from "@/lib/types";
 import { parseCompareParam } from "@/lib/compare";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Use the actual return type from getCompanyBySlug
 type CompanyWithDetails = NonNullable<Awaited<ReturnType<typeof getCompanyBySlug>>>;
@@ -174,7 +168,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}
@@ -315,7 +309,8 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
                 value={tab.value}
                 className={cn(
                   "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                  "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                  "border-transparent bg-muted/30 text-muted-foreground",
+                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                   "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium",
                 )}
               >
@@ -422,7 +417,7 @@ function OverviewTab({ company, alerts, checklist, defaultPlan: _defaultPlan }: 
       {company.rankingHistory && company.rankingHistory.length > 0 ? (
         <>
           <Separator className="bg-border/40" />
-          <CompanyPopularityChart rankingHistory={company.rankingHistory} companyName={company.name} />
+          <CompanyPopularityChartWrapper rankingHistory={company.rankingHistory} companyName={company.name} />
         </>
       ) : null}
 
@@ -715,7 +710,7 @@ function PayoutsTab({ company }: { company: CompanyWithDetails }) {
           </Card>
         </section>
 
-        <PayoutsCharts company={company} />
+        <PayoutsChartsWrapper company={company} />
 
         <PayoutsTimeline company={company} />
 

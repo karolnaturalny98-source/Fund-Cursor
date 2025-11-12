@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ReviewsRankingPage } from "@/components/reviews/reviews-ranking-page";
 import { OpiniePageClient, OpinieBadgeClient } from "@/components/opinie/opinie-page-client";
 import { getReviewsRanking } from "@/lib/queries/reviews";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 export const metadata: Metadata = {
   title: "Opinie prop firm | FundedRank",
@@ -24,7 +24,7 @@ export default async function OpiniePage() {
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

@@ -2,7 +2,7 @@
 import { RankingsExplorer } from "@/components/rankings/rankings-explorer";
 import { RankingsPageClient, RankingsMethodologyClient } from "@/components/rankings/rankings-page-client";
 import { getRankingsDataset } from "@/lib/queries/rankings";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 import type {
   RankingFilters,
   RankingsExplorerInitialFilters,
@@ -66,7 +66,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

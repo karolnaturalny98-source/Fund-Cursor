@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink, Star, Award } from "lucide-react";
 
@@ -20,7 +21,7 @@ interface CompanyCardProps {
   company: Company;
 }
 
-export function CompanyCard({ company }: CompanyCardProps) {
+export const CompanyCard = memo(function CompanyCard({ company }: CompanyCardProps) {
   const { currency, rates } = useCurrency();
   const hasRating = typeof company.rating === "number";
   const isTopRated = company.rating !== null && company.rating >= 4.5;
@@ -151,4 +152,6 @@ export function CompanyCard({ company }: CompanyCardProps) {
       </CardContent>
     </Card>
   );
-}
+});
+
+CompanyCard.displayName = "CompanyCard";

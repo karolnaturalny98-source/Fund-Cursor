@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ShopStatisticsOverview } from "./shop-statistics-overview";
-import { ShopCharts } from "./shop-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const ShopCharts = dynamic(
+  () => import("./shop-charts").then((mod) => ({ default: mod.ShopCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import { ShopTimeFilter, type TimePeriod, type TimeRange } from "./shop-time-filter";
 import type { ShopRevenueStats, ShopTopCompany, ShopTopPlan } from "@/lib/queries/shop";
 

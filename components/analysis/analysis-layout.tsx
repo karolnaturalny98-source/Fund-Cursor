@@ -16,12 +16,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Aurora from "@/components/Aurora";
 import { cn } from "@/lib/utils";
 import type { CompanyWithDetails, CompanyRankingHistory, PriceHistoryPoint } from "@/lib/types";
 import type { ReviewStatistics, ComparisonMetrics } from "@/lib/queries/analysis";
 import dynamic from "next/dynamic";
 import { MetricsDashboard } from "./metrics-dashboard";
+
+const Aurora = dynamic(() => import("@/components/Aurora"), { ssr: false });
 import { PlanFeaturesMatrix } from "./plan-features-matrix";
 import { ReviewSentiment } from "./review-sentiment";
 import { ReviewStatistics as ReviewStatisticsComponent } from "./review-statistics";
@@ -154,7 +155,8 @@ export function AnalysisLayout({
               value="overview"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >
@@ -167,7 +169,8 @@ export function AnalysisLayout({
               value="plans"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >
@@ -180,7 +183,8 @@ export function AnalysisLayout({
               value="trading"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >
@@ -193,7 +197,8 @@ export function AnalysisLayout({
               value="reviews"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >
@@ -206,7 +211,8 @@ export function AnalysisLayout({
               value="payouts"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >
@@ -219,7 +225,8 @@ export function AnalysisLayout({
               value="company"
               className={cn(
                 "group inline-flex min-w-[130px] items-center justify-between gap-3 rounded-full border px-5 py-2 text-sm font-semibold transition-all",
-                "border-transparent bg-muted/30 text-muted-foreground hover:border-gradient hover:bg-gradient-card hover:shadow-premium",
+                "border-transparent bg-muted/30 text-muted-foreground",
+                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
             >

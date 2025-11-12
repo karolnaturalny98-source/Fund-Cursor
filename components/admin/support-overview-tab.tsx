@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { SupportStatisticsOverview } from "./support-statistics-overview";
-import { SupportCharts } from "./support-charts";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const SupportCharts = dynamic(
+  () => import("./support-charts").then((mod) => ({ default: mod.SupportCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import type {
   SupportStats,
   SupportTimeSeriesPoint,

@@ -1,12 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Star, Trophy, Medal } from "lucide-react";
-import type { Company } from "@/lib/types";
+import type { HomeRankingCompany } from "@/lib/queries/companies";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";
@@ -19,10 +17,9 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
-import { FALLBACK_RATES, convertCurrency } from "@/lib/currency";
 
 interface HomeRankingTableProps {
-  companies: Company[];
+  companies: HomeRankingCompany[];
 }
 
 function CompanyAvatar({
@@ -64,11 +61,11 @@ function CompanyAvatar({
   );
 }
 
-function getCompanyHref(company: Company): string {
+function getCompanyHref(company: HomeRankingCompany): string {
   return `/firmy/${company.slug}`;
 }
 
-function getCompanyMeta(company: Company): string {
+function getCompanyMeta(company: HomeRankingCompany): string {
   const parts: string[] = [];
   if (company.country) parts.push(company.country);
   if (company.foundedYear) parts.push(`od ${company.foundedYear}`);
@@ -87,38 +84,32 @@ function RatingBadge({ rating }: { rating: number | null }) {
   );
 }
 
-function CompanyRow({ company, index }: { company: Company; index: number }) {
+function CompanyRow({
+  company,
+  index,
+}: {
+  company: HomeRankingCompany;
+  index: number;
+}) {
   const profileHref = getCompanyHref(company);
   const meta = getCompanyMeta(company);
-  
-  // Calculate max plan price in USD for cashback display
-  const maxPlanPrice = useMemo(() => {
-    if (!company.plans || company.plans.length === 0) return null;
-    const pricesInUsd = company.plans.map((plan) => {
-      const price = typeof plan.price === "number" ? plan.price : 0;
-      const currency = plan.currency ?? "USD";
-      return convertCurrency(price, currency, "USD", FALLBACK_RATES);
-    });
-    return pricesInUsd.length > 0 ? Math.max(...pricesInUsd) : null;
-  }, [company.plans]);
 
-  const cashbackDisplay = useMemo(() => {
-    if (!company.cashbackRate || company.cashbackRate <= 0) {
-      return null;
-    }
-    
-    const cashbackAmount = maxPlanPrice
-      ? (maxPlanPrice * company.cashbackRate) / 100
+  const hasCashback =
+    typeof company.cashbackRate === "number" && company.cashbackRate > 0;
+  const cashbackAmount =
+    hasCashback &&
+    typeof company.maxPlanPriceUsd === "number" &&
+    company.maxPlanPriceUsd > 0
+      ? (company.maxPlanPriceUsd * company.cashbackRate) / 100
       : null;
-    
-    if (cashbackAmount === null) {
-      return `Cashback ${Math.round(company.cashbackRate)}%`;
-    }
-    
-    return `Cashback ${Math.round(company.cashbackRate)}% | $${cashbackAmount.toFixed(2)}`;
-  }, [company.cashbackRate, maxPlanPrice]);
 
-  const reviewCount = company.reviews?.length ?? 0;
+  const cashbackDisplay = hasCashback
+    ? cashbackAmount !== null
+      ? `Cashback ${Math.round(company.cashbackRate)}% | $${cashbackAmount.toFixed(
+          2,
+        )}`
+      : `Cashback ${Math.round(company.cashbackRate)}%`
+    : null;
 
   const isTop3 = index < 3;
   const top3Class = isTop3
@@ -167,10 +158,10 @@ function CompanyRow({ company, index }: { company: Company; index: number }) {
         <RatingBadge rating={company.rating} />
       </TableCell>
       <TableCell className="px-6 py-5 align-top text-sm text-muted-foreground">
-        {reviewCount.toLocaleString("pl-PL")} opinii
+        {company.reviewCount.toLocaleString("pl-PL")} opinii
       </TableCell>
       <TableCell className="px-6 py-5 align-top text-sm">
-        {company.cashbackRate && company.cashbackRate > 0 ? (
+        {hasCashback ? (
           <PremiumBadge variant="glow" className="w-fit text-xs font-semibold">
             {Math.round(company.cashbackRate)}%
           </PremiumBadge>

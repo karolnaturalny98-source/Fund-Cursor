@@ -4,6 +4,7 @@ import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import type { AppRole } from "@/lib/auth";
 import { getInfluencerProfileForUser } from "@/lib/queries/influencers";
+import { convertCurrency, FALLBACK_RATES } from "@/lib/currency";
 import type {
   Company,
   CompanyCommission,
@@ -17,7 +18,10 @@ import type {
   ReviewExperienceLevel,
 } from "@/lib/types";
 
-const COMPANY_PLAN_SELECT = {
+// Export type alias for companies with plans (used in admin panels)
+export type CompanyWithPlans = Awaited<ReturnType<typeof getCompanies>>[number];
+
+const COMPANY_PLAN_LISTING_SELECT: Prisma.CompanyPlanSelect = {
   id: true,
   name: true,
   price: true,
@@ -42,6 +46,10 @@ const COMPANY_PLAN_SELECT = {
   notes: true,
   createdAt: true,
   updatedAt: true,
+};
+
+const COMPANY_PLAN_DETAIL_SELECT: Prisma.CompanyPlanSelect = {
+  ...COMPANY_PLAN_LISTING_SELECT,
   priceHistory: {
     select: {
       id: true,
@@ -54,14 +62,14 @@ const COMPANY_PLAN_SELECT = {
     },
     take: 12,
   },
-} satisfies Prisma.CompanyPlanSelect;
+};
 
-const COMPANY_SELECT = {
+const COMPANY_LISTING_SELECT: Prisma.CompanySelect = {
   id: true,
   name: true,
   slug: true,
-  headline: true,
   logoUrl: true,
+  headline: true,
   country: true,
   foundedYear: true,
   shortDescription: true,
@@ -70,32 +78,38 @@ const COMPANY_SELECT = {
   cashbackRate: true,
   payoutFrequency: true,
   rating: true,
+  verificationStatus: true,
+  regulation: true,
   highlights: true,
   socials: true,
-  regulation: true,
+  licenses: true,
+  registryLinks: true,
+  registryData: true,
   kycRequired: true,
+  supportContact: true,
   paymentMethods: true,
   instruments: true,
   platforms: true,
   educationLinks: true,
-  supportContact: true,
-  instrumentGroups: true,
-  leverageTiers: true,
-  tradingCommissions: true,
-  firmRules: true,
   ceo: true,
   legalName: true,
   headquartersAddress: true,
   foundersInfo: true,
-  verificationStatus: true,
-  licenses: true,
-  registryLinks: true,
-  registryData: true,
   plans: {
     orderBy: {
       price: "asc" as Prisma.SortOrder,
     },
-    select: COMPANY_PLAN_SELECT,
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      currency: true,
+      evaluationModel: true,
+      maxDrawdown: true,
+      profitTarget: true,
+      profitSplit: true,
+      accountType: true,
+    },
   },
   _count: {
     select: {
@@ -103,7 +117,20 @@ const COMPANY_SELECT = {
     },
   },
   createdAt: true,
-  updatedAt: true,
+};
+
+const COMPANY_DETAIL_SELECT: Prisma.CompanySelect = {
+  ...COMPANY_LISTING_SELECT,
+  instrumentGroups: true,
+  leverageTiers: true,
+  tradingCommissions: true,
+  firmRules: true,
+  plans: {
+    orderBy: {
+      price: "asc" as Prisma.SortOrder,
+    },
+    select: COMPANY_PLAN_DETAIL_SELECT,
+  },
   faqs: {
     orderBy: {
       order: "asc" as Prisma.SortOrder,
@@ -214,16 +241,49 @@ const COMPANY_SELECT = {
       updatedAt: true,
     },
   },
-} satisfies Prisma.CompanySelect;
+};
 
-type CompanyRecord = Prisma.CompanyGetPayload<{ select: typeof COMPANY_SELECT }>;
-
-type CompanyPlanRecord = Prisma.CompanyPlanGetPayload<{
-  select: typeof COMPANY_PLAN_SELECT;
+type CompanyListingRecord = Prisma.CompanyGetPayload<{
+  select: typeof COMPANY_LISTING_SELECT;
 }>;
 
+type CompanyDetailRecord = Prisma.CompanyGetPayload<{
+  select: typeof COMPANY_DETAIL_SELECT;
+}>;
+
+type CompanyRecord = CompanyListingRecord & Partial<CompanyDetailRecord>;
+
+type CompanyPlanListingRecord = Prisma.CompanyPlanGetPayload<{
+  select: typeof COMPANY_PLAN_LISTING_SELECT;
+}>;
+
+type CompanyPlanDetailRecord = Prisma.CompanyPlanGetPayload<{
+  select: typeof COMPANY_PLAN_DETAIL_SELECT;
+}>;
+
+type CompanyPlanRecord = CompanyPlanListingRecord & Partial<CompanyPlanDetailRecord>;
+
 type CompanyReviewRecord = Prisma.ReviewGetPayload<{
-  select: typeof COMPANY_SELECT.reviews.select;
+  select: {
+    id: true;
+    userId: true;
+    rating: true;
+    pros: true;
+    cons: true;
+    body: true;
+    status: true;
+    publishedAt: true;
+    createdAt: true;
+    updatedAt: true;
+    metadata: true;
+    user: {
+      select: {
+        id: true;
+        displayName: true;
+        clerkId: true;
+      };
+    };
+  };
 }>;
 
 export interface CompanyFilters {
@@ -240,6 +300,7 @@ export interface CompanyFilters {
 export interface CompanyQueryOptions {
   viewerId?: string | null;
   sort?: CompanySortOption;
+  includeDetails?: boolean;
 }
 
 export interface CompanyOption {
@@ -276,14 +337,12 @@ export async function getCompanyOptions(): Promise<CompanyOption[]> {
   }));
 }
 
-export type CompanyWithPlans = Awaited<
-  ReturnType<typeof getCompanies>
->[number];
-
-export async function getCompanies(
+// Internal implementation without caching
+async function getCompaniesImpl(
   filters: CompanyFilters = {},
   options: CompanyQueryOptions = {},
 ) {
+  const { includeDetails = false, sort = "popular", viewerId = null } = options;
   const where: Prisma.CompanyWhereInput = {};
   const planConditions: Prisma.CompanyPlanWhereInput = {};
 
@@ -337,7 +396,7 @@ export async function getCompanies(
 
   const orderByClauses: Prisma.CompanyOrderByWithRelationInput[] = [];
 
-  switch (options.sort) {
+  switch (sort) {
     case "newest":
       orderByClauses.push({ createdAt: "desc" });
       break;
@@ -358,15 +417,19 @@ export async function getCompanies(
 
   const orderBy =
     orderByClauses.length === 1 ? orderByClauses[0] : orderByClauses;
+  const select = includeDetails ? COMPANY_DETAIL_SELECT : COMPANY_LISTING_SELECT;
 
   const companies = await prisma.company.findMany({
-    select: COMPANY_SELECT,
+    select,
     where,
     orderBy,
   });
 
   let serialized = companies.map(serializeCompany);
 
+  // Note: minProfitSplit filtering is done in-memory because profitSplit is stored as a string
+  // (e.g., "80/20") and requires parsing via extractProfitSplit(). Moving this to WHERE clause
+  // would require raw SQL or a computed column. Current approach is acceptable for reasonable dataset sizes.
   if (typeof filters.minProfitSplit === "number") {
     serialized = serialized.filter((company) =>
       company.plans.some((plan) => {
@@ -376,7 +439,7 @@ export async function getCompanies(
     );
   }
 
-  if (options.sort === "popular" && serialized.length > 1) {
+  if (sort === "popular" && serialized.length > 1) {
     serialized = [...serialized].sort((a, b) => {
       const countA = a.clickCount ?? 0;
       const countB = b.clickCount ?? 0;
@@ -389,7 +452,7 @@ export async function getCompanies(
     });
   }
 
-  if (!options.viewerId) {
+  if (!viewerId) {
     return serialized;
   }
 
@@ -397,7 +460,7 @@ export async function getCompanies(
     where: {
       companyId: { in: serialized.map((company) => company.id) },
       user: {
-        clerkId: options.viewerId,
+        clerkId: viewerId,
       },
     },
     select: {
@@ -413,7 +476,39 @@ export async function getCompanies(
   }));
 }
 
-export async function getCompanyFiltersMetadata(): Promise<CompanyFiltersMetadata> {
+// Cached version of getCompanies with 5 minute revalidation
+// Note: We cache only for requests without viewerId (user-specific favorites can't be cached)
+// For requests with filters, cache is still beneficial as filters are often repeated
+export async function getCompanies(
+  filters: CompanyFilters = {},
+  options: CompanyQueryOptions = {},
+) {
+  // For requests with viewerId, we can't cache effectively due to user-specific favorites
+  if (options.viewerId) {
+    return getCompaniesImpl(filters, options);
+  }
+
+  // Create a stable cache key by sorting filter arrays and normalizing the object
+  const normalizedFilters = {
+    ...filters,
+    evaluationModels: filters.evaluationModels?.slice().sort(),
+    countries: filters.countries?.slice().sort(),
+    accountTypes: filters.accountTypes?.slice().sort(),
+  };
+  const cacheKey = JSON.stringify({ filters: normalizedFilters, options });
+  
+  return unstable_cache(
+    async () => getCompaniesImpl(filters, options),
+    [`companies-${cacheKey}`],
+    {
+      revalidate: 300, // Cache for 5 minutes
+      tags: ["companies"],
+    },
+  )();
+}
+
+// Cached version of getCompanyFiltersMetadata - metadata changes rarely
+const getCompanyFiltersMetadataImpl = async (): Promise<CompanyFiltersMetadata> => {
   const [
     countryRows,
     accountTypeRows,
@@ -510,6 +605,18 @@ export async function getCompanyFiltersMetadata(): Promise<CompanyFiltersMetadat
     minPrice: toNumberOrZero(priceRange._min.price),
     maxPrice: toNumberOrZero(priceRange._max.price),
   };
+};
+
+// Cached version with 1 hour revalidation (metadata changes rarely)
+export async function getCompanyFiltersMetadata(): Promise<CompanyFiltersMetadata> {
+  return unstable_cache(
+    async () => getCompanyFiltersMetadataImpl(),
+    ["company-filters-metadata"],
+    {
+      revalidate: 3600, // Cache for 1 hour
+      tags: ["companies"],
+    },
+  )();
 }
 
 // Cache company data for 5 minutes to improve performance
@@ -517,10 +624,10 @@ const getCachedCompanyData = unstable_cache(
   async (slug: string) => {
     return prisma.company.findUnique({
       where: { slug },
-      select: COMPANY_SELECT,
+      select: COMPANY_DETAIL_SELECT,
     });
   },
-  ["company-by-slug"],
+  undefined,
   {
     revalidate: 300, // 5 minutes
     tags: ["companies"],
@@ -641,7 +748,7 @@ const getCachedSimilarCompaniesData = unstable_cache(
     }
 
     const similarRecords = await prisma.company.findMany({
-      select: COMPANY_SELECT,
+      select: COMPANY_DETAIL_SELECT,
       where: {
         id: {
           not: base.id,
@@ -721,7 +828,7 @@ export async function getCompaniesBySlugs(
         in: slugs,
       },
     },
-    select: COMPANY_SELECT,
+    select: COMPANY_DETAIL_SELECT,
   });
 
   const serialized = records.map(serializeCompany);
@@ -758,7 +865,7 @@ export async function getCompaniesBySlugs(
 
 export async function getFeaturedCompanies(limit = 3) {
   const companies = await prisma.company.findMany({
-    select: COMPANY_SELECT,
+    select: COMPANY_DETAIL_SELECT,
     orderBy: [
       {
         rating: "desc",
@@ -801,7 +908,7 @@ export async function getUserSummary(userId: string) {
         },
         include: {
           company: {
-            select: COMPANY_SELECT,
+            select: COMPANY_DETAIL_SELECT,
           },
         },
         orderBy: {
@@ -966,16 +1073,98 @@ export async function getHomepageMetrics(): Promise<HomepageMetrics> {
   };
 }
 
+const HOME_RANKING_SELECT = {
+  id: true,
+  name: true,
+  slug: true,
+  logoUrl: true,
+  country: true,
+  foundedYear: true,
+  rating: true,
+  discountCode: true,
+  cashbackRate: true,
+  plans: {
+    orderBy: {
+      price: "desc" as Prisma.SortOrder,
+    },
+    select: {
+      price: true,
+      currency: true,
+    },
+    take: 1,
+  },
+  _count: {
+    select: {
+      reviews: {
+        where: {
+          status: ReviewStatus.APPROVED,
+        },
+      },
+    },
+  },
+} satisfies Prisma.CompanySelect;
+
+type HomeRankingRecord = Prisma.CompanyGetPayload<{
+  select: typeof HOME_RANKING_SELECT;
+}>;
+
+export interface HomeRankingCompany {
+  id: string;
+  name: string;
+  slug: string;
+  logoUrl: string | null;
+  country: string | null;
+  foundedYear: number | null;
+  rating: number | null;
+  reviewCount: number;
+  cashbackRate: number | null;
+  discountCode: string | null;
+  maxPlanPriceUsd: number | null;
+}
+
 export interface HomeRanking {
-  topRated: Company[];
-  topCashback: Company[];
-  newest: Company[];
+  topRated: HomeRankingCompany[];
+  topCashback: HomeRankingCompany[];
+  newest: HomeRankingCompany[];
+}
+
+function mapHomeRankingCompany(record: HomeRankingRecord): HomeRankingCompany {
+  const rating = toNumberOrNull(record.rating);
+  const cashbackRate = toNumberOrNull(record.cashbackRate);
+
+  let maxPlanPriceUsd: number | null = null;
+  const topPlan = record.plans?.[0];
+  if (topPlan) {
+    const rawPrice = toNumberOrZero(topPlan.price);
+    const currency = topPlan.currency ?? "USD";
+    const converted = convertCurrency(rawPrice, currency, "USD", FALLBACK_RATES);
+    maxPlanPriceUsd = Number.isFinite(converted)
+      ? Math.round(converted * 100) / 100
+      : null;
+  }
+
+  const reviewCount =
+    typeof record._count?.reviews === "number" ? record._count.reviews : 0;
+
+  return {
+    id: record.id,
+    name: record.name,
+    slug: record.slug,
+    logoUrl: record.logoUrl ?? null,
+    country: record.country ?? null,
+    foundedYear: record.foundedYear ?? null,
+    rating,
+    reviewCount,
+    cashbackRate,
+    discountCode: record.discountCode ?? null,
+    maxPlanPriceUsd,
+  };
 }
 
 export async function getHomeRanking(limit = 10): Promise<HomeRanking> {
   const [topRated, topCashback, newest] = await Promise.all([
     prisma.company.findMany({
-      select: COMPANY_SELECT,
+      select: HOME_RANKING_SELECT,
       orderBy: [
         {
           rating: "desc",
@@ -987,7 +1176,7 @@ export async function getHomeRanking(limit = 10): Promise<HomeRanking> {
       take: limit,
     }),
     prisma.company.findMany({
-      select: COMPANY_SELECT,
+      select: HOME_RANKING_SELECT,
       orderBy: [
         {
           cashbackRate: "desc",
@@ -999,7 +1188,7 @@ export async function getHomeRanking(limit = 10): Promise<HomeRanking> {
       take: limit,
     }),
     prisma.company.findMany({
-      select: COMPANY_SELECT,
+      select: HOME_RANKING_SELECT,
       orderBy: {
         createdAt: "desc",
       },
@@ -1008,9 +1197,391 @@ export async function getHomeRanking(limit = 10): Promise<HomeRanking> {
   ]);
 
   return {
-    topRated: topRated.map(serializeCompany),
-    topCashback: topCashback.map(serializeCompany),
-    newest: newest.map(serializeCompany),
+    topRated: topRated.map(mapHomeRankingCompany),
+    topCashback: topCashback.map(mapHomeRankingCompany),
+    newest: newest.map(mapHomeRankingCompany),
+  };
+}
+
+const COMPANY_ADMIN_PLAN_SELECT: Prisma.CompanyPlanSelect = {
+  id: true,
+  name: true,
+  price: true,
+  currency: true,
+  evaluationModel: true,
+  maxDrawdown: true,
+  maxDailyLoss: true,
+  profitTarget: true,
+  profitSplit: true,
+  description: true,
+  features: true,
+  minTradingDays: true,
+  payoutFirstAfterDays: true,
+  payoutCycleDays: true,
+  leverage: true,
+  accountType: true,
+  affiliateUrl: true,
+  affiliateCommission: true,
+  notes: true,
+  trailingDrawdown: true,
+  refundableFee: true,
+  scalingPlan: true,
+  createdAt: true,
+  updatedAt: true,
+};
+
+const COMPANY_ADMIN_SELECT = {
+  id: true,
+  name: true,
+  slug: true,
+  headline: true,
+  logoUrl: true,
+  shortDescription: true,
+  country: true,
+  foundedYear: true,
+  websiteUrl: true,
+  discountCode: true,
+  cashbackRate: true,
+  payoutFrequency: true,
+  rating: true,
+  highlights: true,
+  regulation: true,
+  supportContact: true,
+  socials: true,
+  paymentMethods: true,
+  instruments: true,
+  platforms: true,
+  educationLinks: true,
+  kycRequired: true,
+  ceo: true,
+  legalName: true,
+  headquartersAddress: true,
+  foundersInfo: true,
+  verificationStatus: true,
+  licenses: true,
+  registryLinks: true,
+  registryData: true,
+  plans: {
+    orderBy: {
+      price: "asc" as Prisma.SortOrder,
+    },
+    select: COMPANY_ADMIN_PLAN_SELECT,
+  },
+  instrumentGroups: true,
+  leverageTiers: true,
+  tradingCommissions: true,
+  firmRules: true,
+  faqs: {
+    orderBy: {
+      order: "asc" as Prisma.SortOrder,
+    },
+    select: {
+      id: true,
+      question: true,
+      answer: true,
+      order: true,
+    },
+  },
+} satisfies Prisma.CompanySelect;
+
+type CompanyAdminPlanRecord = Prisma.CompanyPlanGetPayload<{
+  select: typeof COMPANY_ADMIN_PLAN_SELECT;
+}>;
+
+type CompanyAdminRecord = Prisma.CompanyGetPayload<{
+  select: typeof COMPANY_ADMIN_SELECT;
+}>;
+
+export interface AdminCompanyPlan {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  evaluationModel: EvaluationModel;
+  profitSplit: string | null;
+  description: string | null;
+  features: string[];
+  maxDrawdown: number | null;
+  maxDailyLoss: number | null;
+  profitTarget: number | null;
+  minTradingDays: number | null;
+  payoutFirstAfterDays: number | null;
+  payoutCycleDays: number | null;
+  leverage: number | null;
+  accountType: string | null;
+  affiliateUrl: string | null;
+  affiliateCommission: number | null;
+  notes: string | null;
+  trailingDrawdown: boolean | null;
+  refundableFee: boolean | null;
+  scalingPlan: boolean | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminCompanyFaq {
+  id: string;
+  question: string;
+  answer: string;
+  order: number;
+}
+
+export interface AdminCompany {
+  id: string;
+  name: string;
+  slug: string;
+  headline: string | null;
+  logoUrl: string | null;
+  shortDescription: string | null;
+  country: string | null;
+  foundedYear: number | null;
+  websiteUrl: string | null;
+  discountCode: string | null;
+  cashbackRate: number | null;
+  payoutFrequency: string | null;
+  rating: number | null;
+  highlights: string[];
+  regulation: string | null;
+  supportContact: string | null;
+  socials: Record<string, unknown> | null;
+  paymentMethods: string[];
+  instruments: string[];
+  platforms: string[];
+  educationLinks: string[];
+  kycRequired: boolean;
+  ceo: string | null;
+  legalName: string | null;
+  headquartersAddress: string | null;
+  foundersInfo: string | null;
+  verificationStatus: string | null;
+  licenses: string[];
+  registryLinks: string[];
+  registryData: Record<string, unknown> | null;
+  plans: AdminCompanyPlan[];
+  instrumentGroups: CompanyInstrumentGroup[];
+  leverageTiers: CompanyLeverageTier[];
+  tradingCommissions: CompanyCommission[];
+  firmRules: CompanyRules;
+  faqs: AdminCompanyFaq[];
+}
+
+function mapAdminCompanyPlan(plan: CompanyAdminPlanRecord): AdminCompanyPlan {
+  const features = Array.isArray(plan.features)
+    ? (plan.features.filter((item): item is string => typeof item === "string") as string[])
+    : [];
+
+  return {
+    id: plan.id,
+    name: plan.name,
+    price: toNumberOrZero(plan.price),
+    currency: plan.currency ?? "USD",
+    evaluationModel: plan.evaluationModel as EvaluationModel,
+    profitSplit: plan.profitSplit ?? null,
+    description: plan.description ?? null,
+    features,
+    maxDrawdown: toNumberOrNull(plan.maxDrawdown),
+    maxDailyLoss: toNumberOrNull(plan.maxDailyLoss),
+    profitTarget: toNumberOrNull(plan.profitTarget),
+    minTradingDays: plan.minTradingDays ?? null,
+    payoutFirstAfterDays: plan.payoutFirstAfterDays ?? null,
+    payoutCycleDays: plan.payoutCycleDays ?? null,
+    leverage: toNumberOrNull(plan.leverage),
+    accountType: plan.accountType ?? null,
+    affiliateUrl: plan.affiliateUrl ?? null,
+    affiliateCommission: toNumberOrNull(plan.affiliateCommission),
+    notes: plan.notes ?? null,
+    trailingDrawdown: mapNullableBoolean(plan.trailingDrawdown),
+    refundableFee: mapNullableBoolean(plan.refundableFee),
+    scalingPlan: mapNullableBoolean(plan.scalingPlan),
+    createdAt: toISOString(plan.createdAt) ?? new Date().toISOString(),
+    updatedAt: toISOString(plan.updatedAt) ?? new Date().toISOString(),
+  };
+}
+
+function mapNullableBoolean(value: unknown): boolean | null {
+  if (value === null || value === undefined) {
+    return null;
+  }
+  if (typeof value === "boolean") {
+    return value;
+  }
+  return null;
+}
+
+function mapAdminCompany(record: CompanyAdminRecord): AdminCompany {
+  const socials =
+    record.socials && typeof record.socials === "object" && !Array.isArray(record.socials)
+      ? (record.socials as Record<string, unknown>)
+      : null;
+
+  return {
+    id: record.id,
+    name: record.name,
+    slug: record.slug,
+    headline: record.headline ?? null,
+    logoUrl: record.logoUrl ?? null,
+    shortDescription: record.shortDescription ?? null,
+    country: record.country ?? null,
+    foundedYear: record.foundedYear ?? null,
+    websiteUrl: record.websiteUrl ?? null,
+    discountCode: record.discountCode ?? null,
+    cashbackRate: toNumberOrNull(record.cashbackRate),
+    payoutFrequency: record.payoutFrequency ?? null,
+    rating: toNumberOrNull(record.rating),
+    highlights: Array.isArray(record.highlights)
+      ? (record.highlights.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    regulation: record.regulation ?? null,
+    supportContact: record.supportContact ?? null,
+    socials,
+    paymentMethods: Array.isArray(record.paymentMethods)
+      ? (record.paymentMethods.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    instruments: Array.isArray(record.instruments)
+      ? (record.instruments.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    platforms: Array.isArray(record.platforms)
+      ? (record.platforms.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    educationLinks: Array.isArray(record.educationLinks)
+      ? (record.educationLinks.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    kycRequired: Boolean(record.kycRequired),
+    ceo: record.ceo ?? null,
+    legalName: record.legalName ?? null,
+    headquartersAddress: record.headquartersAddress ?? null,
+    foundersInfo: record.foundersInfo ?? null,
+    verificationStatus: record.verificationStatus ?? null,
+    licenses: Array.isArray(record.licenses)
+      ? (record.licenses.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    registryLinks: Array.isArray(record.registryLinks)
+      ? (record.registryLinks.filter((item): item is string => typeof item === "string") as string[])
+      : [],
+    registryData:
+      record.registryData && typeof record.registryData === "object" && !Array.isArray(record.registryData)
+        ? (record.registryData as Record<string, unknown>)
+        : null,
+    plans: record.plans.map(mapAdminCompanyPlan),
+    instrumentGroups: parseInstrumentGroups(record.instrumentGroups),
+    leverageTiers: parseLeverageTiers(record.leverageTiers),
+    tradingCommissions: parseTradingCommissions(record.tradingCommissions),
+    firmRules: parseCompanyRules(record.firmRules),
+    faqs: record.faqs.map((faq) => ({
+      id: faq.id,
+      question: faq.question,
+      answer: faq.answer,
+      order: faq.order,
+    })),
+  };
+}
+
+export async function getAdminCompanies(): Promise<AdminCompany[]> {
+  const records = await prisma.company.findMany({
+    select: COMPANY_ADMIN_SELECT,
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  return records.map(mapAdminCompany);
+}
+
+const COMPANY_SUMMARY_SELECT = {
+  id: true,
+  name: true,
+  slug: true,
+  headline: true,
+  logoUrl: true,
+  country: true,
+  rating: true,
+  cashbackRate: true,
+  discountCode: true,
+} satisfies Prisma.CompanySelect;
+
+type CompanySummaryRecord = Prisma.CompanyGetPayload<{
+  select: typeof COMPANY_SUMMARY_SELECT;
+}>;
+
+export interface CompanySummary {
+  id: string;
+  name: string;
+  slug: string;
+  headline: string | null;
+  logoUrl: string | null;
+  country: string | null;
+  rating: number | null;
+  cashbackRate: number | null;
+  discountCode: string | null;
+  hasCashback: boolean;
+}
+
+export interface CompanySummaryQuery {
+  page?: number;
+  perPage?: number;
+  search?: string;
+}
+
+export const DEFAULT_COMPANY_SUMMARY_PAGE_SIZE = 20;
+export const MAX_COMPANY_SUMMARY_PAGE_SIZE = 100;
+
+export async function getCompanySummaries({
+  page = 1,
+  perPage = DEFAULT_COMPANY_SUMMARY_PAGE_SIZE,
+  search,
+}: CompanySummaryQuery = {}): Promise<{ items: CompanySummary[]; total: number }> {
+  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+  const normalizedPerPage =
+    Number.isFinite(perPage) && perPage > 0 ? Math.floor(perPage) : DEFAULT_COMPANY_SUMMARY_PAGE_SIZE;
+  const safePerPage = Math.max(1, Math.min(normalizedPerPage, MAX_COMPANY_SUMMARY_PAGE_SIZE));
+  const skip = (safePage - 1) * safePerPage;
+
+  const where: Prisma.CompanyWhereInput = {};
+  if (search && search.trim().length > 0) {
+    const term = search.trim();
+    where.OR = [
+      { name: { contains: term, mode: "insensitive" } },
+      { slug: { contains: term, mode: "insensitive" } },
+      { headline: { contains: term, mode: "insensitive" } },
+    ];
+  }
+
+  const [total, records] = await Promise.all([
+    prisma.company.count({ where }),
+    prisma.company.findMany({
+      select: COMPANY_SUMMARY_SELECT,
+      where,
+      orderBy: [
+        {
+          name: "asc",
+        },
+      ],
+      skip,
+      take: safePerPage,
+    }),
+  ]);
+
+  return {
+    total,
+    items: records.map(mapCompanySummary),
+  };
+}
+
+function mapCompanySummary(record: CompanySummaryRecord): CompanySummary {
+  const cashbackRate = toNumberOrNull(record.cashbackRate);
+  const rating = toNumberOrNull(record.rating);
+
+  return {
+    id: record.id,
+    name: record.name,
+    slug: record.slug,
+    headline: record.headline ?? null,
+    logoUrl: record.logoUrl ?? null,
+    country: record.country ?? null,
+    rating,
+    cashbackRate,
+    discountCode: record.discountCode ?? null,
+    hasCashback: typeof cashbackRate === "number" ? cashbackRate > 0 : false,
   };
 }
 
@@ -1026,8 +1597,13 @@ export async function getUserRole(userId: string): Promise<AppRole> {
 }
 
 function serializeCompany(company: CompanyRecord) {
-  const plans = company.plans as CompanyPlanRecord[];
-  const reviews = company.reviews as CompanyReviewRecord[];
+  const plans = (company.plans ?? []) as CompanyPlanRecord[];
+  const reviews = ("reviews" in company && company.reviews ? company.reviews : []) as unknown as CompanyReviewRecord[];
+  const teamMembers = company.teamMembers ?? [];
+  const timelineItems = company.timelineItems ?? [];
+  const certifications = company.certifications ?? [];
+  const mediaItems = company.mediaItems ?? [];
+  const faqs = company.faqs ?? [];
 
   const numericRatings = reviews
     .map((review) => review.rating)
@@ -1068,7 +1644,7 @@ function serializeCompany(company: CompanyRecord) {
     tradingCommissions: parseTradingCommissions(company.tradingCommissions),
     firmRules: parseCompanyRules(company.firmRules),
     plans: plans.map(serializePlan),
-    teamMembers: company.teamMembers.map((member) => ({
+    teamMembers: teamMembers.map((member) => ({
       id: member.id,
       companyId: company.id,
       name: member.name,
@@ -1081,7 +1657,7 @@ function serializeCompany(company: CompanyRecord) {
       createdAt: toISOString(member.createdAt) ?? new Date().toISOString(),
       updatedAt: toISOString(member.updatedAt) ?? new Date().toISOString(),
     })),
-    timelineItems: company.timelineItems.map((item) => ({
+    timelineItems: timelineItems.map((item) => ({
       id: item.id,
       companyId: company.id,
       title: item.title,
@@ -1093,7 +1669,7 @@ function serializeCompany(company: CompanyRecord) {
       createdAt: toISOString(item.createdAt) ?? new Date().toISOString(),
       updatedAt: toISOString(item.updatedAt) ?? new Date().toISOString(),
     })),
-    certifications: company.certifications.map((cert) => ({
+    certifications: certifications.map((cert) => ({
       id: cert.id,
       companyId: company.id,
       name: cert.name,
@@ -1106,7 +1682,7 @@ function serializeCompany(company: CompanyRecord) {
       createdAt: toISOString(cert.createdAt) ?? new Date().toISOString(),
       updatedAt: toISOString(cert.updatedAt) ?? new Date().toISOString(),
     })),
-    mediaItems: company.mediaItems.map((media) => ({
+    mediaItems: mediaItems.map((media) => ({
       id: media.id,
       companyId: company.id,
       title: media.title,
@@ -1120,7 +1696,7 @@ function serializeCompany(company: CompanyRecord) {
       updatedAt: toISOString(media.updatedAt) ?? new Date().toISOString(),
     })),
     rankingHistory: [],
-    faqs: company.faqs.map((faq) => ({
+    faqs: faqs.map((faq) => ({
       id: faq.id,
       companyId: company.id,
       question: faq.question,
@@ -1404,21 +1980,25 @@ function toISOString(date: Date | string | null | undefined): string | null {
 }
 
 function serializePlan(plan: CompanyPlanRecord) {
-  const priceHistory = plan.priceHistory.map((entry) => ({
+  const priceHistorySource = Array.isArray(plan.priceHistory) ? plan.priceHistory : [];
+  const priceHistory = priceHistorySource.map((entry) => ({
     id: entry.id,
     price: toNumberOrZero(entry.price),
     currency: entry.currency,
     recordedAt: toISOString(entry.recordedAt) ?? new Date().toISOString(),
   }));
 
-  if (priceHistory.length === 0) {
-    priceHistory.push({
-      id: `${plan.id}-snapshot`,
-      price: toNumberOrZero(plan.price),
-      currency: plan.currency,
-      recordedAt: toISOString(plan.updatedAt) ?? new Date().toISOString(),
-    });
-  }
+  const normalizedPriceHistory =
+    priceHistory.length > 0
+      ? priceHistory
+      : [
+          {
+            id: `${plan.id}-snapshot`,
+            price: toNumberOrZero(plan.price),
+            currency: plan.currency,
+            recordedAt: toISOString(plan.updatedAt) ?? new Date().toISOString(),
+          },
+        ];
 
   return {
     ...plan,
@@ -1438,7 +2018,7 @@ function serializePlan(plan: CompanyPlanRecord) {
     affiliateCommission: toNumberOrNull(plan.affiliateCommission),
     createdAt: toISOString(plan.createdAt) ?? new Date().toISOString(),
     updatedAt: toISOString(plan.updatedAt) ?? new Date().toISOString(),
-    priceHistory,
+    priceHistory: normalizedPriceHistory,
   };
 }
 

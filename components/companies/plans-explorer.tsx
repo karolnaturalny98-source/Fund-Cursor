@@ -104,8 +104,10 @@ export function PlansExplorer({
     }
   }, [initialModelFilter, selectedModel]);
 
-  const plansWithComputed = useMemo<PlanWithComputed[]>(() => {
-    let filtered = normalizedPlans.map((plan) => {
+  // Split large useMemo into smaller, optimized chunks
+  // Step 1: Convert prices and compute cashback (only depends on currency/rates)
+  const plansWithConvertedPrices = useMemo<PlanWithComputed[]>(() => {
+    return normalizedPlans.map((plan) => {
       const convertedPrice = convertCurrency(
         plan.price,
         plan.currency,
@@ -136,6 +138,11 @@ export function PlansExplorer({
         changeDirection: change.direction,
       };
     });
+  }, [normalizedPlans, currency, rates, cashbackRate]);
+
+  // Step 2: Filter plans (depends on search and model filter)
+  const filteredPlans = useMemo(() => {
+    let filtered = plansWithConvertedPrices;
 
     // Filtrowanie po wyszukiwarce
     if (searchQuery.trim()) {
@@ -155,8 +162,13 @@ export function PlansExplorer({
       });
     }
 
-    // Sortowanie
-    filtered.sort((a, b) => {
+    return filtered;
+  }, [plansWithConvertedPrices, searchQuery, selectedModel]);
+
+  // Step 3: Sort plans (depends on sortBy and sortOrder)
+  const plansWithComputed = useMemo<PlanWithComputed[]>(() => {
+    const sorted = [...filteredPlans];
+    sorted.sort((a, b) => {
       let comparison = 0;
       if (sortBy === "price") {
         comparison = a.convertedPrice - b.convertedPrice;
@@ -174,8 +186,8 @@ export function PlansExplorer({
       return sortOrder === "asc" ? comparison : -comparison;
     });
 
-    return filtered;
-  }, [normalizedPlans, currency, rates, cashbackRate, searchQuery, selectedModel, sortBy, sortOrder]);
+    return sorted;
+  }, [filteredPlans, sortBy, sortOrder]);
 
   function parseProfitSplit(split: string | null | undefined): number {
     if (!split) return 0;
@@ -432,7 +444,7 @@ function PlanCard({
         : "text-muted-foreground";
 
   return (
-    <article className="group flex flex-col gap-4 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border border-border/60-premium hover:shadow-sm-lg">
+    <article className="group flex flex-col gap-4 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:border-primary/50 hover:shadow-sm-lg">
       <header className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-foreground">
@@ -466,7 +478,15 @@ function PlanCard({
       />
 
       {plan.changeLabel ? (
-        <div className={`flex items-center gap-2 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 ${changeBadge === "text-emerald-600" ? "border-emerald-500/20 bg-emerald-500/5" : changeBadge === "text-rose-600" ? "border-rose-500/20 bg-rose-500/5" : "border-border/60"}`}>
+        <div
+          className={`flex items-center gap-2 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 transition-colors ${
+            changeBadge === "text-emerald-600"
+              ? "border-emerald-500/20 bg-emerald-500/5"
+              : changeBadge === "text-rose-600"
+                ? "border-rose-500/20 bg-rose-500/5"
+                : "border-border/60"
+          }`}
+        >
           <PremiumIcon icon={LineChart} variant={plan.changeDirection === "flat" ? "default" : "glow"} size="sm" />
           <p className={`text-xs font-medium ${changeBadge}`}>
             {plan.changeLabel}

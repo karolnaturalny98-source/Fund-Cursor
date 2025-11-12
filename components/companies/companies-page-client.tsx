@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition, useRef, useMemo, useDeferredValue } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 
@@ -54,11 +54,29 @@ export function CompaniesPageClient({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
-  const [searchDraft, setSearchDraft] = useState(search ?? "");
+  
+  // Synchronizuj searchDraft z URL - ważne dla back/forward navigation
+  const urlSearch = useMemo(() => searchParams.get("search") || "", [searchParams]);
+  const [searchDraft, setSearchDraft] = useState(urlSearch);
+  const prevSearchRef = useRef<string>(urlSearch);
+  
+  // Synchronizuj searchDraft gdy URL się zmienia (back/forward)
+  useEffect(() => {
+    if (urlSearch !== prevSearchRef.current) {
+      setSearchDraft(urlSearch);
+      prevSearchRef.current = urlSearch;
+    }
+  }, [urlSearch]);
+  
+  // Użyj deferred value dla płynniejszych animacji podczas ładowania
+  const deferredCompanies = useDeferredValue(companies);
+  const isStale = companies !== deferredCompanies;
+  
   const sectionAnim = useFadeIn({ rootMargin: "-100px" });
   const cardsAnim = useScrollAnimation({ rootMargin: "-100px" });
-  const staggerItems = useStaggerAnimation(companies.length, 100);
-  const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(companies.length).fill(false);
+  const staggerItems = useStaggerAnimation(deferredCompanies.length, 100);
+  // Zachowaj widoczność podczas pending - nie resetuj animacji
+  const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(deferredCompanies.length).fill(false);
 
   const sortLabels: Record<CompanySortOption, string> = {
     popular: "Popularność",
@@ -70,9 +88,22 @@ export function CompaniesPageClient({
   };
 
   useEffect(() => {
+    const trimmed = searchDraft.trim();
+    
+    // Sprawdź czy wartość faktycznie się zmieniła
+    if (trimmed === prevSearchRef.current) {
+      return; // Nie rób nic jeśli wartość jest taka sama
+    }
+    
     const handler = window.setTimeout(() => {
-      const trimmed = searchDraft.trim();
-      const params = new URLSearchParams(searchParams);
+      // Sprawdź czy wartość w URL jest już taka sama jak chcemy ustawić
+      if (trimmed === urlSearch) {
+        prevSearchRef.current = trimmed;
+        return; // Nie rób nic jeśli wartość jest już w URL
+      }
+      
+      // Użyj searchParams tylko do odczytu, nie dodawaj do zależności
+      const params = new URLSearchParams(searchParams.toString());
       
       if (trimmed.length > 0) {
         params.set("search", trimmed);
@@ -80,16 +111,18 @@ export function CompaniesPageClient({
         params.delete("search");
       }
 
+      prevSearchRef.current = trimmed;
       startTransition(() => {
         const query = params.toString();
         router.replace(`${pathname}${query ? `?${query}` : ""}`);
       });
-    }, 250);
+    }, 300);
 
     return () => {
       window.clearTimeout(handler);
     };
-  }, [searchDraft, pathname, router, searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchDraft, pathname, router, urlSearch]); // Usuń searchParams - używamy tylko do odczytu
 
   const applyQuickFilter = (filterType: "top10" | "cashback" | "with-cashback" | "newest") => {
     const params = new URLSearchParams(searchParams);
@@ -212,7 +245,7 @@ export function CompaniesPageClient({
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-wrap items-center gap-2">
                 <p className="text-sm text-muted-foreground">
-                  {companies.length} firm dostepnych w bazie
+                  {deferredCompanies.length} firm dostepnych w bazie
                   {activeFilters ? " (wynik po filtrach)" : ""}.
                 </p>
                 {activeFilters && (
@@ -263,7 +296,7 @@ export function CompaniesPageClient({
               </div>
             </div>
 
-            {isPending && companies.length === 0 ? (
+            {isPending && deferredCompanies.length === 0 ? (
               <div className="grid gap-6">
                 {Array.from({ length: 6 }).map((_, index) => (
                   <div
@@ -317,15 +350,20 @@ export function CompaniesPageClient({
                   </div>
                 ))}
               </div>
-            ) : companies.length ? (
-              <div ref={cardsAnim.ref} className="grid gap-6">
-                {companies.map((company, index) => (
+            ) : deferredCompanies.length ? (
+              <div ref={cardsAnim.ref} className="grid gap-6 relative">
+                {isStale && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-background/50 backdrop-blur-sm pointer-events-none">
+                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  </div>
+                )}
+                {deferredCompanies.map((company, index) => (
                   <div
                     key={company.id}
-                    className={`transition-all duration-700 delay-[var(--delay)] ${
+                    className={`transition-all duration-500 ${
                       visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-                    }`}
-                    style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+                    } ${isStale ? "opacity-60" : ""}`}
+                    style={{ transitionDelay: `${index * 50}ms` } as React.CSSProperties}
                   >
                     <CompanyCard company={company} />
                   </div>

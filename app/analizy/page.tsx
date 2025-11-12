@@ -5,7 +5,7 @@ import { BarChart3, TrendingUp, FileText, Award } from "lucide-react";
 import { getCompanyOptions } from "@/lib/queries/companies";
 import { CompanySelector } from "@/components/analysis/company-selector";
 import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton";
-import Aurora from "@/components/Aurora";
+import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 export const metadata: Metadata = {
   title: "Analizy Firm | FundedRank",
@@ -23,7 +23,7 @@ export default async function AnalizyPage() {
     <div className="relative">
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
-        <Aurora
+        <AuroraWrapper
           colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
           blend={0.5}
           amplitude={1.0}

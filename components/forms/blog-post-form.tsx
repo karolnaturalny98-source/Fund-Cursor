@@ -20,8 +20,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { RichTextEditor } from "@/components/editor/rich-text-editor";
+import dynamic from "next/dynamic";
 import { generateSlug } from "@/lib/utils/blog";
+
+const RichTextEditor = dynamic(
+  () => import("@/components/editor/rich-text-editor").then((mod) => ({ default: mod.RichTextEditor })),
+  { ssr: false, loading: () => <div className="h-[300px] animate-pulse rounded-lg bg-muted" /> }
+);
 import type { BlogCategory } from "@/lib/types";
 
 const optionalUrl = z

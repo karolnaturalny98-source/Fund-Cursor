@@ -63,6 +63,10 @@ async function getRankingsDatasetImpl(
   const recentBoundary = new Date(now.getTime() - THIRTY_DAYS_MS);
   const previousBoundary = new Date(recentBoundary.getTime() - THIRTY_DAYS_MS);
 
+  // Limit to 200 companies to prevent excessive memory usage and slow queries
+  // This is a reasonable limit for ranking pages - if more are needed, implement pagination
+  const MAX_COMPANIES = 200;
+  
   const companyRecords = await prisma.company.findMany({
     select: {
       id: true,
@@ -120,6 +124,7 @@ async function getRankingsDatasetImpl(
     orderBy: {
       name: "asc",
     },
+    take: MAX_COMPANIES,
   });
 
   const rawCompanies: RawRankingCompany[] = companyRecords.map((company) => {
@@ -346,16 +351,20 @@ async function getRankingsDatasetImpl(
     }),
   );
 
-  // Zapisz score do historii dla wszystkich firm (równolegle)
-  // Używamy Promise.allSettled, aby błędy zapisu nie przerywały głównego flow
-  await Promise.allSettled(
-    snapshotWithScores.map((company) =>
-      recordCompanyRankingScore(company.id, company.scores.overall).catch((error) => {
-        console.error(`Failed to record ranking history for company ${company.id}:`, error);
-        return null; // Continue even if one fails
-      }),
-    ),
-  );
+  // Zapisz score do historii dla wszystkich firm (batch processing)
+  // Batch po 20 firm naraz, aby nie przeciążać bazy danych
+  const BATCH_SIZE = 20;
+  for (let i = 0; i < snapshotWithScores.length; i += BATCH_SIZE) {
+    const batch = snapshotWithScores.slice(i, i + BATCH_SIZE);
+    await Promise.allSettled(
+      batch.map((company) =>
+        recordCompanyRankingScore(company.id, company.scores.overall).catch((error) => {
+          console.error(`Failed to record ranking history for company ${company.id}:`, error);
+          return null; // Continue even if one fails
+        }),
+      ),
+    );
+  }
 
   const filteredCompanies = snapshotWithScores.filter((company) =>
     matchesFilters(company, filters),
