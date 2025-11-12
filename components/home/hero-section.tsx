@@ -14,6 +14,13 @@ const numberFormatter = new Intl.NumberFormat("pl-PL", {
   maximumFractionDigits: 0,
 });
 
+const currencyFormatter = new Intl.NumberFormat("pl-PL", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+});
+
 export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
   const heroContent = useFadeIn({ rootMargin: "-100px" });
   const statsCardAnim = useScrollAnimation({ rootMargin: "-100px" });
@@ -82,7 +89,7 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
             <p className="text-3xl font-bold text-primary">
               <AnimatedCounter
                 value={metrics.totalCashback ?? 0}
-                formatter={(val) => numberFormatter.format(val) + " pkt cashback"}
+                formatter={(val) => currencyFormatter.format(val)}
               />
             </p>
           </CardHeader>
