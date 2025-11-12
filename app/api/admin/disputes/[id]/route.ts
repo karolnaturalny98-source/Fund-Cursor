@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from "@/lib/cache";
 import { z } from "zod";
 
 import { assertAdminRequest } from "@/lib/auth";

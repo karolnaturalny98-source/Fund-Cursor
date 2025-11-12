@@ -7,7 +7,13 @@ import { useRouter } from "next/navigation";
 import { ArrowUpRight, Globe, Layers, Box, Loader2, RefreshCw, Search, X, Filter, Award, Receipt, Users, Sparkles, TrendingUp, BarChart3, CheckCircle2, Trophy, Medal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { RankingsCharts } from "./rankings-charts";
+import dynamic from "next/dynamic";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const RankingsCharts = dynamic(
+  () => import("./rankings-charts").then((mod) => ({ default: mod.RankingsCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import { RankingsExportButton } from "./rankings-export-button";
 
 import type {
@@ -1560,8 +1566,8 @@ function MetricBar({
       <span className="text-sm font-semibold text-foreground">{formatted}</span>
       <div className="h-2.5 w-full rounded-full bg-muted">
         <div
-          className="h-full rounded-full bg-primary transition-[width]"
-          style={{ width: widthPercent.toString() + "%" }}
+          className="h-full rounded-full bg-primary transition-[width] w-[var(--progress-width)]"
+          style={{ "--progress-width": widthPercent.toString() + "%" } as React.CSSProperties}
         />
       </div>
     </div>

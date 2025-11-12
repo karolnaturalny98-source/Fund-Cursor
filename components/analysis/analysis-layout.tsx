@@ -20,15 +20,29 @@ import Aurora from "@/components/Aurora";
 import { cn } from "@/lib/utils";
 import type { CompanyWithDetails, CompanyRankingHistory, PriceHistoryPoint } from "@/lib/types";
 import type { ReviewStatistics, ComparisonMetrics } from "@/lib/queries/analysis";
+import dynamic from "next/dynamic";
 import { MetricsDashboard } from "./metrics-dashboard";
-import { PriceComparisonChart } from "./price-comparison-chart";
-import { RatingTrendsChart } from "./rating-trends-chart";
 import { PlanFeaturesMatrix } from "./plan-features-matrix";
 import { ReviewSentiment } from "./review-sentiment";
 import { ReviewStatistics as ReviewStatisticsComponent } from "./review-statistics";
 import { TradingConditions } from "./trading-conditions";
 import { CompanyProfile } from "./company-profile";
-import { PayoutAnalysis } from "./payout-analysis";
+import { ChartSkeleton } from "./loading-skeleton";
+
+const PriceComparisonChart = dynamic(
+  () => import("./price-comparison-chart").then((mod) => ({ default: mod.PriceComparisonChart })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const RatingTrendsChart = dynamic(
+  () => import("./rating-trends-chart").then((mod) => ({ default: mod.RatingTrendsChart })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const PayoutAnalysis = dynamic(
+  () => import("./payout-analysis").then((mod) => ({ default: mod.PayoutAnalysis })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 
 interface AnalysisLayoutProps {
   companies: CompanyWithDetails[];

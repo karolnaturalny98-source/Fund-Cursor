@@ -205,8 +205,8 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
                     <td className="p-3">
                       <div className="flex items-center gap-2">
                         <div
-                          className="h-2 w-2 rounded-full"
-                          style={{ backgroundColor: getCompanyColor(companyId) }}
+                          className="h-2 w-2 rounded-full bg-[var(--bg-color)]"
+                          style={{ "--bg-color": getCompanyColor(companyId) } as React.CSSProperties}
                         />
                         <span className="text-sm font-medium">{companyName}</span>
                       </div>

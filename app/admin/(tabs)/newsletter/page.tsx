@@ -314,7 +314,7 @@ export default function NewsletterAdminPage() {
                           variant={
                             subscriber.status === "active"
                               ? "default"
-                              : "outline-solid"
+                              : "outline"
                           }
                         >
                           {subscriber.status === "active"

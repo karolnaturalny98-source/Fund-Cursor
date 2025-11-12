@@ -6,7 +6,13 @@ import { ArrowUpDown, Filter, RefreshCcw, Search } from "lucide-react";
 
 import { ReviewsRankingTable } from "@/components/reviews/reviews-ranking-table";
 import { ReviewsRankingMobileList } from "@/components/reviews/reviews-ranking-mobile-list";
-import { ReviewsCharts } from "@/components/reviews/reviews-charts";
+import dynamic from "next/dynamic";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const ReviewsCharts = dynamic(
+  () => import("@/components/reviews/reviews-charts").then((mod) => ({ default: mod.ReviewsCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import { ReviewsExportButton } from "@/components/reviews/reviews-export-button";
 import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";

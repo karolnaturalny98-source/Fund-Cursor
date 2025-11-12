@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from "@/lib/cache";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 

@@ -39,8 +39,8 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -106,8 +106,8 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -161,8 +161,8 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -209,8 +209,8 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -246,8 +246,8 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-4 font-semibold">{company.name}</h4>
                 

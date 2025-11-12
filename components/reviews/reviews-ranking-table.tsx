@@ -153,8 +153,8 @@ function RankingRow({
           </span>
           <div className="h-2.5 w-full rounded-full bg-muted">
             <div
-              className="h-full rounded-full bg-primary transition-all"
-              style={{ width: progressWidth }}
+              className="h-full rounded-full bg-primary transition-all w-[var(--progress-width)]"
+              style={{ "--progress-width": progressWidth } as React.CSSProperties}
             />
           </div>
         </div>

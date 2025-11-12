@@ -119,8 +119,7 @@ function ConnectorLines({ fromLevel: _fromLevel, toLevel: _toLevel, fromMembers,
 
   return (
     <svg
-      className="absolute inset-0 pointer-events-none"
-      style={{ width: "100%", height: "100%" }}
+      className="absolute inset-0 pointer-events-none w-full h-full"
       aria-hidden="true"
     >
       <defs>

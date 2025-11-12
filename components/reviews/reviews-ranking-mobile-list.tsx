@@ -107,8 +107,8 @@ function RankingCard({
       <div className="mt-4">
         <div className="h-2 w-full rounded-full bg-muted">
           <div
-            className="h-full rounded-full bg-primary transition-[width]"
-            style={{ width: `${Math.max(progress * 100, progress > 0 ? 8 : 0)}%` }}
+            className="h-full rounded-full bg-primary transition-[width] w-[var(--progress-width)]"
+            style={{ "--progress-width": `${Math.max(progress * 100, progress > 0 ? 8 : 0)}%` } as React.CSSProperties}
           />
         </div>
         <p className="mt-1 text-xs text-muted-foreground">

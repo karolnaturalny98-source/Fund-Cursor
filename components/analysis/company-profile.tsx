@@ -30,8 +30,8 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
         {companies.map((company, idx) => (
           <Card
             key={company.id}
-            className="border-l-4 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs"
-            style={{ borderLeftColor: getCompanyColor(idx) }}
+            className="border-l-4 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs border-[var(--border-color)]"
+            style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
           >
             <CardHeader>
               <div className="flex items-start gap-3">
@@ -136,8 +136,8 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -200,8 +200,8 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
             {companies.map((company, idx) => (
               <div
                 key={company.id}
-                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                style={{ borderLeftColor: getCompanyColor(idx) }}
+                className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4 border-[var(--border-color)]"
+                style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 
@@ -258,7 +258,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                 <div
                   key={company.id}
                   className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                  style={{ borderLeftColor: getCompanyColor(idx) }}
+                  style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
                 >
                   <h4 className="mb-3 font-semibold">{company.name}</h4>
                   
@@ -310,7 +310,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                 <div
                   key={company.id}
                   className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-                  style={{ borderLeftColor: getCompanyColor(idx) }}
+                  style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
                 >
                   <h4 className="mb-3 font-semibold">{company.name}</h4>
                   
@@ -370,7 +370,8 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
               <div
                 key={company.id}
               className="rounded-lg border-l-4 bg-card/72 backdrop-blur-[36px]! p-4"
-              style={{ borderLeftColor: getCompanyColor(idx) }}
+              style={{ "--border-color": getCompanyColor(idx) } as React.CSSProperties}
+            className="border-l-4 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs border-[var(--border-color)]"
               >
                 <h4 className="mb-3 font-semibold">{company.name}</h4>
                 

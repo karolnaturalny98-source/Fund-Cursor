@@ -1,5 +1,8 @@
+/* stylelint-disable-next-line at-rule-no-unknown */
 @import 'tailwindcss';
 
+/* Tailwind CSS v4 at-rules - these are valid and should not trigger warnings */
+/* stylelint-disable at-rule-no-unknown */
 @custom-variant dark (&:is(.dark *));
 
 @utility container {
@@ -140,6 +143,14 @@
   box-shadow:
     0 42px 90px -32px hsl(var(--shadow-strong) / 0.42),
     0 20px 46px -24px hsl(var(--shadow-soft) / 0.34);
+}
+
+@utility bg-gradient-dark {
+  background: linear-gradient(135deg, #0f1726 0%, #1f2a3c 50%, #2446a6 100%);
+}
+
+@utility text-shadow-glow {
+  text-shadow: 0 0 20px hsl(150 70% 45% / 0.3), 0 0 40px hsl(150 70% 45% / 0.2);
 }
 
 @utility border-gradient {
@@ -305,7 +316,41 @@
 
 @layer utilities {
   :root {
-    /* neutralna ciemna baza */
+    /* light mode - jasna baza */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 9%;
+
+    /* neutralne powierzchnie */
+    --surface-glass: 0 0% 98%;
+    --surface-glass-soft: 0 0% 99%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    /* zielony brand */
+    --primary: 156 72% 44%;
+    --primary-foreground: 0 0% 98%;
+    --ring: 156 72% 44%;
+
+    --radius: 1.125rem;
+    --shadow-soft: 220 20% 85%;
+    --shadow-strong: 220 20% 75%;
+
+    --accent: 200 42% 32%;
+    --accent-foreground: 0 0% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+  }
+
+  :root[class~='dark'] {
+    /* dark mode - ciemna baza */
     --background: 220 20% 9%;
     --foreground: 220 35% 96%;
 
@@ -313,7 +358,11 @@
     --surface-glass: 220 10% 8%;
     --surface-glass-soft: 220 10% 10%;
     --card: 220 12% 11%;
+    --card-foreground: 220 35% 96%;
+    --popover: 220 12% 11%;
+    --popover-foreground: 220 35% 96%;
     --border: 220 12% 18%;
+    --input: 220 12% 18%;
     --muted: 220 10% 14%;
     --muted-foreground: 220 10% 70%;
 
@@ -333,17 +382,6 @@
     --destructive: 0 78% 58%;
     --destructive-foreground: 0 0% 98%;
   }
-
-  :root[class~='dark'] {
-    --background: 220 20% 8%;
-    --foreground: 220 35% 96%;
-    --surface-glass: 220 10% 7%;
-    --surface-glass-soft: 220 10% 9%;
-    --card: 220 12% 10%;
-    --border: 220 12% 18%;
-    --muted: 220 10% 13%;
-    --muted-foreground: 220 10% 68%;
-  }
 }
 
 @layer base {
@@ -352,11 +390,10 @@
   }
 
   body {
+    @apply min-h-screen bg-background text-foreground antialiased;
     background:
       radial-gradient(circle at 30% 10%, hsl(156 72% 14% / 0.2), hsl(220 20% 5%) 80%),
       hsl(var(--background));
-    color: hsl(var(--foreground));
-    @apply antialiased;
   }
 
   .page-shell {
@@ -365,15 +402,6 @@
 
   .section-shell {
     @apply mx-auto w-full max-w-7xl px-6 py-16 sm:px-10 lg:py-20;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
 

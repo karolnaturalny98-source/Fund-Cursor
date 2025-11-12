@@ -424,12 +424,7 @@ export default function UserPanelPage() {
   return (
     <div className="relative min-h-screen">
       {/* Gradient background */}
-      <div 
-        className="fixed inset-0 -z-10 h-[150vh]" 
-        style={{
-          background: 'linear-gradient(135deg, #0f1726 0%, #1f2a3c 50%, #2446a6 100%)',
-        }}
-      />
+      <div className="fixed inset-0 -z-10 h-[150vh] bg-gradient-dark" />
       <div className="container space-y-8 py-8 relative z-10">
       <Breadcrumb>
         <BreadcrumbList>

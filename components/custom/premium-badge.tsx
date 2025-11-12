@@ -17,6 +17,8 @@ const premiumBadgeVariants = cva(
         glow: "border-transparent bg-primary/15 text-primary glow-premium hover:bg-primary/20",
         shimmer:
           "border-transparent bg-linear-to-r from-primary/20 via-primary/10 to-primary/20 text-primary animate-shimmer bg-size-[200%_100%]",
+        "outline-solid":
+          "border-border/80 bg-transparent text-foreground/90 hover:border-border hover:text-foreground",
       },
     },
     defaultVariants: {

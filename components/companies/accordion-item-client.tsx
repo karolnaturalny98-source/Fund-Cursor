@@ -181,9 +181,9 @@ export function InstrumentGroupCard({ title, description, instruments }: Instrum
                           itemAnim ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                         }`}
                         style={{
-                          transitionDelay: `${index * 50}ms`,
-                          transitionDuration: "300ms",
-                        }}
+                          "--delay": `${index * 50}ms`,
+                        } as React.CSSProperties}
+                        className="transition-all duration-300 delay-[var(--delay)]"
                       >
                         <PremiumIcon icon={Check} variant="glow" size="sm" className="h-3 w-3 shrink-0 text-primary" />
                         <span className="flex-1 text-muted-foreground">{item}</span>

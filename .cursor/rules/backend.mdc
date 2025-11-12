@@ -23,8 +23,10 @@ alwaysApply: false
 
 
 ## Caching & Revalidate
-- **Tagged revalidation** (`revalidateTag`) — po mutacjach odśwież odpowiednie tagi.
+- **Tagged revalidation** — po mutacjach odśwież odpowiednie tagi.
+- Używaj helpera `revalidateTag` z `@/lib/cache` zamiast bezpośrednio z `next/cache` (workaround dla typów Next.js 16).
 - Cache selektywny (historia cen, rankingi).
+- Przykład tagów: `"companies"`, `"cashback-${clerkId}"`, `"admin-disputes"`, `"user-disputes-${userId}"`.
 
 ## Security
 - Sanitizacja wejść, limity payload, brak sekretów w logach.

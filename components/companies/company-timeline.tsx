@@ -63,8 +63,9 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       )}
       style={{
-        transitionDelay: `${index * 100}ms`,
-      }}
+        "--delay": `${index * 100}ms`,
+      } as React.CSSProperties}
+      className="transition-all delay-[var(--delay)]"
     >
       {/* Timeline dot with icon */}
       <div className="relative z-10 mb-4">

@@ -1,7 +1,10 @@
 ﻿import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+import type { NextRequest } from "next/server";
 import { z } from "zod";
+
+import { revalidateTag } from "@/lib/cache";
 
 import { assertAdminRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -93,8 +96,9 @@ export async function PATCH(request: Request, { params }: CashbackRouteProps) {
 
     try {
       revalidatePath("/admin");
-      if (transactionBeforeUpdate?.user?.clerkId) {
-        revalidateTag(`cashback-${transactionBeforeUpdate.user.clerkId}`);
+      const clerkId = transactionBeforeUpdate?.user?.clerkId;
+      if (clerkId) {
+        revalidateTag(`cashback-${String(clerkId)}`);
       }
     } catch (revalidateError) {
       console.warn("[admin/cashback] revalidate failed", revalidateError);
@@ -174,8 +178,9 @@ export async function DELETE(_request: Request, { params }: CashbackRouteProps) 
 
     try {
       revalidatePath("/admin");
-      if (transaction.user?.clerkId) {
-        revalidateTag(`cashback-${transaction.user.clerkId}`);
+      const clerkId = transaction.user?.clerkId;
+      if (clerkId) {
+        revalidateTag(`cashback-${String(clerkId)}`);
       }
     } catch (revalidateError) {
       console.warn("[admin/cashback] revalidate failed", revalidateError);

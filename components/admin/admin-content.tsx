@@ -34,8 +34,8 @@ export function AdminContent({ children }: AdminContentProps) {
 
   return (
     <main
-      className="flex-1 flex flex-col overflow-hidden transition-all duration-300 bg-transparent"
-      style={{ paddingLeft }}
+      className="flex-1 flex flex-col overflow-hidden transition-all duration-300 bg-transparent pl-[var(--padding-left)]"
+      style={{ "--padding-left": paddingLeft } as React.CSSProperties}
     >
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
         <div className="container space-y-8 py-6 sm:py-8 lg:py-10 lg:px-8">

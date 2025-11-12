@@ -161,8 +161,8 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
                             <div key={idx} className="flex items-center justify-between gap-4">
                               <div className="flex items-center gap-2">
                                 <div
-                                  className="h-2 w-2 rounded-full"
-                                  style={{ backgroundColor: item.color }}
+                                  className="h-2 w-2 rounded-full bg-[var(--bg-color)]"
+                                  style={{ "--bg-color": item.color } as React.CSSProperties}
                                 />
                                 <span className="text-sm text-muted-foreground">{item.name}</span>
                               </div>

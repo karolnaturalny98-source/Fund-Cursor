@@ -62,7 +62,8 @@ export function KnowledgeGrid() {
             className={`group relative overflow-hidden rounded-3xl border border-border/60 transition-all hover:border-primary/50 hover:shadow-md ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 100}ms`, transitionDuration: "700ms" }}
+            style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-foreground">

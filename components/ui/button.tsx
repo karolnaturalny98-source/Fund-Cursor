@@ -20,6 +20,8 @@ const buttonVariants = cva(
           "border border-border/60 bg-card/60 text-foreground/90 backdrop-blur-xs hover:bg-card/80 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
         outline:
           "border border-border/70 bg-transparent text-foreground/90 hover:bg-card/40 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+        "outline-solid":
+          "border border-border/80 bg-transparent text-foreground hover:bg-card/50 hover:border-border hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
         ghost:
           "text-muted-foreground hover:text-foreground hover:bg-card/30 focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
         destructive:

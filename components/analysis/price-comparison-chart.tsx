@@ -94,8 +94,8 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
           {priceStats.map((stat, idx) => (
             <div
               key={stat.name}
-              className="rounded-lg border border-border/60 bg-background/60 backdrop-blur-[36px]! p-4"
-              style={{ borderLeftWidth: "4px", borderLeftColor: getCompareColor(idx) }}
+              className="rounded-lg border border-border/60 bg-background/60 backdrop-blur-[36px]! p-4 border-l-4 border-[var(--border-color)]"
+              style={{ "--border-color": getCompareColor(idx) } as React.CSSProperties}
             >
               <h4 className="mb-2 font-semibold">{stat.name}</h4>
               <div className="space-y-1 text-sm">
@@ -144,8 +144,8 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
                             <div key={idx} className="flex items-center justify-between gap-4">
                               <div className="flex items-center gap-2">
                                 <div
-                                  className="h-2 w-2 rounded-full"
-                                  style={{ backgroundColor: item.color }}
+                                  className="h-2 w-2 rounded-full bg-[var(--bg-color)]"
+                                  style={{ "--bg-color": item.color } as React.CSSProperties}
                                 />
                                 <span className="text-sm text-muted-foreground">{item.name}</span>
                               </div>

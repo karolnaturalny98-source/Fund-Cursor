@@ -325,7 +325,8 @@ export function CompaniesPageClient({
                     className={`transition-all duration-700 ${
                       visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                     }`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
+                    style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+                    className="transition-all delay-[var(--delay)]"
                   >
                     <CompanyCard company={company} />
                   </div>

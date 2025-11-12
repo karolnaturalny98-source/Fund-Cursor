@@ -1,7 +1,9 @@
 import type { Prisma } from "@prisma/client";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+
+import { revalidateTag } from "@/lib/cache";
 import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from "@/lib/cache";
 
 import {
   DEFAULT_CURRENCY,

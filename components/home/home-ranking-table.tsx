@@ -42,6 +42,7 @@ function CompanyAvatar({
           alt={name}
           width={44}
           height={44}
+          sizes="44px"
           priority={priority}
           className="h-11 w-11 rounded-2xl border border-border/60 bg-background/60 object-contain shadow-xs"
         />

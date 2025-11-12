@@ -341,7 +341,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
             </PopoverContent>
           </Popover>
 
-          <Button variant="outline" onClick={clearFilters} size="icon">
+          <Button variant="outline" onClick={clearFilters} size="icon" aria-label="Wyczyść filtry">
             <X className="h-4 w-4" />
           </Button>
         </div>

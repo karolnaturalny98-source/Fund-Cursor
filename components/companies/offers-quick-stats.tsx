@@ -130,8 +130,9 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
                 : "opacity-0 translate-y-4"
             }`}
             style={{
-              transitionDelay: visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
-            }}
+              "--delay": visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
+            } as React.CSSProperties}
+            className="transition-all delay-[var(--delay)]"
           >
             <CardHeader className="space-y-2 pb-2">
               <div className="flex items-center gap-2">

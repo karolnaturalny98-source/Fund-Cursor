@@ -30,7 +30,7 @@ const STATUS_LABELS: Record<string, string> = {
 const STATUS_BADGE: Record<string, string> = {
   DRAFT: "bg-amber-100 text-amber-800",
   PUBLISHED: "bg-emerald-100 text-emerald-800",
-  ARCHIVED: "bg-gray-100 text-gray-800",
+  ARCHIVED: "bg-muted text-muted-foreground",
 };
 
 export function BlogPostsPanel({ initialPosts }: BlogPostsPanelProps) {

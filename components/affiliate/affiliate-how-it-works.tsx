@@ -61,7 +61,8 @@ export function AffiliateHowItWorks() {
             className={`transition-all duration-700 ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 100}ms` }}
+            style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+            className="transition-all delay-[var(--delay)]"
           >
           <Card 
             className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"

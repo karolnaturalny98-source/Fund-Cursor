@@ -90,7 +90,8 @@ export function TeamSection() {
             className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md hover:scale-[1.02] ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 100}ms`, transitionDuration: "700ms" }}
+            style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardHeader className="flex flex-row items-start gap-4 pb-4">
               <Avatar className="h-16 w-16 border-2 border-primary/30">

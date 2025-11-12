@@ -2,7 +2,9 @@ import { randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+
+import { revalidateTag } from "@/lib/cache";
 
 import { assertAdminRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -121,7 +123,7 @@ export async function POST(request: Request) {
   try {
     revalidatePath("/admin");
     if (userRecord.clerkId) {
-      revalidateTag(`cashback-${userRecord.clerkId}`);
+      revalidateTag(`cashback-${String(userRecord.clerkId)}`);
     }
   } catch (error) {
     console.warn("[admin-cashback] Failed to revalidate cache", error);

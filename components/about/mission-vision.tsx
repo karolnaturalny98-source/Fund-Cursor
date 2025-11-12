@@ -32,7 +32,8 @@ export function MissionVision() {
             className={`border border-border/60 bg-card/72 backdrop-blur-[36px]! transition-all hover:border-primary/50 hover:shadow-md ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 150}ms`, transitionDuration: "700ms" }}
+            style={{ "--delay": `${index * 150}ms` } as React.CSSProperties}
+            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardHeader>
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary mb-4">

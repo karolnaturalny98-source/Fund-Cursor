@@ -267,10 +267,10 @@ const ChartLegendContent = React.forwardRef<
               ) : (
                 !hideIcon && (
                   <div
-                    className="h-2 w-2 shrink-0 rounded-[2px]"
+                    className="h-2 w-2 shrink-0 rounded-[2px] bg-[var(--bg-color)]"
                     style={{
-                      backgroundColor: item.color,
-                    }}
+                      "--bg-color": item.color,
+                    } as React.CSSProperties}
                   />
                 )
               )}

@@ -383,8 +383,9 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                   : "opacity-0 translate-y-4"
               }
               style={{
-                transitionDelay: visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
-              }}
+                "--delay": visibleStaggerItems[index] ? `${index * 100}ms` : "0ms",
+              } as React.CSSProperties}
+              className="transition-all delay-[var(--delay)]"
             >
               <Card
                 data-testid="review-card"

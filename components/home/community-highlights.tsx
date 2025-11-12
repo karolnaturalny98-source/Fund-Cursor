@@ -59,7 +59,8 @@ export function CommunityHighlights({ reviews }: { reviews: ReviewHighlight[] })
             className={`group relative overflow-hidden transition-all hover:border-primary/50 hover:shadow-glass ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 100}ms`, transitionDuration: "700ms" }}
+            style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
+            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <Quote className="absolute -right-6 -top-6 h-20 w-20 text-primary/20" />
             <CardHeader className="space-y-4 pb-0">

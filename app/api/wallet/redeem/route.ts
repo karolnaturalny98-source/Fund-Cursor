@@ -1,7 +1,9 @@
 import { randomUUID } from "node:crypto";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+
+import { revalidateTag } from "@/lib/cache";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 

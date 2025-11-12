@@ -41,7 +41,13 @@ import { AnnouncementCard } from "@/components/companies/announcements-tab-clien
 import { PayoutCalendar } from "@/components/companies/payout-calendar";
 import { PayoutsQuickStats } from "@/components/companies/payouts-quick-stats";
 import { PayoutsTable } from "@/components/companies/payouts-table";
-import { PayoutsCharts } from "@/components/companies/payouts-charts";
+import dynamic from "next/dynamic";
+import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
+
+const PayoutsCharts = dynamic(
+  () => import("@/components/companies/payouts-charts").then((mod) => ({ default: mod.PayoutsCharts })),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
 import { PayoutsTimeline } from "@/components/companies/payouts-timeline";
 import { PayoutsComparison } from "@/components/companies/payouts-comparison";
 import { CompanyMedia } from "@/components/companies/company-media";

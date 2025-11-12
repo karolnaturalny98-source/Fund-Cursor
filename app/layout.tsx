@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { UserPanel } from "@/components/panels/user-panel";
 import { UserPanelProvider } from "@/components/panels/user-panel-context";
 import { CurrencyProvider } from "@/app/providers/currency-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
@@ -39,21 +40,28 @@ export default function RootLayout({
       afterSignInUrl="/admin"
       afterSignUpUrl="/admin"
     >
-      <html lang="pl" className="dark" suppressHydrationWarning>
+      <html lang="pl" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} bg-background font-sans text-foreground antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
         >
-          <CurrencyProvider>
-            <UserPanelProvider>
-              <div className="flex min-h-screen flex-col">
-                <SiteHeader />
-                <main className="flex-1">{children}</main>
-                <SiteFooter />
-              </div>
-              <UserPanel />
-              <Toaster />
-            </UserPanelProvider>
-          </CurrencyProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <CurrencyProvider>
+              <UserPanelProvider>
+                <div className="flex min-h-screen flex-col">
+                  <SiteHeader />
+                  <main className="flex-1">{children}</main>
+                  <SiteFooter />
+                </div>
+                <UserPanel />
+                <Toaster />
+              </UserPanelProvider>
+            </CurrencyProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from "@/lib/cache";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 

@@ -122,12 +122,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
           <div className="relative flex flex-col items-center justify-center h-16 md:h-20 rounded-lg bg-linear-to-br from-primary/20 via-primary/10 to-transparent border border-primary/30 shadow-lg overflow-hidden">
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-50" />
             <div className="relative z-10 text-center">
-              <div 
-                className="text-4xl md:text-5xl font-black text-primary leading-none"
-                style={{
-                  textShadow: "0 0 20px hsl(150 70% 45% / 0.3), 0 0 40px hsl(150 70% 45% / 0.2)"
-                }}
-              >
+              <div className="text-4xl md:text-5xl font-black text-primary leading-none text-shadow-glow">
                 {spotlight.discountValue}%
               </div>
               <span className="text-[10px] md:text-xs font-semibold text-muted-foreground uppercase tracking-wider">

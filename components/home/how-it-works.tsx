@@ -55,7 +55,8 @@ export function HowItWorksSection() {
             className={`border border-border/60 transition-all hover:border-primary/50 hover:shadow-md ${
               visibleStaggerItems[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
-            style={{ transitionDelay: `${index * 150}ms`, transitionDuration: "700ms" }}
+            style={{ "--delay": `${index * 150}ms` } as React.CSSProperties}
+            className="transition-all duration-700 delay-[var(--delay)]"
           >
             <CardContent className="flex h-full flex-col gap-4 p-6">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-primary transition-all hover:bg-white/15">
