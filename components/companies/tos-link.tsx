@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+
 interface TosLinkProps {
   href: string;
   companySlug: string;
@@ -28,14 +30,14 @@ export function TosLink({ href, companySlug, children }: TosLinkProps) {
   }
 
   return (
-    <a
-      className="inline-flex items-center text-xs font-medium text-primary hover:underline"
-      href={href}
-      onClick={handleClick}
-      rel="noreferrer"
-      target="_blank"
+    <Button
+      asChild
+      variant="link"
+      className="inline-flex items-center text-xs font-medium text-primary h-auto p-0"
     >
-      {children}
-    </a>
+      <a href={href} onClick={handleClick} rel="noreferrer" target="_blank">
+        {children}
+      </a>
+    </Button>
   );
 }

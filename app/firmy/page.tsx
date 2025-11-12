@@ -65,9 +65,9 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
       {/* Aurora background */}
       <div className="fixed inset-0 -z-10 h-[150vh]">
         <AuroraWrapper
-          colorStops={["#1e5a3d", "#34d399", "#a7f3d0"]}
-          blend={0.5}
-          amplitude={1.0}
+          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
+          blend={0.35}
+          amplitude={0.7}
           speed={0.5}
         />
       </div>

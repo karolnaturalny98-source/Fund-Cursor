@@ -439,7 +439,7 @@
     @apply min-h-screen bg-background text-foreground antialiased;
     background: hsl(var(--background)); /* fallback */
     background:
-      radial-gradient(circle at 30% 10%, hsl(156 72% 14% / 0.2), hsl(220 20% 5%) 80%),
+      radial-gradient(circle at 30% 10%, hsl(156 72% 44% / 0.25), hsl(252 94% 67% / 0.18) 50%, hsl(217 91% 60% / 0.12) 80%),
       hsl(var(--background));
   }
 

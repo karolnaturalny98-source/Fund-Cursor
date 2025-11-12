@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { ExternalLink, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { cn } from "@/lib/utils";
 
 interface SocialLink {
   key: string;
@@ -23,27 +25,37 @@ export function SocialLinksClient({ socialLinks, tosUrl }: SocialLinksClientProp
   return (
     <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
       {socialLinks.map((entry) => (
-        <Link
+        <Button
           key={entry.key}
-          href={entry.url}
-          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
-          target="_blank"
-          rel="noreferrer"
+          asChild
+          variant="outline"
+          size="sm"
+          className={cn(
+            "rounded-full border-border/60 bg-background/60 backdrop-blur-[36px]!",
+            "hover:border-primary/50 hover:shadow-xs"
+          )}
         >
-          <PremiumIcon icon={ExternalLink} variant="glow" size="sm" />
-          {entry.label}
-        </Link>
+          <Link href={entry.url} target="_blank" rel="noreferrer">
+            <PremiumIcon icon={ExternalLink} variant="glow" size="sm" />
+            {entry.label}
+          </Link>
+        </Button>
       ))}
       {tosUrl ? (
-        <Link
-          href={tosUrl}
-          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-[36px]! px-3 py-1 transition-all duration-200 hover:border-primary/50 hover:shadow-xs"
-          target="_blank"
-          rel="noreferrer"
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className={cn(
+            "rounded-full border-border/60 bg-background/60 backdrop-blur-[36px]!",
+            "hover:border-primary/50 hover:shadow-xs"
+          )}
         >
-          <PremiumIcon icon={BookOpen} variant="glow" size="sm" />
-          Regulamin / ToS
-        </Link>
+          <Link href={tosUrl} target="_blank" rel="noreferrer">
+            <PremiumIcon icon={BookOpen} variant="glow" size="sm" />
+            Regulamin / ToS
+          </Link>
+        </Button>
       ) : null}
     </div>
   );

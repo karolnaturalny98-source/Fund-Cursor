@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Accordion } from "@/components/ui/accordion";
 import { FaqItem } from "@/components/companies/faq-item";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { Search } from "lucide-react";
@@ -32,6 +33,7 @@ const FAQ_CATEGORIES: FaqCategory[] = [
 export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
   const [active, setActive] = useState<string>("all");
   const [query, setQuery] = useState("");
+  const [openedFaqs, setOpenedFaqs] = useState<Set<string>>(new Set());
 
   const categorizedFaqs = useMemo(() => {
     const groups: Record<string, typeof faqs> = {
@@ -120,13 +122,47 @@ export function CompanyFaqTabs({ faqs, companySlug }: CompanyFaqTabsProps) {
       </div>
 
       {filteredFaqs.length ? (
-        <div className="space-y-3">
+        <Accordion
+          type="single"
+          collapsible
+          className="space-y-3"
+          onValueChange={(value) => {
+            if (value && !openedFaqs.has(value)) {
+              const faq = filteredFaqs.find((f) => f.id === value);
+              if (faq) {
+                const payload = JSON.stringify({
+                  companySlug,
+                  source: "faq_expand",
+                  faqId: faq.id,
+                });
+                if (navigator.sendBeacon) {
+                  navigator.sendBeacon("/api/clicks", payload);
+                } else {
+                  fetch("/api/clicks", {
+                    method: "POST",
+                    body: payload,
+                    headers: { "Content-Type": "application/json" },
+                    keepalive: true,
+                  }).catch(() => {
+                    // best effort telemetry
+                  });
+                }
+                setOpenedFaqs((prev) => new Set([...prev, value]));
+              }
+            }
+          }}
+        >
           {filteredFaqs.map((faq) => (
-            <div key={faq.id} data-testid="faq-item">
-              <FaqItem id={faq.id} question={faq.question} answer={faq.answer} companySlug={companySlug} />
-            </div>
+            <FaqItem
+              key={faq.id}
+              id={faq.id}
+              question={faq.question}
+              answer={faq.answer}
+              companySlug={companySlug}
+              value={faq.id}
+            />
           ))}
-        </div>
+        </Accordion>
       ) : (
         <div className="rounded-2xl border border-dashed border-border/60 p-6 text-sm text-muted-foreground shadow-xs bg-card/72">
           Brak wynikow dla wybranej kategorii i zapytania.
