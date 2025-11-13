@@ -172,7 +172,7 @@ export function ReviewsRankingPage({ initialData }: ReviewsRankingPageProps) {
   }, [data]);
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-[clamp(1.5rem,2.3vw,2.1rem)]">
       <FiltersPanel
         filters={filters}
         searchDraft={searchDraft}
@@ -182,26 +182,32 @@ export function ReviewsRankingPage({ initialData }: ReviewsRankingPageProps) {
         loading={loading}
       />
 
-      <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+      <div className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] text-muted-foreground fluid-caption">
         <PremiumBadge variant="glow" className="border-primary/30 bg-primary/10 text-primary">
-          Wyswietlane firmy: {displaySummary.visibleCompanies.toLocaleString("pl-PL")}
+          Wyswietlane firmy:{" "}
+          {displaySummary.visibleCompanies.toLocaleString("pl-PL")}
         </PremiumBadge>
-        <PremiumBadge variant="outline" className="border-primary/30 bg-secondary/20 text-secondary-foreground">
-          Opinie w widoku: {displaySummary.visibleReviews.toLocaleString("pl-PL")}
+        <PremiumBadge
+          variant="outline"
+          className="border-primary/30 bg-secondary/20 text-secondary-foreground"
+        >
+          Opinie w widoku:{" "}
+          {displaySummary.visibleReviews.toLocaleString("pl-PL")}
         </PremiumBadge>
-        <span className="flex items-center gap-1">
-          <Filter className="h-3.5 w-3.5" />
-          Aktualizacja w oparciu o {displaySummary.newReviews.toLocaleString("pl-PL")} nowych opinii.
+        <span className="flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <Filter className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
+          Aktualizacja w oparciu o{" "}
+          {displaySummary.newReviews.toLocaleString("pl-PL")} nowych opinii.
         </span>
       </div>
 
       {error ? (
-        <div className="rounded-3xl border border-destructive/40 bg-destructive/10 px-5 py-3 text-sm text-destructive">
+        <div className="rounded-3xl border border-destructive/40 bg-destructive/10 px-[clamp(1.25rem,1.8vw,1.6rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] fluid-caption text-destructive">
           {error}
         </div>
       ) : null}
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-[clamp(0.85rem,1.3vw,1.2rem)]">
         {data.items.length > 0 && (
           <ReviewsExportButton items={data.items} />
         )}
@@ -308,15 +314,15 @@ function FiltersPanel({
 
   return (
     <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-      <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-2 text-base font-semibold">
-          <Filter className="h-5 w-5 text-primary" />
+      <CardHeader className="pb-[clamp(0.85rem,1.2vw,1.1rem)]">
+        <CardTitle className="flex items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] text-[clamp(1rem,0.45vw+0.9rem,1.15rem)] font-semibold text-foreground">
+          <Filter className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
           Filtry i sortowanie
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="mb-4 flex flex-wrap items-center gap-1.5">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+      <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
+        <div className="mb-[clamp(0.75rem,1.1vw,1rem)] flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
+          <span className="text-[clamp(0.65rem,0.3vw+0.55rem,0.78rem)] uppercase tracking-[0.28em] text-muted-foreground/70">
             Szybkie filtry:
           </span>
           <Button
@@ -324,7 +330,7 @@ function FiltersPanel({
             variant="ghost"
             size="sm"
             onClick={() => applyQuickFilter("top10")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="h-[clamp(2.2rem,1.6vw+1.8rem,2.6rem)] rounded-full px-[clamp(0.75rem,1.1vw,1rem)] text-[clamp(0.78rem,0.33vw+0.68rem,0.88rem)] font-medium"
           >
             Top 10 ocen
           </Button>
@@ -333,7 +339,7 @@ function FiltersPanel({
             variant="ghost"
             size="sm"
             onClick={() => applyQuickFilter("most-reviews")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="h-[clamp(2.2rem,1.6vw+1.8rem,2.6rem)] rounded-full px-[clamp(0.75rem,1.1vw,1rem)] text-[clamp(0.78rem,0.33vw+0.68rem,0.88rem)] font-medium"
           >
             Najwięcej opinii
           </Button>
@@ -342,7 +348,7 @@ function FiltersPanel({
             variant="ghost"
             size="sm"
             onClick={() => applyQuickFilter("recent")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="h-[clamp(2.2rem,1.6vw+1.8rem,2.6rem)] rounded-full px-[clamp(0.75rem,1.1vw,1rem)] text-[clamp(0.78rem,0.33vw+0.68rem,0.88rem)] font-medium"
           >
             Najnowsze
           </Button>
@@ -351,7 +357,7 @@ function FiltersPanel({
             variant="ghost"
             size="sm"
             onClick={() => applyQuickFilter("most-popular")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="h-[clamp(2.2rem,1.6vw+1.8rem,2.6rem)] rounded-full px-[clamp(0.75rem,1.1vw,1rem)] text-[clamp(0.78rem,0.33vw+0.68rem,0.88rem)] font-medium"
           >
             Najpopularniejsze
           </Button>
@@ -361,32 +367,32 @@ function FiltersPanel({
           onSubmit={(event) => event.preventDefault()}
         >
           {/* Search and Filters Row */}
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-1 items-center gap-2">
+          <div className="flex flex-col gap-[clamp(0.85rem,1.2vw,1.1rem)] lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex flex-1 items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] -translate-y-1/2 text-muted-foreground" />
                 <Input
                   placeholder="Szukaj firmy po nazwie lub slugu..."
                   value={searchDraft}
                   onChange={(event) => onSearchChange(event.target.value)}
-                  className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)] shadow-xs focus-visible:ring-2 focus-visible:ring-primary/40"
                   aria-label="Szukaj firmy"
                 />
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
               {hasActiveFilters && (
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={resetFilters}
-                  className="rounded-full"
+                  className="fluid-button-sm rounded-full"
                 >
                   Wyczysc filtry
                 </Button>
               )}
-              <label className="flex items-center gap-2 text-xs text-muted-foreground">
+              <label className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] text-muted-foreground fluid-caption">
                 Min. opinii
                 <Input
                   type="number"
@@ -394,11 +400,11 @@ function FiltersPanel({
                   inputMode="numeric"
                   value={filters.minReviews}
                   onChange={(event) => handleMinReviewsChange(event.target.value)}
-                  className="h-9 w-20 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! text-center text-xs shadow-xs"
+                  className="h-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] w-[clamp(4.5rem,7vw,5.5rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! text-center text-[clamp(0.78rem,0.33vw+0.68rem,0.88rem)] shadow-xs"
                   aria-label="Minimalna liczba opinii"
                 />
               </label>
-              <label className="flex cursor-pointer items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground">
+              <label className="flex cursor-pointer items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-[clamp(0.85rem,1.3vw,1.15rem)] py-[clamp(0.55rem,0.8vw,0.75rem)] text-muted-foreground fluid-caption transition-colors hover:border-primary/50 hover:text-foreground">
                 <Checkbox
                   checked={filters.onlyRecent}
                   onCheckedChange={(checked) =>
@@ -411,13 +417,13 @@ function FiltersPanel({
           </div>
 
           {/* Sort Row */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
             <Select
               value={filters.sortBy}
               onValueChange={(value) => handleSortChange(value as SortBy)}
             >
-              <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-                <ArrowUpDown className="mr-2 h-4 w-4" />
+              <SelectTrigger className="w-[clamp(10rem,16vw,12rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] shadow-xs focus-visible:ring-2 focus-visible:ring-primary/40">
+                <ArrowUpDown className="mr-[clamp(0.4rem,0.6vw,0.55rem)] h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -432,20 +438,25 @@ function FiltersPanel({
               variant="outline"
               size="sm"
               onClick={toggleSortDirection}
-              className="rounded-full"
+              className="fluid-button-sm rounded-full"
             >
-              <ArrowUpDown className="mr-1.5 h-3.5 w-3.5" />
+              <ArrowUpDown className="mr-[clamp(0.35rem,0.55vw,0.5rem)] h-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)] w-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)]" />
               {filters.sortDirection === "desc" ? "Malejaco" : "Rosnaco"}
             </Button>
             <Button
               type="button"
               variant="outline"
               size="sm"
-              className="rounded-full"
+              className="fluid-button-sm rounded-full"
               onClick={() => onFiltersChange((prev) => ({ ...prev }))}
               disabled={loading}
             >
-              <RefreshCcw className={cn("mr-1.5 h-3.5 w-3.5", loading ? "animate-spin" : undefined)} />
+              <RefreshCcw
+                className={cn(
+                  "mr-[clamp(0.35rem,0.55vw,0.5rem)] h-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)] w-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)]",
+                  loading ? "animate-spin" : undefined,
+                )}
+              />
               Odswiez
             </Button>
           </div>

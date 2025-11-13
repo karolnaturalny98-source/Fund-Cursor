@@ -64,57 +64,63 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
   }, [companies]);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold">Statystyki Opinii</h2>
-        <p className="text-sm text-muted-foreground">
+    <div className="space-y-[clamp(1.5rem,2.2vw,2.25rem)]">
+      <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+        <h2 className="fluid-h2 font-bold">Statystyki Opinii</h2>
+        <p className="fluid-copy text-muted-foreground">
           Szczegółowa analiza recenzji użytkowników
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-3">
         {summaryStats.map((stat, _idx) => (
           <Card key={stat.companyId} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base">{stat.companyName}</CardTitle>
+            <CardHeader className="pb-[clamp(0.75rem,1.1vw,1rem)]">
+              <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+                {stat.companyName}
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MessageSquare className="h-4 w-4" />
+            <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
+              <div className="flex items-center justify-between gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+                <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                  <MessageSquare className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Opinie
                 </div>
-                <span className="text-lg font-bold">{stat.totalReviews}</span>
+                <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-foreground">
+                  {stat.totalReviews}
+                </span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Star className="h-4 w-4" />
+              <div className="flex items-center justify-between gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+                <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                  <Star className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Średnia
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-lg font-bold">{stat.averageRating.toFixed(1)}</span>
-                  <span className="text-yellow-500">⭐</span>
+                <div className="flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)]">
+                  <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-foreground">
+                    {stat.averageRating.toFixed(1)}
+                  </span>
+                  <span className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] text-yellow-500">⭐</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <ShieldCheck className="h-4 w-4" />
+              <div className="flex items-center justify-between gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+                <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                  <ShieldCheck className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Zweryfikowane
                 </div>
-                <Badge variant="secondary">
+                <Badge variant="secondary" className="fluid-badge font-semibold">
                   {stat.verifiedCount}
                 </Badge>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <ThumbsUp className="h-4 w-4" />
+              <div className="flex items-center justify-between gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+                <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                  <ThumbsUp className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Rekomendacje
                 </div>
-                <span className="text-lg font-bold text-primary">
+                <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-primary">
                   {stat.recommendationRate.toFixed(0)}%
                 </span>
               </div>
@@ -126,8 +132,10 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
       {/* Rating Distribution Chart */}
       <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
-          <CardTitle>Rozkład Ocen</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+            Rozkład Ocen
+          </CardTitle>
+          <CardDescription className="fluid-caption">
             Liczba opinii według oceny gwiazdkowej
           </CardDescription>
         </CardHeader>
@@ -141,11 +149,11 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
                   angle={-45}
                   textAnchor="end"
                   height={100}
-                  className="text-xs text-muted-foreground"
+                  className="fluid-caption text-muted-foreground"
                   tick={{ fill: "hsl(var(--muted-foreground))" }}
                 />
                 <YAxis
-                  className="text-xs text-muted-foreground"
+                  className="fluid-caption text-muted-foreground"
                   tick={{ fill: "hsl(var(--muted-foreground))" }}
                   label={{ value: "Liczba opinii", angle: -90, position: "insideLeft" }}
                 />

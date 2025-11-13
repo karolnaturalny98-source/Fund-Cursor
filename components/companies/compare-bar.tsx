@@ -19,27 +19,27 @@ export function CompareBar() {
   return (
     <div className="fixed bottom-6 left-1/2 z-40 w-full max-w-xl -translate-x-1/2 px-4 sm:px-0">
       <Card className="glass-panel shadow-premium">
-        <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1 text-sm text-muted-foreground">
+        <CardContent className="flex flex-col gap-[clamp(0.85rem,1.2vw,1.2rem)] p-[clamp(1.15rem,1.6vw,1.5rem)] sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-copy">
             <p className="font-semibold text-foreground">
               Wybrane do porownania ({selection.length}/{maxItems})
             </p>
             <p>{selection.join(" | ")}</p>
             {hasEnoughItems ? (
-              <p className="text-xs text-muted-foreground">
+              <p className="fluid-caption text-muted-foreground">
                 Udostepnij link: <span className="font-medium text-foreground">{compareUrl}</span>
               </p>
             ) : (
-              <p className="text-xs">
+              <p className="fluid-caption">
                 Wybierz co najmniej dwie firmy, aby otworzyc widok porownania.
               </p>
             )}
           </div>
-          <div className="flex gap-2">
-            <Button variant="ghost" size="sm" onClick={clear}>
+          <div className="flex gap-[clamp(0.65rem,1vw,1rem)]">
+            <Button variant="ghost" size="sm" className="fluid-button-sm rounded-full" onClick={clear}>
               Wyczysc
             </Button>
-            <Button asChild disabled={!hasEnoughItems} size="sm">
+            <Button asChild disabled={!hasEnoughItems} size="sm" className="fluid-button-sm rounded-full">
               <Link href={hasEnoughItems ? compareUrl : "#"}>Porownaj</Link>
             </Button>
           </div>

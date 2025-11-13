@@ -94,40 +94,42 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
   }, [companies]);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold">Analiza Sentymentu</h2>
-        <p className="text-sm text-muted-foreground">
+    <div className="space-y-[clamp(1.5rem,2.2vw,2.25rem)]">
+      <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+        <h2 className="fluid-h2 font-bold">Analiza Sentymentu</h2>
+        <p className="fluid-copy text-muted-foreground">
           Najczęściej wymieniane zalety i wady w opiniach użytkowników
         </p>
       </div>
 
       {/* Sentiment Overview */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-3">
         {sentimentData.map((data) => (
           <Card key={data.companyId} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardHeader>
-              <CardTitle className="text-base">{data.companyName}</CardTitle>
-              <CardDescription>
+            <CardHeader className="pb-[clamp(0.75rem,1.1vw,1rem)]">
+              <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+                {data.companyName}
+              </CardTitle>
+              <CardDescription className="fluid-caption">
                 {data.totalReviews} {data.totalReviews === 1 ? "opinia" : "opinii"}
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Wskaźnik sentymentu</span>
-                  <span className="font-semibold">{data.sentimentScore.toFixed(0)}%</span>
+            <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
+              <div className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+                <div className="flex items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                  <span>Wskaźnik sentymentu</span>
+                  <span className="font-semibold text-foreground">{data.sentimentScore.toFixed(0)}%</span>
                 </div>
-                <Progress value={data.sentimentScore} className="h-2" />
+                <Progress value={data.sentimentScore} className="h-[clamp(0.35rem,0.5vw,0.45rem)]" />
               </div>
 
-              <div className="flex justify-between text-sm">
-                <div className="flex items-center gap-1 text-green-600">
-                  <ThumbsUp className="h-4 w-4" />
+              <div className="flex justify-between text-[clamp(0.9rem,0.4vw+0.8rem,1rem)]">
+                <div className="flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)] text-green-600">
+                  <ThumbsUp className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   <span>{data.positiveCount}</span>
                 </div>
-                <div className="flex items-center gap-1 text-red-600">
-                  <ThumbsDown className="h-4 w-4" />
+                <div className="flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)] text-red-600">
+                  <ThumbsDown className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   <span>{data.negativeCount}</span>
                 </div>
               </div>
@@ -139,52 +141,54 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
       {/* Detailed Pros and Cons */}
       {sentimentData.map((data) => (
         <Card key={`detail-${data.companyId}`} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-          <CardHeader>
-            <CardTitle className="text-lg">{data.companyName}</CardTitle>
+          <CardHeader className="pb-[clamp(0.75rem,1.1vw,1rem)]">
+            <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+              {data.companyName}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-[clamp(1rem,1.6vw,1.5rem)] md:grid-cols-2">
               {/* Pros */}
-              <div className="space-y-3">
-                <h4 className="flex items-center gap-2 font-semibold text-green-600">
-                  <ThumbsUp className="h-4 w-4" />
+              <div className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+                <h4 className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-green-600">
+                  <ThumbsUp className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Top Zalety
                 </h4>
                 {data.topPros.length > 0 ? (
-                  <ul className="space-y-2">
+                  <ul className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
                     {data.topPros.map((pro, idx) => (
-                      <li key={idx} className="flex items-start justify-between gap-2">
-                        <span className="text-sm">{pro.text}</span>
-                        <Badge variant="secondary" className="shrink-0">
+                      <li key={idx} className="flex items-start justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                        <span className="fluid-copy">{pro.text}</span>
+                        <Badge variant="secondary" className="shrink-0 fluid-badge font-semibold">
                           {pro.count}
                         </Badge>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-sm text-muted-foreground">Brak danych</p>
+                  <p className="fluid-copy text-muted-foreground">Brak danych</p>
                 )}
               </div>
 
               {/* Cons */}
-              <div className="space-y-3">
-                <h4 className="flex items-center gap-2 font-semibold text-red-600">
-                  <ThumbsDown className="h-4 w-4" />
+              <div className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+                <h4 className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-red-600">
+                  <ThumbsDown className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Top Wady
                 </h4>
                 {data.topCons.length > 0 ? (
-                  <ul className="space-y-2">
+                  <ul className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
                     {data.topCons.map((con, idx) => (
-                      <li key={idx} className="flex items-start justify-between gap-2">
-                        <span className="text-sm">{con.text}</span>
-                        <Badge variant="secondary" className="shrink-0">
+                      <li key={idx} className="flex items-start justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                        <span className="fluid-copy">{con.text}</span>
+                        <Badge variant="secondary" className="shrink-0 fluid-badge font-semibold">
                           {con.count}
                         </Badge>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-sm text-muted-foreground">Brak danych</p>
+                  <p className="fluid-copy text-muted-foreground">Brak danych</p>
                 )}
               </div>
             </div>
@@ -193,36 +197,38 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
       ))}
 
       {/* Recent Reviews */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-[clamp(1rem,1.6vw,1.5rem)] md:grid-cols-2 lg:grid-cols-3">
         {recentHighlights.map((company) => (
           <Card key={`recent-${company.companyId}`} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardHeader>
-              <CardTitle className="text-base">{company.companyName}</CardTitle>
-              <CardDescription>Ostatnie opinie</CardDescription>
+            <CardHeader className="pb-[clamp(0.75rem,1.1vw,1rem)]">
+              <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+                {company.companyName}
+              </CardTitle>
+              <CardDescription className="fluid-caption">Ostatnie opinie</CardDescription>
             </CardHeader>
             <CardContent>
               {company.recentReviews.length > 0 ? (
-                <div className="space-y-3">
+                <div className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
                   {company.recentReviews.map((review, idx) => (
-                    <div key={idx} className="space-y-1 border-b pb-2 last:border-0">
-                      <div className="flex items-center gap-1">
-                        {Array.from({ length: review.rating }).map((_, i) => (
-                          <Star key={i} className="h-3 w-3 fill-yellow-500 text-yellow-500" />
+                    <div key={idx} className="space-y-[clamp(0.35rem,0.5vw,0.45rem)] border-b pb-[clamp(0.65rem,1vw,0.9rem)] last:border-0">
+                      <div className="flex items-center gap-[clamp(0.25rem,0.4vw,0.35rem)] text-yellow-500">
+                        {Array.from({ length: Math.round(review.rating) }).map((_, i) => (
+                          <Star key={i} className="h-[clamp(0.8rem,0.3vw+0.7rem,0.95rem)] w-[clamp(0.8rem,0.3vw+0.7rem,0.95rem)] fill-yellow-500" />
                         ))}
                       </div>
                       {review.body && (
-                        <p className="line-clamp-2 text-xs text-muted-foreground">
+                        <p className="line-clamp-2 text-muted-foreground fluid-caption">
                           {review.body}
                         </p>
                       )}
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground/70 fluid-caption">
                         {new Date(review.publishedAt).toLocaleDateString("pl-PL")}
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">Brak ostatnich opinii</p>
+                <p className="fluid-copy text-muted-foreground">Brak ostatnich opinii</p>
               )}
             </CardContent>
           </Card>

@@ -84,16 +84,16 @@ export function OverviewHeroSection({
   }, [company.rating, company.cashbackRate]);
 
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
+    <div className="grid gap-[clamp(1rem,1.5vw,1.5rem)] lg:grid-cols-3">
       {/* Kolumna 1: Wykres compact + statystyki */}
       <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
         <CardHeader className="pb-3">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            <CardTitle className="text-lg font-semibold">Popularność</CardTitle>
+          <div className="flex items-center gap-[clamp(0.65rem,0.9vw,0.85rem)]">
+            <TrendingUp className="h-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] text-primary" />
+            <CardTitle className="text-[clamp(1.05rem,0.5vw+0.95rem,1.25rem)] font-semibold">Popularność</CardTitle>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-[clamp(1rem,1.5vw,1.4rem)]">
           {compactChartData ? (
             <div className="h-48 w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -150,7 +150,7 @@ export function OverviewHeroSection({
             </div>
           ) : (
             <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-border/40 bg-muted/20">
-              <p className="text-xs text-muted-foreground">Brak danych</p>
+              <p className="fluid-caption text-muted-foreground">Brak danych</p>
             </div>
           )}
 
@@ -159,12 +159,14 @@ export function OverviewHeroSection({
               {quickStats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 rounded-lg border border-border/40 bg-muted/20 px-3 py-2"
+                  className="flex items-center gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-lg border border-border/40 bg-muted/20 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.6rem,0.9vw,0.85rem)]"
                 >
                   {stat.icon}
                   <div className="flex-1">
-                    <p className="text-xs text-muted-foreground">{stat.label}</p>
-                    <p className="text-sm font-semibold text-foreground">{stat.value}</p>
+                    <p className="fluid-caption text-muted-foreground">{stat.label}</p>
+                    <p className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground">
+                      {stat.value}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -177,20 +179,20 @@ export function OverviewHeroSection({
       {alerts.length > 0 ? (
         <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
           <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-amber-500" />
-              <CardTitle className="text-lg font-semibold">Alerty ryzyka</CardTitle>
+            <div className="flex items-center gap-[clamp(0.65rem,0.9vw,0.85rem)]">
+              <AlertTriangle className="h-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] text-amber-500" />
+              <CardTitle className="text-[clamp(1.05rem,0.5vw+0.95rem,1.25rem)] font-semibold">Alerty ryzyka</CardTitle>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="fluid-caption text-muted-foreground">
               Ważne informacje do rozważenia
             </p>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-[clamp(0.85rem,1.1vw,1.05rem)]">
             {alerts.slice(0, 2).map((alert) => (
               <RiskAlertCard key={alert.id} alert={alert} />
             ))}
             {alerts.length > 2 && (
-              <p className="text-xs text-muted-foreground text-center">
+              <p className="fluid-caption text-center text-muted-foreground">
                 +{alerts.length - 2} więcej alertów poniżej
               </p>
             )}
@@ -201,8 +203,8 @@ export function OverviewHeroSection({
           <CardContent className="flex h-full items-center justify-center py-8">
             <div className="text-center">
               <PremiumIcon icon={Shield} variant="glow" size="lg" className="mx-auto mb-2 text-primary" />
-              <p className="text-sm font-medium text-foreground">Brak alertów</p>
-              <p className="text-xs text-muted-foreground">Firma nie ma znanych ostrzeżeń</p>
+              <p className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-medium text-foreground">Brak alertów</p>
+              <p className="fluid-caption text-muted-foreground">Firma nie ma znanych ostrzeżeń</p>
             </div>
           </CardContent>
         </Card>
@@ -211,16 +213,16 @@ export function OverviewHeroSection({
       {/* Kolumna 3: Quick actions */}
       <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg font-semibold">Szybkie linki</CardTitle>
-          <p className="text-xs text-muted-foreground">
+          <CardTitle className="text-[clamp(1.05rem,0.5vw+0.95rem,1.25rem)] font-semibold">Szybkie linki</CardTitle>
+          <p className="fluid-caption text-muted-foreground">
             Przejdź do innych sekcji
           </p>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
           <Button
             asChild
             variant="premium-outline"
-            className="w-full justify-start gap-2 rounded-full"
+            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full fluid-button"
           >
             <Link href={`#challenges`}>
               <PremiumIcon icon={Layers} variant="glow" size="sm" />
@@ -230,7 +232,7 @@ export function OverviewHeroSection({
           <Button
             asChild
             variant="premium-outline"
-            className="w-full justify-start gap-2 rounded-full"
+            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full fluid-button"
           >
             <Link href={`#reviews`}>
               <PremiumIcon icon={MessageSquare} variant="glow" size="sm" />
@@ -240,12 +242,12 @@ export function OverviewHeroSection({
           <Button
             asChild
             variant="premium"
-            className="w-full justify-start gap-2 rounded-full shadow-premium"
+            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full shadow-premium fluid-button"
           >
             <Link href={`#offers`}>
               <PremiumIcon icon={ShoppingCart} variant="glow" size="sm" />
               Oferty
-              <ArrowRight className="ml-auto h-4 w-4" />
+              <ArrowRight className="ml-auto h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
             </Link>
           </Button>
         </CardContent>

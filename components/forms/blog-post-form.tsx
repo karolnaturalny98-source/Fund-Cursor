@@ -24,8 +24,39 @@ import dynamic from "next/dynamic";
 import { generateSlug } from "@/lib/utils/blog";
 
 const RichTextEditor = dynamic(
-  () => import("@/components/editor/rich-text-editor").then((mod) => ({ default: mod.RichTextEditor })),
-  { ssr: false, loading: () => <div className="h-[300px] animate-pulse rounded-lg bg-muted" /> }
+  () =>
+    import("@/components/editor/rich-text-editor")
+      .then((mod) => ({ default: mod.RichTextEditor }))
+      .catch((error) => {
+        console.error("Failed to load RichTextEditor:", error);
+        // Return a fallback component
+        return {
+          default: function RichTextEditorFallback({
+            content,
+            onChange,
+          }: {
+            content: string;
+            onChange: (content: string) => void;
+          }) {
+            return (
+              <div className="h-[300px] rounded-lg border border-border bg-background p-4">
+                <p className="text-sm text-muted-foreground">
+                  Nie można załadować edytora. Odśwież stronę lub użyj zwykłego pola tekstowego.
+                </p>
+                <textarea
+                  className="mt-2 h-full w-full rounded border border-border bg-background p-2"
+                  value={content}
+                  onChange={(e) => onChange(e.target.value)}
+                />
+              </div>
+            );
+          },
+        };
+      }),
+  {
+    ssr: false,
+    loading: () => <div className="h-[300px] animate-pulse rounded-lg bg-muted" />,
+  }
 );
 import type { BlogCategory } from "@/lib/types";
 

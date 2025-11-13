@@ -54,30 +54,49 @@ export function RankingsPageClient({
 
   return (
     <>
-      <div ref={heroAnim.ref} className={`flex flex-col gap-4 ${heroAnim.className}`}>
+      <div ref={heroAnim.ref} className={`flex flex-col gap-[clamp(1rem,1.5vw,1.5rem)] ${heroAnim.className}`}>
         <div ref={badgeAnim.ref} className={badgeAnim.className}>
-          <Badge variant="outline" className="w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wide">
+          <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-wide">
             Rankingi
           </Badge>
         </div>
-        <div className="max-w-3xl space-y-3">
-          <h1 ref={titleAnim.ref} className={`text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl ${titleAnim.className}`}>
+        <div className="max-w-3xl space-y-[clamp(0.75rem,1vw,1rem)]">
+          <h1
+            ref={titleAnim.ref}
+            className={`fluid-h1 font-bold tracking-tight text-foreground ${titleAnim.className}`}
+          >
             Kompletny ranking prop firm FundedRank
           </h1>
-          <p ref={descriptionAnim.ref} className={`text-sm text-muted-foreground sm:text-base ${descriptionAnim.className}`}>
+          <p
+            ref={descriptionAnim.ref}
+            className={`fluid-copy text-muted-foreground ${descriptionAnim.className}`}
+          >
             Porownaj firmy z perspektywy warunkow handlowych, satysfakcji z
             wyplat, aktywnosci spolecznosci, cashbacku oraz dynamiki
             wzrostu. Jeden widok - wiele rankingow.
           </p>
         </div>
-        <div ref={buttonsAnim.ref} className={`flex flex-wrap items-center gap-3 ${buttonsAnim.className}`}>
-          <Button asChild variant="primary" className="group rounded-full px-6 transition-transform duration-300 hover:scale-105" size="lg">
+        <div
+          ref={buttonsAnim.ref}
+          className={`flex flex-wrap items-center gap-[clamp(0.75rem,1vw,1rem)] ${buttonsAnim.className}`}
+        >
+          <Button
+            asChild
+            variant="primary"
+            className="group rounded-full transition-transform duration-300 hover:scale-105 fluid-button"
+            size="lg"
+          >
             <Link href="/firmy" prefetch={false} className="flex items-center">
               Przejdz do listy firm
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-[clamp(1rem,0.45vw+0.9rem,1.1rem)] w-[clamp(1rem,0.45vw+0.9rem,1.1rem)] transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </Button>
-          <Button asChild variant="premium-outline" className="rounded-full px-6 transition-transform duration-300 hover:scale-105" size="lg">
+          <Button
+            asChild
+            variant="premium-outline"
+            className="rounded-full transition-transform duration-300 hover:scale-105 fluid-button"
+            size="lg"
+          >
             <Link href="/opinie" prefetch={false}>
               Zobacz opinie spolecznosci
             </Link>
@@ -213,20 +232,20 @@ function StatCard({
   isVisible?: boolean;
 }) {
   return (
-    <Card className={`group relative overflow-hidden rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-2.5 shadow-xs transition-all duration-300 hover:border-border/60 hover:bg-card/66 hover:scale-[1.02] hover:-translate-y-0.5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-      <div className="flex items-center gap-1.5">
-        <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground/70 transition-colors group-hover:text-primary" />
-        <div className="flex flex-col min-w-0 flex-1 gap-0.5">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">{title}:</span>
-            <span className="text-xs font-semibold text-foreground">
+    <Card
+      className={`group relative overflow-hidden rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! p-[clamp(0.65rem,1vw,0.9rem)] shadow-xs transition-all duration-300 hover:border-border/60 hover:bg-card/66 hover:scale-[1.02] hover:-translate-y-0.5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+    >
+      <div className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)]">
+        <Icon className="h-[clamp(0.75rem,0.4vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.4vw+0.6rem,0.9rem)] shrink-0 text-muted-foreground/70 transition-colors group-hover:text-primary" />
+        <div className="flex min-w-0 flex-1 flex-col gap-[clamp(0.35rem,0.6vw,0.55rem)]">
+          <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+            <span className="fluid-caption font-medium text-muted-foreground whitespace-nowrap">{title}:</span>
+            <span className="fluid-caption font-semibold text-foreground">
               {value}
-              {emphasis && <span className="text-muted-foreground/80 font-normal"> {emphasis}</span>}
+              {emphasis && <span className="font-normal text-muted-foreground/80"> {emphasis}</span>}
             </span>
           </div>
-          {subtitle && (
-            <p className="text-[10px] text-muted-foreground/60 leading-tight ml-0">{subtitle}</p>
-          )}
+          {subtitle ? <p className="text-[clamp(0.6rem,0.28vw+0.55rem,0.75rem)] text-muted-foreground/60 leading-tight">{subtitle}</p> : null}
         </div>
       </div>
     </Card>
@@ -250,31 +269,31 @@ export function RankingsMethodologyClient({
 
   return (
     <>
-      <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors hover:bg-primary/20">
-            <BarChart3 className="h-4 w-4" />
+      <div className="space-y-[clamp(1.5rem,2.4vw,2.75rem)]">
+        <div className="flex items-center gap-[clamp(0.85rem,1.2vw,1.25rem)]">
+          <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)] text-primary transition-colors hover:bg-primary/20">
+            <BarChart3 className="h-[clamp(1rem,0.45vw+0.9rem,1.2rem)] w-[clamp(1rem,0.45vw+0.9rem,1.2rem)]" />
           </div>
-          <h2 className="text-2xl font-semibold text-foreground">
+          <h2 className="fluid-h2 font-semibold text-foreground">
             Metodologia rankingu
           </h2>
         </div>
-        <p className="max-w-3xl text-sm text-muted-foreground">
+        <p className="fluid-copy max-w-3xl text-muted-foreground">
           FundedRank scala recenzje spolecznosci, parametry planow oraz
           sygnaly cashback i klikniec partnerskich. Aktualizujemy dataset
           kazdej nocy, aby ranking reagowal na zmiany reputacji i aktywnosci
           firm. Punkty normalizujemy wzgledem liderow, zeby mniejsze marki
           mogly pokazac swoje mocne strony.
         </p>
-        <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[clamp(1.1rem,1.6vw,1.6rem)] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
             <CardHeader className="space-y-2 pb-3">
-              <CardTitle className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <CardTitle className="fluid-eyebrow text-muted-foreground">
                 Zrodla danych
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
-              <p className="text-sm font-semibold text-foreground">
+              <p className="fluid-copy font-semibold text-foreground">
                 {numberFormatter.format(totalCompanies)} firm,{" "}
                 {numberFormatter.format(totalReviews)} opinii,{" "}
                 {numberFormatter.format(uniqueCountries)} krajow
@@ -311,20 +330,20 @@ export function RankingsMethodologyClient({
         </div>
       </div>
 
-      <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors hover:bg-primary/20">
-            <Info className="h-4 w-4" />
+      <div className="space-y-[clamp(1.5rem,2.4vw,2.75rem)]">
+        <div className="flex items-center gap-[clamp(0.85rem,1.2vw,1.25rem)]">
+          <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)] text-primary transition-colors hover:bg-primary/20">
+            <Info className="h-[clamp(1rem,0.45vw+0.9rem,1.2rem)] w-[clamp(1rem,0.45vw+0.9rem,1.2rem)]" />
           </div>
-          <h3 className="text-2xl font-semibold text-foreground">FAQ</h3>
+          <h3 className="fluid-h2 font-semibold text-foreground">FAQ</h3>
         </div>
-        <Accordion type="single" collapsible className="grid gap-4 md:grid-cols-2">
+        <Accordion type="single" collapsible className="grid gap-[clamp(1rem,1.5vw,1.5rem)] md:grid-cols-2">
           <AccordionItem value="faq-1" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
-            <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
+            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
               Jak czesto odswiezacie dane?
             </AccordionTrigger>
             <AccordionContent className="pt-2">
-              <p className="text-sm text-muted-foreground">
+              <p className="fluid-copy text-muted-foreground">
                 Recenzje i klikniecia aktualizujemy co noc. Transakcje
                 cashback i raporty wyplat spinamy w tygodniowe batchowanie.
                 Ostatnia data generacji widnieje w badge &quot;Dane odswiezone&quot;
@@ -333,11 +352,11 @@ export function RankingsMethodologyClient({
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="faq-2" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
-            <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
+            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
               Co robi filtr &quot;Min. opinii&quot;?
             </AccordionTrigger>
             <AccordionContent className="pt-2">
-              <p className="text-sm text-muted-foreground">
+              <p className="fluid-copy text-muted-foreground">
                 Pozwala ograniczyc wynik do firm z co najmniej zadana liczba
                 recenzji. Dzieki temu latwiej porownac stabilne marki, gdy
                 zalezy Ci na duzej probie opinii.
@@ -345,11 +364,11 @@ export function RankingsMethodologyClient({
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="faq-3" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs md:col-span-2">
-            <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
+            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
               Czy planujecie dodatkowe filtry?
             </AccordionTrigger>
             <AccordionContent className="pt-2">
-              <p className="text-sm text-muted-foreground">
+              <p className="fluid-copy text-muted-foreground">
                 Na roadmapie mamy filtry dla wsparcia jezykowego,
                 ograniczen geograficznych oraz maksymalnego profitu.
                 Mozesz zglaszac swoje potrzeby przez formularz feedbacku na

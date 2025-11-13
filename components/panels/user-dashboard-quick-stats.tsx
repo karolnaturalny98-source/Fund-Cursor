@@ -10,9 +10,9 @@ interface UserDashboardQuickStatsProps {
   recentTransactionsCount?: number;
 }
 
-export function UserDashboardQuickStats({ 
+export function UserDashboardQuickStats({
   summary,
-  recentTransactionsCount = 0 
+  recentTransactionsCount = 0,
 }: UserDashboardQuickStatsProps) {
   const sectionAnim = useFadeIn({ rootMargin: "-50px" });
 
@@ -68,14 +68,17 @@ export function UserDashboardQuickStats({
   ];
 
   return (
-    <section ref={sectionAnim.ref} className={`space-y-4 ${sectionAnim.className}`}>
-      <div className="space-y-1.5">
-        <h2 className="text-lg font-semibold sm:text-xl">Kluczowe metryki</h2>
-        <p className="text-xs text-muted-foreground">
+    <section
+      ref={sectionAnim.ref}
+      className={`space-y-[clamp(1rem,1.8vw,1.6rem)] ${sectionAnim.className}`}
+    >
+      <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+        <h2 className="fluid-h2 font-semibold text-foreground">Kluczowe metryki</h2>
+        <p className="fluid-caption text-muted-foreground">
           Szybki przegląd Twoich punktów cashback.
         </p>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-[clamp(0.85rem,1.2vw,1.1rem)] sm:grid-cols-2 lg:grid-cols-3">
         {stats.map((stat, _index) => (
           <MetricCard
             key={stat.title}

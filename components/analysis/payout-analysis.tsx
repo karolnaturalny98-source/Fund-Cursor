@@ -113,67 +113,71 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
   }, [profitSplitChartData, resolveColorByName]);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold">Analiza Wypłat</h2>
-        <p className="text-sm text-muted-foreground">
+    <div className="space-y-[clamp(1.5rem,2.2vw,2.25rem)]">
+      <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+        <h2 className="fluid-h2 font-bold">Analiza Wypłat</h2>
+        <p className="fluid-copy text-muted-foreground">
           Szczegółowe porównanie warunków wypłat i podziału zysków
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-3">
         {payoutData.map((data, idx) => (
           <Card
             key={data.companyId}
             className="border-l-4 bg-card/82 border-[var(--border-color)]"
             style={{ "--border-color": getCompareColor(idx) } as React.CSSProperties}
           >
-            <CardHeader>
-              <CardTitle className="text-base">{data.companyName}</CardTitle>
+            <CardHeader className="pb-[clamp(0.75rem,1.1vw,1rem)]">
+              <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+                {data.companyName}
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
               {data.payoutFrequency && (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
+                <div className="flex items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                  <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                    <Calendar className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                     Częstotliwość
                   </div>
-                  <Badge variant="secondary">{data.payoutFrequency}</Badge>
+                  <Badge variant="secondary" className="fluid-badge font-semibold">
+                    {data.payoutFrequency}
+                  </Badge>
                 </div>
               )}
 
               {data.minFirstPayoutDays !== null && (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <TrendingUp className="h-4 w-4" />
+                <div className="flex items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                  <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                    <TrendingUp className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                     Pierwsza wypłata
                   </div>
-                  <span className="text-lg font-bold">
+                  <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-foreground">
                     {data.minFirstPayoutDays} dni
                   </span>
                 </div>
               )}
 
               {data.avgCycleDays !== null && (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
+                <div className="flex items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                  <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                    <Calendar className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                     Cykl wypłat
                   </div>
-                  <span className="text-lg font-bold">
+                  <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-foreground">
                     {data.avgCycleDays.toFixed(0)} dni
                   </span>
                 </div>
               )}
 
               {data.bestProfitSplit !== null && (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Percent className="h-4 w-4" />
+                <div className="flex items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+                  <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
+                    <Percent className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                     Najlepszy podział
                   </div>
-                  <span className="text-lg font-bold text-primary">
+                  <span className="text-[clamp(1.1rem,0.5vw+1rem,1.35rem)] font-bold text-primary">
                     {data.bestProfitSplit}%
                   </span>
                 </div>
@@ -185,10 +189,12 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
 
       {/* First Payout Comparison Chart */}
       {firstPayoutChartData.length > 0 && (
-        <Card>
+        <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
-            <CardTitle>Czas do Pierwszej Wypłaty</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+              Czas do Pierwszej Wypłaty
+            </CardTitle>
+            <CardDescription className="fluid-caption">
               Średnia liczba dni do pierwszej wypłaty dla każdej firmy
             </CardDescription>
           </CardHeader>
@@ -202,11 +208,11 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
                     angle={-45}
                     textAnchor="end"
                     height={100}
-                    className="text-xs text-muted-foreground"
+                    className="fluid-caption text-muted-foreground"
                     tick={{ fill: "hsl(var(--muted-foreground))" }}
                   />
                   <YAxis
-                    className="text-xs text-muted-foreground"
+                    className="fluid-caption text-muted-foreground"
                     tick={{ fill: "hsl(var(--muted-foreground))" }}
                     label={{ value: "Dni", angle: -90, position: "insideLeft" }}
                   />
@@ -240,10 +246,12 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
 
       {/* Profit Split Comparison */}
       {profitSplitChartData.length > 0 && (
-        <Card>
+        <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
           <CardHeader>
-            <CardTitle>Porównanie Podziału Zysku</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+              Porównanie Podziału Zysku
+            </CardTitle>
+            <CardDescription className="fluid-caption">
               Średni procent podziału zysku dla tradera
             </CardDescription>
           </CardHeader>
@@ -257,11 +265,11 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
                     angle={-45}
                     textAnchor="end"
                     height={100}
-                    className="text-xs text-muted-foreground"
+                    className="fluid-caption text-muted-foreground"
                     tick={{ fill: "hsl(var(--muted-foreground))" }}
                   />
                   <YAxis
-                    className="text-xs text-muted-foreground"
+                    className="fluid-caption text-muted-foreground"
                     tick={{ fill: "hsl(var(--muted-foreground))" }}
                     label={{ value: "Procent (%)", angle: -90, position: "insideLeft" }}
                     domain={[0, 100]}
@@ -295,20 +303,24 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
       )}
 
       {/* Plan-by-Plan Breakdown */}
-      <Card>
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
-          <CardTitle>Szczegółowy Podział Według Planów</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.2rem)] font-semibold text-foreground">
+            Szczegółowy Podział Według Planów
+          </CardTitle>
+          <CardDescription className="fluid-caption">
             Warunki wypłat dla poszczególnych planów
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-[clamp(1rem,1.6vw,1.5rem)]">
             {payoutData.map((data, _idx) => (
-              <div key={data.companyId} className="space-y-3">
-                <h4 className="font-semibold">{data.companyName}</h4>
+              <div key={data.companyId} className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+                <h4 className="text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)] font-semibold text-foreground">
+                  {data.companyName}
+                </h4>
                 <div className="overflow-x-auto">
-                  <table className="data-table">
+                  <table className="data-table text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)]">
                     <thead>
                       <tr>
                         <th>Plan</th>
@@ -320,14 +332,14 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
                     <tbody>
                       {data.plans.map((plan, planIdx) => (
                         <tr key={planIdx}>
-                          <td>{plan.name}</td>
-                          <td className="font-semibold">
+                          <td className="font-medium text-foreground">{plan.name}</td>
+                          <td className="font-semibold text-foreground">
                             {plan.profitSplit || "-"}
                           </td>
-                          <td>
+                          <td className="text-muted-foreground">
                             {plan.firstPayoutDays ? `${plan.firstPayoutDays} dni` : "-"}
                           </td>
-                          <td>
+                          <td className="text-muted-foreground">
                             {plan.cycleDays ? `${plan.cycleDays} dni` : "-"}
                           </td>
                         </tr>

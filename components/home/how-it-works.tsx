@@ -34,21 +34,25 @@ export function HowItWorksSection() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(steps.length).fill(false);
 
   return (
-    <section ref={sectionVisible.ref} id="jak-to-dziala" className="container space-y-6 bg-muted/10 py-10 rounded-3xl">
-      <div ref={sectionAnim.ref} className={`space-y-3 ${sectionAnim.className}`}>
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+    <section
+      ref={sectionVisible.ref}
+      id="jak-to-dziala"
+      className="container space-y-[clamp(1.5rem,2.4vw,2.75rem)] rounded-3xl bg-muted/10 py-[clamp(2.5rem,3vw,3.5rem)]"
+    >
+      <div ref={sectionAnim.ref} className={`space-y-[clamp(0.85rem,1.4vw,1.35rem)] ${sectionAnim.className}`}>
+        <p className="fluid-eyebrow text-primary">
           Jak to działa
         </p>
-        <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+        <h2 className="fluid-h2 font-semibold text-foreground">
           Cashback, który zamienisz na kolejne konto tradingowe
         </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
+        <p className="fluid-copy max-w-3xl text-muted-foreground">
           FundedRank łączy rankingi firm z przejrzystym systemem cashback.
           Punkty są równoważne dolarom, a proces wymiany trwa tyle, co złożenie
           prostego wniosku.
         </p>
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-[clamp(1rem,1.6vw,1.75rem)] md:grid-cols-3">
         {steps.map((step, index) => (
           <Card
             key={step.title}
@@ -57,16 +61,18 @@ export function HowItWorksSection() {
             }`}
             style={{ "--delay": `${index * 150}ms` } as React.CSSProperties}
           >
-            <CardContent className="flex h-full flex-col gap-4 p-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-primary transition-all hover:bg-white/15">
+            <CardContent className="flex h-full flex-col gap-[clamp(1rem,1.4vw,1.5rem)] p-[clamp(1.25rem,2vw,1.75rem)]">
+              <div className="flex h-[clamp(2.5rem,2.4vw+2rem,3.25rem)] w-[clamp(2.5rem,2.4vw+2rem,3.25rem)] items-center justify-center rounded-full bg-white/10 text-primary transition-all hover:bg-white/15">
                 <PremiumIcon icon={step.icon} variant="glow" size="lg" hoverGlow />
               </div>
-              <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <div className="space-y-[clamp(0.5rem,0.8vw,0.75rem)]">
+                <p className="fluid-eyebrow text-muted-foreground">
                   Krok {index + 1}
                 </p>
-                <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
+                <h3 className="text-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] font-semibold text-foreground">
+                  {step.title}
+                </h3>
+                <p className="fluid-copy text-muted-foreground">{step.description}</p>
               </div>
             </CardContent>
           </Card>

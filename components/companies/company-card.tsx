@@ -31,44 +31,44 @@ export const CompanyCard = memo(function CompanyCard({ company }: CompanyCardPro
     : null;
 
   return (
-    <Card className={cn(
-      "group flex h-full flex-col justify-between overflow-hidden",
-      isTopRated 
-        ? "border-primary/50 hover:border-primary/70 hover:shadow-lg" 
-        : "hover:border-primary/50 hover:shadow-md"
-    )}>
-      <CardContent className="flex h-full flex-col justify-between space-y-5 p-6">
-        <div className="space-y-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-2">
-            <div className="flex items-center gap-3">
-              <h3 className="text-lg font-semibold text-foreground">
+    <Card
+      className={cn(
+        "group flex h-full flex-col justify-between overflow-hidden transition-colors",
+        isTopRated ? "border-primary/50 hover:border-primary/70 hover:shadow-lg" : "hover:border-primary/50 hover:shadow-md",
+      )}
+    >
+      <CardContent className="flex h-full flex-col justify-between space-y-[clamp(1.25rem,1.8vw,1.75rem)] p-[clamp(1.5rem,2vw,1.85rem)]">
+        <div className="space-y-[clamp(1.25rem,1.8vw,1.75rem)]">
+          <div className="flex items-start justify-between gap-[clamp(1rem,1.4vw,1.35rem)]">
+            <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+              <div className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,0.9rem)]">
+                <h3 className="text-[clamp(1.1rem,0.6vw+0.95rem,1.35rem)] font-semibold text-foreground">
                 {company.name}
               </h3>
-              {isTopRated && (
-                <Award className="h-5 w-5 text-amber-500" />
-              )}
+                {isTopRated ? (
+                  <Award className="h-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] text-amber-500" />
+                ) : null}
               {company.discountCode ? (
-                <PremiumBadge variant="gradient" className="px-3 py-1">
+                  <PremiumBadge variant="gradient" className="fluid-badge font-semibold uppercase tracking-wide">
                   {company.discountCode}
                 </PremiumBadge>
               ) : null}
             </div>
-            <p className="text-sm text-muted-foreground line-clamp-2">
+              <p className="fluid-copy text-muted-foreground line-clamp-2">
               {company.shortDescription ?? "Aktualne dane o planach fundingowych."}
             </p>
-            <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground/80">
+              <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground/80 fluid-caption uppercase tracking-[0.18em]">
               {company.country ? <span>{company.country}</span> : null}
               {company.foundedYear ? <span>Od {company.foundedYear}</span> : null}
               {company.payoutFrequency ? <span>{company.payoutFrequency}</span> : null}
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <PremiumBadge variant="glow" className="gap-2 px-3 py-1">
+            <div className="flex flex-col items-end gap-[clamp(0.65rem,1vw,0.9rem)]">
+              <PremiumBadge variant="glow" className="fluid-badge gap-[clamp(0.5rem,0.8vw,0.7rem)] font-semibold">
               <PremiumIcon icon={Star} variant="glow" size="sm" hoverGlow />
               {hasRating ? company.rating?.toFixed(1) : "Nowość"}
             </PremiumBadge>
-            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)]">
               <FavoriteButton
                 companyId={company.id}
                 companySlug={company.slug}
@@ -76,21 +76,22 @@ export const CompanyCard = memo(function CompanyCard({ company }: CompanyCardPro
                 size="icon"
               />
               <CompareToggle slug={company.slug} size="icon" />
+              </div>
             </div>
           </div>
         </div>
 
         {primaryPlan ? (
-          <div className="space-y-3 rounded-2xl border border-primary/20 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+          <div className="space-y-[clamp(0.75rem,1.2vw,1.1rem)] rounded-2xl border border-primary/20 bg-primary/5 p-[clamp(1rem,1.5vw,1.3rem)]">
+            <p className="fluid-caption font-semibold uppercase tracking-[0.3em] text-primary">
               Najpopularniejszy plan
             </p>
-            <div className="flex items-end justify-between gap-4">
-              <div className="space-y-1">
-                <p className="text-sm font-semibold text-foreground">
+            <div className="flex items-end justify-between gap-[clamp(1rem,1.4vw,1.35rem)]">
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.6rem)]">
+                <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
                   {primaryPlan.name}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="fluid-caption text-muted-foreground">
                   {primaryPlan.evaluationModel === "instant-funding"
                     ? "Instant funding"
                     : primaryPlan.evaluationModel === "one-step"
@@ -98,16 +99,16 @@ export const CompanyCard = memo(function CompanyCard({ company }: CompanyCardPro
                       : "Dwuetapowe"}
                 </p>
               </div>
-              <div className="text-right text-sm">
-                <p className="text-xs uppercase text-muted-foreground">Cena</p>
-                <p className="text-lg font-semibold text-primary">
+              <div className="text-right fluid-caption text-muted-foreground">
+                <p className="uppercase tracking-[0.18em]">Cena</p>
+                <p className="text-[clamp(1.15rem,0.6vw+1rem,1.4rem)] font-semibold text-primary">
                   {convertedPrice !== null
                     ? formatCurrencyLocalized(convertedPrice, currency)
                     : `${primaryPlan.price.toLocaleString("pl-PL")}`}
                 </p>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+            <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
               {company.cashbackRate ? (
                 <PremiumBadge variant="glow" className="rounded-full border-primary/30">
                   Cashback {company.cashbackRate}%
@@ -126,19 +127,18 @@ export const CompanyCard = memo(function CompanyCard({ company }: CompanyCardPro
             </div>
           </div>
         ) : null}
-      </div>
 
-      <div className="mt-6 flex flex-col gap-3 pt-4">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground/80">
+        <div className="mt-[clamp(1.25rem,1.8vw,1.75rem)] flex flex-col gap-[clamp(0.75rem,1.2vw,1.1rem)] pt-[clamp(0.85rem,1.2vw,1.1rem)]">
+          <div className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)] text-muted-foreground/80 fluid-caption uppercase tracking-[0.3em]">
           <PremiumIcon icon={ArrowUpRight} variant="gradient" size="default" hoverGlow />
           Szczegóły & cashback
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button asChild variant="premium" className="flex-1 rounded-full">
+          <div className="flex flex-col gap-[clamp(0.75rem,1.2vw,1.1rem)] sm:flex-row sm:items-center">
+            <Button asChild variant="premium" className="flex-1 rounded-full fluid-button">
             <Link href={`/firmy/${company.slug}`}>Profil firmy</Link>
           </Button>
           <PurchaseButton
-            className="flex-1 rounded-full"
+              className="flex-1 rounded-full fluid-button"
             companySlug={company.slug}
             href={company.websiteUrl ?? `https://www.google.com/search?q=${encodeURIComponent(company.name)}`}
             variant="premium-outline"

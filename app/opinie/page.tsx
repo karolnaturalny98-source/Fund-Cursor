@@ -31,7 +31,7 @@ export default async function OpiniePage() {
         />
       </div>
       <section className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col gap-10 py-16">
+        <div className="container relative z-10 flex flex-col gap-[clamp(1.5rem,2.2vw,2.1rem)] py-[clamp(2.5rem,3.5vw,3.25rem)]">
           <OpiniePageClient
             totalReviews={summary.totalReviews}
             newReviews30d={summary.newReviews30d}
@@ -40,13 +40,13 @@ export default async function OpiniePage() {
         </div>
       </section>
 
-      <section className="w-full space-y-12 px-4 py-12 sm:px-6 lg:px-10 xl:px-16">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold text-foreground">
+      <section className="w-full space-y-[clamp(1.75rem,2.5vw,2.4rem)] px-[clamp(1rem,3vw,2.5rem)] py-[clamp(2.5rem,3.5vw,3.25rem)]">
+        <div className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.3vw,1.2rem)]">
+          <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+            <h2 className="fluid-h2 font-semibold text-foreground">
               Ranking opinii spolecznosci
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="fluid-copy text-muted-foreground max-w-2xl">
               Dane odswiezamy automatycznie, a uzytkownicy z rola admin moga
               moderowac recenzje z poziomu panelu.
             </p>

@@ -25,29 +25,29 @@ export function WalletSection({
   );
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-      <CardHeader>
-        <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+      <CardHeader className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+        <CardTitle className="text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
           SALDO PUNKTÓW
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <div className="divide-y divide-border/40">
+        <div className="divide-y divide-border/45">
           {items.map((item, _index) => (
             <div
               key={item.label}
               className={cn(
-                "flex items-center justify-between px-6 py-4 transition-all hover:bg-muted/20",
+                "flex items-center justify-between px-[clamp(1.4rem,2vw,1.8rem)] py-[clamp(0.9rem,1.3vw,1.15rem)] transition-all hover:bg-muted/15",
                 item.highlight && "bg-primary/5",
               )}
             >
               <div className="flex flex-col">
-                <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                <span className="fluid-caption uppercase tracking-[0.28em] text-muted-foreground">
                   {item.label}
                 </span>
                 <span
                   className={cn(
-                    "mt-1 text-2xl font-semibold",
+                    "mt-[clamp(0.25rem,0.4vw,0.35rem)] text-[clamp(1.45rem,0.75vw+1.25rem,1.85rem)] font-semibold",
                     item.value < 0
                       ? "text-destructive"
                       : item.highlight
@@ -59,7 +59,7 @@ export function WalletSection({
                 </span>
               </div>
               {item.highlight && (
-                <div className="ml-4 h-2 w-2 rounded-full bg-primary" />
+                <div className="ml-[clamp(0.75rem,1.1vw,1rem)] h-[clamp(0.65rem,0.9vw,0.85rem)] w-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full bg-primary shadow-glass" />
               )}
             </div>
           ))}

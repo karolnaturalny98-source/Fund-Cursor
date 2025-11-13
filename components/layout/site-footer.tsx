@@ -76,8 +76,8 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border/40 bg-card/72 backdrop-blur-md">
-      <div className="w-full px-6 py-12">
-        <div className="mx-auto max-w-7xl">
+      <div className="w-full px-2 md:px-4 xl:px-0 py-12">
+        <div className="mx-auto max-w-screen-xl">
         {/* Górna sekcja - Logo + Newsletter */}
         <div className="grid gap-8 lg:grid-cols-2 pb-8 border-b border-border/40">
           {/* Logo i opis */}

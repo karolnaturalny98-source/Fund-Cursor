@@ -160,127 +160,151 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
   const statusClass = profile ? INFLUENCER_STATUS_STYLES[profile.status] : "bg-muted text-muted-foreground";
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
+    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="influencer-program" className="border-none">
-          <AccordionTrigger className="px-6 py-4 hover:no-underline">
-            <div className="flex flex-1 items-center justify-between pr-4">
-              <div className="flex flex-col items-start gap-1">
-                <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          <AccordionTrigger className="px-[clamp(1.4rem,2vw,1.8rem)] py-[clamp(1rem,1.4vw,1.2rem)] text-left hover:no-underline [&>svg]:h-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)] [&>svg]:w-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)]">
+            <div className="flex flex-1 items-center justify-between gap-[clamp(0.65rem,0.95vw,0.9rem)] pr-[clamp(0.65rem,0.95vw,0.9rem)]">
+              <div className="flex flex-col items-start gap-[clamp(0.35rem,0.55vw,0.5rem)]">
+                <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
                   Program influencerów
                 </CardTitle>
-                <CardDescription className="text-xs">
+                <CardDescription className="fluid-caption text-muted-foreground">
                   Zgłoś swój profil, aby otrzymać dedykowane materiały i kody polecające
                 </CardDescription>
               </div>
-              <Badge variant="outline" className={cn("rounded-full text-xs font-semibold", statusClass)}>
+              <Badge variant="outline" className={cn("fluid-badge rounded-full font-semibold", statusClass)}>
                 {statusLabel}
               </Badge>
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <CardContent className="px-6 pb-6 pt-0">
+            <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)] px-[clamp(1.4rem,2vw,1.8rem)] pb-[clamp(1.6rem,2.3vw,2.1rem)] pt-[clamp(0.4rem,0.6vw,0.55rem)]">
               {profile?.referralCode ? (
-                <Alert className="mb-4 border-dashed border-primary/40 bg-primary/5 rounded-lg border border-border/40">
-                  <AlertDescription className="text-primary">
-                    Kod polecający: <span className="font-semibold">{profile.referralCode}</span>
+                <Alert className="rounded-2xl border border-primary/40 border-dashed bg-primary/5">
+                  <AlertDescription className="flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)] text-primary fluid-caption">
+                    Kod polecający:
+                    <span className="font-semibold text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)]">
+                      {profile.referralCode}
+                    </span>
                   </AlertDescription>
                 </Alert>
               ) : null}
 
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label>Platforma</Label>
+              <form className="grid gap-[clamp(0.85rem,1.2vw,1.1rem)]" onSubmit={handleSubmit}>
+                <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] md:grid-cols-2">
+                  <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                    <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                      Platforma
+                    </Label>
                     <Input
                       placeholder="np. YouTube, TikTok, Discord"
                       value={formState.platform}
                       onChange={handleChange("platform")}
                       required
-                      className="rounded-lg border border-border/40 bg-background/60"
+                      className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label>Nazwa profilu</Label>
+                  <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                    <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                      Nazwa profilu
+                    </Label>
                     <Input
                       placeholder="np. FundedRankPL"
                       value={formState.handle}
                       onChange={handleChange("handle")}
                       required
-                      className="rounded-lg border border-border/40 bg-background/60"
+                      className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label>Liczba obserwujących</Label>
+                  <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                    <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                      Liczba obserwujących
+                    </Label>
                     <Input
                       placeholder="np. 12000"
                       inputMode="numeric"
                       value={formState.audienceSize}
                       onChange={handleChange("audienceSize")}
-                      className="rounded-lg border border-border/40 bg-background/60"
+                      className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label>Email do współpracy</Label>
+                  <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                    <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                      Email do współpracy
+                    </Label>
                     <Input
                       placeholder="np. media@twojadomena.com"
                       value={formState.contactEmail}
                       onChange={handleChange("contactEmail")}
-                      className="rounded-lg border border-border/40 bg-background/60"
+                      className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Krótki opis / bio</Label>
+                <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                  <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                    Krótki opis / bio
+                  </Label>
                   <Textarea
                     rows={3}
                     placeholder="Opisz swoją społeczność, format treści i doświadczenie."
                     value={formState.bio}
                     onChange={handleChange("bio")}
-                    className="rounded-lg border border-border/40 bg-background/60"
+                    className="rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Linki społecznościowe (po jednym w wierszu)</Label>
+                <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                  <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                    Linki społecznościowe (po jednym w wierszu)
+                  </Label>
                   <Textarea
                     rows={3}
                     placeholder="https://youtube.com/..."
                     value={formState.socialLinks}
                     onChange={handleChange("socialLinks")}
-                    className="rounded-lg border border-border/40 bg-background/60"
+                    className="rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Firmy, które chcesz promować</Label>
+                <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                  <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                    Firmy, które chcesz promować
+                  </Label>
                   <Textarea
                     rows={3}
                     placeholder="np. apex, fundingpips"
                     value={formState.preferredCompanies}
                     onChange={handleChange("preferredCompanies")}
-                    className="rounded-lg border border-border/40 bg-background/60"
+                    className="rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
                 </div>
 
                 {error ? (
-                  <Alert variant="destructive" className="rounded-lg border border-border/40">
-                    <AlertDescription>{error}</AlertDescription>
+                  <Alert variant="destructive" className="rounded-2xl border border-border/60">
+                    <AlertDescription className="fluid-caption text-destructive-foreground">
+                      {error}
+                    </AlertDescription>
                   </Alert>
                 ) : null}
 
                 {statusMessage ? (
-                  <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-lg border border-border/40">
-                    <AlertDescription>{statusMessage}</AlertDescription>
+                  <Alert className="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                    <AlertDescription className="fluid-caption">{statusMessage}</AlertDescription>
                   </Alert>
                 ) : null}
 
-                <CardFooter className="px-0 pb-0 flex justify-end">
-                  <Button disabled={submitting || !influencerFormValid} type="submit" variant="default" className="rounded-lg">
+                <CardFooter className="flex justify-end gap-[clamp(0.65rem,1vw,0.9rem)] px-0 pb-0">
+                  <Button
+                    disabled={submitting || !influencerFormValid}
+                    type="submit"
+                    variant="default"
+                    className="fluid-button rounded-full"
+                  >
                     {submitting ? "Zapisywanie..." : profile ? "Aktualizuj profil" : "Wyślij zgłoszenie"}
                   </Button>
                 </CardFooter>

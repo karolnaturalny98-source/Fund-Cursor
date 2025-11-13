@@ -252,19 +252,19 @@ export function DisputesSection({
     companies.length > 0;
 
   return (
-    <div className="space-y-4">
-      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-        <CardHeader>
-          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="space-y-[clamp(1.5rem,2.2vw,2.1rem)]">
+      <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+        <CardHeader className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+          <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             Zgłoszenia i pomoc
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
-            <Label className="flex items-center gap-2">
-              <span>Status</span>
+        <CardContent className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+          <div className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] text-muted-foreground fluid-caption">
+            <Label className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] text-foreground">
+              <span className="font-medium">Status</span>
               <Select value={status} onValueChange={(value) => onStatusChange(value as DisputeStatusFilter)}>
-                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-border/40 bg-background/60">
+                <SelectTrigger className="h-[clamp(2.55rem,1.8vw+2rem,2.9rem)] w-[clamp(10rem,18vw,11.5rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)] font-medium text-foreground shadow-sm transition focus-visible:ring-2 focus-visible:ring-primary/40">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -278,12 +278,18 @@ export function DisputesSection({
             </Label>
 
             {companiesLoading ? (
-              <span className="text-xs text-muted-foreground">Ładowanie firm…</span>
+              <span className="fluid-caption text-muted-foreground">Ładowanie firm…</span>
             ) : companiesError ? (
-              <Alert variant="destructive" className="py-2 rounded-lg border border-border/40">
-                <AlertDescription className="flex items-center gap-2">
+              <Alert variant="destructive" className="rounded-2xl border border-border/60 bg-destructive/10 py-[clamp(0.85rem,1.2vw,1.1rem)]">
+                <AlertDescription className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] fluid-caption text-destructive-foreground">
                   <span>{companiesError}</span>
-                  <Button size="sm" variant="outline" onClick={onReloadCompanies} disabled={companiesLoading} className="rounded-lg">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={onReloadCompanies}
+                    disabled={companiesLoading}
+                    className="fluid-button-sm rounded-full"
+                  >
                     Spróbuj ponownie
                   </Button>
                 </AlertDescription>
@@ -292,14 +298,14 @@ export function DisputesSection({
           </div>
 
           {error ? (
-            <Alert variant="destructive" className="mt-4 rounded-lg border border-border/40">
-              <AlertDescription>
-                <div className="flex items-center justify-between">
+            <Alert variant="destructive" className="mt-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60">
+              <AlertDescription className="flex flex-wrap items-center justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)] fluid-caption text-destructive-foreground">
+                <div className="space-y-[clamp(0.25rem,0.4vw,0.35rem)]">
                   <span>{error}</span>
-                  <Button size="sm" variant="outline" onClick={onRetry} className="rounded-lg">
-                    Spróbuj ponownie
-                  </Button>
                 </div>
+                <Button size="sm" variant="outline" onClick={onRetry} className="fluid-button-sm rounded-full">
+                  Spróbuj ponownie
+                </Button>
               </AlertDescription>
             </Alert>
           ) : null}
@@ -307,21 +313,29 @@ export function DisputesSection({
       </Card>
 
       {/* List */}
-      <div className="space-y-3">
+      <div className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
         {disputes.map((item) => (
-          <Card key={item.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
-            <CardContent className="p-4">
-              <div className="space-y-2">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1 flex-1">
-                    <p className="font-medium text-foreground">{item.title}</p>
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <Card
+            key={item.id}
+            className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[32px]! shadow-xs transition-all duration-300 hover:border-primary/35 hover:shadow-premium"
+          >
+            <CardContent className="p-[clamp(1.1rem,1.6vw,1.4rem)]">
+              <div className="space-y-[clamp(0.55rem,0.85vw,0.8rem)]">
+                <div className="flex items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+                  <div className="flex-1 space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                    <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
+                      {item.title}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                       <span>{formatDate(item.createdAt)}</span>
-                      <Badge variant="outline" className="rounded-full text-xs">
+                      <Badge variant="outline" className="fluid-badge rounded-full font-medium">
                         {disputeStatusLabels[item.status]}
                       </Badge>
                       {item.company ? (
-                        <Link className="hover:underline hover:text-primary transition-colors" href={`/firmy/${item.company.slug}`}>
+                        <Link
+                          className="transition-colors hover:text-primary hover:underline"
+                          href={`/firmy/${item.company.slug}`}
+                        >
                           {item.company.name}
                         </Link>
                       ) : null}
@@ -329,8 +343,8 @@ export function DisputesSection({
                     </div>
                   </div>
                 </div>
-                <p className="whitespace-pre-wrap text-sm text-muted-foreground">{item.description}</p>
-                <div className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
+                <p className="whitespace-pre-wrap fluid-copy text-muted-foreground">{item.description}</p>
+                <div className="grid gap-[clamp(0.35rem,0.5vw,0.45rem)] text-muted-foreground/90 fluid-caption sm:grid-cols-2">
                   {item.requestedAmount !== null && item.requestedCurrency ? (
                     <span>
                       Roszczenie: <strong>{formatDisputeAmount(item.requestedAmount, item.requestedCurrency)}</strong>
@@ -343,9 +357,15 @@ export function DisputesSection({
                   ) : null}
                 </div>
                 {item.evidenceLinks?.length ? (
-                  <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                  <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                     {item.evidenceLinks.map((link) => (
-                      <Link key={link} className="underline hover:text-primary transition-colors" href={link} target="_blank" rel="noreferrer">
+                      <Link
+                        key={link}
+                        className="underline transition-colors hover:text-primary"
+                        href={link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Dowód
                       </Link>
                     ))}
@@ -357,44 +377,50 @@ export function DisputesSection({
         ))}
 
         {!error && !loading && initialized && disputes.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Brak zgłoszeń dla wybranych filtrów.</p>
+          <p className="fluid-copy text-muted-foreground">Brak zgłoszeń dla wybranych filtrów.</p>
         ) : null}
 
         {loading ? (
-          <div className="space-y-3">
-            <Skeleton className="h-32 rounded-lg" />
-            <Skeleton className="h-32 rounded-lg" />
+          <div className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+            <Skeleton className="h-[clamp(8rem,12vw,10rem)] rounded-2xl" />
+            <Skeleton className="h-[clamp(8rem,12vw,10rem)] rounded-2xl" />
           </div>
         ) : null}
 
         {!error && hasMore ? (
-          <Button className="w-full rounded-lg" size="sm" variant="outline" onClick={onLoadMore}>
+          <Button className="w-full fluid-button-sm rounded-full" size="sm" variant="outline" onClick={onLoadMore}>
             Wczytaj więcej
           </Button>
         ) : null}
       </div>
 
       {/* Create form */}
-      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-        <CardHeader>
-          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Zgłoś problem</CardTitle>
+      <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+        <CardHeader className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+          <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+            Zgłoś problem
+          </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
           {message ? (
-            <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-lg border border-border/40">
-              <AlertDescription>{message}</AlertDescription>
+            <Alert className="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+              <AlertDescription className="fluid-caption">{message}</AlertDescription>
             </Alert>
           ) : null}
 
           {formError ? (
-            <Alert variant="destructive" className="rounded-lg border border-border/40">
-              <AlertDescription>{formError}</AlertDescription>
+            <Alert variant="destructive" className="rounded-2xl border border-border/60">
+              <AlertDescription className="fluid-caption text-destructive-foreground">
+                {formError}
+              </AlertDescription>
             </Alert>
           ) : null}
 
-          <form className="grid gap-3" onSubmit={handleSubmit} noValidate>
-            <div className="space-y-2">
-              <Label>Firma</Label>
+          <form className="grid gap-[clamp(0.85rem,1.2vw,1.1rem)]" onSubmit={handleSubmit} noValidate>
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Firma
+              </Label>
               <Select
                 value={form.companyId || undefined}
                 onValueChange={(value) => {
@@ -404,7 +430,7 @@ export function DisputesSection({
                 disabled={submitting || companiesLoading || noCompaniesAvailable}
                 required
               >
-                <SelectTrigger className="rounded-lg border border-border/40 bg-background/60">
+                <SelectTrigger className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -417,44 +443,95 @@ export function DisputesSection({
               </Select>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label>Tytuł</Label>
-                <Input value={form.title} onChange={handleChange("title")} required className="rounded-lg border border-border/40 bg-background/60" />
+            <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] md:grid-cols-2">
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                  Tytuł
+                </Label>
+                <Input
+                  value={form.title}
+                  onChange={handleChange("title")}
+                  required
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
               </div>
-              <div className="space-y-2">
-                <Label>Kategoria</Label>
-                <Input value={form.category} onChange={handleChange("category")} required className="rounded-lg border border-border/40 bg-background/60" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Opis</Label>
-              <Textarea rows={4} value={form.description} onChange={handleChange("description")} required className="rounded-lg border border-border/40 bg-background/60" />
-            </div>
-
-            <div className="grid gap-3 md:grid-cols-3">
-              <div className="space-y-2">
-                <Label>Kwota roszczenia (opcjonalnie)</Label>
-                <Input inputMode="decimal" placeholder="np. 99.99" value={form.requestedAmount} onChange={handleChange("requestedAmount")} className="rounded-lg border border-border/40 bg-background/60" />
-              </div>
-              <div className="space-y-2">
-                <Label>Waluta</Label>
-                <Input maxLength={3} value={form.requestedCurrency} onChange={handleChange("requestedCurrency")} className="rounded-lg border border-border/40 bg-background/60" />
-              </div>
-              <div className="space-y-2">
-                <Label>ID planu (opcjonalnie)</Label>
-                <Input value={form.planId} onChange={handleChange("planId")} placeholder="cuid planu" className="rounded-lg border border-border/40 bg-background/60" />
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                  Kategoria
+                </Label>
+                <Input
+                  value={form.category}
+                  onChange={handleChange("category")}
+                  required
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label>Linki dowodów (po jednym w wierszu)</Label>
-              <Textarea rows={3} value={form.evidenceLinks} onChange={handleChange("evidenceLinks")} className="rounded-lg border border-border/40 bg-background/60" />
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Opis
+              </Label>
+              <Textarea
+                rows={4}
+                value={form.description}
+                onChange={handleChange("description")}
+                required
+                className="rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+              />
             </div>
 
-            <CardFooter className="px-0 pb-0 flex justify-end gap-2">
-              <Button type="submit" disabled={!canSubmit} variant="default" className="rounded-lg">
+            <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] md:grid-cols-3">
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                  Kwota roszczenia (opcjonalnie)
+                </Label>
+                <Input
+                  inputMode="decimal"
+                  placeholder="np. 99.99"
+                  value={form.requestedAmount}
+                  onChange={handleChange("requestedAmount")}
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
+              </div>
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                  Waluta
+                </Label>
+                <Input
+                  maxLength={3}
+                  value={form.requestedCurrency}
+                  onChange={handleChange("requestedCurrency")}
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
+              </div>
+              <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+                <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                  ID planu (opcjonalnie)
+                </Label>
+                <Input
+                  value={form.planId}
+                  onChange={handleChange("planId")}
+                  placeholder="cuid planu"
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Linki dowodów (po jednym w wierszu)
+              </Label>
+              <Textarea
+                rows={3}
+                value={form.evidenceLinks}
+                onChange={handleChange("evidenceLinks")}
+                className="rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.85rem,1.2vw,1.1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
+              />
+            </div>
+
+            <CardFooter className="flex justify-end gap-[clamp(0.65rem,1vw,0.9rem)] px-0 pb-0">
+              <Button type="submit" disabled={!canSubmit} variant="default" className="fluid-button rounded-full">
                 {submitting ? "Wysyłanie..." : "Wyślij zgłoszenie"}
               </Button>
             </CardFooter>

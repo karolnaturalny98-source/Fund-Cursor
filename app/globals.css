@@ -7,13 +7,72 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 1.5rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
+  padding-inline: 0.5rem; /* px-2 - więcej miejsca na mobile */
+  @media (width >= 768px) {
+    padding-inline: 1rem; /* px-4 - średni padding na tablet */
   }
   @media (width >= 1280px) {
+    padding-inline: 0; /* xl:px-0 - pełna szerokość na desktop */
     max-width: 1280px;
   }
+}
+
+@utility fluid-h1 {
+  font-size: clamp(2.25rem, 4vw + 1rem, 3.5rem);
+  line-height: clamp(2.75rem, 4vw + 1.5rem, 3.75rem);
+  letter-spacing: -0.02em;
+}
+
+@utility fluid-h2 {
+  font-size: clamp(1.75rem, 3vw + 0.9rem, 2.75rem);
+  line-height: clamp(2.25rem, 3vw + 1.4rem, 3.25rem);
+  letter-spacing: -0.015em;
+}
+
+@utility fluid-lead {
+  font-size: clamp(1rem, 1.8vw + 0.5rem, 1.25rem);
+  line-height: 1.65;
+}
+
+@utility fluid-copy {
+  font-size: clamp(0.975rem, 0.45vw + 0.85rem, 1.1rem);
+  line-height: 1.7;
+}
+
+@utility fluid-caption {
+  font-size: clamp(0.7rem, 0.28vw + 0.6rem, 0.82rem);
+  line-height: 1.45;
+}
+
+@utility fluid-eyebrow {
+  font-size: clamp(0.68rem, 0.35vw + 0.58rem, 0.78rem);
+  letter-spacing: clamp(0.18em, 0.06em + 0.22vw, 0.3em);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility fluid-button {
+  height: clamp(2.75rem, 2vw + 2.25rem, 3.25rem);
+  padding-inline: clamp(1.25rem, 2vw + 0.75rem, 2.25rem);
+  border-radius: 9999px;
+  font-size: clamp(0.95rem, 0.6vw + 0.8rem, 1.05rem);
+  font-weight: 600;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+@utility fluid-button-sm {
+  height: clamp(2.25rem, 1.3vw + 1.8rem, 2.5rem);
+  padding-inline: clamp(1rem, 1.4vw + 0.75rem, 1.5rem);
+  border-radius: 9999px;
+  font-size: clamp(0.75rem, 0.4vw + 0.65rem, 0.85rem);
+  font-weight: 600;
+  gap: clamp(0.35rem, 0.8vw, 0.6rem);
+}
+
+@utility fluid-badge {
+  padding-inline: clamp(0.75rem, 1.5vw, 1rem);
+  padding-block: clamp(0.35rem, 1vw, 0.5rem);
+  font-size: clamp(0.7rem, 0.4vw + 0.6rem, 0.75rem);
 }
 
 @theme {

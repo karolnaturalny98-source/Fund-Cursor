@@ -413,152 +413,171 @@ export default function UserPanelPage() {
     <div className="relative min-h-screen">
       {/* Gradient background */}
       <div className="fixed inset-0 -z-10 h-[150vh] bg-gradient-dark" />
-      <div className="container space-y-8 py-8 relative z-10">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/">Strona główna</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Panel użytkownika</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <div className="container relative z-10 space-y-[clamp(2rem,3vw,3.5rem)] py-[clamp(2.25rem,3.5vw,3.75rem)]">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Strona główna</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Panel użytkownika</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Panel użytkownika</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Zarządzaj swoimi punktami, wymianą i zgłoszeniami
-            </p>
-          </div>
-          <Button variant="outline" onClick={openWallet} className="rounded-lg">
-            Otwórz portfel
-          </Button>
-        </div>
-
-        <SignedOut>
-          <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-            <CardContent className="flex flex-col items-center justify-center gap-4 px-6 py-12 text-center">
-              <h3 className="text-lg font-semibold">
-                Zaloguj się, aby uzyskać dostęp do panelu
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Zaloguj się, aby zarządzać swoimi punktami cashback, wymianą i zgłoszeniami.
+        <div className="space-y-[clamp(1.5rem,2.2vw,2.25rem)]">
+          <div className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.2vw,1.1rem)] sm:items-center">
+            <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+              <h1 className="fluid-h1 font-bold tracking-tight text-foreground">
+                Panel użytkownika
+              </h1>
+              <p className="fluid-copy text-muted-foreground">
+                Zarządzaj swoimi punktami, wymianą i zgłoszeniami
               </p>
-              <SignInButton>
-                <Button variant="default" className="rounded-lg">Zaloguj się z Clerk</Button>
-              </SignInButton>
-            </CardContent>
-          </Card>
-        </SignedOut>
-
-        <SignedIn>
-          {state === "loading" || state === "idle" ? (
-            <div className="space-y-6">
-              <Skeleton className="h-32 w-full" />
-              <Skeleton className="h-64 w-full" />
             </div>
-          ) : state === "error" ? (
-            <Card className="rounded-lg border border-destructive/40 bg-destructive/10">
-              <CardContent className="p-6">
-                <p className="text-sm text-destructive">{error}</p>
-                <Button 
-                  onClick={() => void refreshSummary()} 
-                  variant="outline" 
-                  className="mt-4 rounded-lg"
-                >
-                  Spróbuj ponownie
-                </Button>
+            <Button variant="outline" onClick={openWallet} className="fluid-button-sm rounded-full">
+              Otwórz portfel
+            </Button>
+          </div>
+
+          <SignedOut>
+            <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+              <CardContent className="flex flex-col items-center justify-center gap-[clamp(0.85rem,1.2vw,1.1rem)] px-[clamp(1.5rem,2.3vw,2.15rem)] py-[clamp(2.5rem,3.5vw,3.25rem)] text-center">
+                <h3 className="text-[clamp(1.05rem,0.5vw+0.95rem,1.25rem)] font-semibold text-foreground">
+                  Zaloguj się, aby uzyskać dostęp do panelu
+                </h3>
+                <p className="fluid-copy text-muted-foreground">
+                  Zaloguj się, aby zarządzać swoimi punktami cashback, wymianą i zgłoszeniami.
+                </p>
+                <SignInButton>
+                  <Button variant="default" className="fluid-button rounded-full">
+                    Zaloguj się z Clerk
+                  </Button>
+                </SignInButton>
               </CardContent>
             </Card>
-          ) : data ? (
-            <Tabs value={view} onValueChange={(value) => setView(value as typeof view)} className="w-full">
-              <TabsList className="grid w-full grid-cols-5 rounded-lg border border-border/40 bg-background/60 p-1 shadow-xs">
-                <TabsTrigger value="overview" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Przegląd
-                </TabsTrigger>
-                <TabsTrigger value="redeem" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Wymiana
-                </TabsTrigger>
-                <TabsTrigger value="disputes" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Zgłoszenia
-                </TabsTrigger>
-                <TabsTrigger value="favorites" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Ulubione
-                </TabsTrigger>
-                <TabsTrigger value="influencer" className="rounded-lg transition-all data-[state=inactive]:hover:bg-accent/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Influencer
-                </TabsTrigger>
-              </TabsList>
+          </SignedOut>
 
-              <TabsContent value="overview" className="mt-6 space-y-8">
-                <UserDashboardQuickStats 
-                  summary={summary}
-                  recentTransactionsCount={recentTransactions.length}
-                />
-                <UserDashboardCharts summary={summary} />
-                <UserDashboardRecent 
-                  transactions={recentTransactions}
-                  onShowHistory={openWallet}
-                />
-              </TabsContent>
+          <SignedIn>
+            {state === "loading" || state === "idle" ? (
+              <div className="space-y-[clamp(1.25rem,2vw,1.75rem)]">
+                <Skeleton className="h-[clamp(8rem,12vw,10rem)] w-full rounded-2xl" />
+                <Skeleton className="h-[clamp(12rem,18vw,16rem)] w-full rounded-2xl" />
+              </div>
+            ) : state === "error" ? (
+              <Card className="rounded-2xl border border-destructive/40 bg-destructive/10 shadow-xs">
+                <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)] p-[clamp(1.5rem,2.3vw,2.15rem)]">
+                  <p className="fluid-copy text-destructive">{error}</p>
+                  <Button
+                    onClick={() => void refreshSummary()}
+                    variant="outline"
+                    className="fluid-button-sm rounded-full"
+                  >
+                    Spróbuj ponownie
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : data ? (
+              <Tabs value={view} onValueChange={(value) => setView(value as typeof view)} className="w-full space-y-[clamp(1.25rem,2vw,1.75rem)]">
+                <TabsList className="flex w-full flex-wrap justify-start gap-[clamp(0.45rem,0.7vw,0.65rem)] rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.4rem,0.6vw,0.55rem)] shadow-xs">
+                  <TabsTrigger
+                    value="overview"
+                    className="min-w-[clamp(7.5rem,16vw,9.5rem)] flex-1 rounded-full px-[clamp(0.95rem,1.5vw,1.25rem)] py-[clamp(0.45rem,0.65vw,0.6rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-accent/40 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Przegląd
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="redeem"
+                    className="min-w-[clamp(7.5rem,16vw,9.5rem)] flex-1 rounded-full px-[clamp(0.95rem,1.5vw,1.25rem)] py-[clamp(0.45rem,0.65vw,0.6rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-accent/40 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Wymiana
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="disputes"
+                    className="min-w-[clamp(7.5rem,16vw,9.5rem)] flex-1 rounded-full px-[clamp(0.95rem,1.5vw,1.25rem)] py-[clamp(0.45rem,0.65vw,0.6rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-accent/40 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Zgłoszenia
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="favorites"
+                    className="min-w-[clamp(7.5rem,16vw,9.5rem)] flex-1 rounded-full px-[clamp(0.95rem,1.5vw,1.25rem)] py-[clamp(0.45rem,0.65vw,0.6rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-accent/40 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Ulubione
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="influencer"
+                    className="min-w-[clamp(7.5rem,16vw,9.5rem)] flex-1 rounded-full px-[clamp(0.95rem,1.5vw,1.25rem)] py-[clamp(0.45rem,0.65vw,0.6rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=inactive]:bg-transparent data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:bg-accent/40 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    Influencer
+                  </TabsTrigger>
+                </TabsList>
 
-              <TabsContent value="redeem" className="mt-6">
-                <RedeemSection
-                  available={summary.available}
-                  offers={offers}
-                  offersState={offersState}
-                  offersError={offersError}
-                  onReloadOffers={() => loadOffers(true)}
-                  onCancel={() => setView("overview")}
-                  onSuccess={handleRedeemSuccess}
-                  onError={handleRedeemError}
-                />
-              </TabsContent>
+                <TabsContent value="overview" className="space-y-[clamp(1.5rem,2.3vw,2.1rem)]">
+                  <UserDashboardQuickStats
+                    summary={summary}
+                    recentTransactionsCount={recentTransactions.length}
+                  />
+                  <UserDashboardCharts summary={summary} />
+                  <UserDashboardRecent
+                    transactions={recentTransactions}
+                    onShowHistory={openWallet}
+                  />
+                </TabsContent>
 
-              <TabsContent value="disputes" className="mt-6">
-                <DisputesSection
-                  disputes={disputes}
-                  loading={disputesLoading}
-                  error={disputesError}
-                  status={disputesStatus}
-                  initialized={disputesInitialized}
-                  hasMore={Boolean(disputesCursor)}
-                  submitting={disputeSubmitting}
-                  message={disputeMessage}
-                  companies={disputeCompanies}
-                  companiesLoading={disputeCompaniesState === "loading"}
-                  companiesError={disputeCompaniesError}
-                  onReloadCompanies={() => loadDisputeCompanies(true)}
-                  onBack={() => setView("overview")}
-                  onStatusChange={handleDisputeStatusChange}
-                  onRetry={handleDisputeRetry}
-                  onLoadMore={handleDisputeLoadMore}
-                  onCreate={handleDisputeCreate}
-                />
-              </TabsContent>
+                <TabsContent value="redeem">
+                  <RedeemSection
+                    available={summary.available}
+                    offers={offers}
+                    offersState={offersState}
+                    offersError={offersError}
+                    onReloadOffers={() => loadOffers(true)}
+                    onCancel={() => setView("overview")}
+                    onSuccess={handleRedeemSuccess}
+                    onError={handleRedeemError}
+                  />
+                </TabsContent>
 
-              <TabsContent value="favorites" className="mt-6">
-                <FavoritesSection favorites={favorites} />
-              </TabsContent>
+                <TabsContent value="disputes">
+                  <DisputesSection
+                    disputes={disputes}
+                    loading={disputesLoading}
+                    error={disputesError}
+                    status={disputesStatus}
+                    initialized={disputesInitialized}
+                    hasMore={Boolean(disputesCursor)}
+                    submitting={disputeSubmitting}
+                    message={disputeMessage}
+                    companies={disputeCompanies}
+                    companiesLoading={disputeCompaniesState === "loading"}
+                    companiesError={disputeCompaniesError}
+                    onReloadCompanies={() => loadDisputeCompanies(true)}
+                    onBack={() => setView("overview")}
+                    onStatusChange={handleDisputeStatusChange}
+                    onRetry={handleDisputeRetry}
+                    onLoadMore={handleDisputeLoadMore}
+                    onCreate={handleDisputeCreate}
+                  />
+                </TabsContent>
 
-              <TabsContent value="influencer" className="mt-6">
-                <InfluencerSection
-                  profile={data.influencerProfile}
-                  onUpdated={() => {
-                    void refreshSummary();
-                  }}
-                />
-              </TabsContent>
-            </Tabs>
-          ) : null}
-        </SignedIn>
-      </div>
+                <TabsContent value="favorites">
+                  <FavoritesSection favorites={favorites} />
+                </TabsContent>
+
+                <TabsContent value="influencer">
+                  <InfluencerSection
+                    profile={data.influencerProfile}
+                    onUpdated={() => {
+                      void refreshSummary();
+                    }}
+                  />
+                </TabsContent>
+              </Tabs>
+            ) : null}
+          </SignedIn>
+        </div>
       </div>
     </div>
   );

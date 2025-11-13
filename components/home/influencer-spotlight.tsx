@@ -20,29 +20,33 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(Math.max(influencers.length, 1)).fill(false);
 
   return (
-    <section ref={sectionVisible.ref} className="container grid gap-8 lg:grid-cols-[3fr_2fr]" id="influencerzy">
-      <div ref={sectionAnim.ref} className={`space-y-4 ${sectionAnim.className}`}>
-        <PremiumBadge variant="glow" className="rounded-full px-4 py-1 text-xs font-semibold">
+    <section
+      ref={sectionVisible.ref}
+      className="container grid gap-[clamp(2rem,2.5vw,3rem)] lg:grid-cols-[3fr_2fr]"
+      id="influencerzy"
+    >
+      <div ref={sectionAnim.ref} className={`space-y-[clamp(1rem,1.5vw,1.5rem)] ${sectionAnim.className}`}>
+        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
           Program influencerów FundedRank
         </PremiumBadge>
-        <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+        <h2 className="fluid-h2 font-semibold text-foreground">
           Twórz treści, odbieraj cashback i indywidualne kody
         </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
+        <p className="fluid-copy max-w-3xl text-muted-foreground">
           Dołącz do programu partnerskiego dla twórców. Zyskasz dedykowany kod,
           wcześniejszy dostęp do promocji oraz bezpłatne konta na wymianę
           punktów dla swojej społeczności.
         </p>
         <Button
           variant="premium"
-          className="rounded-full px-8 text-sm font-semibold"
+          className="fluid-button rounded-full font-semibold"
           onClick={() => open()}
         >
           Dołącz jako influencer
           <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
         </Button>
       </div>
-      <div className="grid gap-4">
+      <div className="grid gap-[clamp(1rem,1.5vw,1.5rem)]">
         {influencers.length === 0 ? (
           <Card
             className={`group relative overflow-hidden rounded-3xl border border-border/60 border-dashed transition-all duration-700 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
@@ -51,11 +55,11 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
             style={{ "--delay": "0ms" } as React.CSSProperties}
           >
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-foreground">
+              <CardTitle className="text-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] font-semibold text-foreground">
                 Ty możesz być pierwszy
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm text-muted-foreground">
+            <CardContent className="space-y-[clamp(0.75rem,1vw,1rem)] text-muted-foreground fluid-copy">
               <p>
                 Dołącz do FundedRank jako ambasador i otrzymuj materiały,
                 które pomogą Twojej społeczności lepiej wybierać konta
@@ -73,32 +77,41 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
               )}
               style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
             >
-              <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+              <CardHeader className="flex flex-row items-center justify-between gap-[clamp(1rem,1.5vw,1.5rem)] pb-2">
                 <div>
-                  <CardTitle className="text-base font-semibold text-foreground">
+                  <CardTitle className="text-[clamp(0.95rem,0.5vw+0.85rem,1.1rem)] font-semibold text-foreground">
                     {profile.handle}
                   </CardTitle>
-                  <p className="text-xs text-muted-foreground">{profile.bio ?? "Nowy ambasador FundedRank"}</p>
+                  <p className="fluid-caption text-muted-foreground">
+                    {profile.bio ?? "Nowy ambasador FundedRank"}
+                  </p>
                 </div>
-                <PremiumBadge variant="outline" className="rounded-full border-primary/30 text-xs">
+                <PremiumBadge variant="outline" className="fluid-badge rounded-full border-primary/30">
                   {profile.platform}
                 </PremiumBadge>
               </CardHeader>
-              <CardContent className="space-y-3 text-xs text-muted-foreground">
-                <div className="flex items-center gap-3 text-sm text-primary">
+              <CardContent className="space-y-[clamp(0.75rem,1vw,1rem)] text-muted-foreground fluid-caption">
+                <div className="flex items-center gap-[clamp(0.75rem,1vw,1rem)] text-[clamp(0.85rem,0.4vw+0.75rem,0.95rem)] text-primary">
                   {profile.audienceSize ? `${profile.audienceSize.toLocaleString("pl-PL")} obserwujących` : "Nowa współpraca"}
                 </div>
                 {profile.socialLinks.length ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)]">
                     {profile.socialLinks.slice(0, 2).map((link) => (
                       <Link
                         key={link}
                         href={link}
-                        className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
+                        className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs fluid-caption"
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Link <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="h-3 w-3" hoverGlow />
+                        Link{" "}
+                        <PremiumIcon
+                          icon={ArrowUpRight}
+                          variant="glow"
+                          size="sm"
+                          className="h-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)] w-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)]"
+                          hoverGlow
+                        />
                       </Link>
                     ))}
                   </div>

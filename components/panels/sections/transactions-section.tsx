@@ -42,19 +42,19 @@ export function TransactionsSection({
 }: TransactionsSectionProps) {
   if (!transactions.length) {
     return (
-      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+      <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+        <CardHeader className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+          <div className="flex flex-wrap items-center justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+            <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
               Ostatnie zakupy
             </CardTitle>
-            <Button variant="outline" size="sm" onClick={onShowHistory} className="rounded-lg">
+            <Button variant="outline" size="sm" onClick={onShowHistory} className="fluid-button-sm rounded-full">
               Historia
             </Button>
           </div>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
+        <CardContent className="space-y-[clamp(0.55rem,0.85vw,0.8rem)]">
+          <p className="fluid-copy text-muted-foreground">
             Brak zarejestrowanych transakcji cashback.
           </p>
         </CardContent>
@@ -63,33 +63,36 @@ export function TransactionsSection({
   }
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+      <CardHeader className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+        <div className="flex flex-wrap items-center justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+          <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             Ostatnie zakupy
           </CardTitle>
-          <Button variant="outline" size="sm" onClick={onShowHistory} className="rounded-lg">
+          <Button variant="outline" size="sm" onClick={onShowHistory} className="fluid-button-sm rounded-full">
             Historia
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
+      <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
+        <div className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
           {transactions.map((transaction) => {
             const points = transaction.points ?? 0;
             const pointsClass =
               points >= 0 ? "text-emerald-600" : "text-rose-600";
 
             return (
-              <Card key={transaction.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="space-y-1 flex-1">
-                      <p className="font-medium text-foreground">
+              <Card
+                key={transaction.id}
+                className="rounded-2xl border border-border/60 bg-background/60/85 shadow-xs transition-all duration-300 hover:border-primary/35 hover:shadow-premium"
+              >
+                <CardContent className="p-[clamp(1.1rem,1.6vw,1.4rem)]">
+                  <div className="flex items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+                    <div className="flex-1 space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                      <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
                         {transaction.company ? (
                           <Link
-                            className="hover:underline hover:text-primary transition-colors"
+                            className="transition-colors hover:text-primary hover:underline"
                             href={`/firmy/${transaction.company.slug}`}
                           >
                             {transaction.company.name}
@@ -98,20 +101,17 @@ export function TransactionsSection({
                           "Firma usunięta"
                         )}
                       </p>
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                      <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                         <span>{formatDate(transaction.createdAt)}</span>
-                      <Badge
-                        variant="outline"
-                        className="rounded-full text-xs"
-                      >
-                        {statusLabels[transaction.status]}
-                      </Badge>
+                        <Badge variant="outline" className="fluid-badge rounded-full font-medium">
+                          {statusLabels[transaction.status]}
+                        </Badge>
                       </div>
                       {transaction.company?.discountCode ? (
-                        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                        <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                           <span>
                             Kod:{" "}
-                            <span className="font-mono text-foreground">
+                            <span className="font-mono text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold text-foreground">
                               {transaction.company.discountCode}
                             </span>
                           </span>
@@ -127,7 +127,7 @@ export function TransactionsSection({
                                 transaction.company?.discountCode ?? "",
                               )
                             }
-                            className="rounded-lg"
+                            className="fluid-button-sm rounded-full"
                           >
                             {copiedTransactionId === transaction.id
                               ? "Skopiowano"
@@ -136,7 +136,12 @@ export function TransactionsSection({
                         </div>
                       ) : null}
                     </div>
-                    <span className={cn("text-xs font-semibold", pointsClass)}>
+                    <span
+                      className={cn(
+                        "text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold",
+                        pointsClass,
+                      )}
+                    >
                       {formatPoints(points)}
                     </span>
                   </div>

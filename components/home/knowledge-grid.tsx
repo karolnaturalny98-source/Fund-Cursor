@@ -33,27 +33,34 @@ export function KnowledgeGrid() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(knowledgeItems.length).fill(false);
 
   return (
-    <section ref={sectionVisible.ref} className="container space-y-6" id="baza-wiedzy">
-      <div ref={sectionAnim.ref} className={`flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between ${sectionAnim.className}`}>
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+    <section
+      ref={sectionVisible.ref}
+      className="container space-y-[clamp(1.5rem,2.4vw,2.75rem)]"
+      id="baza-wiedzy"
+    >
+      <div
+        ref={sectionAnim.ref}
+        className={`flex flex-wrap gap-[clamp(0.85rem,1.6vw,1.5rem)] sm:flex-nowrap sm:items-end sm:justify-between ${sectionAnim.className}`}
+      >
+        <div className="w-full space-y-[clamp(0.6rem,0.9vw,0.85rem)] sm:w-auto">
+          <p className="fluid-eyebrow text-primary">
             Baza wiedzy
           </p>
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="fluid-h2 font-semibold text-foreground">
             Ucz się razem ze społecznością FundedRank
           </h2>
-          <p className="max-w-2xl text-sm text-muted-foreground">
+          <p className="fluid-copy max-w-2xl text-muted-foreground">
             Pracujemy nad pełnym centrum wiedzy dla traderów. Poniżej znajdziesz
             tematy, nad którymi aktualnie pracujemy — daj znać, które chcesz
             przeczytać jako pierwsze.
           </p>
         </div>
-        <Button variant="premium-outline" className="h-11 rounded-full px-6 text-sm">
+        <Button variant="premium-outline" className="fluid-button w-full rounded-full sm:w-auto">
           Zgłoś temat artykułu
         </Button>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-[clamp(1.25rem,2vw,1.75rem)] md:grid-cols-3">
         {knowledgeItems.map((item, index) => (
           <Card
             key={item.title}
@@ -63,12 +70,12 @@ export function KnowledgeGrid() {
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-foreground">
+              <CardTitle className="text-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] font-semibold text-foreground">
                 {item.title}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">{item.description}</p>
+            <CardContent className="space-y-[clamp(1rem,1.5vw,1.5rem)]">
+              <p className="fluid-copy text-muted-foreground">{item.description}</p>
               <KnowledgeGridButtonClient />
             </CardContent>
           </Card>

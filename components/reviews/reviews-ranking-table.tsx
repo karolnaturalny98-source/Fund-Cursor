@@ -43,8 +43,8 @@ export function ReviewsRankingTable({
   return (
     <div className="relative">
       {loading && (
-        <div className="mb-4 flex items-center justify-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm text-primary">
-          <Loader2 className="h-4 w-4 animate-spin" />
+        <div className="mb-[clamp(0.75rem,1.1vw,1rem)] flex items-center justify-center gap-[clamp(0.45rem,0.7vw,0.65rem)] rounded-2xl border border-primary/30 bg-primary/10 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.65rem,1vw,0.9rem)] fluid-caption text-primary">
+          <Loader2 className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)] animate-spin" />
           <span>Odświeżanie danych...</span>
         </div>
       )}
@@ -109,36 +109,43 @@ const RankingRow = memo(function RankingRow({
     : "";
 
   return (
-    <TableRow className={`transition-all hover:bg-background/60 border-b border-border/40 ${top3Class}`}>
+    <TableRow
+      className={cn(
+        "border-b border-border/40 transition-all hover:bg-card/68",
+        top3Class,
+      )}
+    >
       <Cell>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
           {isTop3 && (
             index === 0 ? (
-              <Trophy className="h-4 w-4 text-amber-500" />
+              <Trophy className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)] text-amber-500" />
             ) : (
-              <Medal className="h-4 w-4 text-slate-400" />
+              <Medal className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)] text-slate-400" />
             )
           )}
-          <span className="font-semibold text-muted-foreground">#{index + 1}</span>
+          <span className="text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold text-muted-foreground">
+            #{index + 1}
+          </span>
         </div>
       </Cell>
       <Cell>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[clamp(0.75rem,1vw,0.95rem)]">
           <FirmAvatar name={item.companyName} logoUrl={item.logoUrl} priority={isTop3} />
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)]">
             <Link
               href={`/firmy/${item.companySlug}`}
               prefetch={false}
-              className="text-sm font-semibold text-foreground transition-colors hover:text-primary"
+              className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground transition-colors hover:text-primary"
             >
               {item.companyName}
             </Link>
-            <span className="text-xs text-muted-foreground">
+            <span className="fluid-caption text-muted-foreground">
               {item.totalReviews.toLocaleString("pl-PL")} opinii |{" "}
               {item.favoritesCount.toLocaleString("pl-PL")} obserwujacych
             </span>
             {item.cashbackRate && item.cashbackRate > 0 ? (
-              <span className="text-xs font-medium text-primary">
+              <span className="fluid-caption font-semibold text-primary">
                 {item.maxPlanPrice
                   ? `Cashback ${Math.round(item.cashbackRate)}% | $${((item.maxPlanPrice * item.cashbackRate) / 100).toFixed(2)}`
                   : `Cashback ${Math.round(item.cashbackRate)}%`}
@@ -148,13 +155,13 @@ const RankingRow = memo(function RankingRow({
         </div>
       </Cell>
       <Cell>
-        <div className="flex flex-col gap-2">
-          <span className="text-sm font-semibold text-foreground">
+        <div className="flex flex-col gap-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <span className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
             {item.totalReviews.toLocaleString("pl-PL")}
           </span>
-          <div className="h-2.5 w-full rounded-full bg-muted">
+          <div className="h-[clamp(0.35rem,0.5vw,0.45rem)] w-full rounded-full bg-muted/70">
             <div
-              className="h-full rounded-full bg-primary transition-all w-[var(--progress-width)]"
+              className="h-full rounded-full bg-primary/80 transition-all w-[var(--progress-width)]"
               style={{ "--progress-width": progressWidth } as React.CSSProperties}
             />
           </div>
@@ -177,7 +184,7 @@ const RankingRow = memo(function RankingRow({
           <PremiumBadge
             variant="glow"
             className={cn(
-              "px-3 py-1 text-sm font-semibold",
+              "px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.4rem,0.6vw,0.55rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold",
               getScoreBadgeClasses(overall),
             )}
           >
@@ -185,12 +192,12 @@ const RankingRow = memo(function RankingRow({
             {overall.toFixed(1)}
           </PremiumBadge>
         </div>
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-[clamp(0.2rem,0.35vw,0.3rem)] fluid-caption text-muted-foreground">
           {item.newReviews30d.toLocaleString("pl-PL")} nowych opinii w 30 dni
         </p>
       </Cell>
       <Cell>
-        <div className="flex items-center gap-1 text-sm font-semibold">
+        <div className="flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)] text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
           <TrendPill trend={trend} />
         </div>
       </Cell>
@@ -201,7 +208,7 @@ const RankingRow = memo(function RankingRow({
         <Button
           asChild
           variant="premium-outline"
-          className="w-full justify-center rounded-full px-4"
+          className="w-full justify-center rounded-full fluid-button-sm"
         >
           <Link href={`/firmy/${item.companySlug}#opinie`} prefetch={false}>
             Zobacz opinie
@@ -237,8 +244,8 @@ function Cell({
   className?: string;
 }) {
   return (
-    <TableCell className={cn("px-6 py-5 align-top text-sm", className)}>
-      <div className="min-w-[120px]">{children}</div>
+    <TableCell className={cn("px-[clamp(1.25rem,1.8vw,1.6rem)] py-[clamp(1rem,1.5vw,1.3rem)] align-top text-[clamp(0.9rem,0.4vw+0.8rem,1rem)]", className)}>
+      <div className="min-w-[clamp(7.5rem,12vw,9.5rem)]">{children}</div>
     </TableCell>
   );
 }
@@ -319,7 +326,7 @@ export function ScoreBadge({ value, label }: { value: number | null; label: stri
     <PremiumBadge
       variant="outline"
       className={cn(
-        "px-2.5 py-1 text-sm font-semibold",
+        "px-[clamp(0.65rem,0.95vw,0.9rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)] font-semibold",
         getScoreBadgeClasses(value),
       )}
       aria-label={`${label}: ${value.toFixed(1)} / 5`}
@@ -357,7 +364,7 @@ export function TrendPill({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold",
+        "inline-flex items-center gap-[clamp(0.35rem,0.55vw,0.5rem)] rounded-full border px-[clamp(0.65rem,0.95vw,0.9rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.82rem,0.33vw+0.72rem,0.92rem)] font-semibold",
         isPositive
           ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
           : "border-rose-500/30 bg-rose-500/10 text-rose-300",

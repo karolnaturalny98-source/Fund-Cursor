@@ -234,63 +234,80 @@ export function RedeemSection({
   const companyFieldError = lowerError.includes("firm");
 
   return (
-    <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-premium-sm transition-all duration-300 hover:border-primary/40">
+      <CardHeader className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+        <div className="flex flex-wrap items-center justify-between gap-[clamp(0.5rem,0.8vw,0.75rem)]">
+          <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             Wniosek o konto
           </CardTitle>
         </div>
-        <CardDescription>
-          Dostępne punkty: <span className="font-semibold">{available.toLocaleString("pl-PL")}</span>
+        <CardDescription className="fluid-caption text-muted-foreground">
+          Dostępne punkty:{" "}
+          <span className="font-semibold text-foreground">{available.toLocaleString("pl-PL")}</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-[clamp(1rem,1.6vw,1.5rem)]">
         {formError ? (
-          <Alert variant="destructive" id="wallet-redeem-error" className="rounded-lg border border-border/40">
-            <AlertDescription>{formError}</AlertDescription>
+          <Alert variant="destructive" id="wallet-redeem-error" className="rounded-2xl border border-border/60 bg-destructive/10">
+            <AlertDescription className="fluid-caption text-destructive-foreground">
+              {formError}
+            </AlertDescription>
           </Alert>
         ) : null}
         {statusMessage ? (
-          <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-lg border border-border/40" id="wallet-redeem-status">
-            <AlertDescription>{statusMessage}</AlertDescription>
+          <Alert
+            className="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+            id="wallet-redeem-status"
+          >
+            <AlertDescription className="fluid-caption">{statusMessage}</AlertDescription>
           </Alert>
         ) : null}
 
         {offersState === "loading" ? (
-          <div className="space-y-2">
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-10 w-full" />
+          <div className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+            <Skeleton className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] w-full rounded-2xl" />
+            <Skeleton className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] w-full rounded-2xl" />
           </div>
         ) : null}
         {offersState === "error" ? (
-          <Alert variant="destructive" className="rounded-lg border border-border/40">
-            <AlertDescription>
-              <div className="flex items-center justify-between">
-                <span>{offersError ?? "Nie udało się pobrać listy ofert."}</span>
-                <Button className="mt-2 rounded-lg" size="sm" variant="outline" type="button" onClick={onReloadOffers}>
-                  Spróbuj ponownie
-                </Button>
-              </div>
+          <Alert variant="destructive" className="rounded-2xl border border-border/60">
+            <AlertDescription className="flex flex-wrap items-center justify-between gap-[clamp(0.65rem,1vw,0.9rem)] fluid-caption text-destructive-foreground">
+              <span>{offersError ?? "Nie udało się pobrać listy ofert."}</span>
+              <Button
+                className="fluid-button-sm rounded-full"
+                size="sm"
+                variant="outline"
+                type="button"
+                onClick={onReloadOffers}
+              >
+                Spróbuj ponownie
+              </Button>
             </AlertDescription>
           </Alert>
         ) : null}
         {offersState === "success" && (offers?.length ?? 0) === 0 ? (
-          <p className="text-sm text-muted-foreground">
+          <p className="fluid-copy text-muted-foreground">
             Obecnie brak ofert wymiany. Skontaktuj się z obsługą, aby dodać nowe konta.
           </p>
         ) : null}
 
-        <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor={companySelectId}>Firma</Label>
+        <form className="space-y-[clamp(1rem,1.6vw,1.5rem)]" onSubmit={handleSubmit} noValidate>
+          <div className="grid gap-[clamp(0.85rem,1.2vw,1.1rem)] md:grid-cols-2">
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label htmlFor={companySelectId} className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Firma
+              </Label>
               <Select
                 value={selectedCompanyId || undefined}
                 onValueChange={handleCompanyChange}
                 disabled={submitting || offersState === "loading" || offersState === "error" || !offers?.length}
               >
-                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-background/60">
+                <SelectTrigger
+                  id={companySelectId}
+                  aria-invalid={companyFieldError || undefined}
+                  aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined}
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm transition focus-visible:ring-2 focus-visible:ring-primary/40"
+                >
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -303,14 +320,21 @@ export function RedeemSection({
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor={planSelectId}>Plan lub konto</Label>
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label htmlFor={planSelectId} className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Plan lub konto
+              </Label>
               <Select
                 value={selectedPlanId || undefined}
                 onValueChange={handlePlanChange}
                 disabled={submitting || !availablePlans.length}
               >
-                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-border/40 bg-background/60">
+                <SelectTrigger
+                  id={planSelectId}
+                  aria-invalid={lowerError.includes("plan") || undefined}
+                  aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined}
+                  className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm transition focus-visible:ring-2 focus-visible:ring-primary/40"
+                >
                   <SelectValue placeholder={selectedCompany ? "Wybierz plan" : "Najpierw wybierz firmę"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -322,10 +346,10 @@ export function RedeemSection({
                 </SelectContent>
               </Select>
               {!selectedCompany && offersState === "success" ? (
-                <p className="text-xs text-muted-foreground">Wybierz firmę, aby zobaczyć dostępne konta.</p>
+                <p className="fluid-caption text-muted-foreground">Wybierz firmę, aby zobaczyć dostępne konta.</p>
               ) : null}
               {selectedCompany && !availablePlans.length ? (
-                <p className="text-xs text-muted-foreground">
+                <p className="fluid-caption text-muted-foreground">
                   Brak planów w walucie USD dla wybranej firmy.
                 </p>
               ) : null}
@@ -333,21 +357,23 @@ export function RedeemSection({
           </div>
 
           {selectedPlan ? (
-            <p className="text-xs text-muted-foreground">
+            <p className="fluid-caption text-muted-foreground">
               Wybrany plan kosztuje {planCost?.toLocaleString("pl-PL")} punktów (1 punkt = 1 USD).
             </p>
           ) : null}
           {insufficientPoints ? (
-            <Alert variant="destructive" className="rounded-lg border border-border/40">
-              <AlertDescription>
+            <Alert variant="destructive" className="rounded-2xl border border-border/60">
+              <AlertDescription className="fluid-caption text-destructive-foreground">
                 Masz {available.toLocaleString("pl-PL")} punktów, potrzebujesz {planCost?.toLocaleString("pl-PL")} punktów.
               </AlertDescription>
             </Alert>
           ) : null}
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor={pointsInputId}>Liczba punktów</Label>
+          <div className="grid gap-[clamp(0.85rem,1.2vw,1.1rem)] md:grid-cols-2">
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label htmlFor={pointsInputId} className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Liczba punktów
+              </Label>
               <Input
                 id={pointsInputId}
                 inputMode="numeric"
@@ -357,12 +383,14 @@ export function RedeemSection({
                 aria-readonly
                 aria-invalid={lowerError.includes("punkt") || undefined}
                 aria-describedby={lowerError.includes("punkt") ? "wallet-redeem-error" : undefined}
-                className="rounded-lg border border-border/40 bg-background/60"
+                className="h-[clamp(2.75rem,2vw+2.25rem,3.1rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor={notesInputId}>Notatka (opcjonalnie)</Label>
+            <div className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+              <Label htmlFor={notesInputId} className="text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-medium text-muted-foreground">
+                Notatka (opcjonalnie)
+              </Label>
               <Textarea
                 id={notesInputId}
                 placeholder="Informacje dla zespołu"
@@ -370,17 +398,17 @@ export function RedeemSection({
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
                 disabled={submitting}
-                className="rounded-lg border border-border/40 bg-background/60"
+                className="min-h-[clamp(6rem,8vw,8rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.75rem,1.1vw,1rem)] text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
           </div>
 
-          <CardFooter className="px-0 pb-0 flex flex-wrap gap-2">
+          <CardFooter className="flex flex-wrap gap-[clamp(0.65rem,1vw,0.9rem)] px-0 pb-0">
             <Button
               disabled={!canRedeemSubmit}
               type="submit"
               variant="default"
-              className="rounded-lg"
+              className="fluid-button rounded-full"
             >
               {submitting ? "Wysyłanie..." : "Wyślij wniosek"}
             </Button>
@@ -389,7 +417,7 @@ export function RedeemSection({
               variant="outline"
               onClick={clearForm}
               disabled={submitting}
-              className="rounded-lg"
+              className="fluid-button-sm rounded-full"
             >
               Wyczyść
             </Button>

@@ -88,21 +88,21 @@ export function HistorySection({
   copiedTransactionId,
 }: HistorySectionProps) {
   return (
-    <div className="space-y-4">
-      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="space-y-[clamp(1.5rem,2.2vw,2.1rem)]">
+      <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+        <CardHeader className="space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
+          <div className="flex flex-wrap items-center justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+            <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
               Historia transakcji
             </CardTitle>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
-            <Label className="flex items-center gap-2">
-              <span>Status</span>
+        <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
+          <div className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] text-muted-foreground fluid-caption">
+            <Label className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] text-foreground">
+              <span className="font-medium">Status</span>
               <Select value={status} onValueChange={(value) => onStatusChange(value as HistoryStatusFilter)}>
-                <SelectTrigger className="h-9 w-[140px] rounded-lg border border-border/40 bg-background/60">
+                <SelectTrigger className="h-[clamp(2.55rem,1.8vw+2rem,2.9rem)] w-[clamp(9.5rem,16vw,11rem)] rounded-2xl border border-border/60 bg-background/60 px-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)] font-medium text-foreground shadow-sm focus-visible:ring-2 focus-visible:ring-primary/40">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -114,58 +114,56 @@ export function HistorySection({
                 </SelectContent>
               </Select>
             </Label>
-            <Label className="flex items-center gap-2 cursor-pointer">
+            <Label className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] cursor-pointer text-foreground">
               <input
                 checked={onlyRedeem}
-                className="h-4 w-4 rounded border-input text-primary focus:ring-primary"
+                className="h-[clamp(1rem,0.45vw+0.9rem,1.15rem)] w-[clamp(1rem,0.45vw+0.9rem,1.15rem)] rounded border-input text-primary focus:ring-primary"
                 type="checkbox"
                 onChange={(event) => onToggleRedeem(event.target.checked)}
               />
-              <span>Tylko wnioski o konto</span>
+              <span className="font-medium">Tylko wnioski o konto</span>
             </Label>
           </div>
 
           {error ? (
-            <Alert variant="destructive" className="rounded-lg border border-border/40">
-              <AlertDescription>
-                <div className="flex items-center justify-between">
+            <Alert variant="destructive" className="rounded-2xl border border-border/60">
+              <AlertDescription className="flex flex-wrap items-center justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)] fluid-caption text-destructive-foreground">
+                <div className="space-y-[clamp(0.25rem,0.4vw,0.35rem)]">
                   <span>{error}</span>
-                  <Button
-                    className="mt-2 rounded-lg"
-                    size="sm"
-                    variant="outline"
-                    onClick={onRetry}
-                  >
-                    Spróbuj ponownie
-                  </Button>
                 </div>
+                <Button className="fluid-button-sm rounded-full" size="sm" variant="outline" onClick={onRetry}>
+                  Spróbuj ponownie
+                </Button>
               </AlertDescription>
             </Alert>
           ) : null}
 
           {!error && !loading && initialized && transactions.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
+            <p className="fluid-copy text-muted-foreground">
               Nie znaleziono transakcji dla wybranych filtrów.
             </p>
           ) : null}
         </CardContent>
       </Card>
 
-      <div className="space-y-3">
+      <div className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
         {transactions.map((transaction) => {
           const points = transaction.points ?? 0;
           const pointsClass =
             points >= 0 ? "text-emerald-600" : "text-rose-600";
 
           return (
-            <Card key={transaction.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1 flex-1">
-                    <p className="font-medium text-foreground">
+            <Card
+              key={transaction.id}
+              className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[32px]! shadow-xs transition-all duration-300 hover:border-primary/35 hover:shadow-premium"
+            >
+              <CardContent className="p-[clamp(1.1rem,1.6vw,1.4rem)]">
+                <div className="flex items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+                  <div className="flex-1 space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                    <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
                       {transaction.company ? (
                         <Link
-                          className="hover:underline hover:text-primary transition-colors"
+                          className="transition-colors hover:text-primary hover:underline"
                           href={`/firmy/${transaction.company.slug}`}
                         >
                           {transaction.company.name}
@@ -174,25 +172,25 @@ export function HistorySection({
                         "Firma usunięta"
                       )}
                     </p>
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                       <span>{formatDate(transaction.createdAt)}</span>
                       <Badge
                         variant="outline"
-                        className="rounded-full text-xs"
+                        className="fluid-badge rounded-full font-medium"
                       >
                         {statusLabels[transaction.status]}
                       </Badge>
                     </div>
                     {transaction.notes ? (
-                      <p className="text-xs text-muted-foreground">
+                      <p className="fluid-caption text-muted-foreground">
                         Notatka: {transaction.notes}
                       </p>
                     ) : null}
                     {transaction.company?.discountCode ? (
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                      <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                         <span>
                           Kod:{" "}
-                          <span className="font-mono text-foreground">
+                          <span className="font-mono text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold text-foreground">
                             {transaction.company.discountCode}
                           </span>
                         </span>
@@ -208,7 +206,7 @@ export function HistorySection({
                               transaction.company?.discountCode ?? "",
                             )
                           }
-                          className="rounded-lg"
+                          className="fluid-button-sm rounded-full"
                         >
                           {copiedTransactionId === transaction.id
                             ? "Skopiowano"
@@ -217,7 +215,12 @@ export function HistorySection({
                       </div>
                     ) : null}
                   </div>
-                  <span className={cn("text-xs font-semibold", pointsClass)}>
+                  <span
+                    className={cn(
+                      "text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold",
+                      pointsClass,
+                    )}
+                  >
                     {formatPoints(points)}
                   </span>
                 </div>
@@ -228,15 +231,15 @@ export function HistorySection({
       </div>
 
       {loading ? (
-        <div className="space-y-3">
-          <Skeleton className="h-24 rounded-lg" />
-          <Skeleton className="h-24 rounded-lg" />
+        <div className="space-y-[clamp(0.65rem,1vw,0.9rem)]">
+          <Skeleton className="h-[clamp(7rem,10vw,8.5rem)] rounded-2xl" />
+          <Skeleton className="h-[clamp(7rem,10vw,8.5rem)] rounded-2xl" />
         </div>
       ) : null}
 
       {!error && hasMore ? (
         <Button
-          className="w-full rounded-lg"
+          className="w-full fluid-button-sm rounded-full"
           size="sm"
           variant="outline"
           onClick={onLoadMore}

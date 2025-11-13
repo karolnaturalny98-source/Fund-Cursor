@@ -71,9 +71,9 @@ export function RankingsExportButton({
       onClick={exportToCSV}
       variant="outline"
       size="sm"
-      className="gap-2"
+      className="fluid-button-sm gap-[clamp(0.45rem,0.8vw,0.7rem)] rounded-full"
     >
-      <Download className="h-4 w-4" />
+      <Download className="h-[clamp(0.85rem,0.4vw+0.75rem,1rem)] w-[clamp(0.85rem,0.4vw+0.75rem,1rem)]" />
       Eksportuj CSV
     </Button>
   );

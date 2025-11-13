@@ -97,13 +97,13 @@ export function PurchaseCard({
   }
 
   return (
-    <aside className="glass-card sticky top-6 flex h-fit flex-col gap-4 p-6">
-      <div className="space-y-2">
-        <p className="text-sm font-semibold text-muted-foreground">
+    <aside className="glass-card sticky top-6 flex h-fit flex-col gap-[clamp(1rem,1.5vw,1.5rem)] p-[clamp(1.5rem,2vw,1.85rem)]">
+      <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+        <p className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-muted-foreground">
           Kod rabatowy
         </p>
-        <div className="flex items-center gap-2">
-          <span className="rounded-xl border-2 border-primary/30 bg-linear-to-r from-primary/10 to-primary/5 px-4 py-2 font-mono text-sm font-semibold shadow-xs">
+        <div className="flex items-center gap-[clamp(0.65rem,1vw,0.9rem)]">
+          <span className="rounded-xl border-2 border-primary/30 bg-linear-to-r from-primary/10 to-primary/5 px-[clamp(1rem,1.4vw,1.4rem)] py-[clamp(0.6rem,0.9vw,0.85rem)] font-mono text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold shadow-xs">
             {code}
           </span>
           {discountCode ? (
@@ -115,12 +115,12 @@ export function PurchaseCard({
           ) : null}
         </div>
         {cashbackRate ? (
-          <p className="text-sm text-muted-foreground">
+          <p className="fluid-copy text-muted-foreground">
             Cashback: <strong>{cashbackRate}%</strong> wartosci zakupu.
           </p>
         ) : null}
         {cashbackEstimate && defaultPlan ? (
-          <p className="text-xs text-muted-foreground">
+          <p className="fluid-caption text-muted-foreground">
             Przy planie {defaultPlan.name}: zwrot{" "}
             <strong>
               {formatCurrencyLocalized(
@@ -137,24 +137,24 @@ export function PurchaseCard({
           </p>
         ) : null}
         {(weeklyCopyCount ?? 0) > 0 ? (
-          <p className="text-xs text-muted-foreground">
+          <p className="fluid-caption text-muted-foreground">
             Ostatnio skopiowano: <strong>{weeklyCopyCount}</strong> razy w 7 dni
             (w tym {dailyCopyCount} dzis).
           </p>
         ) : (
-          <p className="text-xs text-muted-foreground">
+          <p className="fluid-caption text-muted-foreground">
             Badz pierwsza osoba, ktora skopiuje ten kod w tym tygodniu.
           </p>
         )}
       </div>
 
       {showChecklist ? (
-        <div className="glass-panel space-y-2 border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs text-emerald-200">
-          <p className="flex items-center gap-2 font-semibold">
+        <div className="glass-panel space-y-[clamp(0.45rem,0.7vw,0.65rem)] border border-emerald-500/30 bg-emerald-500/10 p-[clamp(1rem,1.4vw,1.3rem)] text-emerald-200 fluid-caption">
+          <p className="flex items-center gap-[clamp(0.5rem,0.8vw,0.7rem)] font-semibold">
             <PremiumIcon icon={CheckCircle} variant="glow" size="sm" className="text-emerald-600" />
             Kod skopiowany. Pamietaj:
           </p>
-          <ul className="space-y-1">
+          <ul className="space-y-[clamp(0.3rem,0.5vw,0.45rem)]">
             <li>1. Wklej kod w koszyku partnera.</li>
             <li>2. Zaloguj sie tym samym mailem co w FundedRank.</li>
             <li>3. Przeslij potwierdzenie w panelu cashback.</li>
@@ -163,28 +163,28 @@ export function PurchaseCard({
       ) : null}
 
       {defaultPlan ? (
-        <div className="glass-panel relative overflow-hidden p-5">
+        <div className="glass-panel relative overflow-hidden p-[clamp(1.25rem,1.6vw,1.5rem)]">
           <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-          <p className="relative font-semibold text-foreground">Najpopularniejszy plan</p>
-          <p className="relative mt-1 text-muted-foreground">{defaultPlan.name}</p>
-          <div className="relative mt-3 flex items-center justify-between">
-            <span className="text-xs text-muted-foreground">Cena</span>
-            <span className="text-lg font-semibold text-foreground">
+          <p className="relative text-[clamp(1rem,0.45vw+0.9rem,1.15rem)] font-semibold text-foreground">Najpopularniejszy plan</p>
+          <p className="relative mt-[clamp(0.4rem,0.6vw,0.6rem)] fluid-copy text-muted-foreground">{defaultPlan.name}</p>
+          <div className="relative mt-[clamp(0.9rem,1.2vw,1.2rem)] flex items-center justify-between">
+            <span className="fluid-caption text-muted-foreground">Cena</span>
+            <span className="text-[clamp(1.15rem,0.6vw+1rem,1.4rem)] font-semibold text-foreground">
               {defaultPlanPricing
                 ? defaultPlanPricing.formattedConverted
                 : `${defaultPlan.price.toLocaleString("pl-PL")} ${defaultPlan.currency}`}
             </span>
           </div>
           {defaultPlanPricing?.showOriginal ? (
-            <p className="relative mt-1 text-[11px] text-muted-foreground">
+            <p className="relative mt-[clamp(0.35rem,0.5vw,0.5rem)] text-[clamp(0.7rem,0.3vw+0.6rem,0.8rem)] text-muted-foreground">
               ({defaultPlanPricing.originalLabel})
             </p>
           ) : null}
         </div>
       ) : null}
 
-      <div className="space-y-2">
-        <Button asChild variant="premium-outline" className="w-full rounded-full">
+      <div className="space-y-[clamp(0.75rem,1.2vw,1.1rem)]">
+        <Button asChild variant="premium-outline" className="w-full rounded-full fluid-button">
           <Link href="#plany">Przejdz do planow</Link>
         </Button>
         {websiteUrl ? (

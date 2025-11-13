@@ -52,15 +52,15 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
 
   return (
     <Card className="group relative overflow-hidden glass-card transition-all duration-300 hover:border-primary/45 hover:shadow-premium before:absolute before:inset-y-4 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:text-base">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-[clamp(0.75rem,1.1vw,1rem)]">
+        <CardTitle className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-medium text-muted-foreground transition-colors group-hover:text-foreground">
           {title}
         </CardTitle>
-        <div className="rounded-full bg-primary/10 p-2 text-primary transition-colors group-hover:bg-primary/20">
+        <div className="rounded-full bg-primary/10 p-[clamp(0.55rem,0.8vw,0.7rem)] text-primary transition-colors group-hover:bg-primary/20">
           {icon}
         </div>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
         {values.map((item) => {
           const numValue =
             typeof item.value === "number"
@@ -76,15 +76,15 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
             : 100;
 
           return (
-            <div key={item.companyId} className="space-y-2">
-              <div className="flex items-center justify-between gap-3 rounded-xl border border-transparent p-2.5 transition-all duration-200 hover:border-primary/30 hover:bg-muted/30">
-                <span className="min-w-0 flex-1 pr-2 text-xs font-medium text-muted-foreground sm:text-sm">
+            <div key={item.companyId} className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+              <div className="flex items-center justify-between gap-[clamp(0.75rem,1.1vw,1rem)] rounded-xl border border-transparent p-[clamp(0.7rem,1vw,0.9rem)] transition-all duration-200 hover:border-primary/30 hover:bg-muted/30">
+                <span className="min-w-0 flex-1 pr-2 text-muted-foreground fluid-caption font-medium">
                   <span className="block truncate">{item.companyName}</span>
                 </span>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex shrink-0 items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
                   <span
                     className={cn(
-                      "text-base sm:text-lg font-bold tabular-nums",
+                      "font-bold tabular-nums text-[clamp(1.05rem,0.5vw+0.95rem,1.3rem)]",
                       isBest ? "text-primary" : "text-foreground"
                     )}
                   >
@@ -95,7 +95,7 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
                   {unit && (
                     <span
                       className={cn(
-                        "text-xs font-medium sm:text-sm",
+                        "text-muted-foreground fluid-caption font-medium",
                         isBest ? "text-primary/70" : "text-muted-foreground",
                       )}
                     >
@@ -105,9 +105,9 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
                   {isBest && (
                     <Badge 
                       variant="default" 
-                      className="h-6 px-2 text-[11px] font-semibold bg-primary/90 text-primary-foreground flex items-center gap-1"
+                      className="bg-primary/90 text-primary-foreground flex items-center gap-[clamp(0.3rem,0.4vw,0.4rem)] fluid-badge"
                     >
-                      <Trophy className="h-3 w-3" />
+                      <Trophy className="h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)]" />
                       TOP
                     </Badge>
                   )}
@@ -221,20 +221,20 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
   const visiblePrimaryCards = useStaggerAnimation(primaryMetrics.length, 50);
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
-          <BarChart3 className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-primary">Analiza Wskaźników</span>
+    <div className="space-y-[clamp(1.75rem,2.6vw,2.5rem)]">
+      <div className="space-y-[clamp(0.9rem,1.3vw,1.2rem)]">
+        <div className="inline-flex items-center gap-[clamp(0.55rem,0.8vw,0.7rem)] rounded-full border border-primary/20 bg-primary/5 px-[clamp(1rem,1.4vw,1.3rem)] py-[clamp(0.5rem,0.75vw,0.65rem)]">
+          <BarChart3 className="h-[clamp(1.05rem,0.45vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.45vw+0.95rem,1.2rem)] text-primary" />
+          <span className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-medium text-primary">Analiza Wskaźników</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Kluczowe Metryki</h2>
-        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
+        <h2 className="fluid-h2 font-bold tracking-tight">Kluczowe Metryki</h2>
+        <p className="fluid-copy text-muted-foreground max-w-2xl">
           Porównanie najważniejszych wskaźników dla wybranych firm. Wartości oznaczone jako <strong className="text-foreground">TOP</strong> reprezentują najlepsze wyniki w danej kategorii.
         </p>
       </div>
 
       {/* Najważniejsze metryki - zawsze widoczne */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-[clamp(1.25rem,1.8vw,1.75rem)] md:grid-cols-2 lg:grid-cols-4">
         {primaryMetrics.map((metric, index) => (
           <div 
             key={`primary-${metric.title}-${index}`}
@@ -256,24 +256,24 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
 
       {/* Sekcje zwijane z dodatkowymi metrykami */}
       {(pricingMetrics.length > 0 || featuresMetrics.length > 0) && (
-        <Accordion type="multiple" className="space-y-4">
+        <Accordion type="multiple" className="space-y-[clamp(1rem,1.5vw,1.4rem)]">
           {pricingMetrics.length > 0 && (
-            <AccordionItem value="pricing" className="glass-panel px-4">
-              <AccordionTrigger className="py-4 hover:no-underline">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <DollarSign className="h-5 w-5 text-primary" />
+            <AccordionItem value="pricing" className="glass-panel px-[clamp(1rem,1.4vw,1.3rem)]">
+              <AccordionTrigger className="py-[clamp(0.9rem,1.3vw,1.2rem)] hover:no-underline">
+                <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
+                  <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)]">
+                    <DollarSign className="h-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)] text-primary" />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-base font-semibold">Ceny i warunki</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
+                    <h3 className="text-[clamp(1rem,0.5vw+0.9rem,1.2rem)] font-semibold">Ceny i warunki</h3>
+                    <p className="mt-[clamp(0.3rem,0.5vw,0.45rem)] text-muted-foreground fluid-caption">
                       Szczegółowe informacje o cenach i warunkach handlowych
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="pb-6 pt-2">
-                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+              <AccordionContent className="pt-[clamp(0.5rem,0.8vw,0.7rem)] pb-[clamp(1.5rem,2vw,1.9rem)]">
+                <div className="grid grid-cols-1 gap-[clamp(1.1rem,1.6vw,1.5rem)] md:grid-cols-2">
                   {pricingMetrics.map((metric, index) => (
                     <MetricCard
                       key={`pricing-${metric.title}-${index}`}
@@ -290,22 +290,22 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
           )}
 
           {featuresMetrics.length > 0 && (
-            <AccordionItem value="features" className="glass-panel px-4">
-              <AccordionTrigger className="py-4 hover:no-underline">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <Settings className="h-5 w-5 text-primary" />
+            <AccordionItem value="features" className="glass-panel px-[clamp(1rem,1.4vw,1.3rem)]">
+              <AccordionTrigger className="py-[clamp(0.9rem,1.3vw,1.2rem)] hover:no-underline">
+                <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
+                  <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)]">
+                    <Settings className="h-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.45vw+1.1rem,1.35rem)] text-primary" />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-base font-semibold">Funkcje i dostępność</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
+                    <h3 className="text-[clamp(1rem,0.5vw+0.9rem,1.2rem)] font-semibold">Funkcje i dostępność</h3>
+                    <p className="mt-[clamp(0.3rem,0.5vw,0.45rem)] text-muted-foreground fluid-caption">
                       Metody płatności, instrumenty i inne funkcje
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="pb-6 pt-2">
-                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <AccordionContent className="pt-[clamp(0.5rem,0.8vw,0.7rem)] pb-[clamp(1.5rem,2vw,1.9rem)]">
+                <div className="grid grid-cols-1 gap-[clamp(1.1rem,1.6vw,1.5rem)] md:grid-cols-2 lg:grid-cols-3">
                   {featuresMetrics.map((metric, index) => (
                     <MetricCard
                       key={`features-${metric.title}-${index}`}
@@ -324,41 +324,43 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
       )}
 
       {/* Regulation & Status Cards */}
-      <div className="space-y-3">
-        <h3 className="text-xl font-semibold">Informacje Regulacyjne</h3>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="space-y-[clamp(0.9rem,1.3vw,1.2rem)]">
+        <h3 className="text-[clamp(1.25rem,0.5vw+1.1rem,1.5rem)] font-semibold">Informacje Regulacyjne</h3>
+        <div className="grid gap-[clamp(1.1rem,1.6vw,1.5rem)] md:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
             <Card
               key={company.id}
               className="group relative overflow-hidden glass-panel transition-all duration-300 hover:border-primary/45 hover:shadow-premium before:absolute before:inset-y-5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50"
             >
               <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <Shield className="h-4 w-4 text-primary" />
+                <CardTitle className="flex items-center gap-[clamp(0.55rem,0.8vw,0.7rem)] text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)]">
+                  <Shield className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] text-primary" />
                   {company.name}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-[clamp(0.75rem,1.2vw,1.1rem)]">
                 {company.regulation && (
-                  <div className="rounded-lg bg-muted/50 p-3">
-                    <p className="text-xs font-medium text-muted-foreground mb-1">Regulacja</p>
-                    <p className="text-sm font-semibold">{company.regulation}</p>
+                  <div className="rounded-lg bg-muted/50 p-[clamp(0.7rem,1vw,0.9rem)]">
+                    <p className="mb-[clamp(0.3rem,0.5vw,0.45rem)] text-muted-foreground fluid-caption font-medium">Regulacja</p>
+                    <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">
+                      {company.regulation}
+                    </p>
                   </div>
                 )}
                 
                 {company.country && (
-                  <div className="rounded-lg bg-muted/50 p-3">
-                    <p className="text-xs font-medium text-muted-foreground mb-1">Kraj</p>
-                    <p className="text-sm font-semibold">{company.country}</p>
+                  <div className="rounded-lg bg-muted/50 p-[clamp(0.7rem,1vw,0.9rem)]">
+                    <p className="mb-[clamp(0.3rem,0.5vw,0.45rem)] text-muted-foreground fluid-caption font-medium">Kraj</p>
+                    <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold text-foreground">{company.country}</p>
                   </div>
                 )}
 
                 {company.licenses.length > 0 && (
                   <div>
-                    <p className="text-xs font-medium text-muted-foreground mb-2">Licencje</p>
-                    <div className="flex flex-wrap gap-1">
+                    <p className="mb-[clamp(0.4rem,0.6vw,0.55rem)] text-muted-foreground fluid-caption font-medium">Licencje</p>
+                    <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                       {company.licenses.map((license, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs">
+                        <Badge key={idx} variant="outline" className="fluid-badge font-medium">
                           {license}
                         </Badge>
                       ))}

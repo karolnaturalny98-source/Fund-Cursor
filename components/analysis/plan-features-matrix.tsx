@@ -148,8 +148,10 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
   return (
     <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader>
-        <CardTitle>Matryca Porównania Planów</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-[clamp(1rem,0.45vw+0.9rem,1.25rem)] font-semibold text-foreground">
+          Matryca Porównania Planów
+        </CardTitle>
+        <CardDescription className="fluid-caption">
           Szczegółowe porównanie cech wszystkich planów. Kliknij nagłówki kolumn aby sortować.
         </CardDescription>
       </CardHeader>
@@ -158,36 +160,44 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b">
-                <th className="p-3 text-left text-sm font-semibold">Firma</th>
-                <th className="p-3 text-left text-sm font-semibold">Plan</th>
-                <th className="p-3 text-left text-sm font-semibold">
-                  <div className="flex items-center gap-1">
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  Firma
+                </th>
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  Plan
+                </th>
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     Cena
                     <SortButton column="price" />
                   </div>
                 </th>
-                <th className="p-3 text-left text-sm font-semibold">Model</th>
-                <th className="p-3 text-left text-sm font-semibold">
-                  <div className="flex items-center gap-1">
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  Model
+                </th>
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     Max Drawdown
                     <SortButton column="maxDrawdown" />
                   </div>
                 </th>
-                <th className="p-3 text-left text-sm font-semibold">
-                  <div className="flex items-center gap-1">
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     Cel Zysku
                     <SortButton column="profitTarget" />
                   </div>
                 </th>
-                <th className="p-3 text-left text-sm font-semibold">
-                  <div className="flex items-center gap-1">
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     Dźwignia
                     <SortButton column="leverage" />
                   </div>
                 </th>
-                <th className="p-3 text-left text-sm font-semibold">Podział Zysku</th>
-                <th className="p-3 text-left text-sm font-semibold">
-                  <div className="flex items-center gap-1">
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  Podział Zysku
+                </th>
+                <th className="p-[clamp(0.75rem,1.1vw,1rem)] text-left text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold">
+                  <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     Min. Dni
                     <SortButton column="minTradingDays" />
                   </div>

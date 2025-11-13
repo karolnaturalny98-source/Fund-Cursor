@@ -153,8 +153,8 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
         href={item.href}
         onClick={handleClick}
         className={cn(
-          "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-          "hover:bg-accent/50 hover:shadow-xs",
+          "group relative flex items-center gap-[clamp(0.55rem,0.85vw,0.8rem)] rounded-2xl px-[clamp(0.9rem,1.3vw,1.15rem)] py-[clamp(0.6rem,0.85vw,0.75rem)] text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)] font-medium transition-all duration-200",
+          "hover:bg-accent/40 hover:shadow-xs",
           collapsed ? "justify-center" : "justify-start",
           isActive
             ? "bg-primary/10 text-primary shadow-xs border-l-2 border-primary"
@@ -163,7 +163,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
       >
         <Icon 
           className={cn(
-            "h-5 w-5 shrink-0 transition-all duration-200",
+            "h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] shrink-0 transition-all duration-200",
             isActive 
               ? "text-primary scale-110" 
               : "group-hover:scale-105 group-hover:text-foreground"
@@ -171,12 +171,14 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
         />
         {!collapsed && (
           <>
-            <span className="flex-1 truncate font-medium">{item.label}</span>
+            <span className="flex-1 truncate font-medium text-[clamp(0.9rem,0.4vw+0.8rem,1rem)]">
+              {item.label}
+            </span>
             {item.badge !== undefined && item.badge !== null && (
               <Badge
                 variant={isActive ? "default" : "outline-solid"}
                 className={cn(
-                  "ml-auto h-5 min-w-5 px-1.5 text-xs font-semibold transition-all duration-200",
+                  "ml-auto fluid-badge min-w-[clamp(1.75rem,2.4vw,2rem)] justify-center font-semibold transition-all duration-200",
                   isActive && "bg-primary text-primary-foreground"
                 )}
               >
@@ -224,21 +226,29 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
         collapsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex h-16 items-center border-b border-border/50 px-3 bg-card/72 backdrop-blur-[36px]!">
+      <div className="flex h-[clamp(3.75rem,5vw,4.25rem)] items-center border-b border-border/50 px-[clamp(0.9rem,1.3vw,1.15rem)] bg-card/72 backdrop-blur-[36px]!">
         {!collapsed ? (
-          <div className="flex flex-1 items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
-              <span className="text-primary font-bold text-sm">A</span>
+          <div className="flex flex-1 items-center gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+            <div className="flex h-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] items-center justify-center rounded-2xl border border-primary/20 bg-linear-to-br from-primary/20 to-primary/10">
+              <span className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-bold text-primary">
+                A
+              </span>
             </div>
             <div className="flex flex-col">
-              <h2 className="text-base font-semibold leading-none">Panel admina</h2>
-              <span className="text-xs text-muted-foreground mt-0.5">FundedRank</span>
+              <h2 className="text-[clamp(1rem,0.45vw+0.9rem,1.15rem)] font-semibold leading-none text-foreground">
+                Panel admina
+              </h2>
+              <span className="mt-[clamp(0.2rem,0.35vw,0.3rem)] text-[clamp(0.8rem,0.33vw+0.7rem,0.9rem)] text-muted-foreground">
+                FundedRank
+              </span>
             </div>
           </div>
         ) : (
           <div className="flex flex-1 items-center justify-center">
-            <div className="h-8 w-8 rounded-lg bg-linear-to-br from-primary/20 to-primary/10 flex items-center justify-center border border-primary/20">
-              <span className="text-primary font-bold text-sm">A</span>
+            <div className="flex h-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] items-center justify-center rounded-2xl border border-primary/20 bg-linear-to-br from-primary/20 to-primary/10">
+              <span className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-bold text-primary">
+                A
+              </span>
             </div>
           </div>
         )}
@@ -246,26 +256,26 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 hover:bg-accent/50 transition-all duration-200"
+            className="h-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] rounded-full hover:bg-accent/50 transition-all duration-200"
             onClick={toggle}
             aria-label={collapsed ? "Rozwiń sidebar" : "Zwiń sidebar"}
           >
             {collapsed ? (
-              <ChevronRight className="h-4 w-4 transition-transform duration-200" />
+              <ChevronRight className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)] transition-transform duration-200" />
             ) : (
-              <ChevronLeft className="h-4 w-4 transition-transform duration-200" />
+              <ChevronLeft className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)] transition-transform duration-200" />
             )}
           </Button>
         )}
       </div>
 
-      <nav className="flex-1 overflow-y-auto p-3 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-        <div className="space-y-1">
+      <nav className="flex-1 overflow-y-auto p-[clamp(0.85rem,1.2vw,1.1rem)] scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
           {items.map((item, index) => (
             <div key={item.value}>
               <NavLink item={item} />
               {index < items.length - 1 && !collapsed && (
-                <div className="h-px bg-border/30 my-1.5 mx-3" />
+                <div className="mx-[clamp(0.75rem,1.1vw,1rem)] my-[clamp(0.35rem,0.55vw,0.5rem)] h-px bg-border/30" />
               )}
             </div>
           ))}

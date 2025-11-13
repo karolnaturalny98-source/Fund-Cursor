@@ -40,7 +40,7 @@ function CompanyAvatar({
           height={44}
           sizes="44px"
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 bg-background/60 object-contain shadow-xs"
+          className="h-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] w-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] rounded-2xl border border-border/60 bg-background/60 object-contain shadow-xs"
         />
       </div>
     );
@@ -54,7 +54,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-white/5 text-sm font-semibold text-primary shadow-xs">
+    <div className="flex h-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] w-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] items-center justify-center rounded-2xl border border-border/60 bg-white/5 text-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)] font-semibold text-primary shadow-xs">
       {initials}
     </div>
   );
@@ -73,11 +73,11 @@ function getCompanyMeta(company: HomeRankingCompany): string {
 
 function RatingBadge({ rating }: { rating: number | null }) {
   if (rating === null) {
-    return <span className="text-xs text-muted-foreground">-</span>;
+    return <span className="fluid-caption text-muted-foreground">-</span>;
   }
   return (
-    <div className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-      <Star className="h-3 w-3 fill-primary text-primary" />
+    <div className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] rounded-full border border-primary/30 bg-primary/10 px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] text-primary fluid-caption font-semibold">
+      <Star className="h-[clamp(0.65rem,0.4vw+0.55rem,0.8rem)] w-[clamp(0.65rem,0.4vw+0.55rem,0.8rem)] fill-primary text-primary" />
       {rating.toFixed(1)}
     </div>
   );
@@ -124,7 +124,7 @@ function CompanyRow({
     <TableRow
       className={`transition-all hover:bg-white/5 border-b border-border/40 ${top3Class}`}
     >
-      <TableCell className="px-6 py-5 align-top text-sm font-semibold text-muted-foreground">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm font-semibold text-muted-foreground">
         <div className="flex items-center gap-2">
           {isTop3 && (
             index === 0 ? (
@@ -136,47 +136,48 @@ function CompanyRow({
           #{index + 1}
         </div>
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
         <div className="flex items-center gap-3">
           <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={isTop3} />
           <div className="flex flex-col">
             <Link
               href={profileHref}
               prefetch={false}
-              className="text-sm font-semibold text-foreground transition-colors hover:text-primary"
+              className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground transition-colors hover:text-primary"
             >
               {company.name}
             </Link>
-            <p className="text-xs text-muted-foreground">{meta}</p>
+            <p className="fluid-caption text-muted-foreground">{meta}</p>
             {cashbackDisplay ? (
-              <p className="text-xs font-medium text-primary">{cashbackDisplay}</p>
+              <p className="fluid-caption font-medium text-primary">{cashbackDisplay}</p>
             ) : null}
           </div>
         </div>
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
         <RatingBadge rating={company.rating} />
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm text-muted-foreground">
-        {company.reviewCount.toLocaleString("pl-PL")} opinii
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm text-muted-foreground">
+        <span className="hidden sm:inline">{company.reviewCount.toLocaleString("pl-PL")} opinii</span>
+        <span className="sm:hidden">{company.reviewCount.toLocaleString("pl-PL")}</span>
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
         {hasCashback ? (
-          <PremiumBadge variant="glow" className="w-fit text-xs font-semibold">
+          <PremiumBadge variant="glow" className="w-fit fluid-badge font-semibold">
             {Math.round(cashbackRate)}%
           </PremiumBadge>
         ) : (
-          <span className="text-xs text-muted-foreground">-</span>
+          <span className="fluid-caption text-muted-foreground">-</span>
         )}
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
-      <TableCell className="px-6 py-5 align-top text-sm">
+      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
         <Button
           asChild
           variant="premium-outline"
-          className="w-full justify-center rounded-full px-4"
+          className="fluid-button w-full justify-center rounded-full"
         >
           <Link href={profileHref} prefetch={false}>
             Przejdź
@@ -201,29 +202,29 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
 
   return (
     <div className="glass-card overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto -mx-2 md:mx-0">
         <Table className="min-w-full table-fixed" aria-label="Ranking premium">
           <TableHeader className="bg-card/48">
             <TableRow className="border-b border-border/40">
-              <TableHead className="w-16 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-16 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 #
               </TableHead>
-              <TableHead className="w-72 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-72 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Firma
               </TableHead>
-              <TableHead className="w-32 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-32 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Ocena
               </TableHead>
-              <TableHead className="w-32 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-32 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Opinie
               </TableHead>
-              <TableHead className="w-40 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-40 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Cashback
               </TableHead>
-              <TableHead className="w-40 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-40 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Kod zniżkowy
               </TableHead>
-              <TableHead className="w-36 px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className="w-36 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Akcje
               </TableHead>
             </TableRow>

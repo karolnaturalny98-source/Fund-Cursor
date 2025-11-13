@@ -62,16 +62,19 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
 
   if (recentTransactions.length === 0) {
     return (
-      <section ref={sectionAnim.ref} className={`space-y-4 ${sectionAnim.className}`}>
-        <div className="space-y-1.5">
-          <h2 className="text-lg font-semibold sm:text-xl">Ostatnie transakcje</h2>
-          <p className="text-xs text-muted-foreground">
+      <section
+        ref={sectionAnim.ref}
+        className={`space-y-[clamp(1.5rem,2.2vw,2.1rem)] ${sectionAnim.className}`}
+      >
+        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <h2 className="fluid-h2 font-semibold text-foreground">Ostatnie transakcje</h2>
+          <p className="fluid-caption text-muted-foreground">
             Ostatnie transakcje cashback.
           </p>
         </div>
-        <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-          <CardContent className="p-6">
-            <p className="text-sm text-muted-foreground text-center">
+        <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+          <CardContent className="p-[clamp(1.5rem,2.3vw,2.15rem)]">
+            <p className="fluid-copy text-center text-muted-foreground">
               Brak transakcji. Zacznij od dodania pierwszej transakcji cashback.
             </p>
           </CardContent>
@@ -81,34 +84,40 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
   }
 
   return (
-    <section ref={sectionAnim.ref} className={`space-y-4 ${sectionAnim.className}`}>
-      <div className="flex items-center justify-between">
-        <div className="space-y-1.5">
-          <h2 className="text-lg font-semibold sm:text-xl">Ostatnie transakcje</h2>
-          <p className="text-xs text-muted-foreground">
+    <section
+      ref={sectionAnim.ref}
+      className={`space-y-[clamp(1.5rem,2.2vw,2.1rem)] ${sectionAnim.className}`}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.2vw,1.1rem)] sm:items-center">
+        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <h2 className="fluid-h2 font-semibold text-foreground">Ostatnie transakcje</h2>
+          <p className="fluid-caption text-muted-foreground">
             Ostatnie 5 transakcji cashback.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={openWallet} className="rounded-lg">
+        <Button variant="outline" size="sm" onClick={openWallet} className="fluid-button-sm rounded-full">
           Zobacz wszystkie
         </Button>
       </div>
-      <Card className="rounded-lg border border-border/40 bg-background/60 shadow-xs">
-        <CardContent className="p-4">
-          <div className="space-y-3">
+      <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+        <CardContent className="p-[clamp(1.25rem,1.8vw,1.6rem)]">
+          <div className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
             {recentTransactions.map((transaction) => {
               const pointsClass =
                 transaction.points >= 0 ? "text-emerald-600" : "text-rose-600";
 
               return (
-                <Card key={transaction.id} className="rounded-lg border border-border/40 bg-background/60 shadow-xs transition-all hover:shadow-md">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="space-y-1 flex-1">
-                        <p className="font-medium text-foreground">
+                <Card
+                  key={transaction.id}
+                  className="rounded-2xl border border-border/60 bg-background/60/80 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-premium"
+                >
+                  <CardContent className="p-[clamp(1rem,1.5vw,1.35rem)]">
+                    <div className="flex items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">
+                      <div className="flex-1 space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                        <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-medium text-foreground">
                           {transaction.company ? (
                             <Link
-                              className="hover:underline hover:text-primary transition-colors"
+                              className="transition-colors hover:text-primary hover:underline"
                               href={`/firmy/${transaction.company.slug}`}
                             >
                               {transaction.company.name}
@@ -117,17 +126,22 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
                             "Firma usunięta"
                           )}
                         </p>
-                        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                        <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                           <span>{formatDate(transaction.createdAt)}</span>
                           <Badge
                             variant="outline"
-                            className="rounded-full text-xs"
+                            className="fluid-badge rounded-full font-medium"
                           >
                             {statusLabels[transaction.status]}
                           </Badge>
                         </div>
                       </div>
-                      <span className={cn("text-xs font-semibold", pointsClass)}>
+                      <span
+                        className={cn(
+                          "text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold",
+                          pointsClass,
+                        )}
+                      >
                         {formatPoints(transaction.points)}
                       </span>
                     </div>

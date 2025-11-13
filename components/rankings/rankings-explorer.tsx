@@ -724,7 +724,7 @@ export function RankingsExplorer({
   };
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-[clamp(1.75rem,2.8vw,3rem)]">
       <FilterPanel
         filters={filters}
         searchDraft={searchDraft}
@@ -739,15 +739,18 @@ export function RankingsExplorer({
         onQuickFilter={applyQuickFilter}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-semibold text-foreground">Rankingi</h2>
-          <p className="text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-[clamp(0.85rem,1.5vw,1.5rem)]">
+        <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+          <h2 className="fluid-h2 font-semibold text-foreground">Rankingi</h2>
+          <p className="fluid-copy text-muted-foreground">
             Eksploruj rozne perspektywy – wybierz zakladke, aby zobaczyc firmowe
             zestawienie wedlug dopasowanego algorytmu.
           </p>
         </div>
-        <PremiumBadge variant="outline" className="border-primary/30 bg-secondary/20 text-secondary-foreground">
+        <PremiumBadge
+          variant="outline"
+          className="fluid-badge border-primary/30 bg-secondary/20 text-secondary-foreground"
+        >
           Dane odswiezone: {new Date(data.generatedAt).toLocaleString("pl-PL")}
         </PremiumBadge>
       </div>
@@ -756,7 +759,7 @@ export function RankingsExplorer({
         value={activeConfig.id}
         onValueChange={(value) => setActiveTab(value as RankingTabId)}
       >
-        <TabsList className="flex flex-wrap justify-start gap-2 rounded-lg border border-border/40 bg-background/60 p-1 shadow-xs">
+        <TabsList className="flex flex-wrap justify-start gap-[clamp(0.65rem,1vw,1rem)] rounded-xl border border-border/40 bg-background/60 p-[clamp(0.4rem,0.8vw,0.6rem)] shadow-xs">
           {RANKING_TABS.map((tab) => {
             const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
               Award,
@@ -772,9 +775,9 @@ export function RankingsExplorer({
               <TabsTrigger
                 key={tab.id}
                 value={tab.id}
-                className="min-w-[140px] flex-1 gap-2 rounded-lg border border-border/40 bg-background/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+                className="min-w-[clamp(8.5rem,12vw,10.5rem)] flex-1 gap-[clamp(0.5rem,0.8vw,0.75rem)] rounded-xl border border-border/40 bg-background/60 text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold transition-all data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
                 {tab.label}
               </TabsTrigger>
             );
@@ -782,8 +785,8 @@ export function RankingsExplorer({
         </TabsList>
         {RANKING_TABS.map((tab) => (
           <TabsContent key={tab.id} value={tab.id} className="space-y-6">
-            <p className="text-sm text-muted-foreground">{tab.description}</p>
-            <p className="text-xs text-muted-foreground" aria-live="polite">
+            <p className="fluid-copy text-muted-foreground">{tab.description}</p>
+            <p className="fluid-caption text-muted-foreground" aria-live="polite">
               {sortedCompanies.length.toLocaleString("pl-PL")} firm w zakladce{" "}
               <span className="font-semibold text-foreground">{tab.label}</span>
             </p>
@@ -794,7 +797,7 @@ export function RankingsExplorer({
               </div>
             ) : null}
 
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-between gap-[clamp(0.85rem,1.2vw,1.25rem)]">
             {sortedCompanies.length > 0 && (
               <RankingsExportButton
                 companies={sortedCompanies}
@@ -893,14 +896,14 @@ function FilterPanel({
   return (
     <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
       <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-2 text-base font-semibold">
-          <Filter className="h-5 w-5 text-primary" />
+        <CardTitle className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)] text-[clamp(1.05rem,0.6vw+0.95rem,1.25rem)] font-semibold">
+          <Filter className="h-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] w-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] text-primary" />
           Filtry rankingu
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="mb-4 flex flex-wrap items-center gap-1.5">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+        <div className="mb-4 flex flex-wrap items-center gap-[clamp(0.45rem,0.75vw,0.7rem)]">
+          <span className="fluid-caption uppercase tracking-wider text-muted-foreground/70">
             Szybkie filtry:
           </span>
           <Button
@@ -908,7 +911,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("top10")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Top 10
           </Button>
@@ -917,7 +920,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("highest-cashback")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najwyższy cashback
           </Button>
@@ -926,7 +929,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("most-popular")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najpopularniejsze
           </Button>
@@ -935,7 +938,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("most-reviews")}
-            className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najwięcej opinii
           </Button>
@@ -944,17 +947,17 @@ function FilterPanel({
           className="flex flex-col gap-4"
           onSubmit={(event) => event.preventDefault()}
         >
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
             <div className="relative min-w-[220px] flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={searchDraft}
                 onChange={(event) => onSearchDraftChange(event.target.value)}
                 placeholder="Szukaj firmy po nazwie lub slugu..."
-                className="h-11 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
+                className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)]"
               />
             </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
               <FilterSelect
                 label="Kraj"
                 value={filters.country ?? ""}
@@ -983,7 +986,7 @@ function FilterPanel({
             </div>
           </div>
           {activeChips.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-border/50 bg-background/60 px-4 py-3 text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl border border-border/50 bg-background/60 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.75rem,1.1vw,1.1rem)] text-muted-foreground fluid-caption">
               <span className="font-semibold uppercase tracking-wide text-muted-foreground/80">
                 Aktywne filtry
               </span>
@@ -991,18 +994,18 @@ function FilterPanel({
                 <PremiumBadge
                   variant="outline"
                   key={chip.key}
-                  className="flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold cursor-pointer transition-colors hover:bg-destructive/10 hover:text-destructive hover:border-destructive/50"
+                  className="flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] fluid-caption font-semibold cursor-pointer transition-colors hover:bg-destructive/10 hover:text-destructive hover:border-destructive/50"
                   onClick={() => onFilterRemove(chip.key)}
                   aria-label={`Usun filtr ${chip.label}`}
                 >
                   {chip.label}
-                  <X className="h-3 w-3" />
+                  <X className="h-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)] w-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)]" />
                 </PremiumBadge>
               ))}
             </div>
           ) : null}
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
+            <label className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground fluid-copy">
               Min. opinii
               <Input
                 type="number"
@@ -1013,29 +1016,29 @@ function FilterPanel({
                     minReviews: Math.max(0, Number(event.target.value) || 0),
                   })
                 }
-                className="h-11 w-24 rounded-full border-border/60 text-center"
+                className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] w-24 rounded-full border-border/60 text-center text-[clamp(0.9rem,0.35vw+0.8rem,1rem)]"
               />
             </label>
-            <label className="flex cursor-pointer items-center gap-2 rounded-full border border-border/60 bg-background/60 px-4 py-2 text-sm text-muted-foreground transition hover:border-primary/50 hover:text-foreground">
+            <label className="flex cursor-pointer items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] rounded-full border border-border/60 bg-background/60 px-[clamp(1rem,1.4vw,1.4rem)] py-[clamp(0.6rem,0.9vw,0.85rem)] text-muted-foreground transition hover:border-primary/50 hover:text-foreground fluid-caption">
               <input
                 type="checkbox"
                 checked={filters.hasCashback}
                 onChange={(event) =>
                   onFiltersChange({ hasCashback: event.target.checked })
                 }
-                className="h-4 w-4 rounded border-border/60 text-primary focus:ring-primary"
+                className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] rounded border-border/60 text-primary focus:ring-primary"
               />
               Tylko firmy z cashback
             </label>
-            <div className="ml-auto flex items-center gap-2">
+            <div className="ml-auto flex items-center gap-[clamp(0.65rem,1vw,1rem)]">
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
                 onClick={() => onFiltersChange({})}
-                className="rounded-full border border-border/60 px-3 text-sm text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+                className="rounded-full border border-border/60 px-[clamp(0.85rem,1.2vw,1.2rem)] text-muted-foreground transition hover:border-primary/40 hover:text-primary fluid-button-sm"
               >
-                <RefreshCw className="mr-1 h-3.5 w-3.5" />
+                <RefreshCw className="mr-1 h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)]" />
                 Odswiez
               </Button>
               {hasActiveFilters ? (
@@ -1044,7 +1047,7 @@ function FilterPanel({
                   variant="ghost"
                   size="sm"
                   onClick={resetFilters}
-                  className="rounded-full border border-destructive/40 px-3 text-sm text-destructive transition hover:border-destructive hover:bg-destructive/10"
+                  className="rounded-full border border-destructive/40 px-[clamp(0.85rem,1.2vw,1.2rem)] text-destructive transition hover:border-destructive hover:bg-destructive/10 fluid-button-sm"
                 >
                   Wyczysc filtry
                 </Button>
@@ -1070,14 +1073,14 @@ function FilterSelect({
   icon?: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)]">
       {Icon && (
-        <div className="rounded-lg bg-primary/10 p-2 text-primary">
-          <Icon className="h-4 w-4" />
+        <div className="rounded-lg bg-primary/10 p-[clamp(0.55rem,0.8vw,0.7rem)] text-primary">
+          <Icon className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
         </div>
       )}
       <Select value={value || "all"} onValueChange={(val) => onChange(val === "all" ? "" : val)}>
-        <SelectTrigger className="h-11 w-[180px] rounded-full border-border/60 bg-background/60 text-sm">
+        <SelectTrigger className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] w-[clamp(10.5rem,14vw,12.5rem)] rounded-full border-border/60 bg-background/60 text-[clamp(0.9rem,0.35vw+0.8rem,1rem)]">
           <SelectValue placeholder={label} />
         </SelectTrigger>
         <SelectContent>
@@ -1238,12 +1241,12 @@ const RankingRow = memo(function RankingRow({
           <PremiumBadge
             variant="glow"
             title="Firma w Top 5 wzrostu"
-            className="mt-2 w-fit border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-300"
+            className="mt-2 w-fit border-emerald-500/30 bg-emerald-500/10 fluid-badge font-semibold text-emerald-300"
           >
             Top rosnacy
           </PremiumBadge>
         ) : null}
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-1 fluid-caption text-muted-foreground">
           {company.reviewCount.toLocaleString("pl-PL")} opinii
         </p>
       </TableCell>
@@ -1259,7 +1262,7 @@ const RankingRow = memo(function RankingRow({
         <Button
           asChild
           variant="premium-outline"
-          className="w-full justify-center rounded-full px-4"
+          className="fluid-button w-full justify-center rounded-full"
         >
           <Link href={getCompanyHref(company)} prefetch={false}>
             Przejdz
@@ -1309,19 +1312,19 @@ function CompanyCell({ company, priority = false }: { company: RankingCompanySna
   }, [company.cashbackRate, company.maxPlanPrice]);
   
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-[clamp(0.85rem,1.2vw,1.25rem)]">
       <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={priority} />
       <div className="flex flex-col">
         <Link
           href={profileHref}
           prefetch={false}
-          className="text-sm font-semibold text-foreground transition-colors hover:text-primary"
+          className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground transition-colors hover:text-primary"
         >
           {company.name}
         </Link>
-        <p className="text-xs text-muted-foreground">{meta}</p>
+        <p className="fluid-caption text-muted-foreground">{meta}</p>
         {cashbackDisplay ? (
-          <p className="text-xs font-medium text-primary">{cashbackDisplay}</p>
+          <p className="fluid-caption font-medium text-primary">{cashbackDisplay}</p>
         ) : null}
       </div>
     </div>
@@ -1348,10 +1351,10 @@ function CompanyAvatar({
           height={44}
           sizes="44px"
           priority={priority}
-          className="h-11 w-11 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! object-contain shadow-xs"
+          className="h-[clamp(2.5rem,2.5vw+2rem,3.25rem)] w-[clamp(2.5rem,2.5vw+2rem,3.25rem)] rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! object-contain shadow-xs"
         />
-        <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">
-          <CheckCircle2 className="h-3 w-3 text-white" />
+        <div className="absolute -right-1 -top-1 flex h-[clamp(1.1rem,0.4vw+1rem,1.25rem)] w-[clamp(1.1rem,0.4vw+1rem,1.25rem)] items-center justify-center rounded-full border-2 border-background bg-emerald-500">
+          <CheckCircle2 className="h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] text-white" />
         </div>
       </div>
     );
@@ -1366,11 +1369,11 @@ function CompanyAvatar({
 
   return (
     <div className="relative">
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! text-sm font-semibold text-muted-foreground shadow-xs">
+      <div className="flex h-[clamp(2.5rem,2.5vw+2rem,3.25rem)] w-[clamp(2.5rem,2.5vw+2rem,3.25rem)] items-center justify-center rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold text-muted-foreground shadow-xs">
         {initials}
       </div>
-      <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500">
-        <CheckCircle2 className="h-3 w-3 text-white" />
+      <div className="absolute -right-1 -top-1 flex h-[clamp(1.1rem,0.4vw+1rem,1.25rem)] w-[clamp(1.1rem,0.4vw+1rem,1.25rem)] items-center justify-center rounded-full border-2 border-background bg-emerald-500">
+        <CheckCircle2 className="h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] text-white" />
       </div>
     </div>
   );
@@ -1382,7 +1385,7 @@ function ScoreBadge({ score }: { score: number }) {
       variant="glow"
       title={score.toFixed(1) + " / 100"}
       className={cn(
-        "px-3 py-1 text-sm font-semibold",
+        "fluid-badge font-semibold",
         getScoreTone(score),
       )}
     >
@@ -1393,13 +1396,13 @@ function ScoreBadge({ score }: { score: number }) {
 
 function RatingBadge({ rating }: { rating: number | null }) {
   if (rating === null) {
-    return <span className="text-xs text-muted-foreground">-</span>;
+    return <span className="fluid-caption text-muted-foreground">-</span>;
   }
   return (
     <PremiumBadge
       variant="glow"
       title={rating.toFixed(2) + " / 5"}
-      className="border-primary/30 bg-primary/10 px-2.5 py-1 text-sm font-semibold text-primary"
+      className="border-primary/30 bg-primary/10 fluid-badge font-semibold text-primary"
     >
       {rating.toFixed(1)}
     </PremiumBadge>
@@ -1414,13 +1417,13 @@ function CategoryBadge({
   value: number | null;
 }) {
   if (value === null) {
-    return <span className="text-xs text-muted-foreground">-</span>;
+    return <span className="fluid-caption text-muted-foreground">-</span>;
   }
   return (
     <PremiumBadge
       variant="outline"
       title={label + ": " + value.toFixed(2) + " / 5"}
-      className="border-primary/30 bg-secondary/20 px-2.5 py-1 text-sm font-semibold text-secondary-foreground"
+      className="border-primary/30 bg-secondary/20 fluid-badge font-semibold text-secondary-foreground"
     >
       {value.toFixed(1)}
     </PremiumBadge>
@@ -1450,14 +1453,16 @@ function MetricBar({
   const widthPercent = Math.max(ratio * 100, hasValue && (numericValue ?? 0) > 0 ? 6 : 0);
   return (
     <div
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-[clamp(0.45rem,0.7vw,0.65rem)]"
       title={
         hasValue && max > 0
           ? formatted + " (" + Math.round(ratio * 100).toString() + "% z max)"
           : formatted
       }
     >
-      <span className="text-sm font-semibold text-foreground">{formatted}</span>
+      <span className="text-[clamp(0.9rem,0.35vw+0.8rem,1rem)] font-semibold text-foreground">
+        {formatted}
+      </span>
       <div className="h-2.5 w-full rounded-full bg-muted">
         <div
           className="h-full rounded-full bg-primary transition-[width] w-[var(--progress-width)]"
