@@ -21,26 +21,26 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
 
   if (affiliates.length === 0) {
     return (
-      <section className="container space-y-6 py-12">
-        <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
-          <div className="space-y-3 mb-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+      <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+        <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}>
+          <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+            <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
               Nasi affilaci
             </p>
-            <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+            <h2 className="font-semibold text-foreground fluid-h2">
               Dołącz do grona affilatów
             </h2>
-            <p className="max-w-3xl text-sm text-muted-foreground">
+            <p className="max-w-3xl text-muted-foreground fluid-copy">
               Zobacz, kto już współpracuje z nami i promuje FundedRank w swoich kanałach.
             </p>
           </div>
-        <Card className="group relative overflow-hidden rounded-3xl border border-dashed border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md">
+        <Card className="group relative overflow-hidden rounded-3xl border border-dashed border-border/60 bg-card/72 p-[clamp(1.5rem,2vw,1.9rem)] shadow-xs transition-all hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-foreground">
+            <CardTitle className="font-semibold text-foreground fluid-copy">
               Ty możesz być pierwszy
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
+          <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)] text-muted-foreground fluid-copy">
             <p>
               Dołącz do FundedRank jako affilat i otrzymuj materiały,
               które pomogą Twojej społeczności lepiej wybierać konta
@@ -54,20 +54,20 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
   }
 
   return (
-    <section className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
-        <div className="space-y-3 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}>
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+          <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Nasi affilaci
           </p>
-          <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+          <h2 className="font-semibold text-foreground fluid-h2">
             Dołącz do grona affilatów
           </h2>
-          <p className="max-w-3xl text-sm text-muted-foreground">
+          <p className="max-w-3xl text-muted-foreground fluid-copy">
             Zobacz, kto już współpracuje z nami i promuje FundedRank w swoich kanałach.
           </p>
         </div>
-      <div ref={cardsAnim.ref} className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div ref={cardsAnim.ref} className="grid gap-[clamp(1rem,1.5vw,1.35rem)] md:grid-cols-2 lg:grid-cols-3">
         {affiliates.map((affiliate, index) => (
           <div
             key={affiliate.id}
@@ -77,42 +77,42 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
           <Card 
-            className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.5rem,2vw,1.9rem)] shadow-xs transition-all hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!"
           >
-            <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+            <CardHeader className="flex flex-row items-center justify-between gap-[clamp(0.75rem,1.1vw,1rem)] pb-[clamp(0.75rem,1.1vw,1rem)]">
               <div>
-                <CardTitle className="text-base font-semibold text-foreground">
+                <CardTitle className="font-semibold text-foreground fluid-copy">
                   {affiliate.handle}
                 </CardTitle>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-muted-foreground fluid-caption">
                   {affiliate.bio ?? "Affilat FundedRank"}
                 </p>
               </div>
-              <PremiumBadge variant="outline" className="rounded-full border-primary/30 text-xs">
+              <PremiumBadge variant="outline" className="rounded-full border-primary/30 fluid-badge">
                 {affiliate.platform}
               </PremiumBadge>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-3 text-sm text-primary">
+            <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
+              <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] text-primary fluid-caption">
                 {affiliate.audienceSize ? (
-                  <span className="font-semibold">
+                  <span className="font-semibold text-foreground fluid-copy">
                     {affiliate.audienceSize.toLocaleString("pl-PL")} obserwujących
                   </span>
                 ) : (
-                  <span className="text-muted-foreground">Nowa współpraca</span>
+                  <span className="text-muted-foreground fluid-caption">Nowa współpraca</span>
                 )}
               </div>
               {affiliate.socialLinks.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.6rem)]">
                   {affiliate.socialLinks.slice(0, 2).map((link) => (
                     <Link
                       key={link}
                       href={link}
-                      className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
+                      className="inline-flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)] rounded-full border border-primary/30 px-[clamp(0.9rem,1.3vw,1.2rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] text-primary fluid-caption transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Link <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="h-3 w-3" hoverGlow />
+                      Link <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" hoverGlow />
                     </Link>
                   ))}
                 </div>

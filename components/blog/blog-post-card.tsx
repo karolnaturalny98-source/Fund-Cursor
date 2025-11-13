@@ -12,9 +12,9 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link href={`/baza-wiedzy/${post.slug}`}>
-      <Card className="group h-full overflow-hidden rounded-lg border border-border/40 bg-background/60 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/30 hover:shadow-md">
+      <Card className="group h-full overflow-hidden rounded-2xl border border-border/40 bg-background/60 shadow-xs transition-all hover:border-primary/30 hover:shadow-md backdrop-blur-[36px]!">
         {post.featuredImageUrl && (
-          <div className="relative h-40 w-full overflow-hidden">
+          <div className="relative h-[clamp(9rem,13vw,11rem)] w-full overflow-hidden">
             <Image
               src={post.featuredImageUrl}
               alt={post.title}
@@ -24,27 +24,27 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             />
           </div>
         )}
-        <CardContent className="p-4">
-          <div className="mb-2 flex flex-wrap gap-1.5">
+        <CardContent className="space-y-[clamp(0.65rem,0.95vw,0.85rem)] p-[clamp(1rem,1.4vw,1.2rem)]">
+          <div className="flex flex-wrap gap-[clamp(0.35rem,0.5vw,0.45rem)]">
             {post.categories.map((category) => (
               <Badge
                 key={category.id}
                 variant="outline"
-                className="rounded-full text-xs font-normal"
+                className="rounded-full font-normal fluid-caption"
               >
                 {category.name}
               </Badge>
             ))}
           </div>
-          <h2 className="mb-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary line-clamp-2">
+          <h2 className="text-foreground transition-colors group-hover:text-primary line-clamp-2 fluid-copy font-semibold">
             {post.title}
           </h2>
           {post.excerpt && (
-            <p className="mb-3 line-clamp-2 text-sm text-muted-foreground">
+            <p className="line-clamp-2 text-muted-foreground fluid-caption">
               {post.excerpt}
             </p>
           )}
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <div className="flex items-center justify-between text-muted-foreground fluid-caption">
             <span>
               {post.publishedAt &&
                 format(new Date(post.publishedAt), "d MMMM yyyy")}

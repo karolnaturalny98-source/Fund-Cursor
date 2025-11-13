@@ -42,21 +42,24 @@ export function AffiliateBenefits() {
   const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(benefits.length).fill(false);
 
   return (
-    <section id="affiliate-benefits" className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
-        <div className="space-y-3 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+    <section id="affiliate-benefits" className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+      <div
+        ref={sectionAnim.ref}
+        className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}
+      >
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+          <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Korzyści
           </p>
-          <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+          <h2 className="font-semibold text-foreground fluid-h2">
             Dlaczego warto zostać affilatem?
           </h2>
-          <p className="max-w-3xl text-sm text-muted-foreground">
+          <p className="max-w-3xl text-muted-foreground fluid-copy">
             Program affilacyjny FundedRank został stworzony, aby nagradzać partnerów, 
             którzy pomagają użytkownikom w wyborze najlepszych firm prop tradingowych.
           </p>
         </div>
-        <div ref={cardsAnim.ref} className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div ref={cardsAnim.ref} className="grid gap-[clamp(1rem,1.5vw,1.35rem)] md:grid-cols-2 lg:grid-cols-4">
         {benefits.map((benefit, index) => (
           <div
             key={benefit.title}
@@ -68,21 +71,21 @@ export function AffiliateBenefits() {
             style={{ transitionDelay: `var(--delay)` } as React.CSSProperties}
           >
           <Card 
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!"
           >
-            <CardHeader className="space-y-3 pb-3">
+            <CardHeader className="space-y-[clamp(0.75rem,1.1vw,1rem)] pb-[clamp(0.75rem,1.1vw,1rem)]">
               <div className="flex items-start justify-between">
-                <div className="mt-0.5 rounded-lg bg-primary/10 p-2 text-primary transition-transform group-hover:scale-110 group-hover:bg-primary/20">
+                <div className="mt-0.5 rounded-lg bg-primary/10 p-[clamp(0.6rem,0.85vw,0.75rem)] text-primary transition-transform group-hover:scale-110 group-hover:bg-primary/20">
                   <PremiumIcon icon={benefit.icon} variant="glow" size="md" hoverGlow />
                 </div>
-                <PremiumBadge variant="outline" className="rounded-full text-xs font-semibold">
+                <PremiumBadge variant="outline" className="fluid-badge rounded-full font-semibold">
                   {benefit.badge}
                 </PremiumBadge>
               </div>
-              <CardTitle className="text-lg font-semibold leading-tight">{benefit.title}</CardTitle>
+              <CardTitle className="font-semibold leading-tight text-foreground fluid-copy">{benefit.title}</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+            <CardContent className="p-0">
+              <p className="leading-relaxed text-muted-foreground fluid-caption">
                 {benefit.description}
               </p>
             </CardContent>

@@ -33,17 +33,17 @@ export default async function BlogPage() {
           speed={0.5}
         />
       </div>
-      <div className="container space-y-8 py-8 relative z-10">
+      <div className="container relative z-10 space-y-[clamp(2rem,2.8vw,2.6rem)] py-[clamp(2.5rem,3.2vw,3.25rem)]">
       {/* Hero Section */}
-      <div className="space-y-3">
-        <Badge variant="outline" className="w-fit rounded-full px-3 py-1 text-xs uppercase tracking-wide">
+      <div className="space-y-[clamp(1rem,1.4vw,1.25rem)]">
+        <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
           Baza wiedzy
         </Badge>
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <div className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+          <h1 className="font-bold tracking-tight text-foreground fluid-h1">
             Baza wiedzy
           </h1>
-          <p className="max-w-2xl text-sm text-muted-foreground">
+          <p className="max-w-2xl text-muted-foreground fluid-copy">
             Dowiedz się więcej o prop tradingu, najlepszych firmach i strategiach
             zarządzania kapitałem.
           </p>

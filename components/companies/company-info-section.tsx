@@ -24,25 +24,25 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
 
   return (
     <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
-      <CardHeader>
-        <div className="flex items-center gap-2">
-          <Building2 className="h-5 w-5 text-primary" />
-          <CardTitle className="text-xl font-semibold sm:text-2xl">
+      <CardHeader className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+        <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+          <Building2 className="h-[clamp(1.2rem,0.5vw+1rem,1.4rem)] w-[clamp(1.2rem,0.5vw+1rem,1.4rem)] text-primary" />
+          <CardTitle className="font-semibold text-foreground fluid-h2">
             Informacje o firmie
           </CardTitle>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground fluid-caption">
           Podstawowe dane firmowe i kontaktowe.
         </p>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
         {company.legalName ? (
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <Building2 className="h-4 w-4" />
+          <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+            <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+              <Building2 className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
               <span>Nazwa prawna</span>
             </div>
-            <p className="text-base font-semibold text-foreground">{company.legalName}</p>
+            <p className="font-semibold text-foreground fluid-copy">{company.legalName}</p>
           </div>
         ) : null}
 
@@ -50,34 +50,34 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
           <Separator className="bg-border/40" />
         ) : null}
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-[clamp(0.85rem,1.3vw,1.1rem)] sm:grid-cols-2">
           {company.ceo ? (
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <User className="h-4 w-4" />
+            <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+              <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+                <User className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
                 <span>CEO</span>
               </div>
-              <p className="text-sm text-foreground">{company.ceo}</p>
+              <p className="text-foreground fluid-copy">{company.ceo}</p>
             </div>
           ) : null}
 
           {company.foundedYear ? (
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <Calendar className="h-4 w-4" />
+            <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+              <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+                <Calendar className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
                 <span>Rok założenia</span>
               </div>
-              <p className="text-sm text-foreground">{company.foundedYear}</p>
+              <p className="text-foreground fluid-copy">{company.foundedYear}</p>
             </div>
           ) : null}
 
           {company.country ? (
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <Globe className="h-4 w-4" />
+            <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+              <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+                <Globe className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
                 <span>Kraj</span>
               </div>
-              <p className="text-sm text-foreground">{company.country}</p>
+              <p className="text-foreground fluid-copy">{company.country}</p>
             </div>
           ) : null}
         </div>
@@ -87,12 +87,12 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
             {(company.ceo || company.foundedYear || company.country) ? (
               <Separator className="bg-border/40" />
             ) : null}
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <MapPin className="h-4 w-4" />
+            <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+              <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+                <MapPin className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
                 <span>Adres siedziby</span>
               </div>
-              <p className="text-sm text-foreground leading-relaxed">{company.headquartersAddress}</p>
+              <p className="text-foreground leading-relaxed fluid-copy">{company.headquartersAddress}</p>
             </div>
           </>
         ) : null}
@@ -102,12 +102,12 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
             {(company.ceo || company.headquartersAddress || company.foundedYear || company.country) ? (
               <Separator className="bg-border/40" />
             ) : null}
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <Users className="h-4 w-4" />
+            <div className="space-y-[clamp(0.35rem,0.6vw,0.5rem)]">
+              <div className="flex items-center gap-[clamp(0.4rem,0.65vw,0.55rem)] font-medium text-muted-foreground fluid-caption">
+                <Users className="h-[clamp(1rem,0.45vw+0.85rem,1.2rem)] w-[clamp(1rem,0.45vw+0.85rem,1.2rem)]" />
                 <span>Założyciele</span>
               </div>
-              <p className="text-sm text-foreground leading-relaxed">{company.foundersInfo}</p>
+              <p className="text-foreground leading-relaxed fluid-copy">{company.foundersInfo}</p>
             </div>
           </>
         ) : null}

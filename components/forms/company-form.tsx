@@ -380,15 +380,15 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
   };
 
   return (
-    <div className="rounded-xl border bg-card/72 p-6 shadow-xs">
-      <h2 className="text-lg font-semibold">{isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}</h2>
-      <p className="mt-1 text-sm text-muted-foreground">
+    <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.5rem,2.3vw,2rem)] shadow-xs backdrop-blur-[36px]!">
+      <h2 className="font-semibold text-foreground fluid-h2">{isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}</h2>
+      <p className="mt-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
         {isEditMode 
           ? "Zaktualizuj informacje o firmie prop tradingowej."
           : "Uzupenij podstawowe informacje o firmie prop tradingowej. Szczegoy mozesz edytowac pozniej."}
       </p>
 
-      <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="mt-[clamp(1.5rem,2.2vw,2rem)] space-y-[clamp(1rem,1.6vw,1.4rem)]" onSubmit={handleSubmit(onSubmit)}>
         <Field label="Nazwa" error={errors.name?.message}>
           <Input placeholder="FundedRank Prop" {...register("name")} />
         </Field>
@@ -400,7 +400,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
             disabled={isEditMode}
           />
           {isEditMode && (
-            <span className="text-xs text-muted-foreground">Slug nie moze byc zmieniony po utworzeniu firmy.</span>
+            <span className="text-muted-foreground fluid-caption">Slug nie moze byc zmieniony po utworzeniu firmy.</span>
           )}
         </Field>
 
@@ -486,9 +486,9 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
           </Field>
         </div>
 
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-foreground">Linki spoecznosciowe</p>
-          <div className="grid gap-3">
+        <div className="space-y-[clamp(0.45rem,0.7vw,0.6rem)]">
+          <p className="font-semibold text-foreground fluid-copy">Linki spoecznosciowe</p>
+          <div className="grid gap-[clamp(0.6rem,0.9vw,0.8rem)]">
             <Input placeholder="Website" {...register("socialsWebsite")} />
             <Input placeholder="Twitter" {...register("socialsTwitter")} />
             <Input placeholder="Discord" {...register("socialsDiscord")} />
@@ -498,8 +498,8 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
 
         <Separator className="my-6" />
 
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold">Informacje o firmie</h3>
+        <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+          <h3 className="font-semibold text-foreground fluid-copy">Informacje o firmie</h3>
           
           <Field label="Nazwa prawna firmy" error={errors.legalName?.message}>
             <Input placeholder="FundedRank Prop Trading Ltd." {...register("legalName")} />
@@ -516,7 +516,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
                 render={({ field }) => (
                   <select
                     {...field}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-auto min-h-[2.75rem] w-full rounded-2xl border border-input bg-background px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.5rem,0.8vw,0.65rem)] fluid-caption ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <option value="">Nie wybrano</option>
                     <option value="VERIFIED">Zweryfikowana</option>
@@ -603,7 +603,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
               />
             )}
           />
-          <label htmlFor="kycRequired" className="text-sm text-foreground">
+        <label htmlFor="kycRequired" className="text-foreground fluid-copy">
             Wymagane potwierdzenie KYC
           </label>
         </div>
@@ -621,7 +621,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
           </Alert>
         ) : null}
 
-        <Button className="w-full" disabled={isSubmitting} type="submit">
+        <Button className="w-full justify-center fluid-button" disabled={isSubmitting} type="submit">
           {isSubmitting ? "Zapisywanie..." : isEditMode ? "Zaktualizuj firme" : "Dodaj firme"}
         </Button>
       </form>
@@ -641,13 +641,13 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="flex flex-col gap-1 text-sm">
-      <span className="font-medium text-foreground">{label}</span>
+    <label className="flex flex-col gap-[clamp(0.35rem,0.6vw,0.5rem)] text-foreground fluid-caption">
+      <span className="font-medium text-foreground fluid-copy">{label}</span>
       {description ? (
-        <span className="text-xs text-muted-foreground">{description}</span>
+        <span className="text-muted-foreground fluid-caption">{description}</span>
       ) : null}
       {children}
-      {error ? <span className="text-xs text-destructive">{error}</span> : null}
+      {error ? <span className="text-destructive fluid-caption">{error}</span> : null}
     </label>
   );
 }

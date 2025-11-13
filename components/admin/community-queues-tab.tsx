@@ -20,7 +20,7 @@ export function CommunityQueuesTab({
   pendingIssues,
 }: CommunityQueuesTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-[clamp(1.25rem,1.8vw,1.65rem)]">
       <SectionCard
         title="Zgłoszenia influencerów"
         description="Weryfikuj profile, ustawiaj kody polecające i oznaczaj status współpracy z twórcami."

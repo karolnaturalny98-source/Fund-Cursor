@@ -8,14 +8,8 @@ import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 
 interface HomeRankingTableProps {
   companies: HomeRankingCompany[];
@@ -63,6 +57,9 @@ function CompanyAvatar({
 function getCompanyHref(company: HomeRankingCompany): string {
   return `/firmy/${company.slug}`;
 }
+
+const HEADER_CELL_CLASSES =
+  "px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(0.85rem,1.3vw,1.35rem)] text-left fluid-caption font-semibold uppercase tracking-[0.18em] text-muted-foreground";
 
 function getCompanyMeta(company: HomeRankingCompany): string {
   const parts: string[] = [];
@@ -114,30 +111,28 @@ function CompanyRow({
   const isTop3 = index < 3;
   const top3Class = isTop3
     ? index === 0
-      ? "bg-amber-500/5 border-l-4 border-l-amber-500"
+      ? "bg-amber-500/5 border-s-4 border-amber-500/60"
       : index === 1
-        ? "bg-slate-400/5 border-l-4 border-l-slate-400"
-        : "bg-amber-700/5 border-l-4 border-l-amber-700"
+        ? "bg-slate-400/5 border-s-4 border-slate-400/60"
+        : "bg-amber-700/5 border-s-4 border-amber-700/60"
     : "";
 
   return (
-    <TableRow
-      className={`transition-all hover:bg-white/5 border-b border-border/40 ${top3Class}`}
-    >
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm font-semibold text-muted-foreground">
-        <div className="flex items-center gap-2">
+    <TableRow className={cn("border-b border-border/40 transition-colors hover:bg-card/40", top3Class)}>
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top font-semibold text-muted-foreground fluid-copy">
+        <div className="flex items-center gap-[clamp(0.4rem,0.7vw,0.65rem)]">
           {isTop3 && (
             index === 0 ? (
-              <Trophy className="h-4 w-4 text-amber-500" />
+              <Trophy className="h-[clamp(0.9rem,0.6vw+0.7rem,1.1rem)] w-[clamp(0.9rem,0.6vw+0.7rem,1.1rem)] text-amber-500" />
             ) : (
-              <Medal className="h-4 w-4 text-slate-400" />
+              <Medal className="h-[clamp(0.9rem,0.6vw+0.7rem,1.1rem)] w-[clamp(0.9rem,0.6vw+0.7rem,1.1rem)] text-slate-400" />
             )
           )}
           #{index + 1}
         </div>
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
-        <div className="flex items-center gap-3">
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+        <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
           <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={isTop3} />
           <div className="flex flex-col">
             <Link
@@ -154,14 +149,16 @@ function CompanyRow({
           </div>
         </div>
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
         <RatingBadge rating={company.rating} />
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm text-muted-foreground">
-        <span className="hidden sm:inline">{company.reviewCount.toLocaleString("pl-PL")} opinii</span>
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top text-muted-foreground fluid-caption">
+        <span className="hidden sm:inline">
+          {company.reviewCount.toLocaleString("pl-PL")} opinii
+        </span>
         <span className="sm:hidden">{company.reviewCount.toLocaleString("pl-PL")}</span>
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
         {hasCashback ? (
           <PremiumBadge variant="glow" className="w-fit fluid-badge font-semibold">
             {Math.round(cashbackRate)}%
@@ -170,10 +167,10 @@ function CompanyRow({
           <span className="fluid-caption text-muted-foreground">-</span>
         )}
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
-      <TableCell className="px-3 md:px-6 py-5 align-top text-sm">
+      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
         <Button
           asChild
           variant="premium-outline"
@@ -202,34 +199,32 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
 
   return (
     <div className="glass-card overflow-hidden">
-      <div className="overflow-x-auto -mx-2 md:mx-0">
+      <div className="-mx-2 overflow-x-auto md:mx-0">
         <Table className="min-w-full table-fixed" aria-label="Ranking premium">
           <TableHeader className="bg-card/48">
             <TableRow className="border-b border-border/40">
-              <TableHead className="w-16 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                #
-              </TableHead>
-              <TableHead className="w-72 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(3.5rem,5vw,4.75rem)]`}>#</TableHead>
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(12rem,26vw,20rem)]`}>
                 Firma
               </TableHead>
-              <TableHead className="w-32 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(8rem,14vw,10rem)]`}>
                 Ocena
               </TableHead>
-              <TableHead className="w-32 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(8rem,14vw,10rem)]`}>
                 Opinie
               </TableHead>
-              <TableHead className="w-40 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(9rem,16vw,12rem)]`}>
                 Cashback
               </TableHead>
-              <TableHead className="w-40 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(10rem,18vw,12.5rem)]`}>
                 Kod zniżkowy
               </TableHead>
-              <TableHead className="w-36 px-3 md:px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <TableHead className={`${HEADER_CELL_CLASSES} w-[clamp(9rem,14vw,11rem)]`}>
                 Akcje
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody className="text-sm text-foreground">
+          <TableBody>
             {companiesToShow.map((company, index) => (
               <CompanyRow key={company.id} company={company} index={index} />
             ))}

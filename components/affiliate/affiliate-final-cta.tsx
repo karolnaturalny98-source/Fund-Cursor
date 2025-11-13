@@ -19,16 +19,16 @@ export function AffiliateFinalCta() {
   };
 
   return (
-    <section className="container space-y-6 py-12">
-      <Card ref={ctaAnim.ref} className={`rounded-3xl border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md ${ctaAnim.className}`}>
-        <CardHeader className="space-y-4 text-center">
-          <PremiumBadge variant="glow" className="mx-auto w-fit rounded-full px-4 py-1 text-xs font-semibold">
+    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+      <Card ref={ctaAnim.ref} className={`rounded-3xl border border-primary/50 bg-card/72 shadow-md backdrop-blur-[36px]! ${ctaAnim.className}`}>
+        <CardHeader className="space-y-[clamp(1rem,1.5vw,1.35rem)] text-center">
+          <PremiumBadge variant="glow" className="mx-auto w-fit rounded-full fluid-badge font-semibold">
             Gotowy do startu?
           </PremiumBadge>
-          <CardTitle className="text-3xl font-semibold sm:text-4xl">
+          <CardTitle className="font-semibold text-foreground fluid-h2">
             Dołącz do programu affilacyjnego już dziś
           </CardTitle>
-          <p className="mx-auto max-w-2xl text-sm text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-muted-foreground fluid-copy">
             Wypełnij formularz zgłoszeniowy i zacznij zarabiać z FundedRank. 
             Pomagaj użytkownikom w wyborze najlepszych firm prop tradingowych i otrzymuj część prowizji.
           </p>
@@ -37,7 +37,7 @@ export function AffiliateFinalCta() {
           <Button
             size="lg"
             variant="premium"
-            className="rounded-full px-8 text-base"
+            className="fluid-button"
             onClick={scrollToForm}
           >
             Złóż zgłoszenie

@@ -93,27 +93,29 @@ export function ShopPurchaseForm({
   const cashbackAmount = Math.round((price * cashbackRate) / 100);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div className="rounded-xl border border-primary/30 bg-linear-to-br from-primary/10 to-primary/5 p-5">
-          <div className="flex items-center justify-between gap-4">
+    <form onSubmit={handleSubmit} className="space-y-[clamp(1.25rem,1.8vw,1.6rem)]">
+      <div className="space-y-[clamp(1rem,1.4vw,1.25rem)]">
+        <div className="rounded-2xl border border-primary/30 bg-linear-to-br from-primary/10 to-primary/5 p-[clamp(1.1rem,1.6vw,1.4rem)]">
+          <div className="flex items-center justify-between gap-[clamp(0.85rem,1.2vw,1.05rem)]">
             <div>
-              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Firma</div>
-              <div className="mt-1 text-lg font-semibold">{company.name}</div>
+              <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Firma</div>
+              <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-foreground fluid-copy">{company.name}</div>
             </div>
             <div className="text-right">
-              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Plan</div>
-              <div className="mt-1 text-lg font-semibold">{plan.name}</div>
+              <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Plan</div>
+              <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-foreground fluid-copy">{plan.name}</div>
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-2 gap-4">
-            <div className="rounded-lg border border-border/60 bg-card/72 p-3">
-              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Cena</div>
-              <div className="mt-1 text-xl font-bold">${price.toLocaleString("pl-PL")}</div>
+          <div className="mt-[clamp(1rem,1.4vw,1.25rem)] grid grid-cols-2 gap-[clamp(0.75rem,1.1vw,1rem)]">
+            <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs">
+              <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Cena</div>
+              <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">
+                ${price.toLocaleString("pl-PL")}
+              </div>
             </div>
-            <div className="rounded-lg border border-primary/30 bg-primary/10 p-3">
-              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Cashback</div>
-              <div className="mt-1 text-xl font-bold text-primary">
+            <div className="rounded-2xl border border-primary/30 bg-primary/10 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs">
+              <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Cashback</div>
+              <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-primary">
                 ${cashbackAmount.toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
             </div>
@@ -121,8 +123,8 @@ export function ShopPurchaseForm({
         </div>
 
         <SignedOut>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+          <div className="space-y-[clamp(0.6rem,0.9vw,0.8rem)]">
+            <Label htmlFor="email" className="text-foreground fluid-copy">Email</Label>
             <Input
               id="email"
               type="email"
@@ -131,20 +133,21 @@ export function ShopPurchaseForm({
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={isSubmitting}
+              className="rounded-full px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.45rem,0.7vw,0.6rem)] fluid-caption"
             />
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground fluid-caption">
               Jeśli utworzysz konto z tym emailem, zamówienie zostanie automatycznie powiązane.
             </p>
           </div>
         </SignedOut>
 
         <SignedIn>
-          <div className="rounded-xl border border-border/60 bg-card/72 p-4">
-            <div className="text-sm font-medium text-muted-foreground">Zalogowany jako</div>
-            <div className="mt-1 text-lg font-semibold">
+          <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.9rem,1.3vw,1.1rem)] shadow-xs">
+            <div className="font-medium text-muted-foreground fluid-caption">Zalogowany jako</div>
+            <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-foreground fluid-copy">
               {user?.emailAddresses[0]?.emailAddress}
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
+            <p className="mt-[clamp(0.45rem,0.65vw,0.6rem)] text-muted-foreground fluid-caption">
               Zamówienie zostanie automatycznie powiązane z Twoim kontem.
             </p>
           </div>
@@ -157,15 +160,10 @@ export function ShopPurchaseForm({
         </Alert>
       )}
 
-      <Button
-        type="submit"
-        variant="premium"
-        className="w-full"
-        disabled={isSubmitting}
-      >
+      <Button type="submit" variant="premium" className="w-full fluid-button" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 h-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)] animate-spin" />
             Przetwarzanie...
           </>
         ) : (

@@ -31,39 +31,39 @@ export default async function AnalizyPage() {
         />
       </div>
 
-      <div className="container py-12 animate-in fade-in duration-500">
+      <div className="container py-[clamp(2.5rem,3.2vw,3.25rem)] animate-in fade-in duration-500 space-y-[clamp(2rem,2.8vw,2.6rem)]">
         {/* Hero Section */}
-        <div className="mb-12 space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-4 py-2 text-sm font-medium text-primary">
-            <BarChart3 className="h-4 w-4" />
+        <div className="space-y-[clamp(1.5rem,2.2vw,2rem)] text-center">
+          <div className="inline-flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] font-medium text-primary shadow-xs backdrop-blur-[36px]!">
+            <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)]" />
             Narzędzie Analityczne
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h1 className="font-bold tracking-tight text-foreground fluid-h1">
             Zaawansowana Analiza Firm
           </h1>
 
-          <p className="mx-auto max-w-2xl text-sm sm:text-base text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-muted-foreground fluid-copy">
             Porównaj do 3 firm prop tradingowych jednocześnie. Analizuj ceny planów,
             warunki handlowe, opinie użytkowników i metryki wydajności w jednym miejscu.
           </p>
 
           {/* Feature Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-card/82">
-              <TrendingUp className="h-4 w-4 text-primary" />
+          <div className="flex flex-wrap items-center justify-center gap-[clamp(0.65rem,0.9vw,0.8rem)]">
+            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
+              <TrendingUp className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
               <span>Wykresy cenowe</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-card/82">
-              <FileText className="h-4 w-4 text-primary" />
+            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
+              <FileText className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
               <span>Porównanie planów</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-card/82">
-              <Award className="h-4 w-4 text-primary" />
+            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
+              <Award className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
               <span>Analiza opinii</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! px-4 py-2 text-sm transition-all hover:bg-card/82">
-              <BarChart3 className="h-4 w-4 text-primary" />
+            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
+              <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
               <span>Metryki wydajności</span>
             </div>
           </div>
@@ -77,66 +77,66 @@ export default async function AnalizyPage() {
         </div>
 
         {/* Info Section */}
-        <div className="mx-auto mt-16 max-w-4xl space-y-8">
-          <h2 className="text-center text-2xl font-bold">Co możesz analizować?</h2>
+        <div className="mx-auto max-w-4xl space-y-[clamp(1.5rem,2.2vw,2rem)]">
+          <h2 className="text-center font-bold text-foreground fluid-h2">Co możesz analizować?</h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <TrendingUp className="h-6 w-6 text-primary" />
+          <div className="grid gap-[clamp(1rem,1.6vw,1.4rem)] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Ceny i Historia</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Ceny i Historia</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Porównaj ceny planów, śledź zmiany historyczne i znajdź najlepsze oferty.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <FileText className="h-6 w-6 text-primary" />
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <FileText className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Warunki Handlowe</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Warunki Handlowe</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Analizuj maksymalne obciążenie, cele zysku, dźwignię i inne parametry.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <Award className="h-6 w-6 text-primary" />
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Opinie i Oceny</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Opinie i Oceny</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Zobacz średnie oceny, rozkład opinii i rekomendacje użytkowników.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <BarChart3 className="h-6 w-6 text-primary" />
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <BarChart3 className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Metryki Kluczowe</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Metryki Kluczowe</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Porównaj cashback, liczbę planów, metody płatności i dostępne instrumenty.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <TrendingUp className="h-6 w-6 text-primary" />
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Wypłaty</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Wypłaty</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Analizuj częstotliwość wypłat, czas oczekiwania i podział zysków.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-6 shadow-xs transition-all hover:shadow-md">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <Award className="h-6 w-6 text-primary" />
+            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
+                <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
-              <h3 className="font-semibold">Profile Firm</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-foreground fluid-copy">Profile Firm</h3>
+              <p className="text-muted-foreground fluid-caption">
                 Sprawdź regulacje, licencje, zespoły i certyfikaty bezpieczeństwa.
               </p>
             </div>

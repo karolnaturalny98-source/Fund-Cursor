@@ -50,8 +50,10 @@ interface TeamMemberNodeProps {
 }
 
 function TeamMemberNode({ member, isTopLevel, index, totalInLevel: _totalInLevel, isVisible }: TeamMemberNodeProps) {
-  const avatarSize = isTopLevel ? "h-20 w-20 md:h-24 md:w-24" : "h-16 w-16 md:h-20 md:w-20";
-  const textSize = isTopLevel ? "text-base md:text-lg" : "text-sm md:text-base";
+  const avatarSize = isTopLevel
+    ? "h-[clamp(4.5rem,5vw,5.5rem)] w-[clamp(4.5rem,5vw,5.5rem)]"
+    : "h-[clamp(3.5rem,4.2vw,4.5rem)] w-[clamp(3.5rem,4.2vw,4.5rem)]";
+  const nameClass = isTopLevel ? "font-semibold text-foreground fluid-copy" : "font-medium text-foreground fluid-caption";
   
   return (
     <div
@@ -71,7 +73,7 @@ function TeamMemberNode({ member, isTopLevel, index, totalInLevel: _totalInLevel
           "group-hover:border-primary/50 group-hover:ring-primary/20 group-hover:scale-105"
         )}>
           <AvatarImage src={member.profileImageUrl || undefined} alt={member.name} />
-          <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10 text-lg font-semibold md:text-xl">
+          <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10 text-[clamp(1rem,0.6vw+0.9rem,1.4rem)] font-semibold">
             {getInitials(member.name)}
           </AvatarFallback>
         </Avatar>
@@ -80,18 +82,18 @@ function TeamMemberNode({ member, isTopLevel, index, totalInLevel: _totalInLevel
             href={member.linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background bg-primary/90 text-primary-foreground transition-all hover:bg-primary hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="absolute -bottom-1 -right-1 flex h-[clamp(1.5rem,1.8vw,1.75rem)] w-[clamp(1.5rem,1.8vw,1.75rem)] items-center justify-center rounded-full border-2 border-background bg-primary/90 text-primary-foreground transition-all hover:bg-primary hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
             aria-label={`LinkedIn profil ${member.name}`}
           >
-            <ExternalLink className="h-3 w-3" />
+            <ExternalLink className="h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
           </a>
         )}
       </div>
 
       {/* Name and Role */}
-      <div className="mt-3 text-center space-y-1">
-        <p className={cn("font-semibold text-foreground", textSize)}>{member.name}</p>
-        <p className="text-xs md:text-sm text-muted-foreground">{member.role}</p>
+      <div className="mt-[clamp(0.65rem,0.9vw,0.85rem)] space-y-[clamp(0.3rem,0.45vw,0.4rem)] text-center">
+        <p className={cn(nameClass)}>{member.name}</p>
+        <p className="text-muted-foreground fluid-caption">{member.role}</p>
       </div>
     </div>
   );
@@ -220,7 +222,7 @@ export function TeamTree({ teamMembers }: TeamTreeProps) {
         containerRef.current = node;
       }}
       className={cn(
-        "relative space-y-12 md:space-y-16 py-4",
+        "relative space-y-[clamp(2rem,3vw,3.25rem)] md:space-y-[clamp(2.5rem,3.5vw,3.75rem)] py-[clamp(1rem,1.6vw,1.4rem)]",
         sectionAnim.className
       )}
       role="tree"
@@ -236,7 +238,7 @@ export function TeamTree({ teamMembers }: TeamTreeProps) {
           <div key={level} className="relative">
             {/* Level container */}
             <div className={cn(
-              "flex flex-wrap items-start justify-center gap-6 md:gap-8 lg:gap-12",
+              "flex flex-wrap items-start justify-center gap-[clamp(1.25rem,1.8vw,1.6rem)] md:gap-[clamp(1.5rem,2vw,1.9rem)] lg:gap-[clamp(2rem,2.8vw,2.5rem)]",
               isTopLevel && "justify-center"
             )}>
               {members.map((member) => {
@@ -258,7 +260,7 @@ export function TeamTree({ teamMembers }: TeamTreeProps) {
 
             {/* Connector lines between levels */}
             {nextLevel !== undefined && (
-              <div className="relative h-12 md:h-16 -mt-6 md:-mt-8">
+              <div className="relative h-[clamp(2.5rem,3vw,3rem)] md:h-[clamp(3.5rem,4vw,4rem)] -mt-[clamp(1.25rem,1.8vw,1.6rem)] md:-mt-[clamp(1.75rem,2.2vw,2rem)]">
                 <ConnectorLines
                   fromLevel={level}
                   toLevel={nextLevel}

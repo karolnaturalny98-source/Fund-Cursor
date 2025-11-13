@@ -21,25 +21,36 @@ export function SectionCard({
   footer,
 }: SectionCardProps) {
   return (
-    <Card className={cn("rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs", className)}>
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <div className="space-y-1.5">
-            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+    <Card
+      className={cn(
+        "rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all duration-200 hover:shadow-md",
+        className
+      )}
+    >
+      <CardHeader className="px-[clamp(1.1rem,1.5vw,1.6rem)] py-[clamp(1.15rem,1.7vw,1.4rem)]">
+        <div className="flex flex-col gap-[clamp(0.65rem,0.95vw,0.8rem)] sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+            <CardTitle className="text-[clamp(1.15rem,0.55vw+1.05rem,1.35rem)] font-semibold tracking-tight">
+              {title}
+            </CardTitle>
             {description && (
-              <CardDescription className="text-sm">{description}</CardDescription>
+              <CardDescription className="fluid-copy text-muted-foreground">
+                {description}
+              </CardDescription>
             )}
           </div>
           {headerActions && (
-            <div className="flex items-center gap-2">{headerActions}</div>
+            <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+              {headerActions}
+            </div>
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-[clamp(1rem,1.5vw,1.3rem)] px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.2rem,1.8vw,1.45rem)] pt-0">
         {children}
       </CardContent>
       {footer && (
-        <div className="border-t border-border/50 p-4 pt-0">
+        <div className="border-t border-border/50 px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.2rem,1.7vw,1.45rem)] pt-0">
           {footer}
         </div>
       )}

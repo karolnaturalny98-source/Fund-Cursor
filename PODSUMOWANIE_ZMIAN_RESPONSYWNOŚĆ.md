@@ -1,6 +1,10 @@
 # Podsumowanie Wdrożonych Zmian - Fluid Responsywność
 
-## ✅ Wszystkie Zmiany Zostały Zastosowane
+## Status migracji (aktualizacja 2025-11-13)
+
+- ✅ Zrealizowano: kluczowe sekcje landing page (hero, highlights, CTA), główne widoki rankingów, większość panelu użytkownika oraz szkielet panelu administracyjnego.
+- 🔄 W trakcie: komponenty tabel rankingowych, widoki firm/analiz wymagające pełnej typografii fluid, szczegółowe ekrany admin (spory, kolejki, moderacja).
+- ⏳ Do wykonania: podsieci afiliacyjne, marketingowe i FAQ oraz formularze w `components/forms/*`.
 
 ### 📋 Lista Zmodyfikowanych Komponentów
 
@@ -54,6 +58,8 @@
 #### 10. **Home Ranking Table** (`components/home/home-ranking-table.tsx`)
 - ✅ Avatary i inicjały: `clamp()` dla rozmiarów
 - ✅ Teksty i badge: `fluid-copy`, `fluid-badge`
+- ✅ Nagłówki tabeli i padding na `clamp()` + `fluid-caption`
+- ✅ Wiersze top3 korzystają z pół-transparentnych borderów `border-s-*`
 
 #### 11. **Rankings Page Client** (`components/rankings/rankings-page-client.tsx`)
 - ✅ Hero + CTA: `fluid-h1`, `fluid-copy`, `fluid-button`
@@ -219,15 +225,150 @@
 - ✅ Pionowe odstępy sekcji ustawione przez `clamp()`
 - ✅ Zgodność z docelowym tłem i layoutem panelu
 
+#### 47. **Admin Overview Dashboard** (`components/admin/overview-dashboard.tsx`)
+- ✅ Grids metryk + szybkie akcje z `clamp()` i `fluid-button`
+- ✅ Ikony CTA oraz copy skalują się płynnie
+
+#### 48. **Admin Overview Stats Grid** (`components/admin/overview-stats-grid.tsx`)
+- ✅ Nagłówki sekcji na płynnej typografii
+- ✅ Odstępy kart metryk sterowane przez `clamp()`
+
+#### 49. **Admin Overview Activity Feed** (`components/admin/overview-activity-feed.tsx`)
+- ✅ Lista aktywności z `clamp()` na paddingach i ikonach
+- ✅ Badges i timestampy przeniesione na `fluid-badge` / `fluid-caption`
+
+#### 50. **Admin Metric Card** (`components/admin/metric-card.tsx`)
+- ✅ Książkowy szklany styling z `clamp()` na headerze
+- ✅ Wartości/liczby z płynną typografią
+
+#### 51. **Admin Section Card** (`components/admin/section-card.tsx`)
+- ✅ Podstawowe wrappery panelu z płynnymi paddingami
+- ✅ Headery/footery kompatybilne z `fluid-*`
+
+#### 52. **Admin Marketing Dashboard** (`components/admin/marketing-dashboard.tsx`)
+- ✅ Nagłówek, kontrolki i tabela na `clamp()` + `fluid-*`
+- ✅ Formularze/dialogi z `fluid-copy`, `fluid-button-sm`, clampowanymi odstępami
+- ✅ Kolejność spotlightów z płynnymi przyciskami i badge’ami statusów
+
+#### 53. **Admin Cashback Dashboard** (`components/admin/cashback-dashboard.tsx`)
+- ✅ Tabs i hero sekcji wykorzystują `fluid-h2`, `fluid-copy`
+- ✅ Przełączniki zakładek skalują się proporcjonalnie
+
+#### 54. **Admin Community Dashboard** (`components/admin/community-dashboard.tsx`)
+- ✅ Typografia sekcji oraz zakładki w schemacie fluid
+- ✅ Ikony i spacing panelu reagują na szerokość viewportu
+
+#### 55. **Admin Blog Dashboard** (`components/admin/blog-dashboard.tsx`)
+- ✅ Wprowadzenie i zakładki z `clamp()` oraz `fluid` utilami
+- ✅ Spójne rozmiary ikon i copy w całym module
+
+#### 56. **Admin Content Dashboard** (`components/admin/content-dashboard.tsx`)
+- ✅ Sekcja startowa z `fluid-h2`, `fluid-copy`
+- ✅ Zakładki zarządzania z clampowanymi triggerami
+
+#### 57. **Admin Shop Dashboard** (`components/admin/shop-dashboard.tsx`)
+- ✅ Hero + opis korzystają z utili fluid
+- ✅ Tab listy skalują się proporcjonalnie przy zmianie viewportu
+
+#### 58. **Admin Support Dashboard** (`components/admin/support-dashboard.tsx`)
+- ✅ Typografia i zakładki podporządkowane `fluid-h2`, `fluid-copy`
+- ✅ Przełączniki sekcji dziedziczą clampowane odstępy
+
+#### 59. **Companies Page Client** (`components/companies/companies-page-client.tsx`)
+- ✅ Sekcja hero: `fluid-h1`, `fluid-copy`, spacing `clamp()`
+- ✅ Chipy szybkich filtrów na bazie `fluid-caption` + zaokrąglone przyciski
+- ✅ Podsumowania filtrów i badge sortowania w `fluid-caption`
+- ✅ Siatka kart firm: animacje zachowane, spacing przepięty na `clamp()`
+
+#### 60. **Company Selector** (`components/analysis/company-selector.tsx`)
+- ✅ Layout sekcji sterowany `clamp()`
+- ✅ Tytuły i listy na `fluid-copy` / `fluid-caption`
+- ✅ Buttony CTA korzystają z `fluid-button`
+- ✅ Avatar + badge kraju dopasowane do utili fluid
+
+#### 61. **Admin Disputes Dashboard** (`components/admin/disputes-dashboard.tsx`)
+- ✅ Karty statystyk: `fluid-eyebrow`, `clamp()` dla paddingów
+- ✅ Filtry statusów/przycisków korzystają z `fluid-caption` / `fluid-button-sm`
+- ✅ Wiersze spraw: typografia, badge i formularze osadzone w utilach `fluid-*`
+- ✅ Stany pusty/błędu spójne z nowym systemem
+
+#### 62. **Company Form** (`components/forms/company-form.tsx`)
+- ✅ Wrapper formularza: `fluid-h2`, `fluid-caption`, spacing na `clamp()`
+- ✅ Pola `Field` renderują etykiety na utilach fluid
+- ✅ Select i przycisk zapisu z `rounded-2xl` + `fluid-button`
+- ✅ Sekcje społeczności/firmy z elastycznymi gridami
+
+#### 63. **Influenser Applications Panel** (`components/admin/influencer-applications-panel.tsx`)
+- ✅ Tabela zgłoszeń na `fluid-caption`, nagłówki w `fluid-eyebrow`
+- ✅ Inputy/textarea z `rounded-full` + `clamp()` wysokości
+- ✅ CTA oraz dialogi wykorzystują `fluid-button-sm`
+- ✅ Komunikaty błędów/sukcesów ujednolicone z nowym systemem
+
+#### 64. **Review Moderation Panel** (`components/admin/review-moderation-panel.tsx`)
+- ✅ Karty recenzji na `fluid-copy`, badge i metadane w utilach `fluid-*`
+- ✅ Plusy/minusy jako `fluid-badge` z clampowanym spacingiem
+- ✅ Przyciski moderacji w `fluid-button-sm`, dialog zgodny z fluid
+
+#### 65. **Data Issue Moderation Panel** (`components/admin/data-issue-moderation-panel.tsx`)
+- ✅ Wrappery raportów i nagłówki w `fluid-copy` / `fluid-eyebrow`
+- ✅ Szczegóły zgłoszenia z `fluid-caption` i clampowanym gapem
+- ✅ Akcje panelu używają `fluid-button-sm`
+
+#### 66. **Affiliate Hero/Benefits/How It Works/Statistics/List/CTA** (`components/affiliate/*`)
+- ✅ Sekcje marketingowe korzystają z `fluid-h1`/`fluid-h2`/`fluid-copy`
+- ✅ Badge i buttony przepięte na `fluid-badge` / `fluid-button`
+- ✅ Karty benefitów i listy affilatów wykorzystują `clamp()` dla gapów
+- ✅ CTA oraz statystyki zachowują spójne skalowanie w programie
+
+#### 67. **About Hero** (`components/about/about-hero.tsx`)
+- ✅ Hero sekcji o nas na `fluid-h1`, `fluid-copy`, spacing `clamp()`
+- ✅ Badge zaktualizowany do `fluid-badge`
+
+#### 68. **Company FAQ Forms** (`components/forms/company-faq-form.tsx`, `components/forms/company-faq-item-form.tsx`)
+- ✅ Formularze FAQ z `rounded-2xl`, `fluid-caption`, elastycznym input spacingiem
+- ✅ Przyciski sterowane `fluid-button-sm`, komunikaty w `fluid-caption`
+
+#### 69. **Shop Page Client** (`components/shop/shop-page-client.tsx`)
+- ✅ Sekcja hero i statystyki na `fluid-h1`, `fluid-copy`, `fluid-badge`
+- ✅ Cards i zakładki otrzymały clampowane spacingi oraz typografię fluid
+- ✅ Integracja z `ShopCompanyCards`, `ShopPlanCard`, `ShopPurchaseForm`
+
+#### 70. **Shop Company Cards** (`components/shop/shop-company-cards.tsx`)
+- ✅ Statystyki, wyszukiwarka i filtry korzystają z `fluid-caption` i `clamp()`
+- ✅ Karty firm zaktualizowane o `fluid-badge`, płynne avatary i opisy
+
+#### 71. **Shop Plan Card** (`components/shop/shop-plan-card.tsx`)
+- ✅ Nazwy, ceny i opisy planów na utilach fluid
+- ✅ Sekcja cashbacku ma dopasowane `clamp()` i responsywne ikony
+
+#### 72. **Shop Purchase Form** (`components/shop/shop-purchase-form.tsx`)
+- ✅ Wyrównany layout formularza `fluid-copy`, inputy `rounded-full`
+- ✅ Podsumowanie zamówienia i CTA korzystają z `fluid-button`
+
+#### 73. **Analizy Page** (`app/analizy/page.tsx`)
+- ✅ Sekcja hero i feature pills z `fluid-h1`, `fluid-copy`, `fluid-badge`
+- ✅ Karty informacji z clampowanymi ikonami i spacingiem
+
+#### 74. **Baza Wiedzy Page** (`app/baza-wiedzy/page.tsx`)
+- ✅ Hero otrzymał `fluid-h1`, `fluid-copy`, `fluid-badge`
+- ✅ Cały layout pracuje na clampowanych spacingach
+
+#### 75. **Blog Stats & Tabs** (`components/blog/blog-statistics.tsx`, `blog-categories-tabs.tsx`, `blog-post-card.tsx`)
+- ✅ Statystyki, kategorie i karty postów używają utili `fluid-caption` / `fluid-copy`
+- ✅ Tab listy korzystają z nowego stylu `TabsTrigger`, spacing przez `clamp()`
+
+#### 76. **Companies Page Wrapper** (`app/firmy/page.tsx`)
+- ✅ Sekcja hero / obwiednia strony zaktualizowana o `clamp()` spacing
+
 ---
 
 ## 📊 Statystyki Zmian
 
-- **Zmodyfikowanych komponentów**: 46
-- **Zmienionych layoutów**: 28 (flex-col → flex-wrap/grid)
-- **Dostosowanych buttonów**: 34 (`fluid-button`, `fluid-button-sm`)
-- **Dostosowanych ikon/avatarów**: 24
-- **Dostosowanych gridów**: 11
+- **Zmodyfikowanych komponentów**: 76 (⚙️ +3: `/baza-wiedzy`, blog UI, `/firmy` wrapper)
+- **Zmienionych layoutów**: 40 (flex/grid → auto-fit/clamp)
+- **Dostosowanych buttonów**: 59 (`fluid-button`, `fluid-button-sm`)
+- **Dostosowanych ikon/avatarów**: 43
+- **Dostosowanych gridów**: 21
 - **Nowe utilsy fluid**: 9 (`fluid-h*`, `fluid-copy`, `fluid-button`, `fluid-badge`)
 
 ---
@@ -285,8 +426,7 @@
 
 ## ♻️ Status migracji
 
-- ✅ Priorytet 1 (landing + rankingi + sekcje firm i analizy) — wdrożony
-- ✅ Priorytet 2 (panel użytkownika: dashboard + sekcje) — wdrożony
-- 🔄 Priorytet 2 (admin: shell + nawigacja gotowe; widoki zakładek w toku)
-- 🔄 Kolejne etapy: opinie/blog, admin views, afiliacja, o nas/sklep/FAQ, formularze
+- 🔄 Priorytet 1 (landing + rankingi + sekcje firm i analizy) — landing + ranking table + companies/analysis selector + kluczowe company widoki zaktualizowane.
+- 🔄 Priorytet 2 (panel + admin) — panel użytkownika ukończony; admin (spory + kolejki/moderacja) w nowym systemie, pozostałe panele weryfikacyjne nadal do przejrzenia.
+- 🔄 Priorytet 3 (afiliacja, marketing, FAQ, formularze) — sekcje affiliate/about + sklep (`/sklep`) + `/analizy` + `/baza-wiedzy` oraz formularze FAQ przeniesione; większe formularze blogowe w kolejce.
 

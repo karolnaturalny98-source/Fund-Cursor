@@ -59,7 +59,7 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
     <div
       className={cn(
         "group relative flex flex-col items-center transition-all duration-500 delay-[var(--delay)]",
-        "md:shrink-0 md:w-[280px]",
+        "md:shrink-0 md:w-[clamp(16rem,18vw,18rem)]",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       )}
       style={{
@@ -67,27 +67,27 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
       } as React.CSSProperties}
     >
       {/* Timeline dot with icon */}
-      <div className="relative z-10 mb-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary/30 bg-background shadow-md ring-2 ring-primary/10 transition-all duration-300 group-hover:border-primary/50 group-hover:ring-primary/20 group-hover:scale-110">
-          <Icon className="h-5 w-5 text-primary" />
+      <div className="relative z-10 mb-[clamp(0.9rem,1.2vw,1.1rem)]">
+        <div className="flex h-[clamp(2.75rem,3vw,3rem)] w-[clamp(2.75rem,3vw,3rem)] items-center justify-center rounded-full border-2 border-primary/30 bg-background shadow-md ring-2 ring-primary/10 transition-all duration-300 group-hover:border-primary/50 group-hover:ring-primary/20 group-hover:scale-110">
+          <Icon className="h-[clamp(1.1rem,0.6vw+0.9rem,1.35rem)] w-[clamp(1.1rem,0.6vw+0.9rem,1.35rem)] text-primary" />
         </div>
       </div>
 
       {/* Card */}
-      <Card className="relative w-full max-w-[280px] rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md">
-        <CardContent className="space-y-3 p-0">
+      <Card className="relative w-full max-w-[clamp(16rem,18vw,18rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!">
+        <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)] p-0">
           {/* Year badge */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-[clamp(0.5rem,0.8vw,0.7rem)]">
             <Badge
               variant="outline"
-              className="text-xs font-semibold text-muted-foreground border-border/40 bg-muted/20"
+              className="border-border/40 bg-muted/20 font-semibold text-muted-foreground fluid-caption rounded-full"
             >
               {year}
             </Badge>
             {item.type && (
               <PremiumBadge
                 variant="outline"
-                className={cn("text-[10px] font-semibold px-2 py-0.5", typeColor)}
+                className={cn("fluid-badge rounded-full font-semibold", typeColor)}
               >
                 {typeLabel}
               </PremiumBadge>
@@ -95,18 +95,18 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-semibold leading-tight text-foreground">
+          <h3 className="font-semibold leading-tight text-foreground fluid-copy">
             {item.title}
           </h3>
 
           {/* Date */}
-          <p className="text-xs font-medium text-muted-foreground">
+          <p className="font-medium text-muted-foreground fluid-caption">
             {formattedDate}
           </p>
 
           {/* Description */}
           {item.description && (
-            <p className="text-xs leading-relaxed text-muted-foreground line-clamp-3">
+            <p className="text-muted-foreground fluid-caption leading-relaxed line-clamp-3">
               {item.description}
             </p>
           )}
@@ -146,16 +146,16 @@ export function CompanyTimeline({ timelineItems }: CompanyTimelineProps) {
         containerRef.current = node;
       }}
       className={cn(
-        "relative space-y-8 py-4",
+        "relative space-y-[clamp(1.5rem,2.2vw,2rem)] py-[clamp(1.25rem,1.8vw,1.75rem)]",
         sectionAnim.className
       )}
       role="region"
       aria-label="Historia firmy - timeline wydarzeń"
     >
       {/* Timeline items container */}
-      <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-start md:gap-8 md:overflow-x-auto md:pb-4">
+      <div className="relative flex flex-col gap-[clamp(1.25rem,1.8vw,1.6rem)] md:flex-row md:items-start md:justify-start md:gap-[clamp(1.5rem,2vw,1.9rem)] md:overflow-x-auto md:pb-[clamp(1rem,1.5vw,1.35rem)]">
         {/* Horizontal timeline line - desktop only */}
-        <div className="absolute left-0 right-0 top-6 hidden h-0.5 border-t-2 border-dashed border-border/40 md:block" />
+        <div className="absolute left-0 right-0 top-[clamp(1.4rem,1.8vw,1.7rem)] hidden h-0.5 border-t-2 border-dashed border-border/40 md:block" />
 
         {sortedItems.map((item, index) => {
           const isVisible = visibleStaggerItems[index] || false;

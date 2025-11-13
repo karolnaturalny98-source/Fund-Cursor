@@ -306,48 +306,66 @@ export function AdminDisputesDashboard({
   );
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="space-y-[clamp(1.25rem,1.8vw,1.75rem)]">
+      <div className="grid gap-[clamp(0.85rem,1.3vw,1.1rem)] sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((card) => (
-          <div key={card.key} className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">{card.label}</p>
-            <p className="mt-2 text-2xl font-semibold">{card.value}</p>
+          <div
+            key={card.key}
+            className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[36px]!"
+          >
+            <p className="fluid-eyebrow text-muted-foreground">{card.label}</p>
+            <p className="mt-[clamp(0.5rem,0.75vw,0.7rem)] text-[clamp(1.6rem,1.8vw+1.1rem,2.15rem)] font-semibold text-foreground">
+              {card.value}
+            </p>
           </div>
         ))}
       </div>
 
-      <form className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" onSubmit={handleSearch}>
-        <div className="flex flex-wrap gap-2">
+      <form
+        className="flex flex-col gap-[clamp(0.65rem,1vw,0.9rem)] sm:flex-row sm:items-center sm:justify-between"
+        onSubmit={handleSearch}
+      >
+        <div className="flex flex-wrap gap-[clamp(0.45rem,0.8vw,0.65rem)]">
           {STATUS_OPTIONS.map((option) => (
             <Button
               key={option}
               type="button"
               variant={status === option ? "default" : "outline-solid"}
               size="sm"
+              className="h-auto rounded-full px-[clamp(0.9rem,1.4vw,1.25rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption font-medium"
               onClick={() => void handleStatusChange(option)}
             >
               {STATUS_LABELS[option]}
             </Button>
           ))}
         </div>
-        <div className="flex w-full gap-2 sm:w-auto">
+        <div className="flex w-full gap-[clamp(0.5rem,0.8vw,0.7rem)] sm:w-auto">
           <Input
             placeholder="Szukaj po firmie, uzytkowniku, tytule..."
             value={searchValue}
             onChange={(event) => setSearchValue(event.target.value)}
+            className="h-auto min-h-[2.75rem] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.25rem)] py-[clamp(0.5rem,0.8vw,0.65rem)] shadow-xs backdrop-blur-[36px]! fluid-caption"
           />
-          <Button type="submit">Filtruj</Button>
+          <Button type="submit" className="h-auto rounded-full fluid-button-sm">
+            Filtruj
+          </Button>
         </div>
       </form>
 
       {banner ? (
-        <div className="rounded-lg border border-emerald-500/50 bg-emerald-500/10 p-3 text-sm text-emerald-600 dark:text-emerald-400" role="status">
+        <div
+          className="rounded-2xl border border-emerald-500/50 bg-emerald-500/10 p-[clamp(0.75rem,1.1vw,1rem)] text-emerald-600 fluid-caption dark:text-emerald-400"
+          role="status"
+        >
           {banner}
         </div>
       ) : null}
 
       {error ? (
-        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-3 py-2 text-sm text-destructive" role="alert">
+        <div
+          className="rounded-2xl border border-destructive/50 bg-destructive/10 p-[clamp(0.75rem,1.1vw,1rem)] text-destructive fluid-caption"
+          role="alert"
+        >
           {error}
         </div>
       ) : null}
@@ -359,11 +377,11 @@ export function AdminDisputesDashboard({
           <div className="h-4 animate-pulse rounded bg-muted/50" />
         </div>
       ) : items.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border/60 bg-muted/40 p-6 text-center text-sm text-muted-foreground">
+        <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 p-[clamp(1.25rem,1.8vw,1.6rem)] text-center text-muted-foreground fluid-copy">
           Brak zgloszen dla wybranych filtrów.
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-[clamp(0.85rem,1.3vw,1.15rem)]">
           {items.map((dispute) => (
             <AdminDisputeRow
               key={dispute.id}
@@ -378,7 +396,12 @@ export function AdminDisputesDashboard({
       )}
 
       {hasMore ? (
-        <Button disabled={loadingMore} onClick={() => void handleLoadMore()} variant="outline">
+        <Button
+          disabled={loadingMore}
+          onClick={() => void handleLoadMore()}
+          variant="outline"
+          className="fluid-button"
+        >
           {loadingMore ? "Wczytywanie..." : "Wczytaj wiecej"}
         </Button>
       ) : null}
@@ -441,14 +464,17 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
   };
 
   return (
-    <article className="space-y-3 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-4 shadow-xs">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div className="space-y-1">
-          <p className="text-sm font-semibold text-foreground">{dispute.title}</p>
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+    <article className="space-y-[clamp(0.75rem,1.2vw,1.1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.5vw,1.35rem)] shadow-xs backdrop-blur-[36px]!">
+      <header className="flex flex-wrap items-start justify-between gap-[clamp(0.65rem,1vw,0.9rem)]">
+        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <p className="font-semibold text-foreground fluid-copy">{dispute.title}</p>
+          <div className="flex flex-wrap items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
             <span>{formatDateTime(dispute.createdAt)}</span>
             {dispute.company ? (
-              <Link className="font-medium text-foreground hover:underline" href={`/firmy/${dispute.company.slug}`}>
+              <Link
+                className="font-medium text-foreground transition-colors hover:text-primary hover:underline"
+                href={`/firmy/${dispute.company.slug}`}
+              >
                 {dispute.company.name}
               </Link>
             ) : null}
@@ -462,14 +488,14 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
             )}
           </div>
         </div>
-        <Badge variant="outline" className={cn("text-xs", STATUS_BADGES[dispute.status])}>
+        <Badge variant="outline" className={cn("fluid-badge rounded-full", STATUS_BADGES[dispute.status])}>
           {STATUS_LABELS[dispute.status]}
         </Badge>
       </header>
 
-      <p className="whitespace-pre-wrap text-sm text-foreground">{dispute.description}</p>
+      <p className="whitespace-pre-wrap text-foreground fluid-copy">{dispute.description}</p>
 
-      <div className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-2">
+      <div className="grid gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption sm:grid-cols-2">
         {dispute.requestedAmount !== null && dispute.requestedAmount !== undefined ? (
           <span>
             Roszczenie:{" "}
@@ -491,7 +517,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
       </div>
 
       {dispute.evidenceLinks.length ? (
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <div className="flex flex-wrap gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
           {dispute.evidenceLinks.map((link) => (
             <Link key={link} className="underline" href={link} rel="noreferrer" target="_blank">
               Dowod
@@ -500,11 +526,11 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
         </div>
       ) : null}
 
-      <div className="grid gap-3 lg:grid-cols-[200px_1fr]">
-        <label className="space-y-1 text-xs font-medium">
+      <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] lg:grid-cols-[200px_1fr]">
+        <label className="space-y-[clamp(0.25rem,0.4vw,0.35rem)] text-xs font-medium text-foreground">
           <span>Status sprawy</span>
           <select
-            className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+            className="h-auto w-full rounded-2xl border border-input bg-background px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.4rem,0.65vw,0.55rem)] text-foreground fluid-caption shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             value={statusDraft}
             onChange={(event) => setStatusDraft(event.target.value as DisputeStatus)}
           >
@@ -515,33 +541,43 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
             ))}
           </select>
         </label>
-        <label className="space-y-1 text-xs font-medium">
+        <label className="space-y-[clamp(0.25rem,0.4vw,0.35rem)] text-xs font-medium text-foreground">
           <span>Notatka dla zespolu (opcjonalnie)</span>
           <Textarea
             rows={3}
             placeholder="Opcjonalna notatka lub podsumowanie kontaktu."
             value={notesDraft}
             onChange={(event) => setNotesDraft(event.target.value)}
+            className="min-h-[clamp(6rem,8vw,8rem)] rounded-2xl border-border/60 bg-card/80 px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.6rem,0.9vw,0.8rem)] fluid-copy shadow-xs"
           />
         </label>
       </div>
 
       {localError ? (
-        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-2 text-xs text-destructive" role="alert">
+        <div
+          className="rounded-2xl border border-destructive/50 bg-destructive/10 p-[clamp(0.5rem,0.75vw,0.65rem)] text-destructive fluid-caption"
+          role="alert"
+        >
           {localError}
         </div>
       ) : null}
 
-      <div className="flex flex-wrap gap-2">
-        <Button type="button" variant="outline" disabled={saving} onClick={handleAssignClick}>
+      <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+        <Button
+          type="button"
+          variant="outline"
+          disabled={saving}
+          onClick={handleAssignClick}
+          className="fluid-button-sm"
+        >
           Przejmij
         </Button>
-        <Button type="button" disabled={saving} onClick={handleSaveClick}>
+        <Button type="button" disabled={saving} onClick={handleSaveClick} className="fluid-button-sm">
           {saving ? "Zapisywanie..." : "Zapisz zmiany"}
         </Button>
         {(dispute.status === "RESOLVED" || dispute.status === "REJECTED") && (
-          <Button type="button" variant="destructive" disabled={saving} onClick={onDelete}>
-            <Trash2 className="h-4 w-4 mr-2" />
+          <Button type="button" variant="destructive" disabled={saving} onClick={onDelete} className="fluid-button-sm">
+            <Trash2 className="mr-2 h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)]" />
             Usuń
           </Button>
         )}

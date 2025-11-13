@@ -46,27 +46,34 @@ export function MetricCard({
   return (
     <Card
       className={cn(
-        "rounded-xl border bg-card/72 backdrop-blur-[36px]! transition-all duration-200 hover:shadow-md",
+        "rounded-2xl border bg-card/72 backdrop-blur-[36px]! transition-all duration-200 hover:shadow-md",
         variantStyles[variant],
         className
       )}
     >
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+      <CardHeader className="px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(0.8rem,1.2vw,1rem)] pt-[clamp(1rem,1.4vw,1.25rem)]">
+        <div className="flex items-center justify-between gap-[clamp(0.4rem,0.7vw,0.6rem)]">
+          <p className="fluid-caption font-medium text-muted-foreground">{title}</p>
           {Icon && (
-            <Icon className={cn("h-4 w-4 shrink-0", iconColors[variant])} />
+            <Icon
+              className={cn(
+                "h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] shrink-0",
+                iconColors[variant]
+              )}
+            />
           )}
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-1">
-          <p className="text-2xl font-semibold tracking-tight">{value}</p>
+      <CardContent className="px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.15rem,1.6vw,1.4rem)] pt-0">
+        <div className="space-y-[clamp(0.45rem,0.7vw,0.6rem)]">
+          <p className="text-[clamp(1.85rem,0.8vw+1.55rem,2.25rem)] font-semibold leading-[clamp(2.1rem,0.9vw+1.8rem,2.45rem)] tracking-tight text-foreground">
+            {value}
+          </p>
           {description && (
-            <p className="text-xs text-muted-foreground">{description}</p>
+            <p className="fluid-caption text-muted-foreground">{description}</p>
           )}
           {trend && (
-            <div className="flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)]">
               <span
                 className={cn(
                   "font-medium",

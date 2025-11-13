@@ -74,41 +74,45 @@ export function CompanyFaqItemForm({
   };
 
   return (
-    <div className="space-y-3 rounded-xl border bg-muted/20 p-4">
-      <div className="grid gap-3">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium text-foreground">Pytanie</span>
+    <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-muted/20 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[16px]!">
+      <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-[minmax(0,1fr)]">
+        <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Pytanie</span>
           <Input
             value={formState.question}
             onChange={(event) => updateField("question", event.target.value)}
+            className="h-auto min-h-[clamp(2.5rem,3vw,2.75rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption"
           />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium text-foreground">Odpowiedz</span>
+        <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Odpowiedz</span>
           <Textarea
             rows={3}
             value={formState.answer}
             onChange={(event) => updateField("answer", event.target.value)}
+            className="rounded-2xl border-border/60 bg-card/80 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] fluid-caption shadow-xs"
           />
         </label>
-        <label className="flex flex-col gap-1 text-sm max-w-[120px]">
-          <span className="font-medium text-foreground">Kolejnosc</span>
+        <label className="flex max-w-[120px] flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Kolejnosc</span>
           <Input
             type="number"
             min="0"
             value={formState.order}
             onChange={(event) => updateField("order", event.target.value)}
+            className="h-auto min-h-[clamp(2.25rem,2.8vw,2.5rem)] rounded-full px-[clamp(0.75rem,1.1vw,0.95rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] fluid-caption"
           />
         </label>
       </div>
 
-      {feedback ? <p className="text-xs text-destructive">{feedback}</p> : null}
+      {feedback ? <p className="text-destructive fluid-caption">{feedback}</p> : null}
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
         <Button
           size="sm"
           disabled={isPending}
           onClick={handleSave}
+          className="fluid-button-sm"
         >
           Zapisz zmiany
         </Button>
@@ -117,6 +121,7 @@ export function CompanyFaqItemForm({
           variant="outline"
           disabled={isPending}
           onClick={handleDelete}
+          className="fluid-button-sm"
         >
           Usun
         </Button>

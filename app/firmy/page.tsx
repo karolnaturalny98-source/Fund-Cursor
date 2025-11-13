@@ -72,7 +72,7 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
         />
       </div>
       <section className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col gap-10 py-16">
+        <div className="container relative z-10 flex flex-col gap-[clamp(2rem,3vw,2.8rem)] py-[clamp(2.75rem,3.5vw,3.5rem)]">
           <CompaniesPageClient
             companies={companies}
             minCashback={minCashback}

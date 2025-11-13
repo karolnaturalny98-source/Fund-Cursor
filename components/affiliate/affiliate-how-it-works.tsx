@@ -40,21 +40,24 @@ export function AffiliateHowItWorks() {
   const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(steps.length).fill(false);
 
   return (
-    <section className="container space-y-6 py-12">
-      <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-8 shadow-xs ${sectionAnim.className}`}>
-        <div className="space-y-3 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+      <div
+        ref={sectionAnim.ref}
+        className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}
+      >
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+          <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Jak to działa
           </p>
-          <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+          <h2 className="font-semibold text-foreground fluid-h2">
             Proces rejestracji w 4 krokach
           </h2>
-          <p className="max-w-3xl text-sm text-muted-foreground">
+          <p className="max-w-3xl text-muted-foreground fluid-copy">
             Dołączanie do programu affilacyjnego jest proste i szybkie. 
             Wystarczy wypełnić formularz i poczekać na weryfikację.
           </p>
         </div>
-        <div ref={cardsAnim.ref} className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div ref={cardsAnim.ref} className="grid gap-[clamp(1rem,1.5vw,1.35rem)] md:grid-cols-2 lg:grid-cols-4">
         {steps.map((step, index) => (
           <div
             key={step.title}
@@ -64,20 +67,20 @@ export function AffiliateHowItWorks() {
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
           <Card 
-            className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+            className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!"
           >
-            <CardContent className="flex h-full flex-col gap-4 p-6">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary transition-all hover:bg-primary/30">
+            <CardContent className="flex h-full flex-col gap-[clamp(0.85rem,1.2vw,1rem)] p-0">
+              <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
+                <div className="flex h-[clamp(2.75rem,3vw,3rem)] w-[clamp(2.75rem,3vw,3rem)] items-center justify-center rounded-full bg-primary/20 text-primary transition-all hover:bg-primary/30">
                   <PremiumIcon icon={step.icon} variant="glow" size="lg" hoverGlow />
                 </div>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                <div className="flex h-[clamp(2rem,2.4vw,2.2rem)] w-[clamp(2rem,2.4vw,2.2rem)] items-center justify-center rounded-full bg-primary/10 text-primary">
                   {index + 1}
                 </div>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
+              <div className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+                <h3 className="font-semibold text-foreground fluid-copy">{step.title}</h3>
+                <p className="text-muted-foreground fluid-caption">{step.description}</p>
               </div>
             </CardContent>
           </Card>

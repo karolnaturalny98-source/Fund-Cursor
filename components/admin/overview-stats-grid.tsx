@@ -29,11 +29,13 @@ export function OverviewStatsGrid({
   clickAnalytics: _clickAnalytics,
 }: OverviewStatsGridProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-[clamp(1.35rem,2vw,1.8rem)]">
       {/* Performance Metrics */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">Metryki wydajności</h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <h3 className="mb-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(1.05rem,0.45vw+0.95rem,1.3rem)] font-semibold tracking-tight text-foreground">
+          Metryki wydajności
+        </h3>
+        <div className="grid gap-[clamp(0.95rem,1.3vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-4">
           <MetricCard
             title="Conversion Rate"
             value={`${shopStats.conversionRate.toFixed(2)}%`}
@@ -70,8 +72,10 @@ export function OverviewStatsGrid({
 
       {/* Pending Items */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">Oczekujące akcje</h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <h3 className="mb-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(1.05rem,0.45vw+0.95rem,1.3rem)] font-semibold tracking-tight text-foreground">
+          Oczekujące akcje
+        </h3>
+        <div className="grid gap-[clamp(0.95rem,1.3vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-3">
           <MetricCard
             title="Transakcje afiliacyjne"
             value={pendingCounts.affiliate}

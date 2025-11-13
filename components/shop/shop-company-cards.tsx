@@ -41,7 +41,7 @@ function CompanyAvatar({
           alt={name}
           width={48}
           height={48}
-          className="h-12 w-12 rounded-xl border border-border/60 bg-card/72 object-contain"
+          className="h-[clamp(2.75rem,3.2vw,3.1rem)] w-[clamp(2.75rem,3.2vw,3.1rem)] rounded-xl border border-border/60 bg-card/72 object-contain"
         />
       </div>
     );
@@ -55,7 +55,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-card/72 text-sm font-semibold text-muted-foreground">
+    <div className="flex h-[clamp(2.75rem,3.2vw,3.1rem)] w-[clamp(2.75rem,3.2vw,3.1rem)] items-center justify-center rounded-xl border border-border/60 bg-card/72 text-muted-foreground text-[clamp(0.85rem,0.4vw+0.75rem,1rem)] font-semibold">
       {initials}
     </div>
   );
@@ -118,36 +118,36 @@ export function ShopCompanyCards({
   const totalPlans = companies.reduce((sum, c) => sum + c.plans.length, 0);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="rounded-lg border border-border/60 bg-card/72 p-3">
-          <div className="text-xs text-muted-foreground">Firm</div>
-          <div className="text-xl font-semibold">{totalCompanies}</div>
+      <div className="grid grid-cols-2 gap-[clamp(0.75rem,1.2vw,1rem)]">
+        <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.85rem,1.2vw,1.05rem)] shadow-xs">
+          <div className="text-muted-foreground fluid-caption">Firm</div>
+          <div className="text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">{totalCompanies}</div>
         </div>
-        <div className="rounded-lg border border-border/60 bg-card/72 p-3">
-          <div className="text-xs text-muted-foreground">Planów</div>
-          <div className="text-xl font-semibold">{totalPlans}</div>
+        <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.85rem,1.2vw,1.05rem)] shadow-xs">
+          <div className="text-muted-foreground fluid-caption">Planów</div>
+          <div className="text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">{totalPlans}</div>
         </div>
       </div>
 
       {/* Search and Sort */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-1 items-center gap-2">
+      <div className="flex flex-col gap-[clamp(0.75rem,1.1vw,1rem)] lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-1 items-center gap-[clamp(0.6rem,0.9vw,0.8rem)]">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)] -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Szukaj firm..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs"
+              className="rounded-full border border-border/60 bg-card/72 pl-9 shadow-xs backdrop-blur-[36px]! fluid-caption"
             />
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-[clamp(0.5rem,0.75vw,0.65rem)]">
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-            <SelectTrigger className="w-[160px] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-              <ArrowUpDown className="mr-2 h-4 w-4" />
+            <SelectTrigger className="w-[clamp(9rem,12vw,10rem)] rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+              <ArrowUpDown className="mr-2 h-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)]" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -160,15 +160,15 @@ export function ShopCompanyCards({
       </div>
 
       {/* Quick Filters */}
-      <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+      <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+        <span className="text-muted-foreground/70 fluid-eyebrow">
           Szybkie filtry:
         </span>
         <Button
           variant={filterBy === "all" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("all")}
-          className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
         >
           Wszystkie
         </Button>
@@ -176,29 +176,29 @@ export function ShopCompanyCards({
           variant={filterBy === "highest-cashback" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("highest-cashback")}
-          className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
         >
-          <TrendingUp className="mr-1 h-2.5 w-2.5" />
+          <TrendingUp className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
           Najwyższy cashback
         </Button>
         <Button
           variant={filterBy === "popular" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("popular")}
-          className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
         >
-          <Star className="mr-1 h-2.5 w-2.5" />
+          <Star className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
           Najpopularniejsze
         </Button>
       </div>
 
       {/* Companies Grid */}
       {filteredAndSortedCompanies.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border/60 bg-muted/40 p-8 text-center text-sm text-muted-foreground">
+        <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 p-[clamp(1.25rem,1.8vw,1.6rem)] text-center text-muted-foreground fluid-copy">
           Brak firm spełniających kryteria wyszukiwania.
         </div>
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
           {filteredAndSortedCompanies.map((company) => {
             const cashbackRate = company.cashbackRate ?? 0;
             const isSelected = company.id === selectedCompanyId;
@@ -213,37 +213,37 @@ export function ShopCompanyCards({
                 )}
                 onClick={() => onCompanyChange(company.id)}
               >
-                <div className="p-4">
-                  <div className="flex items-start gap-3">
+                <div className="p-[clamp(1rem,1.4vw,1.2rem)]">
+                  <div className="flex items-start gap-[clamp(0.75rem,1.1vw,1rem)]">
                     <CompanyAvatar name={company.name} logoUrl={company.logoUrl} />
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-semibold text-sm leading-tight">
+                      <div className="flex items-start justify-between gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+                        <h3 className="font-semibold text-foreground leading-tight fluid-copy">
                           {company.name}
                         </h3>
                         {isSelected && (
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
+                          <CheckCircle2 className="h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] shrink-0 text-primary" />
                         )}
                       </div>
                       {company.shortDescription && (
-                        <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
+                        <p className="mt-[clamp(0.35rem,0.5vw,0.45rem)] line-clamp-2 text-muted-foreground fluid-caption">
                           {company.shortDescription}
                         </p>
                       )}
-                      <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <div className="mt-[clamp(0.5rem,0.75vw,0.7rem)] flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
                         {cashbackRate > 0 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="fluid-badge rounded-full">
                             {cashbackRate}% cashback
                           </Badge>
                         )}
                         {rating && (
-                          <Badge variant="outline" className="text-xs">
-                            <Star className="mr-1 h-3 w-3 fill-yellow-500 text-yellow-500" />
+                          <Badge variant="outline" className="fluid-badge rounded-full">
+                            <Star className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] fill-yellow-500 text-yellow-500" />
                             {rating.toFixed(1)}
                           </Badge>
                         )}
                         {company.plans.length > 0 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="fluid-badge rounded-full">
                             {company.plans.length} plan{company.plans.length !== 1 ? "ów" : ""}
                           </Badge>
                         )}

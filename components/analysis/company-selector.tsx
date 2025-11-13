@@ -80,7 +80,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
   }, [companies, selected]);
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-[clamp(1.5rem,2vw,2rem)] animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Search Bar */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -89,7 +89,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
           placeholder="Szukaj firm po nazwie, slug lub kraju..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 rounded-2xl border-border/60 bg-card/72 backdrop-blur-[36px]!"
+          className="rounded-2xl border-border/60 bg-card/72 pl-10 backdrop-blur-[36px]!"
         />
       </div>
 
@@ -97,15 +97,20 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
       {selected.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">
+            <h3 className="font-semibold text-foreground fluid-copy">
               Wybrane firmy ({selected.length}/{MAX_SELECTION})
             </h3>
-            <Button variant="ghost" size="sm" onClick={handleClear}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleClear}
+              className="h-auto rounded-full px-[clamp(0.85rem,1.3vw,1.2rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] fluid-caption font-medium transition-colors hover:bg-primary/10 hover:text-primary"
+            >
               Wyczyść wszystkie
             </Button>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-[clamp(0.85rem,1.3vw,1.15rem)] sm:grid-cols-2 lg:grid-cols-3">
             {selectedCompanies.map((company) => (
               <Card
                 key={company.slug}
@@ -137,18 +142,18 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                     )}
 
                     <div className="flex-1 space-y-1">
-                      <h4 className="text-sm font-semibold leading-tight">
+                      <h4 className="font-semibold leading-tight fluid-copy">
                         {company.name}
                       </h4>
                       {company.rating && (
                         <div className="flex items-center gap-1">
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-muted-foreground fluid-caption">
                             ⭐ {company.rating.toFixed(1)}
                           </span>
                         </div>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="fluid-badge rounded-full">
                           {company.country}
                         </Badge>
                       )}
@@ -163,7 +168,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
             onClick={handleStartAnalysis}
             disabled={selected.length === 0}
             size="lg"
-            className="w-full"
+            className="w-full fluid-button rounded-full justify-center"
           >
             <TrendingUp className="mr-2 h-4 w-4" />
             Rozpocznij analizę ({selected.length})
@@ -173,11 +178,11 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
 
       {/* Company List */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">
+        <h3 className="font-semibold text-foreground fluid-copy">
           Dostępne firmy ({filteredCompanies.length})
         </h3>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
           {filteredCompanies.map((company) => {
             const isSelected = selected.includes(company.slug);
             const canSelect = !isSelected && selected.length < MAX_SELECTION;
@@ -211,15 +216,15 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                   )}
 
                   <div className="flex-1 space-y-1">
-                    <h4 className="text-sm font-medium leading-tight group-hover:text-primary">
+                    <h4 className="font-medium leading-tight text-foreground transition-colors group-hover:text-primary fluid-copy">
                       {company.name}
                     </h4>
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
                       {company.rating && (
                         <span>⭐ {company.rating.toFixed(1)}</span>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="fluid-badge rounded-full">
                           {company.country}
                         </Badge>
                       )}
@@ -238,7 +243,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
         </div>
 
         {filteredCompanies.length === 0 && (
-          <div className="py-12 text-center text-muted-foreground">
+          <div className="py-[clamp(2.5rem,3vw,3.25rem)] text-center text-muted-foreground fluid-copy">
             <p>Nie znaleziono firm pasujących do wyszukiwania.</p>
           </div>
         )}

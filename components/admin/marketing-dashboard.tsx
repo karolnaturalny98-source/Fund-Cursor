@@ -23,7 +23,6 @@ import {
 import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -47,6 +46,7 @@ import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { SectionCard } from "./section-card";
 
 interface CompanyOption {
   id: string;
@@ -438,242 +438,287 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
 
   if (!hasSection) {
     return (
-      <div className="flex h-full items-center justify-center">
-        <Card className="max-w-xl border border-border/60 bg-card/72 backdrop-blur-[36px]!">
-          <CardHeader>
-            <CardTitle>Marketing</CardTitle>
-            <CardDescription>
-              Nie udało się znaleźć sekcji marketingowej. Upewnij się, że migracje bazy danych
-              zostały zastosowane poprawnie.
-            </CardDescription>
-          </CardHeader>
-        </Card>
+      <div className="flex h-full items-center justify-center px-[clamp(1.6rem,3.2vw,2.4rem)] py-[clamp(2.5rem,4vw,3.4rem)]">
+        <SectionCard
+          title="Marketing"
+          description="Nie udało się znaleźć sekcji marketingowej. Upewnij się, że migracje bazy danych zostały zastosowane poprawnie."
+          className="w-full max-w-[clamp(24rem,58vw,34rem)] text-center"
+        >
+          <p className="fluid-copy text-muted-foreground">
+            Spróbuj ponownie po odświeżeniu danych lub skontaktuj się z zespołem technicznym.
+          </p>
+        </SectionCard>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-6 pb-24">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground flex items-center gap-2">
-            <Flame className="h-6 w-6 text-primary" />
-            Oferty marketingowe
-          </h1>
-          <p className="text-sm text-muted-foreground">
+    <div className="flex flex-col gap-[clamp(1.5rem,2.4vw,2.1rem)] pb-[clamp(2.6rem,4vw,3.4rem)]">
+      <div className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.3vw,1.1rem)]">
+        <div className="flex flex-col gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+          <div className="flex items-center gap-[clamp(0.55rem,0.85vw,0.75rem)]">
+            <Flame className="h-[clamp(1.5rem,0.6vw+1.3rem,1.75rem)] w-[clamp(1.5rem,0.6vw+1.3rem,1.75rem)] text-primary" />
+            <h1 className="fluid-h2 font-semibold text-foreground">Oferty marketingowe</h1>
+          </div>
+          <p className="max-w-2xl fluid-copy text-muted-foreground">
             Zarządzaj karuzelą ofert specjalnych wyświetlaną na stronie głównej.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => void refreshFromServer()} disabled={isReordering}>
-            <RefreshCcw className={cn("mr-2 h-4 w-4", isReordering && "animate-spin")} />
+        <div className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.75rem)]">
+          <Button
+            variant="outline"
+            className="fluid-button-sm"
+            onClick={() => void refreshFromServer()}
+            disabled={isReordering}
+          >
+            <RefreshCcw
+              className={cn(
+                "h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)]",
+                isReordering && "animate-spin"
+              )}
+            />
             Odśwież
           </Button>
-          <Button onClick={openCreateDialog}>
-            <Plus className="mr-2 h-4 w-4" />
+          <Button className="fluid-button-sm" onClick={openCreateDialog}>
+            <Plus className="h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)]" />
             Dodaj spotlight
           </Button>
         </div>
       </div>
 
-      <Card className="border border-border/60 bg-card/66 backdrop-blur-[36px]!">
-        <CardHeader>
-          <CardTitle>Sekcja: {section?.title}</CardTitle>
-          <CardDescription>
-            Łącznie {spotlights.length} elementów. Pierwsze trzy są widoczne na mniejszych ekranach.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {spotlights.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-border/60 bg-muted/30 p-8 text-center text-sm text-muted-foreground">
-              Brak skonfigurowanych spotlightów. Dodaj pierwszy element, aby sekcja pojawiła się na
-              stronie głównej.
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-16">Kolejność</TableHead>
-                    <TableHead>Oferta</TableHead>
-                    <TableHead className="hidden md:table-cell">Firma</TableHead>
-                    <TableHead className="hidden md:table-cell text-center">Zniżka</TableHead>
-                    <TableHead className="hidden md:table-cell text-center">Ocena</TableHead>
-                    <TableHead className="text-center">Status</TableHead>
-                    <TableHead className="text-right">Akcje</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {spotlights.map((spotlight, index) => (
-                    <TableRow key={spotlight.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <span className="font-semibold text-foreground">{index + 1}</span>
-                          <div className="flex flex-col">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-6 w-6"
-                              onClick={() => moveItem(index, -1)}
-                              disabled={index === 0 || isReordering}
-                              aria-label="Przesuń w górę"
-                            >
-                              <ArrowUp className="h-3.5 w-3.5" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-6 w-6"
-                              onClick={() => moveItem(index, 1)}
-                              disabled={index === spotlights.length - 1 || isReordering}
-                              aria-label="Przesuń w dół"
-                            >
-                              <ArrowDown className="h-3.5 w-3.5" />
-                            </Button>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            {spotlight.badgeLabel && (
-                              <Badge variant="outline" className="bg-primary/10 text-primary">
-                                {spotlight.badgeLabel}
-                              </Badge>
-                            )}
-                            {!spotlight.isActive && (
-                              <Badge variant="outline" className="bg-muted text-muted-foreground">
-                                Wstrzymane
-                              </Badge>
-                            )}
-                          </div>
-                          <p className="font-medium text-foreground">{spotlight.title}</p>
-                          {spotlight.headline && (
-                            <p className="text-xs text-muted-foreground line-clamp-1">
-                              {spotlight.headline}
-                            </p>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        {spotlight.company ? (
-                          <div className="flex flex-col text-sm">
-                            <span className="font-medium text-foreground">{spotlight.company.name}</span>
-                            <span className="text-xs text-muted-foreground">{spotlight.company.slug}</span>
-                          </div>
-                        ) : (
-                          <span className="text-xs text-muted-foreground">Brak powiązania</span>
+      <SectionCard
+        className="bg-card/66"
+        title={`Sekcja: ${section?.title ?? "Brak sekcji"}`}
+        description={`Łącznie ${spotlights.length} elementów. Pierwsze trzy są widoczne na mniejszych ekranach.`}
+      >
+        {spotlights.length === 0 ? (
+          <div className="flex flex-col items-center justify-center gap-[clamp(0.65rem,0.95vw,0.8rem)] rounded-2xl border border-dashed border-border/50 bg-muted/30 px-[clamp(1.6rem,2.5vw,2.1rem)] py-[clamp(2.1rem,3.1vw,2.7rem)] text-center">
+            <p className="fluid-copy text-muted-foreground">
+              Brak skonfigurowanych spotlightów. Dodaj pierwszy element, aby sekcja pojawiła się na stronie głównej.
+            </p>
+          </div>
+        ) : (
+          <Table className="min-w-[clamp(56rem,78vw,70rem)] text-[clamp(0.9rem,0.3vw+0.82rem,1.02rem)] leading-[clamp(1.4rem,0.45vw+1.25rem,1.6rem)]">
+            <TableHeader>
+              <TableRow className="border-border/60 bg-card/55">
+                <TableHead className="w-[clamp(4.25rem,6vw,5.5rem)] px-[clamp(0.85rem,1.2vw,1.1rem)] text-left text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75">
+                  Kolejność
+                </TableHead>
+                <TableHead className="px-[clamp(0.85rem,1.2vw,1.1rem)] text-left text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75">
+                  Oferta
+                </TableHead>
+                <TableHead className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] text-left text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75 md:table-cell">
+                  Firma
+                </TableHead>
+                <TableHead className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] text-center text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75 md:table-cell">
+                  Zniżka
+                </TableHead>
+                <TableHead className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] text-center text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75 md:table-cell">
+                  Ocena
+                </TableHead>
+                <TableHead className="px-[clamp(0.85rem,1.2vw,1.1rem)] text-center text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75">
+                  Status
+                </TableHead>
+                <TableHead className="px-[clamp(0.85rem,1.2vw,1.1rem)] text-right text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold uppercase tracking-[0.12em] text-muted-foreground/75">
+                  Akcje
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="[&_tr]:border-border/50">
+              {spotlights.map((spotlight, index) => (
+                <TableRow
+                  key={spotlight.id}
+                  className="border-border/50 transition-colors hover:bg-accent/40"
+                >
+                  <TableCell className="align-top px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
+                    <div className="flex items-start gap-[clamp(0.55rem,0.85vw,0.75rem)] text-muted-foreground">
+                      <span className="text-[clamp(1rem,0.45vw+0.9rem,1.15rem)] font-semibold text-foreground">
+                        {index + 1}
+                      </span>
+                      <div className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)]">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-[clamp(2.1rem,1.6vw+1.7rem,2.4rem)] w-[clamp(2.1rem,1.6vw+1.7rem,2.4rem)] rounded-full text-muted-foreground hover:text-foreground"
+                          onClick={() => moveItem(index, -1)}
+                          disabled={index === 0 || isReordering}
+                          aria-label="Przesuń w górę"
+                        >
+                          <ArrowUp className="h-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)] w-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)]" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-[clamp(2.1rem,1.6vw+1.7rem,2.4rem)] w-[clamp(2.1rem,1.6vw+1.7rem,2.4rem)] rounded-full text-muted-foreground hover:text-foreground"
+                          onClick={() => moveItem(index, 1)}
+                          disabled={index === spotlights.length - 1 || isReordering}
+                          aria-label="Przesuń w dół"
+                        >
+                          <ArrowDown className="h-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)] w-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)]" />
+                        </Button>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="min-w-[clamp(14rem,24vw,18rem)] px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
+                    <div className="flex flex-col gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+                      <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+                        {spotlight.badgeLabel && (
+                          <Badge variant="outline" className="fluid-badge bg-primary/10 text-primary">
+                            {spotlight.badgeLabel}
+                          </Badge>
                         )}
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell text-center">
-                        {spotlight.discountValue !== null && spotlight.discountValue !== undefined ? (
-                          <span className="text-sm font-semibold text-primary">
-                            {spotlight.discountValue}%
-                          </span>
-                        ) : (
-                          <span className="text-xs text-muted-foreground">—</span>
+                        {!spotlight.isActive && (
+                          <Badge variant="outline" className="fluid-badge bg-muted/60 text-muted-foreground">
+                            Wstrzymane
+                          </Badge>
                         )}
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell text-center">
-                        {spotlight.rating !== null && spotlight.rating !== undefined ? (
-                          <div className="flex items-center justify-center gap-1 text-sm">
-                            <BadgeCheck className="h-4 w-4 text-primary" />
-                            <span>{spotlight.rating.toFixed(1)}</span>
-                          </div>
-                        ) : (
-                          <span className="text-xs text-muted-foreground">—</span>
+                      </div>
+                      <p className="text-[clamp(0.98rem,0.45vw+0.88rem,1.15rem)] font-semibold leading-tight text-foreground">
+                        {spotlight.title}
+                      </p>
+                      {spotlight.headline && (
+                        <p className="fluid-caption text-muted-foreground line-clamp-1">
+                          {spotlight.headline}
+                        </p>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] align-top md:table-cell">
+                    {spotlight.company ? (
+                      <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)]">
+                        <span className="text-[clamp(0.92rem,0.4vw+0.82rem,1.05rem)] font-medium text-foreground">
+                          {spotlight.company.name}
+                        </span>
+                        <span className="text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] text-muted-foreground">
+                          {spotlight.company.slug}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] text-muted-foreground">
+                        Brak powiązania
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-center align-top md:table-cell">
+                    {spotlight.discountValue !== null && spotlight.discountValue !== undefined ? (
+                      <span className="text-[clamp(0.95rem,0.35vw+0.88rem,1.1rem)] font-semibold text-primary">
+                        {spotlight.discountValue}%
+                      </span>
+                    ) : (
+                      <span className="text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] text-muted-foreground">
+                        —
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="hidden px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-center align-top md:table-cell">
+                    {spotlight.rating !== null && spotlight.rating !== undefined ? (
+                      <div className="flex items-center justify-center gap-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.92rem,0.4vw+0.82rem,1.05rem)] font-semibold text-foreground">
+                        <BadgeCheck className="h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] text-primary" />
+                        <span>{spotlight.rating.toFixed(1)}</span>
+                      </div>
+                    ) : (
+                      <span className="text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] text-muted-foreground">
+                        —
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-center align-top">
+                    <div className="flex flex-col items-center gap-[clamp(0.45rem,0.65vw,0.55rem)] text-muted-foreground">
+                      <div
+                        className={cn(
+                          "flex items-center gap-[clamp(0.35rem,0.55vw,0.45rem)] rounded-full px-[clamp(0.65rem,0.95vw,0.8rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] font-semibold",
+                          spotlight.isActive
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-border/60 text-muted-foreground"
                         )}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex flex-col items-center gap-1 text-xs text-muted-foreground">
-                          <div
-                            className={cn(
-                              "flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold",
-                              spotlight.isActive ? "bg-emerald-100 text-emerald-700" : "bg-border text-muted-foreground",
-                            )}
-                          >
-                            {spotlight.isActive ? (
-                              <>
-                                <Check className="h-3.5 w-3.5" />
-                                Aktywny
-                              </>
-                            ) : (
-                              <>
-                                <X className="h-3.5 w-3.5" />
-                                Nieaktywny
-                              </>
-                            )}
-                          </div>
-                          <div className="flex items-center gap-1 text-[11px]">
-                            <Calendar className="h-3 w-3" />
-                            <span>
-                              {spotlight.startsAt
-                                ? new Date(spotlight.startsAt).toLocaleDateString("pl-PL", {
-                                    day: "2-digit",
-                                    month: "short",
-                                  })
-                                : "Natychmiast"}
-                              {" — "}
-                              {spotlight.endsAt
-                                ? new Date(spotlight.endsAt).toLocaleDateString("pl-PL", {
-                                    day: "2-digit",
-                                    month: "short",
-                                  })
-                                : "Brak limitu"}
-                            </span>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8"
-                            onClick={() => openEditDialog(spotlight)}
-                            aria-label="Edytuj spotlight"
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-destructive hover:text-destructive"
-                            onClick={() => setDeleteTarget(spotlight)}
-                            aria-label="Usuń spotlight"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                      >
+                        {spotlight.isActive ? (
+                          <>
+                            <Check className="h-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)] w-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)]" />
+                            Aktywny
+                          </>
+                        ) : (
+                          <>
+                            <X className="h-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)] w-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)]" />
+                            Nieaktywny
+                          </>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-[clamp(0.35rem,0.55vw,0.45rem)] text-[clamp(0.75rem,0.3vw+0.7rem,0.85rem)] text-muted-foreground/80">
+                        <Calendar className="h-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)] w-[clamp(0.95rem,0.35vw+0.88rem,1.05rem)]" />
+                        <span>
+                          {spotlight.startsAt
+                            ? new Date(spotlight.startsAt).toLocaleDateString("pl-PL", {
+                                day: "2-digit",
+                                month: "short",
+                              })
+                            : "Natychmiast"}
+                          {" — "}
+                          {spotlight.endsAt
+                            ? new Date(spotlight.endsAt).toLocaleDateString("pl-PL", {
+                                day: "2-digit",
+                                month: "short",
+                              })
+                            : "Brak limitu"}
+                        </span>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-right align-top">
+                    <div className="flex justify-end gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-[clamp(2.35rem,1.8vw+1.85rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.85rem,2.7rem)] rounded-full hover:text-foreground"
+                        onClick={() => openEditDialog(spotlight)}
+                        aria-label="Edytuj spotlight"
+                      >
+                        <Pencil className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)]" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-[clamp(2.35rem,1.8vw+1.85rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.85rem,2.7rem)] rounded-full text-destructive hover:text-destructive"
+                        onClick={() => setDeleteTarget(spotlight)}
+                        aria-label="Usuń spotlight"
+                      >
+                        <Trash2 className="h-[clamp(1rem,0.4vw+0.9rem,1.15rem)] w-[clamp(1rem,0.4vw+0.9rem,1.15rem)]" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </SectionCard>
 
       <Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>{editing ? "Edytuj spotlight" : "Dodaj spotlight"}</DialogTitle>
-            <DialogDescription>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto px-[clamp(1.4rem,2.6vw,2rem)] py-[clamp(1.6rem,2.8vw,2.2rem)]">
+          <DialogHeader className="space-y-[clamp(0.65rem,0.95vw,0.85rem)]">
+            <DialogTitle className="fluid-h2 text-foreground">
+              {editing ? "Edytuj spotlight" : "Dodaj spotlight"}
+            </DialogTitle>
+            <DialogDescription className="fluid-copy text-muted-foreground">
               Uzupełnij informacje, aby wyróżniona oferta pojawiła się w sekcji marketingowej na
               stronie głównej.
             </DialogDescription>
           </DialogHeader>
 
           <Form {...form}>
-            <form className="space-y-6" onSubmit={onSubmit}>
-              <div className="grid gap-6 md:grid-cols-2">
+            <form
+              className="space-y-[clamp(1.1rem,1.7vw,1.5rem)]"
+              onSubmit={onSubmit}
+            >
+              <div className="grid gap-[clamp(1.1rem,1.7vw,1.5rem)] md:grid-cols-2">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
-                    <FormItem className="md:col-span-2">
-                      <FormLabel>Tytuł</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Tytuł
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="np. Listopadowa promocja Alpha Capital" {...field} />
                       </FormControl>
@@ -686,12 +731,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="headline"
                   render={({ field }) => (
-                    <FormItem className="md:col-span-2">
-                      <FormLabel>Opis (opcjonalnie)</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Opis (opcjonalnie)
+                      </FormLabel>
                       <FormControl>
                         <Textarea placeholder="Krótka zajawka widoczna pod tytułem." rows={3} {...field} />
                       </FormControl>
-                      <FormDescription>Maksymalnie 160 znaków.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Maksymalnie 160 znaków.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -701,8 +750,10 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="companyId"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Powiązana firma</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Powiązana firma
+                      </FormLabel>
                       <Select
                         onValueChange={(value) => field.onChange(value === "none" ? "" : value)}
                         value={field.value && field.value.length > 0 ? field.value : "none"}
@@ -722,7 +773,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                           ))}
                         </SelectContent>
                       </Select>
-                      <FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
                         Jeśli wybierzesz firmę, jej nazwa i logo pojawią się na karcie.
                       </FormDescription>
                       <FormMessage />
@@ -734,12 +785,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="badgeLabel"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Badge</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Badge
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="np. 15% OFF" {...field} />
                       </FormControl>
-                      <FormDescription>Krótka etykieta wyróżniająca promocję.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Krótka etykieta wyróżniająca promocję.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -749,12 +804,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="badgeTone"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Kolor badge</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Kolor badge
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="np. pink, violet, emerald" {...field} />
                       </FormControl>
-                      <FormDescription>Zdefiniuj nazwę odcienia zgodną z tokenami Tailwind.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Zdefiniuj nazwę odcienia zgodną z tokenami Tailwind.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -764,12 +823,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="discountValue"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Zniżka (%)</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Zniżka (%)
+                      </FormLabel>
                       <FormControl>
                         <Input type="number" min={0} max={100} step={1} placeholder="np. 20" {...field} />
                       </FormControl>
-                      <FormDescription>Liczba od 0 do 100. Pozostaw puste, jeśli nie dotyczy.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Liczba od 0 do 100. Pozostaw puste, jeśli nie dotyczy.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -779,12 +842,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="rating"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Ocena</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Ocena
+                      </FormLabel>
                       <FormControl>
                         <Input type="number" min={0} max={5} step={0.1} placeholder="np. 4.5" {...field} />
                       </FormControl>
-                      <FormDescription>Wartość w skali 0-5.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Wartość w skali 0-5.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -794,8 +861,10 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ratingCount"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Liczba opinii</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Liczba opinii
+                      </FormLabel>
                       <FormControl>
                         <Input type="number" min={0} step={1} placeholder="np. 120" {...field} />
                       </FormControl>
@@ -808,8 +877,10 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ctaLabel"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tekst przycisku</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Tekst przycisku
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="np. Sprawdź ofertę" {...field} />
                       </FormControl>
@@ -822,8 +893,10 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ctaUrl"
                   render={({ field }) => (
-                    <FormItem className="md:col-span-2">
-                      <FormLabel>Link CTA</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Link CTA
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="https://..." {...field} />
                       </FormControl>
@@ -836,12 +909,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="imageUrl"
                   render={({ field }) => (
-                    <FormItem className="md:col-span-2">
-                      <FormLabel>Obraz (opcjonalnie)</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Obraz (opcjonalnie)
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="https://..." {...field} />
                       </FormControl>
-                      <FormDescription>Adres do grafiki w tle karty (opcjonalnie).</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Adres do grafiki w tle karty (opcjonalnie).
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -851,12 +928,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="startsAt"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Start publikacji</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Start publikacji
+                      </FormLabel>
                       <FormControl>
                         <Input type="datetime-local" {...field} />
                       </FormControl>
-                      <FormDescription>Moment, od którego oferta staje się widoczna.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Moment, od którego oferta staje się widoczna.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -866,12 +947,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="endsAt"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Koniec publikacji</FormLabel>
+                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                      <FormLabel className="fluid-copy font-semibold text-foreground">
+                        Koniec publikacji
+                      </FormLabel>
                       <FormControl>
                         <Input type="datetime-local" {...field} />
                       </FormControl>
-                      <FormDescription>Pozostaw puste, jeśli oferta ma być stała.</FormDescription>
+                      <FormDescription className="fluid-caption text-muted-foreground">
+                        Pozostaw puste, jeśli oferta ma być stała.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -881,10 +966,12 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="isActive"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border/60 bg-muted/30 p-4">
-                      <div className="space-y-0.5">
-                        <FormLabel>Widoczność</FormLabel>
-                        <FormDescription>
+                    <FormItem className="flex flex-row items-center justify-between rounded-2xl border border-border/60 bg-muted/30 px-[clamp(1.1rem,1.6vw,1.4rem)] py-[clamp(1rem,1.4vw,1.2rem)]">
+                      <div className="space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                        <FormLabel className="fluid-copy font-semibold text-foreground">
+                          Widoczność
+                        </FormLabel>
+                        <FormDescription className="fluid-caption text-muted-foreground">
                           Wstrzymane oferty nie będą widoczne, ale zachowają kolejkowanie.
                         </FormDescription>
                       </div>
@@ -897,10 +984,16 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
               </div>
 
               <DialogFooter>
-                <Button type="button" variant="outline" onClick={closeDialog} disabled={isSaving}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="fluid-button-sm"
+                  onClick={closeDialog}
+                  disabled={isSaving}
+                >
                   Anuluj
                 </Button>
-                <Button type="submit" disabled={isSaving}>
+                <Button type="submit" disabled={isSaving} className="fluid-button-sm">
                   {isSaving ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -920,19 +1013,19 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
       </Dialog>
 
       <Dialog open={Boolean(deleteTarget)} onOpenChange={(open) => !open && setDeleteTarget(null)}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Usuń spotlight</DialogTitle>
-            <DialogDescription>
+        <DialogContent className="max-w-md px-[clamp(1.3rem,2.2vw,1.8rem)] py-[clamp(1.4rem,2.4vw,2rem)]">
+          <DialogHeader className="space-y-[clamp(0.55rem,0.85vw,0.75rem)]">
+            <DialogTitle className="fluid-h2 text-foreground">Usuń spotlight</DialogTitle>
+            <DialogDescription className="fluid-copy text-muted-foreground">
               Czy na pewno chcesz usunąć spotlight <strong>{deleteTarget?.title}</strong>? Tej akcji
               nie można cofnąć.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteTarget(null)}>
+            <Button variant="outline" className="fluid-button-sm" onClick={() => setDeleteTarget(null)}>
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={() => void handleDelete()}>
+            <Button variant="destructive" className="fluid-button-sm" onClick={() => void handleDelete()}>
               Usuń
             </Button>
           </DialogFooter>

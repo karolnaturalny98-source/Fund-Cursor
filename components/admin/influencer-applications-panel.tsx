@@ -188,67 +188,67 @@ export function InfluencerApplicationsPanel({
 
   if (pendingCount === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-border/60 bg-muted/40 p-6 text-center text-sm text-muted-foreground">
+      <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 p-[clamp(1.25rem,1.8vw,1.6rem)] text-center text-muted-foreground fluid-copy">
         Brak zgłoszeń influencerów.
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
       {error ? (
-        <p className="rounded-lg border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+        <p className="rounded-2xl border border-destructive/50 bg-destructive/10 px-[clamp(0.75rem,1vw,0.9rem)] py-[clamp(0.6rem,0.8vw,0.7rem)] text-destructive fluid-caption">
           {error}
         </p>
       ) : null}
       {message ? (
-        <p className="rounded-lg border border-emerald-500/50 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600 dark:text-emerald-400">
+        <p className="rounded-2xl border border-emerald-500/50 bg-emerald-500/10 px-[clamp(0.75rem,1vw,0.9rem)] py-[clamp(0.6rem,0.8vw,0.7rem)] text-emerald-600 fluid-caption dark:text-emerald-400">
           {message}
         </p>
       ) : null}
 
-      <div className="overflow-x-auto rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-        <table className="min-w-full divide-y divide-border text-sm">
+      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+        <table className="min-w-full divide-y divide-border text-left">
           <thead>
-            <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">
-              <th className="px-3 py-2">Influencer</th>
-              <th className="px-3 py-2">Profil</th>
-              <th className="px-3 py-2">Zasięg</th>
-              <th className="px-3 py-2">Kontakt</th>
-              <th className="px-3 py-2">Preferencje</th>
-              <th className="px-3 py-2">Kod polecający</th>
-              <th className="px-3 py-2">Notatka</th>
-              <th className="px-3 py-2 text-right">Akcje</th>
+            <tr className="text-muted-foreground fluid-eyebrow">
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Influencer</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Profil</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Zasięg</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Kontakt</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Preferencje</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Kod polecający</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)]">Notatka</th>
+              <th className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.6rem,0.9vw,0.8rem)] text-right">Akcje</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border bg-background">
             {rows.map((profile) => (
               <tr key={profile.id} className="align-top">
-                <td className="px-3 py-3">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-foreground">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
+                  <div className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)]">
+                    <span className="font-medium text-foreground fluid-copy">
                       {profile.user?.displayName ?? profile.user?.clerkId ?? "Unknown"}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-muted-foreground fluid-caption">
                       {profile.user?.email ?? "brak email"}
                     </span>
-                    <span className="mt-1 inline-flex w-fit rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    <span className="inline-flex w-fit rounded-full bg-muted/40 px-[clamp(0.6rem,0.9vw,0.8rem)] py-[clamp(0.25rem,0.4vw,0.35rem)] font-semibold uppercase tracking-[0.2em] text-muted-foreground fluid-caption">
                       {profile.platform}
                     </span>
-                    <span className={cn("mt-1 inline-flex w-fit rounded-full px-2 py-0.5 text-[11px] font-semibold", STATUS_BADGE[profile.status])}>
+                    <span className={cn("inline-flex w-fit rounded-full px-[clamp(0.6rem,0.9vw,0.8rem)] py-[clamp(0.25rem,0.4vw,0.35rem)] font-semibold fluid-caption", STATUS_BADGE[profile.status])}>
                       {STATUS_LABELS[profile.status]}
                     </span>
                   </div>
                 </td>
-                <td className="px-3 py-3 space-y-1">
-                  <p className="font-mono text-xs text-muted-foreground">{profile.handle}</p>
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                  <p className="font-mono text-muted-foreground fluid-caption">{profile.handle}</p>
                   {profile.socialLinks.length ? (
-                    <ul className="space-y-1 text-xs text-primary">
+                    <ul className="space-y-[clamp(0.3rem,0.45vw,0.4rem)] text-primary fluid-caption">
                       {profile.socialLinks.map((link) => (
                         <li key={link}>
                           <a
                             href={link}
-                            className="hover:underline"
+                            className="transition-colors hover:text-primary/80 hover:underline"
                             target="_blank"
                             rel="noreferrer"
                           >
@@ -259,21 +259,21 @@ export function InfluencerApplicationsPanel({
                     </ul>
                   ) : null}
                   {profile.bio ? (
-                    <p className="text-xs text-muted-foreground">{profile.bio}</p>
+                    <p className="text-muted-foreground fluid-caption">{profile.bio}</p>
                   ) : null}
                 </td>
-                <td className="px-3 py-3 text-xs text-muted-foreground">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-muted-foreground fluid-caption">
                   {profile.audienceSize ? `${profile.audienceSize.toLocaleString("pl-PL")} osób` : "—"}
                 </td>
-                <td className="px-3 py-3 text-xs text-muted-foreground">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-muted-foreground fluid-caption">
                   {profile.contactEmail ?? "—"}
                 </td>
-                <td className="px-3 py-3 text-xs text-muted-foreground">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] text-muted-foreground fluid-caption">
                   {profile.preferredCompanies.length
                     ? profile.preferredCompanies.join(", ")
                     : "—"}
                 </td>
-                <td className="px-3 py-3">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
                   <Input
                     value={referralDraft[profile.id] ?? ""}
                     placeholder="np. FUNDED10"
@@ -283,10 +283,10 @@ export function InfluencerApplicationsPanel({
                         [profile.id]: event.target.value,
                       }))
                     }
-                    className="h-9"
+                    className="h-auto min-h-[clamp(2.5rem,3vw,2.75rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption"
                   />
                 </td>
-                <td className="px-3 py-3">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
                   <Textarea
                     value={notesDraft[profile.id] ?? ""}
                     onChange={(event) =>
@@ -296,16 +296,17 @@ export function InfluencerApplicationsPanel({
                       }))
                     }
                     rows={3}
-                    className="min-w-[200px]"
+                    className="min-w-[200px] rounded-2xl border-border/60 bg-card/80 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] fluid-caption shadow-xs"
                   />
                 </td>
-                <td className="px-3 py-3">
-                  <div className="flex flex-col gap-2 text-xs">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)]">
+                  <div className="flex flex-col gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption">
                     <Button
                       size="sm"
                       variant="outline"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleSaveDetails(profile.id)}
+                      className="fluid-button-sm justify-center"
                     >
                       Zapisz kod/notatkę
                     </Button>
@@ -314,6 +315,7 @@ export function InfluencerApplicationsPanel({
                       variant="outline"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "PENDING")}
+                      className="fluid-button-sm justify-center"
                     >
                       Oznacz jako pending
                     </Button>
@@ -321,6 +323,7 @@ export function InfluencerApplicationsPanel({
                       size="sm"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "APPROVED")}
+                      className="fluid-button-sm justify-center"
                     >
                       Zatwierdź
                     </Button>
@@ -329,6 +332,7 @@ export function InfluencerApplicationsPanel({
                       variant="destructive"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "REJECTED")}
+                      className="fluid-button-sm justify-center"
                     >
                       Odrzuć
                     </Button>
@@ -337,9 +341,9 @@ export function InfluencerApplicationsPanel({
                       variant="destructive"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => setDeleteDialog(profile.id)}
-                      className="mt-2"
+                      className="mt-[clamp(0.35rem,0.5vw,0.45rem)] fluid-button-sm justify-center"
                     >
-                      <Trash2 className="h-4 w-4 mr-2" />
+                      <Trash2 className="mr-2 h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)]" />
                       Usuń
                     </Button>
                   </div>
@@ -359,10 +363,10 @@ export function InfluencerApplicationsPanel({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending}>
+            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="fluid-button-sm">
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={handleDelete} disabled={isPending}>
+            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="fluid-button-sm">
               {isPending ? "Usuwanie..." : "Usuń"}
             </Button>
           </DialogFooter>

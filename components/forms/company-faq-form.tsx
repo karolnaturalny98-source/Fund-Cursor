@@ -50,41 +50,44 @@ export function CompanyFaqForm({ companySlug }: CompanyFaqFormProps) {
   };
 
   return (
-    <form onSubmit={submit} className="space-y-3 rounded-xl border bg-background p-4">
-      <p className="text-sm font-semibold text-foreground">Dodaj pytanie FAQ</p>
-      <div className="grid gap-3">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium text-foreground">Pytanie</span>
+    <form onSubmit={submit} className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-background/80 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[24px]!">
+      <p className="font-semibold text-foreground fluid-copy">Dodaj pytanie FAQ</p>
+      <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)]">
+        <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Pytanie</span>
           <Input
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="Jak dziala refundacja?"
             required
+            className="h-auto min-h-[clamp(2.5rem,3vw,2.75rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption"
           />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium text-foreground">Odpowiedz</span>
+        <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Odpowiedz</span>
           <Textarea
             value={answer}
             onChange={(event) => setAnswer(event.target.value)}
             placeholder="Po pierwszej wyplacie oplata challenge jest zwracana."
             rows={3}
             required
+            className="rounded-2xl border-border/60 bg-card/80 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] fluid-caption shadow-xs"
           />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium text-foreground">Kolejnosc</span>
+        <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
+          <span className="font-medium text-foreground fluid-copy">Kolejnosc</span>
           <Input
             value={order}
             onChange={(event) => setOrder(event.target.value)}
             placeholder="0"
             type="number"
             min="0"
+            className="h-auto min-h-[clamp(2.5rem,3vw,2.75rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption"
           />
         </label>
       </div>
-      {feedback ? <p className="text-xs text-destructive">{feedback}</p> : null}
-      <Button type="submit" disabled={isSubmitting}>
+      {feedback ? <p className="text-destructive fluid-caption">{feedback}</p> : null}
+      <Button type="submit" disabled={isSubmitting} className="fluid-button-sm">
         {isSubmitting ? "Zapisywanie..." : "Dodaj pytanie"}
       </Button>
     </form>

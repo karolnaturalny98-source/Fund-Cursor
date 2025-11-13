@@ -64,7 +64,7 @@ export function DataIssueModerationPanel({
 
   if (reports.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-border/60 bg-muted/40 p-6 text-sm text-muted-foreground">
+      <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 p-[clamp(1.25rem,1.8vw,1.6rem)] text-muted-foreground fluid-copy">
         Brak nowych zgłoszeń. Gdy użytkownicy zgłaszają błąd w danych, pojawi się tutaj.
       </div>
     );
@@ -73,39 +73,39 @@ export function DataIssueModerationPanel({
   return (
     <>
       {error && (
-        <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive mb-4">
+        <div className="mb-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-destructive/50 bg-destructive/10 px-[clamp(0.75rem,1vw,0.9rem)] py-[clamp(0.6rem,0.8vw,0.7rem)] text-destructive fluid-caption">
           {error}
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
         {reports.map((report) => (
         <article
           key={report.id}
-          className="space-y-3 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs p-4"
+          className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[36px]!"
         >
-          <header className="flex flex-wrap items-start justify-between gap-3">
-            <div className="space-y-1">
-              <p className="text-sm font-semibold text-foreground">
+          <header className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.2vw,1.1rem)]">
+            <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+              <p className="font-semibold text-foreground fluid-copy">
                 {report.company
                   ? `${report.company.name} /${report.company.slug}`
                   : "Bez powiązanej firmy"}
               </p>
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+              <p className="text-muted-foreground fluid-eyebrow">
                 Kategoria: {formatCategory(report.category)}
                 {report.plan ? ` • Plan: ${report.plan.name}` : null}
               </p>
             </div>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-muted-foreground fluid-caption">
               {formatDateTime(report.createdAt)}
             </span>
           </header>
 
-          <p className="whitespace-pre-wrap text-sm text-foreground">
+          <p className="whitespace-pre-wrap text-foreground fluid-copy">
             {report.description}
           </p>
 
-          <div className="grid gap-2 text-xs text-muted-foreground">
+          <div className="grid gap-[clamp(0.35rem,0.5vw,0.45rem)] text-muted-foreground fluid-caption">
             {report.email ? (
               <p>
                 Kontakt: <strong>{report.email}</strong>
@@ -127,14 +127,15 @@ export function DataIssueModerationPanel({
             ) : null}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-muted-foreground">
+          <div className="flex flex-col items-start justify-between gap-[clamp(0.75rem,1.1vw,1rem)] text-muted-foreground fluid-caption sm:flex-row sm:items-center">
             <span>ID zgłoszenia: {report.id}</span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.6rem)]">
               <Button
                 size="sm"
                 variant="outline"
                 disabled={isPending}
                 onClick={() => updateStatus(report.id, "DISMISSED")}
+                className="fluid-button-sm"
               >
                 Odrzuć
               </Button>
@@ -142,6 +143,7 @@ export function DataIssueModerationPanel({
                 size="sm"
                 disabled={isPending}
                 onClick={() => updateStatus(report.id, "RESOLVED")}
+                className="fluid-button-sm"
               >
                 Oznacz jako rozwiązane
               </Button>
@@ -150,8 +152,9 @@ export function DataIssueModerationPanel({
                 variant="destructive"
                 disabled={isPending}
                 onClick={() => setDeleteDialog(report.id)}
+                className="fluid-button-sm"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)]" />
               </Button>
             </div>
           </div>
@@ -168,10 +171,10 @@ export function DataIssueModerationPanel({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending}>
+            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="fluid-button-sm">
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={handleDelete} disabled={isPending}>
+            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="fluid-button-sm">
               {isPending ? "Usuwanie..." : "Usuń"}
             </Button>
           </DialogFooter>

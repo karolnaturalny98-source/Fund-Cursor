@@ -156,18 +156,21 @@ export function CompaniesPageClient({
 
   return (
     <CompareProvider initialSelection={initialCompare}>
-      <div className="container py-12">
-        <div ref={sectionAnim.ref} className={`flex flex-col gap-6 pb-10 ${sectionAnim.className}`}>
-          <h1 className="text-3xl font-bold sm:text-4xl">
+      <div className="container py-[clamp(2.5rem,3.2vw,3.5rem)]">
+        <div
+          ref={sectionAnim.ref}
+          className={`flex flex-col gap-[clamp(1.5rem,2.4vw,2.5rem)] pb-[clamp(2rem,3vw,2.75rem)] ${sectionAnim.className}`}
+        >
+          <h1 className="fluid-h1 font-bold text-foreground">
             Ranking firm prop tradingowych
           </h1>
-          <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+          <p className="max-w-3xl text-muted-foreground fluid-copy">
             Filtrowanie po modelu oceny, kraju, typie konta, minimalnym cashbacku i payoutach
             pozwala szybciej znaleźć najlepszą firmę fundującą konto.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-[clamp(1.5rem,2.5vw,2.5rem)] lg:grid-cols-[minmax(240px,0.85fr)_1fr]">
           <CompaniesFilterPanel
             minCashback={minCashback}
             selectedModels={selectedModels}
@@ -180,7 +183,7 @@ export function CompaniesPageClient({
             sort={sort}
           />
 
-          <section className="space-y-6">
+          <section className="space-y-[clamp(1.2rem,1.8vw,1.75rem)]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -197,8 +200,8 @@ export function CompaniesPageClient({
                 </div>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70">
+            <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)]">
+              <span className="fluid-eyebrow text-muted-foreground/70">
                 Szybkie filtry:
               </span>
               <Button
@@ -206,7 +209,7 @@ export function CompaniesPageClient({
                 variant="ghost"
                 size="sm"
                 onClick={() => applyQuickFilter("top10")}
-                className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+                className="h-auto rounded-full px-[clamp(0.75rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] text-[clamp(0.72rem,0.3vw+0.62rem,0.85rem)] font-medium transition-colors hover:bg-primary/10 hover:text-primary"
                 disabled={isPending}
               >
                 Top 10 ocen
@@ -216,7 +219,7 @@ export function CompaniesPageClient({
                 variant="ghost"
                 size="sm"
                 onClick={() => applyQuickFilter("cashback")}
-                className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+                className="h-auto rounded-full px-[clamp(0.75rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] text-[clamp(0.72rem,0.3vw+0.62rem,0.85rem)] font-medium transition-colors hover:bg-primary/10 hover:text-primary"
                 disabled={isPending}
               >
                 Najwyższy cashback
@@ -226,7 +229,7 @@ export function CompaniesPageClient({
                 variant="ghost"
                 size="sm"
                 onClick={() => applyQuickFilter("with-cashback")}
-                className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+                className="h-auto rounded-full px-[clamp(0.75rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] text-[clamp(0.72rem,0.3vw+0.62rem,0.85rem)] font-medium transition-colors hover:bg-primary/10 hover:text-primary"
                 disabled={isPending}
               >
                 Z cashbackiem
@@ -236,15 +239,15 @@ export function CompaniesPageClient({
                 variant="ghost"
                 size="sm"
                 onClick={() => applyQuickFilter("newest")}
-                className="h-7 rounded-full px-2.5 text-[11px] font-normal"
+                className="h-auto rounded-full px-[clamp(0.75rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] text-[clamp(0.72rem,0.3vw+0.62rem,0.85rem)] font-medium transition-colors hover:bg-primary/10 hover:text-primary"
                 disabled={isPending}
               >
                 Nowości
               </Button>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-sm text-muted-foreground">
+            <div className="flex flex-col gap-[clamp(0.75rem,1.1vw,1rem)] sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-[clamp(0.5rem,0.8vw,0.7rem)]">
+                <p className="text-muted-foreground fluid-caption">
                   {deferredCompanies.length} firm dostepnych w bazie
                   {activeFilters ? " (wynik po filtrach)" : ""}.
                 </p>
@@ -258,37 +261,37 @@ export function CompaniesPageClient({
                         router.replace(pathname);
                       });
                     }}
-                    className="h-7 text-xs"
+                    className="h-auto rounded-full px-[clamp(0.85rem,1.3vw,1.2rem)] py-[clamp(0.35rem,0.55vw,0.45rem)] fluid-caption font-medium transition-colors hover:bg-primary/10 hover:text-primary"
                     disabled={isPending}
                   >
                     Wyczyść wszystkie
                   </Button>
                 )}
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-[clamp(0.5rem,0.8vw,0.7rem)] text-muted-foreground fluid-eyebrow">
                 <span>Sortowanie: {sortLabels[sort]}</span>
                 {minCashback !== null ? (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-primary">
+                  <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.45rem)] rounded-full bg-primary/10 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] text-primary fluid-caption">
                     Cashback: {minCashback}%
                   </span>
                 ) : null}
                 {minProfitSplit !== null ? (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-primary">
+                  <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.45rem)] rounded-full bg-primary/10 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] text-primary fluid-caption">
                     Payout: {minProfitSplit}%
                   </span>
                 ) : null}
                 {selectedModels.length > 0 && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-primary">
+                  <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.45rem)] rounded-full bg-primary/10 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] text-primary fluid-caption">
                     {selectedModels.length} model{selectedModels.length > 1 ? "e" : ""}
                   </span>
                 )}
                 {selectedCountries.length > 0 && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-primary">
+                  <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.45rem)] rounded-full bg-primary/10 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] text-primary fluid-caption">
                     {selectedCountries.length} kraj{selectedCountries.length > 1 ? "ów" : ""}
                   </span>
                 )}
                 {search && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-primary">
+                  <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.45rem)] rounded-full bg-primary/10 px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] text-primary fluid-caption">
                     Szukaj: {search}
                   </span>
                 )}

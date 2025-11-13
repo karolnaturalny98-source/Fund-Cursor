@@ -100,10 +100,10 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
       title="Ostatnia aktywność"
       description="Najnowsze elementy wymagające uwagi"
     >
-      <ScrollArea className="h-[400px]">
-        <div className="space-y-3 pr-4">
+      <ScrollArea className="h-[clamp(18rem,45vh,23rem)] pr-[clamp(0.4rem,0.7vw,0.6rem)]">
+        <div className="space-y-[clamp(0.85rem,1.2vw,1.05rem)]">
           {activities.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="py-[clamp(3rem,4.5vw,3.5rem)] text-center text-muted-foreground">
               Brak aktywności do wyświetlenia
             </div>
           ) : (
@@ -113,30 +113,30 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
                 <Link
                   key={activity.id}
                   href={activity.href}
-                  className="flex items-start gap-3 rounded-lg border border-border/50 bg-card/72 p-3 transition-all hover:bg-accent/50 hover:shadow-xs"
+                  className="flex items-start gap-[clamp(0.7rem,1vw,0.9rem)] rounded-2xl border border-border/50 bg-card/72 px-[clamp(0.9rem,1.3vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] transition-all hover:bg-accent/40 hover:shadow-sm"
                 >
-                  <div className="mt-0.5 rounded-lg bg-primary/10 p-2">
-                    <Icon className="h-4 w-4 text-primary" />
+                  <div className="mt-[clamp(0.1rem,0.25vw,0.2rem)] rounded-2xl bg-primary/10 p-[clamp(0.55rem,0.8vw,0.7rem)]">
+                    <Icon className="h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] text-primary" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-medium leading-none">
+                  <div className="min-w-0 flex-1 space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                    <div className="flex items-start justify-between gap-[clamp(0.6rem,0.9vw,0.75rem)]">
+                      <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.08rem)] font-semibold leading-tight text-foreground">
                         {activity.title}
                       </p>
                       {activity.badge && (
                         <Badge
                           variant="outline"
-                          className="h-5 text-xs shrink-0"
+                          className="fluid-badge shrink-0 rounded-full"
                         >
                           {activity.badge}
                         </Badge>
                       )}
                     </div>
-                    <p className="mt-1.5 text-xs text-muted-foreground">
+                    <p className="fluid-caption text-muted-foreground">
                       {activity.description}
                     </p>
                     {activity.time && !isNaN(activity.time.getTime()) && (
-                      <p className="mt-1 text-xs text-muted-foreground/70">
+                      <p className="text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)] text-muted-foreground/70">
                         {formatDistanceToNow(activity.time, {
                           addSuffix: true,
                           locale: pl,
@@ -144,7 +144,7 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
                       </p>
                     )}
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                  <ArrowRight className="mt-[clamp(0.15rem,0.3vw,0.25rem)] h-[clamp(0.95rem,0.4vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.4vw+0.85rem,1.1rem)] shrink-0 text-muted-foreground" />
                 </Link>
               );
             })

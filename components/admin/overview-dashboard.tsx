@@ -57,9 +57,9 @@ export function OverviewDashboard({
     pendingCounts.disputes;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-[clamp(1.5rem,2.3vw,2.1rem)]">
       {/* Quick Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-[clamp(0.95rem,1.3vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Revenue"
           value={`$${shopStats.revenue.toLocaleString("pl-PL", {
@@ -108,36 +108,54 @@ export function OverviewDashboard({
         title="Szybkie akcje"
         description="Najczęściej używane funkcje panelu administracyjnego"
       >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Button variant="outline" asChild className="justify-start h-auto py-4">
+        <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
+          <Button
+            variant="outline"
+            asChild
+            className="fluid-button w-full items-start justify-start text-left"
+          >
             <Link href="/admin/cashback">
-              <AlertCircle className="mr-2 h-4 w-4" />
-              <div className="text-left">
-                <div className="font-medium">Kolejki cashback</div>
-                <div className="text-xs text-muted-foreground">
+              <AlertCircle className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
+              <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
+                <div className="text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)] font-semibold leading-tight text-foreground">
+                  Kolejki cashback
+                </div>
+                <div className="fluid-caption text-muted-foreground">
                   {pendingCounts.affiliate + pendingCounts.cashback} oczekujących
                 </div>
               </div>
             </Link>
           </Button>
-          <Button variant="outline" asChild className="justify-start h-auto py-4">
+          <Button
+            variant="outline"
+            asChild
+            className="fluid-button w-full items-start justify-start text-left"
+          >
             <Link href="/admin/community">
-              <Users className="mr-2 h-4 w-4" />
-              <div className="text-left">
-                <div className="font-medium">Moderacja społeczności</div>
-                <div className="text-xs text-muted-foreground">
+              <Users className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
+              <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
+                <div className="text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)] font-semibold leading-tight text-foreground">
+                  Moderacja społeczności
+                </div>
+                <div className="fluid-caption text-muted-foreground">
                   {pendingCounts.influencers + pendingCounts.reviews + pendingCounts.issues}{" "}
                   oczekujących
                 </div>
               </div>
             </Link>
           </Button>
-          <Button variant="outline" asChild className="justify-start h-auto py-4">
+          <Button
+            variant="outline"
+            asChild
+            className="fluid-button w-full items-start justify-start text-left"
+          >
             <Link href="/admin/shop">
-              <TrendingUp className="mr-2 h-4 w-4" />
-              <div className="text-left">
-                <div className="font-medium">Analiza sklepu</div>
-                <div className="text-xs text-muted-foreground">
+              <TrendingUp className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
+              <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
+                <div className="text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)] font-semibold leading-tight text-foreground">
+                  Analiza sklepu
+                </div>
+                <div className="fluid-caption text-muted-foreground">
                   Pełne statystyki i wykresy
                 </div>
               </div>
