@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useTransition, useEffect, useRef, useMemo } from "react";
+import { useState, useTransition, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { Edit2, Trash2, X } from "lucide-react";
+import { Edit2, Trash2 } from "lucide-react";
 
 import { CreateCompanyForm } from "@/components/forms/company-form";
 import { CreateCompanyPlanForm } from "@/components/forms/company-plan-form";
@@ -168,8 +168,7 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
     });
   };
 
-  const company = companies.find((c) => c.slug === editingCompany);
-  const plan = company?.plans.find((p) => p.id === editingPlan?.planId);
+  const _company = companies.find((c) => c.slug === editingCompany);
 
   return (
     <>

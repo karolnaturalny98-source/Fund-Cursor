@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
 
 import type { ReviewsRankingItem } from "@/lib/queries/reviews";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";

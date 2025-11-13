@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Package, DollarSign, TrendingDown, TrendingUp, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { PremiumIcon } from "@/components/custom/premium-icon";
-import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
+import { useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyWithDetails } from "@/lib/types";

@@ -195,7 +195,7 @@ export function PlanFeaturesMatrix({ companies }: PlanFeaturesMatrixProps) {
               </tr>
             </thead>
             <tbody>
-              {sortedPlans.map((row, idx) => {
+              {sortedPlans.map((row, _idx) => {
                 const { plan, companyName, companyId } = row;
                 const price = Number(plan.price);
                 const isBestPrice = price === bestValues.lowestPrice;

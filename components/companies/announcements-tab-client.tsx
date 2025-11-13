@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { Info, Receipt, Clock, Sparkles, BarChart3, ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { PremiumIcon } from "@/components/custom/premium-icon";
 import { PremiumBadge } from "@/components/custom/premium-badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface Announcement {
   id: string;

@@ -39,7 +39,7 @@ export function PremiumIcon({
   icon: Icon,
   variant,
   size,
-  className,
+  className: _className,
   hoverGlow = false,
   ...props
 }: PremiumIconProps) {

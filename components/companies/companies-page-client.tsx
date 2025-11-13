@@ -254,7 +254,6 @@ export function CompaniesPageClient({
                     variant="ghost"
                     size="sm"
                     onClick={() => {
-                      const params = new URLSearchParams();
                       startTransition(() => {
                         router.replace(pathname);
                       });

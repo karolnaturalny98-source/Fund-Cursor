@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Star, Trophy, Medal } from "lucide-react";
 import type { HomeRankingCompany } from "@/lib/queries/companies";
-import { cn } from "@/lib/utils";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";

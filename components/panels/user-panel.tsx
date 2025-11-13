@@ -29,7 +29,6 @@ const HistorySection = dynamic(() => import("./sections/history-section").then(m
   loading: () => <div className="glass-panel h-96 animate-pulse rounded-3xl" />,
 });
 
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -92,30 +91,8 @@ interface DisputeCompanyOption {
   slug: string;
 }
 
-const statusLabels: Record<TransactionStatus, string> = {
-  PENDING: "Oczekujace",
-  APPROVED: "Zatwierdzone",
-  REDEEMED: "Zrealizowane",
-  REJECTED: "Odrzucone",
-};
 
 type HistoryStatusFilter = TransactionStatus | "ALL";
-
-const historyStatusLabels: Record<HistoryStatusFilter, string> = {
-  ALL: "Wszystkie",
-  PENDING: statusLabels.PENDING,
-  APPROVED: statusLabels.APPROVED,
-  REDEEMED: statusLabels.REDEEMED,
-  REJECTED: statusLabels.REJECTED,
-};
-
-const historyStatusOptions: HistoryStatusFilter[] = [
-  "ALL",
-  "PENDING",
-  "APPROVED",
-  "REDEEMED",
-  "REJECTED",
-];
 
 type DisputeStatusFilter = DisputeStatus | "ALL";
 
@@ -783,6 +760,7 @@ function formatDisputeAmount(value: number, currency: string) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function DisputesSection({
   disputes,
   loading,
@@ -796,7 +774,7 @@ function DisputesSection({
   companiesLoading,
   companiesError,
   onReloadCompanies,
-  onBack,
+  onBack: _onBack,
   onStatusChange,
   onRetry,
   onLoadMore,
@@ -1160,13 +1138,14 @@ interface RedeemSectionProps {
   onError: (code?: string) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function RedeemSection({
   available,
   offers,
   offersState,
   offersError,
   onReloadOffers,
-  onCancel,
+  onCancel: _onCancel,
   onSuccess,
   onError,
 }: RedeemSectionProps) {
@@ -1549,6 +1528,7 @@ interface InfluencerSectionProps {
   onUpdated: () => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
   const [formState, setFormState] = useState({
     platform: "",
@@ -1813,6 +1793,7 @@ function splitMultiline(value: string) {
     .filter((entry) => entry.length > 0);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function FavoritesSection({ favorites }: { favorites: Company[] }) {
   if (!favorites.length) {
     return (
@@ -1919,12 +1900,6 @@ function formatDate(value: string) {
   } catch {
     return value;
   }
-}
-
-function formatPoints(points: number) {
-  const sign = points > 0 ? "+" : points < 0 ? "-" : "";
-  const formatted = Math.abs(points).toLocaleString("pl-PL");
-  return `${sign}${formatted} pkt`;
 }
 
 function logWalletEvent(event: string, detail?: string) {

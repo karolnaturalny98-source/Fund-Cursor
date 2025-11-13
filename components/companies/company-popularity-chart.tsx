@@ -4,8 +4,6 @@ import { useMemo } from "react";
 import { TrendingUp } from "lucide-react";
 import { useFadeIn } from "@/lib/animations";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,

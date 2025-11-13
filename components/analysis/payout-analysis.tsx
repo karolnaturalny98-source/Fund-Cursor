@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, Cell } from "recharts";
-import { DollarSign, Calendar, TrendingUp, Percent } from "lucide-react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from "recharts";
+import { Calendar, TrendingUp, Percent } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -304,7 +304,7 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {payoutData.map((data, idx) => (
+            {payoutData.map((data, _idx) => (
               <div key={data.companyId} className="space-y-3">
                 <h4 className="font-semibold">{data.companyName}</h4>
                 <div className="overflow-x-auto">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, TrendingUp, Building2, MessageSquare, Award, Trophy, Medal, BarChart3, Info } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFadeIn, useStaggerAnimation } from "@/lib/animations";
 import {
   Accordion,
@@ -40,12 +40,11 @@ export function RankingsPageClient({
   totalNewReviews,
   totalReviews,
   topOverall,
-  totalCompaniesCount,
-  uniqueCountries,
-  uniqueEvaluationModels,
-  uniqueAccountTypes,
+  totalCompaniesCount: _totalCompaniesCount,
+  uniqueCountries: _uniqueCountries,
+  uniqueEvaluationModels: _uniqueEvaluationModels,
+  uniqueAccountTypes: _uniqueAccountTypes,
 }: RankingsPageClientProps) {
-  const numberFormatter = new Intl.NumberFormat("pl-PL");
   const heroAnim = useFadeIn({ rootMargin: "-100px" });
   const badgeAnim = useFadeIn({ rootMargin: "-100px" });
   const titleAnim = useFadeIn({ rootMargin: "-100px" });

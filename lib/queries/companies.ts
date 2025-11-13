@@ -6,7 +6,6 @@ import type { AppRole } from "@/lib/auth";
 import { getInfluencerProfileForUser } from "@/lib/queries/influencers";
 import { convertCurrency, FALLBACK_RATES } from "@/lib/currency";
 import type {
-  Company,
   CompanyCommission,
   CompanyFiltersMetadata,
   CompanyInstrumentGroup,
@@ -2036,7 +2035,7 @@ function toNumberOrZero(value: unknown): number {
 }
 
 // Helper to convert currency to USD for sorting
-function convertToUSD(amount: number, currency: string): number {
+function convertToUSD(amount: number, _currency: string): number {
   // For simplicity, assuming USD is base. In production, use real rates.
   // For now, treat all currencies as 1:1 for sorting purposes
   return amount;

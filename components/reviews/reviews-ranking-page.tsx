@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { ArrowUpDown, Filter, RefreshCcw, Search } from "lucide-react";
 
@@ -14,7 +14,6 @@ const ReviewsCharts = dynamic(
   { ssr: false, loading: () => <ChartSkeleton /> }
 );
 import { ReviewsExportButton } from "@/components/reviews/reviews-export-button";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -289,10 +288,6 @@ function FiltersPanel({
       return;
     }
     onFiltersChange((prev) => ({ ...prev, minReviews: Math.floor(parsed) }));
-  };
-
-  const toggleRecent = () => {
-    onFiltersChange((prev) => ({ ...prev, onlyRecent: !prev.onlyRecent }));
   };
 
   const handleSortChange = (value: SortBy) => {

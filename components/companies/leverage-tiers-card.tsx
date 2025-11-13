@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Gauge, TrendingUp, BarChart3 } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -17,12 +17,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
 } from "recharts";
 import { useFadeIn, useScrollAnimation, useStaggerAnimation } from "@/lib/animations";
 import type { CompanyLeverageTier } from "@/lib/types";
@@ -30,14 +24,6 @@ import type { CompanyLeverageTier } from "@/lib/types";
 interface LeverageTiersCardProps {
   tiers: CompanyLeverageTier[];
 }
-
-const CHART_COLORS = [
-  "hsl(var(--primary))",
-  "hsl(var(--emerald-500))",
-  "hsl(var(--blue-500))",
-  "hsl(var(--amber-500))",
-  "hsl(var(--rose-500))",
-];
 
 export function LeverageTiersCard({ tiers }: LeverageTiersCardProps) {
   const [sortBy, setSortBy] = useState<"leverage" | "accountSize">("leverage");

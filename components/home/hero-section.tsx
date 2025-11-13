@@ -10,10 +10,6 @@ import { useFadeIn, useScrollAnimation } from "@/lib/animations";
 import type { HomepageMetrics } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const numberFormatter = new Intl.NumberFormat("pl-PL", {
-  maximumFractionDigits: 0,
-});
-
 const currencyFormatter = new Intl.NumberFormat("pl-PL", {
   style: "currency",
   currency: "USD",

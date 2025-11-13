@@ -1,9 +1,9 @@
 "use client";
 
-import { Gauge, Layers, Receipt, Shield } from "lucide-react";
+import { Layers } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AccordionItemClient, InstrumentGroupCard, CommissionCard, RulesCard } from "@/components/companies/accordion-item-client";
+import { InstrumentGroupCard } from "@/components/companies/accordion-item-client";
 import dynamic from "next/dynamic";
 import { ChartSkeleton } from "@/components/analysis/loading-skeleton";
 import type { CompanyCommission, CompanyInstrumentGroup, CompanyLeverageTier, CompanyRules } from "@/lib/types";

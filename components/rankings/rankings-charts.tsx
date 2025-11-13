@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
   BarChart,
@@ -13,7 +12,6 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
-  Legend,
   PieChart,
   Pie,
   Cell,
@@ -61,7 +59,7 @@ const TAB_LABELS: Record<RankingTabId, string> = {
 export function RankingsCharts({
   companies,
   activeTab,
-  maxValues,
+  maxValues: _maxValues,
 }: RankingsChartsProps) {
   const topCompaniesBarData = useMemo(() => {
     return companies

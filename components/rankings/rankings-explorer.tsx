@@ -30,7 +30,6 @@ import type {
   RankingsExplorerInitialFilters,
 } from "@/lib/types/rankings";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";

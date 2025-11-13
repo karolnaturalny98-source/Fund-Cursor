@@ -7,7 +7,6 @@ import {
   Building2,
   FileText,
   HelpCircle,
-  TrendingUp,
   BarChart3,
   CheckCircle,
 } from "lucide-react";

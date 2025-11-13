@@ -2,7 +2,7 @@
 
 import { Clock, Award, Layers } from "lucide-react";
 import { PremiumIcon } from "@/components/custom/premium-icon";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import React from "react";
 
 interface PayoutHighlight {

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowUpRight, ExternalLink, Star, Award } from "lucide-react";
 
 import type { Company } from "@/lib/types";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";

@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { User } from "lucide-react";
-import { cn } from "@/lib/utils";
 import type { BlogPostWithRelations } from "@/lib/types";
 
 interface BlogPostHeaderProps {

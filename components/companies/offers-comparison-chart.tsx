@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
   BarChart,
@@ -22,7 +21,6 @@ import {
 } from "recharts";
 import { useFadeIn } from "@/lib/animations";
 import { formatCurrencyLocalized } from "@/lib/currency";
-import type { CompanyPlan } from "@/lib/types";
 
 interface PlanWithComputed {
   id: string;

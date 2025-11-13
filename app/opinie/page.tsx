@@ -16,7 +16,6 @@ export const revalidate = 1800;
 export default async function OpiniePage() {
   const ranking = await getReviewsRanking();
   const { summary } = ranking;
-  const numberFormatter = new Intl.NumberFormat("pl-PL");
   const averageRating =
     summary.averageRating !== null ? summary.averageRating.toFixed(2) : "-";
 

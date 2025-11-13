@@ -261,9 +261,9 @@ export function RedeemQueueTable({ transactions }: RedeemQueueTableProps) {
 function TransactionsTable({
   transactions,
   handleAction,
-  handleDelete,
-  setDeleteDialog,
-  deleteDialog,
+  handleDelete: _handleDelete,
+  setDeleteDialog: _setDeleteDialog,
+  deleteDialog: _deleteDialog,
   isPending,
   currentActionId,
 }: {

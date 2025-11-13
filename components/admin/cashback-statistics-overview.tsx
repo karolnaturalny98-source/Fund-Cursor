@@ -9,7 +9,6 @@ import {
   TrendingUp,
   TrendingDown,
   Package,
-  Percent,
   Clock,
   BarChart3,
   Zap,

@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
   BarChart,
@@ -20,7 +19,6 @@ import {
   Cell,
   LineChart,
   Line,
-  Legend,
 } from "recharts";
 import { useFadeIn } from "@/lib/animations";
 import type { CompanyWithDetails } from "@/lib/types";

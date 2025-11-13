@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { Calendar, Award, TrendingUp, Zap, type LucideIcon } from "lucide-react";
+import { Calendar, Award, TrendingUp, type LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";

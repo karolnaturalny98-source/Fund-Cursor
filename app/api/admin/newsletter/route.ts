@@ -10,12 +10,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Sprawdzenie roli admina
-    const user = await prisma.user.findUnique({
-      where: { clerkId: userId },
-    });
-
     // TODO: Dodać sprawdzenie roli admina gdy będzie zaimplementowane
+    // const user = await prisma.user.findUnique({
+    //   where: { clerkId: userId },
+    // });
     // if (user?.role !== "admin") {
     //   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     // }

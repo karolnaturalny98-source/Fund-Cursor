@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import type { CompanyWithDetails } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface ReviewSentimentProps {
   companies: CompanyWithDetails[];

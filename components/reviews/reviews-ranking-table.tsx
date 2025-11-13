@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Loader2, Star, CheckCircle2, Trophy, Medal } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";

@@ -11,8 +11,6 @@ import {
   ExternalLink,
   Info,
   Star,
-  TrendingUp,
-  Zap,
 } from "lucide-react";
 
 import { auth } from "@clerk/nextjs/server";
@@ -875,15 +873,6 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
     </section>
   );
 }
-type PersonaCard = {
-  id: string;
-  title: string;
-  description: string;
-  recommendations: string[];
-  planName?: string | null;
-  iconName: "Zap" | "TrendingUp" | "Layers" | "Award" | "Gauge" | "Users";
-  color: "emerald" | "blue" | "purple" | "amber" | "rose" | "sky";
-};
 
 type RiskAlert = {
   id: string;

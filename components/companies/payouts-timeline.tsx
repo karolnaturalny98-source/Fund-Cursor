@@ -2,9 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { Calendar, Clock, TrendingUp } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useFadeIn } from "@/lib/animations";
 import { cn } from "@/lib/utils";
@@ -33,7 +32,6 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
 
   // Generate timeline events
   const timelineEvents = useMemo(() => {
-    const events: TimelineEvent[] = [];
     const eventMap = new Map<number, TimelineEvent>();
 
     company.plans.forEach((plan) => {
@@ -78,10 +76,6 @@ export function PayoutsTimeline({ company }: PayoutsTimelineProps) {
       .sort((a, b) => a.days - b.days)
       .slice(0, 12); // Limit to 12 events
   }, [company.plans, selectedPlanId, today]);
-
-  const selectedPlan = selectedPlanId
-    ? company.plans.find((p) => p.id === selectedPlanId)
-    : null;
 
   if (timelineEvents.length === 0) {
     return null;

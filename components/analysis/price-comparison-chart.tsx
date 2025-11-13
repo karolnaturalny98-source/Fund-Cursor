@@ -21,7 +21,7 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
   const chartData = useMemo(() => {
     const dataMap = new Map<string, Record<string, number>>();
 
-    companies.forEach((company, idx) => {
+    companies.forEach((company, _idx) => {
       const history = priceHistory[company.id] || [];
       
       history.forEach((point) => {
@@ -69,7 +69,7 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
   // Build chart config for ChartContainer
   const chartConfig = useMemo(() => {
     const config: Record<string, { label: string; color: string }> = {};
-    companies.forEach((company, idx) => {
+    companies.forEach((company, _idx) => {
       config[company.name] = {
         label: company.name,
         color: getCompareColor(idx),

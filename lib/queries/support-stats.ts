@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import type { DisputeStatus } from "@/lib/types";
 
 export interface SupportStats {
   totalDisputes: number;

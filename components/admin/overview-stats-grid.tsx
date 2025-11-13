@@ -5,10 +5,8 @@ import type { ShopRevenueStats } from "@/lib/queries/shop";
 import type { ClickAnalyticsResult } from "@/lib/queries/analytics";
 import {
   TrendingUp,
-  TrendingDown,
   Percent,
   Target,
-  Clock,
   BarChart3,
 } from "lucide-react";
 
@@ -28,7 +26,7 @@ interface OverviewStatsGridProps {
 export function OverviewStatsGrid({
   shopStats,
   pendingCounts,
-  clickAnalytics,
+  clickAnalytics: _clickAnalytics,
 }: OverviewStatsGridProps) {
   return (
     <div className="space-y-6">

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";

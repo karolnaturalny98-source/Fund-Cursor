@@ -9,7 +9,6 @@ import { DataTable } from "@/components/admin/data-table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useFadeIn } from "@/lib/animations";
 import { cn } from "@/lib/utils";
-import type { CompanyWithDetails } from "@/lib/types";
 
 interface PayoutRow {
   id: string;

@@ -25,7 +25,6 @@ import { cn } from "@/lib/utils";
 import type {
   TransactionHistoryItem,
   TransactionStatus,
-  TransactionHistoryType,
 } from "@/lib/queries/transactions";
 import type {
   AffiliateHistoryItem,
@@ -166,7 +165,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
     } finally {
       setLoading(false);
     }
-  }, [activeTab, statusFilter, startDate, endDate, companyFilter, platformFilter, searchQuery, minPoints, maxPoints]);
+  }, [statusFilter, startDate, endDate, companyFilter, platformFilter, searchQuery, minPoints, maxPoints]);
 
   useEffect(() => {
     setTransactions([]);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { Star, MessageSquare, ThumbsUp, ShieldCheck } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -74,7 +74,7 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {summaryStats.map((stat, idx) => (
+        {summaryStats.map((stat, _idx) => (
           <Card key={stat.companyId} className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardHeader className="pb-3">
               <CardTitle className="text-base">{stat.companyName}</CardTitle>

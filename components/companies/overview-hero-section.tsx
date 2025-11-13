@@ -14,11 +14,9 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { RiskAlertCard } from "@/components/companies/risk-alert-client";
 import type { CompanyRankingHistory, Company } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface RiskAlert {
   id: string;
@@ -39,7 +37,7 @@ export function OverviewHeroSection({
   company,
   rankingHistory,
   alerts,
-  companySlug,
+  companySlug: _companySlug,
 }: OverviewHeroSectionProps) {
   const compactChartData = useMemo(() => {
     if (rankingHistory.length === 0) return null;

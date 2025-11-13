@@ -6,7 +6,6 @@ import { useFadeIn } from "@/lib/animations";
 
 import { Input } from "@/components/ui/input";
 import { PremiumIcon } from "@/components/custom/premium-icon";
-import { PremiumBadge } from "@/components/custom/premium-badge";
 import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyPlan } from "@/lib/types";

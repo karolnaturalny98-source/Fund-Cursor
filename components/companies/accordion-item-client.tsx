@@ -214,12 +214,6 @@ interface CommissionCardProps {
 
 export function CommissionCard({ market, value, notes }: CommissionCardProps) {
   const sectionAnim = useFadeIn({ threshold: 0.1 });
-  
-  // Extract numeric value from string (e.g., "0.5 pips" -> 0.5)
-  const numericValue = useMemo(() => {
-    const match = value.match(/(\d+\.?\d*)/);
-    return match ? parseFloat(match[1]) : null;
-  }, [value]);
 
   return (
     <Card 

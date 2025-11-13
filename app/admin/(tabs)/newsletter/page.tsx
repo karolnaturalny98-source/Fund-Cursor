@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trash2, Download, Mail, Users, UserCheck, UserX } from "lucide-react";
 import {
   Table,
@@ -68,7 +68,7 @@ export default function NewsletterAdminPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const fetchSubscribers = async () => {
+  const fetchSubscribers = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -102,11 +102,11 @@ export default function NewsletterAdminPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, statusFilter, searchQuery, toast]);
 
   useEffect(() => {
     fetchSubscribers();
-  }, [page, statusFilter]);
+  }, [fetchSubscribers]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -118,7 +118,7 @@ export default function NewsletterAdminPage() {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [searchQuery]);
+  }, [searchQuery, page, fetchSubscribers]);
 
   const handleDelete = async (id: string) => {
     try {

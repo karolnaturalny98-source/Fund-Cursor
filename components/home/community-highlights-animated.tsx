@@ -1,9 +1,8 @@
 "use client";
 
-import { Star, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import type { ReviewHighlight } from "@/lib/types";

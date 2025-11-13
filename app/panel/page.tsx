@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useMemo, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import {
@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import type {
@@ -22,7 +22,6 @@ import type {
   DisputeStatus,
   InfluencerProfile,
   RedeemCompanyOffer,
-  RedeemPlanOption,
 } from "@/lib/types";
 import { useUserPanel } from "@/components/panels/user-panel-context";
 import { UserDashboardQuickStats } from "@/components/panels/user-dashboard-quick-stats";
@@ -82,24 +81,6 @@ interface DisputeCompanyOption {
 }
 
 type DisputeStatusFilter = DisputeStatus | "ALL";
-
-const disputeStatusLabels: Record<DisputeStatusFilter, string> = {
-  ALL: "Wszystkie",
-  OPEN: "Otwarte",
-  IN_REVIEW: "W trakcie analizy",
-  WAITING_USER: "Czekamy na odpowiedź",
-  RESOLVED: "Zamknięte",
-  REJECTED: "Odrzucone",
-};
-
-const disputeStatusOptions: DisputeStatusFilter[] = [
-  "ALL",
-  "OPEN",
-  "IN_REVIEW",
-  "WAITING_USER",
-  "RESOLVED",
-  "REJECTED",
-];
 
 export default function UserPanelPage() {
   const { open: openWallet } = useUserPanel();

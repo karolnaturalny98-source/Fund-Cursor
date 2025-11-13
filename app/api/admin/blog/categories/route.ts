@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { assertAdminRequest } from "@/lib/auth";
 import { getBlogCategories } from "@/lib/queries/blog";
@@ -12,13 +11,6 @@ const createCategorySchema = z.object({
   slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/).optional(),
   description: z.string().max(500).optional(),
   order: z.number().int().default(0),
-});
-
-const updateCategorySchema = z.object({
-  name: z.string().min(1).max(100).optional(),
-  slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/).optional(),
-  description: z.string().max(500).optional(),
-  order: z.number().int().optional(),
 });
 
 export async function GET() {

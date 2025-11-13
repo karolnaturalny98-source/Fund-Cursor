@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Receipt, BarChart3, TrendingDown, TrendingUp } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CommissionCard } from "@/components/companies/accordion-item-client";
 import {
@@ -15,7 +15,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  ResponsiveContainer,
 } from "recharts";
 import { useFadeIn } from "@/lib/animations";
 import type { CompanyCommission } from "@/lib/types";
@@ -23,14 +22,6 @@ import type { CompanyCommission } from "@/lib/types";
 interface CommissionsSectionProps {
   commissions: CompanyCommission[];
 }
-
-const CHART_COLORS = [
-  "hsl(var(--primary))",
-  "hsl(var(--emerald-500))",
-  "hsl(var(--blue-500))",
-  "hsl(var(--amber-500))",
-  "hsl(var(--rose-500))",
-];
 
 // Helper to extract numeric value from commission string
 function extractNumericValue(value: string): number | null {

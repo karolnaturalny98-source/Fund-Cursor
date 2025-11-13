@@ -22,7 +22,7 @@ export function ShopPurchaseForm({
   plan,
   userId,
 }: ShopPurchaseFormProps) {
-  const router = useRouter();
+  const _router = useRouter();
   const { user } = useUser();
   const [email, setEmail] = useState(user?.emailAddresses[0]?.emailAddress ?? "");
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { revalidateTag } from "@/lib/cache";
 import { z } from "zod";
@@ -17,8 +16,6 @@ const createTeamMemberSchema = z.object({
   position: z.enum(["left", "right", "center"]).nullish(),
   order: z.number().int().min(0),
 });
-
-const updateTeamMemberSchema = createTeamMemberSchema.partial();
 
 interface TeamRouteParams {
   params: Promise<{ slug: string }>;

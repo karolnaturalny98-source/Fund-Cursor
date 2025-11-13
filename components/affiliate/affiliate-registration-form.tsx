@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";

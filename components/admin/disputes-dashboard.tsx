@@ -81,7 +81,7 @@ export function AdminDisputesDashboard({
   const [banner, setBanner] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [deleteDialog, setDeleteDialog] = useState<string | null>(null);
-  const router = useRouter();
+  const _router = useRouter();
   const [isPendingDelete, startTransitionDelete] = useTransition();
 
   const hasMore = Boolean(nextCursor);

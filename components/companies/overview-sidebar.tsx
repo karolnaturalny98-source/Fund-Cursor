@@ -9,9 +9,6 @@ import { CompanyPopularityChart } from "@/components/companies/company-popularit
 import { DefaultPlanCardClient } from "@/components/companies/company-page-client";
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AccordionItemClient, InstrumentGroupCard, CommissionCard, RulesCard } from "@/components/companies/accordion-item-client";
 import {
@@ -23,7 +20,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { Company, CompanyPlan, CompanyRankingHistory } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface OverviewSidebarProps {
   company: Company;

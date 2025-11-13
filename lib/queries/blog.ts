@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
-import type { BlogPost, BlogCategory, BlogPostWithRelations, BlogPostStatus } from "@/lib/types";
+import type { BlogCategory, BlogPostWithRelations, BlogPostStatus } from "@/lib/types";
 
 const prismaConfigured = Boolean(process.env.DATABASE_URL);
 

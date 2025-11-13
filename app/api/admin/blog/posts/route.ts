@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { assertAdminRequest } from "@/lib/auth";
 import { ensureUserRecord } from "@/lib/services/user";
 import { getBlogPosts } from "@/lib/queries/blog";
-import { generateSlug, calculateReadingTime } from "@/lib/utils/blog";
+import { calculateReadingTime } from "@/lib/utils/blog";
 
 const createPostSchema = z.object({
   title: z.string().min(1, "Tytuł jest wymagany").max(200),

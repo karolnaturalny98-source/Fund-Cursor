@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap, Shield, Layers, FileText, Clock, BookOpen, LifeBuoy, Check } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ChecklistItemClient } from "@/components/companies/company-page-client";
 import { useFadeIn } from "@/lib/animations";

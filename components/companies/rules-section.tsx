@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Shield, Check, CircleSlash, Search, PieChart as PieChartIcon } from "lucide-react";
+import { Check, CircleSlash, Search, PieChart as PieChartIcon } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +16,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  ResponsiveContainer,
   Legend,
 } from "recharts";
 import { useFadeIn, useScrollAnimation, useStaggerAnimation } from "@/lib/animations";

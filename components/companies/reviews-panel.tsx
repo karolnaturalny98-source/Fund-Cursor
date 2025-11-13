@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";
@@ -20,7 +19,7 @@ import { ReviewForm } from "@/components/companies/review-form";
 import { ReviewsStatisticsChart } from "@/components/companies/reviews-statistics-chart";
 import { cn } from "@/lib/utils";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
-import { Check, Filter, Star, X, MessageSquare, ShieldCheck, ThumbsUp, Search, XCircle, ArrowUpDown, Calendar, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, Star, X, MessageSquare, ShieldCheck, ThumbsUp, Search, XCircle, ArrowUpDown, Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import {
   Select,
   SelectContent,

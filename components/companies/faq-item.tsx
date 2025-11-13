@@ -15,7 +15,7 @@ interface FaqItemProps {
   value: string;
 }
 
-export function FaqItem({ id, question, answer, companySlug, value }: FaqItemProps) {
+export function FaqItem({ id: _id, question, answer, companySlug: _companySlug, value }: FaqItemProps) {
   return (
     <AccordionItem
       value={value}

@@ -63,7 +63,7 @@ export function SiteFooter() {
           variant: "destructive",
         });
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Błąd",
         description: "Nie udało się połączyć z serwerem",
