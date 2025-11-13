@@ -65,7 +65,7 @@ export function MetricCard({
         </div>
       </CardHeader>
       <CardContent className="px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.15rem,1.6vw,1.4rem)] pt-0">
-        <div className="space-y-[clamp(0.45rem,0.7vw,0.6rem)]">
+        <div className="flex flex-col fluid-stack-xs">
           <p className="text-[clamp(1.85rem,0.8vw+1.55rem,2.25rem)] font-semibold leading-[clamp(2.1rem,0.9vw+1.8rem,2.45rem)] tracking-tight text-foreground">
             {value}
           </p>
@@ -92,4 +92,5 @@ export function MetricCard({
     </Card>
   );
 }
+
 

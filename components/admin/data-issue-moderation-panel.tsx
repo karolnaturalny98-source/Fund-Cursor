@@ -78,14 +78,14 @@ export function DataIssueModerationPanel({
         </div>
       )}
 
-      <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+      <div className="flex flex-col fluid-stack-lg">
         {reports.map((report) => (
         <article
           key={report.id}
-          className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[36px]!"
+          className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[36px]!"
         >
           <header className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.2vw,1.1rem)]">
-            <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+            <div className="flex flex-col fluid-stack-xs">
               <p className="font-semibold text-foreground fluid-copy">
                 {report.company
                   ? `${report.company.name} /${report.company.slug}`

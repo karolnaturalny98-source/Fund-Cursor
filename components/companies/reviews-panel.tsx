@@ -187,12 +187,12 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
   const statsAnim = useFadeIn({ rootMargin: "-50px" });
 
   return (
-    <section ref={sectionAnim.ref} className="space-y-6">
+    <section ref={sectionAnim.ref} className="flex flex-col fluid-stack-md">
       {/* Quick Stats */}
       {reviews.length > 0 && (
         <div ref={statsAnim.ref} className={`grid gap-4 sm:grid-cols-2 md:grid-cols-4 ${statsAnim.className}`}>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
+            <CardContent className="flex flex-col items-center justify-center fluid-stack-xs p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {averageRating.toFixed(1)}
               </div>
@@ -201,7 +201,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
+            <CardContent className="flex flex-col items-center justify-center fluid-stack-xs p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {reviews.length}
               </div>
@@ -209,7 +209,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
+            <CardContent className="flex flex-col items-center justify-center fluid-stack-xs p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {verifiedPercentage}%
               </div>
@@ -217,7 +217,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
-            <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
+            <CardContent className="flex flex-col items-center justify-center fluid-stack-xs p-6 text-center">
               <div className="text-3xl font-bold text-foreground">
                 {recommendedPercentage}%
               </div>
@@ -227,7 +227,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="flex flex-col fluid-stack-sm">
         <div>
           <h2 className="text-xl font-semibold sm:text-2xl">Opinie społeczności</h2>
           <p className="text-sm text-muted-foreground">
@@ -333,11 +333,11 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
 
       {filteredReviews.length === 0 ? (
         <Card className="rounded-2xl border border-border/60 border-dashed bg-card/72 backdrop-blur-[36px]! shadow-xs">
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="mb-4 rounded-full bg-muted/30 p-4">
+          <CardContent className="flex flex-col items-center justify-center fluid-stack-md fluid-section-sm text-center">
+            <div className="rounded-full bg-muted/30 p-4">
               <MessageSquare className="h-10 w-10 text-muted-foreground/50" />
             </div>
-            <CardTitle className="mb-2 text-xl font-semibold">Brak opinii</CardTitle>
+            <CardTitle className="text-xl font-semibold">Brak opinii</CardTitle>
             <CardDescription className="max-w-md text-sm">
               {activeFiltersCount > 0
                 ? "Nie znaleziono opinii spełniających wybrane kryteria. Spróbuj zmienić filtry."
@@ -348,12 +348,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                     : "Brak opinii dla tej firmy. Bądź pierwszą osobą, która podzieli się doświadczeniem."}
             </CardDescription>
             {activeFiltersCount > 0 ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-4 rounded-full"
-                onClick={clearFilters}
-              >
+              <Button variant="outline" size="sm" className="rounded-full" onClick={clearFilters}>
                 <XCircle className="mr-2 h-4 w-4" />
                 Wyczyść filtry
               </Button>
@@ -361,7 +356,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
               <Button
                 variant="premium"
                 size="sm"
-                className="mt-4 rounded-full"
+                className="rounded-full"
                 onClick={() => setShowForm(true)}
               >
                 <PremiumIcon icon={MessageSquare} variant="glow" size="sm" className="mr-2" />
@@ -372,7 +367,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
         </Card>
       ) : (
         <>
-          <div className="space-y-4">
+          <div className="flex flex-col fluid-stack-sm">
             {paginatedReviews.map((review, index) => (
             <div
               key={review.id}
@@ -389,7 +384,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                 data-testid="review-card"
                 className="group h-full rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
               >
-              <CardHeader className="space-y-3 pb-3">
+              <CardHeader className="flex flex-col fluid-stack-sm pb-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     {renderStars(review.rating, "md")}
@@ -427,7 +422,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                     )}
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <CardDescription className="flex items-center gap-2 text-xs font-medium">
                     <span>{review.userDisplayName ?? "Anonimowy trader"}</span>
                     <span className="text-muted-foreground/60">&middot;</span>
@@ -465,9 +460,9 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4 pt-0">
+              <CardContent className="flex flex-col fluid-stack-sm pt-0">
                 {review.body ? (
-                  <div className="space-y-2">
+                  <div className="flex flex-col fluid-stack-xs">
                     <p
                       className={cn(
                         "text-sm leading-relaxed text-muted-foreground",
@@ -513,7 +508,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                       Plusy
                     </AlertTitle>
                     <AlertDescription className="mt-2">
-                      <ul className="space-y-1.5 text-sm text-emerald-700">
+                      <ul className="flex flex-col fluid-stack-xs text-sm text-emerald-700">
                         {review.pros.map((pro) => (
                           <li key={pro} className="flex items-start gap-2">
                             <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" />
@@ -531,7 +526,7 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                       Minusy
                     </AlertTitle>
                     <AlertDescription className="mt-2">
-                      <ul className="space-y-1.5 text-sm text-rose-700">
+                      <ul className="flex flex-col fluid-stack-xs text-sm text-rose-700">
                         {review.cons.map((con) => (
                           <li key={con} className="flex items-start gap-2">
                             <X className="mt-0.5 h-3.5 w-3.5 shrink-0" />
@@ -543,9 +538,9 @@ export function ReviewsPanel({ companySlug, reviews }: ReviewsPanelProps) {
                   </Alert>
                 ) : null}
                 {review.resourceLinks.length > 0 ? (
-                  <div className="space-y-2 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! p-3 shadow-xs">
+                  <div className="flex flex-col fluid-stack-xs rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! p-3 shadow-xs">
                     <p className="text-xs font-semibold text-foreground">Materiały:</p>
-                    <ul className="space-y-1 text-xs">
+                    <ul className="flex flex-col fluid-stack-xs text-xs">
                       {review.resourceLinks.map((link) => (
                         <li key={link}>
                           <a

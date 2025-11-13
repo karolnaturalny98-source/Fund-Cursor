@@ -10,7 +10,7 @@ interface BlogOperationsTabProps {
 
 export function BlogOperationsTab({ categories }: BlogOperationsTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Dodaj nowy artykuł"
         description="Utwórz nowy artykuł blogowy z pełnym edytorem tekstu."
@@ -20,4 +20,5 @@ export function BlogOperationsTab({ categories }: BlogOperationsTabProps) {
     </div>
   );
 }
+
 

@@ -11,6 +11,7 @@ import { useFadeIn } from "@/lib/animations";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CompanyWithPlans } from "@/lib/queries/companies";
 import { TrendingUp, Star } from "lucide-react";
+import { Section } from "@/components/layout/section";
 
 interface ShopPageClientProps {
   companies: CompanyWithPlans[];
@@ -71,10 +72,10 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
   }, [companies, activeTab]);
 
   return (
-    <div className="container space-y-[clamp(2rem,3vw,3rem)] py-[clamp(2.5rem,3.5vw,3.75rem)]">
+    <Section size="lg" className="flex flex-col fluid-stack-xl">
       {/* Hero Section */}
-      <div className="space-y-[clamp(1.5rem,2.2vw,2rem)]">
-        <div className="flex flex-col items-center gap-[clamp(1rem,1.5vw,1.35rem)] text-center">
+      <div className="flex flex-col fluid-stack-lg">
+        <div className="flex flex-col items-center fluid-stack-md text-center">
           <div ref={badgeAnim.ref} className={badgeAnim.className}>
             <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
               Sklep
@@ -91,7 +92,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         </div>
 
         {/* Stats */}
-        <div className="mx-auto grid max-w-3xl grid-cols-3 gap-[clamp(0.85rem,1.3vw,1.15rem)]">
+        <div className="mx-auto grid max-w-3xl grid-cols-3 fluid-stack-sm">
           <div className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(1rem,1.4vw,1.2rem)] shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
             <div className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-foreground">{totalCompanies}</div>
             <div className="text-muted-foreground fluid-caption">Firm</div>
@@ -123,7 +124,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value={activeTab} className="mt-6">
+        <TabsContent value={activeTab} className="mt-[clamp(1rem,1.5vw,1.5rem)]">
           <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
             <CardHeader>
               <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz firmę</CardTitle>
@@ -154,7 +155,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
                 {selectedCompany.plans.map((plan) => (
                   <ShopPlanCard
                     key={plan.id}
@@ -191,6 +192,6 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
           </Card>
         </>
       )}
-    </div>
+    </Section>
   );
 }

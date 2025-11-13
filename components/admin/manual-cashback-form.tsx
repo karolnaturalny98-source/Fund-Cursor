@@ -103,9 +103,9 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
   };
 
   return (
-    <form className="space-y-4" onSubmit={onSubmit}>
+    <form className="flex flex-col fluid-stack-sm" onSubmit={onSubmit}>
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="space-y-2 text-sm">
+        <label className="flex flex-col fluid-stack-xs text-sm">
           <span className="font-medium text-foreground">Firma</span>
           <Select
             disabled={isPending || companies.length === 0}
@@ -130,7 +130,7 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
           </Select>
         </label>
 
-        <label className="space-y-2 text-sm">
+        <label className="flex flex-col fluid-stack-xs text-sm">
           <span className="font-medium text-foreground">Punkty</span>
           <Input
             inputMode="numeric"
@@ -150,7 +150,7 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="space-y-2 text-sm">
+        <label className="flex flex-col fluid-stack-xs text-sm">
           <span className="font-medium text-foreground">Clerk ID</span>
           <Input
             placeholder="clerk_usr_123..."
@@ -167,7 +167,7 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
           </p>
         </label>
 
-        <label className="space-y-2 text-sm">
+        <label className="flex flex-col fluid-stack-xs text-sm">
           <span className="font-medium text-foreground">Email użytkownika</span>
           <Input
             placeholder="uzytkownik@example.com"
@@ -186,7 +186,7 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
         </label>
       </div>
 
-      <label className="space-y-2 text-sm">
+      <label className="flex flex-col fluid-stack-xs text-sm">
         <span className="font-medium text-foreground">Status transakcji</span>
         <Select
           disabled={isPending}
@@ -211,7 +211,7 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
         </Select>
       </label>
 
-      <label className="space-y-2 text-sm">
+      <label className="flex flex-col fluid-stack-xs text-sm">
         <span className="font-medium text-foreground">Notatka (opcjonalnie)</span>
         <Textarea
           maxLength={260}
@@ -244,3 +244,4 @@ export function ManualCashbackForm({ companies }: ManualCashbackFormProps) {
     </form>
   );
 }
+

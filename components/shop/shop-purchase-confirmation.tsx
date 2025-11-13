@@ -94,7 +94,7 @@ export function ShopPurchaseConfirmation() {
         </DialogHeader>
 
         {confirmed !== null ? (
-          <div className="space-y-4">
+          <div className="flex flex-col fluid-stack-sm">
             <Alert variant={confirmed ? "default" : "destructive"}>
               <div className="flex items-center gap-2">
                 {confirmed ? (
@@ -118,7 +118,7 @@ export function ShopPurchaseConfirmation() {
               </Alert>
             )}
 
-            <div className="space-y-4 py-4">
+            <div className="flex flex-col fluid-stack-sm py-4">
               <p className="text-sm text-muted-foreground">
                 Abyśmy mogli przyznać Ci cashback, potwierdź czy dokonałeś zakupu na stronie partnera.
               </p>

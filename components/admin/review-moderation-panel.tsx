@@ -79,12 +79,12 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
         </div>
       )}
 
-      <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+      <div className="flex flex-col fluid-stack-md">
         {reviews.map((review) => (
         <Card key={review.id} className="rounded-2xl border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-          <CardHeader className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+          <CardHeader className="flex flex-col fluid-stack-xs">
             <div className="flex flex-wrap items-center justify-between gap-[clamp(0.85rem,1.2vw,1.1rem)]">
-              <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+              <div className="flex flex-col fluid-stack-xs">
                 <p className="font-semibold text-foreground fluid-copy">
                   {review.company.name}
                 </p>
@@ -103,7 +103,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="space-y-[clamp(1rem,1.4vw,1.25rem)]">
+          <CardContent className="flex flex-col fluid-stack-md">
             {review.body ? (
               <>
                 <p className="text-foreground fluid-copy">{review.body}</p>
@@ -113,7 +113,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
 
             <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] text-muted-foreground fluid-caption">
               {review.pros.length > 0 ? (
-                <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                <div className="flex flex-col fluid-stack-xs">
                   <p className="font-semibold text-foreground fluid-caption">Plusy</p>
                   <div className="flex flex-wrap gap-[clamp(0.35rem,0.6vw,0.5rem)]">
                     {review.pros.map((item) => (
@@ -125,7 +125,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                 </div>
               ) : null}
               {review.cons.length > 0 ? (
-                <div className="space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                <div className="flex flex-col fluid-stack-xs">
                   <p className="font-semibold text-foreground fluid-caption">Minusy</p>
                   <div className="flex flex-wrap gap-[clamp(0.35rem,0.6vw,0.5rem)]">
                     {review.cons.map((item) => (
@@ -199,3 +199,4 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
     </>
   );
 }
+

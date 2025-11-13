@@ -307,16 +307,16 @@ export function CreateCompanyPlanForm({
   };
 
   return (
-    <div className="rounded-lg border bg-card/82 p-4">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="flex flex-col rounded-lg border bg-card/82 p-[clamp(1rem,1.5vw,1.5rem)] fluid-stack-md">
+      <h3 className="fluid-eyebrow font-semibold text-muted-foreground">
         {isEditMode ? "Edytuj plan" : "Dodaj plan"}
       </h3>
-      <form className="mt-4 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="mt-[clamp(0.75rem,1vw,1rem)] flex flex-col fluid-stack-md" onSubmit={handleSubmit(onSubmit)}>
         <Field label="Nazwa planu" error={errors.name?.message}>
           <Input placeholder="Account 50K" {...register("name")} />
         </Field>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid fluid-stack-sm md:grid-cols-3">
           <Field label="Cena" error={errors.price?.message}>
             <Input placeholder="249" {...register("price")} />
           </Field>
@@ -328,7 +328,7 @@ export function CreateCompanyPlanForm({
           </Field>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid fluid-stack-sm md:grid-cols-2">
           <Field label="Max drawdown" error={errors.maxDrawdown?.message}>
             <Input placeholder="5000" {...register("maxDrawdown")} />
           </Field>
@@ -337,7 +337,7 @@ export function CreateCompanyPlanForm({
           </Field>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid fluid-stack-sm md:grid-cols-3">
           <Field label="Profit target" error={errors.profitTarget?.message}>
             <Input placeholder="5000" {...register("profitTarget")} />
           </Field>
@@ -349,7 +349,7 @@ export function CreateCompanyPlanForm({
           </Field>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid fluid-stack-sm md:grid-cols-2">
           <Field
             label="Pierwsza wypłata po (dni)"
             error={errors.payoutFirstAfterDays?.message}
@@ -377,7 +377,7 @@ export function CreateCompanyPlanForm({
             placeholder="5.00" 
             {...register("affiliateCommission")} 
           />
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="fluid-caption text-muted-foreground mt-[clamp(0.2rem,0.3vw,0.25rem)]">
             Procent prowizji, który otrzymujemy od partnera za przekierowanie klienta
           </p>
         </Field>
@@ -400,10 +400,10 @@ export function CreateCompanyPlanForm({
           <Textarea placeholder="Dodatkowe informacje" rows={2} {...register("notes")} />
         </Field>
 
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid fluid-stack-sm sm:grid-cols-3">
           <label
             htmlFor="trailingDrawdown"
-            className="flex items-center gap-2 text-sm text-foreground"
+            className="flex items-center fluid-stack-xs fluid-caption text-foreground"
           >
             <input
               id="trailingDrawdown"
@@ -417,7 +417,7 @@ export function CreateCompanyPlanForm({
           </label>
           <label
             htmlFor="refundableFee"
-            className="flex items-center gap-2 text-sm text-foreground"
+            className="flex items-center fluid-stack-xs fluid-caption text-foreground"
           >
             <input
               id="refundableFee"
@@ -429,7 +429,7 @@ export function CreateCompanyPlanForm({
             />
             Refundacja opłaty
           </label>
-          <label htmlFor="scalingPlan" className="flex items-center gap-2 text-sm text-foreground">
+          <label htmlFor="scalingPlan" className="flex items-center fluid-stack-xs text-sm text-foreground">
             <input
               id="scalingPlan"
               type="checkbox"
@@ -444,7 +444,7 @@ export function CreateCompanyPlanForm({
 
         <Field label="Model oceny" error={errors.evaluationModel?.message}>
           <select
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-full rounded-md border border-input bg-background px-[clamp(0.6rem,0.8vw,0.75rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             {...register("evaluationModel")}
           >
             <option value="one-step">1-etapowe wyzwanie</option>
@@ -455,7 +455,7 @@ export function CreateCompanyPlanForm({
 
         {serverMessage ? (
           <div
-            className={`rounded-lg border p-3 text-sm ${
+            className={`rounded-lg border p-[clamp(0.6rem,0.8vw,0.75rem)] fluid-caption ${
               serverMessage.type === "success"
                 ? "border-emerald-200 bg-emerald-50 text-emerald-700"
                 : "border-destructive/40 bg-destructive/10 text-destructive"
@@ -483,10 +483,10 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="flex flex-col gap-1 text-sm">
+    <label className="flex flex-col fluid-stack-xs fluid-caption">
       <span className="font-medium text-foreground">{label}</span>
       {children}
-      {error ? <span className="text-xs text-destructive">{error}</span> : null}
+      {error ? <span className="fluid-caption text-destructive">{error}</span> : null}
     </label>
   );
 }

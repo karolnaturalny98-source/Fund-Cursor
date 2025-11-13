@@ -249,27 +249,27 @@ export function CompanyTradingProfileForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-xl">
       {shouldShow("instrumentGroups") && (
-      <div className="space-y-4">
-        <header className="space-y-2">
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Instrumenty i aktywa</h4>
-          <p className="text-xs text-muted-foreground">
+      <div className="flex flex-col fluid-stack-md">
+        <header className="flex flex-col fluid-stack-xs">
+          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Instrumenty i aktywa</h4>
+          <p className="fluid-caption text-muted-foreground">
             Dodaj sekcje z opisem klas aktywow oraz przykladami instrumentow oferowanych przez firme.
           </p>
         </header>
 
-        <div className="space-y-4">
+        <div className="flex flex-col fluid-stack-md">
           {instrumentsArray.fields.map((field, index) => (
-            <div key={field.id} className="rounded-xl border bg-muted/20 p-4">
-              <div className="grid gap-3 md:grid-cols-2">
+            <div key={field.id} className="flex flex-col rounded-xl border bg-muted/20 p-[clamp(1rem,1.5vw,1.5rem)] fluid-stack-md">
+              <div className="grid fluid-stack-sm md:grid-cols-2">
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`instrument-${index}-title`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`instrument-${index}-title`}>
                     Nazwa sekcji
                   </label>
                   <Input id={`instrument-${index}-title`} {...register(`instrumentGroups.${index}.title`)} />
                   {errors.instrumentGroups?.[index]?.title ? (
-                    <p className="mt-1 text-xs text-rose-600">{errors.instrumentGroups[index]?.title?.message}</p>
+                    <p className="mt-[clamp(0.2rem,0.3vw,0.25rem)] fluid-caption text-rose-600">{errors.instrumentGroups[index]?.title?.message}</p>
                   ) : null}
                 </div>
                 <div>
@@ -282,20 +282,20 @@ export function CompanyTradingProfileForm({
                   <Input id={`instrument-${index}-description`} {...register(`instrumentGroups.${index}.description`)} />
                 </div>
               </div>
-              <div className="mt-3">
+              <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] flex flex-col fluid-stack-xs">
                 <label className="text-xs font-semibold text-muted-foreground" htmlFor={`instrument-${index}-items`}>
                   Instrumenty (po jednym w wierszu)
                 </label>
                 <Textarea id={`instrument-${index}-items`} rows={4} {...register(`instrumentGroups.${index}.instruments`)} />
               </div>
               {instrumentsArray.fields.length > 1 ? (
-                <div className="mt-3 flex justify-end">
+                <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] flex justify-end">
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
                     onClick={() => instrumentsArray.remove(index)}
-                    className="text-xs text-rose-600"
+                    className="fluid-caption text-rose-600"
                   >
                     Usun sekcje
                   </Button>
@@ -317,25 +317,25 @@ export function CompanyTradingProfileForm({
       )}
 
       {shouldShow("leverageTiers") && (
-      <div className="space-y-4">
-        <header className="space-y-2">
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Segmenty dzwigni</h4>
-          <p className="text-xs text-muted-foreground">
+      <div className="flex flex-col fluid-stack-md">
+        <header className="flex flex-col fluid-stack-xs">
+          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Segmenty dzwigni</h4>
+          <p className="fluid-caption text-muted-foreground">
             Opisz segmenty kont wraz z limitami dzwigni oraz dodatkowymi notatkami.
           </p>
         </header>
 
-        <div className="space-y-4">
+        <div className="flex flex-col fluid-stack-md">
           {leverageArray.fields.map((field, index) => (
-            <div key={field.id} className="rounded-xl border bg-muted/20 p-4">
-              <div className="grid gap-3 md:grid-cols-2">
+            <div key={field.id} className="flex flex-col rounded-xl border bg-muted/20 p-[clamp(1rem,1.5vw,1.5rem)] fluid-stack-md">
+              <div className="grid fluid-stack-sm md:grid-cols-2">
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`leverage-${index}-label`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`leverage-${index}-label`}>
                     Nazwa segmentu
                   </label>
                   <Input id={`leverage-${index}-label`} {...register(`leverageTiers.${index}.label`)} />
                   {errors.leverageTiers?.[index]?.label ? (
-                    <p className="mt-1 text-xs text-rose-600">{errors.leverageTiers[index]?.label?.message}</p>
+                    <p className="mt-[clamp(0.2rem,0.3vw,0.25rem)] fluid-caption text-rose-600">{errors.leverageTiers[index]?.label?.message}</p>
                   ) : null}
                 </div>
                 <div>
@@ -348,28 +348,28 @@ export function CompanyTradingProfileForm({
                   <Input id={`leverage-${index}-account`} {...register(`leverageTiers.${index}.accountSize`)} />
                 </div>
               </div>
-              <div className="mt-3 grid gap-3 md:grid-cols-2">
+              <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] grid fluid-stack-sm md:grid-cols-2">
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`leverage-${index}-max`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`leverage-${index}-max`}>
                     Max dzwignia (np. 50)
                   </label>
                   <Input id={`leverage-${index}-max`} {...register(`leverageTiers.${index}.maxLeverage`)} />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`leverage-${index}-notes`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`leverage-${index}-notes`}>
                     Notatki (opcjonalnie)
                   </label>
                   <Input id={`leverage-${index}-notes`} {...register(`leverageTiers.${index}.notes`)} />
                 </div>
               </div>
               {leverageArray.fields.length > 1 ? (
-                <div className="mt-3 flex justify-end">
+                <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] flex justify-end">
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
                     onClick={() => leverageArray.remove(index)}
-                    className="text-xs text-rose-600"
+                    className="fluid-caption text-rose-600"
                   >
                     Usun segment
                   </Button>
@@ -398,51 +398,51 @@ export function CompanyTradingProfileForm({
       )}
 
       {shouldShow("commissions") && (
-      <div className="space-y-4">
-        <header className="space-y-2">
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Prowizje</h4>
-          <p className="text-xs text-muted-foreground">
+      <div className="flex flex-col fluid-stack-md">
+        <header className="flex flex-col fluid-stack-xs">
+          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Prowizje</h4>
+          <p className="fluid-caption text-muted-foreground">
             Opisz prowizje lub oplaty handlowe dla poszczegolnych rynkow.
           </p>
         </header>
 
-        <div className="space-y-4">
+        <div className="flex flex-col fluid-stack-md">
           {commissionArray.fields.map((field, index) => (
-            <div key={field.id} className="rounded-xl border bg-muted/20 p-4">
-              <div className="grid gap-3 md:grid-cols-2">
+            <div key={field.id} className="flex flex-col rounded-xl border bg-muted/20 p-[clamp(1rem,1.5vw,1.5rem)] fluid-stack-md">
+              <div className="grid fluid-stack-sm md:grid-cols-2">
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`commission-${index}-market`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`commission-${index}-market`}>
                     Rynek / klasa aktywow
                   </label>
                   <Input id={`commission-${index}-market`} {...register(`commissions.${index}.market`)} />
                   {errors.commissions?.[index]?.market ? (
-                    <p className="mt-1 text-xs text-rose-600">{errors.commissions[index]?.market?.message}</p>
+                    <p className="mt-[clamp(0.2rem,0.3vw,0.25rem)] fluid-caption text-rose-600">{errors.commissions[index]?.market?.message}</p>
                   ) : null}
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground" htmlFor={`commission-${index}-value`}>
+                  <label className="fluid-caption font-semibold text-muted-foreground" htmlFor={`commission-${index}-value`}>
                     Wartosc prowizji
                   </label>
                   <Input id={`commission-${index}-value`} {...register(`commissions.${index}.value`)} />
                   {errors.commissions?.[index]?.value ? (
-                    <p className="mt-1 text-xs text-rose-600">{errors.commissions[index]?.value?.message}</p>
+                    <p className="mt-[clamp(0.2rem,0.3vw,0.25rem)] fluid-caption text-rose-600">{errors.commissions[index]?.value?.message}</p>
                   ) : null}
                 </div>
               </div>
-              <div className="mt-3">
+              <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] flex flex-col fluid-stack-xs">
                 <label className="text-xs font-semibold text-muted-foreground" htmlFor={`commission-${index}-notes`}>
                   Notatki (opcjonalnie)
                 </label>
                 <Input id={`commission-${index}-notes`} {...register(`commissions.${index}.notes`)} />
               </div>
               {commissionArray.fields.length > 1 ? (
-                <div className="mt-3 flex justify-end">
+                <div className="mt-[clamp(0.5rem,0.8vw,0.75rem)] flex justify-end">
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
                     onClick={() => commissionArray.remove(index)}
-                    className="text-xs text-rose-600"
+                    className="fluid-caption text-rose-600"
                   >
                     Usun wpis
                   </Button>
@@ -464,21 +464,21 @@ export function CompanyTradingProfileForm({
       )}
 
       {shouldShow("firmRules") && (
-      <div className="space-y-4">
-        <header className="space-y-2">
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Zasady firmy</h4>
-          <p className="text-xs text-muted-foreground">
+      <div className="flex flex-col fluid-stack-md">
+        <header className="flex flex-col fluid-stack-xs">
+          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Zasady firmy</h4>
+          <p className="fluid-caption text-muted-foreground">
             Wypisz zasady dozwolone i zabronione (po jednym punkcie na wiersz). Lista pojawi sie w zakladce Overview.
           </p>
         </header>
-        <div className="grid gap-4 md:grid-cols-2">
-          <div>
+        <div className="grid fluid-stack-md md:grid-cols-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-xs font-semibold text-muted-foreground" htmlFor="allowed-rules">
               Dozwolone
             </label>
             <Textarea id="allowed-rules" rows={6} {...register("allowedRules")} />
           </div>
-          <div>
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-xs font-semibold text-muted-foreground" htmlFor="restricted-rules">
               Zabronione
             </label>
@@ -489,7 +489,7 @@ export function CompanyTradingProfileForm({
       )}
 
       {serverMessage ? (
-        <p className={`text-sm ${serverMessage.type === "error" ? "text-rose-600" : "text-emerald-600"}`}>
+        <p className={`fluid-caption ${serverMessage.type === "error" ? "text-rose-600" : "text-emerald-600"}`}>
           {serverMessage.text}
         </p>
       ) : null}

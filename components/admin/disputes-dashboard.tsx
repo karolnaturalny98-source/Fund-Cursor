@@ -306,7 +306,7 @@ export function AdminDisputesDashboard({
   );
 
   return (
-    <div className="space-y-[clamp(1.25rem,1.8vw,1.75rem)]">
+    <div className="flex flex-col fluid-stack-lg">
       <div className="grid gap-[clamp(0.85rem,1.3vw,1.1rem)] sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((card) => (
           <div
@@ -371,7 +371,7 @@ export function AdminDisputesDashboard({
       ) : null}
 
       {loading ? (
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <div className="h-4 animate-pulse rounded bg-muted/70" />
           <div className="h-4 animate-pulse rounded bg-muted/60" />
           <div className="h-4 animate-pulse rounded bg-muted/50" />
@@ -381,7 +381,7 @@ export function AdminDisputesDashboard({
           Brak zgloszen dla wybranych filtrów.
         </div>
       ) : (
-        <div className="space-y-[clamp(0.85rem,1.3vw,1.15rem)]">
+        <div className="flex flex-col fluid-stack-md">
           {items.map((dispute) => (
             <AdminDisputeRow
               key={dispute.id}
@@ -464,9 +464,9 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
   };
 
   return (
-    <article className="space-y-[clamp(0.75rem,1.2vw,1.1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.5vw,1.35rem)] shadow-xs backdrop-blur-[36px]!">
+    <article className="flex flex-col fluid-stack-md rounded-2xl border border-border/60 bg-card/72 p-[clamp(1rem,1.5vw,1.35rem)] shadow-xs backdrop-blur-[36px]!">
       <header className="flex flex-wrap items-start justify-between gap-[clamp(0.65rem,1vw,0.9rem)]">
-        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+        <div className="flex flex-col fluid-stack-xs">
           <p className="font-semibold text-foreground fluid-copy">{dispute.title}</p>
           <div className="flex flex-wrap items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
             <span>{formatDateTime(dispute.createdAt)}</span>
@@ -527,7 +527,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
       ) : null}
 
       <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] lg:grid-cols-[200px_1fr]">
-        <label className="space-y-[clamp(0.25rem,0.4vw,0.35rem)] text-xs font-medium text-foreground">
+        <label className="flex flex-col fluid-stack-xs text-xs font-medium text-foreground">
           <span>Status sprawy</span>
           <select
             className="h-auto w-full rounded-2xl border border-input bg-background px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.4rem,0.65vw,0.55rem)] text-foreground fluid-caption shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
@@ -541,7 +541,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
             ))}
           </select>
         </label>
-        <label className="space-y-[clamp(0.25rem,0.4vw,0.35rem)] text-xs font-medium text-foreground">
+        <label className="flex flex-col fluid-stack-xs text-xs font-medium text-foreground">
           <span>Notatka dla zespolu (opcjonalnie)</span>
           <Textarea
             rows={3}
@@ -608,3 +608,4 @@ function formatAmount(amount: number, currency: string) {
     return `${amount.toFixed(2)} ${currency.toUpperCase()}`;
   }
 }
+

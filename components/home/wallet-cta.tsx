@@ -4,6 +4,7 @@ import { Wallet2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Section } from "@/components/layout/section";
 import { useScrollAnimation } from "@/lib/animations";
 import { useUserPanel } from "@/components/panels/user-panel-context";
 
@@ -12,16 +13,16 @@ export function WalletCtaBanner() {
   const ctaAnim = useScrollAnimation({ rootMargin: "-100px" });
 
   return (
-    <section className="container">
-      <div 
+    <Section size="lg">
+      <div
         ref={ctaAnim.ref}
         className={`relative overflow-hidden glass-card border border-border/60 p-[clamp(2rem,3vw,3.25rem)] shadow-md transition-all duration-700 ${
           ctaAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
         }`}
       >
         <div className="absolute right-0 top-0 h-full w-1/3 rounded-l-full bg-white/10 blur-3xl" aria-hidden="true" />
-        <div className="relative flex flex-wrap gap-[clamp(1.5rem,2vw,2.25rem)] md:flex-nowrap md:items-center md:justify-between">
-          <div className="w-full space-y-[clamp(1rem,1.5vw,1.5rem)] md:max-w-xl">
+        <div className="relative flex flex-wrap fluid-stack-lg md:flex-nowrap md:items-center md:justify-between">
+          <div className="flex w-full flex-col fluid-stack-md md:max-w-xl">
             <PremiumBadge
               variant="glow"
               className="inline-flex items-center gap-[clamp(0.5rem,1vw,0.75rem)] fluid-badge uppercase tracking-[0.3em] text-foreground"
@@ -49,6 +50,6 @@ export function WalletCtaBanner() {
           </Button>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

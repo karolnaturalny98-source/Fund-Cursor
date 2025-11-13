@@ -22,7 +22,7 @@ interface ShopStatisticsOverviewProps {
 
 export function ShopStatisticsOverview({ stats }: ShopStatisticsOverviewProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Główne metryki */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <MetricCard
@@ -229,5 +229,6 @@ export function ShopStatisticsOverview({ stats }: ShopStatisticsOverviewProps) {
     </div>
   );
 }
+
 
 

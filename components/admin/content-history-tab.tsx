@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export function ContentHistoryTab() {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Historia zmian treści"
         description="Przeglądaj historię zmian w firmach, planach i innych treściach."
@@ -27,4 +27,5 @@ export function ContentHistoryTab() {
     </div>
   );
 }
+
 

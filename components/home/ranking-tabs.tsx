@@ -4,7 +4,9 @@ import type { HomeRanking } from "@/lib/queries/companies";
 import { HomeRankingTable } from "@/components/home/home-ranking-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Section } from "@/components/layout/section";
 import { useFadeIn } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
@@ -32,9 +34,19 @@ export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
   ];
 
   return (
-    <section id="ranking" className="container space-y-[clamp(1.5rem,2.5vw,2.75rem)]">
-      <div ref={sectionAnim.ref} className={`flex flex-wrap gap-[clamp(0.85rem,1.8vw,1.5rem)] lg:flex-nowrap lg:items-end lg:justify-between ${sectionAnim.className}`}>
-        <div className="w-full space-y-[clamp(0.85rem,1.6vw,1.35rem)] lg:w-auto">
+    <Section
+      id="ranking"
+      size="lg"
+      className="flex flex-col fluid-stack-xl"
+    >
+      <div
+        ref={sectionAnim.ref}
+        className={cn(
+          "flex flex-wrap items-start gap-[clamp(0.85rem,1.8vw,1.5rem)] lg:flex-nowrap lg:items-end lg:justify-between",
+          sectionAnim.className,
+        )}
+      >
+        <div className="flex w-full flex-col fluid-stack-sm lg:w-auto">
           <p className="fluid-eyebrow text-primary">
             Ranking premium
           </p>
@@ -51,8 +63,8 @@ export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
         </Button>
       </div>
 
-      <Tabs defaultValue="top" className="space-y-6">
-        <TabsList className="glass-panel flex w-full flex-wrap justify-start gap-[clamp(0.5rem,1vw,0.75rem)] p-1">
+      <Tabs defaultValue="top" className="flex flex-col fluid-stack-md">
+        <TabsList className="glass-panel flex w-full flex-wrap justify-start fluid-stack-sm p-1">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.value}
@@ -64,12 +76,12 @@ export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
           ))}
         </TabsList>
         {tabs.map((tab) => (
-          <TabsContent key={tab.value} value={tab.value} className="space-y-4">
+          <TabsContent key={tab.value} value={tab.value} className="flex flex-col fluid-stack-sm">
             <p className="fluid-copy text-muted-foreground">{tab.description}</p>
             <HomeRankingTable companies={tab.companies} />
           </TabsContent>
         ))}
       </Tabs>
-    </section>
+    </Section>
   );
 }

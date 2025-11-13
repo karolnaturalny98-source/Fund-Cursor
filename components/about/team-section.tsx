@@ -4,7 +4,9 @@ import { Linkedin, Github, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useScrollAnimation, useStaggerAnimation } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 interface TeamMember {
   name: string;
@@ -69,21 +71,28 @@ export function TeamSection() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(teamMembers.length).fill(false);
 
   return (
-    <section ref={sectionVisible.ref} className="container space-y-8 py-12">
-      <div ref={sectionAnim.ref} className={`space-y-3 ${sectionAnim.className}`}>
-        <PremiumBadge variant="glow" className="rounded-full px-4 py-1 text-xs font-semibold">
+    <Section
+      ref={sectionVisible.ref}
+      size="lg"
+      className="flex flex-col fluid-stack-xl"
+    >
+      <div
+        ref={sectionAnim.ref}
+        className={cn("flex flex-col fluid-stack-sm", sectionAnim.className)}
+      >
+        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
           Poznaj nas
         </PremiumBadge>
-        <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+        <h2 className="fluid-h2 font-semibold text-foreground">
           Nasz zespół
         </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
+        <p className="max-w-3xl fluid-copy text-muted-foreground">
           Zespół pasjonatów tradingu i technologii, którzy codziennie pracują nad 
           tym, aby FundedRank był najlepszą platformą dla prop traderów.
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+      <div className="grid fluid-stack-lg md:grid-cols-2 lg:grid-cols-2">
         {teamMembers.map((member, index) => (
           <Card
             key={member.name}
@@ -92,33 +101,33 @@ export function TeamSection() {
             }`}
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
-            <CardHeader className="flex flex-row items-start gap-4 pb-4">
-              <Avatar className="h-16 w-16 border-2 border-primary/30">
-                <AvatarFallback className="bg-primary/20 text-primary text-lg font-semibold">
+            <CardHeader className="flex flex-row items-start fluid-stack-sm pb-[clamp(0.75rem,1vw,1rem)]">
+              <Avatar className="h-[clamp(3.5rem,2vw+3rem,4rem)] w-[clamp(3.5rem,2vw+3rem,4rem)] border-2 border-primary/30">
+                <AvatarFallback className="bg-primary/20 text-primary fluid-copy font-semibold">
                   {member.initials}
                 </AvatarFallback>
               </Avatar>
-              <div className="flex-1 space-y-1">
-                <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
-                <p className="text-sm text-primary font-medium">{member.role}</p>
+              <div className="flex flex-1 flex-col fluid-stack-xs">
+                <h3 className="fluid-copy font-semibold text-foreground">{member.name}</h3>
+                <p className="fluid-caption text-primary font-medium">{member.role}</p>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
+            <CardContent className="flex flex-col fluid-stack-md">
+              <p className="fluid-copy text-muted-foreground leading-relaxed">{member.bio}</p>
               {member.socialLinks && member.socialLinks.length > 0 && (
-                <div className="flex gap-2">
+                <div className="flex fluid-stack-xs">
                   {member.socialLinks.map((link) => {
                     const Icon = iconMap[link.platform];
                     return (
                       <a
                         key={link.platform}
                         href={link.url}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
+                        className="flex h-[clamp(1.75rem,1vw+1.5rem,2rem)] w-[clamp(1.75rem,1vw+1.5rem,2rem)] items-center justify-center rounded-full border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                         target="_blank"
                         rel="noreferrer"
                         aria-label={link.platform}
                       >
-                        <Icon className="h-4 w-4" />
+                        <Icon className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" />
                       </a>
                     );
                   })}
@@ -128,7 +137,7 @@ export function TeamSection() {
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

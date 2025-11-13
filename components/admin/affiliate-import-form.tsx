@@ -117,9 +117,9 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
   };
 
   return (
-    <form className="space-y-4" onSubmit={onSubmit}>
+    <form className="flex flex-col fluid-stack-sm" onSubmit={onSubmit}>
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="company-slug">Firma</Label>
           <Select
             disabled={isPending || companies.length === 0}
@@ -144,7 +144,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
           </Select>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="external-id">
             Identyfikator transakcji
           </Label>
@@ -164,7 +164,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="platform">Platforma</Label>
           <Input
             id="platform"
@@ -178,7 +178,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
             }
           />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="user-email">Email użytkownika</Label>
           <Input
             id="user-email"
@@ -193,7 +193,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
             }
           />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="purchase-at">
             Data zakupu (opcjonalnie)
           </Label>
@@ -212,7 +212,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="amount">Kwota zakupu</Label>
           <Input
             id="amount"
@@ -227,7 +227,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
             }
           />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="currency">Waluta</Label>
           <Input
             id="currency"
@@ -241,7 +241,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
             }
           />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="points">Punkty cashback</Label>
           <Input
             id="points"
@@ -259,7 +259,7 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col fluid-stack-xs">
         <Label htmlFor="notes">
           Notatka (opcjonalnie)
         </Label>
@@ -295,3 +295,4 @@ export function AffiliateImportForm({ companies }: AffiliateImportFormProps) {
     </form>
   );
 }
+

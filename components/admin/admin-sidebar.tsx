@@ -204,7 +204,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
               {linkContent}
             </TooltipTrigger>
             <TooltipContent side="right">
-              <div className="space-y-0.5">
+              <div className="flex flex-col fluid-stack-2xs">
                 <p className="font-medium">{item.label}</p>
                 {item.description && (
                   <p className="text-xs text-muted-foreground">{item.description}</p>
@@ -270,7 +270,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
       </div>
 
       <nav className="flex-1 overflow-y-auto p-[clamp(0.85rem,1.2vw,1.1rem)] scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-        <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+        <div className="flex flex-col fluid-stack-xs">
           {items.map((item, index) => (
             <div key={item.value}>
               <NavLink item={item} />

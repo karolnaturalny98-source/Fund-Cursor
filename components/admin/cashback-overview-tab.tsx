@@ -29,7 +29,7 @@ export function CashbackOverviewTab({
   topCompanies,
 }: CashbackOverviewTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <CashbackStatisticsOverview stats={stats} />
       <CashbackCharts
         timeSeries={timeSeries}
@@ -39,5 +39,6 @@ export function CashbackOverviewTab({
     </div>
   );
 }
+
 
 

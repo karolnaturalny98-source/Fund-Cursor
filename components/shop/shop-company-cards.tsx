@@ -118,9 +118,9 @@ export function ShopCompanyCards({
   const totalPlans = companies.reduce((sum, c) => sum + c.plans.length, 0);
 
   return (
-    <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+    <div className="flex flex-col fluid-stack-lg">
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-[clamp(0.75rem,1.2vw,1rem)]">
+      <div className="grid grid-cols-2 fluid-stack-sm">
         <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.85rem,1.2vw,1.05rem)] shadow-xs">
           <div className="text-muted-foreground fluid-caption">Firm</div>
           <div className="text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">{totalCompanies}</div>
@@ -132,8 +132,8 @@ export function ShopCompanyCards({
       </div>
 
       {/* Search and Sort */}
-      <div className="flex flex-col gap-[clamp(0.75rem,1.1vw,1rem)] lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-1 items-center gap-[clamp(0.6rem,0.9vw,0.8rem)]">
+      <div className="flex flex-col fluid-stack-sm lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-1 items-center fluid-stack-xs">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)] -translate-y-1/2 text-muted-foreground" />
             <Input
@@ -144,7 +144,7 @@ export function ShopCompanyCards({
             />
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-[clamp(0.5rem,0.75vw,0.65rem)]">
+        <div className="flex flex-wrap items-center fluid-stack-xs">
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
             <SelectTrigger className="w-[clamp(9rem,12vw,10rem)] rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
               <ArrowUpDown className="mr-2 h-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)]" />
@@ -160,7 +160,7 @@ export function ShopCompanyCards({
       </div>
 
       {/* Quick Filters */}
-      <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+      <div className="flex flex-wrap items-center fluid-stack-xs">
         <span className="text-muted-foreground/70 fluid-eyebrow">
           Szybkie filtry:
         </span>
@@ -198,7 +198,7 @@ export function ShopCompanyCards({
           Brak firm spełniających kryteria wyszukiwania.
         </div>
       ) : (
-        <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
           {filteredAndSortedCompanies.map((company) => {
             const cashbackRate = company.cashbackRate ?? 0;
             const isSelected = company.id === selectedCompanyId;
@@ -214,10 +214,10 @@ export function ShopCompanyCards({
                 onClick={() => onCompanyChange(company.id)}
               >
                 <div className="p-[clamp(1rem,1.4vw,1.2rem)]">
-                  <div className="flex items-start gap-[clamp(0.75rem,1.1vw,1rem)]">
+                  <div className="flex items-start fluid-stack-sm">
                     <CompanyAvatar name={company.name} logoUrl={company.logoUrl} />
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+                      <div className="flex items-start justify-between fluid-stack-xs">
                         <h3 className="font-semibold text-foreground leading-tight fluid-copy">
                           {company.name}
                         </h3>
@@ -230,7 +230,7 @@ export function ShopCompanyCards({
                           {company.shortDescription}
                         </p>
                       )}
-                      <div className="mt-[clamp(0.5rem,0.75vw,0.7rem)] flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+                      <div className="mt-[clamp(0.5rem,0.75vw,0.7rem)] flex flex-wrap items-center fluid-stack-xs">
                         {cashbackRate > 0 && (
                           <Badge variant="outline" className="fluid-badge rounded-full">
                             {cashbackRate}% cashback

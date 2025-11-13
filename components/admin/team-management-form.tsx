@@ -228,7 +228,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <div className="rounded-2xl border-gradient bg-gradient-card p-6 shadow-premium">
         <div className="mb-4 flex items-center justify-between">
           <div>
@@ -239,7 +239,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-sm">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm font-medium">Imię i nazwisko *</label>
@@ -333,7 +333,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
 
       <Separator />
 
-      <div className="space-y-4">
+      <div className="flex flex-col fluid-stack-sm">
         <h4 className="text-base font-semibold">Członkowie zespołu ({teamMembers.length})</h4>
         {loading ? (
           <p className="text-sm text-muted-foreground">Ładowanie...</p>
@@ -354,7 +354,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
                         {getInitials(member.name)}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="flex-1 space-y-1">
+                    <div className="flex-1 flex flex-col fluid-stack-xs">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
                           <p className="font-semibold text-foreground">{member.name}</p>
@@ -425,4 +425,5 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
     </div>
   );
 }
+
 

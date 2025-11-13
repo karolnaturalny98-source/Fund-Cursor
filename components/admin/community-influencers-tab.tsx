@@ -12,7 +12,7 @@ export function CommunityInfluencersTab({
   profiles,
 }: CommunityInfluencersTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Zatwierdzeni influencerzy"
         description="Przeglądaj listę zatwierdzonych influencerów, którzy mają aktywny kod polecający."
@@ -22,4 +22,5 @@ export function CommunityInfluencersTab({
     </div>
   );
 }
+
 

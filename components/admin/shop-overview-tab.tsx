@@ -29,7 +29,7 @@ export function ShopOverviewTab({
   onPeriodChange,
 }: ShopOverviewTabProps) {
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col fluid-stack-lg">
       <ShopTimeFilter
         onPeriodChange={onPeriodChange}
         selectedPeriod={selectedPeriod}
@@ -42,5 +42,6 @@ export function ShopOverviewTab({
     </div>
   );
 }
+
 
 

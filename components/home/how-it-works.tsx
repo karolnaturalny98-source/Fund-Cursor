@@ -4,7 +4,9 @@ import { CheckCircle2, Sparkles, Wallet } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 const steps = [
   {
@@ -34,12 +36,13 @@ export function HowItWorksSection() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(steps.length).fill(false);
 
   return (
-    <section
+    <Section
       ref={sectionVisible.ref}
       id="jak-to-dziala"
-      className="container space-y-[clamp(1.5rem,2.4vw,2.75rem)] rounded-3xl bg-muted/10 py-[clamp(2.5rem,3vw,3.5rem)]"
+      size="lg"
+      className="rounded-3xl bg-muted/10"
     >
-      <div ref={sectionAnim.ref} className={`space-y-[clamp(0.85rem,1.4vw,1.35rem)] ${sectionAnim.className}`}>
+      <div ref={sectionAnim.ref} className={cn("flex flex-col fluid-stack-sm", sectionAnim.className)}>
         <p className="fluid-eyebrow text-primary">
           Jak to działa
         </p>
@@ -52,7 +55,7 @@ export function HowItWorksSection() {
           prostego wniosku.
         </p>
       </div>
-      <div className="grid gap-[clamp(1rem,1.6vw,1.75rem)] md:grid-cols-3">
+      <div className="grid fluid-stack-lg md:grid-cols-3">
         {steps.map((step, index) => (
           <Card
             key={step.title}
@@ -61,11 +64,11 @@ export function HowItWorksSection() {
             }`}
             style={{ "--delay": `${index * 150}ms` } as React.CSSProperties}
           >
-            <CardContent className="flex h-full flex-col gap-[clamp(1rem,1.4vw,1.5rem)] p-[clamp(1.25rem,2vw,1.75rem)]">
+            <CardContent className="flex h-full flex-col fluid-stack-md p-[clamp(1.25rem,2vw,1.75rem)]">
               <div className="flex h-[clamp(2.5rem,2.4vw+2rem,3.25rem)] w-[clamp(2.5rem,2.4vw+2rem,3.25rem)] items-center justify-center rounded-full bg-white/10 text-primary transition-all hover:bg-white/15">
                 <PremiumIcon icon={step.icon} variant="glow" size="lg" hoverGlow />
               </div>
-              <div className="space-y-[clamp(0.5rem,0.8vw,0.75rem)]">
+              <div className="flex flex-col fluid-stack-xs">
                 <p className="fluid-eyebrow text-muted-foreground">
                   Krok {index + 1}
                 </p>
@@ -78,6 +81,6 @@ export function HowItWorksSection() {
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

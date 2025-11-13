@@ -94,7 +94,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col fluid-stack-sm">
       {/* Toolbar */}
       <div className="flex items-center justify-between gap-4">
         {searchKey && (
@@ -227,4 +227,5 @@ export function DataTable<TData, TValue>({
     </div>
   );
 }
+
 

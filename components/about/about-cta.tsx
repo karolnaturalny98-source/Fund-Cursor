@@ -4,33 +4,33 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn } from "@/lib/animations";
 
 export function AboutCta() {
   const ctaAnim = useFadeIn({ rootMargin: "-100px" });
 
   return (
-    <section className="container py-16">
+    <Section size="lg">
       <div
         ref={ctaAnim.ref}
-        className={`mx-auto max-w-3xl space-y-8 rounded-3xl border border-border/60 bg-muted/10 p-8 text-center backdrop-blur-[36px]! lg:p-12 ${ctaAnim.className}`}
+        className={`mx-auto max-w-3xl flex flex-col fluid-stack-lg rounded-3xl border border-border/60 bg-muted/10 p-[clamp(1.5rem,2vw,2rem)] text-center backdrop-blur-[36px]! lg:p-[clamp(2rem,3vw,3rem)] ${ctaAnim.className}`}
       >
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
+        <div className="flex flex-col fluid-stack-sm">
+          <h2 className="fluid-h2 font-bold text-foreground">
             Dołącz do FundedRank
           </h2>
-          <p className="mx-auto max-w-2xl text-base text-muted-foreground">
+          <p className="mx-auto max-w-2xl fluid-copy text-muted-foreground">
             Rozpocznij swoją przygodę z prop tradingiem w najlepszym ekosystemie. 
             Porównuj firmy, zbieraj cashback i rozwijaj się z naszą społecznością.
           </p>
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+        <div className="flex flex-col fluid-stack-sm sm:flex-row sm:items-center sm:justify-center">
           <Button
             asChild
-            size="lg"
             variant="premium"
-            className="h-12 rounded-full px-8 text-base"
+            className="fluid-button rounded-full"
           >
             <Link href="/rankingi">
               Przeglądaj ranking
@@ -39,9 +39,8 @@ export function AboutCta() {
           </Button>
           <Button
             asChild
-            size="lg"
             variant="premium-outline"
-            className="h-12 rounded-full px-8 text-base"
+            className="fluid-button rounded-full"
           >
             <Link href="/baza-wiedzy">
               Dowiedz się więcej
@@ -50,7 +49,7 @@ export function AboutCta() {
           </Button>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

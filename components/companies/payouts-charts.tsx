@@ -303,7 +303,7 @@ export function PayoutsCharts({ company }: PayoutsChartsProps) {
                               {data.count} {data.count === 1 ? "plan" : "planów"}
                             </p>
                             {data.plans.length > 0 && (
-                              <div className="mt-1 space-y-0.5">
+                              <div className="mt-1 flex flex-col fluid-stack-2xs">
                                 {data.plans.slice(0, 3).map((plan: string, idx: number) => (
                                   <p key={idx} className="text-[10px] text-muted-foreground">
                                     • {plan}

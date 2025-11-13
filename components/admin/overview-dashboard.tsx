@@ -57,7 +57,7 @@ export function OverviewDashboard({
     pendingCounts.disputes;
 
   return (
-    <div className="space-y-[clamp(1.5rem,2.3vw,2.1rem)]">
+    <div className="flex flex-col fluid-stack-lg">
       {/* Quick Stats */}
       <div className="grid gap-[clamp(0.95rem,1.3vw,1.25rem)] sm:grid-cols-2 lg:grid-cols-4">
         <MetricCard
@@ -166,4 +166,5 @@ export function OverviewDashboard({
     </div>
   );
 }
+
 

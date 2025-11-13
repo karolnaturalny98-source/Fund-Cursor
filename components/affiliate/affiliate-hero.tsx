@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn } from "@/lib/animations";
 
 export function AffiliateHero() {
@@ -18,16 +19,16 @@ export function AffiliateHero() {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-border/40">
+    <Section bleed size="lg" className="relative overflow-hidden border-b border-border/40">
       <div
         ref={heroAnim.ref}
-        className={`container relative z-10 flex flex-col gap-[clamp(2.5rem,3.5vw,3.75rem)] py-[clamp(3rem,4vw,4.25rem)] lg:flex-row lg:items-center lg:justify-between ${heroAnim.className}`}
+        className={`container relative z-10 flex flex-col fluid-stack-xl py-[clamp(3rem,4vw,4.25rem)] lg:flex-row lg:items-center lg:justify-between ${heroAnim.className}`}
       >
-        <div className="max-w-2xl space-y-[clamp(1.5rem,2.2vw,2rem)]">
+        <div className="flex max-w-2xl flex-col fluid-stack-lg">
           <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
             Program Affilacyjny FundedRank
           </PremiumBadge>
-          <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+          <div className="flex flex-col fluid-stack-md">
             <h1 className="fluid-h1 font-bold tracking-tight text-foreground">
               Zostań affilatem i zarabiaj z nami
             </h1>
@@ -37,7 +38,7 @@ export function AffiliateHero() {
               w wyborze idealnego konta fundingowego.
             </p>
           </div>
-          <div className="flex flex-col gap-[clamp(0.75rem,1.1vw,1rem)] sm:flex-row sm:items-center">
+          <div className="flex flex-col fluid-stack-sm sm:flex-row sm:items-center">
             <Button 
               size="lg" 
               variant="premium" 
@@ -91,7 +92,7 @@ export function AffiliateHero() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

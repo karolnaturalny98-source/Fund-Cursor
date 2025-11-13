@@ -29,7 +29,7 @@ export function SupportOverviewTab({
   topCompanies,
 }: SupportOverviewTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SupportStatisticsOverview stats={stats} />
       <SupportCharts
         timeSeries={timeSeries}
@@ -39,4 +39,5 @@ export function SupportOverviewTab({
     </div>
   );
 }
+
 

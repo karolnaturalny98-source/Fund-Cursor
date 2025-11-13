@@ -32,7 +32,7 @@ export function ContentOverviewTab({
   topCompanies,
 }: ContentOverviewTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <ContentStatisticsOverview stats={stats} />
       <ContentCharts
         timeSeries={timeSeries}
@@ -42,4 +42,5 @@ export function ContentOverviewTab({
     </div>
   );
 }
+
 

@@ -76,7 +76,7 @@ export function CashbackCharts({
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Trend transakcji w czasie */}
       <Card className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
         <CardHeader>
@@ -246,4 +246,5 @@ export function CashbackCharts({
     </div>
   );
 }
+
 

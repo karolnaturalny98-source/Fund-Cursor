@@ -20,7 +20,7 @@ interface SupportStatisticsOverviewProps {
 
 export function SupportStatisticsOverview({ stats }: SupportStatisticsOverviewProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Przegląd statusów sporów"
         description="Kluczowe metryki dotyczące zgłoszeń i sporów użytkowników."
@@ -127,4 +127,5 @@ export function SupportStatisticsOverview({ stats }: SupportStatisticsOverviewPr
     </div>
   );
 }
+
 

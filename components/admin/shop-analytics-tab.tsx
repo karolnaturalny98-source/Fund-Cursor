@@ -9,10 +9,11 @@ interface ShopAnalyticsTabProps {
 
 export function ShopAnalyticsTab({ clickAnalytics }: ShopAnalyticsTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <ClickAnalyticsDashboard data={clickAnalytics} />
     </div>
   );
 }
+
 
 

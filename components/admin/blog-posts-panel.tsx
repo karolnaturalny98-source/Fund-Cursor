@@ -89,7 +89,7 @@ export function BlogPostsPanel({ initialPosts }: BlogPostsPanelProps) {
             {posts.map((post) => (
               <tr key={post.id} className="align-top">
                 <td className="px-4 py-3">
-                  <div className="space-y-1">
+                  <div className="flex flex-col fluid-stack-xs">
                     <p className="font-medium text-foreground">{post.title}</p>
                     <p className="text-xs text-muted-foreground">{post.slug}</p>
                   </div>
@@ -201,4 +201,5 @@ export function BlogPostsPanel({ initialPosts }: BlogPostsPanelProps) {
     </>
   );
 }
+
 

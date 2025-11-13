@@ -50,7 +50,7 @@ export function CompanyFaqForm({ companySlug }: CompanyFaqFormProps) {
   };
 
   return (
-    <form onSubmit={submit} className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-background/80 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[24px]!">
+    <form onSubmit={submit} className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-background/80 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[24px]!">
       <p className="font-semibold text-foreground fluid-copy">Dodaj pytanie FAQ</p>
       <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)]">
         <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">

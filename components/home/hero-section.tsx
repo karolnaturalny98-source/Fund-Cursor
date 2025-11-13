@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { AnimatedCounter } from "@/components/custom/animated-counter";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useScrollAnimation } from "@/lib/animations";
 import type { HomepageMetrics } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -41,13 +42,13 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
   ];
 
   return (
-    <section className="relative overflow-hidden border-b border-border/40">
-      <div className="container relative z-10 grid grid-cols-1 items-center gap-8 py-14 sm:gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
-        <div ref={heroContent.ref} className={`w-full max-w-2xl space-y-6 sm:space-y-8 ${heroContent.className}`}>
+    <Section bleed size="lg" className="relative overflow-hidden border-b border-border/40">
+      <div className="container relative z-10 grid items-center fluid-stack-xl lg:grid-cols-[1.2fr_1fr]">
+        <div ref={heroContent.ref} className={cn("flex w-full max-w-2xl flex-col fluid-stack-lg", heroContent.className)}>
           <PremiumBadge variant="glow" className="fluid-badge">
             {`${metrics.activeInfluencers ?? 0}+ twórców • Cashback • Ranking`}
           </PremiumBadge>
-          <div className="space-y-4">
+          <div className="flex flex-col fluid-stack-sm">
             <h1 className="fluid-h1 font-bold tracking-tight text-foreground">
               FundedRank. Twój kompas w świecie prop tradingu.
             </h1>
@@ -57,7 +58,7 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
               panelu.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-center fluid-stack-sm">
             <Button asChild variant="premium" className="fluid-button rounded-full">
               <Link href="#ranking">Przeglądaj ranking</Link>
             </Button>
@@ -73,11 +74,11 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
         <Card
           ref={statsCardAnim.ref}
           className={cn(
-            "glass-card bg-card/80 backdrop-blur-[36px]! w-full max-w-xl mx-auto lg:mx-0 overflow-hidden border border-border/70 shadow-premium transition-all duration-700",
+            "glass-card bg-card/80 backdrop-blur-[36px]! mx-auto w-full max-w-xl overflow-hidden border border-border/70 shadow-premium transition-all duration-700 lg:mx-0",
             statsCardAnim.isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
           )}
         >
-          <CardHeader className="border-b border-border/60 space-y-1.5">
+          <CardHeader className="flex flex-col border-b border-border/60 fluid-stack-xs">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
               Ostatnie 30 dni ekosystemu
             </p>
@@ -88,7 +89,7 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
               />
             </p>
           </CardHeader>
-          <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 sm:gap-4 pt-6">
+          <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] fluid-stack-md pt-[clamp(1rem,1.5vw,1.5rem)]">
             {stats.map((item) => (
               <div
                 key={item.label}
@@ -105,6 +106,6 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
           </CardContent>
         </Card>
       </div>
-    </section>
+    </Section>
   );
 }

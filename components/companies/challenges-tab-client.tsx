@@ -93,7 +93,7 @@ export function ChallengeSegmentCard({ group, onClick, isActive }: ChallengeSegm
         cardAnim.className,
       )}
     >
-      <CardHeader className="space-y-2 p-0">
+      <CardHeader className="flex flex-col fluid-stack-sm p-0">
         <div className="flex items-center gap-2">
           <div className="relative rounded-md bg-primary/5 p-1.5 text-primary transition-all group-hover:bg-primary/10">
             <Icon className="h-3.5 w-3.5" />
@@ -102,7 +102,7 @@ export function ChallengeSegmentCard({ group, onClick, isActive }: ChallengeSegm
         </div>
         <CardDescription className="text-xs leading-relaxed text-muted-foreground/80">{group.description}</CardDescription>
       </CardHeader>
-      <CardContent className="mt-3 space-y-2 p-0">
+      <CardContent className="mt-3 flex flex-col fluid-stack-sm p-0">
         {group.plans.length ? (
           <>
             <div className="flex items-center gap-1.5">
@@ -110,7 +110,7 @@ export function ChallengeSegmentCard({ group, onClick, isActive }: ChallengeSegm
                 {group.plans.length} plan{group.plans.length !== 1 ? "ów" : ""}
               </PremiumBadge>
             </div>
-            <ul className="space-y-1.5 text-xs">
+            <ul className="flex flex-col fluid-stack-xs text-xs">
               {group.plans.slice(0, 3).map((plan) => (
                 <li key={plan.id} className="flex items-start gap-1.5 rounded-md bg-muted/20 px-2 py-1 transition-colors group-hover:bg-muted/30">
                   <Check className="mt-0.5 h-3 w-3 shrink-0 text-primary/80" />
@@ -167,7 +167,7 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
   };
 
   return (
-    <div ref={sectionAnim.ref} className={cn("space-y-2", sectionAnim.className)}>
+    <div ref={sectionAnim.ref} className={cn("flex flex-col fluid-stack-sm", sectionAnim.className)}>
       <Accordion
         type="single"
         collapsible
@@ -206,7 +206,7 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
                   )}>
                     <Icon className="h-4 w-4" />
                   </div>
-                  <div className="flex-1 space-y-1">
+                  <div className="flex flex-1 flex-col fluid-stack-2xs">
                     <div className="flex items-center gap-2">
                       <h4 className="text-sm font-semibold text-foreground">{group.label}</h4>
                       {hasPlans && (
@@ -226,15 +226,15 @@ export function ChallengeSegmentsAccordion({ groups, selectedSegment, onSegmentC
               </AccordionTrigger>
               <AccordionContent className="px-4 pb-4 pt-0">
                 {hasPlans ? (
-                  <div className="space-y-3 pt-2">
-                    <ul className="space-y-2">
+                  <div className="flex flex-col fluid-stack-sm pt-2">
+                    <ul className="flex flex-col fluid-stack-sm">
                       {group.plans.map((plan) => (
                         <li
                           key={plan.id}
                           className="flex items-start gap-2 rounded-lg border border-border/40 bg-background/60 px-3 py-2 transition-colors hover:bg-card/72"
                         >
                           <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/80" />
-                          <div className="flex-1 space-y-0.5">
+                          <div className="flex flex-1 flex-col fluid-stack-2xs">
                             <span className="text-sm font-medium text-foreground">{plan.name}</span>
                             <p className="text-xs text-muted-foreground">
                               {new Intl.NumberFormat("pl-PL", {

@@ -11,7 +11,7 @@ import {
 
 export function ContentOperationsTab() {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Dodaj treści"
         description="Twórz nowe firmy, plany i inne treści w systemie."
@@ -37,4 +37,5 @@ export function ContentOperationsTab() {
     </div>
   );
 }
+
 

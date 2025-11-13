@@ -4,8 +4,10 @@ import { Quote } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import type { ReviewHighlight } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { RatingBadgeClient } from "./community-highlights-client";
 
@@ -31,16 +33,20 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
   }
 
   return (
-    <section
+    <Section
       ref={sectionVisible.ref}
-      className="container space-y-[clamp(1.5rem,2.4vw,2.75rem)]"
       id="spolecznosc"
+      size="lg"
+      className="flex flex-col fluid-stack-xl"
     >
       <div
         ref={sectionAnim.ref}
-        className={`flex flex-wrap gap-[clamp(0.85rem,1.6vw,1.5rem)] lg:flex-nowrap lg:items-end lg:justify-between ${sectionAnim.className}`}
+        className={cn(
+          "flex flex-wrap gap-[clamp(0.85rem,1.6vw,1.5rem)] lg:flex-nowrap lg:items-end lg:justify-between",
+          sectionAnim.className,
+        )}
       >
-        <div className="w-full space-y-[clamp(0.85rem,1.4vw,1.35rem)] lg:w-auto">
+        <div className="flex w-full flex-col fluid-stack-sm lg:w-auto">
           <p className="fluid-eyebrow text-primary">
             Społeczność FundedRank
           </p>
@@ -58,7 +64,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
         </PremiumBadge>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid fluid-stack-lg lg:grid-cols-3">
         {reviews.map((review, index) => (
           <Card 
             key={review.id} 
@@ -68,7 +74,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
             <Quote className="absolute -right-6 -top-6 h-20 w-20 text-primary/20" />
-            <CardHeader className="space-y-4 pb-0">
+            <CardHeader className="flex flex-col fluid-stack-sm pb-0">
           <div className="flex items-center gap-[clamp(0.65rem,1vw,1rem)]">
                 <RatingBadgeClient rating={review.rating} />
                 {review.experienceLevel ? (
@@ -91,7 +97,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
                 </Link>
               </CardTitle>
             </CardHeader>
-        <CardContent className="space-y-[clamp(1rem,1.6vw,1.5rem)]">
+        <CardContent className="flex flex-col fluid-stack-md">
               {review.body ? (
             <p className="fluid-copy leading-relaxed text-muted-foreground line-clamp-4">
                   {review.body}
@@ -127,7 +133,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

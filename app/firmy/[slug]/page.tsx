@@ -174,7 +174,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
         />
       </div>
     <CompareProvider initialSelection={initialCompare}>
-      <div className="container space-y-10 py-10">
+      <div className="container flex flex-col fluid-stack-xl py-[clamp(2.5rem,3vw,3.5rem)]">
         <script
           dangerouslySetInnerHTML={{ __html: jsonLd }}
           suppressHydrationWarning
@@ -203,25 +203,25 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
 
         <Link
           href="/firmy"
-          className="inline-flex items-center text-sm text-muted-foreground transition hover:text-foreground"
+          className="inline-flex items-center fluid-caption text-muted-foreground transition hover:text-foreground"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" /> Powrót do listy firm
+          <ArrowLeft className="mr-[clamp(0.4rem,0.6vw,0.5rem)] h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" /> Powrót do listy firm
         </Link>
 
         <CompanyHeroClient>
-          <div className="relative space-y-6">
-            <div className="flex items-start gap-4">
+          <div className="relative flex flex-col fluid-stack-lg">
+            <div className="flex items-start gap-[clamp(0.75rem,1vw,1rem)]">
               {company.logoUrl ? (
-                <Avatar className="h-20 w-20 rounded-2xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
+                <Avatar className="h-[clamp(4rem,2.5vw+3.5rem,5rem)] w-[clamp(4rem,2.5vw+3.5rem,5rem)] rounded-2xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
                   <AvatarImage src={company.logoUrl} alt={company.name} className="object-cover" />
-                  <AvatarFallback className="rounded-2xl bg-linear-to-br from-primary/20 to-primary/10 text-xl font-semibold">
+                  <AvatarFallback className="rounded-2xl bg-linear-to-br from-primary/20 to-primary/10 fluid-copy font-semibold">
                     {company.name.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               ) : null}
-              <div className="space-y-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{company.name}</h1>
+              <div className="flex flex-col fluid-stack-sm">
+                <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+                  <h1 className="fluid-h1 font-bold tracking-tight">{company.name}</h1>
                   <FavoriteButton
                     companyId={company.id}
                     companySlug={company.slug}
@@ -230,16 +230,16 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
                   />
                   <CompareToggle slug={company.slug} size="sm" />
                 </div>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-[clamp(0.6rem,0.8vw,0.75rem)] fluid-caption text-muted-foreground">
                   {company.rating ? (
-                    <PremiumBadge variant="glow" className="gap-1 bg-amber-500/10 px-2 py-1 ring-1 ring-amber-500/20">
-                      <Star className="h-4 w-4 fill-amber-400 text-amber-400 drop-shadow-xs" />
+                    <PremiumBadge variant="glow" className="fluid-badge gap-[clamp(0.2rem,0.3vw,0.25rem)] bg-amber-500/10 ring-1 ring-amber-500/20">
+                      <Star className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)] fill-amber-400 text-amber-400 drop-shadow-xs" />
                       {company.rating.toFixed(1)}
                     </PremiumBadge>
                   ) : null}
                   {company.country ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <span className="text-base">{getCountryFlag(company.country)}</span>
+                    <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.375rem)]">
+                      <span className="fluid-copy">{getCountryFlag(company.country)}</span>
                       <span>{company.country}</span>
                     </span>
             ) : null}
@@ -252,27 +252,27 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
 
             {/* Informacje o firmie - zamiast headline, description, stats */}
             {(company.legalName || company.ceo || company.headquartersAddress || company.foundersInfo) && (
-              <div className="space-y-3 rounded-xl border border-border/40 bg-muted/20 p-4">
+              <div className="flex flex-col fluid-stack-sm rounded-xl border border-border/40 bg-muted/20 p-[clamp(0.75rem,1vw,1rem)]">
                 {company.legalName && (
-                  <div className="flex items-start gap-2 text-sm">
+                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
                     <span className="text-muted-foreground">Nazwa prawna:</span>
                     <span className="font-medium text-foreground">{company.legalName}</span>
               </div>
                 )}
                 {company.ceo && (
-                  <div className="flex items-start gap-2 text-sm">
+                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
                     <span className="text-muted-foreground">CEO:</span>
                     <span className="font-medium text-foreground">{company.ceo}</span>
                       </div>
                 )}
                 {company.headquartersAddress && (
-                  <div className="flex items-start gap-2 text-sm">
+                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
                     <span className="text-muted-foreground">Adres siedziby:</span>
                     <span className="font-medium text-foreground">{company.headquartersAddress}</span>
                     </div>
                 )}
                 {company.foundersInfo && (
-                  <div className="flex items-start gap-2 text-sm">
+                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
                     <span className="text-muted-foreground">Założyciele:</span>
                     <span className="font-medium text-foreground">{company.foundersInfo}</span>
               </div>
@@ -299,7 +299,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           />
         </CompanyHeroClient>
 
-        <Tabs defaultValue="overview" className="space-y-8">
+        <Tabs defaultValue="overview" className="flex flex-col fluid-stack-lg">
           <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
             {tabConfig.map((tab) => (
               <TabsTrigger
@@ -376,7 +376,7 @@ function OverviewTab({ company, alerts, checklist, defaultPlan: _defaultPlan }: 
   const educationLinks = company.educationLinks ?? [];
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Quick Stats */}
       <OverviewQuickStats company={company} />
 
@@ -395,10 +395,10 @@ function OverviewTab({ company, alerts, checklist, defaultPlan: _defaultPlan }: 
         <ChecklistSection checklist={checklist} />
 
       {/* FAQ */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Info className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold sm:text-2xl">FAQ w kontekście</h2>
+        <section className="flex flex-col fluid-stack-md">
+          <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+            <Info className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
+          <h2 className="fluid-h2 font-semibold">FAQ w kontekście</h2>
           </div>
           <CompanyFaqTabs faqs={company.faqs} companySlug={company.slug} />
         </section>
@@ -423,13 +423,13 @@ function OverviewTab({ company, alerts, checklist, defaultPlan: _defaultPlan }: 
         {educationLinks.length ? (
         <>
           <Separator className="bg-border/40" />
-          <section className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <h2 className="text-xl font-semibold sm:text-2xl">Materiały edukacyjne</h2>
+          <section className="flex flex-col fluid-stack-md">
+            <div className="flex flex-col fluid-stack-sm">
+              <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+                <BookOpen className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
+                <h2 className="fluid-h2 font-semibold">Materiały edukacyjne</h2>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="fluid-caption text-muted-foreground">
                 Oficjalne zasoby i materiały szkoleniowe udostępnione przez firmę.
               </p>
             </div>
@@ -549,11 +549,11 @@ function ReviewsTab({
 }) {
   if (!reviews.length) {
     return (
-      <section className="space-y-4">
-        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+      <section className="flex flex-col fluid-stack-sm">
+        <div className="flex flex-col gap-[clamp(0.4rem,0.6vw,0.5rem)] md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-xl font-semibold sm:text-2xl">Opinie społeczności</h2>
-            <p className="text-sm text-muted-foreground">
+            <h2 className="fluid-h2 font-semibold">Opinie społeczności</h2>
+            <p className="fluid-caption text-muted-foreground">
               Bądź pierwszą osobą, która podzieli się doświadczeniem z tą firmą.
             </p>
           </div>
@@ -574,7 +574,7 @@ function OffersTab({
   defaultPlan?: CompanyPlan | null;
 }) {
   return (
-    <div id="offers" className="space-y-8">
+    <div id="offers" className="flex flex-col fluid-stack-lg">
       <PlansShopList company={company} />
     </div>
   );
@@ -614,27 +614,27 @@ function AnnouncementsTab({
   });
 
   return (
-    <div className="space-y-10">
-      <section className="space-y-6">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-primary" />
-            <h2 className="text-xl font-semibold sm:text-2xl">Ostatnie aktualizacje</h2>
+    <div className="flex flex-col fluid-stack-xl">
+      <section className="flex flex-col fluid-stack-md">
+        <div className="flex flex-col fluid-stack-xs">
+          <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+            <BarChart3 className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
+            <h2 className="fluid-h2 font-semibold">Ostatnie aktualizacje</h2>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="fluid-caption text-muted-foreground">
             Śledź zmiany w cenach, zasadach wypłat i innych ważnych informacjach dotyczących firmy.
           </p>
         </div>
         {announcements.length > 0 ? (
-          <div className="space-y-6">
+          <div className="flex flex-col fluid-stack-md">
             {sortedGroups.map(([date, items]) => (
-              <div key={date} className="space-y-4">
+              <div key={date} className="flex flex-col fluid-stack-sm">
                 <div className="flex items-center gap-2">
                   <div className="h-px flex-1 bg-border" />
-                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{date}</span>
+                  <span className="fluid-caption font-semibold uppercase tracking-wide text-muted-foreground">{date}</span>
                   <div className="h-px flex-1 bg-border" />
                 </div>
-                <div className="space-y-3">
+                <div className="flex flex-col fluid-stack-xs">
                   {items.map((item) => (
                     <AnnouncementCard key={item.id} item={item} />
                   ))}
@@ -648,8 +648,8 @@ function AnnouncementsTab({
               <div className="glass-panel mb-4 rounded-full p-4">
                 <BarChart3 className="h-10 w-10 text-muted-foreground/50" />
               </div>
-              <CardTitle className="mb-2 text-xl font-semibold">Brak aktualizacji</CardTitle>
-              <CardDescription className="max-w-md text-sm">
+              <CardTitle className="mb-[clamp(0.4rem,0.6vw,0.5rem)] fluid-h2 font-semibold">Brak aktualizacji</CardTitle>
+              <CardDescription className="max-w-md fluid-copy">
                 Brak zarejestrowanych aktualizacji dla tej firmy – sprawdź ponownie później.
               </CardDescription>
             </CardContent>
@@ -691,13 +691,13 @@ function PayoutsTab({ company }: { company: CompanyWithDetails }) {
 
   return (
     <TooltipProvider>
-      <div className="space-y-8">
+      <div className="flex flex-col fluid-stack-lg">
         <PayoutsQuickStats company={company} />
 
-        <section className="space-y-4">
-          <div className="space-y-1.5">
-            <h2 className="text-lg font-semibold sm:text-xl">Harmonogram wypłat</h2>
-            <p className="text-xs text-muted-foreground">
+        <section className="flex flex-col fluid-stack-md">
+          <div className="flex flex-col fluid-stack-xs">
+            <h2 className="fluid-copy font-semibold">Harmonogram wypłat</h2>
+            <p className="fluid-caption text-muted-foreground">
               Szczegółowe informacje o terminach wypłat dla każdego planu.
             </p>
           </div>
@@ -714,13 +714,13 @@ function PayoutsTab({ company }: { company: CompanyWithDetails }) {
 
         <PayoutsComparison company={company} />
 
-        <section className="space-y-4">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-primary" />
-              <h3 className="text-lg font-semibold sm:text-xl">Kalendarz wypłat</h3>
+        <section className="flex flex-col fluid-stack-md">
+          <div className="flex flex-col fluid-stack-xs">
+            <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
+              <Calendar className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)] text-primary" />
+              <h3 className="fluid-copy font-semibold">Kalendarz wypłat</h3>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="fluid-caption text-muted-foreground">
               Sprawdź dostępne terminy wypłat i zaplanuj swoje transakcje.
             </p>
           </div>
@@ -735,9 +735,9 @@ function PayoutsTab({ company }: { company: CompanyWithDetails }) {
           <Card className="border-primary/30 bg-primary/10">
             <CardContent className="flex items-start gap-3 p-4">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <div className="space-y-1">
-                <CardTitle className="text-sm font-semibold text-primary">Ważna informacja</CardTitle>
-                <CardDescription className="text-xs text-primary/90">{summary.slaNotice}</CardDescription>
+              <div className="flex flex-col fluid-stack-xs">
+                <CardTitle className="fluid-caption font-semibold text-primary">Ważna informacja</CardTitle>
+                <CardDescription className="fluid-caption text-primary/90">{summary.slaNotice}</CardDescription>
               </div>
             </CardContent>
           </Card>
@@ -807,10 +807,10 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
   }
 
   return (
-    <section className="space-y-4">
-      <div className="space-y-1">
-        <h2 className="text-xl font-semibold sm:text-2xl">Podobne firmy</h2>
-        <p className="text-sm text-muted-foreground">
+    <section className="flex flex-col fluid-stack-md">
+      <div className="flex flex-col fluid-stack-xs">
+        <h2 className="fluid-h2 font-semibold">Podobne firmy</h2>
+        <p className="fluid-copy text-muted-foreground">
           Rekomendacje na podstawie modelu finansowania, instrumentów i ocen społeczności.
         </p>
       </div>
@@ -823,14 +823,14 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
               key={company.id}
               className="group flex h-full flex-col justify-between rounded-3xl border-gradient bg-gradient-card p-4 shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg"
             >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-col fluid-stack-sm">
+                <div className="flex items-start justify-between gap-[clamp(0.6rem,0.8vw,0.75rem)]">
                   <div>
-                    <Link className="text-base font-semibold text-foreground hover:text-primary transition-colors" href={`/firmy/${company.slug}`}>
+                    <Link className="fluid-copy font-semibold text-foreground hover:text-primary transition-colors" href={`/firmy/${company.slug}`}>
                       {company.name}
                     </Link>
-                    <div className="mt-1">
-                      <PremiumBadge variant="glow" className="text-xs font-semibold">
+                    <div className="mt-[clamp(0.2rem,0.3vw,0.25rem)]">
+                      <PremiumBadge variant="glow" className="fluid-badge font-semibold">
                         Cashback do {company.cashbackRate ?? 0} pkt
                       </PremiumBadge>
                     </div>
@@ -843,15 +843,15 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
                   />
                 </div>
                 {models.length ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.5rem)]">
                     {models.map((model) => (
-                      <PremiumBadge key={model} variant="outline" className="text-xs font-semibold">
+                      <PremiumBadge key={model} variant="outline" className="fluid-badge font-semibold">
                         {renderModelLabel(model)}
                       </PremiumBadge>
                     ))}
                   </div>
                 ) : null}
-                <p className="text-sm text-muted-foreground">
+                <p className="fluid-caption text-muted-foreground">
                   {company.shortDescription ?? "Sprawdź zasady, wypłaty i cashback partnera."}
                 </p>
               </div>

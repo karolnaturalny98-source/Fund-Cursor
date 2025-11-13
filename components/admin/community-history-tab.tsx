@@ -10,7 +10,7 @@ interface CommunityHistoryTabProps {
 
 export function CommunityHistoryTab({ companies }: CommunityHistoryTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Historia i wyszukiwanie operacji społecznościowych"
         description="Przeglądaj i filtruj wszystkie operacje: zgłoszenia influencerów, opinie i błędy danych."
@@ -20,4 +20,5 @@ export function CommunityHistoryTab({ companies }: CommunityHistoryTabProps) {
     </div>
   );
 }
+
 

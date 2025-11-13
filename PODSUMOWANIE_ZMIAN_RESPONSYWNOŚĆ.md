@@ -2,9 +2,9 @@
 
 ## Status migracji (aktualizacja 2025-11-13)
 
-- ✅ Zrealizowano: kluczowe sekcje landing page (hero, highlights, CTA), główne widoki rankingów, większość panelu użytkownika oraz szkielet panelu administracyjnego.
-- 🔄 W trakcie: komponenty tabel rankingowych, widoki firm/analiz wymagające pełnej typografii fluid, szczegółowe ekrany admin (spory, kolejki, moderacja).
-- ⏳ Do wykonania: podsieci afiliacyjne, marketingowe i FAQ oraz formularze w `components/forms/*`.
+- ✅ Zrealizowano: kluczowe sekcje landing page (hero, highlights, CTA), główne widoki rankingów, większość panelu użytkownika, szkielet panelu administracyjnego, layout components (header/footer), komponenty about/*, strona firmy, komponenty UI oraz formularze.
+- 🔄 W trakcie: niektóre komponenty companies/* i admin/* mogą wymagać dodatkowych aktualizacji (sprawdzanie w toku).
+- ⏳ Do wykonania: weryfikacja pozostałych komponentów companies/* i admin/* pod kątem pełnej zgodności z fluid utilities.
 
 ### 📋 Lista Zmodyfikowanych Komponentów
 
@@ -360,16 +360,62 @@
 #### 76. **Companies Page Wrapper** (`app/firmy/page.tsx`)
 - ✅ Sekcja hero / obwiednia strony zaktualizowana o `clamp()` spacing
 
+#### 77. **Site Header** (`components/layout/site-header.tsx`)
+- ✅ Header z `fluid-button-sm`, `fluid-copy`, `fluid-caption`, clampowane spacingi i wysokości
+- ✅ Menu mobilne zaktualizowane o fluid utilities
+
+#### 78. **Site Footer** (`components/layout/site-footer.tsx`)
+- ✅ Logo i nagłówki na `fluid-h2`, `fluid-copy`, `fluid-caption`
+- ✅ Linki i ikony społecznościowe z clampowanymi rozmiarami
+- ✅ Newsletter form z `fluid-button-sm`
+
+#### 79. **About Components** (`components/about/*`)
+- ✅ Mission Vision: `fluid-h2`, `fluid-copy`, clampowane ikony
+- ✅ Company Values: `fluid-h2`, `fluid-copy`, `fluid-caption`, `fluid-badge`
+- ✅ Team Section: `fluid-h2`, `fluid-copy`, `fluid-caption`, clampowane avatary i ikony
+- ✅ About CTA: `fluid-h2`, `fluid-copy`, `fluid-button`
+
+#### 80. **Company Page** (`app/firmy/[slug]/page.tsx`)
+- ✅ Hero sekcja: `fluid-h1`, `fluid-copy`, `fluid-caption`, `fluid-badge`
+- ✅ Wszystkie sekcje (FAQ, materiały edukacyjne, wypłaty, podobne firmy) zaktualizowane o fluid utilities
+- ✅ Clampowane spacingi, ikony i avatary
+
+#### 81. **UI Components** (`components/ui/*`)
+- ✅ Input: `fluid-caption`, clampowane wysokości i paddingi
+- ✅ Label: `fluid-caption`
+- ✅ Textarea: `fluid-caption`, clampowane wysokości i paddingi
+- ✅ Select: `fluid-caption`, clampowane wysokości, paddingi i ikony
+
+#### 82. **Form Components** (`components/forms/*`)
+- ✅ Blog Post Form: wszystkie komunikaty błędów na `fluid-caption`
+- ✅ Company Plan Form: nagłówki na `fluid-eyebrow`, komunikaty na `fluid-caption`, clampowane spacingi
+- ✅ Company Trading Profile Form: nagłówki na `fluid-eyebrow`, wszystkie etykiety i komunikaty na `fluid-caption`
+
 ---
 
 ## 📊 Statystyki Zmian
 
-- **Zmodyfikowanych komponentów**: 76 (⚙️ +3: `/baza-wiedzy`, blog UI, `/firmy` wrapper)
+- **Zmodyfikowanych komponentów**: 82 (⚙️ +9: layout components, about/*, company page, UI components, forms)
 - **Zmienionych layoutów**: 40 (flex/grid → auto-fit/clamp)
-- **Dostosowanych buttonów**: 59 (`fluid-button`, `fluid-button-sm`)
-- **Dostosowanych ikon/avatarów**: 43
+- **Dostosowanych buttonów**: 59+ (`fluid-button`, `fluid-button-sm`)
+- **Dostosowanych ikon/avatarów**: 50+
 - **Dostosowanych gridów**: 21
 - **Nowe utilsy fluid**: 9 (`fluid-h*`, `fluid-copy`, `fluid-button`, `fluid-badge`)
+
+## ✅ Viewport QA – 2025-11-13
+
+Audyt wykonano metodą code-review dla kluczowych viewportów (375 / 414 / 768 / 1024 / 1440 px). Sprawdzaliśmy, czy sekcje korzystają z `<Section>`, `fluid-section-*`, `fluid-stack-*` oraz nowych prymitywów (`fluid-button`, `fluid-badge`). Po deployu nadal warto wykonać screenshoty, ale bieżące wnioski są poniżej.
+
+| Powierzchnia / Widok | 375 / 414 | 768 | 1024 | 1440 | Notatki |
+|----------------------|-----------|-----|------|------|---------|
+| Landing, Rankingi, Sklep (`app/page.tsx`, `app/rankingi/page.tsx`, `components/shop/*`) | ✅ | ✅ | ✅ | ✅ | Sekcje stoją na `<Section>` + `fluid-stack-*`; CTA/badge'y używają `fluid-button(-sm)` i `fluid-badge`. |
+| Admin overview + queues/disputes (`components/admin/*`) | ✅ | ✅ | ✅ | ✅ | Po refaktorze brak lokalnych `space-y-*`. Filtry, taby i formularze stoją na `fluid-stack`. |
+| Company listing + detail (`app/firmy/page.tsx`, `app/firmy/[slug]/page.tsx`) | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Widzimy `space-y-[clamp(...)]` w `components/companies/companies-page-client.tsx`, `company-info-section.tsx`, `company-timeline.tsx`. Konieczna migracja na `flex flex-col fluid-stack-*`. |
+| Panel użytkownika (`app/panel/page.tsx`, `components/panels/sections/*`) | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Sekcje history/transactions/influencer/disputes nadal mają lokalne `space-y-*`, co utrudnia spójny rytm pionowy. |
+| Opinie & Reviews (`app/opinie/page.tsx`, `components/reviews/*`, `components/opinie/*`) | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Hero i listy rankingów polegają na `space-y` + ręcznych `px-[clamp(...)]`. Do przeniesienia na `Section` + `fluid-stack`. |
+| Analizy – moduły companies (`components/analysis/company-selector.tsx`, `components/analysis/payout-analysis.tsx`) | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Większość nagłówków ma `fluid-*`, ale wrappery nadal używają `space-y` (np. `company-selector`, `plan-features-matrix`). |
+
+> Po zakończeniu powyższych migracji należy ponownie zebrać screenshoty (375/414/768/1024/1440) i porównać layout z referencją PropFirmMatch.
 
 ---
 

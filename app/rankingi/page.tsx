@@ -3,6 +3,7 @@ import { RankingsExplorer } from "@/components/rankings/rankings-explorer";
 import { RankingsPageClient, RankingsMethodologyClient } from "@/components/rankings/rankings-page-client";
 import { getRankingsDataset } from "@/lib/queries/rankings";
 import { AuroraWrapper } from "@/components/aurora-wrapper";
+import { Section } from "@/components/layout/section";
 import type {
   RankingFilters,
   RankingsExplorerInitialFilters,
@@ -73,8 +74,8 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
           speed={0.5}
         />
       </div>
-      <section className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col gap-10 py-16">
+      <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
+        <div className="container relative z-10 flex flex-col fluid-stack-lg">
           <RankingsPageClient
             filteredCompanies={dataset.filteredCompanies}
             totalCompanies={dataset.totalCompanies}
@@ -95,18 +96,20 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
             uniqueAccountTypes={uniqueAccountTypes}
           />
         </div>
-      </section>
+      </Section>
 
-      <section className="w-full space-y-12 px-4 py-12 sm:px-6 lg:px-10 xl:px-16">
-        <RankingsExplorer
-          initialData={dataset}
-          initialFilters={initialExplorerFilters}
-          initialTab={activeTab}
-        />
-      </section>
+      <Section bleed size="lg" className="w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col fluid-stack-lg px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
+          <RankingsExplorer
+            initialData={dataset}
+            initialFilters={initialExplorerFilters}
+            initialTab={activeTab}
+          />
+        </div>
+      </Section>
 
-      <section className="border-t border-border/60 bg-muted/10 px-4 py-12 sm:px-6 lg:px-10 xl:px-16">
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+      <Section bleed size="lg" className="border-t border-border/60 bg-muted/10">
+        <div className="mx-auto flex max-w-6xl flex-col fluid-stack-lg px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
           <RankingsMethodologyClient
             totalCompanies={dataset.totalCompanies}
             totalReviews={totalReviews}
@@ -115,7 +118,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
             uniqueAccountTypes={uniqueAccountTypes}
           />
         </div>
-      </section>
+      </Section>
     </div>
   );
 }

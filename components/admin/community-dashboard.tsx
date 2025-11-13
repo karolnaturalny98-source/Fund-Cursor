@@ -47,15 +47,15 @@ export function CommunityDashboard({
     "border-transparent bg-muted/30 text-muted-foreground data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium";
 
   return (
-    <div className="space-y-[clamp(1.5rem,2.3vw,2.1rem)]">
-      <div className="space-y-[clamp(0.55rem,0.85vw,0.75rem)]">
+    <div className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col fluid-stack-sm">
         <h1 className="fluid-h2 font-semibold tracking-tight text-foreground">Dashboard Społeczności</h1>
         <p className="max-w-2xl fluid-copy text-muted-foreground">
           Zarządzaj influencerami, moderuj opinie i rozwiązuj zgłoszenia błędów danych.
         </p>
       </div>
 
-      <Tabs defaultValue="overview" className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+      <Tabs defaultValue="overview" className="flex flex-col fluid-stack-lg">
         <TabsList className="flex flex-wrap gap-[clamp(0.55rem,0.85vw,0.75rem)] bg-transparent p-0">
           <TabsTrigger
             value="overview"
@@ -107,7 +107,7 @@ export function CommunityDashboard({
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+        <TabsContent value="overview" className="flex flex-col fluid-stack-lg">
           <CommunityOverviewTab
             stats={stats}
             timeSeries={timeSeries}
@@ -116,7 +116,7 @@ export function CommunityDashboard({
           />
         </TabsContent>
 
-        <TabsContent value="queues" className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+        <TabsContent value="queues" className="flex flex-col fluid-stack-lg">
           <CommunityQueuesTab
             influencerProfiles={influencerProfiles}
             pendingReviews={pendingReviews}
@@ -124,15 +124,16 @@ export function CommunityDashboard({
           />
         </TabsContent>
 
-        <TabsContent value="influencers" className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+        <TabsContent value="influencers" className="flex flex-col fluid-stack-lg">
           <CommunityInfluencersTab profiles={approvedInfluencerProfiles} />
         </TabsContent>
 
-        <TabsContent value="history" className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+        <TabsContent value="history" className="flex flex-col fluid-stack-lg">
           <CommunityHistoryTab companies={companies} />
         </TabsContent>
       </Tabs>
     </div>
   );
 }
+
 

@@ -20,7 +20,7 @@ export function SupportQueuesTab({
   initialQuery,
 }: SupportQueuesTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Kolejki sporów"
         description="Zarządzaj zgłoszeniami użytkowników, aktualizuj statusy i dokumentuj notatki kontaktowe."
@@ -36,4 +36,5 @@ export function SupportQueuesTab({
     </div>
   );
 }
+
 

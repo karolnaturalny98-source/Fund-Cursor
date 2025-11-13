@@ -93,8 +93,8 @@ export function ShopPurchaseForm({
   const cashbackAmount = Math.round((price * cashbackRate) / 100);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-[clamp(1.25rem,1.8vw,1.6rem)]">
-      <div className="space-y-[clamp(1rem,1.4vw,1.25rem)]">
+    <form onSubmit={handleSubmit} className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col fluid-stack-md">
         <div className="rounded-2xl border border-primary/30 bg-linear-to-br from-primary/10 to-primary/5 p-[clamp(1.1rem,1.6vw,1.4rem)]">
           <div className="flex items-center justify-between gap-[clamp(0.85rem,1.2vw,1.05rem)]">
             <div>
@@ -123,7 +123,7 @@ export function ShopPurchaseForm({
         </div>
 
         <SignedOut>
-          <div className="space-y-[clamp(0.6rem,0.9vw,0.8rem)]">
+          <div className="flex flex-col fluid-stack-xs">
             <Label htmlFor="email" className="text-foreground fluid-copy">Email</Label>
             <Input
               id="email"
@@ -142,7 +142,7 @@ export function ShopPurchaseForm({
         </SignedOut>
 
         <SignedIn>
-          <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.9rem,1.3vw,1.1rem)] shadow-xs">
+          <div className="flex flex-col rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.9rem,1.3vw,1.1rem)] shadow-xs">
             <div className="font-medium text-muted-foreground fluid-caption">Zalogowany jako</div>
             <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-foreground fluid-copy">
               {user?.emailAddresses[0]?.emailAddress}

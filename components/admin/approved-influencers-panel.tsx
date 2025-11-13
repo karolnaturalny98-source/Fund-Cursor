@@ -82,10 +82,10 @@ export function ApprovedInfluencersPanel({
         cell: ({ row }) => {
           const profile = row.original;
           return (
-            <div className="space-y-1">
+            <div className="flex flex-col fluid-stack-xs">
               <p className="font-mono text-xs text-muted-foreground">{profile.handle}</p>
               {profile.socialLinks.length > 0 ? (
-                <ul className="space-y-1 text-xs text-primary">
+                <ul className="flex flex-col fluid-stack-xs text-xs text-primary">
                   {profile.socialLinks.map((link) => (
                     <li key={link}>
                       <a
@@ -234,3 +234,4 @@ export function ApprovedInfluencersPanel({
     />
   );
 }
+

@@ -12,7 +12,7 @@ interface BlogHistoryTabProps {
 
 export function BlogHistoryTab({ initialPosts, initialCategories }: BlogHistoryTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Wszystkie artykuły"
         description="Przeglądaj i zarządzaj wszystkimi artykułami blogowymi."
@@ -29,4 +29,5 @@ export function BlogHistoryTab({ initialPosts, initialCategories }: BlogHistoryT
     </div>
   );
 }
+
 

@@ -172,35 +172,35 @@ export function CompanyMediaForm({ companySlug }: CompanyMediaFormProps) {
   if (loading) return <p className="text-sm text-muted-foreground">Ładowanie...</p>;
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="flex flex-col fluid-stack-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-sm">
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Tytuł *</label>
             <Input {...register("title")} placeholder="Tytuł artykułu/wywiadu" />
             {errors.title && <p className="text-xs text-red-500">{errors.title.message}</p>}
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Źródło</label>
             <Input {...register("source")} placeholder="Nazwa portalu/media" />
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-sm font-medium">URL *</label>
           <Input {...register("url")} type="url" placeholder="https://..." />
           {errors.url && <p className="text-xs text-red-500">{errors.url.message}</p>}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Data publikacji *</label>
             <Input type="datetime-local" {...register("publishedAt")} />
             {errors.publishedAt && <p className="text-xs text-red-500">{errors.publishedAt.message}</p>}
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Typ</label>
             <Select
               value={watch("type") || ""}
@@ -219,12 +219,12 @@ export function CompanyMediaForm({ companySlug }: CompanyMediaFormProps) {
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-sm font-medium">Opis</label>
           <Textarea {...register("description")} placeholder="Krótki opis (opcjonalnie)" rows={3} />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-sm font-medium">URL obrazu</label>
           <Input {...register("imageUrl")} type="url" placeholder="https://..." />
         </div>
@@ -244,12 +244,12 @@ export function CompanyMediaForm({ companySlug }: CompanyMediaFormProps) {
 
       <Separator />
 
-      <div className="space-y-3">
+      <div className="flex flex-col fluid-stack-sm">
         <h3 className="text-base font-semibold">Istniejące wpisy medialne</h3>
         {items.length === 0 ? (
           <p className="text-sm text-muted-foreground">Brak wpisów medialnych.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             {items.map((item) => (
               <Card key={item.id} className="p-4">
                 <div className="flex items-start justify-between gap-4">
@@ -300,4 +300,5 @@ export function CompanyMediaForm({ companySlug }: CompanyMediaFormProps) {
     </div>
   );
 }
+
 

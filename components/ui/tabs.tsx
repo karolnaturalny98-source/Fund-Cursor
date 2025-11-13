@@ -14,7 +14,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center gap-[clamp(0.35rem,0.5vw,0.45rem)] rounded-full bg-muted/20 p-[clamp(0.35rem,0.5vw,0.45rem)] text-muted-foreground",
+      "inline-flex flex-wrap items-center justify-center rounded-full bg-muted/20 p-[clamp(0.35rem,0.5vw,0.45rem)] text-muted-foreground fluid-stack-2xs",
       className,
     )}
     {...props}
@@ -29,9 +29,10 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex min-w-[clamp(7.5rem,11vw,9rem)] items-center justify-center whitespace-nowrap rounded-full px-[clamp(1rem,1.5vw,1.35rem)] py-[clamp(0.45rem,0.7vw,0.6rem)] text-[clamp(0.82rem,0.4vw+0.72rem,0.95rem)] font-semibold transition-all duration-200",
-      "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-glass",
-      "data-[state=inactive]:text-muted-foreground/80 data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:bg-foreground/5",
+      "group inline-flex min-w-[clamp(7.5rem,11vw,9rem)] items-center justify-between whitespace-nowrap rounded-full border font-semibold transition-all duration-200 fluid-button-sm",
+      "border-transparent bg-muted/30 text-muted-foreground",
+      "data-[state=inactive]:text-muted-foreground/80 data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
+      "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium",
       className,
     )}
     {...props}
@@ -46,7 +47,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-6 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "mt-[clamp(1.25rem,2vw,1.75rem)] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       className,
     )}
     {...props}

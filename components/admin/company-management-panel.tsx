@@ -193,7 +193,7 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-6 pt-4">
+                <div className="flex flex-col fluid-stack-lg pt-[clamp(1rem,1.5vw,1.25rem)]">
                   <div className="flex items-center justify-between">
                     <div className="flex flex-wrap gap-2 text-xs">
                       <Badge variant="outline">Kraj: {company.country ?? "brak danych"}</Badge>
@@ -388,9 +388,9 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                     </TabsList>
 
                     <TabsContent value="plans">
-                      <div className="space-y-3">
+                      <div className="flex flex-col fluid-stack-sm">
                         {company.plans.length ? (
-                          <div className="space-y-3">
+                          <div className="flex flex-col fluid-stack-sm">
                             {company.plans.map((planItem) => (
                               <Card key={planItem.id} className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
                                 <CardContent className="pt-4">
@@ -539,9 +539,9 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                     </TabsContent>
 
                     <TabsContent value="faq">
-                      <div className="space-y-3">
+                      <div className="flex flex-col fluid-stack-sm">
                         {company.faqs.length ? (
-                          <div className="space-y-3">
+                          <div className="flex flex-col fluid-stack-sm">
                             {company.faqs.map((faq) => (
                               <CompanyFaqItemForm
                                 key={faq.id}

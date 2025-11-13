@@ -1,15 +1,16 @@
 "use client";
 
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Section } from "@/components/layout/section";
 import { useFadeIn } from "@/lib/animations";
 
 export function AboutHero() {
   const heroContent = useFadeIn({ rootMargin: "-100px" });
 
   return (
-    <section className="relative overflow-hidden border-b border-border/40">
-      <div className="container relative z-10 flex flex-col gap-[clamp(2rem,3vw,3rem)] py-[clamp(3rem,4vw,4.5rem)]">
-        <div ref={heroContent.ref} className={`max-w-3xl space-y-[clamp(1.25rem,1.8vw,1.6rem)] ${heroContent.className}`}>
+    <Section bleed size="lg" className="relative overflow-hidden border-b border-border/40">
+      <div className="container relative z-10 flex flex-col fluid-stack-xl">
+        <div ref={heroContent.ref} className={`max-w-3xl flex flex-col fluid-stack-md ${heroContent.className}`}>
           <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
             O FundedRank
           </PremiumBadge>
@@ -24,7 +25,7 @@ export function AboutHero() {
           </p>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

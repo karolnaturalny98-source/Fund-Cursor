@@ -101,7 +101,7 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
       description="Najnowsze elementy wymagające uwagi"
     >
       <ScrollArea className="h-[clamp(18rem,45vh,23rem)] pr-[clamp(0.4rem,0.7vw,0.6rem)]">
-        <div className="space-y-[clamp(0.85rem,1.2vw,1.05rem)]">
+        <div className="flex flex-col fluid-stack-sm">
           {activities.length === 0 ? (
             <div className="py-[clamp(3rem,4.5vw,3.5rem)] text-center text-muted-foreground">
               Brak aktywności do wyświetlenia
@@ -118,7 +118,7 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
                   <div className="mt-[clamp(0.1rem,0.25vw,0.2rem)] rounded-2xl bg-primary/10 p-[clamp(0.55rem,0.8vw,0.7rem)]">
                     <Icon className="h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] text-primary" />
                   </div>
-                  <div className="min-w-0 flex-1 space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                  <div className="min-w-0 flex-1 flex flex-col fluid-stack-xs">
                     <div className="flex items-start justify-between gap-[clamp(0.6rem,0.9vw,0.75rem)]">
                       <p className="text-[clamp(0.95rem,0.45vw+0.85rem,1.08rem)] font-semibold leading-tight text-foreground">
                         {activity.title}
@@ -154,4 +154,5 @@ export function OverviewActivityFeed({ recentItems }: OverviewActivityFeedProps)
     </SectionCard>
   );
 }
+
 

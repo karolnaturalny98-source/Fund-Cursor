@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
 import { useFadeIn } from "@/lib/animations";
 
@@ -127,8 +128,8 @@ export function AffiliateRegistrationForm() {
   const formAnim = useFadeIn({ rootMargin: "-100px" });
 
   return (
-    <section id="affiliate-form" className="container space-y-6 py-12">
-      <div ref={formAnim.ref} className={`space-y-3 mb-6 ${formAnim.className}`}>
+    <Section id="affiliate-form" size="lg" className="flex flex-col fluid-stack-lg">
+      <div ref={formAnim.ref} className={`mb-6 flex flex-col fluid-stack-xs ${formAnim.className}`}>
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">
           Zgłoszenie
         </p>
@@ -142,7 +143,7 @@ export function AffiliateRegistrationForm() {
       </div>
 
       <Card className="rounded-3xl border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md">
-        <CardHeader className="space-y-2">
+        <CardHeader className="flex flex-col fluid-stack-xs">
           <div className="flex items-center justify-between">
             <CardTitle className="text-xl font-semibold">Formularz zgłoszeniowy</CardTitle>
             <PremiumBadge variant="glow" className="rounded-full text-xs font-semibold">
@@ -171,9 +172,9 @@ export function AffiliateRegistrationForm() {
           </SignedOut>
 
           <SignedIn>
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="flex flex-col fluid-stack-md" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <Label htmlFor="platform">Platforma *</Label>
                   <Input
                     id="platform"
@@ -188,7 +189,7 @@ export function AffiliateRegistrationForm() {
                   </p>
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <Label htmlFor="handle">Nazwa profilu *</Label>
                   <Input
                     id="handle"
@@ -203,7 +204,7 @@ export function AffiliateRegistrationForm() {
                   </p>
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <Label htmlFor="audienceSize">Liczba obserwujących</Label>
                   <Input
                     id="audienceSize"
@@ -218,7 +219,7 @@ export function AffiliateRegistrationForm() {
                   </p>
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <Label htmlFor="contactEmail">Email do współpracy</Label>
                   <Input
                     id="contactEmail"
@@ -234,7 +235,7 @@ export function AffiliateRegistrationForm() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="flex flex-col fluid-stack-xs">
                 <Label htmlFor="bio">Krótki opis / bio</Label>
                 <Textarea
                   id="bio"
@@ -249,7 +250,7 @@ export function AffiliateRegistrationForm() {
                 </p>
               </div>
 
-              <div className="space-y-2">
+              <div className="flex flex-col fluid-stack-xs">
                 <Label htmlFor="socialLinks">Linki społecznościowe (po jednym w wierszu)</Label>
                 <Textarea
                   id="socialLinks"
@@ -264,7 +265,7 @@ export function AffiliateRegistrationForm() {
                 </p>
               </div>
 
-              <div className="space-y-2">
+              <div className="flex flex-col fluid-stack-xs">
                 <Label htmlFor="preferredCompanies">Firmy, które chcesz promować</Label>
                 <Textarea
                   id="preferredCompanies"
@@ -309,7 +310,7 @@ export function AffiliateRegistrationForm() {
           </SignedIn>
         </CardContent>
       </Card>
-    </section>
+    </Section>
   );
 }
 

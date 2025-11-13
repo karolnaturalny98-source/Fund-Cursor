@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Section } from "@/components/layout/section";
 import { useFadeIn } from "@/lib/animations";
 
 interface AffiliateStatisticsProps {
@@ -12,12 +13,12 @@ export function AffiliateStatistics({ approvedCount, pendingCount }: AffiliateSt
   const statsAnim = useFadeIn({ rootMargin: "-100px" });
 
   return (
-    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+    <Section size="lg" className="flex flex-col fluid-stack-xl">
       <div
         ref={statsAnim.ref}
         className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${statsAnim.className}`}
       >
-        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] flex flex-col fluid-stack-sm">
           <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Statystyki
           </p>
@@ -72,7 +73,7 @@ export function AffiliateStatistics({ approvedCount, pendingCount }: AffiliateSt
           </Card>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

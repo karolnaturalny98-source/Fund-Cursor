@@ -10,7 +10,7 @@ interface CashbackHistoryTabProps {
 
 export function CashbackHistoryTab({ companies }: CashbackHistoryTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Historia i wyszukiwanie operacji cashback"
         description="Przeglądaj i filtruj wszystkie operacje cashback: transakcje, wnioski, ręczne przyznania i importy afiliacyjne."
@@ -20,5 +20,6 @@ export function CashbackHistoryTab({ companies }: CashbackHistoryTabProps) {
     </div>
   );
 }
+
 
 

@@ -25,7 +25,7 @@ export function CommunityStatisticsOverview({
   stats,
 }: CommunityStatisticsOverviewProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Główne metryki */}
       <SectionCard
         title="Główne metryki"
@@ -259,4 +259,5 @@ export function CommunityStatisticsOverview({
     </div>
   );
 }
+
 

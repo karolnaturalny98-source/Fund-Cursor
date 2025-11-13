@@ -38,11 +38,11 @@ export function AdminContent({ children }: AdminContentProps) {
       style={{ "--padding-left": paddingLeft } as React.CSSProperties}
     >
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-        <div className="container space-y-[clamp(1.5rem,2.3vw,2.1rem)] px-[clamp(1rem,3vw,2.5rem)] py-[clamp(2.25rem,3.5vw,3rem)] lg:px-[clamp(1.5rem,2.5vw,2.5rem)]">
+        <div className="container flex flex-col fluid-stack-lg px-[clamp(1rem,3vw,2.5rem)] py-[clamp(2.25rem,3.5vw,3rem)] lg:px-[clamp(1.5rem,2.5vw,2.5rem)]">
           {/* Mobile spacing */}
           <div className="lg:hidden h-[clamp(3.75rem,5vw,4.25rem)]" />
 
-          <div className="space-y-[clamp(1.25rem,1.9vw,1.7rem)]">
+          <div className="flex flex-col fluid-stack-lg">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
@@ -62,8 +62,8 @@ export function AdminContent({ children }: AdminContentProps) {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <header className="space-y-[clamp(0.85rem,1.2vw,1.1rem)] border-b border-border/50 pb-[clamp(1.25rem,1.9vw,1.7rem)]">
-              <div className="space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
+            <header className="flex flex-col fluid-stack-md border-b border-border/50 pb-[clamp(1.25rem,1.9vw,1.7rem)]">
+              <div className="flex flex-col fluid-stack-xs">
                 <h1 className="fluid-h1 font-bold tracking-tight bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                   Panel administratora
                 </h1>
@@ -82,3 +82,4 @@ export function AdminContent({ children }: AdminContentProps) {
     </main>
   );
 }
+

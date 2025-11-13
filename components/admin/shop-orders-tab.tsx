@@ -9,10 +9,11 @@ interface ShopOrdersTabProps {
 
 export function ShopOrdersTab({ orders }: ShopOrdersTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <ShopOrdersTable orders={orders} />
     </div>
   );
 }
+
 
 

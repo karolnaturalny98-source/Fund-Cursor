@@ -6,6 +6,7 @@ import { getCompanyOptions } from "@/lib/queries/companies";
 import { CompanySelector } from "@/components/analysis/company-selector";
 import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton";
 import { AuroraWrapper } from "@/components/aurora-wrapper";
+import { Section } from "@/components/layout/section";
 
 export const metadata: Metadata = {
   title: "Analizy Firm | FundedRank",
@@ -31,9 +32,9 @@ export default async function AnalizyPage() {
         />
       </div>
 
-      <div className="container py-[clamp(2.5rem,3.2vw,3.25rem)] animate-in fade-in duration-500 space-y-[clamp(2rem,2.8vw,2.6rem)]">
+      <Section size="lg" className="animate-in fade-in duration-500 flex flex-col fluid-stack-xl">
         {/* Hero Section */}
-        <div className="space-y-[clamp(1.5rem,2.2vw,2rem)] text-center">
+        <div className="flex flex-col fluid-stack-lg text-center">
           <div className="inline-flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] font-medium text-primary shadow-xs backdrop-blur-[36px]!">
             <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)]" />
             Narzędzie Analityczne
@@ -77,11 +78,11 @@ export default async function AnalizyPage() {
         </div>
 
         {/* Info Section */}
-        <div className="mx-auto max-w-4xl space-y-[clamp(1.5rem,2.2vw,2rem)]">
+        <div className="mx-auto flex max-w-4xl flex-col fluid-stack-lg">
           <h2 className="text-center font-bold text-foreground fluid-h2">Co możesz analizować?</h2>
 
           <div className="grid gap-[clamp(1rem,1.6vw,1.4rem)] sm:grid-cols-2 lg:grid-cols-3">
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -91,7 +92,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <FileText className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -101,7 +102,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -111,7 +112,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <BarChart3 className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -121,7 +122,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -131,7 +132,7 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
               <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
                 <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
               </div>
@@ -142,8 +143,8 @@ export default async function AnalizyPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+    </Section>
+  </div>
+);
 }
 

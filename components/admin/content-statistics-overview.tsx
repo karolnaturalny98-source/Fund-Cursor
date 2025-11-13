@@ -17,7 +17,7 @@ interface ContentStatisticsOverviewProps {
 
 export function ContentStatisticsOverview({ stats }: ContentStatisticsOverviewProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Przegląd treści"
         description="Kluczowe metryki dotyczące firm, planów i FAQ."
@@ -114,4 +114,5 @@ export function ContentStatisticsOverview({ stats }: ContentStatisticsOverviewPr
     </div>
   );
 }
+
 

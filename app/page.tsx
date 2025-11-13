@@ -45,20 +45,16 @@ export default async function Home({ searchParams }: HomeProps) {
             speed={0.5}
           />
         </div>
-        <div className="pb-16">
+        <div className="flex flex-col fluid-stack-xl pb-[clamp(2.5rem,3vw,3.5rem)]">
           <HeroSection metrics={metrics} />
-          <div className="py-4 md:py-6">
-            <TopCashbackSection companies={topCashbackCompanies} />
-          </div>
-          <div className="space-y-16 md:space-y-20">
-            <MarketingCarousel section={marketingSection} />
-            <RankingTabs ranking={ranking} />
-            <CommunityHighlights reviews={reviews} />
-            <InfluencerSpotlight influencers={influencers} />
-            <HowItWorksSection />
-            <WalletCtaBanner />
-            <KnowledgeGrid />
-          </div>
+          <TopCashbackSection companies={topCashbackCompanies} />
+          <MarketingCarousel section={marketingSection} />
+          <RankingTabs ranking={ranking} />
+          <CommunityHighlights reviews={reviews} />
+          <InfluencerSpotlight influencers={influencers} />
+          <HowItWorksSection />
+          <WalletCtaBanner />
+          <KnowledgeGrid />
         </div>
       </div>
 

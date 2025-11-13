@@ -388,7 +388,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
           : "Uzupenij podstawowe informacje o firmie prop tradingowej. Szczegoy mozesz edytowac pozniej."}
       </p>
 
-      <form className="mt-[clamp(1.5rem,2.2vw,2rem)] space-y-[clamp(1rem,1.6vw,1.4rem)]" onSubmit={handleSubmit(onSubmit)}>
+      <form className="mt-[clamp(1.5rem,2.2vw,2rem)] flex flex-col fluid-stack-md" onSubmit={handleSubmit(onSubmit)}>
         <Field label="Nazwa" error={errors.name?.message}>
           <Input placeholder="FundedRank Prop" {...register("name")} />
         </Field>
@@ -486,7 +486,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
           </Field>
         </div>
 
-        <div className="space-y-[clamp(0.45rem,0.7vw,0.6rem)]">
+        <div className="flex flex-col fluid-stack-xs">
           <p className="font-semibold text-foreground fluid-copy">Linki spoecznosciowe</p>
           <div className="grid gap-[clamp(0.6rem,0.9vw,0.8rem)]">
             <Input placeholder="Website" {...register("socialsWebsite")} />
@@ -498,7 +498,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
 
         <Separator className="my-6" />
 
-        <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+        <div className="flex flex-col fluid-stack-md">
           <h3 className="font-semibold text-foreground fluid-copy">Informacje o firmie</h3>
           
           <Field label="Nazwa prawna firmy" error={errors.legalName?.message}>
@@ -551,7 +551,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
 
         <Separator className="my-6" />
 
-        <div className="space-y-4">
+        <div className="flex flex-col fluid-stack-sm">
           <h3 className="text-base font-semibold">Weryfikacja prawna</h3>
 
           <Field

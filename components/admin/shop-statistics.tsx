@@ -21,7 +21,7 @@ interface ShopStatisticsProps {
 
 export function ShopStatistics({ stats }: ShopStatisticsProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Główne metryki */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
@@ -367,3 +367,4 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
     </div>
   );
 }
+

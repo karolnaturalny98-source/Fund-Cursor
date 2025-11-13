@@ -10,6 +10,7 @@ import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { Section } from "@/components/layout/section";
 import { cn } from "@/lib/utils";
 
 interface MarketingCarouselProps {
@@ -245,9 +246,9 @@ export function MarketingCarousel({ section }: MarketingCarouselProps) {
   }
 
   return (
-    <section className="relative overflow-hidden border-y border-border/40">
+    <Section bleed size="lg" className="relative overflow-hidden border-y border-border/40">
       <div className="absolute inset-0 bg-linear-to-b from-secondary/10 via-secondary/5 to-transparent backdrop-blur-[36px]!" />
-      <div className="container relative z-10 space-y-[clamp(1.5rem,2.5vw,2.75rem)] py-[clamp(2.5rem,4vw,3.5rem)]">
+      <div className="container relative z-10 flex flex-col fluid-stack-lg">
         {/* Section Header */}
         <div className="flex justify-center">
           <div className="inline-flex w-fit items-center rounded-full border font-semibold uppercase tracking-[0.28em] text-foreground transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 px-[clamp(0.75rem,1.5vw,1.1rem)] py-[clamp(0.35rem,0.8vw,0.55rem)] text-[clamp(0.68rem,0.3vw+0.58rem,0.78rem)]">
@@ -256,13 +257,13 @@ export function MarketingCarousel({ section }: MarketingCarouselProps) {
         </div>
 
         {/* Grid Layout - zachować strukturę z płynniejszym skalowaniem */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] justify-items-center gap-[clamp(0.75rem,1.5vw,1.5rem)]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] justify-items-center fluid-stack-md">
           {spotlights.map((spotlight) => (
             <MarketingCard key={spotlight.id} spotlight={spotlight} />
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

@@ -195,7 +195,7 @@ export function InfluencerApplicationsPanel({
   }
 
   return (
-    <div className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+    <div className="flex flex-col fluid-stack-md">
       {error ? (
         <p className="rounded-2xl border border-destructive/50 bg-destructive/10 px-[clamp(0.75rem,1vw,0.9rem)] py-[clamp(0.6rem,0.8vw,0.7rem)] text-destructive fluid-caption">
           {error}
@@ -240,10 +240,10 @@ export function InfluencerApplicationsPanel({
                     </span>
                   </div>
                 </td>
-                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] space-y-[clamp(0.35rem,0.5vw,0.45rem)]">
+                <td className="px-[clamp(0.75rem,1.2vw,1.15rem)] py-[clamp(0.85rem,1.2vw,1.05rem)] flex flex-col fluid-stack-xs">
                   <p className="font-mono text-muted-foreground fluid-caption">{profile.handle}</p>
                   {profile.socialLinks.length ? (
-                    <ul className="space-y-[clamp(0.3rem,0.45vw,0.4rem)] text-primary fluid-caption">
+                    <ul className="flex flex-col fluid-stack-xs text-primary fluid-caption">
                       {profile.socialLinks.map((link) => (
                         <li key={link}>
                           <a
@@ -375,3 +375,4 @@ export function InfluencerApplicationsPanel({
     </div>
   );
 }
+

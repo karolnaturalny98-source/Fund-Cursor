@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Section } from "@/components/layout/section";
 import type { TopCashbackCompany } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -24,8 +25,8 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
   }
 
   return (
-    <section className="relative">
-      <div className="container space-y-3">
+    <Section size="md" className="relative">
+      <div className="flex flex-col fluid-stack-sm">
         {/* Section Header Badge */}
         <div className="flex justify-center">
           <Badge variant="outline" className="fluid-badge font-semibold tracking-[0.28em]">
@@ -36,21 +37,21 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
         {/* Cards Container */}
         <div className="relative">
           {/* Mobile: Horizontal Scroll - zachowaj spójny wygląd */}
-          <div className="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 scrollbar-hide md:hidden">
+          <div className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 scrollbar-hide fluid-stack-sm md:hidden">
             {companies.map((company) => (
               <CompanyCard key={company.id} company={company} />
             ))}
           </div>
 
           {/* Tablet+: Grid z zachowaniem proporcji - używa auto-fit dla płynnego skalowania */}
-          <div className="hidden md:grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3 md:gap-4 justify-items-center max-w-full">
+          <div className="hidden max-w-full grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] justify-items-center fluid-stack-sm md:grid">
             {companies.slice(0, 8).map((company) => (
               <CompanyCard key={company.id} company={company} />
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

@@ -154,7 +154,7 @@ export function RedeemQueueTable({ transactions }: RedeemQueueTableProps) {
   }
 
   return (
-    <Tabs defaultValue="pending" className="space-y-4">
+    <Tabs defaultValue="pending" className="flex flex-col fluid-stack-sm">
       <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
         <TabsTrigger
           value="pending"
@@ -190,7 +190,7 @@ export function RedeemQueueTable({ transactions }: RedeemQueueTableProps) {
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="pending" className="space-y-4">
+      <TabsContent value="pending" className="flex flex-col fluid-stack-sm">
         {pendingCount === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
             Brak wniosków oczekujących na weryfikację.
@@ -208,7 +208,7 @@ export function RedeemQueueTable({ transactions }: RedeemQueueTableProps) {
         )}
       </TabsContent>
 
-      <TabsContent value="approved" className="space-y-4">
+      <TabsContent value="approved" className="flex flex-col fluid-stack-sm">
         {approvedCount === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
             Brak zatwierdzonych wniosków.

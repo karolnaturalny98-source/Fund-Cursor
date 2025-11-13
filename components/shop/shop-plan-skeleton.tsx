@@ -10,19 +10,19 @@ export function ShopPlanSkeleton() {
         <Card key={i} className="border-border/60 bg-card/72">
           <div className="p-5">
             <div className="flex items-start justify-between gap-4">
-              <div className="flex-1 space-y-2">
+              <div className="flex flex-1 flex-col fluid-stack-xs">
                 <Skeleton className="h-6 w-32" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-3/4" />
               </div>
-              <div className="text-right space-y-1">
+              <div className="flex flex-col items-end fluid-stack-xs text-right">
                 <Skeleton className="h-8 w-20" />
                 <Skeleton className="h-3 w-12" />
               </div>
             </div>
             <div className="mt-4 rounded-xl border border-border/60 bg-primary/5 p-4">
               <div className="flex items-center justify-between">
-                <div className="space-y-2">
+                <div className="flex flex-col fluid-stack-xs">
                   <Skeleton className="h-3 w-16" />
                   <Skeleton className="h-7 w-24" />
                 </div>

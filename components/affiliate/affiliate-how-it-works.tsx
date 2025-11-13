@@ -4,6 +4,7 @@ import { CheckCircle2, FileText, Sparkles, TrendingUp } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 
 const steps = [
@@ -40,12 +41,12 @@ export function AffiliateHowItWorks() {
   const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(steps.length).fill(false);
 
   return (
-    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+    <Section size="lg" className="flex flex-col fluid-stack-xl">
       <div
         ref={sectionAnim.ref}
         className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}
       >
-        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] flex flex-col fluid-stack-sm">
           <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Jak to działa
           </p>
@@ -78,7 +79,7 @@ export function AffiliateHowItWorks() {
                   {index + 1}
                 </div>
               </div>
-              <div className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+              <div className="flex flex-col fluid-stack-xs">
                 <h3 className="font-semibold text-foreground fluid-copy">{step.title}</h3>
                 <p className="text-muted-foreground fluid-caption">{step.description}</p>
               </div>
@@ -88,7 +89,7 @@ export function AffiliateHowItWorks() {
         ))}
       </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

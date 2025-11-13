@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import type { InfluencerProfile } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -20,12 +21,13 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(Math.max(influencers.length, 1)).fill(false);
 
   return (
-    <section
+    <Section
       ref={sectionVisible.ref}
-      className="container grid gap-[clamp(2rem,2.5vw,3rem)] lg:grid-cols-[3fr_2fr]"
+      className="grid fluid-stack-xl lg:grid-cols-[3fr_2fr]"
       id="influencerzy"
+      size="lg"
     >
-      <div ref={sectionAnim.ref} className={`space-y-[clamp(1rem,1.5vw,1.5rem)] ${sectionAnim.className}`}>
+      <div ref={sectionAnim.ref} className={cn("flex flex-col fluid-stack-md", sectionAnim.className)}>
         <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
           Program influencerów FundedRank
         </PremiumBadge>
@@ -46,7 +48,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
           <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
         </Button>
       </div>
-      <div className="grid gap-[clamp(1rem,1.5vw,1.5rem)]">
+      <div className="grid fluid-stack-lg">
         {influencers.length === 0 ? (
           <Card
             className={`group relative overflow-hidden rounded-3xl border border-border/60 border-dashed transition-all duration-700 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
@@ -59,7 +61,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                 Ty możesz być pierwszy
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-[clamp(0.75rem,1vw,1rem)] text-muted-foreground fluid-copy">
+            <CardContent className="flex flex-col fluid-stack-sm text-muted-foreground fluid-copy">
               <p>
                 Dołącz do FundedRank jako ambasador i otrzymuj materiały,
                 które pomogą Twojej społeczności lepiej wybierać konta
@@ -90,7 +92,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                   {profile.platform}
                 </PremiumBadge>
               </CardHeader>
-              <CardContent className="space-y-[clamp(0.75rem,1vw,1rem)] text-muted-foreground fluid-caption">
+              <CardContent className="flex flex-col fluid-stack-sm text-muted-foreground fluid-caption">
                 <div className="flex items-center gap-[clamp(0.75rem,1vw,1rem)] text-[clamp(0.85rem,0.4vw+0.75rem,0.95rem)] text-primary">
                   {profile.audienceSize ? `${profile.audienceSize.toLocaleString("pl-PL")} obserwujących` : "Nowa współpraca"}
                 </div>
@@ -121,6 +123,6 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
           ))
         )}
       </div>
-    </section>
+    </Section>
   );
 }

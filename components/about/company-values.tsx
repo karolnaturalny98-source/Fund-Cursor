@@ -4,7 +4,9 @@ import { Sparkles, Users, Shield, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useScrollAnimation, useStaggerAnimation } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 const values = [
   {
@@ -36,21 +38,28 @@ export function CompanyValues() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(values.length).fill(false);
 
   return (
-    <section ref={sectionVisible.ref} className="container space-y-8 py-12">
-      <div ref={sectionAnim.ref} className={`space-y-3 ${sectionAnim.className}`}>
-        <PremiumBadge variant="glow" className="rounded-full px-4 py-1 text-xs font-semibold">
+    <Section
+      ref={sectionVisible.ref}
+      size="lg"
+      className="flex flex-col fluid-stack-xl"
+    >
+      <div
+        ref={sectionAnim.ref}
+        className={cn("flex flex-col fluid-stack-sm", sectionAnim.className)}
+      >
+        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
           Nasze wartości
         </PremiumBadge>
-        <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">
+        <h2 className="fluid-h2 font-semibold text-foreground">
           Na czym nam zależy
         </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
+        <p className="max-w-3xl fluid-copy text-muted-foreground">
           Wartości, które kierują naszymi działaniami i definiują to, kim jesteśmy 
           jako platforma dla społeczności prop traderów.
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid fluid-stack-lg md:grid-cols-2 lg:grid-cols-4">
         {values.map((value, index) => (
           <Card
             key={value.title}
@@ -59,19 +68,19 @@ export function CompanyValues() {
             }`}
             style={{ "--delay": `${index * 100}ms` } as React.CSSProperties}
           >
-            <CardContent className="flex h-full flex-col gap-4 p-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary transition-all hover:bg-primary/30">
+            <CardContent className="flex h-full flex-col fluid-stack-md p-[clamp(1.25rem,1.5vw,1.5rem)]">
+              <div className="flex h-[clamp(2.5rem,1.5vw+2rem,3rem)] w-[clamp(2.5rem,1.5vw+2rem,3rem)] items-center justify-center rounded-full bg-primary/20 text-primary transition-all hover:bg-primary/30">
                 <PremiumIcon icon={value.icon} variant="glow" size="lg" hoverGlow />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-foreground">{value.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
+              <div className="flex flex-col fluid-stack-xs">
+                <h3 className="fluid-copy font-semibold text-foreground">{value.title}</h3>
+                <p className="fluid-caption text-muted-foreground leading-relaxed">{value.description}</p>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

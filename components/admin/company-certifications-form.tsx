@@ -167,45 +167,45 @@ export function CompanyCertificationsForm({ companySlug }: CompanyCertifications
   if (loading) return <p className="text-sm text-muted-foreground">Ładowanie...</p>;
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="flex flex-col fluid-stack-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-sm">
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Nazwa certyfikatu *</label>
             <Input {...register("name")} placeholder="Nazwa certyfikatu" />
             {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Wydawca</label>
             <Input {...register("issuer")} placeholder="Organizacja wydająca" />
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-sm font-medium">Opis</label>
           <Textarea {...register("description")} placeholder="Opis certyfikatu" rows={3} />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">URL certyfikatu</label>
             <Input {...register("url")} type="url" placeholder="https://..." />
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">URL obrazu</label>
             <Input {...register("imageUrl")} type="url" placeholder="https://..." />
           </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Data wydania</label>
             <Input type="date" {...register("issuedDate")} />
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Data wygaśnięcia</label>
             <Input type="date" {...register("expiryDate")} />
           </div>
@@ -226,12 +226,12 @@ export function CompanyCertificationsForm({ companySlug }: CompanyCertifications
 
       <Separator />
 
-      <div className="space-y-3">
+      <div className="flex flex-col fluid-stack-sm">
         <h3 className="text-base font-semibold">Istniejące certyfikaty</h3>
         {items.length === 0 ? (
           <p className="text-sm text-muted-foreground">Brak certyfikatów.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             {items.map((item) => (
               <Card key={item.id} className="p-4">
                 <div className="flex items-start justify-between gap-4">
@@ -279,4 +279,5 @@ export function CompanyCertificationsForm({ companySlug }: CompanyCertifications
     </div>
   );
 }
+
 

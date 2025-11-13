@@ -695,7 +695,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
 
       <Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto px-[clamp(1.4rem,2.6vw,2rem)] py-[clamp(1.6rem,2.8vw,2.2rem)]">
-          <DialogHeader className="space-y-[clamp(0.65rem,0.95vw,0.85rem)]">
+          <DialogHeader className="flex flex-col fluid-stack-sm">
             <DialogTitle className="fluid-h2 text-foreground">
               {editing ? "Edytuj spotlight" : "Dodaj spotlight"}
             </DialogTitle>
@@ -707,7 +707,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
 
           <Form {...form}>
             <form
-              className="space-y-[clamp(1.1rem,1.7vw,1.5rem)]"
+              className="flex flex-col fluid-stack-md"
               onSubmit={onSubmit}
             >
               <div className="grid gap-[clamp(1.1rem,1.7vw,1.5rem)] md:grid-cols-2">
@@ -715,7 +715,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="title"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                    <FormItem className="flex flex-col fluid-stack-xs md:col-span-2">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Tytuł
                       </FormLabel>
@@ -731,7 +731,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="headline"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                    <FormItem className="flex flex-col fluid-stack-xs md:col-span-2">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Opis (opcjonalnie)
                       </FormLabel>
@@ -750,7 +750,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="companyId"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Powiązana firma
                       </FormLabel>
@@ -785,7 +785,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="badgeLabel"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Badge
                       </FormLabel>
@@ -804,7 +804,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="badgeTone"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Kolor badge
                       </FormLabel>
@@ -823,7 +823,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="discountValue"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Zniżka (%)
                       </FormLabel>
@@ -842,7 +842,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="rating"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Ocena
                       </FormLabel>
@@ -861,7 +861,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ratingCount"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Liczba opinii
                       </FormLabel>
@@ -877,7 +877,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ctaLabel"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Tekst przycisku
                       </FormLabel>
@@ -893,7 +893,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="ctaUrl"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                    <FormItem className="flex flex-col fluid-stack-xs md:col-span-2">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Link CTA
                       </FormLabel>
@@ -909,7 +909,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="imageUrl"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)] md:col-span-2">
+                    <FormItem className="flex flex-col fluid-stack-xs md:col-span-2">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Obraz (opcjonalnie)
                       </FormLabel>
@@ -928,7 +928,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="startsAt"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Start publikacji
                       </FormLabel>
@@ -947,7 +947,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   control={form.control}
                   name="endsAt"
                   render={({ field }) => (
-                    <FormItem className="space-y-[clamp(0.45rem,0.65vw,0.55rem)]">
+                    <FormItem className="flex flex-col fluid-stack-xs">
                       <FormLabel className="fluid-copy font-semibold text-foreground">
                         Koniec publikacji
                       </FormLabel>
@@ -967,7 +967,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                   name="isActive"
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-center justify-between rounded-2xl border border-border/60 bg-muted/30 px-[clamp(1.1rem,1.6vw,1.4rem)] py-[clamp(1rem,1.4vw,1.2rem)]">
-                      <div className="space-y-[clamp(0.3rem,0.45vw,0.4rem)]">
+                      <div className="flex flex-col fluid-stack-xs">
                         <FormLabel className="fluid-copy font-semibold text-foreground">
                           Widoczność
                         </FormLabel>
@@ -1014,7 +1014,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
 
       <Dialog open={Boolean(deleteTarget)} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <DialogContent className="max-w-md px-[clamp(1.3rem,2.2vw,1.8rem)] py-[clamp(1.4rem,2.4vw,2rem)]">
-          <DialogHeader className="space-y-[clamp(0.55rem,0.85vw,0.75rem)]">
+          <DialogHeader className="flex flex-col fluid-stack-sm">
             <DialogTitle className="fluid-h2 text-foreground">Usuń spotlight</DialogTitle>
             <DialogDescription className="fluid-copy text-muted-foreground">
               Czy na pewno chcesz usunąć spotlight <strong>{deleteTarget?.title}</strong>? Tej akcji
@@ -1034,5 +1034,6 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
     </div>
   );
 }
+
 
 

@@ -18,7 +18,7 @@ export function SupportHistoryTab({
   initialQuery,
 }: SupportHistoryTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Historia sporów"
         description="Przeglądaj wszystkie spory w systemie z możliwością filtrowania i wyszukiwania."
@@ -34,4 +34,5 @@ export function SupportHistoryTab({
     </div>
   );
 }
+
 

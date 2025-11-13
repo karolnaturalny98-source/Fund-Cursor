@@ -13,7 +13,7 @@ export function BlogQueuesTab({ initialPosts }: BlogQueuesTabProps) {
   const draftPosts = initialPosts.filter((post) => post.status === "DRAFT");
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Szkice artykułów"
         description="Artykuły w statusie DRAFT oczekujące na publikację."
@@ -23,4 +23,5 @@ export function BlogQueuesTab({ initialPosts }: BlogQueuesTabProps) {
     </div>
   );
 }
+
 

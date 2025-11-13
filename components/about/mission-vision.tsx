@@ -3,6 +3,7 @@
 import { Target, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useScrollAnimation, useStaggerAnimation } from "@/lib/animations";
 
 export function MissionVision() {
@@ -24,8 +25,8 @@ export function MissionVision() {
   ];
 
   return (
-    <section ref={sectionVisible.ref} className="container py-12">
-      <div className="grid gap-6 lg:grid-cols-2">
+    <Section ref={sectionVisible.ref} size="lg">
+      <div className="grid fluid-stack-lg lg:grid-cols-2">
         {items.map((item, index) => (
           <Card
             key={item.title}
@@ -34,23 +35,23 @@ export function MissionVision() {
             }`}
             style={{ "--delay": `${index * 150}ms` } as React.CSSProperties}
           >
-            <CardHeader>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary mb-4">
+            <CardHeader className="flex flex-col fluid-stack-sm">
+              <div className="flex h-[clamp(2.5rem,1.5vw+2rem,3rem)] w-[clamp(2.5rem,1.5vw+2rem,3rem)] items-center justify-center rounded-full bg-primary/20 text-primary">
                 <PremiumIcon icon={item.icon} variant="glow" size="lg" hoverGlow />
               </div>
-              <CardTitle className="text-2xl font-semibold text-foreground">
+              <CardTitle className="fluid-h2 font-semibold text-foreground">
                 {item.title}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+            <CardContent className="flex flex-col fluid-stack-sm">
+              <p className="fluid-copy text-muted-foreground leading-relaxed">
                 {item.content}
               </p>
             </CardContent>
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

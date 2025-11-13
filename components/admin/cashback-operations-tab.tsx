@@ -11,7 +11,7 @@ interface CashbackOperationsTabProps {
 
 export function CashbackOperationsTab({ companies }: CashbackOperationsTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Import transakcji afiliacyjnych"
         description="Dodaj rekord zewnętrznej sieci afiliacyjnej, aby rozpocząć proces weryfikacji cashbacku."
@@ -28,5 +28,6 @@ export function CashbackOperationsTab({ companies }: CashbackOperationsTabProps)
     </div>
   );
 }
+
 
 

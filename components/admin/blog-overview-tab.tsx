@@ -32,7 +32,7 @@ export function BlogOverviewTab({
   topAuthors,
 }: BlogOverviewTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <BlogStatisticsOverview stats={stats} />
       <BlogCharts
         timeSeries={timeSeries}
@@ -43,4 +43,5 @@ export function BlogOverviewTab({
     </div>
   );
 }
+
 

@@ -10,7 +10,7 @@ interface ContentManagementTabProps {
 
 export function ContentManagementTab({ companies }: ContentManagementTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Zarządzanie firmami"
         description="Dodawaj plany kont, aktualizuj kluczowe parametry i utrzymuj FAQ w porządku."
@@ -20,4 +20,5 @@ export function ContentManagementTab({ companies }: ContentManagementTabProps) {
     </div>
   );
 }
+
 

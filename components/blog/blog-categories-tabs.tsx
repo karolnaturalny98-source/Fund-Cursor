@@ -28,7 +28,7 @@ export function BlogCategoriesTabs({
   }, [posts, activeCategory]);
 
   return (
-    <Tabs value={activeCategory} onValueChange={setActiveCategory} className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+    <Tabs value={activeCategory} onValueChange={setActiveCategory} className="flex flex-col fluid-stack-md">
       <TabsList className="flex w-full flex-wrap gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.5rem,0.75vw,0.65rem)] shadow-xs backdrop-blur-[36px]!">
         <TabsTrigger
           value="all"
@@ -47,7 +47,7 @@ export function BlogCategoriesTabs({
         ))}
       </TabsList>
 
-      <TabsContent value="all" className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+      <TabsContent value="all" className="flex flex-col fluid-stack-md">
         {filteredPosts.length === 0 ? (
           <Alert className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs backdrop-blur-[36px]! fluid-caption">
             <BookOpen className="h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)]" />
@@ -65,7 +65,7 @@ export function BlogCategoriesTabs({
       </TabsContent>
 
       {categories.map((category) => (
-        <TabsContent key={category.id} value={category.id} className="space-y-[clamp(1rem,1.5vw,1.35rem)]">
+        <TabsContent key={category.id} value={category.id} className="flex flex-col fluid-stack-md">
           {filteredPosts.length === 0 ? (
             <Alert className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs backdrop-blur-[36px]! fluid-caption">
               <BookOpen className="h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)]" />

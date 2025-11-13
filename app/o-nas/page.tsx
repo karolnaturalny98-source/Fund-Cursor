@@ -25,15 +25,12 @@ export default function AboutPage() {
         />
       </div>
 
-      <div className="pb-24">
+      <div className="flex flex-col fluid-stack-xl pb-[clamp(2.5rem,3vw,3.5rem)]">
         <AboutHero />
-        
-        <div className="space-y-20">
-          <MissionVision />
-          <CompanyValues />
-          <TeamSection />
-          <AboutCta />
-        </div>
+        <MissionVision />
+        <CompanyValues />
+        <TeamSection />
+        <AboutCta />
       </div>
     </div>
   );

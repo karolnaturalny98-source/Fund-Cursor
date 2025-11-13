@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import type { InfluencerProfile } from "@/lib/types";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 
@@ -21,9 +22,9 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
 
   if (affiliates.length === 0) {
     return (
-      <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+      <Section size="lg" className="flex flex-col fluid-stack-xl">
         <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}>
-          <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+          <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] flex flex-col fluid-stack-sm">
             <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
               Nasi affilaci
             </p>
@@ -40,7 +41,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
               Ty możesz być pierwszy
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)] text-muted-foreground fluid-copy">
+          <CardContent className="flex flex-col fluid-stack-sm text-muted-foreground fluid-copy">
             <p>
               Dołącz do FundedRank jako affilat i otrzymuj materiały,
               które pomogą Twojej społeczności lepiej wybierać konta
@@ -49,14 +50,14 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
           </CardContent>
         </Card>
         </div>
-      </section>
+      </Section>
     );
   }
 
   return (
-    <section className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+    <Section size="lg" className="flex flex-col fluid-stack-xl">
       <div ref={sectionAnim.ref} className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}>
-        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] flex flex-col fluid-stack-sm">
           <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Nasi affilaci
           </p>
@@ -67,7 +68,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
             Zobacz, kto już współpracuje z nami i promuje FundedRank w swoich kanałach.
           </p>
         </div>
-      <div ref={cardsAnim.ref} className="grid gap-[clamp(1rem,1.5vw,1.35rem)] md:grid-cols-2 lg:grid-cols-3">
+      <div ref={cardsAnim.ref} className="grid fluid-stack-md md:grid-cols-2 lg:grid-cols-3">
         {affiliates.map((affiliate, index) => (
           <div
             key={affiliate.id}
@@ -92,7 +93,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
                 {affiliate.platform}
               </PremiumBadge>
             </CardHeader>
-            <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
+            <CardContent className="flex flex-col fluid-stack-sm">
               <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] text-primary fluid-caption">
                 {affiliate.audienceSize ? (
                   <span className="font-semibold text-foreground fluid-copy">
@@ -123,7 +124,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
         ))}
       </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

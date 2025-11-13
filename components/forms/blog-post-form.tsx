@@ -40,7 +40,7 @@ const RichTextEditor = dynamic(
           }) {
             return (
               <div className="h-[300px] rounded-lg border border-border bg-background p-4">
-                <p className="text-sm text-muted-foreground">
+                <p className="fluid-caption text-muted-foreground">
                   Nie można załadować edytora. Odśwież stronę lub użyj zwykłego pola tekstowego.
                 </p>
                 <textarea
@@ -215,7 +215,7 @@ export function BlogPostForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-xl">
       {serverMessage && (
         <Alert
           variant={serverMessage.type === "error" ? "destructive" : "default"}
@@ -224,8 +224,8 @@ export function BlogPostForm({
         </Alert>
       )}
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid fluid-stack-md md:grid-cols-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="title">Tytuł *</Label>
           <Input
             id="title"
@@ -233,11 +233,11 @@ export function BlogPostForm({
             placeholder="Tytuł artykułu"
           />
           {errors.title && (
-            <p className="text-xs text-destructive">{errors.title.message}</p>
+            <p className="fluid-caption text-destructive">{errors.title.message}</p>
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="slug">Slug *</Label>
           <Input
             id="slug"
@@ -246,12 +246,12 @@ export function BlogPostForm({
             disabled={isEditMode}
           />
           {errors.slug && (
-            <p className="text-xs text-destructive">{errors.slug.message}</p>
+            <p className="fluid-caption text-destructive">{errors.slug.message}</p>
           )}
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col fluid-stack-xs">
         <Label htmlFor="excerpt">Krótki opis (excerpt)</Label>
         <Textarea
           id="excerpt"
@@ -260,11 +260,11 @@ export function BlogPostForm({
           rows={3}
         />
         {errors.excerpt && (
-          <p className="text-xs text-destructive">{errors.excerpt.message}</p>
+          <p className="fluid-caption text-destructive">{errors.excerpt.message}</p>
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col fluid-stack-xs">
         <Label htmlFor="content">Treść *</Label>
         <Controller
           name="content"
@@ -277,12 +277,12 @@ export function BlogPostForm({
           )}
         />
         {errors.content && (
-          <p className="text-xs text-destructive">{errors.content.message}</p>
+          <p className="fluid-caption text-destructive">{errors.content.message}</p>
         )}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid fluid-stack-md md:grid-cols-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="featuredImageUrl">URL obrazka głównego</Label>
           <Input
             id="featuredImageUrl"
@@ -291,7 +291,7 @@ export function BlogPostForm({
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="ogImageUrl">URL obrazka Open Graph</Label>
           <Input
             id="ogImageUrl"
@@ -301,8 +301,8 @@ export function BlogPostForm({
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid fluid-stack-md md:grid-cols-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="metaTitle">Meta Title (SEO)</Label>
           <Input
             id="metaTitle"
@@ -311,7 +311,7 @@ export function BlogPostForm({
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="metaDescription">Meta Description (SEO)</Label>
           <Textarea
             id="metaDescription"
@@ -322,8 +322,8 @@ export function BlogPostForm({
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid fluid-stack-md md:grid-cols-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label htmlFor="status">Status</Label>
           <Controller
             name="status"
@@ -343,13 +343,13 @@ export function BlogPostForm({
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <Label>Kategorie</Label>
           <Controller
             name="categoryIds"
             control={control}
             render={({ field }) => (
-              <div className="space-y-2">
+              <div className="flex flex-col fluid-stack-xs">
                 <Select
                   value=""
                   onValueChange={(value) => {
@@ -370,7 +370,7 @@ export function BlogPostForm({
                   </SelectContent>
                 </Select>
                 {currentCategoryIds.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap fluid-stack-xs">
                     {currentCategoryIds.map((categoryId) => {
                       const category = categories.find((c) => c.id === categoryId);
                       if (!category) return null;
@@ -403,9 +403,9 @@ export function BlogPostForm({
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col fluid-stack-xs">
         <Label htmlFor="tags">Tagi</Label>
-        <div className="flex gap-2">
+        <div className="flex fluid-stack-xs">
           <Input
             id="tags"
             value={tagInput}
@@ -423,7 +423,7 @@ export function BlogPostForm({
           </Button>
         </div>
         {currentTags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap fluid-stack-xs">
             {currentTags.map((tag) => (
               <Badge
                 key={tag}
@@ -444,7 +444,7 @@ export function BlogPostForm({
         )}
       </div>
 
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end fluid-stack-xs">
         <Button
           type="button"
           variant="outline"

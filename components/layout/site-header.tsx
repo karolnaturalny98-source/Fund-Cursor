@@ -29,16 +29,16 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 glass-premium border-none">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <Link className="text-lg font-semibold text-foreground shrink-0" href="/">
+      <div className="container flex h-[clamp(3.5rem,2vw+3rem,4rem)] items-center justify-between fluid-stack-sm">
+        <Link className="fluid-copy font-semibold text-foreground shrink-0" href="/">
           Funded<span className="text-primary">Rank</span>
         </Link>
-        <nav className="hidden items-center gap-2 text-sm font-medium md:flex">
+        <nav className="hidden items-center fluid-stack-xs fluid-caption font-medium md:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
               className={cn(
-                "rounded-full px-3 py-1 transition-colors hover:text-primary",
+                "rounded-full px-[clamp(0.6rem,0.8vw,0.75rem)] py-[clamp(0.2rem,0.3vw,0.25rem)] transition-colors hover:text-primary",
                 pathname === item.href || pathname.startsWith(item.href)
                   ? "bg-primary/10 text-primary"
                   : "text-foreground/60",
@@ -49,14 +49,14 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex shrink-0">
+        <div className="hidden items-center fluid-stack-xs md:flex shrink-0">
           <CurrencySwitcher layout="compact" />
-          <Button variant="premium-outline" className="rounded-full h-10 px-5 text-sm" onClick={open}>
+          <Button variant="premium-outline" className="fluid-button-sm rounded-full" onClick={open}>
             Panel
           </Button>
           <SignedOut>
             <SignInButton>
-              <Button variant="premium" className="rounded-full h-10 px-5 text-sm">Zaloguj</Button>
+              <Button variant="premium" className="fluid-button-sm rounded-full">Zaloguj</Button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
@@ -64,7 +64,7 @@ export function SiteHeader() {
               <Button
                 asChild
                 variant="ghost"
-                className="rounded-full text-muted-foreground h-10 px-5 text-sm"
+                className="fluid-button-sm rounded-full text-muted-foreground"
               >
                 <Link href="/admin" prefetch={false}>
                   Admin
@@ -84,12 +84,12 @@ export function SiteHeader() {
 
       {isMenuOpen ? (
         <div className="border-t border-border/40 glass-premium md:hidden">
-          <div className="container space-y-4 py-6">
-            <nav className="flex flex-col gap-2 text-sm font-medium">
+          <div className="container flex flex-col fluid-stack-sm py-[clamp(1rem,1.5vw,1.5rem)]">
+            <nav className="flex flex-col fluid-stack-xs fluid-caption font-medium">
               {navigation.map((item) => (
                 <Link
                   key={item.href}
-                  className="rounded-md px-2 py-2 hover:bg-muted"
+                  className="rounded-md px-[clamp(0.4rem,0.6vw,0.5rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] hover:bg-muted"
                   href={item.href}
                   prefetch={false}
                   onClick={() => setMenuOpen(false)}
@@ -98,10 +98,11 @@ export function SiteHeader() {
                 </Link>
               ))}
             </nav>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col fluid-stack-xs">
               <CurrencySwitcher />
               <Button
                 variant="premium-outline"
+                className="fluid-button-sm"
                 onClick={() => {
                   open();
                   setMenuOpen(false);
@@ -111,7 +112,7 @@ export function SiteHeader() {
               </Button>
               <SignedOut>
                 <SignInButton>
-                  <Button variant="premium">Zaloguj</Button>
+                  <Button variant="premium" className="fluid-button-sm">Zaloguj</Button>
                 </SignInButton>
               </SignedOut>
               <SignedIn>
@@ -120,6 +121,7 @@ export function SiteHeader() {
                     asChild
                     onClick={() => setMenuOpen(false)}
                     variant="ghost"
+                    className="fluid-button-sm"
                   >
                     <Link href="/admin" prefetch={false}>
                       Panel admina

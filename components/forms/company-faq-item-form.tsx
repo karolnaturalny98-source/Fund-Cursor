@@ -74,7 +74,7 @@ export function CompanyFaqItemForm({
   };
 
   return (
-    <div className="space-y-[clamp(0.75rem,1.1vw,1rem)] rounded-2xl border border-border/60 bg-muted/20 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[16px]!">
+    <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-muted/20 p-[clamp(1rem,1.4vw,1.25rem)] shadow-xs backdrop-blur-[16px]!">
       <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-[minmax(0,1fr)]">
         <label className="flex flex-col gap-[clamp(0.35rem,0.5vw,0.45rem)] text-foreground fluid-caption">
           <span className="font-medium text-foreground fluid-copy">Pytanie</span>

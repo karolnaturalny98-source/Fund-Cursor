@@ -2,8 +2,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import { KnowledgeGridButtonClient } from "./knowledge-grid-client";
+import { cn } from "@/lib/utils";
 
 const knowledgeItems = [
   {
@@ -33,16 +35,20 @@ export function KnowledgeGrid() {
   const visibleStaggerItems = sectionVisible.isVisible ? staggerItems : new Array(knowledgeItems.length).fill(false);
 
   return (
-    <section
+    <Section
       ref={sectionVisible.ref}
-      className="container space-y-[clamp(1.5rem,2.4vw,2.75rem)]"
+      className="flex flex-col fluid-stack-xl"
       id="baza-wiedzy"
+      size="lg"
     >
       <div
         ref={sectionAnim.ref}
-        className={`flex flex-wrap gap-[clamp(0.85rem,1.6vw,1.5rem)] sm:flex-nowrap sm:items-end sm:justify-between ${sectionAnim.className}`}
+        className={cn(
+          "flex flex-wrap gap-[clamp(0.85rem,1.6vw,1.5rem)] sm:flex-nowrap sm:items-end sm:justify-between",
+          sectionAnim.className,
+        )}
       >
-        <div className="w-full space-y-[clamp(0.6rem,0.9vw,0.85rem)] sm:w-auto">
+        <div className="flex w-full flex-col fluid-stack-xs sm:w-auto">
           <p className="fluid-eyebrow text-primary">
             Baza wiedzy
           </p>
@@ -60,7 +66,7 @@ export function KnowledgeGrid() {
         </Button>
       </div>
 
-      <div className="grid gap-[clamp(1.25rem,2vw,1.75rem)] md:grid-cols-3">
+      <div className="grid fluid-stack-lg md:grid-cols-3">
         {knowledgeItems.map((item, index) => (
           <Card
             key={item.title}
@@ -74,13 +80,13 @@ export function KnowledgeGrid() {
                 {item.title}
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-[clamp(1rem,1.5vw,1.5rem)]">
+            <CardContent className="flex flex-col fluid-stack-md">
               <p className="fluid-copy text-muted-foreground">{item.description}</p>
               <KnowledgeGridButtonClient />
             </CardContent>
           </Card>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

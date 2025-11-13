@@ -29,7 +29,7 @@ export function OverviewStatsGrid({
   clickAnalytics: _clickAnalytics,
 }: OverviewStatsGridProps) {
   return (
-    <div className="space-y-[clamp(1.35rem,2vw,1.8rem)]">
+    <div className="flex flex-col fluid-stack-lg">
       {/* Performance Metrics */}
       <div>
         <h3 className="mb-[clamp(0.85rem,1.3vw,1.15rem)] text-[clamp(1.05rem,0.45vw+0.95rem,1.3rem)] font-semibold tracking-tight text-foreground">
@@ -117,4 +117,5 @@ export function OverviewStatsGrid({
     </div>
   );
 }
+
 

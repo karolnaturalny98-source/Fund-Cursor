@@ -113,7 +113,7 @@ export function BlogCategoriesPanel({
           Brak kategorii.
         </div>
       ) : (
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           {categories.map((category) => (
             <div
               key={category.id}
@@ -161,8 +161,8 @@ export function BlogCategoriesPanel({
                 : "Dodaj nową kategorię artykułów."}
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-sm">
+            <div className="flex flex-col fluid-stack-xs">
               <Label htmlFor="category-name">Nazwa *</Label>
               <Input
                 id="category-name"
@@ -171,7 +171,7 @@ export function BlogCategoriesPanel({
                 placeholder="Nazwa kategorii"
               />
             </div>
-            <div className="space-y-2">
+            <div className="flex flex-col fluid-stack-xs">
               <Label htmlFor="category-description">Opis</Label>
               <Input
                 id="category-description"
@@ -194,4 +194,5 @@ export function BlogCategoriesPanel({
     </>
   );
 }
+
 

@@ -256,7 +256,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       {/* Quick Filters */}
       <div className="flex flex-wrap gap-2 sm:gap-3">
         <Button
@@ -295,7 +295,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
 
       {/* Filters */}
       <div className="grid gap-3 sm:gap-4 rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-3 sm:p-4 shadow-xs sm:grid-cols-2 lg:grid-cols-4">
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Status</label>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="rounded-lg">
@@ -311,7 +311,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           </Select>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Data od</label>
           <Input
             type="date"
@@ -321,7 +321,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Data do</label>
           <Input
             type="date"
@@ -331,7 +331,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Firma</label>
           <Select value={companyFilter} onValueChange={setCompanyFilter}>
             <SelectTrigger className="rounded-lg">
@@ -349,7 +349,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
         </div>
 
         {(activeTab === "affiliate" || activeTab === "imports") && (
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-xs font-medium text-muted-foreground">Platforma</label>
             <Select value={platformFilter} onValueChange={setPlatformFilter}>
               <SelectTrigger className="rounded-lg">
@@ -367,7 +367,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           </div>
         )}
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Wyszukiwanie</label>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -381,7 +381,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Min punkty</label>
           <Input
             type="number"
@@ -392,7 +392,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-xs font-medium text-muted-foreground">Max punkty</label>
           <Input
             type="number"
@@ -426,7 +426,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
       </div>
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as HistoryTab)} className="space-y-4">
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as HistoryTab)} className="flex flex-col fluid-stack-sm">
         <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
           <TabsTrigger
             value="all"
@@ -487,7 +487,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
 
         {/* Cashback Transactions Tables */}
         {(activeTab === "all" || activeTab === "redeem" || activeTab === "manual") && (
-          <TabsContent value={activeTab} className="space-y-4">
+          <TabsContent value={activeTab} className="flex flex-col fluid-stack-sm">
             {loading && transactions.length === 0 ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -628,7 +628,7 @@ export function CashbackHistoryPanel({ companies }: CashbackHistoryPanelProps) {
 
         {/* Affiliate Transactions Tables */}
         {(activeTab === "affiliate" || activeTab === "imports") && (
-          <TabsContent value={activeTab} className="space-y-4">
+          <TabsContent value={activeTab} className="flex flex-col fluid-stack-sm">
             {loading && affiliateTransactions.length === 0 ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />

@@ -29,7 +29,7 @@ export function SectionCard({
     >
       <CardHeader className="px-[clamp(1.1rem,1.5vw,1.6rem)] py-[clamp(1.15rem,1.7vw,1.4rem)]">
         <div className="flex flex-col gap-[clamp(0.65rem,0.95vw,0.8rem)] sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
+          <div className="flex flex-col fluid-stack-xs">
             <CardTitle className="text-[clamp(1.15rem,0.55vw+1.05rem,1.35rem)] font-semibold tracking-tight">
               {title}
             </CardTitle>
@@ -46,7 +46,7 @@ export function SectionCard({
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-[clamp(1rem,1.5vw,1.3rem)] px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.2rem,1.8vw,1.45rem)] pt-0">
+      <CardContent className="flex flex-col fluid-stack-md px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.2rem,1.8vw,1.45rem)] pt-0">
         {children}
       </CardContent>
       {footer && (
@@ -57,4 +57,5 @@ export function SectionCard({
     </Card>
   );
 }
+
 

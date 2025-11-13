@@ -163,30 +163,30 @@ export function CompanyTimelineForm({ companySlug }: CompanyTimelineFormProps) {
   if (loading) return <p className="text-sm text-muted-foreground">Ładowanie...</p>;
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="flex flex-col fluid-stack-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col fluid-stack-sm">
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Tytuł *</label>
             <Input {...register("title")} placeholder="Nazwa wydarzenia" />
             {errors.title && <p className="text-xs text-red-500">{errors.title.message}</p>}
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Data *</label>
             <Input type="date" {...register("date")} />
             {errors.date && <p className="text-xs text-red-500">{errors.date.message}</p>}
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col fluid-stack-xs">
           <label className="text-sm font-medium">Opis</label>
           <Textarea {...register("description")} placeholder="Opis wydarzenia (opcjonalnie)" rows={3} />
           {errors.description && <p className="text-xs text-red-500">{errors.description.message}</p>}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Typ</label>
             <Select
               value={watch("type") || ""}
@@ -204,12 +204,12 @@ export function CompanyTimelineForm({ companySlug }: CompanyTimelineFormProps) {
             </Select>
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Ikona</label>
             <Input {...register("icon")} placeholder="Nazwa ikony (lucide-react)" />
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             <label className="text-sm font-medium">Kolejność</label>
             <Input type="number" {...register("order")} placeholder="0" />
             {errors.order && <p className="text-xs text-red-500">{errors.order.message}</p>}
@@ -235,12 +235,12 @@ export function CompanyTimelineForm({ companySlug }: CompanyTimelineFormProps) {
 
       <Separator />
 
-      <div className="space-y-3">
+      <div className="flex flex-col fluid-stack-sm">
         <h3 className="text-base font-semibold">Istniejące wydarzenia</h3>
         {items.length === 0 ? (
           <p className="text-sm text-muted-foreground">Brak wydarzeń.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="flex flex-col fluid-stack-xs">
             {items.map((item) => (
               <Card key={item.id} className="p-4">
                 <div className="flex items-start justify-between gap-4">
@@ -297,4 +297,5 @@ export function CompanyTimelineForm({ companySlug }: CompanyTimelineFormProps) {
     </div>
   );
 }
+
 

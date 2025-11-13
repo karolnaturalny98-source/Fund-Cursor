@@ -20,7 +20,7 @@ interface BlogStatisticsOverviewProps {
 
 export function BlogStatisticsOverview({ stats }: BlogStatisticsOverviewProps) {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <SectionCard
         title="Przegląd statusów artykułów"
         description="Kluczowe metryki dotyczące artykułów blogowych."
@@ -124,4 +124,5 @@ export function BlogStatisticsOverview({ stats }: BlogStatisticsOverviewProps) {
     </div>
   );
 }
+
 

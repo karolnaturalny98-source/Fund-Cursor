@@ -293,7 +293,7 @@ export function AffiliateQueueTable({
   }
 
   return (
-    <Tabs defaultValue="pending" className="space-y-4">
+    <Tabs defaultValue="pending" className="flex flex-col fluid-stack-sm">
       <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
         <TabsTrigger
           value="pending"
@@ -345,7 +345,7 @@ export function AffiliateQueueTable({
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="pending" className="space-y-4">
+      <TabsContent value="pending" className="flex flex-col fluid-stack-sm">
         {pendingCount === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
             Brak transakcji oczekujących na weryfikację.
@@ -368,7 +368,7 @@ export function AffiliateQueueTable({
         )}
       </TabsContent>
 
-      <TabsContent value="verification" className="space-y-4">
+      <TabsContent value="verification" className="flex flex-col fluid-stack-sm">
         {verificationCount === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
             Brak transakcji wymagających weryfikacji.
@@ -383,7 +383,7 @@ export function AffiliateQueueTable({
         )}
       </TabsContent>
 
-      <TabsContent value="manual" className="space-y-4">
+      <TabsContent value="manual" className="flex flex-col fluid-stack-sm">
         {manualPendingCount === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
             Brak ręcznych przyznań oczekujących na weryfikację.
@@ -488,7 +488,7 @@ function PendingTransactionsTable({
   }, [items, sourceFilter, userConfirmedFilter]);
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col fluid-stack-sm">
       <div className="flex items-center gap-4">
         <Label htmlFor="sourceFilter">Filtr źródła:</Label>
         <Select value={sourceFilter} onValueChange={(value) => setSourceFilter(value as typeof sourceFilter)}>

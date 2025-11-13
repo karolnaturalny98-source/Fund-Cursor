@@ -76,35 +76,35 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border/40 bg-card/72 backdrop-blur-md">
-      <div className="w-full px-2 md:px-4 xl:px-0 py-12">
-        <div className="mx-auto max-w-screen-xl">
+      <div className="w-full px-2 md:px-4 xl:px-0 fluid-section-lg">
+        <div className="mx-auto flex max-w-screen-xl flex-col fluid-stack-xl">
         {/* Górna sekcja - Logo + Newsletter */}
-        <div className="grid gap-8 lg:grid-cols-2 pb-8 border-b border-border/40">
+        <div className="grid fluid-stack-lg lg:grid-cols-2 border-b border-border/40 pb-[clamp(1.5rem,2.2vw,2.5rem)]">
           {/* Logo i opis */}
-          <div className="space-y-4">
+          <div className="flex flex-col fluid-stack-sm">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold text-foreground">
+              <span className="fluid-h2 font-bold text-foreground">
                 Funded<span className="text-primary">Rank</span>
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-md">
+            <p className="fluid-copy text-muted-foreground max-w-md">
               Twój kompas w świecie prop tradingu. Porównuj firmy, zbieraj
               cashback i wymieniaj punkty 1:1 na kolejne konta tradingowe.
             </p>
           </div>
 
           {/* Newsletter */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-sm font-semibold text-foreground">
+          <div className="flex flex-col fluid-stack-sm">
+            <div className="flex flex-col fluid-stack-xs">
+              <h3 className="fluid-copy font-semibold text-foreground">
                 Zapisz się do newslettera
               </h3>
-              <p className="text-xs text-muted-foreground">
+              <p className="fluid-caption text-muted-foreground">
                 Otrzymuj informacje o najlepszych ofertach i promocjach firm
                 prop tradingowych
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="flex gap-2">
+            <form onSubmit={handleSubmit} className="flex fluid-stack-xs">
               <Input
                 type="email"
                 placeholder="twoj@email.com"
@@ -117,7 +117,7 @@ export function SiteFooter() {
                 type="submit"
                 disabled={loading}
                 variant="premium"
-                className="rounded-full px-6"
+                className="fluid-button-sm rounded-full"
               >
                 {loading ? "Zapisuję..." : "Zapisz się"}
               </Button>
@@ -126,16 +126,16 @@ export function SiteFooter() {
         </div>
 
         {/* Środkowa sekcja - Linki w 4 kolumnach */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 py-8">
+        <div className="grid fluid-stack-lg sm:grid-cols-2 lg:grid-cols-4 py-[clamp(1.5rem,2vw,2.5rem)]">
           {/* Nawigacja */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">Nawigacja</h4>
-            <ul className="space-y-2">
+          <div className="flex flex-col fluid-stack-sm">
+            <h4 className="fluid-copy font-semibold text-foreground">Nawigacja</h4>
+            <ul className="flex flex-col fluid-stack-xs">
               {footerNavigationLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="fluid-copy text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -145,14 +145,14 @@ export function SiteFooter() {
           </div>
 
           {/* Prawne */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">Prawne</h4>
-            <ul className="space-y-2">
+          <div className="flex flex-col fluid-stack-sm">
+            <h4 className="fluid-copy font-semibold text-foreground">Prawne</h4>
+            <ul className="flex flex-col fluid-stack-xs">
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="fluid-copy text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -162,18 +162,18 @@ export function SiteFooter() {
           </div>
 
           {/* Kontakt */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">Kontakt</h4>
-            <ul className="space-y-2">
+          <div className="flex flex-col fluid-stack-sm">
+            <h4 className="fluid-copy font-semibold text-foreground">Kontakt</h4>
+            <ul className="flex flex-col fluid-stack-xs">
               {contactLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <link.icon className="h-4 w-4" />
+                    <link.icon className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" />
                     {link.name}
                   </a>
                 </li>
@@ -182,11 +182,11 @@ export function SiteFooter() {
           </div>
 
           {/* Social Media */}
-          <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">
+          <div className="flex flex-col fluid-stack-sm">
+            <h4 className="fluid-copy font-semibold text-foreground">
               Śledź nas
             </h4>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap fluid-stack-xs">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -194,9 +194,9 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-muted/20 backdrop-blur-[36px]! text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:scale-110"
+                  className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] items-center justify-center rounded-full border border-border/60 bg-muted/20 backdrop-blur-[36px]! text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:scale-110"
                 >
-                  <social.icon className="h-4 w-4" />
+                  <social.icon className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" />
                 </a>
               ))}
             </div>
@@ -204,11 +204,21 @@ export function SiteFooter() {
         </div>
 
         {/* Dolna sekcja - Copyright */}
-        <div className="pt-8 border-t border-border/40">
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} FundedRank. Wszelkie prawa
-            zastrzeżone.
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-[clamp(1.25rem,1.8vw,1.75rem)] sm:flex-row sm:gap-6">
+          <p className="text-center fluid-caption text-muted-foreground sm:text-left">
+            © {new Date().getFullYear()} FundedRank. Wszelkie prawa zastrzeżone.
           </p>
+          <div className="flex flex-wrap items-center justify-center fluid-stack-xs text-muted-foreground fluid-caption">
+            {legalLinks.slice(0, 2).map((link) => (
+              <Link
+                key={`footer-bottom-${link.href}`}
+                href={link.href}
+                className="transition-colors hover:text-primary"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
         </div>
       </div>

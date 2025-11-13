@@ -5,6 +5,7 @@ import { DollarSign, Gift, TrendingUp, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
@@ -42,12 +43,16 @@ export function AffiliateBenefits() {
   const visibleStaggerItems = cardsAnim.isVisible ? staggerItems : new Array(benefits.length).fill(false);
 
   return (
-    <section id="affiliate-benefits" className="container space-y-[clamp(1.75rem,2.4vw,2.3rem)] py-[clamp(2.5rem,3.2vw,3rem)]">
+    <Section
+      id="affiliate-benefits"
+      size="lg"
+      className="flex flex-col fluid-stack-xl"
+    >
       <div
         ref={sectionAnim.ref}
         className={`rounded-3xl border border-border/60 bg-card/72 p-[clamp(1.75rem,2.5vw,2.2rem)] shadow-xs backdrop-blur-[36px]! ${sectionAnim.className}`}
       >
-        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] space-y-[clamp(0.75rem,1.1vw,1rem)]">
+        <div className="mb-[clamp(1.25rem,1.8vw,1.6rem)] flex flex-col fluid-stack-sm">
           <p className="font-semibold uppercase tracking-[0.28em] text-primary fluid-eyebrow">
             Korzyści
           </p>
@@ -73,7 +78,7 @@ export function AffiliateBenefits() {
           <Card 
             className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:border-primary/50 hover:shadow-md backdrop-blur-[36px]!"
           >
-            <CardHeader className="space-y-[clamp(0.75rem,1.1vw,1rem)] pb-[clamp(0.75rem,1.1vw,1rem)]">
+            <CardHeader className="flex flex-col fluid-stack-sm pb-[clamp(0.75rem,1.1vw,1rem)]">
               <div className="flex items-start justify-between">
                 <div className="mt-0.5 rounded-lg bg-primary/10 p-[clamp(0.6rem,0.85vw,0.75rem)] text-primary transition-transform group-hover:scale-110 group-hover:bg-primary/20">
                   <PremiumIcon icon={benefit.icon} variant="glow" size="md" hoverGlow />
@@ -94,7 +99,7 @@ export function AffiliateBenefits() {
         ))}
       </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

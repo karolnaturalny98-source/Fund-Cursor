@@ -27,8 +27,8 @@ export function ClickAnalyticsDashboard({
   data,
 }: ClickAnalyticsDashboardProps) {
   return (
-    <section className="space-y-6">
-      <div className="space-y-2">
+    <section className="flex flex-col fluid-stack-md">
+      <div className="flex flex-col fluid-stack-xs">
         <h2 className="text-2xl font-semibold tracking-tight">Analityka kliknięć</h2>
         <p className="text-sm text-muted-foreground">
           Monitoruj łączną liczbę przekierowań „Zakup z kodem” oraz aktywność
@@ -149,3 +149,4 @@ function CompanyTable({ companies }: { companies: CompanyClickSummary[] }) {
     </Card>
   );
 }
+

@@ -24,7 +24,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             />
           </div>
         )}
-        <CardContent className="space-y-[clamp(0.65rem,0.95vw,0.85rem)] p-[clamp(1rem,1.4vw,1.2rem)]">
+        <CardContent className="flex flex-col fluid-stack-sm p-[clamp(1rem,1.4vw,1.2rem)]">
           <div className="flex flex-wrap gap-[clamp(0.35rem,0.5vw,0.45rem)]">
             {post.categories.map((category) => (
               <Badge

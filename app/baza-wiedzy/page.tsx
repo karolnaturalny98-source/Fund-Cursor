@@ -5,6 +5,7 @@ import { BlogCategoriesTabs } from "@/components/blog/blog-categories-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { AuroraWrapper } from "@/components/aurora-wrapper";
+import { Section } from "@/components/layout/section";
 
 // Cache blog index for 5 minutes - content changes infrequently
 export const revalidate = 300;
@@ -33,13 +34,13 @@ export default async function BlogPage() {
           speed={0.5}
         />
       </div>
-      <div className="container relative z-10 space-y-[clamp(2rem,2.8vw,2.6rem)] py-[clamp(2.5rem,3.2vw,3.25rem)]">
+      <Section size="lg" className="relative z-10 flex flex-col fluid-stack-xl">
       {/* Hero Section */}
-      <div className="space-y-[clamp(1rem,1.4vw,1.25rem)]">
+      <div className="flex flex-col fluid-stack-md">
         <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
           Baza wiedzy
         </Badge>
-        <div className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
+        <div className="flex flex-col fluid-stack-xs">
           <h1 className="font-bold tracking-tight text-foreground fluid-h1">
             Baza wiedzy
           </h1>
@@ -61,7 +62,7 @@ export default async function BlogPage() {
 
       {/* Categories Tabs */}
       <BlogCategoriesTabs posts={posts} categories={categories} />
-      </div>
+      </Section>
     </div>
   );
 }

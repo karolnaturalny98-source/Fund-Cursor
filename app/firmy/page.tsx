@@ -7,6 +7,7 @@ import {
 import { parseCompareParam } from "@/lib/compare";
 import type { CompanySortOption, EvaluationModel } from "@/lib/types";
 import { AuroraWrapper } from "@/components/aurora-wrapper";
+import { Section } from "@/components/layout/section";
 
 interface CompaniesPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -71,8 +72,8 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
           speed={0.5}
         />
       </div>
-      <section className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col gap-[clamp(2rem,3vw,2.8rem)] py-[clamp(2.75rem,3.5vw,3.5rem)]">
+      <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
+        <div className="container relative z-10 flex flex-col fluid-stack-xl">
           <CompaniesPageClient
             companies={companies}
             minCashback={minCashback}
@@ -89,7 +90,7 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
             search={search}
           />
         </div>
-      </section>
+      </Section>
     </div>
   );
 }

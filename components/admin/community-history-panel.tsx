@@ -224,7 +224,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col fluid-stack-md">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
           <TabsTrigger
@@ -322,7 +322,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              <div className="p-4 space-y-4">
+              <div className="flex flex-col fluid-stack-sm p-4">
                 <div>
                   <label className="text-sm font-medium">Od</label>
                   <Input
@@ -350,7 +350,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
           </Button>
         </div>
 
-        <TabsContent value="all" className="space-y-4">
+        <TabsContent value="all" className="flex flex-col fluid-stack-sm">
           {/* Combined view - show summary counts */}
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs p-4">
@@ -368,7 +368,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
           </div>
         </TabsContent>
 
-        <TabsContent value="influencers" className="space-y-4">
+        <TabsContent value="influencers" className="flex flex-col fluid-stack-sm">
           {loading && influencers.length === 0 ? (
             <div className="flex justify-center p-8">
               <Loader2 className="h-6 w-6 animate-spin" />
@@ -415,7 +415,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
           )}
         </TabsContent>
 
-        <TabsContent value="reviews" className="space-y-4">
+        <TabsContent value="reviews" className="flex flex-col fluid-stack-sm">
           {loading && reviews.length === 0 ? (
             <div className="flex justify-center p-8">
               <Loader2 className="h-6 w-6 animate-spin" />
@@ -462,7 +462,7 @@ export function CommunityHistoryPanel({ companies }: CommunityHistoryPanelProps)
           )}
         </TabsContent>
 
-        <TabsContent value="data-issues" className="space-y-4">
+        <TabsContent value="data-issues" className="flex flex-col fluid-stack-sm">
           {loading && dataIssues.length === 0 ? (
             <div className="flex justify-center p-8">
               <Loader2 className="h-6 w-6 animate-spin" />
