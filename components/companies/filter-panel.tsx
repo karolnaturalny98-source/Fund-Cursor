@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useTransition } from "react";
+import { useCallback, useMemo, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -94,15 +94,19 @@ export function CompaniesFilterPanel({
     return count;
   }, [selectedModels, minCashback, minProfitSplit, selectedCountries, selectedAccountTypes]);
 
-  const updateSearchParams = (mutate: (params: URLSearchParams) => void) => {
-    const params = new URLSearchParams(searchParams);
-    mutate(params);
+  // Memoize updateSearchParams to prevent unnecessary re-renders
+  const updateSearchParams = useCallback(
+    (mutate: (params: URLSearchParams) => void) => {
+      const params = new URLSearchParams(searchParams);
+      mutate(params);
 
-    startTransition(() => {
-      const query = params.toString();
-      router.replace(`${pathname}${query ? `?${query}` : ""}`);
-    });
-  };
+      startTransition(() => {
+        const query = params.toString();
+        router.replace(`${pathname}${query ? `?${query}` : ""}`);
+      });
+    },
+    [searchParams, pathname, router, startTransition],
+  );
 
   const toggleModel = (model: EvaluationModel) => {
     updateSearchParams((params) => {

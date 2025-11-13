@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { ArrowUpDown, Filter, RefreshCcw, Search } from "lucide-react";
 
@@ -70,24 +70,40 @@ export function ReviewsRankingPage({ initialData }: ReviewsRankingPageProps) {
     );
   }, [filters]);
 
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const prevSearchDraftRef = useRef<string>(searchDraft);
+
   useEffect(() => {
     setSearchDraft(DEFAULT_FILTERS.search);
   }, []);
 
+  // Optimized debounce: only update filters when searchDraft changes, not when filters.search changes
   useEffect(() => {
-    if (searchDraft === filters.search) {
+    // Skip if searchDraft hasn't actually changed
+    if (searchDraft === prevSearchDraftRef.current) {
       return;
     }
+    prevSearchDraftRef.current = searchDraft;
 
-    const timeout = window.setTimeout(() => {
+    // Clear existing timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // Set new timeout
+    searchTimeoutRef.current = setTimeout(() => {
       setFilters((prev) => ({
         ...prev,
         search: searchDraft.trim(),
       }));
     }, 250);
 
-    return () => window.clearTimeout(timeout);
-  }, [searchDraft, filters.search]);
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, [searchDraft]);
 
   useEffect(() => {
     if (isFirstFetch.current) {

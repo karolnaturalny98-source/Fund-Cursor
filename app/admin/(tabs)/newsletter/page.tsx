@@ -93,7 +93,7 @@ export default function NewsletterAdminPage() {
       setSubscribers(data.subscribers);
       setStats(data.stats);
       setTotalPages(data.pagination.totalPages);
-    } catch (error) {
+    } catch {
       toast({
         title: "Błąd",
         description: "Nie udało się pobrać subskrybentów",
@@ -136,7 +136,7 @@ export default function NewsletterAdminPage() {
       });
 
       fetchSubscribers();
-    } catch (error) {
+    } catch {
       toast({
         title: "Błąd",
         description: "Nie udało się usunąć subskrybenta",
@@ -165,7 +165,7 @@ export default function NewsletterAdminPage() {
       });
 
       fetchSubscribers();
-    } catch (error) {
+    } catch {
       toast({
         title: "Błąd",
         description: "Nie udało się zaktualizować statusu",

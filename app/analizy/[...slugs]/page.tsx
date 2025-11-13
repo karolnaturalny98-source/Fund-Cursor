@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 import {
@@ -10,7 +9,6 @@ import {
   getCompaniesComparisonMetrics,
 } from "@/lib/queries/analysis";
 import { AnalysisLayout } from "@/components/analysis/analysis-layout";
-import { AnalysisLayoutSkeleton } from "@/components/analysis/loading-skeleton";
 
 interface AnalysisPageProps {
   params: Promise<{

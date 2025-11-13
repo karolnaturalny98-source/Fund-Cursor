@@ -8,7 +8,7 @@ globs:
 alwaysApply: false
 ---
 
-# Frontend Rules (Next 15 + React 19 + Tailwind 4)
+# Frontend Rules (Next 16 + React 19 + Tailwind 4)
 
 ## Components & Client/Server
 - Preferuj **Server Components**; `use client` tylko dla interakcji (state/effects, event handlers).

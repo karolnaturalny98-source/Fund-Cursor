@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getBlogPostBySlug, getRelatedPosts } from "@/lib/queries/blog";
-import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
