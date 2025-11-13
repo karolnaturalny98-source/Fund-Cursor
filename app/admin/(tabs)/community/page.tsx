@@ -11,27 +11,23 @@ import {
 } from "@/lib/queries/community-stats";
 
 export default async function AdminCommunityPage() {
-  const [
-    influencerProfiles,
-    approvedInfluencerProfiles,
-    pendingReviews,
-    pendingIssues,
-    companies,
-    stats,
-    timeSeries,
-    statusDistribution,
-    topInfluencers,
-  ] = await Promise.all([
-    getInfluencerProfiles(50),
-    getApprovedInfluencerProfiles(50),
-    getPendingReviews(20),
-    getPendingDataIssues(25),
-    getCompanies(),
-    getCommunityStats(),
-    getCommunityTimeSeries(30),
-    getCommunityStatusDistribution(),
-    getTopInfluencers(5),
-  ]);
+  // Podziel na mniejsze grupy równoległych zapytań
+  const [influencerProfiles, approvedInfluencerProfiles, pendingReviews, pendingIssues, companies] = 
+    await Promise.all([
+      getInfluencerProfiles(50),
+      getApprovedInfluencerProfiles(50),
+      getPendingReviews(20),
+      getPendingDataIssues(25),
+      getCompanies(),
+    ]);
+
+  const [stats, timeSeries, statusDistribution, topInfluencers] = 
+    await Promise.all([
+      getCommunityStats(),
+      getCommunityTimeSeries(30),
+      getCommunityStatusDistribution(),
+      getTopInfluencers(5),
+    ]);
 
   const companyOptions = companies.map((company) => ({
     id: company.id,

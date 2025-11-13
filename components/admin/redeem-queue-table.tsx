@@ -389,7 +389,7 @@ function TransactionsTable({
                       disabled={isPending || currentActionId === transaction.id}
                       size="sm"
                       variant="destructive"
-                      onClick={() => setDeleteDialog(transaction.id)}
+                      onClick={() => _setDeleteDialog(transaction.id)}
                       className="text-xs sm:text-sm"
                     >
                       <Trash2 className="h-4 w-4" />

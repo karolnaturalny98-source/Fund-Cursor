@@ -209,55 +209,51 @@ export async function getCommunityTimeSeries(
   const startDate = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
   startDate.setHours(0, 0, 0, 0);
 
+  // Użyj agregacji SQL zamiast pobierania wszystkich rekordów
   const [influencers, reviews, issues] = await Promise.all([
-    prisma.influencerProfile.findMany({
-      where: { createdAt: { gte: startDate } },
-      select: { createdAt: true },
-      orderBy: { createdAt: "asc" },
-    }),
-    prisma.review.findMany({
-      where: { createdAt: { gte: startDate } },
-      select: { createdAt: true },
-      orderBy: { createdAt: "asc" },
-    }),
-    prisma.dataIssueReport.findMany({
-      where: { createdAt: { gte: startDate } },
-      select: { createdAt: true },
-      orderBy: { createdAt: "asc" },
-    }),
+    prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
+      SELECT 
+        DATE("createdAt") as date,
+        COUNT(*)::int as count
+      FROM "InfluencerProfile"
+      WHERE "createdAt" >= ${startDate}
+      GROUP BY DATE("createdAt")
+      ORDER BY date ASC
+    `,
+    prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
+      SELECT 
+        DATE("createdAt") as date,
+        COUNT(*)::int as count
+      FROM "Review"
+      WHERE "createdAt" >= ${startDate}
+      GROUP BY DATE("createdAt")
+      ORDER BY date ASC
+    `,
+    prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
+      SELECT 
+        DATE("createdAt") as date,
+        COUNT(*)::int as count
+      FROM "DataIssueReport"
+      WHERE "createdAt" >= ${startDate}
+      GROUP BY DATE("createdAt")
+      ORDER BY date ASC
+    `,
   ]);
 
-  // Grupuj po dniach
-  const dailyMap = new Map<
-    string,
-    { influencers: number; reviews: number; issues: number }
-  >();
-
+  // Konwertuj wyniki na mapy
+  const influencersMap = new Map<string, number>();
   influencers.forEach((item) => {
-    const date = new Date(item.createdAt).toISOString().split("T")[0];
-    const existing = dailyMap.get(date) || { influencers: 0, reviews: 0, issues: 0 };
-    dailyMap.set(date, {
-      ...existing,
-      influencers: existing.influencers + 1,
-    });
+    influencersMap.set(item.date, Number(item.count));
   });
 
+  const reviewsMap = new Map<string, number>();
   reviews.forEach((item) => {
-    const date = new Date(item.createdAt).toISOString().split("T")[0];
-    const existing = dailyMap.get(date) || { influencers: 0, reviews: 0, issues: 0 };
-    dailyMap.set(date, {
-      ...existing,
-      reviews: existing.reviews + 1,
-    });
+    reviewsMap.set(item.date, Number(item.count));
   });
 
+  const issuesMap = new Map<string, number>();
   issues.forEach((item) => {
-    const date = new Date(item.createdAt).toISOString().split("T")[0];
-    const existing = dailyMap.get(date) || { influencers: 0, reviews: 0, issues: 0 };
-    dailyMap.set(date, {
-      ...existing,
-      issues: existing.issues + 1,
-    });
+    issuesMap.set(item.date, Number(item.count));
   });
 
   // Wypełnij wszystkie dni w zakresie
@@ -266,12 +262,11 @@ export async function getCommunityTimeSeries(
     const date = new Date(startDate);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().split("T")[0];
-    const data = dailyMap.get(dateStr) || { influencers: 0, reviews: 0, issues: 0 };
     result.push({
       date: dateStr,
-      influencers: data.influencers,
-      reviews: data.reviews,
-      issues: data.issues,
+      influencers: influencersMap.get(dateStr) ?? 0,
+      reviews: reviewsMap.get(dateStr) ?? 0,
+      issues: issuesMap.get(dateStr) ?? 0,
     });
   }
 

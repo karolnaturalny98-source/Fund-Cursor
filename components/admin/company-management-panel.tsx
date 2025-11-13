@@ -254,7 +254,11 @@ export function CompanyManagementPanel({ companies }: CompanyManagementPanelProp
                             verificationStatus: company.verificationStatus,
                             licenses: company.licenses,
                             registryLinks: company.registryLinks,
-                            registryData: company.registryData,
+                            registryData: company.registryData
+                              ? typeof company.registryData === "string"
+                                ? company.registryData
+                                : JSON.stringify(company.registryData)
+                              : null,
                           }}
                           onSuccess={async () => {
                             // Close form first

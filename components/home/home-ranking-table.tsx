@@ -95,19 +95,20 @@ function CompanyRow({
 
   const hasCashback =
     typeof company.cashbackRate === "number" && company.cashbackRate > 0;
+  const cashbackRate = company.cashbackRate ?? 0;
   const cashbackAmount =
     hasCashback &&
     typeof company.maxPlanPriceUsd === "number" &&
     company.maxPlanPriceUsd > 0
-      ? (company.maxPlanPriceUsd * company.cashbackRate) / 100
+      ? (company.maxPlanPriceUsd * cashbackRate) / 100
       : null;
 
   const cashbackDisplay = hasCashback
     ? cashbackAmount !== null
-      ? `Cashback ${Math.round(company.cashbackRate)}% | $${cashbackAmount.toFixed(
+      ? `Cashback ${Math.round(cashbackRate)}% | $${cashbackAmount.toFixed(
           2,
         )}`
-      : `Cashback ${Math.round(company.cashbackRate)}%`
+      : `Cashback ${Math.round(cashbackRate)}%`
     : null;
 
   const isTop3 = index < 3;
@@ -162,7 +163,7 @@ function CompanyRow({
       <TableCell className="px-6 py-5 align-top text-sm">
         {hasCashback ? (
           <PremiumBadge variant="glow" className="w-fit text-xs font-semibold">
-            {Math.round(company.cashbackRate)}%
+            {Math.round(cashbackRate)}%
           </PremiumBadge>
         ) : (
           <span className="text-xs text-muted-foreground">-</span>

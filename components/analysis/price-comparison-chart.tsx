@@ -69,7 +69,7 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
   // Build chart config for ChartContainer
   const chartConfig = useMemo(() => {
     const config: Record<string, { label: string; color: string }> = {};
-    companies.forEach((company, _idx) => {
+    companies.forEach((company, idx) => {
       config[company.name] = {
         label: company.name,
         color: getCompareColor(idx),

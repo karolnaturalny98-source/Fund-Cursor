@@ -647,7 +647,7 @@ function PendingTransactionsTable({
                             size="sm"
                             variant="destructive"
                             disabled={isPending && currentActionId === item.id}
-                            onClick={() => setDeleteDialog(item.id)}
+                            onClick={() => _setDeleteDialog(item.id)}
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -908,7 +908,7 @@ function ManualCashbackTable({
                     size="sm"
                     variant="destructive"
                     disabled={isPending && currentActionId === item.id}
-                    onClick={() => setDeleteDialog(item.id)}
+                    onClick={() => _setDeleteDialog(item.id)}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
