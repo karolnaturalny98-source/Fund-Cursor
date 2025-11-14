@@ -110,9 +110,9 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
   return (
     <Card
       className={cn(
-        "group relative mx-auto flex h-full w-full max-w-[clamp(12rem,24vw,15rem)] flex-col",
-        "aspect-3/4 overflow-hidden",
-        "border-gradient-premium glass-card transition-all duration-500",
+        "group relative z-10 mx-auto flex h-full w-full max-w-[clamp(12rem,24vw,15rem)] flex-col",
+        "min-h-[clamp(20rem,30vw,24rem)]",
+        "border-gradient-premium glass-card overflow-visible transition-all duration-500",
         "hover:scale-105 hover:shadow-premium-lg hover:border-gradient-premium",
       )}
     >
@@ -120,7 +120,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       {hasDiscount && (
         <CardHeader className="p-[clamp(0.9rem,1.5vw,1.15rem)] pb-0">
           <div className="relative flex h-[clamp(4rem,5vw+3rem,5.5rem)] flex-col items-center justify-center overflow-hidden rounded-lg border border-primary/30 bg-linear-to-br from-primary/20 via-primary/10 to-transparent shadow-lg">
-            <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-50" />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-50" />
             <div className="relative z-10 text-center">
               <div className="text-[clamp(2.5rem,4vw+1.75rem,3.25rem)] font-black leading-none text-primary text-shadow-glow">
                 {spotlight.discountValue}%
@@ -136,7 +136,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       {/* Content */}
       <CardContent
         className={cn(
-          "flex flex-1 flex-col justify-between gap-[clamp(0.6rem,1.2vw,0.85rem)]",
+          "flex flex-1 flex-col fluid-stack-sm",
           hasDiscount ? "px-[clamp(0.85rem,1.5vw,1.15rem)] pb-[clamp(0.75rem,1.3vw,1rem)] pt-[clamp(0.5rem,1vw,0.75rem)]" : "p-[clamp(0.85rem,1.5vw,1.15rem)]",
         )}
       >
@@ -160,9 +160,9 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
         </div>
 
         {/* Text Section */}
-        <div className="flex flex-col items-center gap-1 text-center">
+        <div className="flex flex-col items-center fluid-stack-2xs text-center">
           {/* Company name + Badge */}
-          <div className="flex flex-wrap items-center justify-center gap-1">
+          <div className="flex flex-wrap items-center justify-center fluid-stack-2xs">
             <span className="text-[clamp(0.65rem,0.3vw+0.55rem,0.78rem)] font-medium uppercase tracking-[0.24em] text-muted-foreground">
               {spotlight.company?.name ?? "Specjalna oferta"}
             </span>
@@ -195,7 +195,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
         {/* Rating Badge */}
         {spotlight.rating !== null && spotlight.rating !== undefined && (
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/5 px-[clamp(0.55rem,1vw,0.75rem)] py-[clamp(0.25rem,0.6vw,0.4rem)] text-[clamp(0.62rem,0.3vw+0.52rem,0.75rem)]">
+            <div className="inline-flex items-center fluid-stack-2xs rounded-full border border-primary/20 bg-primary/5 px-[clamp(0.55rem,1vw,0.75rem)] py-[clamp(0.25rem,0.6vw,0.4rem)] text-[clamp(0.62rem,0.3vw+0.52rem,0.75rem)]">
               <Star className="shrink-0" style={{ height: "clamp(0.65rem,0.4vw+0.55rem,0.85rem)", width: "clamp(0.65rem,0.4vw+0.55rem,0.85rem)" }} />
               <span className="font-semibold text-foreground">
                 {spotlight.rating.toFixed(1)}
@@ -211,12 +211,12 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       </CardContent>
 
       {/* CTA Button */}
-      <CardFooter className="p-3 pt-0">
+      <CardFooter className="relative z-20 mt-auto p-[clamp(0.75rem,1.2vw,1rem)] pt-0">
         {spotlight.ctaUrl ? (
           <Button
             asChild
             variant="premium"
-            className="fluid-button-sm w-full rounded-full"
+            className="relative z-20 fluid-button-sm w-full rounded-full"
           >
             <Link href={spotlight.ctaUrl} target="_blank" rel="noreferrer">
               {spotlight.ctaLabel ?? "Sprawdź ofertę"}
@@ -225,7 +225,7 @@ function MarketingCard({ spotlight }: { spotlight: MarketingSpotlight }) {
         ) : (
           <Badge
             variant="outline"
-            className="fluid-button-sm inline-flex w-full justify-center rounded-full border-primary/20"
+            className="relative z-20 fluid-button-sm inline-flex w-full justify-center rounded-full border-primary/20"
           >
             {spotlight.ctaLabel ?? "Oferta limitowana"}
           </Badge>
@@ -247,7 +247,7 @@ export function MarketingCarousel({ section }: MarketingCarouselProps) {
 
   return (
     <Section bleed size="lg" className="relative overflow-hidden border-y border-border/40">
-      <div className="absolute inset-0 bg-linear-to-b from-secondary/10 via-secondary/5 to-transparent backdrop-blur-[36px]!" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/10 via-secondary/5 to-transparent backdrop-blur-[36px]!" />
       <div className="container relative z-10 flex flex-col fluid-stack-lg">
         {/* Section Header */}
         <div className="flex justify-center">

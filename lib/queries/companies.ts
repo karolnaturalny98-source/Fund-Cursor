@@ -2070,7 +2070,8 @@ export const getTopCashbackCompanies = unstable_cache(
     // Calculate cashback ranges and sort
     const companiesWithCashback = companies
       .map((company) => {
-        if (!company.plans.length || !company.cashbackRate) {
+        // More explicit check for cashbackRate
+        if (!company.plans.length || company.cashbackRate === null || company.cashbackRate === undefined || company.cashbackRate <= 0) {
           return null;
         }
 

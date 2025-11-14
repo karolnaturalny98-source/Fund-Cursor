@@ -729,9 +729,9 @@ const blogCategoriesData = [
 // Marketing spotlight sections
 const marketingSectionsData = [
   {
-    slug: "homepage-promocje",
-    title: "Promocje Specjalne",
-    subtitle: "Najlepsze oferty prop firm",
+    slug: "homepage-forex-offers", // Musi być zgodny z DEFAULT_SECTION_SLUG w lib/queries/marketing.ts
+    title: "Oferty marketingowe",
+    subtitle: "Zarządzaj promowanymi kampaniami na stronie głównej",
     emoji: "🔥",
     isActive: true,
   },
