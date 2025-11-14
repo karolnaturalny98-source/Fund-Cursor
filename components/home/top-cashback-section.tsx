@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Section } from "@/components/layout/section";
 import type { TopCashbackCompany } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface TopCashbackSectionProps {
   companies: TopCashbackCompany[];
@@ -57,41 +57,32 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
 
 function CompanyCard({ company }: { company: TopCashbackCompany }) {
   return (
-    <Card className="snap-center shrink-0 w-[clamp(8.5rem,24vw,10.5rem)] border-border/60 bg-card/72 backdrop-blur-[36px]! transition-transform duration-300 hover:scale-105">
-      <CardContent className="p-[clamp(1rem,2vw,1.35rem)]">
-        <Link
-          href={`/firmy/${company.slug}`}
-          className={cn(
-            "group flex flex-col items-center gap-[clamp(0.5rem,1.5vw,0.75rem)]",
-            "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    <Card className="snap-center shrink-0 w-[clamp(10rem,24vw,12rem)] border-border/60 bg-card/80 backdrop-blur">
+      <CardContent className="flex flex-col items-center gap-3 p-4 text-center">
+        <div className="relative flex h-[clamp(3.5rem,4vw+2.5rem,5.25rem)] w-[clamp(3.5rem,4vw+2.5rem,5.25rem)] items-center justify-center rounded-xl border border-border/30 bg-background">
+          {company.logoUrl ? (
+            <Image
+              src={company.logoUrl}
+              alt={`${company.name} logo`}
+              width={96}
+              height={96}
+              className="h-full w-full rounded-xl object-contain"
+            />
+          ) : (
+            <span className="text-base font-semibold text-primary">{getInitials(company.name)}</span>
           )}
-        >
-          <div className="relative flex h-[clamp(3.5rem,4vw+2.5rem,5.25rem)] w-[clamp(3.5rem,4vw+2.5rem,5.25rem)] items-center justify-center rounded-xl">
-            {company.logoUrl ? (
-              <Image
-                src={company.logoUrl}
-                alt={`${company.name} logo`}
-                width={96}
-                height={96}
-                className="h-full w-full rounded-xl object-contain"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-primary/10">
-                <span className="text-[clamp(0.75rem,0.5vw+0.65rem,0.95rem)] font-semibold text-primary">
-                  {getInitials(company.name)}
-                </span>
-              </div>
-            )}
-          </div>
-
-          <div className="text-center">
-            <p className="text-[clamp(0.65rem,0.3vw+0.55rem,0.78rem)] font-semibold leading-tight text-primary">
-              ${company.minCashback} - ${company.maxCashback}
-            </p>
-          </div>
-        </Link>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm font-semibold text-foreground">{company.name}</p>
+          <p className="text-xs text-muted-foreground">${company.minCashback} - ${company.maxCashback} cashback</p>
+        </div>
+        <Button asChild size="sm" className="w-full rounded-full">
+          <Link href={`/firmy/${company.slug}`} prefetch={false}>
+            Odbierz cashback
+          </Link>
+        </Button>
+        <p className="text-[11px] text-muted-foreground">Przejdź z kodem, a część naszej prowizji wróci do Ciebie.</p>
       </CardContent>
     </Card>
   );
 }
-

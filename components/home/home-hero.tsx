@@ -58,6 +58,11 @@ export function HomeHero({ metrics }: HomeHeroProps) {
                 Kup konto z cashbackiem
               </Link>
             </Button>
+            <Button asChild variant="outline" size="lg" className="rounded-full">
+              <Link href="/analizy" prefetch={false}>
+                Porównaj firmy
+              </Link>
+            </Button>
           </div>
         </div>
 

@@ -16,8 +16,8 @@ const POINTS = [
   },
   {
     icon: Coins,
-    title: "Cashback z naszej prowizji",
-    description: "Dzielenie się prowizją 1:1 – więcej środków na kolejne wyzwania.",
+    title: "Jak działa cashback?",
+    description: "Kupujesz konto z naszego linka, my dostajemy prowizję, a część oddajemy Ci jako cashback.",
   },
   {
     icon: BarChart3,

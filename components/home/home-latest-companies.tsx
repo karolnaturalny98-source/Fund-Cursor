@@ -3,6 +3,7 @@ import { Sparkles, Star, ArrowRight } from "lucide-react";
 
 import { Section } from "@/components/layout/section";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import type { RecentCompanySummary } from "@/lib/types";
 
 interface HomeLatestCompaniesProps {
@@ -48,14 +49,17 @@ export function HomeLatestCompanies({ companies }: HomeLatestCompaniesProps) {
               </div>
             </CardContent>
             <CardFooter className="border-t border-border/30 p-4">
-              <Link
-                href={`/firmy/${company.slug}`}
-                prefetch={false}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-              >
-                Przejdź do firmy
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="flex w-full flex-col gap-1">
+                <Button asChild size="sm" className="w-full rounded-full">
+                  <Link href={`/firmy/${company.slug}`} prefetch={false} className="inline-flex items-center gap-2">
+                    Przejdź z kodem
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <p className="text-[11px] text-muted-foreground">
+                  Cashback dostępny po przejściu z naszego linka.
+                </p>
+              </div>
             </CardFooter>
           </Card>
         ))}

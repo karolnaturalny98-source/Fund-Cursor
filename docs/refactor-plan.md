@@ -125,6 +125,7 @@ nie przenosimy jej na stronę główną.
 - Strona główna została przebudowana zgodnie z one-page core: nowy `HomeHero` z wyszukiwarką i CTA, sekcja multi-rankingów (`HomeRankingSection`) oparta o wspólny komponent tabów, sekcja Top Cashback, teaser porównywarki oraz mini-edukacja i lista niedawno dodanych firm/opinii.
 - Wyodrębniono komponent `RankingTabsSection` oraz helpery `buildRankingTabs` / `getHomeRankingTabs`, które są wykorzystywane zarówno na `/` (limit 10), jak i na `/rankingi` (wersja „full”).
 - Dodano komponenty `HomeCompareTeaser`, `HomeEducationGrid` i `HomeRecentSection`, które korzystają z istniejących danych (`getHomeRanking`, `getRecentPublicReviews`, `getRecentCompanies`).
+- Etap 3.2 dołożył silniejsze CTA afiliacyjne (multi-ranking, Top Cashback, niedawno dodane firmy), trzeci przycisk hero (do `/analizy`), microcopy o cashbacku oraz sekcję `HomeMarketingSpotlights` bazującą na panelu admina.
 
 ---
 

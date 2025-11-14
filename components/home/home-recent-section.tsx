@@ -50,6 +50,12 @@ export function HomeRecentSection({ reviews }: HomeRecentSectionProps) {
           </Card>
         ))}
       </div>
+      <div className="flex justify-center">
+        <Link href="/opinie" prefetch={false} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+          Zobacz wszystkie opinie
+          <MessageSquare className="h-4 w-4" />
+        </Link>
+      </div>
     </Section>
   );
 }

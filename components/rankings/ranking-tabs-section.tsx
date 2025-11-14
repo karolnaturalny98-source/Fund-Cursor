@@ -96,6 +96,21 @@ export function RankingTabsSection({ tabs, variant = "home" }: RankingTabsSectio
                       {company.trendRatio.toFixed(1)}%
                     </div>
                   </div>
+
+                  <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:w-40">
+                    <Button
+                      asChild
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      <Link href={`/firmy/${company.slug}`} prefetch={false}>
+                        Przejdź z kodem
+                      </Link>
+                    </Button>
+                    <p className="text-[11px] leading-tight">
+                      Zgarnij cashback z naszego linka
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

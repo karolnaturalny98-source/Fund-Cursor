@@ -11,6 +11,8 @@ import { parseCompareParam } from "@/lib/compare";
 import { getHomeRanking, getHomepageMetrics, getRecentCompanies, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
 import { getHomeRankingTabs } from "@/lib/queries/rankings";
+import { getHomepageMarketingSection } from "@/lib/queries/marketing";
+import { HomeMarketingSpotlights } from "@/components/home/home-marketing-spotlights";
 
 interface HomeProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -26,6 +28,7 @@ export default async function Home({ searchParams }: HomeProps) {
     topCashbackCompanies,
     recentReviews,
     homeRanking,
+    marketingSection,
     recentCompanies,
   ] = await Promise.all([
     getHomepageMetrics(),
@@ -33,6 +36,7 @@ export default async function Home({ searchParams }: HomeProps) {
     getTopCashbackCompanies(6),
     getRecentPublicReviews(4),
     getHomeRanking(4),
+    getHomepageMarketingSection(6),
     getRecentCompanies(6),
   ]);
 
@@ -45,6 +49,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <HomeHero metrics={metrics} />
           <HomeRankingSection tabs={rankingTabs} />
           <TopCashbackSection companies={topCashbackCompanies} />
+          <HomeMarketingSpotlights section={marketingSection} />
           <HomeLatestCompanies companies={recentCompanies} />
           <HomeCompareTeaser companies={compareCompanies} />
           <HomeEducationGrid />

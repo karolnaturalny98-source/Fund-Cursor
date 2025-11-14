@@ -18,5 +18,10 @@
 - Stworzono nowy `HomeHero` z wyszukiwarką, CTA i kartami metryk oraz przeniesiono sekcję multi-rankingów do `HomeRankingSection`.
 - Dodano komponent `RankingTabsSection` i helpery `buildRankingTabs`/`getHomeRankingTabs`, wykorzystywane jednocześnie przez `/` i `/rankingi`.
 - Rozbudowano stronę o teaser porównywarki (`HomeCompareTeaser`), mini-edukację (`HomeEducationGrid`) oraz sekcję „Niedawno dodane” łączącą nowe firmy i opinie.
-- Zachowano sekcję Top Cashback, Community Highlights i Influencer Spotlight, ale osadzono je w nowym układzie one-page.
+- Zachowano sekcję Top Cashback oraz dodano `HomeMarketingSpotlights` i `HomeLatestCompanies`, a blok opinii pokazuje tylko 3 najnowsze recenzje.
 - Usunięto stare komponenty landingowe (`HeroSection`, `RankingTabs`, `MarketingCarousel`, `HowItWorksSection`, `WalletCtaBanner`), aby z repozytorium zniknęły nieużywane sekcje.
+
+## 2025-11-14 – Etap 3.2: UX/CRO pod afiliację
+- W sekcjach multi-rankingu i Top Cashback dodano wyraźne CTA „Przejdź z kodem”/„Odbierz cashback” oraz microcopy tłumaczące mechanizm cashbacku.
+- „Niedawno dodane firmy” i hero zawierają dodatkowe przyciski (w tym link do `/analizy`), a „Ostatnie opinie” zyskały odnośnik do `/opinie`.
+- Mini-edukacja ma kafelek „Jak działa cashback?”, a nowa karuzela `HomeMarketingSpotlights` pokazuje badge, zniżki, oceny i CTA spójne z panelem admina.
