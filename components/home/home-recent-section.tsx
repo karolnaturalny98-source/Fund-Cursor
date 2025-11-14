@@ -20,38 +20,38 @@ export function HomeRecentSection({ reviews }: HomeRecentSectionProps) {
     .slice(0, 3);
 
   return (
-    <Section size="lg" className="space-y-6">
-      <div className="flex flex-col gap-2 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+    <Section size="lg" className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col text-center fluid-stack-xs">
+        <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">
           Ostatnie opinie
         </p>
         <h2 className="fluid-h2 font-semibold text-foreground">Świeże doświadczenia traderów</h2>
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid fluid-stack-md md:grid-cols-3">
         {items.map((item) => (
           <Card key={item.id} className="border border-border/40 bg-background/60">
-            <CardContent className="space-y-3 p-5">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            <CardContent className="flex flex-col fluid-stack-sm p-5">
+              <div className="flex items-center font-semibold uppercase tracking-wide text-muted-foreground fluid-stack-xs fluid-caption">
                 <MessageSquare className="h-4 w-4 text-primary" />
                 Nowa opinia
               </div>
-              <div className="space-y-1">
+              <div className="flex flex-col fluid-stack-2xs">
                 <Link
                   href={item.href}
                   prefetch={false}
-                  className="text-sm font-semibold text-foreground transition hover:text-primary"
+                  className="font-semibold text-foreground transition hover:text-primary fluid-copy"
                 >
                   {item.title}
                 </Link>
-                <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
+                <p className="text-muted-foreground fluid-caption line-clamp-2">{item.description}</p>
               </div>
-              <p className="text-xs text-muted-foreground">{item.meta}</p>
+              <p className="text-muted-foreground fluid-caption">{item.meta}</p>
             </CardContent>
           </Card>
         ))}
       </div>
       <div className="flex justify-center">
-        <Link href="/opinie" prefetch={false} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+        <Link href="/opinie" prefetch={false} className="inline-flex items-center fluid-stack-2xs font-semibold text-primary fluid-copy">
           Zobacz wszystkie opinie
           <MessageSquare className="h-4 w-4" />
         </Link>

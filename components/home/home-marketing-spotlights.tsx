@@ -18,17 +18,17 @@ export function HomeMarketingSpotlights({ section }: HomeMarketingSpotlightsProp
   }
 
   return (
-    <Section size="lg" className="space-y-6">
-      <div className="flex flex-col gap-2 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+    <Section size="lg" className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col text-center fluid-stack-xs">
+        <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">
           {section.emoji ?? "🔥"} {section.title}
         </p>
         {section.subtitle ? (
-          <p className="text-sm text-muted-foreground">{section.subtitle}</p>
+          <p className="text-muted-foreground fluid-copy">{section.subtitle}</p>
         ) : null}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid fluid-stack-md md:grid-cols-3">
         {section.spotlights.slice(0, 6).map((spotlight) => (
           <SpotlightCard key={spotlight.id} spotlight={spotlight} />
         ))}
@@ -47,33 +47,33 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
 
   return (
     <Card className="flex h-full flex-col border border-border/40 bg-background/80 shadow-sm transition hover:border-primary/40">
-      <CardContent className="flex flex-1 flex-col gap-3 p-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className={`rounded-full text-xs font-semibold ${badgeTone}`}>
+      <CardContent className="flex flex-1 flex-col fluid-stack-sm p-5">
+        <div className="flex flex-wrap items-center fluid-stack-2xs">
+          <Badge variant="outline" className={`rounded-full font-semibold fluid-caption ${badgeTone}`}>
             {spotlight.badgeLabel ?? "Specjalna oferta"}
           </Badge>
           {discountLabel ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+            <span className="inline-flex items-center fluid-stack-2xs rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary fluid-caption">
               <Percent className="h-3 w-3" />
               {discountLabel}
             </span>
           ) : null}
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center fluid-stack-sm">
           {spotlight.company?.logoUrl ? (
             <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-border/30 bg-card">
               <Image src={spotlight.company.logoUrl} alt={spotlight.company.name} fill sizes="40px" className="object-contain" />
             </div>
           ) : null}
-          <div className="space-y-1">
-            <p className="text-sm font-semibold text-foreground">{spotlight.title}</p>
-            <p className="text-xs text-muted-foreground line-clamp-2">
+          <div className="flex flex-col fluid-stack-2xs">
+            <p className="font-semibold text-foreground fluid-copy">{spotlight.title}</p>
+            <p className="text-muted-foreground fluid-caption line-clamp-2">
               {spotlight.headline ?? spotlight.company?.name ?? "Sprawdź szczegóły"}
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
+        <div className="flex flex-wrap items-center text-muted-foreground fluid-stack-xs fluid-caption">
+          <span className="inline-flex items-center fluid-stack-2xs">
             <Star className="h-3 w-3 text-amber-500" />
             {ratingLabel}
           </span>
@@ -81,7 +81,7 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between border-t border-border/30 p-4">
-        <div className="text-sm font-semibold text-foreground">{spotlight.company?.name ?? "Oferta"}</div>
+        <div className="font-semibold text-foreground fluid-copy">{spotlight.company?.name ?? "Oferta"}</div>
         {spotlight.ctaUrl ? (
           <Button asChild variant="ghost" size="sm" className="gap-1">
             <Link href={spotlight.ctaUrl} target="_blank" rel="noopener noreferrer">

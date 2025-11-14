@@ -28,21 +28,21 @@ const POINTS = [
 
 export function HomeEducationGrid() {
   return (
-    <Section size="lg" className="space-y-6">
-      <div className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">Dlaczego FundedRank?</p>
+    <Section size="lg" className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col text-center fluid-stack-xs">
+        <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">Dlaczego FundedRank?</p>
         <h2 className="fluid-h2 font-semibold text-foreground">Zaufany partner w wyborze prop firmy</h2>
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid fluid-stack-md md:grid-cols-2">
         {POINTS.map((point) => (
           <Card key={point.title} className="border border-border/40 bg-background/60">
-            <CardContent className="flex items-start gap-4 p-5">
+            <CardContent className="flex items-start fluid-stack-sm p-5">
               <div className="rounded-full bg-primary/10 p-3 text-primary">
                 <point.icon className="h-5 w-5" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">{point.title}</p>
-                <p className="text-sm text-muted-foreground">{point.description}</p>
+              <div className="flex flex-col fluid-stack-2xs">
+                <p className="font-semibold text-foreground fluid-copy">{point.title}</p>
+                <p className="text-muted-foreground fluid-copy">{point.description}</p>
               </div>
             </CardContent>
           </Card>

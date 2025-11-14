@@ -17,31 +17,31 @@ This project unifies responsive typography, buttons, and badges through a set of
 
 | Utility              | Purpose                                    | Current clamp configuration                                       |
 |----------------------|---------------------------------------------|-------------------------------------------------------------------|
-| `fluid-h1`           | Hero/primary heading                        | `font-size: clamp(2.25rem, 4vw + 1rem, 3.5rem)`<br>`line-height: clamp(2.75rem, 4vw + 1.5rem, 3.75rem)` |
-| `fluid-h2`           | Secondary heading                           | `font-size: clamp(1.75rem, 3vw + 0.9rem, 2.75rem)`<br>`line-height: clamp(2.25rem, 3vw + 1.4rem, 3.25rem)` |
-| `fluid-lead`         | Lead paragraphs                             | `font-size: clamp(1rem, 1.8vw + 0.5rem, 1.25rem)`<br>`line-height: 1.65` |
-| `fluid-copy`         | Body text                                   | `font-size: clamp(0.975rem, 0.45vw + 0.85rem, 1.1rem)`<br>`line-height: 1.7` |
-| `fluid-caption`      | Small text / descriptions                   | `font-size: clamp(0.7rem, 0.28vw + 0.6rem, 0.82rem)`<br>`line-height: 1.45` |
-| `fluid-eyebrow`      | Uppercase label text                        | `font-size: clamp(0.68rem, 0.35vw + 0.58rem, 0.78rem)`<br>`letter-spacing: clamp(0.18em, 0.06em + 0.22vw, 0.3em)` |
-| `fluid-button`       | Primary buttons                             | `height: clamp(2.75rem, 2vw + 2.25rem, 3.25rem)`<br>`padding-inline: clamp(1.25rem, 2vw + 0.75rem, 2.25rem)`<br>`font-size: clamp(0.95rem, 0.6vw + 0.8rem, 1.05rem)` |
-| `fluid-button-sm`    | Compact buttons                             | `height: clamp(2.25rem, 1.3vw + 1.8rem, 2.5rem)`<br>`padding-inline: clamp(1rem, 1.4vw + 0.75rem, 1.5rem)`<br>`font-size: clamp(0.75rem, 0.4vw + 0.65rem, 0.85rem)` |
-| `fluid-button-lg`    | Emphasised CTAs                             | `height: clamp(3.1rem, 2.4vw + 2.6rem, 3.75rem)`<br>`padding-inline: clamp(1.5rem, 2.6vw + 1.1rem, 3.1rem)`<br>`font-size: clamp(1.05rem, 0.65vw + 0.9rem, 1.2rem)` |
-| `fluid-button-icon`  | Icon-only buttons                           | `height: clamp(2.65rem, 1.6vw + 2.2rem, 3rem)`<br>`width: clamp(2.65rem, 1.6vw + 2.2rem, 3rem)` |
-| `fluid-badge`        | Badge / pill text & padding                 | `padding-inline: clamp(0.75rem, 1.5vw, 1rem)`<br>`padding-block: clamp(0.35rem, 1vw, 0.5rem)`<br>`font-size: clamp(0.7rem, 0.4vw + 0.6rem, 0.75rem)` |
+| `fluid-h1`           | Hero/primary heading                        | `font-size: clamp(1.89rem, 3.36vw + 0.84rem, 2.94rem)`<br>`line-height: clamp(2.31rem, 3.36vw + 1.26rem, 3.15rem)` |
+| `fluid-h2`           | Secondary heading                           | `font-size: clamp(1.47rem, 2.52vw + 0.756rem, 2.31rem)`<br>`line-height: clamp(1.89rem, 2.52vw + 1.176rem, 2.73rem)` |
+| `fluid-lead`         | Lead paragraphs                             | `font-size: clamp(0.84rem, 1.512vw + 0.42rem, 1.05rem)`<br>`line-height: 1.65` |
+| `fluid-copy`         | Body text                                   | `font-size: clamp(0.819rem, 0.378vw + 0.714rem, 0.924rem)`<br>`line-height: 1.7` |
+| `fluid-caption`      | Small text / descriptions                   | `font-size: clamp(0.588rem, 0.2352vw + 0.504rem, 0.688rem)`<br>`line-height: 1.45` |
+| `fluid-eyebrow`      | Uppercase label text                        | `font-size: clamp(0.571rem, 0.294vw + 0.487rem, 0.655rem)`<br>`letter-spacing: clamp(0.151em, 0.050em + 0.185vw, 0.252em)` |
+| `fluid-button`       | Primary buttons                             | `height: clamp(2.31rem, 1.68vw + 1.89rem, 2.73rem)`<br>`padding-inline: clamp(1.05rem, 1.68vw + 0.63rem, 1.89rem)`<br>`font-size: clamp(0.798rem, 0.504vw + 0.672rem, 0.882rem)` |
+| `fluid-button-sm`    | Compact buttons                             | `height: clamp(1.89rem, 1.092vw + 1.512rem, 2.1rem)`<br>`padding-inline: clamp(0.84rem, 1.176vw + 0.63rem, 1.26rem)`<br>`font-size: clamp(0.63rem, 0.336vw + 0.546rem, 0.714rem)` |
+| `fluid-button-lg`    | Emphasised CTAs                             | `height: clamp(2.604rem, 2.016vw + 2.184rem, 3.15rem)`<br>`padding-inline: clamp(1.26rem, 2.184vw + 0.924rem, 2.604rem)`<br>`font-size: clamp(0.882rem, 0.546vw + 0.756rem, 1.008rem)` |
+| `fluid-button-icon`  | Icon-only buttons                           | `height: clamp(2.226rem, 1.344vw + 1.848rem, 2.52rem)`<br>`width: clamp(2.226rem, 1.344vw + 1.848rem, 2.52rem)` |
+| `fluid-badge`        | Badge / pill text & padding                 | `padding-inline: clamp(0.63rem, 1.26vw, 0.84rem)`<br>`padding-block: clamp(0.294rem, 0.84vw, 0.42rem)`<br>`font-size: clamp(0.588rem, 0.336vw + 0.504rem, 0.63rem)` |
 
 ### Spacing tokens
 
 | Utility              | Purpose                         | Current clamp configuration                                          |
 |----------------------|---------------------------------|-----------------------------------------------------------------------|
-| `fluid-section-sm`   | Compact block padding           | `padding-block: clamp(1.75rem, 2vw + 1.25rem, 2.5rem)`                |
-| `fluid-section-md`   | Default block padding           | `padding-block: clamp(2.5rem, 3vw + 1.5rem, 3.5rem)`                  |
-| `fluid-section-lg`   | Hero / spacious block padding   | `padding-block: clamp(3.25rem, 4vw + 1.75rem, 4.5rem)`                |
-| `fluid-stack-2xs`    | Micro copy/meta gaps            | `gap: clamp(0.25rem, 0.6vw + 0.05rem, 0.45rem)`                       |
-| `fluid-stack-xs`     | Tight inline/vertical gaps      | `gap: clamp(0.35rem, 0.75vw + 0.1rem, 0.6rem)`                        |
-| `fluid-stack-sm`     | Body copy stacks                | `gap: clamp(0.6rem, 1vw + 0.2rem, 1rem)`                              |
-| `fluid-stack-md`     | Card internals / forms          | `gap: clamp(0.9rem, 1.3vw + 0.35rem, 1.5rem)`                         |
-| `fluid-stack-lg`     | Section-level layout gaps       | `gap: clamp(1.25rem, 1.6vw + 0.5rem, 2rem)`                           |
-| `fluid-stack-xl`     | Hero spacing / multi-block gaps | `gap: clamp(1.75rem, 2.2vw + 0.6rem, 2.75rem)`                        |
+| `fluid-section-sm`   | Compact block padding           | `padding-block: clamp(1.47rem, 1.68vw + 1.05rem, 2.1rem)`             |
+| `fluid-section-md`   | Default block padding           | `padding-block: clamp(2.1rem, 2.52vw + 1.26rem, 2.94rem)`             |
+| `fluid-section-lg`   | Hero / spacious block padding   | `padding-block: clamp(2.73rem, 3.36vw + 1.47rem, 3.78rem)`            |
+| `fluid-stack-2xs`    | Micro copy/meta gaps            | `gap: clamp(0.21rem, 0.504vw + 0.042rem, 0.378rem)`                   |
+| `fluid-stack-xs`     | Tight inline/vertical gaps      | `gap: clamp(0.294rem, 0.63vw + 0.084rem, 0.504rem)`                   |
+| `fluid-stack-sm`     | Body copy stacks                | `gap: clamp(0.504rem, 0.84vw + 0.168rem, 0.84rem)`                    |
+| `fluid-stack-md`     | Card internals / forms          | `gap: clamp(0.756rem, 1.092vw + 0.294rem, 1.26rem)`                   |
+| `fluid-stack-lg`     | Section-level layout gaps       | `gap: clamp(1.05rem, 1.344vw + 0.42rem, 1.68rem)`                     |
+| `fluid-stack-xl`     | Hero spacing / multi-block gaps | `gap: clamp(1.47rem, 1.848vw + 0.504rem, 2.31rem)`                    |
 
 Use the stack tokens on any flex/grid wrapper (`className="flex flex-col fluid-stack-md"` or `className="grid fluid-stack-lg"`) instead of bespoke `space-y-*`.
 
@@ -116,5 +116,3 @@ Use the stack tokens on any flex/grid wrapper (`className="flex flex-col fluid-s
 - Up-to-date status is tracked in `PODSUMOWANIE_ZMIAN_RESPONSYWNOŚĆ.md`.
 - Clamp values documented above reflect the current baseline. If you need exact historical values (e.g. the brief 15% variant), consult git history.
 - When unsure, grep for `fluid-` usage to ensure new components are consistent.
-
-

@@ -188,7 +188,7 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
   if (companiesToShow.length === 0) {
     return (
       <div className="glass-card card-outline p-8 text-center">
-        <p className="text-sm text-muted-foreground">Brak firm do wyświetlenia.</p>
+        <p className="text-muted-foreground fluid-copy">Brak firm do wyświetlenia.</p>
       </div>
     );
   }

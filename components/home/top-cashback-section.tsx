@@ -25,11 +25,11 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
   }
 
   return (
-    <Section size="md" className="relative">
+    <Section size="md" className="relative flex flex-col fluid-stack-lg">
       <div className="flex flex-col fluid-stack-sm">
         {/* Section Header Badge */}
         <div className="flex justify-center">
-          <Badge variant="outline" className="fluid-badge font-semibold tracking-[0.28em]">
+          <Badge variant="outline" className="fluid-badge font-semibold tracking-[0.28em] fluid-caption">
             Top Cashback
           </Badge>
         </div>
@@ -57,8 +57,8 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
 
 function CompanyCard({ company }: { company: TopCashbackCompany }) {
   return (
-    <Card className="snap-center shrink-0 w-[clamp(10rem,24vw,12rem)] border-border/60 bg-card/80 backdrop-blur">
-      <CardContent className="flex flex-col items-center gap-3 p-4 text-center">
+    <Card className="snap-center w-[clamp(10rem,24vw,12rem)] shrink-0 border-border/60 bg-card/80 backdrop-blur">
+      <CardContent className="flex flex-col items-center text-center fluid-stack-sm p-4">
         <div className="relative flex h-[clamp(3.5rem,4vw+2.5rem,5.25rem)] w-[clamp(3.5rem,4vw+2.5rem,5.25rem)] items-center justify-center rounded-xl border border-border/30 bg-background">
           {company.logoUrl ? (
             <Image
@@ -69,19 +69,21 @@ function CompanyCard({ company }: { company: TopCashbackCompany }) {
               className="h-full w-full rounded-xl object-contain"
             />
           ) : (
-            <span className="text-base font-semibold text-primary">{getInitials(company.name)}</span>
+            <span className="font-semibold text-primary fluid-copy">{getInitials(company.name)}</span>
           )}
         </div>
-        <div className="space-y-1">
-          <p className="text-sm font-semibold text-foreground">{company.name}</p>
-          <p className="text-xs text-muted-foreground">${company.minCashback} - ${company.maxCashback} cashback</p>
+        <div className="flex flex-col fluid-stack-2xs">
+          <p className="font-semibold text-foreground fluid-copy">{company.name}</p>
+          <p className="text-muted-foreground fluid-caption">
+            ${company.minCashback} - ${company.maxCashback} cashback
+          </p>
         </div>
         <Button asChild size="sm" className="w-full rounded-full">
           <Link href={`/firmy/${company.slug}`} prefetch={false}>
             Odbierz cashback
           </Link>
         </Button>
-        <p className="text-[11px] text-muted-foreground">Przejdź z kodem, a część naszej prowizji wróci do Ciebie.</p>
+        <p className="text-muted-foreground fluid-caption">Przejdź z kodem, a część naszej prowizji wróci do Ciebie.</p>
       </CardContent>
     </Card>
   );

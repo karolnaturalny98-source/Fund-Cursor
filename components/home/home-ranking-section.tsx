@@ -15,14 +15,14 @@ export function HomeRankingSection({ tabs }: HomeRankingSectionProps) {
   }
 
   return (
-    <Section size="lg" className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+    <Section size="lg" className="flex flex-col fluid-stack-lg">
+      <div className="flex flex-col fluid-stack-md sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col fluid-stack-sm">
+          <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">
             Rankingi
           </p>
           <h2 className="fluid-h2 font-semibold text-foreground">Najważniejsze zestawienia</h2>
-          <p className="max-w-2xl text-sm text-muted-foreground">
+          <p className="max-w-2xl text-muted-foreground fluid-copy">
             Jeden widok, wiele rankingów: reputacja, cashback, cena wejścia i doświadczenie wypłat. Każda zakładka to 10 najlepszych firm w danej kategorii.
           </p>
         </div>

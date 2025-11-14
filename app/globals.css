@@ -18,114 +18,114 @@
 }
 
 @utility fluid-h1 {
-  font-size: clamp(2.25rem, 4vw + 1rem, 3.5rem);
-  line-height: clamp(2.75rem, 4vw + 1.5rem, 3.75rem);
+  font-size: clamp(1.89rem, 3.36vw + 0.84rem, 2.94rem);
+  line-height: clamp(2.31rem, 3.36vw + 1.26rem, 3.15rem);
   letter-spacing: -0.02em;
 }
 
 @utility fluid-h2 {
-  font-size: clamp(1.75rem, 3vw + 0.9rem, 2.75rem);
-  line-height: clamp(2.25rem, 3vw + 1.4rem, 3.25rem);
+  font-size: clamp(1.47rem, 2.52vw + 0.756rem, 2.31rem);
+  line-height: clamp(1.89rem, 2.52vw + 1.176rem, 2.73rem);
   letter-spacing: -0.015em;
 }
 
 @utility fluid-lead {
-  font-size: clamp(1rem, 1.8vw + 0.5rem, 1.25rem);
+  font-size: clamp(0.84rem, 1.512vw + 0.42rem, 1.05rem);
   line-height: 1.65;
 }
 
 @utility fluid-copy {
-  font-size: clamp(0.975rem, 0.45vw + 0.85rem, 1.1rem);
+  font-size: clamp(0.819rem, 0.378vw + 0.714rem, 0.924rem);
   line-height: 1.7;
 }
 
 @utility fluid-caption {
-  font-size: clamp(0.7rem, 0.28vw + 0.6rem, 0.82rem);
+  font-size: clamp(0.588rem, 0.2352vw + 0.504rem, 0.688rem);
   line-height: 1.45;
 }
 
 @utility fluid-eyebrow {
-  font-size: clamp(0.68rem, 0.35vw + 0.58rem, 0.78rem);
-  letter-spacing: clamp(0.18em, 0.06em + 0.22vw, 0.3em);
+  font-size: clamp(0.571rem, 0.294vw + 0.487rem, 0.655rem);
+  letter-spacing: clamp(0.151em, 0.050em + 0.185vw, 0.252em);
   text-transform: uppercase;
   font-weight: 600;
 }
 
 @utility fluid-button {
-  height: clamp(2.75rem, 2vw + 2.25rem, 3.25rem);
-  padding-inline: clamp(1.25rem, 2vw + 0.75rem, 2.25rem);
+  height: clamp(2.31rem, 1.68vw + 1.89rem, 2.73rem);
+  padding-inline: clamp(1.05rem, 1.68vw + 0.63rem, 1.89rem);
   border-radius: 9999px;
-  font-size: clamp(0.95rem, 0.6vw + 0.8rem, 1.05rem);
+  font-size: clamp(0.798rem, 0.504vw + 0.672rem, 0.882rem);
   font-weight: 600;
-  gap: clamp(0.5rem, 1vw, 0.75rem);
+  gap: clamp(0.42rem, 0.84vw, 0.63rem);
 }
 
 @utility fluid-button-sm {
-  height: clamp(2.25rem, 1.3vw + 1.8rem, 2.5rem);
-  padding-inline: clamp(1rem, 1.4vw + 0.75rem, 1.5rem);
+  height: clamp(1.89rem, 1.092vw + 1.512rem, 2.1rem);
+  padding-inline: clamp(0.84rem, 1.176vw + 0.63rem, 1.26rem);
   border-radius: 9999px;
-  font-size: clamp(0.75rem, 0.4vw + 0.65rem, 0.85rem);
+  font-size: clamp(0.63rem, 0.336vw + 0.546rem, 0.714rem);
   font-weight: 600;
-  gap: clamp(0.35rem, 0.8vw, 0.6rem);
+  gap: clamp(0.294rem, 0.672vw, 0.504rem);
 }
 
 @utility fluid-button-lg {
-  height: clamp(3.1rem, 2.4vw + 2.6rem, 3.75rem);
-  padding-inline: clamp(1.5rem, 2.6vw + 1.1rem, 3.1rem);
+  height: clamp(2.604rem, 2.016vw + 2.184rem, 3.15rem);
+  padding-inline: clamp(1.26rem, 2.184vw + 0.924rem, 2.604rem);
   border-radius: 9999px;
-  font-size: clamp(1.05rem, 0.65vw + 0.9rem, 1.2rem);
+  font-size: clamp(0.882rem, 0.546vw + 0.756rem, 1.008rem);
   font-weight: 600;
-  gap: clamp(0.6rem, 1.2vw, 0.95rem);
+  gap: clamp(0.504rem, 1.008vw, 0.798rem);
 }
 
 @utility fluid-button-icon {
-  height: clamp(2.65rem, 1.6vw + 2.2rem, 3rem);
-  width: clamp(2.65rem, 1.6vw + 2.2rem, 3rem);
+  height: clamp(2.226rem, 1.344vw + 1.848rem, 2.52rem);
+  width: clamp(2.226rem, 1.344vw + 1.848rem, 2.52rem);
   border-radius: 9999px;
-  font-size: clamp(0.95rem, 0.45vw + 0.85rem, 1.05rem);
+  font-size: clamp(0.798rem, 0.378vw + 0.714rem, 0.882rem);
   padding: 0;
 }
 
 @utility fluid-badge {
-  padding-inline: clamp(0.75rem, 1.5vw, 1rem);
-  padding-block: clamp(0.35rem, 1vw, 0.5rem);
-  font-size: clamp(0.7rem, 0.4vw + 0.6rem, 0.75rem);
+  padding-inline: clamp(0.63rem, 1.26vw, 0.84rem);
+  padding-block: clamp(0.294rem, 0.84vw, 0.42rem);
+  font-size: clamp(0.588rem, 0.336vw + 0.504rem, 0.63rem);
 }
 
 @utility fluid-section-sm {
-  padding-block: clamp(1.75rem, 2vw + 1.25rem, 2.5rem);
+  padding-block: clamp(1.47rem, 1.68vw + 1.05rem, 2.1rem);
 }
 
 @utility fluid-section-md {
-  padding-block: clamp(2.5rem, 3vw + 1.5rem, 3.5rem);
+  padding-block: clamp(2.1rem, 2.52vw + 1.26rem, 2.94rem);
 }
 
 @utility fluid-section-lg {
-  padding-block: clamp(3.25rem, 4vw + 1.75rem, 4.5rem);
+  padding-block: clamp(2.73rem, 3.36vw + 1.47rem, 3.78rem);
 }
 
 @utility fluid-stack-2xs {
-  gap: clamp(0.25rem, 0.6vw + 0.05rem, 0.45rem);
+  gap: clamp(0.21rem, 0.504vw + 0.042rem, 0.378rem);
 }
 
 @utility fluid-stack-xs {
-  gap: clamp(0.35rem, 0.75vw + 0.1rem, 0.6rem);
+  gap: clamp(0.294rem, 0.63vw + 0.084rem, 0.504rem);
 }
 
 @utility fluid-stack-sm {
-  gap: clamp(0.6rem, 1vw + 0.2rem, 1rem);
+  gap: clamp(0.504rem, 0.84vw + 0.168rem, 0.84rem);
 }
 
 @utility fluid-stack-md {
-  gap: clamp(0.9rem, 1.3vw + 0.35rem, 1.5rem);
+  gap: clamp(0.756rem, 1.092vw + 0.294rem, 1.26rem);
 }
 
 @utility fluid-stack-lg {
-  gap: clamp(1.25rem, 1.6vw + 0.5rem, 2rem);
+  gap: clamp(1.05rem, 1.344vw + 0.42rem, 1.68rem);
 }
 
 @utility fluid-stack-xl {
-  gap: clamp(1.75rem, 2.2vw + 0.6rem, 2.75rem);
+  gap: clamp(1.47rem, 1.848vw + 0.504rem, 2.31rem);
 }
 
 @theme {
