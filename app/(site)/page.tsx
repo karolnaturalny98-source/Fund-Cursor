@@ -1,18 +1,15 @@
 import { CompareBar } from "@/components/companies/compare-bar";
 import { CompareProvider } from "@/components/companies/compare-context";
-import { CommunityHighlights } from "@/components/home/community-highlights";
-import { InfluencerSpotlight } from "@/components/home/influencer-spotlight";
-import { KnowledgeGrid } from "@/components/home/knowledge-grid";
 import { TopCashbackSection } from "@/components/home/top-cashback-section";
 import { HomeHero } from "@/components/home/home-hero";
 import { HomeRankingSection } from "@/components/home/home-ranking-section";
 import { HomeCompareTeaser } from "@/components/home/home-compare-teaser";
 import { HomeEducationGrid } from "@/components/home/home-education-grid";
 import { HomeRecentSection } from "@/components/home/home-recent-section";
+import { HomeLatestCompanies } from "@/components/home/home-latest-companies";
 import { parseCompareParam } from "@/lib/compare";
 import { getHomeRanking, getHomepageMetrics, getRecentCompanies, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
-import { getApprovedInfluencers } from "@/lib/queries/influencers";
 import { getHomeRankingTabs } from "@/lib/queries/rankings";
 
 interface HomeProps {
@@ -28,7 +25,6 @@ export default async function Home({ searchParams }: HomeProps) {
     rankingTabs,
     topCashbackCompanies,
     recentReviews,
-    influencers,
     homeRanking,
     recentCompanies,
   ] = await Promise.all([
@@ -36,7 +32,6 @@ export default async function Home({ searchParams }: HomeProps) {
     getHomeRankingTabs(10),
     getTopCashbackCompanies(6),
     getRecentPublicReviews(4),
-    getApprovedInfluencers(3),
     getHomeRanking(4),
     getRecentCompanies(6),
   ]);
@@ -50,12 +45,10 @@ export default async function Home({ searchParams }: HomeProps) {
           <HomeHero metrics={metrics} />
           <HomeRankingSection tabs={rankingTabs} />
           <TopCashbackSection companies={topCashbackCompanies} />
+          <HomeLatestCompanies companies={recentCompanies} />
           <HomeCompareTeaser companies={compareCompanies} />
           <HomeEducationGrid />
-          <HomeRecentSection companies={recentCompanies} reviews={recentReviews} />
-          <CommunityHighlights reviews={recentReviews} />
-          <InfluencerSpotlight influencers={influencers} />
-          <KnowledgeGrid />
+          <HomeRecentSection reviews={recentReviews} />
         </div>
       </div>
 
