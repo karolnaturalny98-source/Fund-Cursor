@@ -25,3 +25,8 @@
 - W sekcjach multi-rankingu i Top Cashback dodano wyraźne CTA „Przejdź z kodem”/„Odbierz cashback” oraz microcopy tłumaczące mechanizm cashbacku.
 - „Niedawno dodane firmy” i hero zawierają dodatkowe przyciski (w tym link do `/analizy`), a „Ostatnie opinie” zyskały odnośnik do `/opinie`.
 - Mini-edukacja ma kafelek „Jak działa cashback?”, a nowa karuzela `HomeMarketingSpotlights` pokazuje badge, zniżki, oceny i CTA spójne z panelem admina.
+
+## 2025-11-14 – Etap 4: Strona firmy (`/firmy/[slug]`)
+- Rozbito monolit strony firmy na moduły: `CompanyHeaderSection`, `CompanyMetaSection`, `CompanyRulesSection`, `CompanyFaqSection`, `CompanyMediaSection`, `CompanyPlansSection`, `CompanyOffersSection`, `CompanyPayoutsSection` i `CompanyReviewsSection`, które są ładowane w zakładkach App Routera.
+- Cała logika hero (logo, ulubione, Compare, PurchaseCard, social links) znajduje się w `CompanyHeaderSection`, a zakładka „Przegląd” korzysta z meta/rules/FAQ/media sekcji, co ułatwia dalsze prace nad SSR i lazy loadingiem.
+- Wyciągnięto wspólne typy (`company-profile-types.ts`) i helpery, usunięto nadmiarowy kod z `page.tsx`, a karta ofert/planów i wypłaty korzystają teraz z małych komponentów serwerowych.

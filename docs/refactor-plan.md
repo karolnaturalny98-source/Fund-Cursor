@@ -142,7 +142,7 @@ Uproszczenie i zmodularyzowanie profilu firmy, żeby był:
 
 ### 4.1 Modularizacja
 
-- [ ] Rozbić duży komponent strony firmy na mniejsze sekcje:
+ - [x] Rozbić duży komponent strony firmy na mniejsze sekcje:
   - `CompanyHeaderSection`
   - `CompanyPlansSection`
   - `CompanyPayoutsSection`
@@ -158,8 +158,13 @@ Uproszczenie i zmodularyzowanie profilu firmy, żeby był:
 
 ### 4.2 Reużywalne komponenty
 
-- [ ] Wynieść powtarzające się elementy (karty planów, sekcje z zasadami itd.) do `components/companies/*`.
-- [ ] Ustandaryzować użycie komponentów shadcn/ui (Button, Tabs, Badge, Card itd.).
+- [x] Wynieść powtarzające się elementy (karty planów, sekcje z zasadami itd.) do `components/companies/*`.
+- [x] Ustandaryzować użycie komponentów shadcn/ui (Button, Tabs, Badge, Card itd.).
+
+#### Aktualizacja – 2025-11-14
+- Strona `/firmy/[slug]` korzysta teraz z modułów `CompanyHeaderSection`, `CompanyMetaSection`, `CompanyRulesSection`, `CompanyFaqSection`, `CompanyMediaSection`, `CompanyPlansSection`, `CompanyOffersSection`, `CompanyPayoutsSection` i `CompanyReviewsSection`, dzięki czemu każdy fragment można niezależnie rozwijać lub lazy‑loadować.
+- Wyciągnięto logikę kart planów, wypłat i opinii do `components/companies/*`, a wcześniej wbudowane funkcje (`OverviewTab`, `PayoutsTab`, `ReviewsTab`) zostały zastąpione małymi komponentami serwerowymi korzystającymi ze wspólnych typów w `company-profile-types.ts`.
+- `CompanyHeaderSection` obejmuje całą strefę hero (logo, CTA, PurchaseCard, social links), natomiast zakładki Tabs renderują dedykowane sekcje (plany, oferty, wypłaty, opinie) z jednolitymi komponentami shadcn/ui i przygotowanymi helperami do przyszłej paginacji/lazy loadingu.
 
 ## Etap 5 – Porównywarka (`/analizy`)
 

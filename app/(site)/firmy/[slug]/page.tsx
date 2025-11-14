@@ -2,57 +2,27 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
-import {
-  ArrowLeft,
-  BarChart3,
-  BookOpen,
-  Calendar,
-  Clock,
-  ExternalLink,
-  Info,
-  Star,
-} from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 import { auth } from "@clerk/nextjs/server";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { CompareBar } from "@/components/companies/compare-bar";
 import { CompareProvider } from "@/components/companies/compare-context";
-import { CompareToggle } from "@/components/companies/compare-toggle";
-import { DisclosureSection } from "@/components/companies/disclosure-section";
 import { FavoriteButton } from "@/components/companies/favorite-button";
 import { PurchaseButton } from "@/components/companies/purchase-button";
-import { PurchaseCard } from "@/components/companies/purchase-card";
-import { ReportIssueForm } from "@/components/companies/report-issue-form";
-import { ReviewForm } from "@/components/companies/review-form";
-import { CompanyFaqTabs } from "@/components/companies/company-faq-tabs";
-import { ReviewsPanel } from "@/components/companies/reviews-panel";
 import { PremiumBadge } from "@/components/custom/premium-badge";
-import { CompanyInfoClient, ResourceCardClient, RulesGridClient } from "@/components/companies/company-page-client";
-import { ChallengesTabClientWrapper } from "@/components/companies/challenges-tab-client-wrapper";
-import { CompanyHeroClient } from "@/components/companies/company-hero-client";
-import { OverviewQuickStats } from "@/components/companies/overview-quick-stats";
-import { ChecklistSection } from "@/components/companies/checklist-section";
-import { PlansShopList } from "@/components/companies/offers-tab-client";
 import { AnnouncementsTabClientWrapper } from "@/components/companies/announcements-tab-client-wrapper";
-import { AnnouncementCard } from "@/components/companies/announcements-tab-client";
-import { PayoutCalendar } from "@/components/companies/payout-calendar";
-import { PayoutsQuickStats } from "@/components/companies/payouts-quick-stats";
-import { PayoutsTable } from "@/components/companies/payouts-table";
-import { PayoutsChartsWrapper } from "@/components/companies/payouts-charts-wrapper";
-import { PayoutsTimeline } from "@/components/companies/payouts-timeline";
-import { PayoutsComparison } from "@/components/companies/payouts-comparison";
-import { CompanyMedia } from "@/components/companies/company-media";
-import { VerificationAccordionCard } from "@/components/companies/verification-accordion-card";
-import { CompanyPopularityChartWrapper } from "@/components/companies/company-popularity-chart-wrapper";
-import { TeamHistoryTabsCard } from "@/components/companies/team-history-tabs-card";
-import { TechnicalDetailsTabsCard } from "@/components/companies/technical-details-tabs-card";
-import { SocialLinksClient } from "@/components/companies/social-links-client";
+import { CompanyHeaderSection } from "@/components/companies/company-header-section";
+import { CompanyMetaSection } from "@/components/companies/company-meta-section";
+import { CompanyRulesSection } from "@/components/companies/company-rules-section";
+import { CompanyFaqSection } from "@/components/companies/company-faq-section";
+import { CompanyMediaSection } from "@/components/companies/company-media-section";
+import { CompanyPlansSection } from "@/components/companies/company-plans-section";
+import { CompanyOffersSection } from "@/components/companies/company-offers-section";
+import { CompanyPayoutsSection } from "@/components/companies/company-payouts-section";
+import { CompanyReviewsSection } from "@/components/companies/company-reviews-section";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -69,6 +39,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { Company, CompanyPlan } from "@/lib/types";
 import { parseCompareParam } from "@/lib/compare";
+import type { CompanyChecklistItem, CompanyReviewCard, CompanyRiskAlert } from "@/components/companies/company-profile-types";
 
 // Use the actual return type from getCompanyBySlug
 type CompanyWithDetails = NonNullable<Awaited<ReturnType<typeof getCompanyBySlug>>>;
@@ -198,96 +169,12 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           <ArrowLeft className="mr-[clamp(0.4rem,0.6vw,0.5rem)] h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" /> Powrót do listy firm
         </Link>
 
-        <CompanyHeroClient>
-          <div className="relative flex flex-col fluid-stack-lg">
-            <div className="flex items-start gap-[clamp(0.75rem,1vw,1rem)]">
-              {company.logoUrl ? (
-                <Avatar className="h-[clamp(4rem,2.5vw+3.5rem,5rem)] w-[clamp(4rem,2.5vw+3.5rem,5rem)] rounded-2xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
-                  <AvatarImage src={company.logoUrl} alt={company.name} className="object-cover" />
-                  <AvatarFallback className="rounded-2xl bg-linear-to-br from-primary/20 to-primary/10 fluid-copy font-semibold">
-                    {company.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              ) : null}
-              <div className="flex flex-col fluid-stack-sm">
-                <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
-                  <h1 className="fluid-h1 font-bold tracking-tight">{company.name}</h1>
-                  <FavoriteButton
-                    companyId={company.id}
-                    companySlug={company.slug}
-                    initialFavorite={company.viewerHasFavorite}
-                    size="icon"
-                  />
-                  <CompareToggle slug={company.slug} size="sm" />
-                </div>
-                <div className="flex flex-wrap items-center gap-[clamp(0.6rem,0.8vw,0.75rem)] fluid-caption text-muted-foreground">
-                  {company.rating ? (
-                    <PremiumBadge variant="glow" className="fluid-badge gap-[clamp(0.2rem,0.3vw,0.25rem)] bg-amber-500/10 ring-1 ring-amber-500/20">
-                      <Star className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)] fill-amber-400 text-amber-400 drop-shadow-xs" />
-                      {company.rating.toFixed(1)}
-                    </PremiumBadge>
-                  ) : null}
-                  {company.country ? (
-                    <span className="inline-flex items-center gap-[clamp(0.3rem,0.5vw,0.375rem)]">
-                      <span className="fluid-copy">{getCountryFlag(company.country)}</span>
-                      <span>{company.country}</span>
-                    </span>
-            ) : null}
-                  {company.foundedYear ? (
-                    <span>Rok założenia: {company.foundedYear}</span>
-                  ) : null}
-                    </div>
-                    </div>
-                </div>
-
-            {/* Informacje o firmie - zamiast headline, description, stats */}
-            {(company.legalName || company.ceo || company.headquartersAddress || company.foundersInfo) && (
-              <div className="flex flex-col fluid-stack-sm rounded-xl border border-border/40 bg-muted/20 p-[clamp(0.75rem,1vw,1rem)]">
-                {company.legalName && (
-                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
-                    <span className="text-muted-foreground">Nazwa prawna:</span>
-                    <span className="font-medium text-foreground">{company.legalName}</span>
-              </div>
-                )}
-                {company.ceo && (
-                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
-                    <span className="text-muted-foreground">CEO:</span>
-                    <span className="font-medium text-foreground">{company.ceo}</span>
-                      </div>
-                )}
-                {company.headquartersAddress && (
-                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
-                    <span className="text-muted-foreground">Adres siedziby:</span>
-                    <span className="font-medium text-foreground">{company.headquartersAddress}</span>
-                    </div>
-                )}
-                {company.foundersInfo && (
-                  <div className="flex items-start gap-[clamp(0.4rem,0.6vw,0.5rem)] fluid-copy">
-                    <span className="text-muted-foreground">Założyciele:</span>
-                    <span className="font-medium text-foreground">{company.foundersInfo}</span>
-              </div>
-                )}
-              </div>
-            )}
-
-            <CompanyInfoClient
-              paymentMethods={company.paymentMethods}
-              platforms={company.platforms}
-              instruments={company.instruments}
-            />
-
-            <SocialLinksClient socialLinks={socialLinks} tosUrl={tosUrl} />
-          </div>
-
-          <PurchaseCard
-            companySlug={company.slug}
-            discountCode={company.discountCode}
-            websiteUrl={company.websiteUrl}
-            cashbackRate={company.cashbackRate}
-            defaultPlan={defaultPlan}
-            copyMetrics={company.copyMetrics}
-          />
-        </CompanyHeroClient>
+        <CompanyHeaderSection
+          company={company}
+          defaultPlan={defaultPlan}
+          socialLinks={socialLinks}
+          tosUrl={tosUrl}
+        />
 
         <Tabs defaultValue="overview" className="flex flex-col fluid-stack-lg">
           <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
@@ -318,24 +205,29 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           </TabsList>
 
           <TabsContent value="overview" data-tab-value="overview">
-            <OverviewTab
-              company={company}
-              alerts={riskAlerts}
-              checklist={checklist}
-              defaultPlan={defaultPlan}
-            />
+            <div className="flex flex-col fluid-stack-lg">
+              <CompanyMetaSection company={company} checklist={checklist} />
+              <CompanyRulesSection
+                company={company}
+                alerts={riskAlerts}
+                bestProfitSplit={_bestProfitSplit}
+                bestLeverage={_bestLeverage}
+              />
+              <CompanyFaqSection companySlug={company.slug} faqs={company.faqs} />
+              <CompanyMediaSection company={company} educationLinks={company.educationLinks ?? []} />
+            </div>
           </TabsContent>
 
           <TabsContent value="challenges" data-tab-value="challenges">
-            <ChallengesTab company={company} bestProfitSplit={_bestProfitSplit} bestLeverage={_bestLeverage} />
+            <CompanyPlansSection company={company} bestProfitSplit={_bestProfitSplit} bestLeverage={_bestLeverage} />
           </TabsContent>
 
           <TabsContent value="reviews" data-tab-value="reviews">
-            <ReviewsTab companySlug={company.slug} reviews={reviewCards} />
+            <CompanyReviewsSection companySlug={company.slug} reviews={reviewCards} />
           </TabsContent>
 
           <TabsContent value="offers" data-tab-value="offers">
-            <OffersTab company={company} defaultPlan={defaultPlan} />
+            <CompanyOffersSection company={company} />
           </TabsContent>
 
           <TabsContent value="announcements" data-tab-value="announcements">
@@ -343,7 +235,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           </TabsContent>
 
           <TabsContent value="payouts" data-tab-value="payouts">
-            <PayoutsTab company={company} />
+            <CompanyPayoutsSection company={company} />
           </TabsContent>
         </Tabs>
 
@@ -355,435 +247,6 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
     </div>
   );
 }
-interface OverviewTabProps {
-  company: CompanyWithDetails;
-  alerts: RiskAlert[];
-  checklist: ChecklistItem[];
-  defaultPlan: CompanyPlan | null;
-}
-
-function OverviewTab({ company, alerts, checklist, defaultPlan: _defaultPlan }: OverviewTabProps) {
-  const educationLinks = company.educationLinks ?? [];
-
-  return (
-    <div className="flex flex-col fluid-stack-md">
-      {/* Quick Stats */}
-      <OverviewQuickStats company={company} />
-
-      {/* Weryfikacja i bezpieczeństwo - z alertami ryzyka */}
-      <VerificationAccordionCard company={company} alerts={alerts} />
-
-      {/* Szczegóły techniczne */}
-      <TechnicalDetailsTabsCard company={company} />
-
-      {/* Zespół i historia */}
-      <TeamHistoryTabsCard company={company} />
-
-      <Separator className="bg-border/40" />
-
-      {/* Lista kontrolna przed startem */}
-        <ChecklistSection checklist={checklist} />
-
-      {/* FAQ */}
-        <section className="flex flex-col fluid-stack-md">
-          <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
-            <Info className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
-          <h2 className="fluid-h2 font-semibold">FAQ w kontekście</h2>
-          </div>
-          <CompanyFaqTabs faqs={company.faqs} companySlug={company.slug} />
-        </section>
-
-      {/* Media i prasa */}
-      {company.mediaItems && company.mediaItems.length > 0 ? (
-        <>
-          <Separator className="bg-border/40" />
-          <CompanyMedia mediaItems={company.mediaItems} />
-        </>
-      ) : null}
-
-      {/* Wykres popularności */}
-      {company.rankingHistory && company.rankingHistory.length > 0 ? (
-        <>
-          <Separator className="bg-border/40" />
-          <CompanyPopularityChartWrapper rankingHistory={company.rankingHistory} companyName={company.name} />
-        </>
-      ) : null}
-
-      {/* Materiały edukacyjne */}
-        {educationLinks.length ? (
-        <>
-          <Separator className="bg-border/40" />
-          <section className="flex flex-col fluid-stack-md">
-            <div className="flex flex-col fluid-stack-sm">
-              <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
-                <BookOpen className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
-                <h2 className="fluid-h2 font-semibold">Materiały edukacyjne</h2>
-              </div>
-              <p className="fluid-caption text-muted-foreground">
-                Oficjalne zasoby i materiały szkoleniowe udostępnione przez firmę.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {educationLinks.map((link, index) => {
-                const getResourceType = (url: string): { iconName: string; label: string } => {
-                  const lowerUrl = url.toLowerCase();
-                  if (lowerUrl.includes("youtube") || lowerUrl.includes("youtu.be") || lowerUrl.includes("vimeo")) {
-                    return { iconName: "BookOpen", label: "Wideo" };
-                  }
-                  if (lowerUrl.includes("pdf") || lowerUrl.includes("doc") || lowerUrl.includes("docx")) {
-                    return { iconName: "FileText", label: "Dokument" };
-                  }
-                  return { iconName: "ExternalLink", label: "Strona" };
-                };
-
-                const resourceType = getResourceType(link);
-
-                return (
-                  <ResourceCardClient
-                    key={link}
-                    link={link}
-                    resourceType={resourceType}
-                    index={index}
-                  />
-                );
-              })}
-            </div>
-          </section>
-        </>
-        ) : null}
-    </div>
-  );
-}
-
-function ChallengesTab({
-  company,
-  bestProfitSplit,
-  bestLeverage,
-}: {
-  company: CompanyWithDetails;
-  bestProfitSplit: string | null;
-  bestLeverage: number | null;
-}) {
-  // TODO: Future feature - planGroups and plan segmentation removed (unused)
-
-  const highlights = buildChallengeHighlights(company, bestProfitSplit, bestLeverage);
-
-  return (
-    <ChallengesTabClientWrapper
-      company={company}
-      bestProfitSplit={bestProfitSplit}
-      bestLeverage={bestLeverage}
-      highlights={highlights}
-    />
-  );
-}
-
-function buildChallengeHighlights(
-  company: CompanyWithDetails,
-  bestProfitSplit: string | null,
-  bestLeverage: number | null,
-) {
-  const lowestPricePlan = [...company.plans].sort((a, b) => a.price - b.price)[0] ?? null;
-  const fastestPayoutPlan = [...company.plans]
-    .filter((plan) => (plan.payoutFirstAfterDays ?? Infinity) !== Infinity)
-    .sort((a, b) => (a.payoutFirstAfterDays ?? Infinity) - (b.payoutFirstAfterDays ?? Infinity))[0] ?? null;
-
-  return [
-    {
-      id: "cashback",
-      label: "Cashback",
-      value: company.cashbackRate ? `${company.cashbackRate} pkt` : "brak programu",
-      description: "Punkty FundedRank naliczane przy zakupie kwalifikowanych planów.",
-      iconName: "Award" as const,
-    },
-    {
-      id: "profit-split",
-      label: "Najlepszy profit split",
-      value: bestProfitSplit ?? "n/d",
-      description: "Najwyższy udział w zyskach dostępny w planach challenge.",
-      iconName: "TrendingUp" as const,
-    },
-    {
-      id: "leverage",
-      label: "Maksymalna dźwignia",
-      value: typeof bestLeverage === "number" ? `1:${bestLeverage}` : "n/d",
-      description: "Deklarowany limit dźwigni na najwyższym segmencie konta.",
-      iconName: "Gauge" as const,
-    },
-    {
-      id: "entry-price",
-      label: "Najniższy koszt wejścia",
-      value: lowestPricePlan ? formatCurrency(lowestPricePlan.price, lowestPricePlan.currency) : "n/d",
-      description: lowestPricePlan ? `Plan ${lowestPricePlan.name}` : "Brak planów w ofercie.",
-      iconName: "Receipt" as const,
-    },
-    {
-      id: "payout",
-      label: "Najszybszy pierwszy payout",
-      value:
-        typeof fastestPayoutPlan?.payoutFirstAfterDays === "number"
-          ? `${fastestPayoutPlan.payoutFirstAfterDays} dni`
-          : "n/d",
-      description: fastestPayoutPlan ? `Plan ${fastestPayoutPlan.name}` : "Brak informacji o harmonogramie wypłat.",
-      iconName: "Clock" as const,
-    },
-  ];
-}
-
-function ReviewsTab({
-  companySlug,
-  reviews,
-}: {
-  companySlug: string;
-  reviews: ReviewCardData[];
-}) {
-  if (!reviews.length) {
-    return (
-      <section className="flex flex-col fluid-stack-sm">
-        <div className="flex flex-col gap-[clamp(0.4rem,0.6vw,0.5rem)] md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="fluid-h2 font-semibold">Opinie społeczności</h2>
-            <p className="fluid-caption text-muted-foreground">
-              Bądź pierwszą osobą, która podzieli się doświadczeniem z tą firmą.
-            </p>
-          </div>
-        </div>
-        <ReviewForm companySlug={companySlug} />
-      </section>
-    );
-  }
-
-  return <ReviewsPanel companySlug={companySlug} reviews={reviews} />;
-}
-
-function OffersTab({
-  company,
-  defaultPlan: _defaultPlan,
-}: {
-  company: CompanyWithDetails;
-  defaultPlan?: CompanyPlan | null;
-}) {
-  return (
-    <div id="offers" className="flex flex-col fluid-stack-lg">
-      <PlansShopList company={company} />
-    </div>
-  );
-}
-
-// TODO: Future feature - AnnouncementsTab component (prepared for future use)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function AnnouncementsTab({
-  company,
-  announcements,
-  tosUrl,
-}: {
-  company: CompanyWithDetails;
-  announcements: Announcement[];
-  tosUrl: string | null;
-}) {
-  // Helper component for announcements tab
-
-  // Group announcements by date
-  const groupedAnnouncements = announcements.reduce(
-    (acc, item) => {
-      const date = item.dateLabel;
-      if (!acc[date]) {
-        acc[date] = [];
-      }
-      acc[date].push(item);
-      return acc;
-    },
-    {} as Record<string, Announcement[]>,
-  );
-
-  const sortedGroups = Object.entries(groupedAnnouncements).sort((a, b) => {
-    // Sort by date (most recent first)
-    if (a[0] === "Aktualne") return -1;
-    if (b[0] === "Aktualne") return 1;
-    return b[0].localeCompare(a[0]);
-  });
-
-  return (
-    <div className="flex flex-col fluid-stack-xl">
-      <section className="flex flex-col fluid-stack-md">
-        <div className="flex flex-col fluid-stack-xs">
-          <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
-            <BarChart3 className="h-[clamp(1.1rem,0.6vw+1rem,1.25rem)] w-[clamp(1.1rem,0.6vw+1rem,1.25rem)] text-primary" />
-            <h2 className="fluid-h2 font-semibold">Ostatnie aktualizacje</h2>
-          </div>
-          <p className="fluid-caption text-muted-foreground">
-            Śledź zmiany w cenach, zasadach wypłat i innych ważnych informacjach dotyczących firmy.
-          </p>
-        </div>
-        {announcements.length > 0 ? (
-          <div className="flex flex-col fluid-stack-md">
-            {sortedGroups.map(([date, items]) => (
-              <div key={date} className="flex flex-col fluid-stack-sm">
-                <div className="flex items-center gap-2">
-                  <div className="h-px flex-1 bg-border" />
-                  <span className="fluid-caption font-semibold uppercase tracking-wide text-muted-foreground">{date}</span>
-                  <div className="h-px flex-1 bg-border" />
-                </div>
-                <div className="flex flex-col fluid-stack-xs">
-                  {items.map((item) => (
-                    <AnnouncementCard key={item.id} item={item} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-        <Card className="border border-dashed border-border/40">
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="glass-panel mb-4 rounded-full p-4">
-                <BarChart3 className="h-10 w-10 text-muted-foreground/50" />
-              </div>
-              <CardTitle className="mb-[clamp(0.4rem,0.6vw,0.5rem)] fluid-h2 font-semibold">Brak aktualizacji</CardTitle>
-              <CardDescription className="max-w-md fluid-copy">
-                Brak zarejestrowanych aktualizacji dla tej firmy – sprawdź ponownie później.
-              </CardDescription>
-            </CardContent>
-          </Card>
-        )}
-      </section>
-
-      <section className="glass-card group relative overflow-hidden p-6 transition-all hover:border-primary/50 hover:shadow-glass">
-        <ReportIssueForm
-          companyId={company.id}
-          companySlug={company.slug}
-          plans={company.plans.map((plan) => ({ id: plan.id, name: plan.name }))}
-        />
-      </section>
-
-      <DisclosureSection companyName={company.name} tosUrl={tosUrl} />
-    </div>
-  );
-}
-
-function PayoutsTab({ company }: { company: CompanyWithDetails }) {
-  const summary = buildPayoutSummary(company);
-
-  // Find fastest payout
-  const fastestPayout = summary.rows.reduce((fastest, row) => {
-    const daysMatch = row.firstPayout.match(/(\d+)/);
-    const currentDays = daysMatch ? parseInt(daysMatch[1], 10) : Infinity;
-    const fastestDays = fastest?.firstPayout.match(/(\d+)/)
-      ? parseInt(fastest.firstPayout.match(/(\d+)/)![1], 10)
-      : Infinity;
-    return currentDays < fastestDays ? row : fastest;
-  }, summary.rows[0]);
-
-  // Prepare table rows with isFastest flag
-  const tableRows = summary.rows.map((row) => ({
-    ...row,
-    isFastest: fastestPayout && row.id === fastestPayout.id,
-  }));
-
-  return (
-    <TooltipProvider>
-      <div className="flex flex-col fluid-stack-lg">
-        <PayoutsQuickStats company={company} />
-
-        <section className="flex flex-col fluid-stack-md">
-          <div className="flex flex-col fluid-stack-xs">
-            <h2 className="fluid-copy font-semibold">Harmonogram wypłat</h2>
-            <p className="fluid-caption text-muted-foreground">
-              Szczegółowe informacje o terminach wypłat dla każdego planu.
-            </p>
-          </div>
-          <Card className="border border-border/40">
-            <CardContent className="p-4">
-              <PayoutsTable rows={tableRows} />
-            </CardContent>
-          </Card>
-        </section>
-
-        <PayoutsChartsWrapper company={company} />
-
-        <PayoutsTimeline company={company} />
-
-        <PayoutsComparison company={company} />
-
-        <section className="flex flex-col fluid-stack-md">
-          <div className="flex flex-col fluid-stack-xs">
-            <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
-              <Calendar className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)] text-primary" />
-              <h3 className="fluid-copy font-semibold">Kalendarz wypłat</h3>
-            </div>
-            <p className="fluid-caption text-muted-foreground">
-              Sprawdź dostępne terminy wypłat i zaplanuj swoje transakcje.
-            </p>
-          </div>
-          <Card className="border border-border/40">
-            <CardContent className="p-4">
-              <PayoutCalendar company={company} />
-            </CardContent>
-          </Card>
-        </section>
-
-        {summary.slaNotice ? (
-          <Card className="border-primary/30 bg-primary/10">
-            <CardContent className="flex items-start gap-3 p-4">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <div className="flex flex-col fluid-stack-xs">
-                <CardTitle className="fluid-caption font-semibold text-primary">Ważna informacja</CardTitle>
-                <CardDescription className="fluid-caption text-primary/90">{summary.slaNotice}</CardDescription>
-              </div>
-            </CardContent>
-          </Card>
-        ) : null}
-      </div>
-    </TooltipProvider>
-  );
-}
-
-// TODO: Future feature - RulesGrid component (prepared for future use)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function RulesGrid({
-  company,
-  bestProfitSplit: _bestProfitSplit,
-  bestLeverage: _bestLeverage,
-}: {
-  company: CompanyWithDetails;
-  bestProfitSplit: string | null;
-  bestLeverage: number | null;
-}) {
-  const rows = [
-    {
-      iconName: "Shield",
-      label: "Regulacja",
-      value: company.regulation ?? "Brak informacji",
-    },
-    {
-      iconName: "LifeBuoy",
-      label: "Wsparcie",
-      value: company.supportContact ?? "Brak danych",
-    },
-    {
-      iconName: "TrendingUp",
-      label: "Najlepszy profit split",
-      value: _bestProfitSplit ?? "Brak danych",
-    },
-    {
-      iconName: "BookOpen",
-      label: "Materiały edukacyjne",
-      value: company.educationLinks.length ? `${company.educationLinks.length} linków` : "Brak",
-    },
-    {
-      iconName: "Receipt",
-      label: "Płatności",
-      value: company.paymentMethods.length ? company.paymentMethods.join(", ") : "Brak danych",
-    },
-    {
-      iconName: "Gauge",
-      label: "Dźwignia",
-      value: _bestLeverage ? `${_bestLeverage}x` : "Brak danych",
-    },
-  ];
-
-  return <RulesGridClient rows={rows} />;
-}
-
 // Type for companies returned by getSimilarCompanies - includes plans and other computed fields
 type SimilarCompany = Company & { 
   plans: Array<{ id: string; evaluationModel: string }>; 
@@ -864,14 +327,6 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
   );
 }
 
-type RiskAlert = {
-  id: string;
-  title: string;
-  description: string;
-  severity: "high" | "medium" | "low";
-  iconName: "AlertTriangle" | "Shield" | "LifeBuoy" | "Zap";
-};
-
 type Announcement = {
   id: string;
   title: string;
@@ -880,20 +335,10 @@ type Announcement = {
   tag?: string;
 };
 
-type ChecklistItem = {
-  id: string;
-  title: string;
-  description: string;
-  recommended: boolean;
-  iconName: "Shield" | "Layers" | "FileText" | "Clock" | "BookOpen" | "LifeBuoy";
-};
-
-type ReviewCardData = ReturnType<typeof mapReviewsForPanel>[number];
-
 // TODO: Future feature - buildPersonas function removed (unused, had broken reference to 'company' variable)
 
-function deriveRiskAlerts(company: CompanyWithDetails): RiskAlert[] {
-  const alerts: RiskAlert[] = [];
+function deriveRiskAlerts(company: CompanyWithDetails): CompanyRiskAlert[] {
+  const alerts: CompanyRiskAlert[] = [];
 
   if (company.rating && company.rating < 3.5) {
     alerts.push({
@@ -987,7 +432,7 @@ function buildAnnouncements(company: CompanyWithDetails): Announcement[] {
   return entries.sort((a, b) => b.dateLabel.localeCompare(a.dateLabel));
 }
 
-function buildChecklist(company: CompanyWithDetails): ChecklistItem[] {
+function buildChecklist(company: CompanyWithDetails): CompanyChecklistItem[] {
   return [
     {
       id: "kyc",
@@ -1069,50 +514,9 @@ function getOffersCount(company: CompanyWithDetails) {
 
 // TODO: Future feature - collectOffers function removed (unused, had broken reference to 'company' variable)
 
-function buildPayoutSummary(company: CompanyWithDetails) {
-  const highlights: Array<{ id: string; label: string; value: string }> = [];
-  highlights.push({
-    id: "frequency",
-    label: "Deklarowana częstotliwość",
-    value: company.payoutFrequency ?? "Brak danych",
-  });
-  highlights.push({
-    id: "cashback",
-    label: "Cashback",
-    value: company.cashbackRate ? `${company.cashbackRate} pkt` : "Brak programu",
-  });
-  highlights.push({
-    id: "plans",
-    label: "Liczba plan?w",
-    value: company.plans.length.toString(),
-  });
-
-  const rows = company.plans.map((plan) => ({
-    id: plan.id,
-    name: plan.name,
-    evaluationModel: plan.evaluationModel,
-    firstPayout: formatDays(plan.payoutFirstAfterDays),
-    cycle: plan.payoutCycleDays ? `co ${plan.payoutCycleDays} dni` : "Brak danych",
-    profitSplit: plan.profitSplit,
-    notes: plan.notes,
-  }));
-
-  const slowestCycle = company.plans
-    .map((plan) => plan.payoutCycleDays ?? null)
-    .filter((value): value is number => value !== null)
-    .sort((a, b) => b - a)[0];
-
-  return {
-    highlights,
-    rows,
-    slaNotice: slowestCycle
-      ? `Najdłuższy cykl wypłat wynosi ${slowestCycle} dni – upewnij się, że mieści się w Twoim planie cashflow.`
-      : null,
-  };
-}
 function mapReviewsForPanel(
   reviews: NonNullable<Awaited<ReturnType<typeof getCompanyBySlug>>>["reviews"],
-) {
+): CompanyReviewCard[] {
   return reviews.map((review) => {
     const experienceLevel = review.experienceLevel ?? null;
     const tradingStyle = review.tradingStyle ?? null;
@@ -1258,141 +662,3 @@ function renderModelLabel(model: string) {
       return model;
   }
 }
-
-function getCountryFlag(country: string): string {
-  if (!country) return "🌍";
-  
-  const countryToFlag: Record<string, string> = {
-    "Polska": "🇵🇱",
-    "Poland": "🇵🇱",
-    "poland": "🇵🇱",
-    "Stany Zjednoczone": "🇺🇸",
-    "United States": "🇺🇸",
-    "USA": "🇺🇸",
-    "US": "🇺🇸",
-    "us": "🇺🇸",
-    "United States of America": "🇺🇸",
-    "Wielka Brytania": "🇬🇧",
-    "United Kingdom": "🇬🇧",
-    "UK": "🇬🇧",
-    "uk": "🇬🇧",
-    "Niemcy": "🇩🇪",
-    "Germany": "🇩🇪",
-    "Francja": "🇫🇷",
-    "France": "🇫🇷",
-    "Włochy": "🇮🇹",
-    "Italy": "🇮🇹",
-    "Hiszpania": "🇪🇸",
-    "Spain": "🇪🇸",
-    "Holandia": "🇳🇱",
-    "Netherlands": "🇳🇱",
-    "Belgia": "🇧🇪",
-    "Belgium": "🇧🇪",
-    "Szwajcaria": "🇨🇭",
-    "Switzerland": "🇨🇭",
-    "Austria": "🇦🇹",
-    "Czechy": "🇨🇿",
-    "Czech Republic": "🇨🇿",
-    "Szwecja": "🇸🇪",
-    "Sweden": "🇸🇪",
-    "Norwegia": "🇳🇴",
-    "Norway": "🇳🇴",
-    "Dania": "🇩🇰",
-    "Denmark": "🇩🇰",
-    "Finlandia": "🇫🇮",
-    "Finland": "🇫🇮",
-    "Grecja": "🇬🇷",
-    "Greece": "🇬🇷",
-    "Portugalia": "🇵🇹",
-    "Portugal": "🇵🇹",
-    "Irlandia": "🇮🇪",
-    "Ireland": "🇮🇪",
-    "Kanada": "🇨🇦",
-    "Canada": "🇨🇦",
-    "Australia": "🇦🇺",
-    "Nowa Zelandia": "🇳🇿",
-    "New Zealand": "🇳🇿",
-    "Japonia": "🇯🇵",
-    "Japan": "🇯🇵",
-    "Chiny": "🇨🇳",
-    "China": "🇨🇳",
-    "Indie": "🇮🇳",
-    "India": "🇮🇳",
-    "Brazylia": "🇧🇷",
-    "Brazil": "🇧🇷",
-    "Meksyk": "🇲🇽",
-    "Mexico": "🇲🇽",
-    "Argentyna": "🇦🇷",
-    "Argentina": "🇦🇷",
-    "Chile": "🇨🇱",
-    "Kolumbia": "🇨🇴",
-    "Colombia": "🇨🇴",
-    "Południowa Afryka": "🇿🇦",
-    "South Africa": "🇿🇦",
-    "Izrael": "🇮🇱",
-    "Israel": "🇮🇱",
-    "Turcja": "🇹🇷",
-    "Turkey": "🇹🇷",
-    "Zjednoczone Emiraty Arabskie": "🇦🇪",
-    "United Arab Emirates": "🇦🇪",
-    "UAE": "🇦🇪",
-    "Singapur": "🇸🇬",
-    "Singapore": "🇸🇬",
-    "Hong Kong": "🇭🇰",
-    "Tajlandia": "🇹🇭",
-    "Thailand": "🇹🇭",
-    "Indonezja": "🇮🇩",
-    "Indonesia": "🇮🇩",
-    "Malezja": "🇲🇾",
-    "Malaysia": "🇲🇾",
-    "Filipiny": "🇵🇭",
-    "Philippines": "🇵🇭",
-    "Wietnam": "🇻🇳",
-    "Vietnam": "🇻🇳",
-    "Korea Południowa": "🇰🇷",
-    "South Korea": "🇰🇷",
-    "Taiwan": "🇹🇼",
-    "Rosja": "🇷🇺",
-    "Russia": "🇷🇺",
-    "Ukraina": "🇺🇦",
-    "Ukraine": "🇺🇦",
-  };
-  
-  // Normalize and try exact match first
-  const normalized = country.trim();
-  if (countryToFlag[normalized]) {
-    return countryToFlag[normalized];
-  }
-  
-  // Try case-insensitive match
-  const lower = normalized.toLowerCase();
-  for (const [key, flag] of Object.entries(countryToFlag)) {
-    if (key.toLowerCase() === lower) {
-      return flag;
-    }
-  }
-  
-  return "🌍";
-}
-
-function formatCurrency(value: number, currency: string) {
-  try {
-    return new Intl.NumberFormat("pl-PL", {
-      style: "currency",
-      currency: currency.toUpperCase(),
-      maximumFractionDigits: 2,
-    }).format(value);
-  } catch {
-    return `${value.toLocaleString("pl-PL")} ${currency.toUpperCase()}`;
-  }
-}
-
-
-
-
-
-
-
-
-
-
