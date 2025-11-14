@@ -8,7 +8,6 @@ import { HowItWorksSection } from "@/components/home/how-it-works";
 import { KnowledgeGrid } from "@/components/home/knowledge-grid";
 import { WalletCtaBanner } from "@/components/home/wallet-cta";
 import { parseCompareParam } from "@/lib/compare";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { getHomeRanking, getHomepageMetrics, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
 import { getApprovedInfluencers } from "@/lib/queries/influencers";
@@ -35,16 +34,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <CompareProvider initialSelection={selection}>
-      <div className="relative">
-        {/* Aurora background from top to end of hero section */}
-        <div className="fixed inset-0 -z-10 h-[150vh]">
-          <AuroraWrapper
-            colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-            blend={0.35}
-            amplitude={0.7}
-            speed={0.5}
-          />
-        </div>
+      <div className="relative bg-background">
         <div className="flex flex-col fluid-stack-xl pb-[clamp(2.5rem,3vw,3.5rem)]">
           <HeroSection metrics={metrics} />
           <TopCashbackSection companies={topCashbackCompanies} />

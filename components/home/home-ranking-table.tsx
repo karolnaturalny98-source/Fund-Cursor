@@ -171,11 +171,7 @@ function CompanyRow({
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
       <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
-        <Button
-          asChild
-          variant="premium-outline"
-          className="fluid-button w-full justify-center rounded-full"
-        >
+        <Button asChild variant="ghost-dark" className="fluid-button w-full justify-center rounded-full">
           <Link href={profileHref} prefetch={false}>
             Przejdź
             <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-1" hoverGlow />
@@ -191,14 +187,14 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
 
   if (companiesToShow.length === 0) {
     return (
-      <div className="glass-card p-8 text-center">
+      <div className="glass-card card-outline p-8 text-center">
         <p className="text-sm text-muted-foreground">Brak firm do wyświetlenia.</p>
       </div>
     );
   }
 
   return (
-    <div className="glass-card overflow-hidden">
+    <div className="glass-card card-outline overflow-hidden">
       <div className="-mx-2 overflow-x-auto md:mx-0">
         <Table className="min-w-full table-fixed" aria-label="Ranking premium">
           <TableHeader className="bg-card/48">

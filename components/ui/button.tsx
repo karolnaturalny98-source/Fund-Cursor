@@ -29,6 +29,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         "premium-outline":
           "border-gradient-premium bg-transparent text-primary shadow-glass hover:bg-gradient-button-premium-outline-hover hover:text-primary-foreground hover:-translate-y-px",
+        glow:
+          "bg-white text-secondary-foreground border border-white/30 shadow-[0_30px_60px_-30px_rgba(255,255,255,0.95)] hover:-translate-y-0.5 hover:shadow-[0_45px_80px_-35px_rgba(255,255,255,0.95)] focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2",
+        "ghost-dark":
+          "bg-[rgba(5,5,5,0.75)] text-foreground border border-white/15 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-[rgba(10,10,10,0.85)] hover:border-white/25 focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
       },
       size: {
         default: "fluid-button",

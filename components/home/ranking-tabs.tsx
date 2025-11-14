@@ -58,18 +58,18 @@ export function RankingTabs({ ranking }: { ranking: HomeRanking }) {
             zobaczyć firmy wyróżnione przez społeczność.
           </p>
         </div>
-        <Button asChild variant="premium-outline" className="fluid-button w-full rounded-full lg:w-auto">
+        <Button asChild variant="ghost-dark" className="fluid-button w-full rounded-full lg:w-auto">
           <Link href="/firmy">Zobacz pełny ranking</Link>
         </Button>
       </div>
 
       <Tabs defaultValue="top" className="flex flex-col fluid-stack-md">
-        <TabsList className="glass-panel flex w-full flex-wrap justify-start fluid-stack-sm p-1">
+        <TabsList className="glass-panel card-outline flex w-full flex-wrap justify-start fluid-stack-sm p-1">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="rounded-full border border-transparent px-[clamp(1.1rem,1.8vw,1.6rem)] py-[clamp(0.5rem,0.9vw,0.7rem)] text-[clamp(0.85rem,0.4vw+0.75rem,0.95rem)] font-semibold transition-all data-[state=active]:border-primary/50 data-[state=active]:bg-white/10 data-[state=active]:shadow-xs data-[state=inactive]:border-border/40 data-[state=inactive]:hover:border-primary/30 data-[state=inactive]:hover:bg-white/5"
+              className="rounded-full border border-white/10 bg-black/40 px-[clamp(1.1rem,1.8vw,1.6rem)] py-[clamp(0.5rem,0.9vw,0.7rem)] text-[clamp(0.85rem,0.4vw+0.75rem,0.95rem)] font-semibold text-muted-foreground transition-all data-[state=active]:border-white/50 data-[state=active]:bg-white text-foreground data-[state=active]:shadow-[0_15px_35px_-25px_rgba(255,255,255,0.9)] data-[state=inactive]:hover:border-white/25 data-[state=inactive]:hover:text-foreground"
             >
               {tab.label}
             </TabsTrigger>

@@ -59,12 +59,12 @@ export function HeroSection({ metrics }: { metrics: HomepageMetrics }) {
             </p>
           </div>
           <div className="flex flex-wrap items-center fluid-stack-sm">
-            <Button asChild variant="premium" className="fluid-button rounded-full">
+            <Button asChild variant="glow" className="fluid-button rounded-full text-base">
               <Link href="#ranking">Przeglądaj ranking</Link>
             </Button>
             <Button
               asChild
-              variant="premium-outline"
+              variant="ghost-dark"
               className="fluid-button rounded-full"
             >
               <Link href="#jak-to-dziala">Jak to działa?</Link>
