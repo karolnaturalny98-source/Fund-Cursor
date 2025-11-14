@@ -63,36 +63,81 @@ Plan dotyczy pełnego, rozbudowanego produktu. Celem jest:
 
 ## Etap 3 – Strona główna / One-Page Core
 
-### 3.1 Projekt UX
-- [ ] Na podstawie aktualnego `app/page.tsx` i audytu przygotować docelowy layout:
-  - Hero: search, metryki, krótki opis.
-  - Ranking (multi-tabs): Ogólny / Opinie / Cashback / Oferty / Payouty.
-  - Filtry nad rankingiem (model, cashback, kraj, itd.).
-  - Sekcja Top Cashback.
-  - Sekcja ofert/karuzela (MarketingSpotlight).
-  - Sekcja społeczności (opinie, influencerzy).
-  - Sekcja “Jak to działa” (3 kroki).
-  - Sekcja CTA / newsletter.
+## Etap 3 – Nowa Strona Główna (one-page core pod konwersję)
 
-### 3.2 Implementacja
-- [ ] Wyodrębnić sekcje do osobnych komponentów w `components/home/*`:
-  - `HomeHero`
-  - `HomeRankingSection`
-  - `HomeTopCashbackSection`
-  - `HomeDealsSection`
-  - `HomeCommunitySection`
-  - `HomeHowItWorks`
-  - `HomeNewsletterSection`
-- [ ] Upewnić się, że:
-  - korzystają ze wspólnego layoutu/Section,
-  - używają komponentów shadcn/ui.
+CEL:
+Strona główna ma stać się głównym narzędziem dla tradera, łącząc:
+- wyszukiwarkę prop firm,
+- multi-ranking (oparty o logikę z istniejącej strony /rankingi),
+- sekcję Top Cashback,
+- krótki teaser porównywarki,
+- mini-edukację,
+- nowo dodane elementy (firmy, opinie, analizy).
+
+### 3.1 Wyszukiwarka w hero
+- duża wyszukiwarka firm (input + szybkie filtry)
+- CTA do rankingów i cashbacku
+- reużycie istniejącego hooka/endpointów do wyszukiwania (jeśli istnieją)
+
+### 3.2 Sekcja multi-ranking
+- baza danych i logika rankingów **ma być reużyta z istniejącej strony `/rankingi`**
+- należy wyodrębnić komponent np. `components/ranking/RankingTable.tsx`
+- multi-ranking ma działać jako:
+  - 5 zakładek: Top, Opinie, Cashback, Cena, Wypłaty
+  - dynamiczne przełączanie trybu (props mode/variant)
+  - wersja na stronie głównej: limit 10 wyników, uproszczone filtry
+
+### 3.3 Sekcja Top Cashback
+- kafelki z 3–6 najlepszymi ofertami cashback
+- CTA: „Przejdź z kodem”
+- dane z istniejącego modelu cashback / firmy
+
+### 3.4 Teaser porównywarki (strona /analizy)
+
+- Mała sekcja na stronie głównej, np. „Porównaj 2–3 prop firmy jednocześnie”.
+- Prosty widżet pokazujący mini-porównanie (np. 2 najpopularniejszych firm: payout, cena, max DD).
+- Główne CTA ma prowadzić do istniejącej pełnej strony analizy / porównywarki, np.: `/analizy` (lub inny aktualny route dla porównywarki).
+
+Pełna porównywarka z wykresami i szczegółami pozostaje na osobnej stronie (`/analizy`),
+nie przenosimy jej na stronę główną.
+
+
+### 3.5 Mini-edukacja (4 punkty)
+- krótkie kafelki typu: „Prawdziwe dane”, „Zweryfikowane opinie” itd.
+- zero długich tekstów
+
+### 3.6 Sekcja “Niedawno dodane”
+- ostatnie firmy, opinie i analizy (3–9 elementów)
+- używa istniejących endpointów
+
+### 3.7 Stylizacja
+- oparta na Aurora Layout (z Etapu 2)
+- wizualnie inspirowana Aceternity UI (bez dodawania nowego frameworka)
+- wyłącznie shadcn/ui + Tailwind
+
+### 3.8 Ograniczenia Etapu 3
+- NIE przebudowujemy jeszcze strony `/rankingi`
+- NIE ruszamy pełnej porównywarki
+- NIE ruszamy wewnętrznych stron firm
+- skupiamy się tylko na `/` i komponentach współdzielonych
+
 
 ---
 
 ## Etap 4 – Strona firmy (`/firmy/[slug]`)
+UWAGA:
+Etap 4 dotyczy wyłącznie strony profilu firmy (`/firmy/[slug]`).
+Porównywarka znajduje się w `/analizy` i jest osobnym etapem (Etap 5 A).
+
+CEL:
+Uproszczenie i zmodularyzowanie profilu firmy, żeby był:
+- czytelny dla użytkownika,
+- łatwy w utrzymaniu,
+- gotowy pod dalsze rozwijanie.
 
 ### 4.1 Modularizacja
-- [ ] Rozbić gigantyczny komponent na mniejsze:
+
+- [ ] Rozbić duży komponent strony firmy na mniejsze sekcje:
   - `CompanyHeaderSection`
   - `CompanyPlansSection`
   - `CompanyPayoutsSection`
@@ -101,26 +146,56 @@ Plan dotyczy pełnego, rozbudowanego produktu. Celem jest:
   - `CompanyReviewsSection`
   - `CompanyFaqSection`
   - `CompanyMetaSection` (timeline, certyfikaty, team)
+
 - [ ] Zostawić SSR, ale:
   - rozważyć paginację recenzji,
-  - opóźnione ładowanie cięższych modułów (np. wykresy payoutów).
+  - rozważyć opóźnione ładowanie cięższych modułów (np. wykresy payoutów).
 
 ### 4.2 Reużywalne komponenty
-- [ ] Zidentyfikować powtarzające się karty (np. plan, payout, FAQ) i przenieść do `components/companies/*`.
-- [ ] Ustandaryzować użycie Button, Badge, Tabs, itd. z shadcn.
+
+- [ ] Wynieść powtarzające się elementy (karty planów, sekcje z zasadami itd.) do `components/companies/*`.
+- [ ] Ustandaryzować użycie komponentów shadcn/ui (Button, Tabs, Badge, Card itd.).
+
+## Etap 5 – Porównywarka (`/analizy`)
+
+**CEL:**  
+Zachować porównywarkę jako **osobne narzędzie** (1–3 firmy, wykresy, głębokie porównanie) oraz utrzymać ją w formie czytelnej, modularnej i wydajnej.
 
 ---
 
-## Etap 5 – Panel użytkownika i UserPanel
+### 5.1 Struktura i UX
 
-### 5.1 Wspólne źródła danych
+- Jasny, dwustopniowy flow:
+  1. **Wybierz 1–3 firmy**
+  2. **Analiza / wykresy / porównanie**
+- Upewnić się, że CTA z homepage (sekcja „Teaser porównywarki”) kieruje dokładnie na `/analizy`.
+- Zachować obecną funkcjonalność, ale uporządkować ją pod kątem modularności i czytelności.
+
+---
+
+### 5.2 Modularność
+
+- Wydzielić logikę porównywania firm do dedykowanych hooków, np.:
+  - `useComparisonData`
+  - `useComparisonCharts`
+- Zoptymalizować ładowanie:
+  - komponentów wykresów (lazy-loading),
+  - cięższych danych analitycznych (SSR lub SSG, jeśli ma sens),
+  - zapytań – unikać powielania fetchów.
+- Upewnić się, że struktura komponentów jest czytelna i możliwa do rozbudowy (np. dodanie nowych metryk w przyszłości).
+
+---
+
+## Etap 5 A – Panel użytkownika i UserPanel
+
+### 5.1 A Wspólne źródła danych
 - [ ] Wyekstrahować hooki:
   - `useUserSummary`
   - `useWalletOffers`
   - `useUserDisputes`
 - [ ] Nie dublować fetch’y – współdzielić logikę między `/panel` i globalnym `UserPanel`.
 
-### 5.2 UX
+### 5.2 UX A
 - [ ] Upewnić się, że:
   - główne akcje cashback (redeem, historia) są zrozumiałe i spójne,
   - overlay `UserPanel` nie konkuruje z pełną stroną `/panel` (przemyśleć restrukturyzację).
