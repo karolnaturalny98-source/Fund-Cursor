@@ -30,3 +30,9 @@
 - Rozbito monolit strony firmy na moduły: `CompanyHeaderSection`, `CompanyMetaSection`, `CompanyRulesSection`, `CompanyFaqSection`, `CompanyMediaSection`, `CompanyPlansSection`, `CompanyOffersSection`, `CompanyPayoutsSection` i `CompanyReviewsSection`, które są ładowane w zakładkach App Routera.
 - Cała logika hero (logo, ulubione, Compare, PurchaseCard, social links) znajduje się w `CompanyHeaderSection`, a zakładka „Przegląd” korzysta z meta/rules/FAQ/media sekcji, co ułatwia dalsze prace nad SSR i lazy loadingiem.
 - Wyciągnięto wspólne typy (`company-profile-types.ts`) i helpery, usunięto nadmiarowy kod z `page.tsx`, a karta ofert/planów i wypłaty korzystają teraz z małych komponentów serwerowych.
+
+## 2025-11-14 – Etap 5: Porównywarka (`/analizy`)
+- Dodano hooki `useComparisonData` i `useComparisonCharts`, które agregują metryki i dane wykresów dla całej analizy; dzięki temu `AnalysisLayout`, `MetricsDashboard` i wykresy korzystają z jednej warstwy pochodnych danych zamiast obliczać je wielokrotnie.
+- `PriceComparisonChart` i `RatingTrendsChart` przyjmują gotowe zestawy danych, a zakładki Tabs renderują swoje sekcje dopiero po aktywacji, co ogranicza koszt hydratacji (wykresy i ciężkie komponenty nie ładują się dopóki użytkownik ich nie potrzebuje).
+- Karta nagłówka pokazuje teraz streszczenie firm (logo, rating, kraj, highlighty) oraz globalne statystyki opinii, a sekcja przeglądu korzysta z tych samych danych także w zakładkach „Plany” i „Przegląd”.
+- `MetricsDashboard` nie polega już na globalnej zmiennej `companies`; wszystkie dane (łącznie z kartami regulacyjnymi) przekazywane są poprzez nowe hooki, co rozwiązuje runtime'owy ReferenceError „companies is not defined”.

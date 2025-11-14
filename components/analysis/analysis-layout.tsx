@@ -21,6 +21,9 @@ import type { CompanyWithDetails, CompanyRankingHistory, PriceHistoryPoint } fro
 import type { ReviewStatistics, ComparisonMetrics } from "@/lib/queries/analysis";
 import dynamic from "next/dynamic";
 import { MetricsDashboard } from "./metrics-dashboard";
+import { useComparisonData } from "@/components/analysis/hooks/use-comparison-data";
+import { useComparisonCharts } from "@/components/analysis/hooks/use-comparison-charts";
+import { getCountryFlag } from "@/lib/country";
 
 const Aurora = dynamic(() => import("@/components/Aurora"), { ssr: false });
 import { PlanFeaturesMatrix } from "./plan-features-matrix";
@@ -61,6 +64,16 @@ export function AnalysisLayout({
   comparisonMetrics,
 }: AnalysisLayoutProps) {
   const [activeTab, setActiveTab] = useState("overview");
+  const { companyCards, metrics, reviewSummary } = useComparisonData({
+    companies,
+    comparisonMetrics,
+    reviewStatistics,
+  });
+  const { priceChart, ratingChart } = useComparisonCharts({
+    companies,
+    priceHistory,
+    ratingHistory,
+  });
 
   return (
     <div className="relative">
@@ -113,41 +126,60 @@ export function AnalysisLayout({
 
           {/* Selected Companies */}
           <div className="grid gap-[clamp(1rem,1.5vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-3">
-            {companies.map((company) => (
+            {companyCards.map((card) => (
               <Card
-                key={company.id}
+                key={card.id}
                 className="group flex items-center gap-[clamp(0.85rem,1.2vw,1.1rem)] rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-[clamp(1.1rem,1.6vw,1.5rem)] shadow-xs transition-all hover:border-gradient hover:shadow-premium"
               >
-                {company.logoUrl ? (
+                {card.logoUrl ? (
                   <Avatar className="h-[clamp(2.75rem,2.6vw+2.1rem,3.4rem)] w-[clamp(2.75rem,2.6vw+2.1rem,3.4rem)] rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
-                    <AvatarImage src={company.logoUrl} alt={company.name} className="object-cover" />
+                    <AvatarImage src={card.logoUrl} alt={card.name} className="object-cover" />
                     <AvatarFallback className="rounded-xl bg-linear-to-br from-primary/20 to-primary/10 text-sm font-semibold">
-                      {company.name.charAt(0).toUpperCase()}
+                      {card.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 ) : (
                   <div className="flex h-[clamp(2.75rem,2.6vw+2.1rem,3.4rem)] w-[clamp(2.75rem,2.6vw+2.1rem,3.4rem)] items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-primary/10">
                     <span className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-muted-foreground">
-                      {company.name.charAt(0).toUpperCase()}
+                      {card.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
                   <h3 className="truncate text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground">
-                    {company.name}
+                    {card.name}
                   </h3>
-                  {company.rating && (
+                  {card.rating && (
                     <div className="mt-[clamp(0.35rem,0.5vw,0.45rem)] flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)]">
                       <Star className="h-[clamp(0.9rem,0.35vw+0.8rem,1rem)] w-[clamp(0.9rem,0.35vw+0.8rem,1rem)] fill-amber-400 text-amber-400" />
                       <span className="fluid-caption text-muted-foreground">
-                        {company.rating.toFixed(1)}
+                        {card.rating.toFixed(1)}
                       </span>
                     </div>
                   )}
+                  <div className="mt-[clamp(0.4rem,0.6vw,0.5rem)] flex flex-wrap gap-[clamp(0.25rem,0.4vw,0.35rem)]">
+                    {card.country ? (
+                      <Badge variant="outline" className="fluid-badge rounded-full">
+                        {getCountryFlag(card.country)} {card.country}
+                      </Badge>
+                    ) : null}
+                    {card.highlights.map((highlight) => (
+                      <Badge key={`${card.id}-${highlight.label}`} variant="secondary" className="fluid-badge rounded-full">
+                        {highlight.label}: {highlight.value}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </Card>
             ))}
           </div>
+          {reviewSummary.totalReviews > 0 ? (
+            <p className="text-muted-foreground fluid-caption">
+              Łącznie opinii: <strong>{reviewSummary.totalReviews}</strong> · Zweryfikowane:{" "}
+              <strong>{reviewSummary.verifiedCount}</strong> · Średnia ocena:{" "}
+              <strong>{reviewSummary.averageRating.toFixed(2)}</strong>
+            </p>
+          ) : null}
         </div>
 
         {/* Tabs */}
@@ -241,58 +273,65 @@ export function AnalysisLayout({
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <MetricsDashboard
-              companies={companies}
-              comparisonMetrics={comparisonMetrics}
-            />
-            
-            <div className="grid gap-[clamp(1.5rem,2.2vw,2rem)] lg:grid-cols-2">
-              <PriceComparisonChart
-                companies={companies}
-                priceHistory={priceHistory}
-              />
-              <RatingTrendsChart
-                companies={companies}
-                ratingHistory={ratingHistory}
-              />
-            </div>
+            {activeTab === "overview" && (
+              <>
+                <MetricsDashboard
+                  metrics={metrics}
+                  regulationCards={companies.map((company) => ({
+                    id: company.id,
+                    name: company.name,
+                    regulation: company.regulation ?? null,
+                    country: company.country ?? null,
+                    licenses: company.licenses ?? [],
+                  }))}
+                />
+                <div className="grid gap-[clamp(1.5rem,2.2vw,2rem)] lg:grid-cols-2">
+                  <PriceComparisonChart data={priceChart} />
+                  <RatingTrendsChart data={ratingChart} />
+                </div>
+              </>
+            )}
           </TabsContent>
 
           {/* Plans Tab */}
           <TabsContent value="plans" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <PlanFeaturesMatrix companies={companies} />
-            <PriceComparisonChart
-              companies={companies}
-              priceHistory={priceHistory}
-            />
+            {activeTab === "plans" && (
+              <>
+                <PlanFeaturesMatrix companies={companies} />
+                <PriceComparisonChart data={priceChart} />
+              </>
+            )}
           </TabsContent>
 
           {/* Trading Conditions Tab */}
           <TabsContent value="trading" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <TradingConditions companies={companies} />
+            {activeTab === "trading" && <TradingConditions companies={companies} />}
           </TabsContent>
 
           {/* Reviews Tab */}
           <TabsContent value="reviews" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <ReviewStatisticsComponent
-              companies={companies}
-              reviewStatistics={reviewStatistics}
-            />
-            <ReviewSentiment companies={companies} />
+            {activeTab === "reviews" && (
+              <>
+                <ReviewStatisticsComponent
+                  companies={companies}
+                  reviewStatistics={reviewStatistics}
+                />
+                <ReviewSentiment companies={companies} />
+              </>
+            )}
           </TabsContent>
 
           {/* Payouts Tab */}
           <TabsContent value="payouts" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <PayoutAnalysis companies={companies} />
+            {activeTab === "payouts" && <PayoutAnalysis companies={companies} />}
           </TabsContent>
 
           {/* Company Profiles Tab */}
           <TabsContent value="company" className="space-y-[clamp(2rem,3vw,3rem)]">
-            <CompanyProfile companies={companies} />
+            {activeTab === "company" && <CompanyProfile companies={companies} />}
           </TabsContent>
         </Tabs>
       </div>
     </div>
   );
 }
-

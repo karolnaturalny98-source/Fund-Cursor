@@ -175,24 +175,29 @@ Zachować porównywarkę jako **osobne narzędzie** (1–3 firmy, wykresy, głę
 
 ### 5.1 Struktura i UX
 
-- Jasny, dwustopniowy flow:
+- [x] Jasny, dwustopniowy flow:
   1. **Wybierz 1–3 firmy**
   2. **Analiza / wykresy / porównanie**
-- Upewnić się, że CTA z homepage (sekcja „Teaser porównywarki”) kieruje dokładnie na `/analizy`.
-- Zachować obecną funkcjonalność, ale uporządkować ją pod kątem modularności i czytelności.
+- [x] Upewnić się, że CTA z homepage (sekcja „Teaser porównywarki”) kieruje dokładnie na `/analizy`.
+- [x] Zachować obecną funkcjonalność, ale uporządkować ją pod kątem modularności i czytelności.
 
 ---
 
 ### 5.2 Modularność
 
-- Wydzielić logikę porównywania firm do dedykowanych hooków, np.:
+- [x] Wydzielić logikę porównywania firm do dedykowanych hooków, np.:
   - `useComparisonData`
   - `useComparisonCharts`
-- Zoptymalizować ładowanie:
+- [x] Zoptymalizować ładowanie:
   - komponentów wykresów (lazy-loading),
   - cięższych danych analitycznych (SSR lub SSG, jeśli ma sens),
   - zapytań – unikać powielania fetchów.
-- Upewnić się, że struktura komponentów jest czytelna i możliwa do rozbudowy (np. dodanie nowych metryk w przyszłości).
+- [x] Upewnić się, że struktura komponentów jest czytelna i możliwa do rozbudowy (np. dodanie nowych metryk w przyszłości).
+
+#### Aktualizacja – 2025-11-14
+- Dodano hooki `useComparisonData` i `useComparisonCharts`, które agregują metryki, statystyki opinii i dane wykresów – komponenty (dashboard, wykresy) otrzymują gotowe zbiory, dzięki czemu unikamy powielania obliczeń w wielu miejscach.
+- `PriceComparisonChart` i `RatingTrendsChart` otrzymują przygotowane dane, a zakładki Tabs renderują sekcje dopiero po aktywacji, co ogranicza koszty hydratacji oraz pozwala łatwo rozszerzać moduły (plany, trading, opinie, wypłaty, profile).
+- Widok `/analizy/[...slugs]` zachowuje flow 1) wybór firm → 2) analiza; header pokazuje podsumowanie firm i globalny skrót opinii, a wszystkie sekcje wykorzystują modularne komponenty gotowe pod dalsze rozbudowy (nowe metryki lub kolejne wykresy).
 
 ---
 

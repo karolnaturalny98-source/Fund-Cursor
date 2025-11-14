@@ -5,20 +5,27 @@ import { TrendingUp, Star, FileText, DollarSign, Calendar, Shield, CreditCard, B
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import type { CompanyWithDetails } from "@/lib/types";
-import type { ComparisonMetrics } from "@/lib/queries/analysis";
+import type { ComparisonMetricsData, ComparisonMetricValue } from "@/components/analysis/hooks/use-comparison-data";
 import { cn } from "@/lib/utils";
 import { useStaggerAnimation } from "@/lib/animations";
 
+interface RegulationCardData {
+  id: string;
+  name: string;
+  regulation: string | null;
+  country: string | null;
+  licenses: string[];
+}
+
 interface MetricsDashboardProps {
-  companies: CompanyWithDetails[];
-  comparisonMetrics: Record<string, ComparisonMetrics>;
+  metrics: ComparisonMetricsData;
+  regulationCards: RegulationCardData[];
 }
 
 interface MetricCardProps {
   title: string;
   icon: React.ReactNode;
-  values: { companyName: string; value: string | number; companyId: string }[];
+  values: ComparisonMetricValue[];
   unit?: string;
   higherIsBetter?: boolean;
 }
@@ -135,67 +142,18 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
   );
 }
 
-export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashboardProps) {
-  // Prepare metrics data
-  const avgPlanPrices = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: comparisonMetrics[company.id]?.avgPlanPrice || 0,
-  }));
-
-  const cashbackRates = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: company.cashbackRate || 0,
-  }));
-
-  const ratings = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: company.rating || 0,
-  }));
-
-  const totalPlans = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: comparisonMetrics[company.id]?.totalPlans || 0,
-  }));
-
-  const foundedYears = companies
-    .filter((c) => c.foundedYear)
-    .map((company) => ({
-      companyName: company.name,
-      companyId: company.id,
-      value: company.foundedYear!,
-    }));
-
-  const paymentMethodsCounts = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: company.paymentMethods.length,
-  }));
-
-  const instrumentsCounts = companies.map((company) => ({
-    companyName: company.name,
-    companyId: company.id,
-    value: company.instruments.length,
-  }));
-
-  const avgProfitSplits = companies
-    .map((company) => ({
-      companyName: company.name,
-      companyId: company.id,
-      value: comparisonMetrics[company.id]?.avgProfitSplit || 0,
-    }))
-    .filter((item) => item.value > 0);
-
-  const avgLeverages = companies
-    .map((company) => ({
-      companyName: company.name,
-      companyId: company.id,
-      value: comparisonMetrics[company.id]?.avgLeverage || 0,
-    }))
-    .filter((item) => item.value > 0);
+export function MetricsDashboard({ metrics, regulationCards }: MetricsDashboardProps) {
+  const {
+    ratings,
+    cashbackRates,
+    avgPlanPrices,
+    totalPlans,
+    foundedYears,
+    paymentMethodsCounts,
+    instrumentsCounts,
+    avgProfitSplits,
+    avgLeverages,
+  } = metrics;
 
   // Najważniejsze metryki - zawsze widoczne
   const primaryMetrics = [
@@ -327,7 +285,7 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
       <div className="space-y-[clamp(0.9rem,1.3vw,1.2rem)]">
         <h3 className="text-[clamp(1.25rem,0.5vw+1.1rem,1.5rem)] font-semibold">Informacje Regulacyjne</h3>
         <div className="grid gap-[clamp(1.1rem,1.6vw,1.5rem)] md:grid-cols-2 lg:grid-cols-3">
-          {companies.map((company) => (
+          {regulationCards.map((company) => (
             <Card
               key={company.id}
               className="group relative overflow-hidden glass-panel transition-all duration-300 hover:border-primary/45 hover:shadow-premium before:absolute before:inset-y-5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50"
@@ -375,4 +333,3 @@ export function MetricsDashboard({ companies, comparisonMetrics }: MetricsDashbo
     </div>
   );
 }
-

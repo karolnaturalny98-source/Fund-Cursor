@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,77 +7,15 @@ import {
   ChartContainer,
   ChartTooltip,
 } from "@/components/ui/chart";
-import { getCompareColor } from "@/lib/compare";
-import type { CompanyWithDetails, PriceHistoryPoint } from "@/lib/types";
+import type { PriceChartData } from "@/components/analysis/hooks/use-comparison-charts";
 
 interface PriceComparisonChartProps {
-  companies: CompanyWithDetails[];
-  priceHistory: Record<string, PriceHistoryPoint[]>;
+  data: PriceChartData;
 }
 
-export function PriceComparisonChart({ companies, priceHistory }: PriceComparisonChartProps) {
-  // Prepare chart data by aggregating all plans
-  const chartData = useMemo(() => {
-    const dataMap = new Map<string, Record<string, number>>();
-
-    companies.forEach((company, _idx) => {
-      const history = priceHistory[company.id] || [];
-      
-      history.forEach((point) => {
-        const date = new Date(point.recordedAt).toLocaleDateString("pl-PL", {
-          month: "short",
-          year: "numeric",
-        });
-        
-        if (!dataMap.has(date)) {
-          dataMap.set(date, {});
-        }
-        
-        const entry = dataMap.get(date)!;
-        entry[company.name] = point.price;
-      });
-    });
-
-    return Array.from(dataMap.entries())
-      .map(([date, values]) => ({
-        date,
-        ...values,
-      }))
-      .sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return dateA.getTime() - dateB.getTime();
-      });
-  }, [companies, priceHistory]);
-
-  // Calculate current price statistics
-  const priceStats = useMemo(() => {
-    return companies.map((company) => {
-      const plans = company.plans || [];
-      const prices = plans.map((p) => Number(p.price));
-      
-      return {
-        name: company.name,
-        min: prices.length > 0 ? Math.min(...prices) : 0,
-        max: prices.length > 0 ? Math.max(...prices) : 0,
-        avg: prices.length > 0 ? prices.reduce((a, b) => a + b, 0) / prices.length : 0,
-      };
-    });
-  }, [companies]);
-
-  // Build chart config for ChartContainer
-  const chartConfig = useMemo(() => {
-    const config: Record<string, { label: string; color: string }> = {};
-    companies.forEach((company, idx) => {
-      config[company.name] = {
-        label: company.name,
-        color: getCompareColor(idx),
-      };
-    });
-    return config;
-  }, [companies]);
-
-  const hasHistoricalData = chartData.length > 0;
+export function PriceComparisonChart({ data }: PriceComparisonChartProps) {
+  const { chartData, priceStats, chartConfig, hasHistoricalData } = data;
+  const chartEntries = Object.entries(chartConfig);
 
   return (
     <Card className="col-span-full rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
@@ -91,11 +28,11 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
       <CardContent className="space-y-6">
         {/* Current Price Stats */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {priceStats.map((stat, idx) => (
+          {priceStats.map((stat) => (
             <div
               key={stat.name}
               className="rounded-lg border border-border/60 bg-background/60 backdrop-blur-[36px]! p-4 border-l-4 border-[var(--border-color)]"
-              style={{ "--border-color": getCompareColor(idx) } as React.CSSProperties}
+              style={{ "--border-color": stat.color } as React.CSSProperties}
             >
               <h4 className="mb-2 font-semibold">{stat.name}</h4>
               <div className="space-y-1 text-sm">
@@ -161,12 +98,12 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
                   }}
                 />
                 <Legend />
-                {companies.map((company, idx) => (
+                {chartEntries.map(([label, config]) => (
                   <Line
-                    key={company.id}
+                    key={label}
                     type="monotone"
-                    dataKey={company.name}
-                    stroke={getCompareColor(idx)}
+                    dataKey={label}
+                    stroke={config.color}
                     strokeWidth={2}
                     dot={{ r: 3 }}
                     activeDot={{ r: 5 }}
@@ -186,4 +123,3 @@ export function PriceComparisonChart({ companies, priceHistory }: PriceCompariso
     </Card>
   );
 }
-
