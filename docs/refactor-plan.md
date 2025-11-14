@@ -225,18 +225,23 @@ Zachować porównywarkę jako **osobne narzędzie** (1–3 firmy, wykresy, głę
 ## Etap 6 – Stylowanie i Tailwind
 
 ### 6.1 `tailwind.config.ts`
-- [ ] Wprowadzić plik `tailwind.config.ts`:
+- [x] Wprowadzić plik `tailwind.config.ts`:
   - przenieść tam kolory,
   - zdefiniować podstawowe font-size, spacing, radius,
   - odwzorować najważniejsze tokens z `globals.css`.
-- [ ] Stopniowo używać `theme(...)` zamiast surowych wartości.
+- [x] Stopniowo używać `theme(...)` zamiast surowych wartości.
 
 ### 6.2 Naprawa brakujących klas
-- [ ] Dodać definicję `.glass-premium` (i ewentualnie innych brakujących utili) tak, aby `SiteHeader` i `SiteFooter` renderowały efekty zgodnie z projektem.
+- [x] Dodać definicję `.glass-premium` (i ewentualnie innych brakujących utili) tak, aby `SiteHeader` i `SiteFooter` renderowały efekty zgodnie z projektem.
 
 ### 6.3 Redukcja duplikatów
-- [ ] Zmapować gradienty, cienie, glass efekty na 2–3 główne utilsy.
-- [ ] Usunąć/lub zastąpić ręczne `px-[clamp(...)]`, gdzie istnieją `fluid-*`.
+- [x] Zmapować gradienty, cienie, glass efekty na 2–3 główne utilsy.
+- [x] Usunąć/lub zastąpić ręczne `px-[clamp(...)]`, gdzie istnieją `fluid-*`.
+
+#### Aktualizacja – 2025-11-14
+- Dodano `tailwind.config.ts`, który odwzorowuje paletę, spacing (`fluid-section-*`, `fluid-stack-*`), typografię (`fluid-h*`, `fluid-copy`), promienie i animacje; `theme()` może być teraz używane w utilach zamiast ręcznych wartości.
+- W `app/globals.css` rozbudowano system glass o trzy podstawowe klasy (`glass-card`, `glass-panel`, `glass-premium`) oraz nowe utilsy (`fluid-pill`, `fluid-table-head`, `fluid-table-cell`, `fluid-icon-sm`), a `SiteHeader`/`SiteFooter` korzystają z `glass-premium`, dzięki czemu odzyskały efekt szklanego panelu.
+- Sekcja rankingu na stronie głównej oraz pozostałe pigułki CTA korzystają z nowych utili zamiast powtarzania `px-[clamp(...)]`, co porządkuje spacing w tabeli i badge’ach; dokumentacja `fluid` została uzupełniona o nowe wpisy.
 
 ---
 

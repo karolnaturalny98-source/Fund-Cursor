@@ -41,3 +41,8 @@
 - Powstały hooki `useUserSummary`, `useWalletOffers` i `useUserDisputes`, które cache’ują odpowiedzi API i udostępniają `refresh/load/reset`; `/panel` oraz globalny `UserPanel` korzystają teraz z tych samych źródeł danych zamiast utrzymywać własne fetch’e i stany.
 - Strona `/panel` odczytuje tab startowy z parametru `?view=`, a zakładki `RedeemSection` i `DisputesSection` pobierają dane poprzez hooki (w tym automatyczne przeładowanie po sukcesie redeem/dispute), co uprościło kilkaset linii stanów i odwołań do `fetch`.
 - Overlay `UserPanel` wykorzystuje `useUserSummary`, tab „Saldo” został przemianowany na „Przegląd”, a w sekcji CTA pojawiły się przyciski „Wymień punkty” i „Zgłoszenia” prowadzące do `/panel?view=redeem|disputes`, dzięki czemu overlay pełni rolę lekkiego podglądu i zachęca do przejścia do pełnego panelu.
+
+## 2025-11-14 – Etap 6: Stylowanie i Tailwind
+- Utworzono `tailwind.config.ts`, który mapuje kolory (z obsługą alfa), spacing `fluid-*`, typografię, promienie i animacje – dzięki temu utilsy w `globals.css` mogą opierać się na `theme()` zamiast surowych wartości, a projekt ma jedno źródło prawdy dla tokenów.
+- Rozszerzono `app/globals.css` o klasę `glass-premium` oraz nowe utilsy (`fluid-pill`, `fluid-table-head`, `fluid-table-cell`, `fluid-icon-sm`); `SiteHeader`, `SiteFooter` i sekcje mobilne odzyskały efekt szklanego panelu, a glass efekty zostały sprowadzone do trzech bazowych wariantów (`glass-card`, `glass-panel`, `glass-premium`).
+- Ranking na stronie głównej i pozostałe pigułki CTA korzystają teraz z nowych utili zamiast powtarzanych `px-[clamp(...)]`, co upraszcza kod i przybliża rollout `fluid spacing`; dokumentacja fluid została uzupełniona o nowe wpisy.

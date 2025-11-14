@@ -23,6 +23,10 @@ This project unifies responsive typography, buttons, and badges through a set of
 | `fluid-copy`         | Body text                                   | `font-size: clamp(0.819rem, 0.378vw + 0.714rem, 0.924rem)`<br>`line-height: 1.7` |
 | `fluid-caption`      | Small text / descriptions                   | `font-size: clamp(0.588rem, 0.2352vw + 0.504rem, 0.688rem)`<br>`line-height: 1.45` |
 | `fluid-eyebrow`      | Uppercase label text                        | `font-size: clamp(0.571rem, 0.294vw + 0.487rem, 0.655rem)`<br>`letter-spacing: clamp(0.151em, 0.050em + 0.185vw, 0.252em)` |
+| `fluid-pill`         | Pigułki / chipy / badge CTA                 | `gap: clamp(0.35rem, 0.6vw, 0.5rem)`<br>`padding-inline: clamp(0.6rem, 1vw, 0.85rem)`<br>`padding-block: clamp(0.25rem, 0.5vw, 0.4rem)` |
+| `fluid-table-head`   | Padding nagłówków tabel                     | `padding-inline: clamp(0.75rem, 1.2vw, 1.4rem)`<br>`padding-block: clamp(0.85rem, 1.3vw, 1.35rem)` |
+| `fluid-table-cell`   | Padding komórek tabel                       | `padding-inline: clamp(0.75rem, 1.2vw, 1.4rem)`<br>`padding-block: clamp(1rem, 1.5vw, 1.6rem)` |
+| `fluid-icon-sm`      | Małe ikony w badge/pill                    | `height/width: clamp(0.65rem, 0.4vw + 0.55rem, 0.8rem)` |
 | `fluid-button`       | Primary buttons                             | `height: clamp(2.31rem, 1.68vw + 1.89rem, 2.73rem)`<br>`padding-inline: clamp(1.05rem, 1.68vw + 0.63rem, 1.89rem)`<br>`font-size: clamp(0.798rem, 0.504vw + 0.672rem, 0.882rem)` |
 | `fluid-button-sm`    | Compact buttons                             | `height: clamp(1.89rem, 1.092vw + 1.512rem, 2.1rem)`<br>`padding-inline: clamp(0.84rem, 1.176vw + 0.63rem, 1.26rem)`<br>`font-size: clamp(0.63rem, 0.336vw + 0.546rem, 0.714rem)` |
 | `fluid-button-lg`    | Emphasised CTAs                             | `height: clamp(2.604rem, 2.016vw + 2.184rem, 3.15rem)`<br>`padding-inline: clamp(1.26rem, 2.184vw + 0.924rem, 2.604rem)`<br>`font-size: clamp(0.882rem, 0.546vw + 0.756rem, 1.008rem)` |

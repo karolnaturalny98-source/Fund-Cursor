@@ -59,7 +59,7 @@ function getCompanyHref(company: HomeRankingCompany): string {
 }
 
 const HEADER_CELL_CLASSES =
-  "px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(0.85rem,1.3vw,1.35rem)] text-left fluid-caption font-semibold uppercase tracking-[0.18em] text-muted-foreground";
+  "fluid-table-head text-left fluid-caption font-semibold uppercase tracking-[0.18em] text-muted-foreground";
 
 function getCompanyMeta(company: HomeRankingCompany): string {
   const parts: string[] = [];
@@ -73,8 +73,8 @@ function RatingBadge({ rating }: { rating: number | null }) {
     return <span className="fluid-caption text-muted-foreground">-</span>;
   }
   return (
-    <div className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] rounded-full border border-primary/30 bg-primary/10 px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] text-primary fluid-caption font-semibold">
-      <Star className="h-[clamp(0.65rem,0.4vw+0.55rem,0.8rem)] w-[clamp(0.65rem,0.4vw+0.55rem,0.8rem)] fill-primary text-primary" />
+    <div className="fluid-pill border border-primary/30 bg-primary/10 text-primary fluid-caption font-semibold">
+      <Star className="fluid-icon-sm fill-primary text-primary" />
       {rating.toFixed(1)}
     </div>
   );
@@ -119,7 +119,7 @@ function CompanyRow({
 
   return (
     <TableRow className={cn("border-b border-border/40 transition-colors hover:bg-card/40", top3Class)}>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top font-semibold text-muted-foreground fluid-copy">
+      <TableCell className="fluid-table-cell align-top font-semibold text-muted-foreground fluid-copy">
         <div className="flex items-center gap-[clamp(0.4rem,0.7vw,0.65rem)]">
           {isTop3 && (
             index === 0 ? (
@@ -131,7 +131,7 @@ function CompanyRow({
           #{index + 1}
         </div>
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+      <TableCell className="fluid-table-cell align-top">
         <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
           <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={isTop3} />
           <div className="flex flex-col">
@@ -149,16 +149,16 @@ function CompanyRow({
           </div>
         </div>
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+      <TableCell className="fluid-table-cell align-top">
         <RatingBadge rating={company.rating} />
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top text-muted-foreground fluid-caption">
+      <TableCell className="fluid-table-cell align-top text-muted-foreground fluid-caption">
         <span className="hidden sm:inline">
           {company.reviewCount.toLocaleString("pl-PL")} opinii
         </span>
         <span className="sm:hidden">{company.reviewCount.toLocaleString("pl-PL")}</span>
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+      <TableCell className="fluid-table-cell align-top">
         {hasCashback ? (
           <PremiumBadge variant="glow" className="w-fit fluid-badge font-semibold">
             {Math.round(cashbackRate)}%
@@ -167,10 +167,10 @@ function CompanyRow({
           <span className="fluid-caption text-muted-foreground">-</span>
         )}
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+      <TableCell className="fluid-table-cell align-top">
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
-      <TableCell className="px-[clamp(0.75rem,1.2vw,1.4rem)] py-[clamp(1rem,1.5vw,1.6rem)] align-top">
+      <TableCell className="fluid-table-cell align-top">
         <Button asChild variant="ghost-dark" className="fluid-button w-full justify-center rounded-full">
           <Link href={profileHref} prefetch={false}>
             Przejdź

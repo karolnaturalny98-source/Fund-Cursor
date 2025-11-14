@@ -117,7 +117,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                className="rounded-full border border-primary/30 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
+                className="fluid-pill border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
                   >
                     Materiał dowodowy
                   </a>
@@ -136,4 +136,3 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
     </Section>
   );
 }
-

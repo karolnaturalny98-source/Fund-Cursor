@@ -102,16 +102,16 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                       <Link
                         key={link}
                         href={link}
-                        className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs fluid-caption"
+                        className="fluid-pill border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs fluid-caption"
                         target="_blank"
                         rel="noreferrer"
                       >
-                        Link{" "}
+                        Link
                         <PremiumIcon
                           icon={ArrowUpRight}
                           variant="glow"
                           size="sm"
-                          className="h-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)] w-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)]"
+                          className="fluid-icon-sm"
                           hoverGlow
                         />
                       </Link>

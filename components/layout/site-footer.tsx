@@ -75,7 +75,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-border/40 bg-card/72 backdrop-blur-md">
+    <footer className="glass-premium border-t border-border/40">
       <div className="w-full px-2 md:px-4 xl:px-0 fluid-section-lg">
         <div className="mx-auto flex max-w-screen-xl flex-col fluid-stack-xl">
         {/* Górna sekcja - Logo + Newsletter */}
