@@ -89,3 +89,12 @@ export interface RankingsExplorerInitialFilters {
   minReviews: number;
   hasCashback: boolean;
 }
+
+export type HomeRankingTabId = "top" | "opinions" | "cashback" | "price" | "payouts";
+
+export interface HomeRankingTab {
+  id: HomeRankingTabId;
+  label: string;
+  description: string;
+  companies: RankingCompanySnapshot[];
+}

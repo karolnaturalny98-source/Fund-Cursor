@@ -8,6 +8,7 @@ import type {
   RankingMaxValues,
   RankingScores,
   RankingsDataset,
+  HomeRankingTab,
 } from "@/lib/types/rankings";
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -823,6 +824,120 @@ export const getRankingsDataset = unstable_cache(
     tags: ["rankings"],
   }
 );
+
+export function buildRankingTabs(
+  dataset: RankingsDataset,
+  limit = 10,
+): HomeRankingTab[] {
+  const companies = dataset.companies;
+
+  const top = selectTopCompanies(
+    companies,
+    (company) => company.scores.overall,
+    limit,
+  );
+
+  const opinions = selectTopCompanies(
+    companies.filter((company) => company.reviewCount > 0),
+    (company) => company.averageRating ?? 0,
+    limit,
+  );
+
+  const cashback = selectTopCompanies(
+    companies.filter(
+      (company) =>
+        typeof company.cashbackRate === "number" && company.cashbackRate > 0,
+    ),
+    (company) => company.cashbackRate ?? 0,
+    limit,
+  );
+
+  const price = selectTopCompanies(
+    companies.filter(
+      (company) =>
+        typeof company.maxPlanPrice === "number" && company.maxPlanPrice > 0,
+    ),
+    (company) => company.maxPlanPrice ?? Number.POSITIVE_INFINITY,
+    limit,
+    { direction: "asc" },
+  );
+
+  const payouts = selectTopCompanies(
+    companies,
+    (company) => getPayoutMetric(company),
+    limit,
+    { direction: "asc" },
+  );
+
+  return [
+    {
+      id: "top",
+      label: "Top",
+      description: "Najlepsze firmy wg rankingu ogólnego",
+      companies: top,
+    },
+    {
+      id: "opinions",
+      label: "Opinie",
+      description: "Liderzy według ocen społeczności",
+      companies: opinions,
+    },
+    {
+      id: "cashback",
+      label: "Cashback",
+      description: "Najwyższe zwroty i kody rabatowe",
+      companies: cashback,
+    },
+    {
+      id: "price",
+      label: "Cena",
+      description: "Najniższe koszty wejścia w wyzwanie",
+      companies: price,
+    },
+    {
+      id: "payouts",
+      label: "Wypłaty",
+      description: "Firmy z najlepszym doświadczeniem wypłat",
+      companies: payouts,
+    },
+  ];
+}
+
+export async function getHomeRankingTabs(
+  limit = 10,
+): Promise<HomeRankingTab[]> {
+  const dataset = await getRankingsDataset();
+  return buildRankingTabs(dataset, limit);
+}
+
+function selectTopCompanies(
+  companies: RankingCompanySnapshot[],
+  accessor: (company: RankingCompanySnapshot) => number,
+  limit: number,
+  options: { direction?: "asc" | "desc" } = {},
+): RankingCompanySnapshot[] {
+  const direction = options.direction ?? "desc";
+  const sorted = [...companies].sort((a, b) => {
+    const valueA = accessor(a);
+    const valueB = accessor(b);
+    if (direction === "asc") {
+      return valueA - valueB;
+    }
+    return valueB - valueA;
+  });
+  return sorted.slice(0, limit);
+}
+
+function getPayoutMetric(company: RankingCompanySnapshot): number {
+  if (
+    typeof company.cashbackPayoutHours === "number" &&
+    Number.isFinite(company.cashbackPayoutHours)
+  ) {
+    return company.cashbackPayoutHours;
+  }
+  const payoutScore = company.scores?.payouts ?? 0;
+  return payoutScore > 0 ? 100 - payoutScore : Number.POSITIVE_INFINITY;
+}
 
 export {
   normalizeRating,

@@ -15,6 +15,7 @@ import type {
   EvaluationModel,
   HomepageMetrics,
   ReviewExperienceLevel,
+  RecentCompanySummary,
 } from "@/lib/types";
 
 // Export type alias for companies with plans (used in admin panels)
@@ -1200,6 +1201,41 @@ export async function getHomeRanking(limit = 10): Promise<HomeRanking> {
     topCashback: topCashback.map(mapHomeRankingCompany),
     newest: newest.map(mapHomeRankingCompany),
   };
+}
+
+export async function getRecentCompanies(
+  limit = 6,
+): Promise<RecentCompanySummary[]> {
+  const companies = await prisma.company.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      logoUrl: true,
+      shortDescription: true,
+      rating: true,
+      cashbackRate: true,
+      createdAt: true,
+    },
+  });
+
+  return companies.map((company) => ({
+    id: company.id,
+    name: company.name,
+    slug: company.slug,
+    logoUrl: company.logoUrl,
+    shortDescription: company.shortDescription,
+    rating: toNumberOrNull(company.rating),
+    cashbackRate: toNumberOrNull(company.cashbackRate),
+    createdAt:
+      typeof company.createdAt === "string"
+        ? company.createdAt
+        : company.createdAt.toISOString(),
+  }));
 }
 
 const COMPANY_ADMIN_PLAN_SELECT: Prisma.CompanyPlanSelect = {

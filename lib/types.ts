@@ -422,6 +422,17 @@ export interface HomepageMetrics {
   activeInfluencers?: number;
 }
 
+export interface RecentCompanySummary {
+  id: string;
+  name: string;
+  slug: string;
+  logoUrl: string | null;
+  shortDescription: string | null;
+  rating: number | null;
+  cashbackRate: number | null;
+  createdAt: string;
+}
+
 export interface MarketingSpotlightSection {
   id: string;
   slug: string;

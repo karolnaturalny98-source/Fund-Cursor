@@ -13,3 +13,9 @@
 ## 2025-11-14 – Rename (marketing) → (site)
 - Zmieniono nazwę route group z `(marketing)` na `(site)` bez wpływu na publiczne URL-e.
 - Zaktualizowano dokumentację (`agents.md`, `docs/refactor-plan.md`) oraz wpisy o layoutach tak, aby nowa grupa była opisana jako segment publiczny aplikacji.
+
+## 2025-11-14 – Etap 3: nowa strona główna / one-page core
+- Stworzono nowy `HomeHero` z wyszukiwarką, CTA i kartami metryk oraz przeniesiono sekcję multi-rankingów do `HomeRankingSection`.
+- Dodano komponent `RankingTabsSection` i helpery `buildRankingTabs`/`getHomeRankingTabs`, wykorzystywane jednocześnie przez `/` i `/rankingi`.
+- Rozbudowano stronę o teaser porównywarki (`HomeCompareTeaser`), mini-edukację (`HomeEducationGrid`) oraz sekcję „Niedawno dodane” łączącą nowe firmy i opinie.
+- Zachowano sekcję Top Cashback, Community Highlights i Influencer Spotlight, ale osadzono je w nowym układzie one-page.

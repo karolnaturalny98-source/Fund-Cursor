@@ -121,6 +121,10 @@ nie przenosimy jej na stronę główną.
 - NIE ruszamy wewnętrznych stron firm
 - skupiamy się tylko na `/` i komponentach współdzielonych
 
+#### Aktualizacja – 2025-11-14
+- Strona główna została przebudowana zgodnie z one-page core: nowy `HomeHero` z wyszukiwarką i CTA, sekcja multi-rankingów (`HomeRankingSection`) oparta o wspólny komponent tabów, sekcja Top Cashback, teaser porównywarki oraz mini-edukacja i lista niedawno dodanych firm/opinii.
+- Wyodrębniono komponent `RankingTabsSection` oraz helpery `buildRankingTabs` / `getHomeRankingTabs`, które są wykorzystywane zarówno na `/` (limit 10), jak i na `/rankingi` (wersja „full”).
+- Dodano komponenty `HomeCompareTeaser`, `HomeEducationGrid` i `HomeRecentSection`, które korzystają z istniejących danych (`getHomeRanking`, `getRecentPublicReviews`, `getRecentCompanies`).
 
 ---
 

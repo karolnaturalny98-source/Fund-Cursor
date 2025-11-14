@@ -1,19 +1,19 @@
 import { CompareBar } from "@/components/companies/compare-bar";
 import { CompareProvider } from "@/components/companies/compare-context";
-import { HeroSection } from "@/components/home/hero-section";
-import { RankingTabs } from "@/components/home/ranking-tabs";
 import { CommunityHighlights } from "@/components/home/community-highlights";
 import { InfluencerSpotlight } from "@/components/home/influencer-spotlight";
-import { HowItWorksSection } from "@/components/home/how-it-works";
 import { KnowledgeGrid } from "@/components/home/knowledge-grid";
-import { WalletCtaBanner } from "@/components/home/wallet-cta";
+import { TopCashbackSection } from "@/components/home/top-cashback-section";
+import { HomeHero } from "@/components/home/home-hero";
+import { HomeRankingSection } from "@/components/home/home-ranking-section";
+import { HomeCompareTeaser } from "@/components/home/home-compare-teaser";
+import { HomeEducationGrid } from "@/components/home/home-education-grid";
+import { HomeRecentSection } from "@/components/home/home-recent-section";
 import { parseCompareParam } from "@/lib/compare";
-import { getHomeRanking, getHomepageMetrics, getTopCashbackCompanies } from "@/lib/queries/companies";
+import { getHomeRanking, getHomepageMetrics, getRecentCompanies, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
 import { getApprovedInfluencers } from "@/lib/queries/influencers";
-import { MarketingCarousel } from "@/components/home/marketing-carousel";
-import { getHomepageMarketingSection } from "@/lib/queries/marketing";
-import { TopCashbackSection } from "@/components/home/top-cashback-section";
+import { getHomeRankingTabs } from "@/lib/queries/rankings";
 
 interface HomeProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -23,27 +23,38 @@ export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
   const selection = parseCompareParam(params.compare);
 
-  const [metrics, ranking, reviews, influencers, marketingSection, topCashbackCompanies] = await Promise.all([
+  const [
+    metrics,
+    rankingTabs,
+    topCashbackCompanies,
+    recentReviews,
+    influencers,
+    homeRanking,
+    recentCompanies,
+  ] = await Promise.all([
     getHomepageMetrics(),
-    getHomeRanking(10),
-    getRecentPublicReviews(6),
+    getHomeRankingTabs(10),
+    getTopCashbackCompanies(6),
+    getRecentPublicReviews(4),
     getApprovedInfluencers(3),
-    getHomepageMarketingSection(10),
-    getTopCashbackCompanies(8),
+    getHomeRanking(4),
+    getRecentCompanies(6),
   ]);
+
+  const compareCompanies = homeRanking.topRated.slice(0, 2);
 
   return (
     <CompareProvider initialSelection={selection}>
       <div className="relative bg-background">
         <div className="flex flex-col fluid-stack-xl pb-[clamp(2.5rem,3vw,3.5rem)]">
-          <HeroSection metrics={metrics} />
+          <HomeHero metrics={metrics} />
+          <HomeRankingSection tabs={rankingTabs} />
           <TopCashbackSection companies={topCashbackCompanies} />
-          <MarketingCarousel section={marketingSection} />
-          <RankingTabs ranking={ranking} />
-          <CommunityHighlights reviews={reviews} />
+          <HomeCompareTeaser companies={compareCompanies} />
+          <HomeEducationGrid />
+          <HomeRecentSection companies={recentCompanies} reviews={recentReviews} />
+          <CommunityHighlights reviews={recentReviews} />
           <InfluencerSpotlight influencers={influencers} />
-          <HowItWorksSection />
-          <WalletCtaBanner />
           <KnowledgeGrid />
         </div>
       </div>

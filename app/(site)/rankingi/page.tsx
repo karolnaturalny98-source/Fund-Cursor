@@ -1,7 +1,8 @@
 ﻿import type { Metadata } from "next";
 import { RankingsExplorer } from "@/components/rankings/rankings-explorer";
 import { RankingsPageClient, RankingsMethodologyClient } from "@/components/rankings/rankings-page-client";
-import { getRankingsDataset } from "@/lib/queries/rankings";
+import { RankingTabsSection } from "@/components/rankings/ranking-tabs-section";
+import { buildRankingTabs, getRankingsDataset } from "@/lib/queries/rankings";
 import { Section } from "@/components/layout/section";
 import type {
   RankingFilters,
@@ -28,6 +29,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
   const activeTab = parseTabParam(params.tab) ?? FALLBACK_TAB;
 
   const dataset = await getRankingsDataset(filters);
+  const rankingTabs = buildRankingTabs(dataset, 15);
 
   const totalReviews = dataset.companies.reduce(
     (sum, company) => sum + company.reviewCount,
@@ -86,6 +88,10 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
             uniqueAccountTypes={uniqueAccountTypes}
           />
         </div>
+      </Section>
+
+      <Section size="lg">
+        <RankingTabsSection tabs={rankingTabs} variant="full" />
       </Section>
 
       <Section bleed size="lg" className="w-full">
@@ -183,7 +189,6 @@ export function parseTabParam(
   ];
   return allowed.includes(raw as RankingTabId) ? (raw as RankingTabId) : null;
 }
-
 
 
 
