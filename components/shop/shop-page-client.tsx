@@ -93,16 +93,16 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
 
         {/* Stats */}
         <div className="mx-auto grid max-w-3xl grid-cols-3 fluid-stack-sm">
-          <div className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(1rem,1.4vw,1.2rem)] shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
-            <div className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-foreground">{totalCompanies}</div>
+          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+            <div className="font-semibold text-foreground fluid-h2">{totalCompanies}</div>
             <div className="text-muted-foreground fluid-caption">Firm</div>
           </div>
-          <div className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(1rem,1.4vw,1.2rem)] shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
-            <div className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-foreground">{totalPlans}</div>
+          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+            <div className="font-semibold text-foreground fluid-h2">{totalPlans}</div>
             <div className="text-muted-foreground fluid-caption">Planów</div>
           </div>
-          <div className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(1rem,1.4vw,1.2rem)] shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
-            <div className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-primary">{avgCashback}%</div>
+          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+            <div className="font-semibold text-primary fluid-h2">{avgCashback}%</div>
             <div className="text-muted-foreground fluid-caption">Śr. cashback</div>
           </div>
         </div>
@@ -124,15 +124,15 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value={activeTab} className="mt-[clamp(1rem,1.5vw,1.5rem)]">
+        <TabsContent value={activeTab} className="mt-6 lg:mt-8">
           <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-            <CardHeader>
+            <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz firmę</CardTitle>
               <CardDescription className="fluid-caption">
                 Wybierz firmę, której konto chcesz zakupić
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-0">
               <ShopCompanyCards
                 companies={filteredCompanies}
                 selectedCompanyId={selectedCompanyId}
@@ -148,14 +148,14 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         <>
           <Separator />
           <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-            <CardHeader>
+            <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz plan</CardTitle>
               <CardDescription className="fluid-caption">
                 Wybierz plan konta, który Cię interesuje
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
+            <CardContent className="p-4 pt-0">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {selectedCompany.plans.map((plan) => (
                   <ShopPlanCard
                     key={plan.id}
@@ -176,13 +176,13 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         <>
           <Separator />
           <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-            <CardHeader>
+            <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Kup teraz</CardTitle>
               <CardDescription className="fluid-caption">
                 Wypełnij formularz, aby otrzymać link afiliacyjny
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-0">
               <ShopPurchaseForm
                 company={selectedCompany}
                 plan={selectedPlan}

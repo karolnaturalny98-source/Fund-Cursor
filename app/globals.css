@@ -128,6 +128,14 @@
   gap: clamp(1.47rem, 1.848vw + 0.504rem, 2.31rem);
 }
 
+@utility fluid-stack-2xl {
+  gap: clamp(2rem, 3vw, 3rem);
+}
+
+@utility fluid-stack-3xl {
+  gap: clamp(2.5rem, 3.5vw, 3.75rem);
+}
+
 @utility fluid-pill {
   display: inline-flex;
   align-items: center;
@@ -150,6 +158,81 @@
 @utility fluid-icon-sm {
   height: clamp(0.65rem, 0.4vw + 0.55rem, 0.8rem);
   width: clamp(0.65rem, 0.4vw + 0.55rem, 0.8rem);
+}
+
+@utility fluid-icon-md {
+  height: clamp(0.85rem, 0.4vw + 0.7rem, 1.05rem);
+  width: clamp(0.85rem, 0.4vw + 0.7rem, 1.05rem);
+}
+
+@utility fluid-icon-card {
+  height: clamp(2.8rem, 3.2vw, 3.1rem);
+  width: clamp(2.8rem, 3.2vw, 3.1rem);
+  border-radius: 0.85rem;
+}
+
+@utility fluid-card-pad-sm {
+  padding: clamp(0.85rem, 0.8vw + 0.6rem, 1.05rem);
+}
+
+@utility fluid-card-pad-md {
+  padding: clamp(1rem, 1vw + 0.75rem, 1.2rem);
+}
+
+@utility fluid-card-pad-lg {
+  padding: clamp(1.25rem, 1.2vw + 1rem, 1.6rem);
+}
+
+@utility fluid-avatar-md {
+  width: clamp(2.75rem, 2vw + 2.1rem, 3.1rem);
+  height: clamp(2.75rem, 2vw + 2.1rem, 3.1rem);
+  border-radius: 1rem;
+}
+
+@utility fluid-select-width {
+  width: clamp(9rem, 8vw + 4rem, 10rem);
+}
+
+@utility fluid-input-icon {
+  padding-left: clamp(2.15rem, 1vw + 1.35rem, 2.75rem);
+}
+
+@utility fluid-avatar-sm {
+  width: clamp(2.5rem, 2vw + 1.8rem, 2.8rem);
+  height: clamp(2.5rem, 2vw + 1.8rem, 2.8rem);
+  border-radius: 0.85rem;
+}
+
+@utility fluid-avatar-md {
+  width: clamp(2.75rem, 3.2vw, 3.1rem);
+  height: clamp(2.75rem, 3.2vw, 3.1rem);
+  border-radius: 1rem;
+}
+
+@utility fluid-avatar-lg {
+  width: clamp(3rem, 3.5vw + 2rem, 3.5rem);
+  height: clamp(3rem, 3.5vw + 2rem, 3.5rem);
+  border-radius: 1.1rem;
+}
+
+@utility fluid-empty-state-pad {
+  padding-block: clamp(2.5rem, 3vw, 3.25rem);
+}
+
+@utility fluid-section-pad {
+  padding-block: clamp(2.5rem, 3vw, 3.5rem);
+}
+
+@utility fluid-grid-gap-sm {
+  gap: clamp(0.75rem, 1.1vw, 1rem);
+}
+
+@utility fluid-grid-gap-md {
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+@utility fluid-grid-gap-lg {
+  gap: clamp(1.5rem, 2.2vw, 2rem);
 }
 
 @theme {
@@ -545,63 +628,84 @@
 
 @layer utilities {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 220 30% 96%;
-
-    --surface-glass: 222 33% 8%;
-    --surface-glass-soft: 222 28% 10%;
-    --card: 225 34% 9%;
-    --card-foreground: 220 30% 96%;
-    --popover: 225 34% 9%;
-    --popover-foreground: 220 30% 96%;
-    --border: 223 26% 20%;
-    --input: 223 26% 22%;
-    --muted: 222 25% 16%;
-    --muted-foreground: 220 15% 70%;
-
-    --primary: 192 85% 64%;
-    --primary-foreground: 210 27% 6%;
-    --accent: 266 83% 68%;
-    --accent-foreground: 0 0% 100%;
-    --secondary: 220 18% 18%;
-    --secondary-foreground: 220 30% 92%;
-    --destructive: 0 78% 58%;
-    --destructive-foreground: 0 0% 100%;
-
-    --ring: 192 85% 64%;
-    --radius: 1.2rem;
-    --shadow-soft: 220 35% 6%;
-    --shadow-strong: 220 35% 3%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 197 37% 24%;
+    --chart-3: 43 74% 66%;
+    --chart-4: 27 87% 67%;
+    --chart-5: 210 40% 96%;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 222.2 47.4% 11.2%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --surface-glass: 210 40% 98%;
+    --surface-glass-soft: 210 40% 96%;
+    --shadow-soft: 210 10% 50%;
+    --shadow-strong: 210 20% 40%;
   }
 
-  :root[class~='dark'] {
-    --background: 0 0% 0%;
-    --foreground: 220 32% 94%;
-
-    --surface-glass: 225 30% 7%;
-    --surface-glass-soft: 225 28% 9%;
-    --card: 228 28% 8%;
-    --card-foreground: 220 32% 94%;
-    --popover: 228 28% 8%;
-    --popover-foreground: 220 32% 94%;
-    --border: 225 24% 18%;
-    --input: 225 24% 20%;
-    --muted: 225 22% 14%;
-    --muted-foreground: 222 16% 68%;
-
-    --primary: 188 90% 60%;
-    --primary-foreground: 210 30% 5%;
-    --accent: 260 78% 70%;
-    --accent-foreground: 0 0% 100%;
-    --secondary: 225 20% 14%;
-    --secondary-foreground: 220 25% 92%;
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 0 0% 100%;
-
-    --ring: 188 90% 60%;
-    --radius: 1.25rem;
-    --shadow-soft: 220 40% 4%;
-    --shadow-strong: 220 40% 2%;
+  :root[class~='dark'],
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar: 217.2 32.6% 17.5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-accent: 217.2 32.6% 24%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 24%;
+    --sidebar-ring: 212.7 26.8% 83.9%;
+    --radius: 0.5rem;
+    --surface-glass: 217 25% 12%;
+    --surface-glass-soft: 217 20% 16%;
+    --shadow-soft: 217 25% 20%;
+    --shadow-strong: 217 35% 10%;
   }
 }
 

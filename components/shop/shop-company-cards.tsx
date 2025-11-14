@@ -41,7 +41,7 @@ function CompanyAvatar({
           alt={name}
           width={48}
           height={48}
-          className="h-[clamp(2.75rem,3.2vw,3.1rem)] w-[clamp(2.75rem,3.2vw,3.1rem)] rounded-xl border border-border/60 bg-card/72 object-contain"
+          className="fluid-avatar-md rounded-xl border border-border/60 bg-card/72 object-contain"
         />
       </div>
     );
@@ -55,7 +55,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-[clamp(2.75rem,3.2vw,3.1rem)] w-[clamp(2.75rem,3.2vw,3.1rem)] items-center justify-center rounded-xl border border-border/60 bg-card/72 text-muted-foreground text-[clamp(0.85rem,0.4vw+0.75rem,1rem)] font-semibold">
+    <div className="flex items-center justify-center fluid-avatar-md rounded-xl border border-border/60 bg-card/72 text-muted-foreground text-sm font-semibold">
       {initials}
     </div>
   );
@@ -121,13 +121,13 @@ export function ShopCompanyCards({
     <div className="flex flex-col fluid-stack-lg">
       {/* Stats */}
       <div className="grid grid-cols-2 fluid-stack-sm">
-        <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.85rem,1.2vw,1.05rem)] shadow-xs">
+        <div className="rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
           <div className="text-muted-foreground fluid-caption">Firm</div>
-          <div className="text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">{totalCompanies}</div>
+          <div className="font-semibold text-foreground fluid-h2">{totalCompanies}</div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(0.85rem,1.2vw,1.05rem)] shadow-xs">
+        <div className="rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
           <div className="text-muted-foreground fluid-caption">Planów</div>
-          <div className="text-[clamp(1.5rem,1.9vw,1.8rem)] font-semibold text-foreground">{totalPlans}</div>
+          <div className="font-semibold text-foreground fluid-h2">{totalPlans}</div>
         </div>
       </div>
 
@@ -135,19 +135,19 @@ export function ShopCompanyCards({
       <div className="flex flex-col fluid-stack-sm lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-1 items-center fluid-stack-xs">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)] -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 fluid-icon-md -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Szukaj firm..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 bg-card/72 pl-9 shadow-xs backdrop-blur-[36px]! fluid-caption"
+              className="rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]! fluid-caption fluid-input-icon"
             />
           </div>
         </div>
         <div className="flex flex-wrap items-center fluid-stack-xs">
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-            <SelectTrigger className="w-[clamp(9rem,12vw,10rem)] rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-              <ArrowUpDown className="mr-2 h-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.75rem,1.1rem)]" />
+            <SelectTrigger className="fluid-select-width rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+              <ArrowUpDown className="mr-2 fluid-icon-md" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -168,7 +168,7 @@ export function ShopCompanyCards({
           variant={filterBy === "all" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("all")}
-          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
+          className="fluid-pill font-medium"
         >
           Wszystkie
         </Button>
@@ -176,25 +176,25 @@ export function ShopCompanyCards({
           variant={filterBy === "highest-cashback" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("highest-cashback")}
-          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
+          className="fluid-pill font-medium"
         >
-          <TrendingUp className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
+          <TrendingUp className="mr-1 fluid-icon-sm" />
           Najwyższy cashback
         </Button>
         <Button
           variant={filterBy === "popular" ? "default" : "ghost"}
           size="sm"
           onClick={() => setFilterBy("popular")}
-          className="h-auto rounded-full px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.3rem,0.45vw,0.4rem)] text-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] font-medium"
+          className="fluid-pill font-medium"
         >
-          <Star className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
+          <Star className="mr-1 fluid-icon-sm" />
           Najpopularniejsze
         </Button>
       </div>
 
       {/* Companies Grid */}
       {filteredAndSortedCompanies.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 p-[clamp(1.25rem,1.8vw,1.6rem)] text-center text-muted-foreground fluid-copy">
+        <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 fluid-card-pad-lg text-center text-muted-foreground fluid-copy">
           Brak firm spełniających kryteria wyszukiwania.
         </div>
       ) : (
@@ -213,37 +213,37 @@ export function ShopCompanyCards({
                 )}
                 onClick={() => onCompanyChange(company.id)}
               >
-                <div className="p-[clamp(1rem,1.4vw,1.2rem)]">
-                  <div className="flex items-start fluid-stack-sm">
+                <div className="fluid-card-pad-md">
+                  <div className="flex items-start gap-4">
                     <CompanyAvatar name={company.name} logoUrl={company.logoUrl} />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between fluid-stack-xs">
+                    <div className="flex-1 min-w-0 flex flex-col fluid-stack-sm">
+                      <div className="flex items-start justify-between gap-2">
                         <h3 className="font-semibold text-foreground leading-tight fluid-copy">
                           {company.name}
                         </h3>
                         {isSelected && (
-                          <CheckCircle2 className="h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] shrink-0 text-primary" />
+                          <CheckCircle2 className="fluid-icon-md shrink-0 text-primary" />
                         )}
                       </div>
                       {company.shortDescription && (
-                        <p className="mt-[clamp(0.35rem,0.5vw,0.45rem)] line-clamp-2 text-muted-foreground fluid-caption">
+                        <p className="text-muted-foreground fluid-caption line-clamp-2">
                           {company.shortDescription}
                         </p>
                       )}
-                      <div className="mt-[clamp(0.5rem,0.75vw,0.7rem)] flex flex-wrap items-center fluid-stack-xs">
+                      <div className="flex flex-wrap items-center gap-2">
                         {cashbackRate > 0 && (
-                          <Badge variant="outline" className="fluid-badge rounded-full">
+                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
                             {cashbackRate}% cashback
                           </Badge>
                         )}
                         {rating && (
-                          <Badge variant="outline" className="fluid-badge rounded-full">
-                            <Star className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] fill-yellow-500 text-yellow-500" />
+                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
+                            <Star className="mr-1 fluid-icon-sm fill-yellow-500 text-yellow-500" />
                             {rating.toFixed(1)}
                           </Badge>
                         )}
                         {company.plans.length > 0 && (
-                          <Badge variant="outline" className="fluid-badge rounded-full">
+                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
                             {company.plans.length} plan{company.plans.length !== 1 ? "ów" : ""}
                           </Badge>
                         )}
@@ -259,4 +259,3 @@ export function ShopCompanyCards({
     </div>
   );
 }
-

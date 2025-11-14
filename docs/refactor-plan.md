@@ -242,6 +242,7 @@ Zachować porównywarkę jako **osobne narzędzie** (1–3 firmy, wykresy, głę
 - Dodano `tailwind.config.ts`, który odwzorowuje paletę, spacing (`fluid-section-*`, `fluid-stack-*`), typografię (`fluid-h*`, `fluid-copy`), promienie i animacje; `theme()` może być teraz używane w utilach zamiast ręcznych wartości.
 - W `app/globals.css` rozbudowano system glass o trzy podstawowe klasy (`glass-card`, `glass-panel`, `glass-premium`) oraz nowe utilsy (`fluid-pill`, `fluid-table-head`, `fluid-table-cell`, `fluid-icon-sm`), a `SiteHeader`/`SiteFooter` korzystają z `glass-premium`, dzięki czemu odzyskały efekt szklanego panelu.
 - Sekcja rankingu na stronie głównej oraz pozostałe pigułki CTA korzystają z nowych utili zamiast powtarzania `px-[clamp(...)]`, co porządkuje spacing w tabeli i badge’ach; dokumentacja `fluid` została uzupełniona o nowe wpisy.
+- Wyrównano zmienne kolorystyczne do standardowego schematu shadcn (light/dark), więc przyszłe motywy z registry/tweakcn można wklejać bez zmian, a nasze własne efekty (`surface-glass`, `shadow-soft/strong`) bazują na pochodnych tych samych tokenów.
 
 ---
 

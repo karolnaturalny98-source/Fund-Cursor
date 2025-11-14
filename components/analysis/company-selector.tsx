@@ -80,16 +80,16 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
   }, [companies, selected]);
 
   return (
-    <div className="space-y-[clamp(1.5rem,2vw,2rem)] animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="flex flex-col fluid-stack-xl animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Search Bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 fluid-icon-sm -translate-y-1/2 text-muted-foreground" />
         <Input
           type="text"
           placeholder="Szukaj firm po nazwie, slug lub kraju..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="rounded-2xl border-border/60 bg-card/72 pl-10 backdrop-blur-[36px]!"
+          className="rounded-2xl border-border/60 bg-card/72 shadow-xs backdrop-blur-xl fluid-input-icon"
         />
       </div>
 
@@ -104,13 +104,13 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
               variant="ghost"
               size="sm"
               onClick={handleClear}
-              className="h-auto rounded-full px-[clamp(0.85rem,1.3vw,1.2rem)] py-[clamp(0.35rem,0.6vw,0.5rem)] fluid-caption font-medium transition-colors hover:bg-primary/10 hover:text-primary"
+              className="fluid-pill font-medium text-primary hover:bg-primary/10"
             >
               Wyczyść wszystkie
             </Button>
           </div>
 
-          <div className="grid gap-[clamp(0.85rem,1.3vw,1.15rem)] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid fluid-grid-gap-sm sm:grid-cols-2 lg:grid-cols-3">
             {selectedCompanies.map((company) => (
               <Card
                 key={company.slug}
@@ -127,14 +127,14 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
 
                   <div className="flex items-start gap-3">
                     {company.logoUrl ? (
-                      <Avatar className="h-12 w-12 rounded-lg">
+                      <Avatar className="fluid-avatar-md rounded-lg">
                         <AvatarImage src={company.logoUrl} alt={company.name} />
                         <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                     ) : (
-                      <Avatar className="h-12 w-12 rounded-lg">
+                      <Avatar className="fluid-avatar-md rounded-lg">
                         <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
@@ -153,7 +153,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                         </div>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="fluid-badge rounded-full">
+                        <Badge variant="outline" className="fluid-pill text-xs font-medium">
                           {company.country}
                         </Badge>
                       )}
@@ -182,7 +182,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
           Dostępne firmy ({filteredCompanies.length})
         </h3>
 
-        <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid fluid-grid-gap-sm sm:grid-cols-2 lg:grid-cols-3">
           {filteredCompanies.map((company) => {
             const isSelected = selected.includes(company.slug);
             const canSelect = !isSelected && selected.length < MAX_SELECTION;
@@ -201,14 +201,14 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
               >
                 <div className="flex items-start gap-3">
                   {company.logoUrl ? (
-                    <Avatar className="h-10 w-10 rounded-lg">
+                    <Avatar className="fluid-avatar-sm rounded-lg">
                       <AvatarImage src={company.logoUrl} alt={company.name} />
                       <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                   ) : (
-                    <Avatar className="h-10 w-10 rounded-lg">
+                    <Avatar className="fluid-avatar-sm rounded-lg">
                       <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>
@@ -219,12 +219,12 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                     <h4 className="font-medium leading-tight text-foreground transition-colors group-hover:text-primary fluid-copy">
                       {company.name}
                     </h4>
-                    <div className="flex flex-wrap items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
+                    <div className="flex flex-wrap items-center gap-2 text-muted-foreground fluid-caption">
                       {company.rating && (
                         <span>⭐ {company.rating.toFixed(1)}</span>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="fluid-badge rounded-full">
+                        <Badge variant="outline" className="fluid-pill text-xs font-medium">
                           {company.country}
                         </Badge>
                       )}
@@ -243,7 +243,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
         </div>
 
         {filteredCompanies.length === 0 && (
-          <div className="py-[clamp(2.5rem,3vw,3.25rem)] text-center text-muted-foreground fluid-copy">
+          <div className="text-center text-muted-foreground fluid-copy fluid-empty-state-pad">
             <p>Nie znaleziono firm pasujących do wyszukiwania.</p>
           </div>
         )}
@@ -251,4 +251,3 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
     </div>
   );
 }
-

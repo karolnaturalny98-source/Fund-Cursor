@@ -12,9 +12,9 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link href={`/baza-wiedzy/${post.slug}`}>
-      <Card className="group h-full overflow-hidden rounded-2xl border border-border/40 bg-background/60 shadow-xs transition-all hover:border-primary/30 hover:shadow-md backdrop-blur-[36px]!">
+      <Card className="group h-full overflow-hidden rounded-2xl border border-border/40 bg-background/60 shadow-xs transition-all hover:border-primary/30 hover:shadow-md backdrop-blur-xl">
         {post.featuredImageUrl && (
-          <div className="relative h-[clamp(9rem,13vw,11rem)] w-full overflow-hidden">
+          <div className="relative h-48 w-full overflow-hidden">
             <Image
               src={post.featuredImageUrl}
               alt={post.title}
@@ -24,13 +24,13 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             />
           </div>
         )}
-        <CardContent className="flex flex-col fluid-stack-sm p-[clamp(1rem,1.4vw,1.2rem)]">
-          <div className="flex flex-wrap gap-[clamp(0.35rem,0.5vw,0.45rem)]">
+        <CardContent className="flex flex-col fluid-stack-sm p-5">
+          <div className="flex flex-wrap gap-2">
             {post.categories.map((category) => (
               <Badge
                 key={category.id}
                 variant="outline"
-                className="rounded-full font-normal fluid-caption"
+                className="fluid-pill border-border/60 text-xs font-medium"
               >
                 {category.name}
               </Badge>
@@ -56,4 +56,3 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
     </Link>
   );
 }
-

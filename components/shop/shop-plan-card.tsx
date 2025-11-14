@@ -33,32 +33,32 @@ export function ShopPlanCard({
       )}
       onClick={onSelect}
     >
-      <div className="p-[clamp(1.1rem,1.6vw,1.4rem)]">
-        <div className="flex items-start justify-between gap-[clamp(0.85rem,1.2vw,1.05rem)]">
+      <div className="fluid-card-pad-sm space-y-4">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
+            <div className="flex flex-wrap items-center gap-2">
               <h3 className="font-semibold text-foreground fluid-copy">{plan.name}</h3>
               {isSelected && (
-                <Badge variant="default" className="fluid-badge rounded-full">
-                  <Check className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
+                <Badge variant="default" className="fluid-pill text-xs font-medium">
+                  <Check className="mr-1 fluid-icon-sm" />
                   Wybrany
                 </Badge>
               )}
               {isBestValue && !isSelected && (
-                <Badge variant="outline" className="fluid-badge rounded-full">
-                  <Sparkles className="mr-1 h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" />
+                <Badge variant="outline" className="fluid-pill text-xs font-medium">
+                  <Sparkles className="mr-1 fluid-icon-sm" />
                   Najlepsza wartość
                 </Badge>
               )}
             </div>
             {plan.description && (
-              <p className="mt-[clamp(0.45rem,0.65vw,0.6rem)] text-muted-foreground fluid-caption line-clamp-2">
+              <p className="text-muted-foreground fluid-caption line-clamp-2">
                 {plan.description}
               </p>
             )}
           </div>
           <div className="text-right shrink-0">
-            <div className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-foreground">
+            <div className="font-semibold text-foreground fluid-h2 leading-tight">
               ${price.toLocaleString("pl-PL")}
             </div>
             <div className="text-muted-foreground uppercase fluid-caption">
@@ -70,19 +70,19 @@ export function ShopPlanCard({
         {/* Prominent Cashback Display */}
         <div
           className={cn(
-          "mt-[clamp(0.85rem,1.2vw,1.05rem)] rounded-2xl border p-[clamp(0.9rem,1.3vw,1.15rem)] transition-colors",
-          isSelected 
-            ? "border-primary/50 bg-primary/10" 
-            : "border-border/60 bg-linear-to-br from-primary/5 to-primary/10"
-        )}
+            "rounded-2xl border fluid-card-pad-sm transition-colors",
+            isSelected
+              ? "border-primary/50 bg-primary/10"
+              : "border-border/60 bg-linear-to-br from-primary/5 to-primary/10",
+          )}
         >
-          <div className="flex items-center justify-between gap-[clamp(0.75rem,1.1vw,1rem)]">
+          <div className="flex items-center justify-between gap-4">
             <div>
               <div className="font-medium text-muted-foreground uppercase tracking-[0.2em] fluid-caption">
                 Cashback
               </div>
-              <div className="mt-[clamp(0.4rem,0.6vw,0.5rem)] flex items-baseline gap-[clamp(0.35rem,0.5vw,0.45rem)]">
-                <span className="text-[clamp(1.75rem,2.2vw,2.1rem)] font-semibold text-primary leading-none">
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="font-semibold text-primary fluid-h2 leading-none">
                   ${cashbackAmount.toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
                 {cashbackRate > 0 && (
@@ -93,8 +93,8 @@ export function ShopPlanCard({
               </div>
             </div>
             {cashbackAmount > 0 && (
-              <div className="rounded-full bg-primary/20 p-[clamp(0.5rem,0.75vw,0.65rem)]">
-                <Sparkles className="h-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] w-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] text-primary" />
+              <div className="rounded-full bg-primary/20 p-3">
+                <Sparkles className="fluid-icon-md text-primary" />
               </div>
             )}
           </div>

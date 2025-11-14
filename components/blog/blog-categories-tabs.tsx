@@ -29,10 +29,10 @@ export function BlogCategoriesTabs({
 
   return (
     <Tabs value={activeCategory} onValueChange={setActiveCategory} className="flex flex-col fluid-stack-md">
-      <TabsList className="flex w-full flex-wrap gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.5rem,0.75vw,0.65rem)] shadow-xs backdrop-blur-[36px]!">
+      <TabsList className="flex w-full flex-wrap fluid-stack-xs rounded-2xl border border-border/40 bg-background/60 p-3 shadow-xs backdrop-blur-xl">
         <TabsTrigger
           value="all"
-          className="rounded-full px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] text-[clamp(0.82rem,0.4vw+0.72rem,0.95rem)] font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:hover:bg-foreground/5"
+          className="fluid-pill text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
         >
           Wszystkie
         </TabsTrigger>
@@ -40,7 +40,7 @@ export function BlogCategoriesTabs({
           <TabsTrigger
             key={category.id}
             value={category.id}
-            className="rounded-full px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] text-[clamp(0.82rem,0.4vw+0.72rem,0.95rem)] font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:hover:bg-foreground/5"
+            className="fluid-pill text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
           >
             {category.name}
           </TabsTrigger>
@@ -49,14 +49,14 @@ export function BlogCategoriesTabs({
 
       <TabsContent value="all" className="flex flex-col fluid-stack-md">
         {filteredPosts.length === 0 ? (
-          <Alert className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs backdrop-blur-[36px]! fluid-caption">
-            <BookOpen className="h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)]" />
+          <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl fluid-stack-xs">
+            <BookOpen className="fluid-icon-sm" />
             <AlertDescription>
               Brak artykułów do wyświetlenia.
             </AlertDescription>
           </Alert>
         ) : (
-          <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid fluid-stack-sm md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
               <BlogPostCard key={post.id} post={post} />
             ))}
@@ -67,14 +67,14 @@ export function BlogCategoriesTabs({
       {categories.map((category) => (
         <TabsContent key={category.id} value={category.id} className="flex flex-col fluid-stack-md">
           {filteredPosts.length === 0 ? (
-            <Alert className="rounded-2xl border border-border/40 bg-background/60 p-[clamp(0.75rem,1.1vw,1rem)] shadow-xs backdrop-blur-[36px]! fluid-caption">
-              <BookOpen className="h-[clamp(1rem,0.55vw+0.85rem,1.2rem)] w-[clamp(1rem,0.55vw+0.85rem,1.2rem)]" />
+            <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl fluid-stack-xs">
+              <BookOpen className="fluid-icon-sm" />
               <AlertDescription>
                 Brak artykułów w kategorii &quot;{category.name}&quot;.
               </AlertDescription>
             </Alert>
           ) : (
-            <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid fluid-stack-sm md:grid-cols-2 lg:grid-cols-3">
               {filteredPosts.map((post) => (
                 <BlogPostCard key={post.id} post={post} />
               ))}
@@ -85,4 +85,3 @@ export function BlogCategoriesTabs({
     </Tabs>
   );
 }
-

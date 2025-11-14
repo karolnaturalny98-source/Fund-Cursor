@@ -20,11 +20,11 @@ async function CompanySelectorWrapper() {
 
 export default async function AnalizyPage() {
   return (
-    <Section size="lg" className="animate-in fade-in duration-500 flex flex-col fluid-stack-xl">
+    <Section size="lg" className="flex flex-col fluid-stack-xl animate-in fade-in duration-500">
       {/* Hero Section */}
       <div className="flex flex-col fluid-stack-lg text-center">
-          <div className="inline-flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] font-medium text-primary shadow-xs backdrop-blur-[36px]!">
-            <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)]" />
+          <div className="inline-flex fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs backdrop-blur-xl">
+            <BarChart3 className="fluid-icon-md" />
             Narzędzie Analityczne
           </div>
 
@@ -38,21 +38,21 @@ export default async function AnalizyPage() {
           </p>
 
           {/* Feature Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-[clamp(0.65rem,0.9vw,0.8rem)]">
-            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
-              <TrendingUp className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
+          <div className="flex flex-wrap items-center justify-center fluid-stack-xs">
+            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+              <TrendingUp className="fluid-icon-md text-primary" />
               <span>Wykresy cenowe</span>
             </div>
-            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
-              <FileText className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
+            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+              <FileText className="fluid-icon-md text-primary" />
               <span>Porównanie planów</span>
             </div>
-            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
-              <Award className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
+            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+              <Award className="fluid-icon-md text-primary" />
               <span>Analiza opinii</span>
             </div>
-            <div className="flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] text-primary shadow-xs transition-all hover:bg-card/82 backdrop-blur-[36px]! fluid-caption">
-              <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] text-primary" />
+            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+              <BarChart3 className="fluid-icon-md text-primary" />
               <span>Metryki wydajności</span>
             </div>
           </div>
@@ -69,10 +69,10 @@ export default async function AnalizyPage() {
         <div className="mx-auto flex max-w-4xl flex-col fluid-stack-lg">
           <h2 className="text-center font-bold text-foreground fluid-h2">Co możesz analizować?</h2>
 
-          <div className="grid gap-[clamp(1rem,1.6vw,1.4rem)] sm:grid-cols-2 lg:grid-cols-3">
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+          <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <TrendingUp className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Ceny i Historia</h3>
               <p className="text-muted-foreground fluid-caption">
@@ -80,9 +80,9 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <FileText className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <FileText className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Warunki Handlowe</h3>
               <p className="text-muted-foreground fluid-caption">
@@ -90,9 +90,9 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <Award className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Opinie i Oceny</h3>
               <p className="text-muted-foreground fluid-caption">
@@ -100,9 +100,9 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <BarChart3 className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <BarChart3 className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Metryki Kluczowe</h3>
               <p className="text-muted-foreground fluid-caption">
@@ -110,9 +110,9 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <TrendingUp className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <TrendingUp className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Wypłaty</h3>
               <p className="text-muted-foreground fluid-caption">
@@ -120,9 +120,9 @@ export default async function AnalizyPage() {
               </p>
             </div>
 
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.1rem,1.5vw,1.3rem)] shadow-xs transition-all hover:shadow-md backdrop-blur-[36px]!">
-              <div className="flex h-[clamp(2.8rem,3.2vw,3.1rem)] w-[clamp(2.8rem,3.2vw,3.1rem)] items-center justify-center rounded-lg bg-primary/10">
-                <Award className="h-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] w-[clamp(1.3rem,0.7vw+1.1rem,1.5rem)] text-primary" />
+            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
+              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                <Award className="fluid-icon-md text-primary" />
               </div>
               <h3 className="font-semibold text-foreground fluid-copy">Profile Firm</h3>
               <p className="text-muted-foreground fluid-caption">
