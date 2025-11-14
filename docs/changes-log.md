@@ -19,3 +19,4 @@
 - Dodano komponent `RankingTabsSection` i helpery `buildRankingTabs`/`getHomeRankingTabs`, wykorzystywane jednocześnie przez `/` i `/rankingi`.
 - Rozbudowano stronę o teaser porównywarki (`HomeCompareTeaser`), mini-edukację (`HomeEducationGrid`) oraz sekcję „Niedawno dodane” łączącą nowe firmy i opinie.
 - Zachowano sekcję Top Cashback, Community Highlights i Influencer Spotlight, ale osadzono je w nowym układzie one-page.
+- Usunięto stare komponenty landingowe (`HeroSection`, `RankingTabs`, `MarketingCarousel`, `HowItWorksSection`, `WalletCtaBanner`), aby z repozytorium zniknęły nieużywane sekcje.

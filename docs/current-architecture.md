@@ -1,7 +1,7 @@
 # Routing
 
 ## Public routes
-- `/` (`app/page.tsx`) – główny landing osadzony wewnątrz `CompareProvider`; kolejność sekcji: `HeroSection` z metrykami (`getHomepageMetrics`), `TopCashbackSection`, `MarketingCarousel`, `RankingTabs`, społecznościowe `CommunityHighlights`, `InfluencerSpotlight`, instruktaż `HowItWorksSection`, `WalletCtaBanner`, `KnowledgeGrid`. Całej stronie towarzyszy `CompareBar`, więc przyciski CTA zawsze prowadzą do zakupów/kodów.
+- `/` (`app/(site)/page.tsx`) – główny landing wewnątrz `CompareProvider`. Sekcje: `HomeHero` (wyszukiwarka + metryki z `getHomepageMetrics`), `HomeRankingSection` (zakładki rankingów budowane na `getHomeRankingTabs`), `TopCashbackSection`, teaser `HomeCompareTeaser`, mini-edukacja (`HomeEducationGrid`), blok “Niedawno dodane” (`HomeRecentSection`). Dalej nadal renderowane są `CommunityHighlights`, `InfluencerSpotlight`, `KnowledgeGrid`, a footer CTA zapewnia `CompareBar`.
 - `/rankingi` (`app/rankingi/page.tsx`) – dwuczęściowy układ. Najpierw statystyki zagregowane w `RankingsPageClient`, niżej interaktywny `RankingsExplorer` z filtrami (`RankingFilters`) i sekcja metodologii (`RankingsMethodologyClient`). Dane pochodzą z `getRankingsDataset`.
 - `/firmy` (`app/firmy/page.tsx`) – lista firm (`CompaniesPageClient`) z filtrami modelu finansowania, cashbacku, krajów, typów kont, sortowaniem i wyszukiwarką. Wszystko otoczone `AuroraWrapper`. Widok pracuje na `getCompanies` + `getCompanyFiltersMetadata`.
 - `/firmy/[slug]` – kompletny profil firmy. Strona ładuje się wewnątrz `CompareProvider`, buduje breadcrumbs, `CompanyHeroClient`, `OverviewQuickStats`, listę alertów, moduły planów (`PlansShopList` z CTA `PurchaseButton`), zakładki (overview/reguły/payouty/oferty/ogłoszenia/recenzje/FAQ), komponenty payoutowe (`PayoutCalendar`, `PayoutsChartsWrapper`, `PayoutsTimeline`, `PayoutsComparison`), checklisty, `CompanyFaqTabs`, `ReviewsPanel` oraz formularze (`ReviewForm`, `ReportIssueForm`). Całość kończy `CompareBar`.
@@ -14,7 +14,7 @@
 - `/baza-wiedzy` i `/baza-wiedzy/[slug]` – katalog i pojedyncze artykuły bloga. Index pokazuje `BlogStatistics` + `BlogCategoriesTabs`. Detal używa `Breadcrumb`, nagłówka (`BlogPostHeader`), opcji obrazu, treści renderowanej z `sanitizeHtml` i sekcji pokrewnych (`RelatedPostsTabs`).
 - `/o-nas` – sekwencja modułów (`AboutHero`, `MissionVision`, `CompanyValues`, `TeamSection`, `AboutCta`) na wspólnym tle `AuroraWrapper`.
 - `/panel` – w całości kliencki hub użytkownika z breadcrumb, zakładkami (`overview`, `redeem`, `disputes`, `favorites`, `influencer`). Pobiera `/api/user/summary`, `/api/wallet/offers`, `/api/user/disputes`, `/api/wallet/transactions`. Wbudowane sekcje (`RedeemSection`, `FavoritesSection`, `InfluencerSection`) współdzielą logikę z panelem bocznym (`UserPanel`).
-- `/opinie`, `/rankingi`, `/firmy`, `/affilacja`, `/sklep`, `/analizy`, `/baza-wiedzy`, `/o-nas` korzystają z identycznego, ręcznie dodawanego tła `AuroraWrapper`, co znaczy, że większość marketingowych ekranów ma wspólną estetykę, ale także powtarza konfigurację.
+- `/opinie`, `/rankingi`, `/firmy`, `/affilacja`, `/sklep`, `/analizy`, `/baza-wiedzy`, `/o-nas` korzystają ze wspólnego layoutu `app/(site)/layout.tsx`, który raz renderuje `AuroraWrapper` i zapewnia spójne tło.
 - `/ (auth)/sign-in` oraz `/sign-up` (Next Clerk) implementują pojedyncze formularze w kartach `shadcn/ui`.
 
 ## Zbiór route'ów chronionych
@@ -36,17 +36,17 @@
 # Kluczowe komponenty
 - **Nawigacja i globalne UI**: `SiteHeader` (`components/layout/site-header.tsx`) z `CurrencySwitcher`, `SignedIn/Out`, `UserButton`, mobilnym menu; `SiteFooter` łączy nawigację, CTA newslettera (wywołuje `/api/newsletter`), bloki social i kontaktów. `CurrencyClientProvider` zarządza kursami i preferencjami (cookie + localStorage + `/api/preferences/currency`).
 - **System porównania**: `CompareProvider`, `CompareBar`, `CompareToggle`, `FavoriteButton`, `PurchaseButton`. Udostępnia globalny stan porównań i CTA „Kup z kodem”.
-- **Home + marketing**: `HeroSection`, `TopCashbackSection`, `MarketingCarousel`, `RankingTabs`, `CommunityHighlights (+client)`, `InfluencerSpotlight`, `HowItWorksSection`, `KnowledgeGrid`, `WalletCtaBanner`. Zależności: `getHomeRanking`, `getHomepageMarketingSection`, `getHomepageMetrics`, `getRecentPublicReviews`, `getApprovedInfluencers`.
+- **Home + marketing**: `HomeHero`, `HomeRankingSection`, `TopCashbackSection`, `HomeCompareTeaser`, `HomeEducationGrid`, `HomeRecentSection`, `CommunityHighlights (+client)`, `InfluencerSpotlight`, `KnowledgeGrid`. Bazują na `getHomepageMetrics`, `getHomeRankingTabs`, `getTopCashbackCompanies`, `getRecentPublicReviews`, `getApprovedInfluencers`, `getRecentCompanies`.
 - **Firmy / commerce**: duży zestaw w `components/companies/*` – hero, karty ofert, zakładki regulaminów, `RulesGridClient`, `ChallengesTabClientWrapper`, `AnnouncementsTabClientWrapper`, `CompanyFaqTabs`, `ReviewsPanel`, moduły payout (kalendarz, timeline, porównanie), `CompanyMedia`, `VerificationAccordionCard`, `CompanyPopularityChartWrapper`, `TeamHistoryTabsCard`, `TechnicalDetailsTabsCard`, `SocialLinksClient`, `ChecklistSection`.
 - **Rankingi i analizy**: `RankingsPageClient`, `RankingsExplorer`, `RankingsMethodologyClient`, `AnalysisLayout`, `CompanySelector`, `KnowledgeGrid`. Wspierają filtry, tabele i wykresy.
 - **Społeczność**: `ReviewsRankingPage`, `OpiniePageClient`, `OpinieBadgeClient`, `ReviewForm`, `ReportIssueForm`, `InfluencerSpotlight`.
 - **Affiliate/Shop**: `Affiliate*` komponenty, `ShopPageClient`, `ShopPurchaseConfirmation`.
 - **Admin suite**: setki drobnych komponentów (`*Dashboard`, `*OverviewTab`, wykresy, kolejki, formularze) – każdy tab posiada własne sekcje (np. `CashbackQueuesTab`, `ReviewModerationPanel`, `CompanyManagementPanel`).
 - **UI kit**: `components/ui/*` to forki shadcn/ui (Accordion, Tabs, Dialog, Table, Badge itd.) rozszerzone o lokalne warianty (np. `gradient-button`, `premium` button). Dostępne są też `components/custom/*` (np. `PremiumBadge`, `AnimatedCounter`).
-- **Efekty graficzne**: `components/Aurora.tsx` + `components/aurora-wrapper.tsx` (dynamiczny import) generują WebGL-ową „aurorę” powielaną na większości stron. Nie istnieje centralny layout, który by ją wstrzykiwał.
+- **Efekty graficzne**: `components/Aurora.tsx` + `components/aurora-wrapper.tsx` (dynamiczny import) generują WebGL-ową „aurorę”. Segment `app/(site)/layout.tsx` renderuje ją raz dla publicznych stron.
 
 # Wnioski i problemy
-- Większość stron marketingowych ręcznie wstawia `AuroraWrapper`, co dubluje kod i kosztowny efekt WebGL (np. `app/page.tsx`, `app/firmy/page.tsx`, `app/opinie/page.tsx`, `app/analizy/page.tsx`, `app/affilacja/page.tsx`, `app/o-nas/page.tsx`). Brakuje wspólnego layoutu/komponentu nadrzędnego.
+- Segment `(site)` centralizuje `AuroraWrapper`, ale inne layouty (np. panel użytkownika, admin) nadal mają własne tła i spacing, więc estetyka poza publicznym segmentem jest niespójna.
 - Strona firmy (`app/firmy/[slug]/page.tsx`) jest monolitem liczącym kilkaset linii, importuje kilkanaście modułów i ładuje wszystkie dane naraz. Utrudnia to iteracje, SSR i ładowanie warstwowe.
 - `app/panel/page.tsx` i `UserPanel` duplikują część funkcjonalności (redeem, disputes, ulubione), ale komunikują się z tymi samymi endpointami – kod jest złożony, a logika UI powiela się w dwóch miejscach.
 - `app/admin/(tabs)/newsletter/page.tsx` działa jako klient pobierający dane z `/api/admin/newsletter`, jednak to API nie weryfikuje roli admina – każda zalogowana osoba może pobrać/usuwać subskrybentów.
