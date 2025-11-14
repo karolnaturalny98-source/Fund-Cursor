@@ -4,7 +4,6 @@ import { BlogStatistics } from "@/components/blog/blog-statistics";
 import { BlogCategoriesTabs } from "@/components/blog/blog-categories-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { Section } from "@/components/layout/section";
 
 // Cache blog index for 5 minutes - content changes infrequently
@@ -24,17 +23,7 @@ export default async function BlogPage() {
   const [totalPosts, publishedPosts, categoriesCount] = stats;
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
-      <Section size="lg" className="relative z-10 flex flex-col fluid-stack-xl">
+    <Section size="lg" className="relative z-10 flex flex-col fluid-stack-xl">
       {/* Hero Section */}
       <div className="flex flex-col fluid-stack-md">
         <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
@@ -62,7 +51,6 @@ export default async function BlogPage() {
 
       {/* Categories Tabs */}
       <BlogCategoriesTabs posts={posts} categories={categories} />
-      </Section>
-    </div>
+    </Section>
   );
 }

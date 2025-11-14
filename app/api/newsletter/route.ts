@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
+import { rateLimit } from "@/lib/rate-limit";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NEWSLETTER_LIMIT = {
+  windowMs: 10 * 60 * 1000,
+  max: 5,
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,6 +28,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Nieprawidłowy format emaila" },
         { status: 400 }
+      );
+    }
+
+    const identifier = `${getClientIp(request) ?? "unknown"}:${trimmedEmail}`;
+    const limitResult = rateLimit({
+      key: `newsletter:${identifier}`,
+      limit: NEWSLETTER_LIMIT.max,
+      windowMs: NEWSLETTER_LIMIT.windowMs,
+    });
+
+    if (!limitResult.success) {
+      const retryAfterSeconds = Math.max(1, Math.ceil(limitResult.retryAfterMs / 1000));
+      return NextResponse.json(
+        {
+          error: "RATE_LIMITED",
+          retryAfterSeconds,
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": `${retryAfterSeconds}`,
+          },
+        },
       );
     }
 
@@ -75,3 +104,16 @@ export async function POST(request: NextRequest) {
   }
 }
 
+function getClientIp(request: Request) {
+  const forwarded =
+    request.headers.get("x-forwarded-for") ??
+    request.headers.get("x-real-ip") ??
+    request.headers.get("cf-connecting-ip") ??
+    "";
+
+  if (!forwarded) {
+    return null;
+  }
+
+  return forwarded.split(",")[0]?.trim() ?? null;
+}

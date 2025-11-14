@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
+
+import { assertAdminRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "@/lib/cache";
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -11,11 +13,7 @@ export async function DELETE(
   context: RouteContext
 ) {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    await assertAdminRequest();
 
     const { id } = await context.params;
 
@@ -23,6 +21,12 @@ export async function DELETE(
     await prisma.newsletterSubscriber.delete({
       where: { id },
     });
+
+    try {
+      revalidateTag("admin-newsletter");
+    } catch (error) {
+      console.warn("[admin-newsletter] Failed to revalidate after delete", error);
+    }
 
     return NextResponse.json({ message: "Subskrybent został usunięty" });
   } catch (error) {
@@ -39,11 +43,7 @@ export async function PATCH(
   context: RouteContext
 ) {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    await assertAdminRequest();
 
     const { id } = await context.params;
     const body = await request.json();
@@ -62,6 +62,12 @@ export async function PATCH(
       data: { status },
     });
 
+    try {
+      revalidateTag("admin-newsletter");
+    } catch (error) {
+      console.warn("[admin-newsletter] Failed to revalidate after patch", error);
+    }
+
     return NextResponse.json({
       message: "Status zaktualizowany",
       subscriber: updated,
@@ -74,4 +80,3 @@ export async function PATCH(
     );
   }
 }
-

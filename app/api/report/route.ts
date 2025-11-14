@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
 import { revalidateTag } from "@/lib/cache";
+import { rateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
@@ -25,6 +26,29 @@ const reportSchema = z
   );
 
 export async function POST(request: Request) {
+  const identifier = getClientIp(request) ?? "anonymous";
+  const limitResult = rateLimit({
+    key: `report:${identifier}`,
+    limit: 5,
+    windowMs: 10 * 60 * 1000,
+  });
+
+  if (!limitResult.success) {
+    const retryAfterSeconds = Math.max(1, Math.ceil(limitResult.retryAfterMs / 1000));
+    return NextResponse.json(
+      {
+        error: "RATE_LIMITED",
+        retryAfterSeconds,
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": `${retryAfterSeconds}`,
+        },
+      },
+    );
+  }
+
   const body = await request.json().catch(() => null);
 
   const parsed = reportSchema.safeParse(body);
@@ -115,4 +139,18 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ id: report.id }, { status: 201 });
+}
+
+function getClientIp(request: Request) {
+  const forwarded =
+    request.headers.get("x-forwarded-for") ??
+    request.headers.get("x-real-ip") ??
+    request.headers.get("cf-connecting-ip") ??
+    "";
+
+  if (!forwarded) {
+    return null;
+  }
+
+  return forwarded.split(",")[0]?.trim() ?? null;
 }

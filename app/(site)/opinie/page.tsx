@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { ReviewsRankingPage } from "@/components/reviews/reviews-ranking-page";
 import { OpiniePageClient, OpinieBadgeClient } from "@/components/opinie/opinie-page-client";
 import { getReviewsRanking } from "@/lib/queries/reviews";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 export const metadata: Metadata = {
   title: "Opinie prop firm | FundedRank",
@@ -20,16 +19,7 @@ export default async function OpiniePage() {
     summary.averageRating !== null ? summary.averageRating.toFixed(2) : "-";
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
+    <>
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="container relative z-10 flex flex-col gap-[clamp(1.5rem,2.2vw,2.1rem)] py-[clamp(2.5rem,3.5vw,3.25rem)]">
           <OpiniePageClient
@@ -58,6 +48,6 @@ export default async function OpiniePage() {
           <ReviewsRankingPage initialData={ranking} />
         </div>
       </section>
-    </div>
+    </>
   );
 }

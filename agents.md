@@ -109,7 +109,7 @@ W Etapie 8 dozwolone jest wykorzystywanie gotowych bloków z rejestrów (np. Ace
    - Kompozycja opisana w `docs/refactor-plan.md`.
 3. **Aurora / tło WebGL**:
    - nie powielaj `AuroraWrapper` na każdej stronie.
-   - wprowadź wspólny layout marketingowy (np. `app/(marketing)/layout.tsx`), który raz wstrzykuje aurorę – szczegóły w `refactor-plan.md`.
+   - publiczny segment aplikacji (`app/(site)/*`) obejmuje landing, rankingi, firmy, opinie, analizy i content – korzysta ze wspólnego layoutu `app/(site)/layout.tsx`, który wstrzykuje aurorę i kontroluje tło (szczegóły w `refactor-plan.md`).
 4. **Strona firmy** (`/firmy/[slug]`):
    - powinna zostać rozbita na mniejsze moduły (sekcje) zamiast jednego monolitu,
    - SSR ma być zachowany, ale można wprowadzić lazy-loading wybranych części (np. recenzje).

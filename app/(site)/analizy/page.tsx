@@ -5,7 +5,6 @@ import { BarChart3, TrendingUp, FileText, Award } from "lucide-react";
 import { getCompanyOptions } from "@/lib/queries/companies";
 import { CompanySelector } from "@/components/analysis/company-selector";
 import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { Section } from "@/components/layout/section";
 
 export const metadata: Metadata = {
@@ -21,20 +20,9 @@ async function CompanySelectorWrapper() {
 
 export default async function AnalizyPage() {
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
-
-      <Section size="lg" className="animate-in fade-in duration-500 flex flex-col fluid-stack-xl">
-        {/* Hero Section */}
-        <div className="flex flex-col fluid-stack-lg text-center">
+    <Section size="lg" className="animate-in fade-in duration-500 flex flex-col fluid-stack-xl">
+      {/* Hero Section */}
+      <div className="flex flex-col fluid-stack-lg text-center">
           <div className="inline-flex items-center gap-[clamp(0.5rem,0.75vw,0.65rem)] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.2rem)] py-[clamp(0.5rem,0.75vw,0.65rem)] font-medium text-primary shadow-xs backdrop-blur-[36px]!">
             <BarChart3 className="h-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)] w-[clamp(1.05rem,0.6vw+0.9rem,1.25rem)]" />
             Narzędzie Analityczne
@@ -143,8 +131,6 @@ export default async function AnalizyPage() {
             </div>
           </div>
         </div>
-    </Section>
-  </div>
-);
+      </Section>
+  );
 }
-

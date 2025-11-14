@@ -32,21 +32,32 @@ Plan dotyczy pełnego, rozbudowanego produktu. Celem jest:
   - `/api/clicks`
 - [ ] Rozważyć prostą ochronę przed spamem (np. honeypot, opóźnienia).
 
+#### Aktualizacja – 2025-11-14
+- `/api/cashback` przyjmuje teraz jedynie `companySlug`, `transactionRef`, `points` (limit 5 000) i `notes`. Status jest zawsze ustawiany na `PENDING`, a po utworzeniu transakcji odświeżany jest tag `cashback-{user}`. Utworzono również administacyjny endpoint `POST /api/admin/cashback/manual`, w którym admin może wskazać użytkownika (ID/clerkId/email), firmę, status i liczbę punktów (z limitem 100 000). Każda manualna operacja jest logowana.
+- Endpointy admina do newslettera (`/api/admin/newsletter` oraz `/api/admin/newsletter/[id]`) korzystają z `assertAdminRequest`. Mutacje (PATCH/DELETE) wywołują `revalidateTag("admin-newsletter")`, więc panel widzi aktualne dane.
+- `/api/newsletter`, `/api/report` i `/api/clicks` posiadają prosty limiter w pamięci (odpowiednio: 5 zgłoszeń / 10 min na IP+email, 5 zgłoszeń / 10 min na IP, 40 kliknięć / min na IP). Przy przekroczeniu zwracany jest `429` z nagłówkiem `Retry-After`.
+- Otwarte zadanie w tej sekcji: wdrożenie dodatkowych honeypotów lub bardziej trwałego mechanizmu (np. redis) zgodnie z punktem 1.3.
+
 ---
 
 ## Etap 2 – Layouty i Aurora
 
-### 2.1 Wspólny layout marketingowy
-- [ ] Stworzyć `app/(marketing)/layout.tsx`, który:
+### 2.1 Wspólny layout publiczny
+- [ ] Stworzyć `app/(site)/layout.tsx`, który:
   - wstrzykuje `AuroraWrapper` tylko raz,
   - zapewnia wspólny container/spacing,
   - renderuje `SiteHeader` / `SiteFooter` (lub używa root layoutu).
-- [ ] Przenieść marketingowe strony (`/`, `/rankingi`, `/firmy`, `/opinie`, `/analizy`, `/affilacja`, `/sklep`, `/baza-wiedzy`, `/o-nas`) do segmentu `(marketing)` jeśli ma to sens.
+- [ ] Przenieść publiczne strony (`/`, `/rankingi`, `/firmy`, `/opinie`, `/analizy`, `/affilacja`, `/sklep`, `/baza-wiedzy`, `/o-nas`) do segmentu `(site)` jeśli ma to sens.
 
 ### 2.2 Uporządkowanie `AuroraWrapper`
 - [ ] Usunąć duplikowane instancje aurory z poszczególnych stron.
 - [ ] Ustandaryzować parametry (colorStops, blend mode) w jednym miejscu.
 - [ ] Zadbać o wydajność WebGL (jedna instancja, brak wycieków).
+
+#### Aktualizacja – 2025-11-14
+- Utworzono `app/(site)/layout.tsx`, który renderuje wspólny `AuroraWrapper` oraz owija wszystkie publiczne route'y (landing, rankingi, firmy, opinie, analizy, affilacja, sklep, baza wiedzy, o nas).
+- Całe drzewo stron publicznych zostało przeniesione do grupy `(site)`, a lokalne instancje aurory zostały usunięte z poszczególnych plików (`/firmy`, `/firmy/[slug]`, `/rankingi`, `/opinie`, `/analizy`, `/affilacja`, `/sklep`, `/baza-wiedzy`, `/o-nas`).
+- Dzięki layoutowi tło WebGL jest renderowane jednokrotnie, co upraszcza kontrolę wydajności i eliminuję duplikaty.
 
 ---
 

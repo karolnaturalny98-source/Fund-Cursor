@@ -1,22 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
+
+import { assertAdminRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    // TODO: Dodać sprawdzenie roli admina gdy będzie zaimplementowane
-    // const user = await prisma.user.findUnique({
-    //   where: { clerkId: userId },
-    // });
-    // if (user?.role !== "admin") {
-    //   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    // }
+    await assertAdminRequest();
 
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
@@ -81,10 +70,7 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("Newsletter admin GET error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    const message = error instanceof Error ? error.message : "Internal server error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
-

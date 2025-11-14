@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs/server";
 import { getCompanies } from "@/lib/queries/companies";
 import { ShopPageClient } from "@/components/shop/shop-page-client";
 import { ShopPurchaseConfirmation } from "@/components/shop/shop-purchase-confirmation";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Cache shop page for 5 minutes for better performance
 export const revalidate = 300;
@@ -14,18 +13,9 @@ export default async function ShopPage() {
   const companies = await getCompanies({}, { viewerId: userId });
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
+    <>
       <ShopPurchaseConfirmation />
       <ShopPageClient companies={companies} userId={userId} />
-    </div>
+    </>
   );
 }

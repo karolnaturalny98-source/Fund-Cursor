@@ -5,14 +5,20 @@ import { z } from "zod";
 
 import { ensureUserRecord } from "@/lib/services/user";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "@/lib/cache";
+
+const USER_CASHBACK_POINTS_LIMIT = 5_000;
 
 const createTransactionSchema = z.object({
   companySlug: z.string().min(1),
   transactionRef: z.string().min(3),
-  points: z.number().int().positive(),
-  status: z
-    .enum(["PENDING", "APPROVED", "REDEEMED", "REJECTED"])
-    .default("PENDING"),
+  points: z
+    .number()
+    .int()
+    .positive()
+    .max(USER_CASHBACK_POINTS_LIMIT, {
+      message: `Przekroczono limit ${USER_CASHBACK_POINTS_LIMIT} punktów na pojedyncze zgłoszenie.`,
+    }),
   notes: z.string().max(260).optional(),
 });
 
@@ -60,11 +66,19 @@ export async function POST(request: Request) {
         userId: userRecord.id,
         transactionRef: data.transactionRef,
         points: data.points,
-        status: data.status,
+        // Użytkownik nie może ręcznie zatwierdzać transakcji – zawsze zaczynamy od PENDING,
+        // a dalsza weryfikacja powinna zostać spięta z prawdziwym zdarzeniem zakupowym.
+        status: "PENDING",
         notes: data.notes ?? null,
         purchasedAt: new Date(),
       },
     });
+
+    try {
+      revalidateTag(`cashback-${user.id}`);
+    } catch (error) {
+      console.warn("[cashback] Failed to revalidate tag", error);
+    }
 
     return NextResponse.json({ data: transaction }, { status: 201 });
   } catch (error) {

@@ -6,7 +6,6 @@ import {
 } from "@/lib/queries/companies";
 import { parseCompareParam } from "@/lib/compare";
 import type { CompanySortOption, EvaluationModel } from "@/lib/types";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { Section } from "@/components/layout/section";
 
 interface CompaniesPageProps {
@@ -62,36 +61,25 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
     (search ?? null) !== null;
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
+    <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
+      <div className="container relative z-10 flex flex-col fluid-stack-xl">
+        <CompaniesPageClient
+          companies={companies}
+          minCashback={minCashback}
+          selectedModels={selectedModels}
+          activeFilters={activeFilters}
+          initialCompare={initialCompare}
+          countryOptions={countries}
+          accountTypeOptions={accountTypes}
+          profitSplitOptions={profitSplits}
+          selectedCountries={selectedCountries}
+          selectedAccountTypes={selectedAccountTypes}
+          minProfitSplit={minProfitSplit}
+          sort={sort}
+          search={search}
         />
       </div>
-      <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col fluid-stack-xl">
-          <CompaniesPageClient
-            companies={companies}
-            minCashback={minCashback}
-            selectedModels={selectedModels}
-            activeFilters={activeFilters}
-            initialCompare={initialCompare}
-            countryOptions={countries}
-            accountTypeOptions={accountTypes}
-            profitSplitOptions={profitSplits}
-            selectedCountries={selectedCountries}
-            selectedAccountTypes={selectedAccountTypes}
-            minProfitSplit={minProfitSplit}
-            sort={sort}
-            search={search}
-          />
-        </div>
-      </Section>
-    </div>
+    </Section>
   );
 }
 

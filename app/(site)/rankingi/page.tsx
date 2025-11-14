@@ -2,7 +2,6 @@
 import { RankingsExplorer } from "@/components/rankings/rankings-explorer";
 import { RankingsPageClient, RankingsMethodologyClient } from "@/components/rankings/rankings-page-client";
 import { getRankingsDataset } from "@/lib/queries/rankings";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 import { Section } from "@/components/layout/section";
 import type {
   RankingFilters,
@@ -64,16 +63,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
   };
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
+    <>
       <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
         <div className="container relative z-10 flex flex-col fluid-stack-lg">
           <RankingsPageClient
@@ -119,7 +109,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
           />
         </div>
       </Section>
-    </div>
+    </>
   );
 }
 
@@ -193,7 +183,6 @@ export function parseTabParam(
   ];
   return allowed.includes(raw as RankingTabId) ? (raw as RankingTabId) : null;
 }
-
 
 
 

@@ -69,7 +69,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { Company, CompanyPlan } from "@/lib/types";
 import { parseCompareParam } from "@/lib/compare";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Use the actual return type from getCompanyBySlug
 type CompanyWithDetails = NonNullable<Awaited<ReturnType<typeof getCompanyBySlug>>>;
@@ -164,15 +163,6 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
 
   return (
     <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
     <CompareProvider initialSelection={initialCompare}>
       <div className="container flex flex-col fluid-stack-xl py-[clamp(2.5rem,3vw,3.5rem)]">
         <script
@@ -1396,7 +1386,6 @@ function formatCurrency(value: number, currency: string) {
     return `${value.toLocaleString("pl-PL")} ${currency.toUpperCase()}`;
   }
 }
-
 
 
 

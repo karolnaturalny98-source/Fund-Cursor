@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 import { ensureUserRecord } from "@/lib/services/user";
+import { rateLimit } from "@/lib/rate-limit";
 
 const clickSchema = z.object({
   companySlug: z.string().min(1),
@@ -25,6 +26,29 @@ function getClientIp(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const ipAddress = getClientIp(request);
+  const limitResult = rateLimit({
+    key: `clicks:${ipAddress ?? "anonymous"}`,
+    limit: 40,
+    windowMs: 60 * 1000,
+  });
+
+  if (!limitResult.success) {
+    const retryAfterSeconds = Math.max(1, Math.ceil(limitResult.retryAfterMs / 1000));
+    return NextResponse.json(
+      {
+        error: "RATE_LIMITED",
+        retryAfterSeconds,
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": `${retryAfterSeconds}`,
+        },
+      },
+    );
+  }
+
   const body = await request.json();
   const parsed = clickSchema.safeParse(body);
 
@@ -34,7 +58,6 @@ export async function POST(request: Request) {
 
   const { companySlug, source } = parsed.data;
   const userAgent = request.headers.get("user-agent") ?? "";
-  const ipAddress = getClientIp(request);
 
   const { userId } = await auth();
 

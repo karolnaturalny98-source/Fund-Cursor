@@ -7,7 +7,6 @@ import { AffiliateFinalCta } from "@/components/affiliate/affiliate-final-cta";
 import { AffiliateStatistics } from "@/components/affiliate/affiliate-statistics";
 import { getApprovedInfluencers } from "@/lib/queries/influencers";
 import { prisma } from "@/lib/prisma";
-import { AuroraWrapper } from "@/components/aurora-wrapper";
 
 // Cache affiliate page for 10 minutes - affiliate list changes infrequently
 export const revalidate = 600;
@@ -24,26 +23,17 @@ export default async function AffiliatePage() {
   const [approvedCount, pendingCount] = stats;
 
   return (
-    <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-[150vh]">
-        <AuroraWrapper
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
+    <>
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="container relative z-10 flex flex-col gap-10 py-16">
           <AffiliateHero />
         </div>
       </section>
-      
+
       <div className="space-y-20 pb-24">
         <AffiliateBenefits />
         <AffiliateHowItWorks />
-        
+
         <AffiliateStatistics approvedCount={approvedCount} pendingCount={pendingCount} />
 
         <AffiliateList affiliates={affiliates} />
@@ -52,7 +42,6 @@ export default async function AffiliatePage() {
         {/* Final CTA Section */}
         <AffiliateFinalCta />
       </div>
-    </div>
+    </>
   );
 }
-
