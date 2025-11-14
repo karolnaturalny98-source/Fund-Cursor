@@ -204,16 +204,21 @@ Zachować porównywarkę jako **osobne narzędzie** (1–3 firmy, wykresy, głę
 ## Etap 5 A – Panel użytkownika i UserPanel
 
 ### 5.1 A Wspólne źródła danych
-- [ ] Wyekstrahować hooki:
+- [x] Wyekstrahować hooki:
   - `useUserSummary`
   - `useWalletOffers`
   - `useUserDisputes`
-- [ ] Nie dublować fetch’y – współdzielić logikę między `/panel` i globalnym `UserPanel`.
+- [x] Nie dublować fetch’y – współdzielić logikę między `/panel` i globalnym `UserPanel`.
 
 ### 5.2 UX A
-- [ ] Upewnić się, że:
+- [x] Upewnić się, że:
   - główne akcje cashback (redeem, historia) są zrozumiałe i spójne,
   - overlay `UserPanel` nie konkuruje z pełną stroną `/panel` (przemyśleć restrukturyzację).
+
+#### Aktualizacja – 2025-11-14
+- Uporządkowano źródła danych panelu poprzez hooki `useUserSummary`, `useWalletOffers` i `useUserDisputes`, które cache’ują odpowiedzi `/api/user/summary`, `/api/wallet/offers` oraz `/api/user/disputes` – teraz `/panel` i globalny `UserPanel` odczytują je z jednej warstwy i nie dublują fetchy.
+- Strona `/panel` inicjuje widoki także z parametru `?view=`, a zakładki korzystają z nowych hooków zamiast własnych stanów, dzięki czemu `RedeemSection`/`DisputesSection` odświeżają dane jednym wywołaniem.
+- Overlay `UserPanel` pełni rolę „szybkiego podglądu”: korzysta z tych samych hooków, tab „Saldo” został przemianowany na „Przegląd”, a w sekcji CTA pojawiły się jasne przyciski „Wymień punkty” / „Zgłoszenia” prowadzące bezpośrednio do `/panel?view=…`.
 
 ---
 

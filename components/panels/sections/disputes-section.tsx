@@ -17,9 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { DisputeCase, DisputeStatus } from "@/lib/types";
-
-type DisputeStatusFilter = DisputeStatus | "ALL";
+import type { DisputeCase } from "@/lib/types";
+import type { CreateDisputePayload, DisputeStatusFilter } from "@/components/panels/hooks/use-user-disputes";
 
 const disputeStatusLabels: Record<DisputeStatusFilter, string> = {
   ALL: "Wszystkie",
@@ -38,17 +37,6 @@ const disputeStatusOptions: DisputeStatusFilter[] = [
   "RESOLVED",
   "REJECTED",
 ];
-
-interface CreateDisputeFormPayload {
-  companyId: string;
-  planId?: string;
-  title: string;
-  category: string;
-  description: string;
-  requestedAmount?: number | null;
-  requestedCurrency?: string | null;
-  evidenceLinks?: string[];
-}
 
 interface DisputeCompanyOption {
   id: string;
@@ -73,7 +61,7 @@ interface DisputesSectionProps {
   onStatusChange: (value: DisputeStatusFilter) => void;
   onRetry: () => void;
   onLoadMore: () => void;
-  onCreate: (payload: CreateDisputeFormPayload) => Promise<{ ok: boolean; error?: string }>;
+  onCreate: (payload: CreateDisputePayload) => Promise<{ ok: boolean; error?: string }>;
 }
 
 function formatDisputeAmount(value: number, currency: string) {
@@ -541,4 +529,3 @@ export function DisputesSection({
     </div>
   );
 }
-

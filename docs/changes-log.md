@@ -36,3 +36,8 @@
 - `PriceComparisonChart` i `RatingTrendsChart` przyjmują gotowe zestawy danych, a zakładki Tabs renderują swoje sekcje dopiero po aktywacji, co ogranicza koszt hydratacji (wykresy i ciężkie komponenty nie ładują się dopóki użytkownik ich nie potrzebuje).
 - Karta nagłówka pokazuje teraz streszczenie firm (logo, rating, kraj, highlighty) oraz globalne statystyki opinii, a sekcja przeglądu korzysta z tych samych danych także w zakładkach „Plany” i „Przegląd”.
 - `MetricsDashboard` nie polega już na globalnej zmiennej `companies`; wszystkie dane (łącznie z kartami regulacyjnymi) przekazywane są poprzez nowe hooki, co rozwiązuje runtime'owy ReferenceError „companies is not defined”.
+
+## 2025-11-14 – Etap 5A: Panel użytkownika
+- Powstały hooki `useUserSummary`, `useWalletOffers` i `useUserDisputes`, które cache’ują odpowiedzi API i udostępniają `refresh/load/reset`; `/panel` oraz globalny `UserPanel` korzystają teraz z tych samych źródeł danych zamiast utrzymywać własne fetch’e i stany.
+- Strona `/panel` odczytuje tab startowy z parametru `?view=`, a zakładki `RedeemSection` i `DisputesSection` pobierają dane poprzez hooki (w tym automatyczne przeładowanie po sukcesie redeem/dispute), co uprościło kilkaset linii stanów i odwołań do `fetch`.
+- Overlay `UserPanel` wykorzystuje `useUserSummary`, tab „Saldo” został przemianowany na „Przegląd”, a w sekcji CTA pojawiły się przyciski „Wymień punkty” i „Zgłoszenia” prowadzące do `/panel?view=redeem|disputes`, dzięki czemu overlay pełni rolę lekkiego podglądu i zachęca do przejścia do pełnego panelu.

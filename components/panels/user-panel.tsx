@@ -29,6 +29,7 @@ const HistorySection = dynamic(() => import("./sections/history-section").then(m
   loading: () => <div className="glass-panel h-96 animate-pulse rounded-3xl" />,
 });
 
+import { useUserSummary } from "@/components/panels/hooks/use-user-summary";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,7 +55,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import type {
-  CashbackSummary,
   Company,
   DisputeCase,
   DisputeStatus,
@@ -65,25 +65,8 @@ import type {
   TransactionStatus,
   WalletTransaction,
 } from "@/lib/types";
+import type { CreateDisputePayload } from "@/components/panels/hooks/use-user-disputes";
 import { useUserPanel } from "./user-panel-context";
-
-interface UserSummary {
-  summary: CashbackSummary;
-  favorites: Company[];
-  recentTransactions: WalletTransaction[];
-  influencerProfile: InfluencerProfile | null;
-}
-
-interface CreateDisputeFormPayload {
-  companyId: string;
-  planId?: string;
-  title: string;
-  category: string;
-  description: string;
-  requestedAmount?: number | null;
-  requestedCurrency?: string | null;
-  evidenceLinks?: string[];
-}
 
 interface DisputeCompanyOption {
   id: string;
@@ -116,11 +99,14 @@ const disputeStatusOptions: DisputeStatusFilter[] = [
 
 export function UserPanel() {
   const { isOpen, close } = useUserPanel();
-  const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
-  const [data, setData] = useState<UserSummary | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: summaryData,
+    status: summaryStatus,
+    error: summaryError,
+    summary,
+    recentTransactions,
+    refresh: refreshSummary,
+  } = useUserSummary({ enabled: isOpen });
   const [view, setView] = useState<"overview" | "history">(
     "overview",
   );
@@ -326,47 +312,6 @@ export function UserPanel() {
     },
     [],
   );
-
-  const refreshSummary = useCallback(async () => {
-    if (!isOpen) {
-      return;
-    }
-
-    setState("loading");
-    setError(null);
-
-    try {
-      const response = await fetch("/api/user/summary", {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        throw new Error(
-          response.status === 401
-            ? "Brak uprawnień. Zaloguj się ponownie."
-            : "Nie udało się pobrać danych użytkownika.",
-        );
-      }
-
-      const payload: UserSummary = await response.json();
-
-      if (!openRef.current) {
-        return;
-      }
-
-      setData(payload);
-      setState("success");
-    } catch (err) {
-      if (!openRef.current) {
-        return;
-      }
-
-      setError(
-        err instanceof Error ? err.message : "Wystąpił nieznany błąd.",
-      );
-      setState("error");
-    }
-  }, [isOpen]);
 
   const loadHistory = useCallback(
     async ({ reset = false }: { reset?: boolean } = {}) => {
@@ -597,17 +542,7 @@ export function UserPanel() {
     });
   }, []);
 
-  const summary: CashbackSummary = data?.summary ?? {
-    pending: 0,
-    approved: 0,
-    redeemed: 0,
-    available: 0,
-  };
-
-  // TODO: Future feature - favorites functionality
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const favorites = data?.favorites ?? [];
-  const recentTransactions = data?.recentTransactions ?? [];
+  const hasSummary = Boolean(summaryData);
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && close()}>
@@ -646,9 +581,9 @@ export function UserPanel() {
             <div aria-live="polite" className="sr-only">
               {copyAnnouncement ?? ""}
             </div>
-            {state === "loading" ? <LoadingState /> : null}
-            {state === "error" ? <ErrorState message={error} /> : null}
-            {data ? (
+            {summaryStatus === "loading" ? <LoadingState /> : null}
+            {summaryStatus === "error" ? <ErrorState message={summaryError ?? "Nie udało się pobrać portfela."} /> : null}
+            {hasSummary ? (
               <Tabs value={view} onValueChange={(value) => {
                 if (value === "overview") setView("overview");
                 else if (value === "history") handleShowHistory();
@@ -658,7 +593,7 @@ export function UserPanel() {
                     value="overview"
                     className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
-                    Saldo
+                    Przegląd
                   </TabsTrigger>
                   <TabsTrigger 
                     value="history"
@@ -680,12 +615,24 @@ export function UserPanel() {
                     onCopyCode={handleCopyCode}
                     copiedTransactionId={copiedTransactionId}
                   />
-                  <div className="pt-4 border-t border-border/40">
-                  <Button asChild variant="outline" className="w-full rounded-xl">
-                    <Link href="/panel">
-                      Otwórz pełny panel użytkownika
-                    </Link>
-                  </Button>
+                  <div className="rounded-2xl border border-border/40 bg-background/70 p-4 shadow-glass space-y-3">
+                    <div className="space-y-1">
+                      <p className="text-sm font-semibold text-foreground">Pełne operacje cashback</p>
+                      <p className="text-sm text-muted-foreground">
+                        Wymiana punktów i zgłoszenia sporów są dostępne w pełnym panelu użytkownika.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Button asChild size="sm" className="rounded-full">
+                        <Link href="/panel?view=redeem">Wymień punkty</Link>
+                      </Button>
+                      <Button asChild size="sm" variant="outline" className="rounded-full">
+                        <Link href="/panel?view=disputes">Zgłoszenia</Link>
+                      </Button>
+                      <Button asChild size="sm" variant="ghost" className="rounded-full">
+                        <Link href="/panel">Otwórz panel</Link>
+                      </Button>
+                    </div>
                   </div>
                 </TabsContent>
 
@@ -711,9 +658,8 @@ export function UserPanel() {
                     copiedTransactionId={copiedTransactionId}
                   />
                 </TabsContent>
-
               </Tabs>
-            ) : state === "loading" ? null : (
+            ) : summaryStatus === "loading" ? null : (
               <EmptyState />
             )}
           </div>
@@ -745,7 +691,7 @@ interface DisputesSectionProps {
   onStatusChange: (value: DisputeStatusFilter) => void;
   onRetry: () => void;
   onLoadMore: () => void;
-  onCreate: (payload: CreateDisputeFormPayload) => Promise<{ ok: boolean; error?: string }>;
+  onCreate: (payload: CreateDisputePayload) => Promise<{ ok: boolean; error?: string }>;
 }
 
 function formatDisputeAmount(value: number, currency: string) {
@@ -1929,19 +1875,6 @@ function logWalletEvent(event: string, detail?: string) {
     console.warn("[wallet] telemetry error", error);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
