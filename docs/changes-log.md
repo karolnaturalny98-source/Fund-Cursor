@@ -42,6 +42,12 @@
 - Strona `/panel` odczytuje tab startowy z parametru `?view=`, a zakładki `RedeemSection` i `DisputesSection` pobierają dane poprzez hooki (w tym automatyczne przeładowanie po sukcesie redeem/dispute), co uprościło kilkaset linii stanów i odwołań do `fetch`.
 - Overlay `UserPanel` wykorzystuje `useUserSummary`, tab „Saldo” został przemianowany na „Przegląd”, a w sekcji CTA pojawiły się przyciski „Wymień punkty” i „Zgłoszenia” prowadzące do `/panel?view=redeem|disputes`, dzięki czemu overlay pełni rolę lekkiego podglądu i zachęca do przejścia do pełnego panelu.
 
+## 2025-11-15 – `/firmy` jako kompaktowa lista
+- Strona `/firmy` korzysta teraz z nowego layoutu inspirowanego ui.aceternity: nagłówek ze statystykami i kompaktowa tabela/lista, gdzie na jednym ekranie mieści się kilkanaście firm zamiast marketingowych kart.
+- Filtry przeniesiono do jednego paska (Input + Selecty + dropdowny wielokrotnego wyboru), utrzymując dotychczasową logikę URL bez zmian.
+- Każdy wiersz zawiera logo, rating, kluczowe parametry planu, sekcję cashbacku oraz dwa CTA („Zobacz szczegóły”, „Kup z kodem”) z microcopy o cashbacku.
+- Stary komponent `CompanyCard` został zastąpiony `CompanyDirectoryRow`, a całość używa shadcn/ui + Tailwind (bez legacy klas).
+
 ## 2025-11-14 – Etap 6: Stylowanie i Tailwind
 - Utworzono `tailwind.config.ts`, który mapuje kolory (z obsługą alfa), spacing `fluid-*`, typografię, promienie i animacje – dzięki temu utilsy w `globals.css` mogą opierać się na `theme()` zamiast surowych wartości, a projekt ma jedno źródło prawdy dla tokenów.
 - Rozszerzono `app/globals.css` o klasę `glass-premium` oraz nowe utilsy (`fluid-pill`, `fluid-table-head`, `fluid-table-cell`, `fluid-icon-sm`); `SiteHeader`, `SiteFooter` i sekcje mobilne odzyskały efekt szklanego panelu, a glass efekty zostały sprowadzone do trzech bazowych wariantów (`glass-card`, `glass-panel`, `glass-premium`).

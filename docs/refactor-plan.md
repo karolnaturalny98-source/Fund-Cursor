@@ -127,6 +127,11 @@ nie przenosimy jej na stronę główną.
 - Dodano komponenty `HomeCompareTeaser`, `HomeEducationGrid` i `HomeRecentSection`, które korzystają z istniejących danych (`getHomeRanking`, `getRecentPublicReviews`, `getRecentCompanies`).
 - Etap 3.2 dołożył silniejsze CTA afiliacyjne (multi-ranking, Top Cashback, niedawno dodane firmy), trzeci przycisk hero (do `/analizy`), microcopy o cashbacku oraz sekcję `HomeMarketingSpotlights` bazującą na panelu admina.
 
+#### Aktualizacja – 2025-11-15
+- `/firmy` zostało przepisane na zwarty layout listowy bazujący na shadcn/ui + ui.aceternity: nagłówek ze statystykami, pasek filtrów (Input + Select + dropdowny wielokrotnego wyboru) i lista firm działająca jak tabela (logo, parametry planu, cashback, CTA).
+- Użyto tych samych źródeł danych (`getCompanies`, `getCompanyFiltersMetadata`) i logiki porównania, więc SSR/URL query pozostały bez zmian.
+- Legacy `CompanyCard` zastąpił `CompanyDirectoryRow`, każdy wiersz ma osobną sekcję cashbacku oraz obowiązkowe CTA „Zobacz szczegóły” + „Kup z kodem”.
+
 ---
 
 ## Etap 4 – Strona firmy (`/firmy/[slug]`)
