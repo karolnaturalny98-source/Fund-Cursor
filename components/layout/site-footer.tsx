@@ -75,7 +75,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="glass-premium border-t border-border/40">
+    <footer className="bg-[#050505] border-t border-white/10 text-white">
       <div className="w-full px-2 md:px-4 xl:px-0 fluid-section-lg">
         <div className="mx-auto flex max-w-screen-xl flex-col fluid-stack-xl">
         {/* Górna sekcja - Logo + Newsletter */}
@@ -111,7 +111,7 @@ export function SiteFooter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="bg-card/54 border-border/60 focus:border-primary backdrop-blur-[36px]!"
+                className="bg-[#080808] border-white/15 text-white placeholder:text-white/40 focus:border-white/40"
               />
               <Button
                 type="submit"
@@ -186,15 +186,15 @@ export function SiteFooter() {
             <h4 className="fluid-copy font-semibold text-foreground">
               Śledź nas
             </h4>
-            <div className="flex flex-wrap fluid-stack-xs">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
+          <div className="flex flex-wrap fluid-stack-xs">
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] items-center justify-center rounded-full border border-border/60 bg-muted/20 backdrop-blur-[36px]! text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:scale-110"
+                  className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] items-center justify-center rounded-full border border-white/15 bg-[#0a0a0a] text-muted-foreground transition-all hover:border-white/40 hover:text-white hover:scale-110"
                 >
                   <social.icon className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" />
                 </a>

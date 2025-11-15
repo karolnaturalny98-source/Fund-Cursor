@@ -2,7 +2,8 @@ import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 
 import { Section } from "@/components/layout/section";
-import { Card, CardContent } from "@/components/ui/card";
+import { SectionHeader } from "@/components/layout/section-header";
+import { SurfaceCard } from "@/components/layout/surface-card";
 import type { ReviewHighlight } from "@/lib/types";
 
 interface HomeRecentSectionProps {
@@ -21,33 +22,30 @@ export function HomeRecentSection({ reviews }: HomeRecentSectionProps) {
 
   return (
     <Section size="lg" className="flex flex-col fluid-stack-lg">
-      <div className="flex flex-col text-center fluid-stack-xs">
-        <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">
-          Ostatnie opinie
-        </p>
-        <h2 className="fluid-h2 font-semibold text-foreground">Świeże doświadczenia traderów</h2>
-      </div>
+      <SectionHeader
+        eyebrow="Ostatnie opinie"
+        title="Świeże doświadczenia traderów"
+        description="Najbardziej aktualne zgłoszenia payoutów, komentarze i średnie oceny zebrane w jednym widoku."
+      />
       <div className="grid fluid-stack-md md:grid-cols-3">
         {items.map((item) => (
-          <Card key={item.id} className="border border-border/40 bg-background/60">
-            <CardContent className="flex flex-col fluid-stack-sm p-5">
-              <div className="flex items-center font-semibold uppercase tracking-wide text-muted-foreground fluid-stack-xs fluid-caption">
-                <MessageSquare className="h-4 w-4 text-primary" />
-                Nowa opinia
-              </div>
-              <div className="flex flex-col fluid-stack-2xs">
-                <Link
-                  href={item.href}
-                  prefetch={false}
-                  className="font-semibold text-foreground transition hover:text-primary fluid-copy"
-                >
-                  {item.title}
-                </Link>
-                <p className="text-muted-foreground fluid-caption line-clamp-2">{item.description}</p>
-              </div>
-              <p className="text-muted-foreground fluid-caption">{item.meta}</p>
-            </CardContent>
-          </Card>
+          <SurfaceCard key={item.id} variant="muted" padding="md" className="flex flex-col fluid-stack-sm">
+            <div className="inline-flex items-center gap-2 font-semibold uppercase tracking-wide text-muted-foreground fluid-caption">
+              <MessageSquare className="h-4 w-4 text-primary" />
+              Nowa opinia
+            </div>
+            <div className="flex flex-col fluid-stack-2xs">
+              <Link
+                href={item.href}
+                prefetch={false}
+                className="font-semibold text-foreground transition hover:text-primary fluid-copy"
+              >
+                {item.title}
+              </Link>
+              <p className="text-muted-foreground fluid-caption line-clamp-2">{item.description}</p>
+            </div>
+            <p className="text-muted-foreground fluid-caption">{item.meta}</p>
+          </SurfaceCard>
         ))}
       </div>
       <div className="flex justify-center">

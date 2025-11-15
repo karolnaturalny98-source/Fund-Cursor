@@ -4,7 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { UserPanel } from "@/components/panels/user-panel";
 import { UserPanelProvider } from "@/components/panels/user-panel-context";
 import { CurrencyProvider } from "@/app/providers/currency-provider";
@@ -69,7 +68,6 @@ export default function RootLayout({
             <CurrencyProvider>
               <UserPanelProvider>
                 <div className="flex min-h-screen flex-col">
-                  <SiteHeader />
                   <main className="flex-1">{children}</main>
                   <SiteFooter />
                 </div>

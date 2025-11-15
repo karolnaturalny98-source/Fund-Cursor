@@ -6,8 +6,8 @@ import type { ReactNode } from "react";
 import { ArrowRight, Star } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { SurfaceCard } from "@/components/layout/surface-card";
 import type { HomeRankingTab, RankingCompanySnapshot } from "@/lib/types/rankings";
 import { formatCurrencyLocalized } from "@/lib/currency";
 
@@ -23,7 +23,7 @@ export function RankingTabsSection({ tabs, variant = "home" }: RankingTabsSectio
 
   return (
     <Tabs defaultValue={tabs[0]?.id ?? ""} className="w-full">
-      <TabsList className="flex w-full flex-wrap justify-start gap-2 overflow-x-auto border border-border/50 bg-card/60 p-1">
+      <TabsList className="flex w-full flex-wrap justify-start gap-2 overflow-x-auto rounded-2xl border border-border/30 bg-[var(--surface-muted)]/60 p-1 backdrop-blur-md">
         {tabs.map((tab) => (
           <TabsTrigger
             key={tab.id}
@@ -38,82 +38,86 @@ export function RankingTabsSection({ tabs, variant = "home" }: RankingTabsSectio
       {tabs.map((tab) => {
         const containerClasses =
           variant === "full"
-            ? "mt-6 space-y-5 rounded-2xl border border-border/60 bg-card/70 p-5 shadow-xs"
-            : "mt-6 space-y-4 rounded-2xl border border-border/60 bg-card/70 p-4 shadow-xs";
+            ? "mt-6 space-y-5"
+            : "mt-6 space-y-4";
 
         return (
           <TabsContent key={tab.id} value={tab.id} className={containerClasses}>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-muted-foreground">{tab.description}</p>
-              <Button
-                asChild
-                variant="ghost"
-                className="flex items-center gap-2 text-sm font-semibold text-primary"
-              >
-                <Link href="/rankingi" prefetch={false}>
-                  Pełny ranking
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-
-            <div className={variant === "full" ? "space-y-4" : "space-y-3"}>
-              {tab.companies.map((company, index) => (
-                <div
-                  key={company.id}
-                  className="flex flex-col gap-4 rounded-xl border border-border/40 bg-background/50 p-4 transition hover:border-primary/30 hover:bg-background/70 sm:flex-row sm:items-center"
+            <SurfaceCard variant="outline" padding="lg" className="flex flex-col gap-6 rounded-3xl border-border/30 bg-[var(--surface-base)]/60">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-muted-foreground">{tab.description}</p>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="flex items-center gap-2 text-sm font-semibold text-primary"
                 >
-                  <div className="flex items-center gap-3 sm:w-1/3">
-                    <Badge variant="outline" className="rounded-full px-3 py-1 text-xs font-semibold">
-                      #{index + 1}
-                    </Badge>
-                    <div className="flex items-center gap-3">
-                      <CompanyLogo name={company.name} logoUrl={company.logoUrl} />
-                      <div className="space-y-1">
-                        <Link
-                          href={`/firmy/${company.slug}`}
-                          className="text-sm font-semibold text-foreground transition hover:text-primary"
-                          prefetch={false}
-                        >
-                          {company.name}
-                        </Link>
-                        <p className="text-xs text-muted-foreground line-clamp-1">
-                          {company.headline ?? company.country ?? "Globalny rynek"}
-                        </p>
+                  <Link href="/rankingi" prefetch={false}>
+                    Pełny ranking
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+
+              <div className={variant === "full" ? "space-y-4" : "space-y-3"}>
+                {tab.companies.map((company, index) => (
+                  <SurfaceCard
+                    key={company.id}
+                    variant="muted"
+                    padding="md"
+                    className="flex flex-col gap-4 rounded-2xl border border-border/30 bg-[var(--surface-base)]/80 transition hover:border-primary/40 hover:bg-[var(--surface-elevated)]/80 sm:flex-row sm:items-center"
+                  >
+                    <div className="flex items-center gap-3 sm:w-1/3">
+                      <div className="rounded-full border border-border/40 bg-[var(--surface-muted)]/40 px-3 py-1 text-xs font-semibold text-muted-foreground">
+                        #{index + 1}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <CompanyLogo name={company.name} logoUrl={company.logoUrl} />
+                        <div className="space-y-1">
+                          <Link
+                            href={`/firmy/${company.slug}`}
+                            className="text-sm font-semibold text-foreground transition hover:text-primary"
+                            prefetch={false}
+                          >
+                            {company.name}
+                          </Link>
+                          <p className="text-xs text-muted-foreground line-clamp-1">
+                            {company.headline ?? company.country ?? "Globalny rynek"}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex flex-1 flex-wrap items-center gap-3 text-xs text-muted-foreground sm:justify-end">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-3 w-3 text-amber-500" />
-                      {company.averageRating ? company.averageRating.toFixed(1) : "—"}{" "}
-                      • {company.reviewCount.toLocaleString("pl-PL")} opinii
+                    <div className="flex flex-1 flex-wrap items-center gap-3 text-xs text-muted-foreground sm:justify-end">
+                      <div className="flex items-center gap-1">
+                        <Star className="h-3 w-3 text-amber-500" />
+                        {company.averageRating ? company.averageRating.toFixed(1) : "—"}{" "}
+                        • {company.reviewCount.toLocaleString("pl-PL")} opinii
+                      </div>
+                      <div>{renderMetric(tab.id, company)}</div>
+                      <div className="font-semibold text-foreground">
+                        Trend: {company.trendRatio >= 0 ? "+" : ""}
+                        {company.trendRatio.toFixed(1)}%
+                      </div>
                     </div>
-                    <div>{renderMetric(tab.id, company)}</div>
-                    <div className="font-semibold text-foreground">
-                      Trend: {company.trendRatio >= 0 ? "+" : ""}
-                      {company.trendRatio.toFixed(1)}%
-                    </div>
-                  </div>
 
-                  <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:w-40">
-                    <Button
-                      asChild
-                      size="sm"
-                      className="rounded-full"
-                    >
-                      <Link href={`/firmy/${company.slug}`} prefetch={false}>
-                        Przejdź z kodem
-                      </Link>
-                    </Button>
-                    <p className="text-[11px] leading-tight">
-                      Zgarnij cashback z naszego linka
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                    <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:w-40">
+                      <Button
+                        asChild
+                        size="sm"
+                        className="rounded-full"
+                      >
+                        <Link href={`/firmy/${company.slug}`} prefetch={false}>
+                          Przejdź z kodem
+                        </Link>
+                      </Button>
+                      <p className="text-[11px] leading-tight">
+                        Zgarnij cashback z naszego linka
+                      </p>
+                    </div>
+                  </SurfaceCard>
+                ))}
+              </div>
+            </SurfaceCard>
           </TabsContent>
         );
       })}

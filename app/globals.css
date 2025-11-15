@@ -17,6 +17,43 @@
   }
 }
 
+:root {
+  --surface-base: color-mix(in srgb, var(--background) 92%, var(--foreground) 8%);
+  --surface-muted: color-mix(in srgb, var(--background) 88%, var(--foreground) 12%);
+  --surface-elevated: color-mix(in srgb, var(--background) 80%, var(--foreground) 20%);
+  --surface-glass: color-mix(in srgb, var(--background) 70%, var(--accent) 30%);
+  --surface-ring: color-mix(in srgb, var(--accent) 60%, var(--primary) 40%);
+  --surface-highlight: color-mix(in srgb, var(--accent) 30%, white 70%);
+  --surface-pad-sm: clamp(0.9rem, 0.85vw + 0.65rem, 1.25rem);
+  --surface-pad-md: clamp(1.15rem, 1vw + 0.9rem, 1.6rem);
+  --surface-pad-lg: clamp(1.45rem, 1.2vw + 1.1rem, 2.15rem);
+}
+
+.dark {
+  --surface-base: color-mix(in srgb, var(--background) 80%, white 20%);
+  --surface-muted: color-mix(in srgb, var(--background) 72%, white 28%);
+  --surface-elevated: color-mix(in srgb, var(--background) 65%, white 35%);
+  --surface-glass: color-mix(in srgb, var(--background) 55%, var(--accent) 45%);
+  --surface-ring: color-mix(in srgb, var(--accent) 70%, white 30%);
+  --surface-highlight: color-mix(in srgb, var(--accent) 25%, white 75%);
+}
+
+@utility surface-pad-sm {
+  padding: var(--surface-pad-sm);
+}
+
+@utility surface-pad-md {
+  padding: var(--surface-pad-md);
+}
+
+@utility surface-pad-lg {
+  padding: var(--surface-pad-lg);
+}
+
+@utility safe-area-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px) + 0.75rem);
+}
+
 @utility fluid-h1 {
   font-size: clamp(1.89rem, 3.36vw + 0.84rem, 2.94rem);
   line-height: clamp(2.31rem, 3.36vw + 1.26rem, 3.15rem);

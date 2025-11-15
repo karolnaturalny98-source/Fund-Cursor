@@ -3,8 +3,10 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Section } from "@/components/layout/section";
+import { SectionHeader } from "@/components/layout/section-header";
+import { SurfaceCard } from "@/components/layout/surface-card";
+import { cn } from "@/lib/utils";
 import type { TopCashbackCompany } from "@/lib/types";
 
 interface TopCashbackSectionProps {
@@ -25,66 +27,72 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
   }
 
   return (
-    <Section size="md" className="relative flex flex-col fluid-stack-lg">
-      <div className="flex flex-col fluid-stack-sm">
-        {/* Section Header Badge */}
-        <div className="flex justify-center">
-          <Badge variant="outline" className="fluid-badge font-semibold tracking-[0.28em] fluid-caption">
-            Top Cashback
-          </Badge>
-        </div>
-
-        {/* Cards Container */}
-        <div className="relative">
-          {/* Mobile: Horizontal Scroll - zachowaj spójny wygląd */}
-          <div className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 scrollbar-hide fluid-stack-sm md:hidden">
-            {companies.map((company) => (
-              <CompanyCard key={company.id} company={company} />
-            ))}
-          </div>
-
-          {/* Tablet+: Grid z zachowaniem proporcji - używa auto-fit dla płynnego skalowania */}
-          <div className="hidden max-w-full grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] justify-items-center fluid-stack-sm md:grid">
-            {companies.slice(0, 8).map((company) => (
-              <CompanyCard key={company.id} company={company} />
-            ))}
-          </div>
-        </div>
+    <Section size="md" className="relative flex flex-col gap-8">
+      <SectionHeader
+        eyebrow={
+          <span className="inline-flex items-center gap-2">
+            <Badge variant="outline" className="rounded-full px-3 py-1 font-semibold uppercase tracking-[0.28em]">
+              Top Cashback
+            </Badge>
+            Live
+          </span>
+        }
+        title="Najwyższe stawki cashbacku"
+        description="Filtrujemy realtime zgłoszenia cashbacków. Zobacz firmy, które w tym tygodniu płacą najwięcej."
+      />
+      <div
+        className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3"
+        aria-label="Top cashback – przewiń listę firm"
+      >
+        {companies.map((company) => (
+          <CompanyCard
+            key={company.id}
+            company={company}
+            className="snap-center min-w-[220px]"
+          />
+        ))}
       </div>
     </Section>
   );
 }
 
-function CompanyCard({ company }: { company: TopCashbackCompany }) {
+function CompanyCard({ company, className }: { company: TopCashbackCompany; className?: string }) {
   return (
-    <Card className="snap-center w-[clamp(10rem,24vw,12rem)] shrink-0 border-border/60 bg-card/80 backdrop-blur">
-      <CardContent className="flex flex-col items-center text-center fluid-stack-sm p-4">
-        <div className="relative flex h-[clamp(3.5rem,4vw+2.5rem,5.25rem)] w-[clamp(3.5rem,4vw+2.5rem,5.25rem)] items-center justify-center rounded-xl border border-border/30 bg-background">
-          {company.logoUrl ? (
-            <Image
-              src={company.logoUrl}
-              alt={`${company.name} logo`}
-              width={96}
-              height={96}
-              className="h-full w-full rounded-xl object-contain"
-            />
-          ) : (
-            <span className="font-semibold text-primary fluid-copy">{getInitials(company.name)}</span>
-          )}
-        </div>
-        <div className="flex flex-col fluid-stack-2xs">
-          <p className="font-semibold text-foreground fluid-copy">{company.name}</p>
-          <p className="text-muted-foreground fluid-caption">
-            ${company.minCashback} - ${company.maxCashback} cashback
-          </p>
-        </div>
-        <Button asChild size="sm" className="w-full rounded-full">
-          <Link href={`/firmy/${company.slug}`} prefetch={false}>
-            Odbierz cashback
-          </Link>
-        </Button>
-        <p className="text-muted-foreground fluid-caption">Przejdź z kodem, a część naszej prowizji wróci do Ciebie.</p>
-      </CardContent>
-    </Card>
+    <SurfaceCard
+      variant="glass"
+      padding="sm"
+      className={cn(
+        "flex flex-col items-center text-center gap-3 border border-white/10 bg-[#090909]",
+        className,
+      )}
+    >
+      <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-border/40 bg-[var(--surface-base)]">
+        {company.logoUrl ? (
+          <Image
+            src={company.logoUrl}
+            alt={`${company.name} logo`}
+            width={96}
+            height={96}
+            className="h-full w-full rounded-2xl object-contain"
+          />
+        ) : (
+          <span className="font-semibold text-primary fluid-copy">{getInitials(company.name)}</span>
+        )}
+      </div>
+      <div className="flex flex-col fluid-stack-2xs">
+        <p className="font-semibold text-foreground fluid-copy">{company.name}</p>
+        <p className="text-muted-foreground fluid-caption">
+          ${company.minCashback} - ${company.maxCashback} cashback
+        </p>
+      </div>
+      <Button asChild size="sm" className="w-full rounded-full border border-white/20 bg-transparent text-white">
+        <Link href={`/firmy/${company.slug}`} prefetch={false}>
+          Odbierz cashback
+        </Link>
+      </Button>
+      <p className="text-muted-foreground fluid-caption">
+        Przejdź z kodem, a część naszej prowizji wróci do Ciebie.
+      </p>
+    </SurfaceCard>
   );
 }

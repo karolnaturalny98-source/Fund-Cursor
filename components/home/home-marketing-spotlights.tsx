@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, Percent, Star } from "lucide-react";
 
 import { Section } from "@/components/layout/section";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { SectionHeader } from "@/components/layout/section-header";
+import { SurfaceCard } from "@/components/layout/surface-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types";
@@ -18,20 +19,20 @@ export function HomeMarketingSpotlights({ section }: HomeMarketingSpotlightsProp
   }
 
   return (
-    <Section size="lg" className="flex flex-col fluid-stack-lg">
-      <div className="flex flex-col text-center fluid-stack-xs">
-        <p className="font-semibold uppercase tracking-[0.35em] text-muted-foreground fluid-caption">
-          {section.emoji ?? "🔥"} {section.title}
-        </p>
-        {section.subtitle ? (
-          <p className="text-muted-foreground fluid-copy">{section.subtitle}</p>
-        ) : null}
-      </div>
+    <Section size="lg" className="flex flex-col gap-8">
+      <SectionHeader
+        eyebrow={`${section.emoji ?? "🔥"} spotlight`}
+        title={section.title}
+        description={section.subtitle ?? "Personalizowane oferty i kody cashbacku przygotowane z partnerami FR."}
+        eyebrowTone="accent"
+      />
 
-      <div className="grid fluid-stack-md md:grid-cols-3">
-        {section.spotlights.slice(0, 6).map((spotlight) => (
-          <SpotlightCard key={spotlight.id} spotlight={spotlight} />
-        ))}
+      <div className="rounded-[32px] border border-white/5 bg-[#080808] p-6">
+        <div className="grid gap-6 md:grid-cols-3">
+          {section.spotlights.slice(0, 6).map((spotlight) => (
+            <SpotlightCard key={spotlight.id} spotlight={spotlight} />
+          ))}
+        </div>
       </div>
     </Section>
   );
@@ -46,22 +47,26 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
   const badgeTone = getBadgeTone(spotlight.badgeTone);
 
   return (
-    <Card className="flex h-full flex-col border border-border/40 bg-background/80 shadow-sm transition hover:border-primary/40">
-      <CardContent className="flex flex-1 flex-col fluid-stack-sm p-5">
-        <div className="flex flex-wrap items-center fluid-stack-2xs">
+    <SurfaceCard
+      variant="glass"
+      padding="md"
+      className="flex h-full flex-col justify-between gap-5 border border-white/10 bg-[#0b0b0b] hover:border-white/30"
+    >
+      <div className="flex flex-col fluid-stack-sm">
+        <div className="flex flex-wrap items-center gap-2">
           <Badge variant="outline" className={`rounded-full font-semibold fluid-caption ${badgeTone}`}>
             {spotlight.badgeLabel ?? "Specjalna oferta"}
           </Badge>
           {discountLabel ? (
-            <span className="inline-flex items-center fluid-stack-2xs rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary fluid-caption">
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary fluid-caption">
               <Percent className="h-3 w-3" />
               {discountLabel}
             </span>
           ) : null}
         </div>
-        <div className="flex items-center fluid-stack-sm">
+        <div className="flex items-center gap-3">
           {spotlight.company?.logoUrl ? (
-            <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-border/30 bg-card">
+            <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/10 bg-[#050505]">
               <Image src={spotlight.company.logoUrl} alt={spotlight.company.name} fill sizes="40px" className="object-contain" />
             </div>
           ) : null}
@@ -73,37 +78,37 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
           </div>
         </div>
         <div className="flex flex-wrap items-center text-muted-foreground fluid-stack-xs fluid-caption">
-          <span className="inline-flex items-center fluid-stack-2xs">
+          <span className="inline-flex items-center gap-1">
             <Star className="h-3 w-3 text-amber-500" />
             {ratingLabel}
           </span>
           <span>{ratingCount}</span>
         </div>
-      </CardContent>
-      <CardFooter className="flex items-center justify-between border-t border-border/30 p-4">
+      </div>
+      <div className="flex items-center justify-between border-t border-border/30 pt-4">
         <div className="font-semibold text-foreground fluid-copy">{spotlight.company?.name ?? "Oferta"}</div>
         {spotlight.ctaUrl ? (
-          <Button asChild variant="ghost" size="sm" className="gap-1">
+          <Button asChild variant="ghost" size="sm" className="gap-1 text-white">
             <Link href={spotlight.ctaUrl} target="_blank" rel="noopener noreferrer">
               {spotlight.ctaLabel ?? "Sprawdź"}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         ) : null}
-      </CardFooter>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }
 
 function getBadgeTone(tone?: string | null) {
   switch (tone) {
     case "violet":
-      return "border-violet-400/30 text-violet-600";
+      return "border-violet-400/30 text-violet-200";
     case "emerald":
-      return "border-emerald-400/30 text-emerald-600";
+      return "border-emerald-400/30 text-emerald-200";
     case "orange":
-      return "border-orange-400/30 text-orange-600";
+      return "border-orange-400/30 text-orange-200";
     default:
-      return "border-primary/40 text-primary";
+      return "border-[color-mix(in_srgb,var(--surface-ring)_75%,white_25%)] text-[var(--surface-ring)]";
   }
 }

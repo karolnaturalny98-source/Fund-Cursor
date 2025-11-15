@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import Image from "next/image";
+import React, { useRef, useState, type MouseEvent } from "react";
 import {
   motion,
   useTransform,
@@ -9,16 +10,21 @@ import {
   useSpring,
 } from "motion/react";
 
-export const AnimatedTooltip = ({
-  items,
-}: {
-  items: {
-    id: number;
-    name: string;
-    designation: string;
-    image: string;
-  }[];
-}) => {
+import { cn } from "@/lib/utils";
+
+interface AnimatedTooltipItem {
+  id: number;
+  name: string;
+  designation: string;
+  image: string;
+}
+
+interface AnimatedTooltipProps {
+  items: AnimatedTooltipItem[];
+  className?: string;
+}
+
+export const AnimatedTooltip = ({ items, className }: AnimatedTooltipProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
@@ -33,23 +39,30 @@ export const AnimatedTooltip = ({
     springConfig,
   );
 
-  const handleMouseMove = (event: any) => {
+  const handleMouseMove = (event: MouseEvent<HTMLImageElement>) => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
 
     animationFrameRef.current = requestAnimationFrame(() => {
-      const halfWidth = event.target.offsetWidth / 2;
+      const target = event.currentTarget;
+      if (!target) {
+        return;
+      }
+      const halfWidth = target.offsetWidth / 2;
       x.set(event.nativeEvent.offsetX - halfWidth);
     });
   };
 
   return (
-    <>
-      {items.map((item, idx) => (
+    <div className={cn("flex items-center", className)}>
+      {items.map((item, index) => (
         <div
-          className="group relative -mr-4"
-          key={item.name}
+          className={cn(
+            "group relative",
+            index === 0 ? "ml-0" : "-ml-8",
+          )}
+          key={item.id}
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -84,16 +97,18 @@ export const AnimatedTooltip = ({
               </motion.div>
             )}
           </AnimatePresence>
-          <img
-            onMouseMove={handleMouseMove}
-            height={100}
-            width={100}
-            src={item.image}
-            alt={item.name}
-            className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
-          />
+          <div className="relative h-16 w-16 overflow-hidden rounded-[32%] border-2 border-white bg-black/40">
+            <Image
+              onMouseMove={handleMouseMove}
+              alt={item.name}
+              className="h-full w-full object-cover object-center"
+              src={item.image}
+              width={64}
+              height={64}
+            />
+          </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
