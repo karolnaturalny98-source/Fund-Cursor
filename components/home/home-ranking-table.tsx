@@ -61,8 +61,7 @@ function getCompanyHref(company: HomeRankingCompany): string {
   return `/firmy/${company.slug}`;
 }
 
-const HEADER_CELL_CLASSES =
-  "fluid-table-head text-left fluid-caption font-semibold uppercase tracking-[0.18em] text-muted-foreground";
+const HEADER_CELL_CLASSES = "text-left text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground";
 
 function getCompanyMeta(company: HomeRankingCompany): string {
   const parts: string[] = [];
@@ -73,7 +72,7 @@ function getCompanyMeta(company: HomeRankingCompany): string {
 
 function RatingBadge({ rating }: { rating: number | null }) {
   if (rating === null) {
-    return <span className="fluid-caption text-muted-foreground">-</span>;
+    return <span className="text-sm text-muted-foreground">-</span>;
   }
   return (
     <Badge variant="pill" className="gap-2 border-primary/30 bg-primary/10 text-primary fluid-caption font-semibold">
@@ -122,7 +121,7 @@ function CompanyRow({
 
   return (
     <TableRow className={cn("border-b border-border/40 transition-colors hover:bg-card/40", top3Class)}>
-      <TableCell className="fluid-table-cell align-top font-semibold text-muted-foreground fluid-copy">
+      <TableCell className="font-semibold text-muted-foreground">
         <div className="flex items-center gap-[clamp(0.4rem,0.7vw,0.65rem)]">
           {isTop3 && (
             index === 0 ? (
@@ -134,7 +133,7 @@ function CompanyRow({
           #{index + 1}
         </div>
       </TableCell>
-      <TableCell className="fluid-table-cell align-top">
+      <TableCell className="align-top">
         <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
           <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={isTop3} />
           <div className="flex flex-col">
@@ -159,10 +158,10 @@ function CompanyRow({
           </div>
         </div>
       </TableCell>
-      <TableCell className="fluid-table-cell align-top">
+      <TableCell className="align-top">
         <RatingBadge rating={company.rating} />
       </TableCell>
-      <TableCell className="fluid-table-cell align-top text-muted-foreground fluid-caption">
+      <TableCell className="align-top text-sm text-muted-foreground">
         <Text asChild variant="caption" tone="muted" className="hidden sm:inline">
           <span>{company.reviewCount.toLocaleString("pl-PL")} opinii</span>
         </Text>
@@ -170,7 +169,7 @@ function CompanyRow({
           <span>{company.reviewCount.toLocaleString("pl-PL")}</span>
         </Text>
       </TableCell>
-      <TableCell className="fluid-table-cell align-top">
+      <TableCell className="align-top">
         {hasCashback ? (
           <PremiumBadge variant="glow" className="w-fit px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
             {Math.round(cashbackRate)}%
@@ -179,10 +178,10 @@ function CompanyRow({
           <span className="fluid-caption text-muted-foreground">-</span>
         )}
       </TableCell>
-      <TableCell className="fluid-table-cell align-top">
+      <TableCell className="align-top">
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
-      <TableCell className="fluid-table-cell align-top">
+      <TableCell className="align-top">
         <Link
           href={profileHref}
           prefetch={false}

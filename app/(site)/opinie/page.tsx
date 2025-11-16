@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { ReviewsRankingPage } from "@/components/reviews/reviews-ranking-page";
 import { OpiniePageClient, OpinieBadgeClient } from "@/components/opinie/opinie-page-client";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { getReviewsRanking } from "@/lib/queries/reviews";
 
 export const metadata: Metadata = {
@@ -33,13 +35,12 @@ export default async function OpiniePage() {
       <section className="w-full space-y-[clamp(1.75rem,2.5vw,2.4rem)] px-[clamp(1rem,3vw,2.5rem)] py-[clamp(2.5rem,3.5vw,3.25rem)]">
         <div className="flex flex-wrap items-start justify-between gap-[clamp(0.85rem,1.3vw,1.2rem)]">
           <div className="space-y-[clamp(0.35rem,0.55vw,0.5rem)]">
-            <h2 className="fluid-h2 font-semibold text-foreground">
+            <Heading level={2} variant="section">
               Ranking opinii spolecznosci
-            </h2>
-            <p className="fluid-copy text-muted-foreground max-w-2xl">
-              Dane odswiezamy automatycznie, a uzytkownicy z rola admin moga
-              moderowac recenzje z poziomu panelu.
-            </p>
+            </Heading>
+            <Text variant="body" tone="muted" className="max-w-2xl">
+              Dane odswiezamy automatycznie, a uzytkownicy z rola admin moga moderowac recenzje z poziomu panelu.
+            </Text>
           </div>
           <OpinieBadgeClient />
         </div>

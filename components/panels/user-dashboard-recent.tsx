@@ -109,7 +109,7 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
               return (
                 <Card
                   key={transaction.id}
-                  className="rounded-2xl border border-border/60 bg-background/60/80 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-premium"
+                  className="rounded-2xl border border-border/60 bg-background/60/80 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
                 >
                   <CardContent className="p-[clamp(1rem,1.5vw,1.35rem)]">
                     <div className="flex items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)]">

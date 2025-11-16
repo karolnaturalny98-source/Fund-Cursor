@@ -88,6 +88,48 @@
 - **Typ zmian:** usunięcie nieużywanych `@utility` bloków, pozostawienie komentarzy przy tokenach core, aktualizacja dokumentacji z listą „dozwolonych” vs „zakazanych” utili, dopisanie checklisty PR („nie używaj fluid-* poza Heading/Text”).  
 - **Dlaczego bezpieczna:** następuje dopiero po potwierdzeniu braku konsumentów (rg = puste). To czysta higiena CSS + dokumentacja, zgodna z AGENTS.md (brak zmian w restricted files typu `globals.css` bez kontekstu – mamy explicite zgodę w tym planie).
 
+### Iteracja 1 – Uporządkowanie tokenów typografii i spacingu (WYKONANA)
+- **Co zmieniono:**  
+  - `components/layout/section.tsx` otrzymał nowy prop `stack`, który kapsułkuje wszystkie `fluid-stack-*` w jednym miejscu. Dzięki temu sekcje mogą ustawiać pionowe odstępy bez ręcznego dopisywania `flex flex-col fluid-stack-*`.  
+  - `components/home/home-recent-section.tsx` oraz `components/home/home-latest-companies.tsx` używają teraz `Section stack="lg"` oraz komponentu `Text` zamiast klas `fluid-copy`/`fluid-caption`. Wszystkie wcześniejsze `fluid-stack-*` i `fluid-h*/copy` w tych sekcjach zniknęły, a spacing opiera się o Tailwind `gap-*` lub nowe API Section.  
+- **Efekt UX:** home page zyskał konsekwentne odstępy i typografię sterowaną przez design system – brak już mieszanki `fluid-*` i własnych klas w tych blokach. Łatwiej też sterować czytelnym CTA (tekstowe linki korzystają z `Text`).  
+- **Następne kroki:** przenieść kolejne sekcje landingowe/blogowe na `Section stack` + `Text/Heading`, a potem przejść do Iteracji 2 (paddingi kart/tabel/avatarów).
+
+### Wykonane zmiany – Home sections (Section stack + Text)
+- `components/home/knowledge-grid.tsx`, `home-education-grid.tsx`, `home-marketing-spotlights.tsx`, `home-compare-teaser.tsx`, `top-cashback-section.tsx`, `community-highlights-animated.tsx` oraz `influencer-spotlight.tsx` nie używają już `fluid-stack-*` ani `fluid-copy`/`fluid-caption`. Wszystkie sekcje korzystają z `Section stack="lg|xl"` lub Tailwindowych `gap-*`, a teksty renderowane są przez `Text`/`Heading`.  
+- Dzięki temu cały blok „Home” opiera spacing na komponentach layoutowych i możemy wyciąć `fluid-stack-*` z kodu funkcjonalnego przed startem Iteracji 2 (cleanup paddingów/tabel/avatarów).
+
+### Wykonane zmiany – Blog (karty + taby + statystyki)
+- `components/blog/blog-post-card.tsx`, `blog-categories-tabs.tsx`, `blog-statistics.tsx` zostały uwolnione od `fluid-stack-*`, `fluid-copy`, `fluid-caption`. Zamiast nich stosujemy `gap-*`, nowy `Section stack` (tam gdzie potrzebne) oraz `Text`/`Heading`.  
+- Tabs i alerty nie używają już `fluid-stack` ani `fluid-icon`; spacing zapewniają `gap-6`, a ikonki mają stałe rozmiary `h-4 w-4`. Dzięki temu również część blogowa przeszła na system komponentowy.
+
+### Wykonane zmiany – Strony (Analizy / Rankingi / Firmy / Opinie / O nas / Baza wiedzy)
+- Wszystkie główne podstrony marketingowe (`app/(site)/analizy`, `/rankingi`, `/firmy`, `/firmy/[slug]`, `/opinie`, `/o-nas`, `/baza-wiedzy`) zostały przepisane na `Section stack` lub zwykłe Tailwindowe `gap-*`, a lokalne nagłówki/opisy korzystają z `Heading`/`Text`.  
+- Dzięki temu w folderze `app/(site)` nie ma już `fluid-stack-*`, `fluid-copy`, `fluid-caption` ani `fluid-h*` — jedyne pozostałe `fluid-*` to tokeny ikon, które przeniesiemy później. To domyka etap przygotowujący iterację 2 (padding/tabelki/avatar).
+
+### Iteracja 2 – paddingi kart/tabel/avatarów (WYKONANA)
+- **Co zmieniono:**  
+  - `components/ui/card.tsx` dostał dodatkowe poziomy paddingu (`xs`, obecne `sm/md/lg`), `components/ui/table.tsx` ma teraz kontekst `padding` (TableHead/TableCell renderują odpowiednie `px/py`), a `components/ui/avatar.tsx` przyjmuje prop `size` (`sm|md|lg`).  
+  - Home ranking table wyszło z `fluid-table-head/cell`: `components/home/home-ranking-table.tsx` używa Table padding=md + zwykłych klas.  
+  - Wszystkie `fluid-card-pad-*` zniknęły (`shop-plan-card`, `shop-company-cards`, `analysis-layout`).  
+  - `fluid-avatar-*` usunięto z company selector / analysis layout / shop company cards (korzystają z nowego `Avatar size`).  
+  - `fluid-input-icon` zastąpiono stałym `pl-10` + ikonami w search barach (company selector, shop purchase form).  
+- **Efekt:** padding i rozmiary wróciły do komponentów bazowych, więc kolejne sekcje nie muszą znać tokenów `fluid-*`. `app/globals.css` może teraz usunąć `fluid-card-pad-*`, `fluid-table-*`, `fluid-avatar-*`, `fluid-input-icon` i `fluid-select-width` – nie ma już konsumentów.
+
+### Iteracja 3 – konsolidacja gradientów i cieni (WYKONANA)
+- **Co zmieniono:**  
+  - `components/ui/card.tsx`, `components/ui/surface.tsx`, `components/ui/button.tsx`, `components/ui/input.tsx`, `components/ui/textarea.tsx`, `components/ui/select.tsx` mają wbudowane klasy z Tailwinda (arbitrary values) opisujące gradientowe tła, cienie i obramowania. Dzięki temu zniknęły zależności od `glass-card`, `card-outline`, `shadow-premium*`, `bg-gradient-card`, `border-gradient*`, `bg-gradient-button-*`.  
+  - Wszystkie miejsca, które kopiowały utilsy (`components/admin/*`, `components/analysis/analysis-layout.tsx`, `components/panels/user-panel.tsx`, `app/(site)/firmy/[slug]/page.tsx`, `components/companies/faq-item.tsx`, itp.) zostały przepisane na zwykłe Tailwindowe klasy (`border-primary/...`, `bg-card/90`, `shadow-[...]`). Tab-y admina mają jeden zestaw stanów (`triggerStateClasses`).  
+  - Z `app/globals.css` usunięto definicje `glass-card`, `card-outline`, `shadow-glass`, `shadow-soft`, `shadow-premium*`, `bg-gradient-card`, `border-gradient` (wraz z kombinacjami `.hover`/`data-state`), `bg-gradient-button-premium*`, `backdrop-premium`.  
+- **Efekt:** gradienty i cienie są kontrolowane przez komponenty UI, a globalny CSS nie zawiera już stylów specyficznych dla sekcji. Każdy nowy moduł korzysta z tych samych wariantów (`Card`/`Surface`/`Button`) bez kopiowania utili, co upraszcza dalsze porządki i usuwanie długu wizualnego.
+
+### Iteracja 4 – cleanup utili + dokumentacja (WYKONANA)
+- **Co zmieniono:**  
+  - Z `app/globals.css` usunięto ostatnie utilsy bez konsumentów (`fluid-card-pad-*`, `fluid-table-*`, `fluid-avatar-*`, `fluid-input-icon`, `fluid-select-width`, `glass-card`, `card-outline`, `shadow-glass`, `shadow-soft`, `shadow-premium*`, `bg-gradient-card`, `border-gradient*`, `bg-gradient-button-*`, `backdrop-premium`).  
+  - Repozytorium (`rg`) nie zawiera już odwołań do tych nazw – wszystkie komponenty bazują na nowych wariantach w UI kit i czystym Tailwindzie.  
+  - `agent-style-audit.md` odnotowuje zamknięcie planu oraz fakt, że zasady dotyczące typografii/spacingu/form są opisane w wcześniejszych sekcjach.
+- **Efekt:** globalny CSS zawiera wyłącznie core tokens (`fluid-h*`, `fluid-stack-*`, `fluid-button*`, itp.) oraz reset. Każdy przyszły refaktor będzie dodawał wariant do komponentu zamiast rozszerzać `globals.css`, a dokumentacja ma kompletny zapis wykonanych iteracji.
+
 ## Plan refaktoru filtrów i form controls
 
 **Iteracja 1 – Uporządkowanie komponentów chip/badge i semantyki**  

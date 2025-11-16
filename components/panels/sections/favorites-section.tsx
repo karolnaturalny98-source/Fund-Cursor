@@ -62,7 +62,7 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
         {favorites.map((company) => (
           <Card
             key={company.id}
-            className="rounded-2xl border border-border/60 bg-background/60/85 shadow-xs transition-all duration-300 hover:border-primary/35 hover:shadow-premium"
+            className="rounded-2xl border border-border/60 bg-background/60/85 shadow-xs transition-all duration-300 hover:border-primary/35 hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
           >
             <CardContent className="p-[clamp(1.1rem,1.6vw,1.4rem)] space-y-[clamp(0.4rem,0.6vw,0.55rem)]">
               <Link

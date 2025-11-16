@@ -3,6 +3,8 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Text } from "@/components/ui/text";
+import { Heading } from "@/components/ui/heading";
 import type { BlogPostWithRelations } from "@/lib/types";
 
 interface BlogPostCardProps {
@@ -24,7 +26,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             />
           </div>
         )}
-        <CardContent className="flex flex-col fluid-stack-sm p-5">
+        <CardContent className="flex flex-col gap-4 p-5">
           <div className="flex flex-wrap gap-2">
             {post.categories.map((category) => (
               <Badge key={category.id} variant="pill-outline" className="text-xs font-medium">
@@ -32,21 +34,26 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               </Badge>
             ))}
           </div>
-          <h2 className="text-foreground transition-colors group-hover:text-primary line-clamp-2 fluid-copy font-semibold">
-            {post.title}
-          </h2>
+          <Heading
+            asChild
+            level={3}
+            variant="subsectionStrong"
+            className="line-clamp-2 text-foreground transition-colors group-hover:text-primary"
+          >
+            <span>{post.title}</span>
+          </Heading>
           {post.excerpt && (
-            <p className="line-clamp-2 text-muted-foreground fluid-caption">
+            <Text variant="caption" tone="muted" className="line-clamp-2">
               {post.excerpt}
-            </p>
+            </Text>
           )}
-          <div className="flex items-center justify-between text-muted-foreground fluid-caption">
+          <Text asChild variant="caption" tone="muted" className="flex items-center justify-between">
             <span>
               {post.publishedAt &&
                 format(new Date(post.publishedAt), "d MMMM yyyy")}
             </span>
             {post.readingTime && <span>{post.readingTime} min czytania</span>}
-          </div>
+          </Text>
         </CardContent>
       </Card>
     </Link>

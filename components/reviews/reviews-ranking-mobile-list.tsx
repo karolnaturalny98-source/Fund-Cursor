@@ -70,7 +70,7 @@ function RankingCard({
   const overall = item.averageRating ?? 0;
 
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-[clamp(1.2rem,1.8vw,1.6rem)] shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-premium">
+    <article className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! p-[clamp(1.2rem,1.8vw,1.6rem)] shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]">
       <div className="flex items-start justify-between gap-[clamp(0.65rem,0.95vw,0.9rem)]">
         <div className="flex flex-1 items-center gap-[clamp(0.75rem,1vw,0.95rem)]">
           <span className="flex h-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] w-[clamp(2.35rem,1.8vw+1.9rem,2.7rem)] items-center justify-center rounded-full border border-border/60 bg-muted text-[clamp(0.9rem,0.4vw+0.8rem,1rem)] font-semibold text-muted-foreground">

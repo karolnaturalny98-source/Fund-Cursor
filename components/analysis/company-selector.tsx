@@ -83,13 +83,13 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
     <div className="flex flex-col fluid-stack-xl animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Search Bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 fluid-icon-sm -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           type="text"
           placeholder="Szukaj firm po nazwie, slug lub kraju..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="rounded-2xl border-border/60 bg-card/72 shadow-xs backdrop-blur-xl fluid-input-icon"
+          className="rounded-2xl border-border/60 bg-card/72 pl-10 shadow-xs backdrop-blur-xl"
         />
       </div>
 
@@ -127,14 +127,14 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
 
                   <div className="flex items-start gap-3">
                     {company.logoUrl ? (
-                      <Avatar className="fluid-avatar-md rounded-lg">
+                      <Avatar size="lg" className="rounded-lg">
                         <AvatarImage src={company.logoUrl} alt={company.name} />
                         <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                     ) : (
-                      <Avatar className="fluid-avatar-md rounded-lg">
+                      <Avatar size="lg" className="rounded-lg">
                         <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                           {company.name.charAt(0)}
                         </AvatarFallback>
@@ -201,14 +201,14 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
               >
                 <div className="flex items-start gap-3">
                   {company.logoUrl ? (
-                    <Avatar className="fluid-avatar-sm rounded-lg">
+                    <Avatar size="sm" className="rounded-lg">
                       <AvatarImage src={company.logoUrl} alt={company.name} />
                       <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                   ) : (
-                    <Avatar className="fluid-avatar-sm rounded-lg">
+                    <Avatar size="sm" className="rounded-lg">
                       <AvatarFallback className="rounded-lg bg-linear-to-br from-primary/20 to-primary/10 text-xs font-semibold">
                         {company.name.charAt(0)}
                       </AvatarFallback>

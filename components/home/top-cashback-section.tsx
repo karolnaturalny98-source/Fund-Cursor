@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { Text } from "@/components/ui/text";
 import type { TopCashbackCompany } from "@/lib/types";
 
 interface TopCashbackSectionProps {
@@ -27,7 +28,7 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
   }
 
   return (
-    <Section size="md" className="relative flex flex-col gap-8">
+    <Section size="md" stack="lg" className="relative">
       <SectionHeader
         eyebrow={
           <span className="inline-flex items-center gap-2">
@@ -76,14 +77,18 @@ function CompanyCard({ company, className }: { company: TopCashbackCompany; clas
             className="h-full w-full rounded-2xl object-contain"
           />
         ) : (
-          <span className="font-semibold text-primary fluid-copy">{getInitials(company.name)}</span>
+          <Text variant="body" weight="semibold" className="text-primary">
+            {getInitials(company.name)}
+          </Text>
         )}
       </div>
-      <div className="flex flex-col fluid-stack-2xs">
-        <p className="font-semibold text-foreground fluid-copy">{company.name}</p>
-        <p className="text-muted-foreground fluid-caption">
+      <div className="flex flex-col gap-1.5">
+        <Text variant="body" weight="semibold" className="text-foreground">
+          {company.name}
+        </Text>
+        <Text variant="caption" tone="muted">
           ${company.minCashback} - ${company.maxCashback} cashback
-        </p>
+        </Text>
       </div>
       <Link
         href={`/firmy/${company.slug}`}
@@ -95,9 +100,9 @@ function CompanyCard({ company, className }: { company: TopCashbackCompany; clas
       >
         Odbierz cashback
       </Link>
-      <p className="text-muted-foreground fluid-caption">
+      <Text variant="caption" tone="muted">
         Przejdź z kodem, a część naszej prowizji wróci do Ciebie.
-      </p>
+      </Text>
     </SurfaceCard>
   );
 }

@@ -62,7 +62,7 @@ export default async function CompaniesPage({ searchParams }: CompaniesPageProps
 
   return (
     <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
-      <div className="container relative z-10 flex flex-col fluid-stack-xl">
+      <div className="container relative z-10 flex flex-col gap-8">
         <CompaniesPageClient
           companies={companies}
           minCashback={minCashback}

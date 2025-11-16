@@ -28,8 +28,8 @@ export function BlogCategoriesTabs({
   }, [posts, activeCategory]);
 
   return (
-    <Tabs value={activeCategory} onValueChange={setActiveCategory} className="flex flex-col fluid-stack-md">
-      <TabsList className="flex w-full flex-wrap fluid-stack-xs rounded-2xl border border-border/40 bg-background/60 p-3 shadow-xs backdrop-blur-xl">
+    <Tabs value={activeCategory} onValueChange={setActiveCategory} className="flex flex-col gap-6">
+      <TabsList className="flex w-full flex-wrap gap-2 rounded-2xl border border-border/40 bg-background/60 p-3 shadow-xs backdrop-blur-xl">
         <TabsTrigger
           value="all"
           className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
@@ -47,16 +47,14 @@ export function BlogCategoriesTabs({
         ))}
       </TabsList>
 
-      <TabsContent value="all" className="flex flex-col fluid-stack-md">
+      <TabsContent value="all" className="flex flex-col gap-6">
         {filteredPosts.length === 0 ? (
-          <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl fluid-stack-xs">
-            <BookOpen className="fluid-icon-sm" />
-            <AlertDescription>
-              Brak artykułów do wyświetlenia.
-            </AlertDescription>
+          <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl flex items-center gap-3">
+            <BookOpen className="h-4 w-4" />
+            <AlertDescription>Brak artykułów do wyświetlenia.</AlertDescription>
           </Alert>
         ) : (
-          <div className="grid fluid-stack-sm md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
               <BlogPostCard key={post.id} post={post} />
             ))}
@@ -65,16 +63,14 @@ export function BlogCategoriesTabs({
       </TabsContent>
 
       {categories.map((category) => (
-        <TabsContent key={category.id} value={category.id} className="flex flex-col fluid-stack-md">
+        <TabsContent key={category.id} value={category.id} className="flex flex-col gap-6">
           {filteredPosts.length === 0 ? (
-            <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl fluid-stack-xs">
-              <BookOpen className="fluid-icon-sm" />
-              <AlertDescription>
-                Brak artykułów w kategorii &quot;{category.name}&quot;.
-              </AlertDescription>
+            <Alert className="rounded-2xl border border-border/40 bg-background/60 p-4 shadow-xs backdrop-blur-xl flex items-center gap-3">
+              <BookOpen className="h-4 w-4" />
+              <AlertDescription>Brak artykułów w kategorii &quot;{category.name}&quot;.</AlertDescription>
             </Alert>
           ) : (
-            <div className="grid fluid-stack-sm md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredPosts.map((post) => (
                 <BlogPostCard key={post.id} post={post} />
               ))}

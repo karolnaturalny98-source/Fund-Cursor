@@ -39,7 +39,7 @@ export function KnowledgeGrid() {
   return (
     <Section
       ref={sectionVisible.ref}
-      className="flex flex-col fluid-stack-xl"
+      stack="xl"
       id="baza-wiedzy"
       size="lg"
     >
@@ -50,7 +50,7 @@ export function KnowledgeGrid() {
           sectionAnim.className,
         )}
       >
-        <div className="flex w-full flex-col fluid-stack-xs sm:w-auto">
+        <div className="flex w-full flex-col gap-2 sm:w-auto">
           <Text variant="eyebrow" tone="primary">
             Baza wiedzy
           </Text>
@@ -68,7 +68,7 @@ export function KnowledgeGrid() {
         </Button>
       </div>
 
-      <div className="grid fluid-stack-lg md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3 md:gap-8">
         {knowledgeItems.map((item, index) => (
           <Card
             key={item.title}
@@ -82,7 +82,7 @@ export function KnowledgeGrid() {
                 {item.title}
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col fluid-stack-md">
+            <CardContent className="flex flex-col gap-4">
               <Text variant="body" tone="muted">
                 {item.description}
               </Text>

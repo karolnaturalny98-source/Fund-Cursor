@@ -130,17 +130,17 @@ export function AnalysisLayout({
               <Card
                 key={card.id}
                 variant="elevated"
-                className="group flex items-center gap-4 fluid-card-pad-md transition-all hover:border-primary/40"
+                className="group flex items-center gap-4 p-6 transition-all hover:border-primary/40"
               >
                 {card.logoUrl ? (
-                  <Avatar className="fluid-avatar-lg rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
+                  <Avatar size="lg" className="rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">
                     <AvatarImage src={card.logoUrl} alt={card.name} className="object-cover" />
                     <AvatarFallback className="rounded-xl bg-linear-to-br from-primary/20 to-primary/10 text-sm font-semibold">
                       {card.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 ) : (
-                  <div className="flex items-center justify-center fluid-avatar-lg rounded-xl bg-linear-to-br from-primary/20 to-primary/10">
+                  <div className="flex items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-primary/10 p-4">
                     <span className="font-semibold text-muted-foreground fluid-copy">
                       {card.name.charAt(0).toUpperCase()}
                     </span>
@@ -190,8 +190,8 @@ export function AnalysisLayout({
               value="overview"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">
@@ -203,8 +203,8 @@ export function AnalysisLayout({
               value="plans"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">
@@ -216,8 +216,8 @@ export function AnalysisLayout({
               value="trading"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">
@@ -229,8 +229,8 @@ export function AnalysisLayout({
               value="reviews"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">
@@ -242,8 +242,8 @@ export function AnalysisLayout({
               value="payouts"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">
@@ -255,8 +255,8 @@ export function AnalysisLayout({
               value="company"
               className={cn(
                 "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
-                "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
+                "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]"
               )}
             >
               <div className="flex items-center gap-2">

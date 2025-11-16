@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Text } from "@/components/ui/text";
 import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,7 @@ export function HomeMarketingSpotlights({ section }: HomeMarketingSpotlightsProp
   }
 
   return (
-    <Section size="lg" className="flex flex-col gap-8">
+    <Section size="lg" stack="lg">
       <SectionHeader
         eyebrow={`${section.emoji ?? "🔥"} spotlight`}
         title={section.title}
@@ -53,16 +54,24 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       padding="md"
       className="flex h-full flex-col justify-between gap-5 border border-white/10 bg-[#0b0b0b] hover:border-white/30"
     >
-      <div className="flex flex-col fluid-stack-sm">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className={`rounded-full font-semibold fluid-caption ${badgeTone}`}>
+          <Badge variant="outline" className={cn("rounded-full text-[0.7rem] font-semibold", badgeTone)}>
             {spotlight.badgeLabel ?? "Specjalna oferta"}
           </Badge>
           {discountLabel ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary fluid-caption">
-              <Percent className="h-3 w-3" />
-              {discountLabel}
-            </span>
+            <Text
+              asChild
+              variant="caption"
+              tone="primary"
+              weight="semibold"
+              className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5"
+            >
+              <span>
+                <Percent className="h-3 w-3" />
+                {discountLabel}
+              </span>
+            </Text>
           ) : null}
         </div>
         <div className="flex items-center gap-3">
@@ -71,23 +80,29 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
               <Image src={spotlight.company.logoUrl} alt={spotlight.company.name} fill sizes="40px" className="object-contain" />
             </div>
           ) : null}
-          <div className="flex flex-col fluid-stack-2xs">
-            <p className="font-semibold text-foreground fluid-copy">{spotlight.title}</p>
-            <p className="text-muted-foreground fluid-caption line-clamp-2">
+          <div className="flex flex-col gap-1.5">
+            <Text variant="body" weight="semibold" className="text-foreground">
+              {spotlight.title}
+            </Text>
+            <Text variant="caption" tone="muted" className="line-clamp-2">
               {spotlight.headline ?? spotlight.company?.name ?? "Sprawdź szczegóły"}
-            </p>
+            </Text>
           </div>
         </div>
-        <div className="flex flex-wrap items-center text-muted-foreground fluid-stack-xs fluid-caption">
-          <span className="inline-flex items-center gap-1">
-            <Star className="h-3 w-3 text-amber-500" />
-            {ratingLabel}
-          </span>
-          <span>{ratingCount}</span>
-        </div>
+        <Text asChild variant="caption" tone="muted" className="flex flex-wrap items-center gap-3 text-muted-foreground">
+          <div>
+            <span className="inline-flex items-center gap-1">
+              <Star className="h-3 w-3 text-amber-500" />
+              {ratingLabel}
+            </span>
+            <span className="ml-3">{ratingCount}</span>
+          </div>
+        </Text>
       </div>
       <div className="flex items-center justify-between border-t border-border/30 pt-4">
-        <div className="font-semibold text-foreground fluid-copy">{spotlight.company?.name ?? "Oferta"}</div>
+        <Text variant="body" weight="semibold" className="text-foreground">
+          {spotlight.company?.name ?? "Oferta"}
+        </Text>
         {spotlight.ctaUrl ? (
           <Link
             href={spotlight.ctaUrl}

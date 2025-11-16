@@ -244,7 +244,7 @@ export function OverviewHeroSection({
             href="#offers"
             className={cn(
               buttonVariants({ variant: "premium" }),
-              "w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full shadow-premium",
+              "w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
             )}
           >
             <PremiumIcon icon={ShoppingCart} variant="glow" size="sm" />

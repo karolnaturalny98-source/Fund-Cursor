@@ -142,7 +142,7 @@ export function AffiliateRegistrationForm() {
         </p>
       </div>
 
-      <Card className="rounded-3xl border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md">
+      <Card className="rounded-3xl border border border-primary/50 bg-card/72 backdrop-blur-[36px]! shadow-md">
         <CardHeader className="flex flex-col fluid-stack-xs">
           <div className="flex items-center justify-between">
             <CardTitle className="text-xl font-semibold">Formularz zgłoszeniowy</CardTitle>

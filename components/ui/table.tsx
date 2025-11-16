@@ -2,17 +2,30 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+type TablePadding = "sm" | "md" | "lg"
+
+const TABLE_SPACING: Record<TablePadding, { head: string; cell: string }> = {
+  sm: { head: "px-4 py-3", cell: "px-4 py-4" },
+  md: { head: "px-6 py-4", cell: "px-6 py-5" },
+  lg: { head: "px-8 py-5", cell: "px-8 py-6" },
+}
+
+type TableContextValue = { padding: TablePadding }
+const TableContext = React.createContext<TableContextValue>({ padding: "md" })
+
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto">
-    <table
-      ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
-      {...props}
-    />
-  </div>
+  React.HTMLAttributes<HTMLTableElement> & { padding?: TablePadding }
+>(({ className, padding = "md", ...props }, ref) => (
+  <TableContext.Provider value={{ padding }}>
+    <div className="relative w-full overflow-auto">
+      <table
+        ref={ref}
+        className={cn("w-full caption-bottom text-sm", className)}
+        {...props}
+      />
+    </div>
+  </TableContext.Provider>
 ))
 Table.displayName = "Table"
 
@@ -69,28 +82,39 @@ TableRow.displayName = "TableRow"
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
-  <th
-    ref={ref}
-    className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
-      className
-    )}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const { padding } = React.useContext(TableContext)
+  return (
+    <th
+      ref={ref}
+      className={cn(
+        "text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+        TABLE_SPACING[padding].head,
+        className
+      )}
+      {...props}
+    />
+  )
+})
 TableHead.displayName = "TableHead"
 
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
-  <td
-    ref={ref}
-    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const { padding } = React.useContext(TableContext)
+  return (
+    <td
+      ref={ref}
+      className={cn(
+        "align-middle [&:has([role=checkbox])]:pr-0",
+        TABLE_SPACING[padding].cell,
+        className
+      )}
+      {...props}
+    />
+  )
+})
 TableCell.displayName = "TableCell"
 
 const TableCaption = React.forwardRef<

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col fluid-stack-xl pb-[clamp(2.5rem,3vw,3.5rem)]">
+    <div className="flex flex-col gap-10 pb-[clamp(2.5rem,3vw,3.5rem)]">
       <AboutHero />
       <MissionVision />
       <CompanyValues />

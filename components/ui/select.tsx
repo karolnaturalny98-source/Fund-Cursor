@@ -14,7 +14,7 @@ const selectTriggerVariants = cva(
       variant: {
         default: "border border-input bg-background",
         premium:
-          "border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)] hover:shadow-[0_38px_80px_-40px_rgba(15,23,42,0.5)] focus:ring-primary",
+          "border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)] hover:shadow-[0_38px_80px_-40px_rgba(15,23,42,0.5)] focus:ring-primary",
       },
     },
     defaultVariants: {
@@ -30,7 +30,7 @@ const selectContentVariants = cva(
       variant: {
         default: "",
         premium:
-          "border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]",
+          "border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]",
       },
     },
     defaultVariants: {

@@ -58,9 +58,9 @@ async function CompanySelectorWrapper() {
 
 export default async function AnalizyPage() {
   return (
-    <Section size="lg" className="flex flex-col fluid-stack-xl animate-in fade-in duration-500">
+    <Section size="lg" stack="xl" className="animate-in fade-in duration-500">
       {/* Hero Section */}
-      <div className="flex flex-col fluid-stack-lg text-center">
+      <div className="flex flex-col gap-6 text-center">
           <Badge
             variant="pill"
             className="mx-auto w-fit gap-2 border-border/60 bg-card/72 text-primary shadow-xs backdrop-blur-xl"
@@ -79,7 +79,7 @@ export default async function AnalizyPage() {
           </Text>
 
           {/* Feature Pills */}
-          <div className="flex flex-wrap items-center justify-center fluid-stack-xs">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <Badge
               variant="pill"
               className="gap-2 border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl"
@@ -119,18 +119,18 @@ export default async function AnalizyPage() {
         </div>
 
         {/* Info Section */}
-        <div className="mx-auto flex max-w-4xl flex-col fluid-stack-lg">
+        <div className="mx-auto flex max-w-4xl flex-col gap-8">
           <Heading level={2} variant="section" align="center">
             Co możesz analizować?
           </Heading>
 
-          <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {ANALYSIS_FEATURES.map(({ icon: Icon, title, description }) => (
               <Surface
                 key={title}
                 variant="panel"
                 padding="lg"
-                className="flex flex-col fluid-stack-sm transition-all hover:border-primary/40"
+                className="flex flex-col gap-4 transition-all hover:border-primary/40"
               >
                 <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
                   <Icon className="fluid-icon-md text-primary" />

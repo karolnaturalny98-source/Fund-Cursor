@@ -31,6 +31,7 @@ export function ShopPlanCard({
   return (
     <Card
       variant={isSelected ? "elevated" : "muted"}
+      padding="md"
       className={cn(
         "cursor-pointer transition-all duration-200",
         !isSelected && "hover:border-primary/50 hover:shadow-md",
@@ -38,7 +39,7 @@ export function ShopPlanCard({
       )}
       onClick={onSelect}
     >
-      <div className="fluid-card-pad-sm space-y-4">
+      <div className="space-y-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2">

@@ -236,7 +236,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
 
   return (
     <div className="flex flex-col fluid-stack-md">
-      <div className="rounded-2xl border-gradient bg-gradient-card p-6 shadow-premium">
+      <div className="rounded-2xl border border-primary/50 bg-card/90 p-6 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold">Zarządzanie zespołem</h3>
@@ -353,7 +353,7 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
             {teamMembers.map((member) => (
               <Card
                 key={member.id}
-                className="group relative overflow-hidden rounded-2xl border-gradient bg-gradient-card shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg"
+                className="group relative overflow-hidden rounded-2xl border border-primary/50 bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] transition-all hover:border-primary/70 hover:shadow-[0_42px_90px_-32px_rgba(15,23,42,0.5),0_20px_46px_-24px_rgba(15,23,42,0.35)]"
               >
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">

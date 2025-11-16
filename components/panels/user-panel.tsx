@@ -894,7 +894,7 @@ function DisputesSection({
             <Label className="flex items-center gap-2">
               <span>Status</span>
               <Select value={status} onValueChange={(value) => onStatusChange(value as DisputeStatusFilter)}>
-                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
+                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -939,7 +939,7 @@ function DisputesSection({
       {/* List */}
       <div className="space-y-3">
         {disputes.map((item) => (
-          <Card key={item.id} className="border border-border/40 shadow-premium transition-all hover:border border-border/40-premium hover:shadow-premium-lg">
+          <Card key={item.id} className="border border-border/40 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] transition-all hover:border border-border/40-premium hover:shadow-[0_42px_90px_-32px_rgba(15,23,42,0.5),0_20px_46px_-24px_rgba(15,23,42,0.35)]">
             <CardContent className="p-4">
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-3">
@@ -1034,7 +1034,7 @@ function DisputesSection({
                 disabled={submitting || companiesLoading || noCompaniesAvailable}
                 required
               >
-                <SelectTrigger className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
+                <SelectTrigger className="rounded-lg border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -1370,7 +1370,7 @@ function RedeemSection({
                 onValueChange={handleCompanyChange}
                 disabled={submitting || offersState === "loading" || offersState === "error" || !offers?.length}
               >
-                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
+                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -1390,7 +1390,7 @@ function RedeemSection({
                 onValueChange={handlePlanChange}
                 disabled={submitting || !availablePlans.length}
               >
-                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
+                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-card/90 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder={selectedCompany ? "Wybierz plan" : "Najpierw wybierz firmę"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -1812,7 +1812,7 @@ function FavoritesSection({ favorites }: { favorites: Company[] }) {
       <CardContent>
         <div className="space-y-3">
           {favorites.map((company) => (
-            <Card key={company.id} className="border border-border/40 shadow-premium transition-all hover:border border-border/40-premium hover:shadow-premium-lg">
+            <Card key={company.id} className="border border-border/40 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] transition-all hover:border border-border/40-premium hover:shadow-[0_42px_90px_-32px_rgba(15,23,42,0.5),0_20px_46px_-24px_rgba(15,23,42,0.35)]">
               <CardContent className="p-4">
                 <Link
                   className="font-medium hover:underline hover:text-primary transition-colors"
@@ -1857,7 +1857,7 @@ function LoadingState() {
 
 function ErrorState({ message }: { message: string | null }) {
   return (
-    <div className="rounded-lg border border-border/40 border-destructive bg-destructive/10 p-4 text-sm text-destructive shadow-premium">
+    <div className="rounded-lg border border-border/40 border-destructive bg-destructive/10 p-4 text-sm text-destructive shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]">
       {message ?? "Nie udało się pobrać danych użytkownika."}
     </div>
   );
@@ -1865,7 +1865,7 @@ function ErrorState({ message }: { message: string | null }) {
 
 function EmptyState() {
   return (
-    <div className="rounded-lg border border-border/40 bg-gradient-card p-6 text-center text-sm text-muted-foreground shadow-premium">
+    <div className="rounded-lg border border-border/40 bg-card/90 p-6 text-center text-sm text-muted-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]">
       Nie znaleziono danych cashback. Zacznij od dodania pierwszej transakcji.
     </div>
   );

@@ -26,11 +26,11 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
   return (
     <Section
       ref={sectionVisible.ref}
-      className="grid fluid-stack-xl lg:grid-cols-[3fr_2fr]"
+      className="grid gap-8 lg:grid-cols-[3fr_2fr]"
       id="influencerzy"
       size="lg"
     >
-      <div ref={sectionAnim.ref} className={cn("flex flex-col fluid-stack-md", sectionAnim.className)}>
+      <div ref={sectionAnim.ref} className={cn("flex flex-col gap-4", sectionAnim.className)}>
         <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
           Program influencerów FundedRank
         </PremiumBadge>
@@ -47,7 +47,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
           <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
         </Button>
       </div>
-      <div className="grid fluid-stack-lg">
+      <div className="grid gap-6">
         {influencers.length === 0 ? (
           <Card
             className={`group relative overflow-hidden rounded-3xl border border-border/60 border-dashed transition-all duration-700 hover:border-primary/50 hover:shadow-md delay-[var(--delay)] ${
@@ -60,7 +60,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                 Ty możesz być pierwszy
               </Heading>
             </CardHeader>
-            <CardContent className="flex flex-col fluid-stack-sm">
+            <CardContent className="flex flex-col gap-4">
               <Text variant="body" tone="muted">
                 Dołącz do FundedRank jako ambasador i otrzymuj materiały,
                 które pomogą Twojej społeczności lepiej wybierać konta
@@ -91,7 +91,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                   {profile.platform}
                 </PremiumBadge>
               </CardHeader>
-              <CardContent className="flex flex-col fluid-stack-sm">
+              <CardContent className="flex flex-col gap-4">
                 <Text
                   variant="caption"
                   tone="primary"
@@ -114,7 +114,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                             icon={ArrowUpRight}
                             variant="glow"
                             size="sm"
-                            className="fluid-icon-sm"
+                            className="h-4 w-4"
                             hoverGlow
                           />
                         </Link>

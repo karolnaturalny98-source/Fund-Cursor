@@ -57,7 +57,7 @@ export function AffiliateHero() {
             </Button>
           </div>
         </div>
-        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-primary/50 bg-card/72 shadow-md backdrop-blur-[36px]!">
+        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border border-primary/50 bg-card/72 shadow-md backdrop-blur-[36px]!">
           <div className="border-b border-border/40 bg-primary/10 px-[clamp(1.5rem,2vw,1.9rem)] py-[clamp(1.25rem,1.8vw,1.6rem)]">
             <p className="font-semibold tracking-[0.18em] text-muted-foreground fluid-eyebrow">
               Program Affilacyjny

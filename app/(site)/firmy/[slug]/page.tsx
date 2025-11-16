@@ -22,6 +22,8 @@ import { CompanyOffersSection } from "@/components/companies/company-offers-sect
 import { CompanyPayoutsSection } from "@/components/companies/company-payouts-section";
 import { CompanyReviewsSection } from "@/components/companies/company-reviews-section";
 import { buttonVariants } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Breadcrumb,
@@ -135,7 +137,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
   return (
     <div className="relative">
     <CompareProvider initialSelection={initialCompare}>
-      <div className="container flex flex-col fluid-stack-xl py-[clamp(2.5rem,3vw,3.5rem)]">
+      <div className="container flex flex-col gap-10 py-[clamp(2.5rem,3vw,3.5rem)]">
         <script
           dangerouslySetInnerHTML={{ __html: jsonLd }}
           suppressHydrationWarning
@@ -162,12 +164,17 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           </BreadcrumbList>
         </Breadcrumb>
 
-        <Link
-          href="/firmy"
-          className="inline-flex items-center fluid-caption text-muted-foreground transition hover:text-foreground"
+        <Text
+          asChild
+          variant="caption"
+          tone="muted"
+          className="inline-flex items-center gap-2 transition hover:text-foreground"
         >
-          <ArrowLeft className="mr-[clamp(0.4rem,0.6vw,0.5rem)] h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" /> Powrót do listy firm
-        </Link>
+          <Link href="/firmy">
+            <ArrowLeft className="h-4 w-4" />
+            Powrót do listy firm
+          </Link>
+        </Text>
 
         <CompanyHeaderSection
           company={company}
@@ -176,7 +183,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           tosUrl={tosUrl}
         />
 
-        <Tabs defaultValue="overview" className="flex flex-col fluid-stack-lg">
+        <Tabs defaultValue="overview" className="flex flex-col gap-8">
           <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
             {tabConfig.map((tab) => (
               <TabsTrigger
@@ -185,8 +192,8 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
                 className={cn(
                   "group inline-flex min-w-[clamp(8rem,12vw,9.5rem)] items-center justify-between gap-[clamp(0.45rem,0.7vw,0.6rem)] rounded-full border px-[clamp(1.1rem,1.7vw,1.4rem)] py-[clamp(0.45rem,0.7vw,0.6rem)] text-[clamp(0.82rem,0.4vw+0.72rem,0.95rem)] font-semibold transition-all",
                   "border-transparent bg-muted/30 text-muted-foreground",
-                  "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-                  "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium",
+                  "data-[state=inactive]:hover:border-primary/50 data-[state=inactive]:hover:bg-card/95 data-[state=inactive]:hover:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
+                  "data-[state=active]:border-primary/70 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
                 )}
               >
                 <span>{tab.label}</span>
@@ -205,7 +212,7 @@ export default async function CompanyPage({ params, searchParams }: CompanyPageP
           </TabsList>
 
           <TabsContent value="overview" data-tab-value="overview">
-            <div className="flex flex-col fluid-stack-lg">
+            <div className="flex flex-col gap-8">
               <CompanyMetaSection company={company} checklist={checklist} />
               <CompanyRulesSection
                 company={company}
@@ -260,12 +267,14 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
   }
 
   return (
-    <section className="flex flex-col fluid-stack-md">
-      <div className="flex flex-col fluid-stack-xs">
-        <h2 className="fluid-h2 font-semibold">Podobne firmy</h2>
-        <p className="fluid-copy text-muted-foreground">
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <Heading level={2} variant="section">
+          Podobne firmy
+        </Heading>
+        <Text variant="body" tone="muted">
           Rekomendacje na podstawie modelu finansowania, instrumentów i ocen społeczności.
-        </p>
+        </Text>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {companies.map((company) => {
@@ -274,14 +283,19 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
           return (
             <article
               key={company.id}
-              className="group flex h-full flex-col justify-between rounded-3xl border-gradient bg-gradient-card p-4 shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg"
+              className="group flex h-full flex-col justify-between rounded-3xl border border-primary/50 bg-card/90 p-4 shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] transition-all hover:border-primary/70 hover:shadow-[0_42px_90px_-32px_rgba(15,23,42,0.5),0_20px_46px_-24px_rgba(15,23,42,0.35)]"
             >
-              <div className="flex flex-col fluid-stack-sm">
+              <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-[clamp(0.6rem,0.8vw,0.75rem)]">
                   <div>
-                    <Link className="fluid-copy font-semibold text-foreground hover:text-primary transition-colors" href={`/firmy/${company.slug}`}>
-                      {company.name}
-                    </Link>
+                    <Text
+                      asChild
+                      variant="body"
+                      weight="semibold"
+                      className="text-foreground transition-colors hover:text-primary"
+                    >
+                      <Link href={`/firmy/${company.slug}`}>{company.name}</Link>
+                    </Text>
                     <div className="mt-[clamp(0.2rem,0.3vw,0.25rem)]">
                       <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                         Cashback do {company.cashbackRate ?? 0} pkt
@@ -304,9 +318,9 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
                     ))}
                   </div>
                 ) : null}
-                <p className="fluid-caption text-muted-foreground">
+                <Text variant="caption" tone="muted">
                   {company.shortDescription ?? "Sprawdź zasady, wypłaty i cashback partnera."}
-                </p>
+                </Text>
               </div>
               <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <Link

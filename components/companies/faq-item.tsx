@@ -20,7 +20,7 @@ export function FaqItem({ id: _id, question, answer, companySlug: _companySlug, 
     <AccordionItem
       value={value}
       className={cn(
-        "group rounded-2xl border border-border/50 bg-gradient-card p-4 text-sm shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)] transition-all",
+        "group rounded-2xl border border-border/50 bg-card/90 p-4 text-sm shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)] transition-all",
         "border-b-0 data-[state=open]:border-primary/50"
       )}
     >

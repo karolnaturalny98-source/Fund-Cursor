@@ -67,7 +67,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
   return (
     <>
       <Section bleed size="lg" className="relative overflow-hidden border-b border-border/60">
-        <div className="container relative z-10 flex flex-col fluid-stack-lg">
+        <div className="container relative z-10 flex flex-col gap-8">
           <RankingsPageClient
             filteredCompanies={dataset.filteredCompanies}
             totalCompanies={dataset.totalCompanies}
@@ -95,7 +95,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
       </Section>
 
       <Section bleed size="lg" className="w-full">
-        <div className="mx-auto flex w-full max-w-7xl flex-col fluid-stack-lg px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
           <RankingsExplorer
             initialData={dataset}
             initialFilters={initialExplorerFilters}
@@ -105,7 +105,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
       </Section>
 
       <Section bleed size="lg" className="border-t border-border/60 bg-muted/10">
-        <div className="mx-auto flex max-w-6xl flex-col fluid-stack-lg px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-[clamp(0.5rem,1vw,1rem)] sm:px-[clamp(1rem,1.5vw,1.5rem)] lg:px-[clamp(2rem,2.5vw,2.5rem)] xl:px-[clamp(3rem,4vw,4rem)]">
           <RankingsMethodologyClient
             totalCompanies={dataset.totalCompanies}
             totalReviews={totalReviews}
@@ -189,7 +189,6 @@ export function parseTabParam(
   ];
   return allowed.includes(raw as RankingTabId) ? (raw as RankingTabId) : null;
 }
-
 
 
 

@@ -59,7 +59,7 @@ export function WalletSection({
                 </span>
               </div>
               {item.highlight && (
-                <div className="ml-[clamp(0.75rem,1.1vw,1rem)] h-[clamp(0.65rem,0.9vw,0.85rem)] w-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full bg-primary shadow-glass" />
+                <div className="ml-[clamp(0.75rem,1.1vw,1rem)] h-[clamp(0.65rem,0.9vw,0.85rem)] w-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full bg-primary shadow-[0_20px_45px_-25px_rgba(15,23,42,0.4),inset_0_0_1px_rgba(148,163,184,0.35)]" />
               )}
             </div>
           ))}

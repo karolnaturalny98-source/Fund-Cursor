@@ -129,7 +129,7 @@ export function ShopPurchaseForm({
 
         <SignedOut>
           <div className="flex flex-col fluid-stack-xs">
-            <Label htmlFor="email" className="text-foreground fluid-copy">Email</Label>
+            <Label htmlFor="email" className="text-foreground text-sm font-semibold">Email</Label>
             <Input
               id="email"
               type="email"
@@ -138,11 +138,11 @@ export function ShopPurchaseForm({
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={isSubmitting}
-              className="rounded-full fluid-input-icon"
+              className="rounded-full pl-10"
             />
-            <p className="text-muted-foreground fluid-caption">
+            <span className="text-xs text-muted-foreground">
               Jeśli utworzysz konto z tym emailem, zamówienie zostanie automatycznie powiązane.
-            </p>
+            </span>
           </div>
         </SignedOut>
 

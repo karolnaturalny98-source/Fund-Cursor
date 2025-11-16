@@ -31,7 +31,7 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground shadow-[0_20px_35px_-25px_rgba(255,82,82,0.5)] hover:bg-destructive/85 active:translate-y-0",
         link: "text-primary underline-offset-4 hover:underline",
         "premium-outline":
-          "border-gradient-premium bg-transparent text-primary shadow-glass hover:bg-gradient-button-premium-outline-hover hover:text-primary-foreground hover:-translate-y-px",
+          "border border-primary/60 bg-transparent text-primary shadow-[0_20px_45px_-25px_rgba(15,23,42,0.4),inset_0_0_1px_rgba(148,163,184,0.35)] hover:bg-[linear-gradient(120deg,hsl(var(--accent)/0.15),hsl(var(--primary)/0.12))] hover:text-primary-foreground hover:-translate-y-px",
         glow:
           "bg-white text-secondary-foreground border border-white/30 shadow-[0_30px_60px_-30px_rgba(255,255,255,0.95)] hover:-translate-y-0.5 hover:shadow-[0_45px_80px_-35px_rgba(255,255,255,0.95)] focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2",
         "ghost-dark":

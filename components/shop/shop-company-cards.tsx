@@ -41,7 +41,8 @@ function CompanyAvatar({
           alt={name}
           width={48}
           height={48}
-          className="fluid-avatar-md rounded-xl border border-border/60 bg-card/72 object-contain"
+          className="rounded-xl border border-border/60 bg-card/72 object-contain"
+          size="lg"
         />
       </div>
     );
@@ -55,7 +56,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex items-center justify-center fluid-avatar-md rounded-xl border border-border/60 bg-card/72 text-muted-foreground text-sm font-semibold">
+    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-card/72 text-muted-foreground text-sm font-semibold">
       {initials}
     </div>
   );
@@ -209,7 +210,7 @@ export function ShopCompanyCards({
           Brak firm spełniających kryteria wyszukiwania.
         </Surface>
       ) : (
-        <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredAndSortedCompanies.map((company) => {
             const cashbackRate = company.cashbackRate ?? 0;
             const isSelected = company.id === selectedCompanyId;
@@ -226,7 +227,7 @@ export function ShopCompanyCards({
                 )}
                 onClick={() => onCompanyChange(company.id)}
               >
-                <div className="fluid-card-pad-md">
+                <div className="p-6">
                   <div className="flex items-start gap-4">
                     <CompanyAvatar name={company.name} logoUrl={company.logoUrl} />
                     <div className="flex-1 min-w-0 flex flex-col fluid-stack-sm">
