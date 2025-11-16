@@ -8,6 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 export function ContentOperationsTab() {
   return (
@@ -20,10 +22,12 @@ export function ContentOperationsTab() {
           <AccordionItem value="add-company" className="border-none">
             <AccordionTrigger className="hover:no-underline">
               <div className="flex flex-col items-start gap-1">
-                <h3 className="text-lg font-semibold">Dodaj nową firmę</h3>
-                <p className="text-sm text-muted-foreground text-left">
+                <Heading level={3} variant="subsection">
+                  Dodaj nową firmę
+                </Heading>
+                <Text variant="caption" tone="muted" align="start">
                   Uzupełnij podstawowe dane, aby wprowadzić nowego providera do bazy FundedRank.
-                </p>
+                </Text>
               </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -37,5 +41,3 @@ export function ContentOperationsTab() {
     </div>
   );
 }
-
-

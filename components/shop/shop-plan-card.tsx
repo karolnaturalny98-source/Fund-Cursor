@@ -7,6 +7,8 @@ import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { CompanyWithPlans } from "@/lib/queries/companies";
 import type { CompanyPlan } from "@/lib/types";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface ShopPlanCardProps {
   plan: CompanyPlan;
@@ -40,7 +42,9 @@ export function ShopPlanCard({
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-semibold text-foreground fluid-copy">{plan.name}</h3>
+              <Heading level={3} variant="subsection">
+                {plan.name}
+              </Heading>
               {isSelected && (
                 <Badge variant="default" className="fluid-pill text-xs font-medium">
                   <Check className="mr-1 fluid-icon-sm" />
@@ -55,18 +59,18 @@ export function ShopPlanCard({
               )}
             </div>
             {plan.description && (
-              <p className="text-muted-foreground fluid-caption line-clamp-2">
+              <Text variant="caption" tone="muted" className="line-clamp-2">
                 {plan.description}
-              </p>
+              </Text>
             )}
           </div>
           <div className="text-right shrink-0">
-            <div className="font-semibold text-foreground fluid-h2 leading-tight">
+            <Text variant="stat" className="leading-tight">
               ${price.toLocaleString("pl-PL")}
-            </div>
-            <div className="text-muted-foreground uppercase fluid-caption">
+            </Text>
+            <Text variant="caption" tone="muted" className="uppercase">
               {plan.currency}
-            </div>
+            </Text>
           </div>
         </div>
 
@@ -81,17 +85,17 @@ export function ShopPlanCard({
         >
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="font-medium text-muted-foreground uppercase tracking-[0.2em] fluid-caption">
+              <Text variant="caption" tone="muted" className="font-medium uppercase tracking-[0.2em]">
                 Cashback
-              </div>
+              </Text>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-semibold text-primary fluid-h2 leading-none">
+                <Text variant="stat" tone="primary" className="leading-none">
                   ${cashbackAmount.toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
+                </Text>
                 {cashbackRate > 0 && (
-                  <span className="font-semibold text-primary/70 fluid-caption">
+                  <Text variant="caption" tone="primary" className="text-primary/70 font-semibold">
                     ({cashbackRate}%)
-                  </span>
+                  </Text>
                 )}
               </div>
             </div>

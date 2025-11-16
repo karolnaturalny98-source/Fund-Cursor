@@ -1,5 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 
 type SectionHeaderAlign = "start" | "center";
@@ -25,10 +27,10 @@ const SIZE_CLASSES: Record<SectionHeaderSize, string> = {
   lg: "fluid-stack-sm",
 };
 
-const EYEBROW_TONE_CLASSES: Record<EyebrowTone, string> = {
-  muted: "text-muted-foreground",
-  accent: "text-[var(--surface-ring)]",
-  primary: "text-primary",
+const EYEBROW_TONE_TO_TEXT: Record<EyebrowTone, "default" | "muted" | "accent" | "primary"> = {
+  muted: "muted",
+  accent: "accent",
+  primary: "primary",
 };
 
 export function SectionHeader({
@@ -47,13 +49,21 @@ export function SectionHeader({
       {...props}
     >
       {eyebrow ? (
-        <div className={cn("font-semibold tracking-[0.35em] fluid-caption uppercase", EYEBROW_TONE_CLASSES[eyebrowTone])}>
+        <Text variant="eyebrow" tone={EYEBROW_TONE_TO_TEXT[eyebrowTone]}>
           {eyebrow}
-        </div>
+        </Text>
       ) : null}
-      <h2 className="fluid-h2 font-semibold text-foreground">{title}</h2>
+      <Heading
+        level={2}
+        variant={size === "lg" ? "section" : "subsection"}
+        align={align}
+      >
+        {title}
+      </Heading>
       {description ? (
-        <p className="max-w-2xl text-muted-foreground fluid-copy">{description}</p>
+        <Text variant="body" tone="muted" align={align} className="max-w-2xl">
+          {description}
+        </Text>
       ) : null}
     </div>
   );

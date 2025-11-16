@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Heading } from "@/components/ui/heading";
 import type {
   CompanyCommission,
   CompanyInstrumentGroup,
@@ -253,7 +254,9 @@ export function CompanyTradingProfileForm({
       {shouldShow("instrumentGroups") && (
       <div className="flex flex-col fluid-stack-md">
         <header className="flex flex-col fluid-stack-xs">
-          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Instrumenty i aktywa</h4>
+          <Heading level={4} variant="subsection" className="fluid-eyebrow font-semibold text-muted-foreground">
+            Instrumenty i aktywa
+          </Heading>
           <p className="fluid-caption text-muted-foreground">
             Dodaj sekcje z opisem klas aktywow oraz przykladami instrumentow oferowanych przez firme.
           </p>
@@ -319,7 +322,9 @@ export function CompanyTradingProfileForm({
       {shouldShow("leverageTiers") && (
       <div className="flex flex-col fluid-stack-md">
         <header className="flex flex-col fluid-stack-xs">
-          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Segmenty dzwigni</h4>
+          <Heading level={4} variant="subsection" className="fluid-eyebrow font-semibold text-muted-foreground">
+            Segmenty dzwigni
+          </Heading>
           <p className="fluid-caption text-muted-foreground">
             Opisz segmenty kont wraz z limitami dzwigni oraz dodatkowymi notatkami.
           </p>
@@ -400,7 +405,9 @@ export function CompanyTradingProfileForm({
       {shouldShow("commissions") && (
       <div className="flex flex-col fluid-stack-md">
         <header className="flex flex-col fluid-stack-xs">
-          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Prowizje</h4>
+          <Heading level={4} variant="subsection" className="fluid-eyebrow font-semibold text-muted-foreground">
+            Prowizje
+          </Heading>
           <p className="fluid-caption text-muted-foreground">
             Opisz prowizje lub oplaty handlowe dla poszczegolnych rynkow.
           </p>
@@ -466,7 +473,9 @@ export function CompanyTradingProfileForm({
       {shouldShow("firmRules") && (
       <div className="flex flex-col fluid-stack-md">
         <header className="flex flex-col fluid-stack-xs">
-          <h4 className="fluid-eyebrow font-semibold text-muted-foreground">Zasady firmy</h4>
+          <Heading level={4} variant="subsection" className="fluid-eyebrow font-semibold text-muted-foreground">
+            Zasady firmy
+          </Heading>
           <p className="fluid-caption text-muted-foreground">
             Wypisz zasady dozwolone i zabronione (po jednym punkcie na wiersz). Lista pojawi sie w zakladce Overview.
           </p>

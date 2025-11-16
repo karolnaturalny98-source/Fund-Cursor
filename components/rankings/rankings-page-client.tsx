@@ -13,6 +13,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface RankingsPageClientProps {
   filteredCompanies: number;
@@ -275,17 +277,17 @@ export function RankingsMethodologyClient({
           <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)] text-primary transition-colors hover:bg-primary/20">
             <BarChart3 className="h-[clamp(1rem,0.45vw+0.9rem,1.2rem)] w-[clamp(1rem,0.45vw+0.9rem,1.2rem)]" />
           </div>
-          <h2 className="fluid-h2 font-semibold text-foreground">
+          <Heading level={2} variant="section">
             Metodologia rankingu
-          </h2>
+          </Heading>
         </div>
-        <p className="fluid-copy max-w-3xl text-muted-foreground">
+        <Text variant="body" tone="muted" className="max-w-3xl">
           FundedRank scala recenzje spolecznosci, parametry planow oraz
           sygnaly cashback i klikniec partnerskich. Aktualizujemy dataset
           kazdej nocy, aby ranking reagowal na zmiany reputacji i aktywnosci
           firm. Punkty normalizujemy wzgledem liderow, zeby mniejsze marki
           mogly pokazac swoje mocne strony.
-        </p>
+        </Text>
         <div className="grid gap-[clamp(1.1rem,1.6vw,1.6rem)] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs transition-all hover:border-primary/50">
             <CardHeader className="space-y-2 pb-3">
@@ -336,45 +338,53 @@ export function RankingsMethodologyClient({
           <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)] text-primary transition-colors hover:bg-primary/20">
             <Info className="h-[clamp(1rem,0.45vw+0.9rem,1.2rem)] w-[clamp(1rem,0.45vw+0.9rem,1.2rem)]" />
           </div>
-          <h3 className="fluid-h2 font-semibold text-foreground">FAQ</h3>
+          <Heading level={3} variant="section">
+            FAQ
+          </Heading>
         </div>
         <Accordion type="single" collapsible className="grid gap-[clamp(1rem,1.5vw,1.5rem)] md:grid-cols-2">
           <AccordionItem value="faq-1" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
-            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
-              Jak czesto odswiezacie dane?
-            </AccordionTrigger>
+            <Heading asChild level={3} variant="subsectionStrong">
+              <AccordionTrigger className="hover:no-underline">
+                Jak czesto odswiezacie dane?
+              </AccordionTrigger>
+            </Heading>
             <AccordionContent className="pt-2">
-              <p className="fluid-copy text-muted-foreground">
+              <Text variant="body" tone="muted">
                 Recenzje i klikniecia aktualizujemy co noc. Transakcje
                 cashback i raporty wyplat spinamy w tygodniowe batchowanie.
                 Ostatnia data generacji widnieje w badge &quot;Dane odswiezone&quot;
                 nad tabelami.
-              </p>
+              </Text>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="faq-2" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs">
-            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
-              Co robi filtr &quot;Min. opinii&quot;?
-            </AccordionTrigger>
+            <Heading asChild level={3} variant="subsectionStrong">
+              <AccordionTrigger className="hover:no-underline">
+                Co robi filtr &quot;Min. opinii&quot;?
+              </AccordionTrigger>
+            </Heading>
             <AccordionContent className="pt-2">
-              <p className="fluid-copy text-muted-foreground">
+              <Text variant="body" tone="muted">
                 Pozwala ograniczyc wynik do firm z co najmniej zadana liczba
                 recenzji. Dzieki temu latwiej porownac stabilne marki, gdy
                 zalezy Ci na duzej probie opinii.
-              </p>
+              </Text>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="faq-3" className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! px-6 shadow-xs md:col-span-2">
-            <AccordionTrigger className="text-[clamp(1rem,0.6vw+0.9rem,1.2rem)] font-semibold text-foreground hover:no-underline">
-              Czy planujecie dodatkowe filtry?
-            </AccordionTrigger>
+            <Heading asChild level={3} variant="subsectionStrong">
+              <AccordionTrigger className="hover:no-underline">
+                Czy planujecie dodatkowe filtry?
+              </AccordionTrigger>
+            </Heading>
             <AccordionContent className="pt-2">
-              <p className="fluid-copy text-muted-foreground">
+              <Text variant="body" tone="muted">
                 Na roadmapie mamy filtry dla wsparcia jezykowego,
                 ograniczen geograficznych oraz maksymalnego profitu.
                 Mozesz zglaszac swoje potrzeby przez formularz feedbacku na
                 stronie glownej.
-              </p>
+              </Text>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

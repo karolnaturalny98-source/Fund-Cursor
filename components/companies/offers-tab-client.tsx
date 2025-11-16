@@ -23,6 +23,8 @@ import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyPlan, CompanyWithDetails } from "@/lib/types";
 import { OffersComparisonChart } from "./offers-comparison-chart";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface PlansShopListProps {
   company: CompanyWithDetails;
@@ -152,10 +154,12 @@ export function PlansShopList({ company }: PlansShopListProps) {
   return (
     <section className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold sm:text-2xl">Dostępne plany</h2>
-        <p className="text-sm text-muted-foreground">
+        <Heading level={2} variant="subsectionStrong">
+          Dostępne plany
+        </Heading>
+        <Text variant="body" tone="muted">
           Wybierz plan, który najlepiej odpowiada Twoim potrzebom. Wszystkie plany dostępne z kodem rabatowym i cashbackiem.
-        </p>
+        </Text>
       </div>
 
       {/* Quick Stats */}
@@ -163,32 +167,40 @@ export function PlansShopList({ company }: PlansShopListProps) {
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
-              <div className="text-3xl font-bold text-foreground">{plansWithComputed.length}</div>
-              <CardDescription className="text-xs">Dostępnych planów</CardDescription>
+              <Text variant="stat">{plansWithComputed.length}</Text>
+              <Text variant="caption" tone="muted">
+                Dostępnych planów
+              </Text>
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
-              <div className="text-3xl font-bold text-foreground">
+              <Text variant="stat">
                 {formatCurrencyLocalized(stats.avgPrice, currency)}
-              </div>
-              <CardDescription className="text-xs">Średnia cena</CardDescription>
+              </Text>
+              <Text variant="caption" tone="muted">
+                Średnia cena
+              </Text>
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
-              <div className="text-3xl font-bold text-foreground">
+              <Text variant="stat">
                 {formatCurrencyLocalized(stats.minPrice, currency)}
-              </div>
-              <CardDescription className="text-xs">Najniższa cena</CardDescription>
+              </Text>
+              <Text variant="caption" tone="muted">
+                Najniższa cena
+              </Text>
             </CardContent>
           </Card>
           <Card className="rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
             <CardContent className="flex flex-col items-center justify-center space-y-2 p-6 text-center">
-              <div className="text-3xl font-bold text-foreground">
+              <Text variant="stat">
                 {formatCurrencyLocalized(stats.maxPrice, currency)}
-              </div>
-              <CardDescription className="text-xs">Najwyższa cena</CardDescription>
+              </Text>
+              <Text variant="caption" tone="muted">
+                Najwyższa cena
+              </Text>
             </CardContent>
           </Card>
         </div>

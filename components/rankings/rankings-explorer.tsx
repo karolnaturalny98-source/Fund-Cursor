@@ -34,8 +34,10 @@ import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Button } from "@/components/ui/button";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import {
   Select,
   SelectContent,
@@ -901,16 +903,20 @@ function FilterPanel({
   return (
     <Card variant="elevated" className="rounded-3xl backdrop-blur-xl">
       <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)] text-[clamp(1.05rem,0.6vw+0.95rem,1.25rem)] font-semibold">
+        <Heading
+          level={3}
+          variant="subsection"
+          className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)]"
+        >
           <Filter className="h-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] w-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] text-primary" />
           Filtry rankingu
-        </CardTitle>
+        </Heading>
       </CardHeader>
       <CardContent>
         <div className="mb-4 flex flex-wrap items-center gap-[clamp(0.45rem,0.75vw,0.7rem)]">
-          <span className="fluid-caption uppercase tracking-wider text-muted-foreground/70">
+          <Text variant="caption" tone="muted" className="uppercase tracking-wider">
             Szybkie filtry:
-          </span>
+          </Text>
           <Button
             type="button"
             variant="ghost"
@@ -1000,9 +1006,9 @@ function FilterPanel({
               padding="md"
               className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl text-muted-foreground fluid-caption"
             >
-              <span className="font-semibold uppercase tracking-wide text-muted-foreground/80">
+              <Text variant="caption" tone="muted" className="font-semibold uppercase tracking-wide">
                 Aktywne filtry
-              </span>
+              </Text>
               {activeChips.map((chip) => (
                 <PremiumBadge
                   variant="chip"
@@ -1344,16 +1350,23 @@ function CompanyCell({ company, priority = false }: { company: RankingCompanySna
     <div className="flex items-center gap-[clamp(0.85rem,1.2vw,1.25rem)]">
       <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={priority} />
       <div className="flex flex-col">
-        <Link
-          href={profileHref}
-          prefetch={false}
-          className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground transition-colors hover:text-primary"
+        <Text
+          asChild
+          variant="body"
+          weight="semibold"
+          className="text-foreground transition-colors hover:text-primary"
         >
-          {company.name}
-        </Link>
-        <p className="fluid-caption text-muted-foreground">{meta}</p>
+          <Link href={profileHref} prefetch={false}>
+            {company.name}
+          </Link>
+        </Text>
+        <Text variant="caption" tone="muted">
+          {meta}
+        </Text>
         {cashbackDisplay ? (
-          <p className="fluid-caption font-medium text-primary">{cashbackDisplay}</p>
+          <Text variant="caption" tone="primary" weight="semibold">
+            {cashbackDisplay}
+          </Text>
         ) : null}
       </div>
     </div>
@@ -1398,7 +1411,7 @@ function CompanyAvatar({
 
   return (
     <div className="relative">
-      <div className="flex h-[clamp(2.5rem,2.5vw+2rem,3.25rem)] w-[clamp(2.5rem,2.5vw+2rem,3.25rem)] items-center justify-center rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold text-muted-foreground shadow-xs">
+      <div className="flex h-[clamp(2.5rem,2.5vw+2rem,3.25rem)] w-[clamp(2.5rem,2.5vw+2rem,3.25rem)] items-center justify-center rounded-2xl border border-border/60 bg-card/72 backdrop-blur-[36px]! font-semibold text-muted-foreground shadow-xs fluid-copy">
         {initials}
       </div>
       <div className="absolute -right-1 -top-1 flex h-[clamp(1.1rem,0.4vw+1rem,1.25rem)] w-[clamp(1.1rem,0.4vw+1rem,1.25rem)] items-center justify-center rounded-full border-2 border-background bg-emerald-500">
@@ -1489,9 +1502,9 @@ function MetricBar({
           : formatted
       }
     >
-      <span className="text-[clamp(0.9rem,0.35vw+0.8rem,1rem)] font-semibold text-foreground">
+      <Text variant="body" weight="semibold">
         {formatted}
-      </span>
+      </Text>
       <div className="h-2.5 w-full rounded-full bg-muted">
         <div
           className="h-full rounded-full bg-primary transition-[width] w-[var(--progress-width)]"

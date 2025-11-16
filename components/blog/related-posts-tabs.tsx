@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BlogPostCard } from "./blog-post-card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { BookOpen } from "lucide-react";
+import { Heading } from "@/components/ui/heading";
 import type { BlogPostWithRelations, BlogCategory } from "@/lib/types";
 
 interface RelatedPostsTabsProps {
@@ -29,9 +30,9 @@ export function RelatedPostsTabs({
 
   return (
     <section className="space-y-6">
-      <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+      <Heading level={2} variant="section">
         Powiązane artykuły
-      </h2>
+      </Heading>
       <Tabs
         value={activeCategory}
         onValueChange={setActiveCategory}
@@ -94,4 +95,3 @@ export function RelatedPostsTabs({
     </section>
   );
 }
-

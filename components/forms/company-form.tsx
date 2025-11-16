@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
+import { Heading } from "@/components/ui/heading";
 
 const optionalUrl = z
   .string()
@@ -381,7 +382,9 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
 
   return (
     <div className="rounded-2xl border border-border/60 bg-card/72 p-[clamp(1.5rem,2.3vw,2rem)] shadow-xs backdrop-blur-[36px]!">
-      <h2 className="font-semibold text-foreground fluid-h2">{isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}</h2>
+      <Heading level={2} variant="section">
+        {isEditMode ? "Edytuj firme" : "Dodaj nowa firme"}
+      </Heading>
       <p className="mt-[clamp(0.35rem,0.6vw,0.5rem)] text-muted-foreground fluid-caption">
         {isEditMode 
           ? "Zaktualizuj informacje o firmie prop tradingowej."
@@ -487,7 +490,9 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
         </div>
 
         <div className="flex flex-col fluid-stack-xs">
-          <p className="font-semibold text-foreground fluid-copy">Linki spoecznosciowe</p>
+          <Heading level={3} variant="subsection">
+            Linki spoecznosciowe
+          </Heading>
           <div className="grid gap-[clamp(0.6rem,0.9vw,0.8rem)]">
             <Input placeholder="Website" {...register("socialsWebsite")} />
             <Input placeholder="Twitter" {...register("socialsTwitter")} />
@@ -499,7 +504,9 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
         <Separator className="my-6" />
 
         <div className="flex flex-col fluid-stack-md">
-          <h3 className="font-semibold text-foreground fluid-copy">Informacje o firmie</h3>
+          <Heading level={3} variant="subsection">
+            Informacje o firmie
+          </Heading>
           
           <Field label="Nazwa prawna firmy" error={errors.legalName?.message}>
             <Input placeholder="FundedRank Prop Trading Ltd." {...register("legalName")} />
@@ -552,7 +559,9 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
         <Separator className="my-6" />
 
         <div className="flex flex-col fluid-stack-sm">
-          <h3 className="text-base font-semibold">Weryfikacja prawna</h3>
+          <Heading level={3} variant="subsection">
+            Weryfikacja prawna
+          </Heading>
 
           <Field
             label="Licencje i uprawnienia (po jednej pozycji w każdej linii)"

@@ -6,6 +6,8 @@ import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import { KnowledgeGridButtonClient } from "./knowledge-grid-client";
 import { cn } from "@/lib/utils";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 const knowledgeItems = [
   {
@@ -49,17 +51,17 @@ export function KnowledgeGrid() {
         )}
       >
         <div className="flex w-full flex-col fluid-stack-xs sm:w-auto">
-          <p className="fluid-eyebrow text-primary">
+          <Text variant="eyebrow" tone="primary">
             Baza wiedzy
-          </p>
-          <h2 className="fluid-h2 font-semibold text-foreground">
+          </Text>
+          <Heading level={2} variant="section">
             Ucz się razem ze społecznością FundedRank
-          </h2>
-          <p className="fluid-copy max-w-2xl text-muted-foreground">
+          </Heading>
+          <Text variant="body" tone="muted" className="max-w-2xl">
             Pracujemy nad pełnym centrum wiedzy dla traderów. Poniżej znajdziesz
             tematy, nad którymi aktualnie pracujemy — daj znać, które chcesz
             przeczytać jako pierwsze.
-          </p>
+          </Text>
         </div>
         <Button variant="premium-outline" className="w-full rounded-full sm:w-auto">
           Zgłoś temat artykułu
@@ -81,7 +83,9 @@ export function KnowledgeGrid() {
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col fluid-stack-md">
-              <p className="fluid-copy text-muted-foreground">{item.description}</p>
+              <Text variant="body" tone="muted">
+                {item.description}
+              </Text>
               <KnowledgeGridButtonClient />
             </CardContent>
           </Card>

@@ -13,6 +13,8 @@ import type {
   TopDisputedCompany,
 } from "@/lib/queries/support-stats";
 import type { DisputeCase, DisputeStatus } from "@/lib/types";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface SupportDashboardProps {
   stats: SupportStats;
@@ -45,10 +47,12 @@ export function SupportDashboard({
   return (
     <div className="flex flex-col fluid-stack-lg">
       <div className="flex flex-col fluid-stack-sm">
-        <h1 className="fluid-h2 font-semibold tracking-tight text-foreground">Dashboard Wsparcia</h1>
-        <p className="max-w-2xl fluid-copy text-muted-foreground">
+        <Heading level={1} variant="page">
+          Dashboard Wsparcia
+        </Heading>
+        <Text variant="body" tone="muted" className="max-w-2xl">
           Zarządzaj zgłoszeniami użytkowników, monitoruj spory i rozwiązuj problemy.
-        </p>
+        </Text>
       </div>
 
       <Tabs defaultValue="overview" className="flex flex-col fluid-stack-lg">
@@ -122,5 +126,3 @@ export function SupportDashboard({
     </div>
   );
 }
-
-

@@ -66,6 +66,12 @@
   letter-spacing: -0.015em;
 }
 
+@utility fluid-h3 {
+  font-size: clamp(1.15rem, 1.44vw + 0.95rem, 1.5rem);
+  line-height: clamp(1.5rem, 1.68vw + 1.2rem, 1.95rem);
+  letter-spacing: -0.01em;
+}
+
 @utility fluid-lead {
   font-size: clamp(0.84rem, 1.512vw + 0.42rem, 1.05rem);
   line-height: 1.65;

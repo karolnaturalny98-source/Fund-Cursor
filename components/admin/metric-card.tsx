@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
+import { Text } from "@/components/ui/text";
 
 interface MetricCardProps {
   title: string;
@@ -53,7 +54,9 @@ export function MetricCard({
     >
       <CardHeader className="px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(0.8rem,1.2vw,1rem)] pt-[clamp(1rem,1.4vw,1.25rem)]">
         <div className="flex items-center justify-between gap-[clamp(0.4rem,0.7vw,0.6rem)]">
-          <p className="fluid-caption font-medium text-muted-foreground">{title}</p>
+          <Text variant="caption" tone="muted" className="font-medium">
+            {title}
+          </Text>
           {Icon && (
             <Icon
               className={cn(
@@ -66,31 +69,32 @@ export function MetricCard({
       </CardHeader>
       <CardContent className="px-[clamp(1.1rem,1.5vw,1.6rem)] pb-[clamp(1.15rem,1.6vw,1.4rem)] pt-0">
         <div className="flex flex-col fluid-stack-xs">
-          <p className="text-[clamp(1.85rem,0.8vw+1.55rem,2.25rem)] font-semibold leading-[clamp(2.1rem,0.9vw+1.8rem,2.45rem)] tracking-tight text-foreground">
+          <Text variant="stat" className="tracking-tight">
             {value}
-          </p>
-          {description && (
-            <p className="fluid-caption text-muted-foreground">{description}</p>
-          )}
-          {trend && (
-            <div className="flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)] text-[clamp(0.78rem,0.32vw+0.72rem,0.88rem)]">
-              <span
-                className={cn(
-                  "font-medium",
-                  trend.isPositive
-                    ? "text-emerald-500"
-                    : "text-destructive"
-                )}
-              >
-                {trend.isPositive ? "↑" : "↓"} {Math.abs(trend.value)}%
-              </span>
-              <span className="text-muted-foreground">{trend.label}</span>
-            </div>
-          )}
+          </Text>
+          {description ? (
+            <Text variant="caption" tone="muted">
+              {description}
+            </Text>
+          ) : null}
+          {trend ? (
+            <Text asChild variant="caption" className="flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)]">
+              <div>
+                <span
+                  className={cn(
+                    "font-medium",
+                    trend.isPositive ? "text-emerald-500" : "text-destructive",
+                  )}
+                >
+                  {trend.isPositive ? "↑" : "↓"} {Math.abs(trend.value)}%
+                </span>
+                <span className="pl-2 text-muted-foreground">{trend.label}</span>
+              </div>
+            </Text>
+          ) : null}
         </div>
       </CardContent>
     </Card>
   );
 }
-
 

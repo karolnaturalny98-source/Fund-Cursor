@@ -5,6 +5,8 @@ import { BlogCategoriesTabs } from "@/components/blog/blog-categories-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Section } from "@/components/layout/section";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 // Cache blog index for 5 minutes - content changes infrequently
 export const revalidate = 300;
@@ -30,13 +32,13 @@ export default async function BlogPage() {
           Baza wiedzy
         </Badge>
         <div className="flex flex-col fluid-stack-xs">
-          <h1 className="font-bold tracking-tight text-foreground fluid-h1">
+          <Heading level={1} variant="hero">
             Baza wiedzy
-          </h1>
-          <p className="max-w-2xl text-muted-foreground fluid-copy">
+          </Heading>
+          <Text variant="body" tone="muted" className="max-w-2xl">
             Dowiedz się więcej o prop tradingu, najlepszych firmach i strategiach
             zarządzania kapitałem.
-          </p>
+          </Text>
         </div>
       </div>
 

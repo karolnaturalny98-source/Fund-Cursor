@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { ShopCompanyCards } from "./shop-company-cards";
 import { ShopPlanCard } from "./shop-plan-card";
 import { ShopPurchaseForm } from "./shop-purchase-form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Surface } from "@/components/ui/surface";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -13,6 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CompanyWithPlans } from "@/lib/queries/companies";
 import { TrendingUp, Star } from "lucide-react";
 import { Section } from "@/components/layout/section";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface ShopPageClientProps {
   companies: CompanyWithPlans[];
@@ -83,28 +85,38 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
             </Badge>
           </div>
           <div className="max-w-3xl">
-            <h1
+            <Heading
               ref={titleAnim.ref}
-              className={`text-foreground ${titleAnim.className} fluid-h1 font-bold tracking-tight`}
+              level={1}
+              variant="hero"
+              className={titleAnim.className}
             >
               Wybierz konto prop trading
-            </h1>
+            </Heading>
           </div>
         </div>
 
         {/* Stats */}
         <div className="mx-auto grid max-w-3xl grid-cols-3 fluid-stack-sm">
           <Surface variant="stats" padding="lg" className="text-center">
-            <div className="font-semibold text-foreground fluid-h2">{totalCompanies}</div>
-            <div className="text-muted-foreground fluid-caption">Firm</div>
+            <Text variant="stat">{totalCompanies}</Text>
+            <Text variant="caption" tone="muted">
+              Firm
+            </Text>
           </Surface>
           <Surface variant="stats" padding="lg" className="text-center">
-            <div className="font-semibold text-foreground fluid-h2">{totalPlans}</div>
-            <div className="text-muted-foreground fluid-caption">Planów</div>
+            <Text variant="stat">{totalPlans}</Text>
+            <Text variant="caption" tone="muted">
+              Planów
+            </Text>
           </Surface>
-          <Surface variant="stats" padding="lg" className="text-center">
-            <div className="font-semibold text-primary fluid-h2">{avgCashback}%</div>
-            <div className="text-muted-foreground fluid-caption">Śr. cashback</div>
+            <Surface variant="stats" padding="lg" className="text-center">
+            <Text variant="stat" tone="primary">
+              {avgCashback}%
+            </Text>
+            <Text variant="caption" tone="muted">
+              Śr. cashback
+            </Text>
           </Surface>
         </div>
       </div>
@@ -127,11 +139,13 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
 
         <TabsContent value={activeTab} className="mt-6 lg:mt-8">
           <Card variant="elevated">
-            <CardHeader className="p-4 pb-2">
-              <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz firmę</CardTitle>
-              <CardDescription className="fluid-caption">
+            <CardHeader className="p-4 pb-2 space-y-1">
+              <Heading level={3} variant="subsection">
+                Wybierz firmę
+              </Heading>
+              <Text variant="caption" tone="muted">
                 Wybierz firmę, której konto chcesz zakupić
-              </CardDescription>
+              </Text>
             </CardHeader>
             <CardContent className="p-4 pt-0">
               <ShopCompanyCards
@@ -149,11 +163,13 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         <>
           <Separator />
           <Card variant="elevated">
-            <CardHeader className="p-4 pb-2">
-              <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz plan</CardTitle>
-              <CardDescription className="fluid-caption">
+            <CardHeader className="p-4 pb-2 space-y-1">
+              <Heading level={3} variant="subsection">
+                Wybierz plan
+              </Heading>
+              <Text variant="caption" tone="muted">
                 Wybierz plan konta, który Cię interesuje
-              </CardDescription>
+              </Text>
             </CardHeader>
             <CardContent className="p-4 pt-0">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

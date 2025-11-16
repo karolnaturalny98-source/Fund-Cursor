@@ -8,6 +8,8 @@ import { useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyWithDetails } from "@/lib/types";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 interface OffersQuickStatsProps {
   company: CompanyWithDetails;
@@ -114,11 +116,13 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <BarChart3 className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold sm:text-2xl">Statystyki planów</h2>
+          <Heading level={2} variant="subsectionStrong">
+            Statystyki planów
+          </Heading>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <Text variant="body" tone="muted">
           Przegląd dostępnych planów i ich cen.
-        </p>
+        </Text>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {stats.map((stat, index) => (
@@ -145,7 +149,9 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
               <CardDescription className="text-xs leading-tight">{stat.description}</CardDescription>
             </CardHeader>
             <CardContent className="pt-0">
-              <p className="text-xl font-semibold text-foreground">{stat.value}</p>
+              <Text variant="subsectionStrong" className="text-foreground">
+                {stat.value}
+              </Text>
             </CardContent>
           </Card>
         ))}
@@ -153,4 +159,3 @@ export function OffersQuickStats({ company }: OffersQuickStatsProps) {
     </section>
   );
 }
-

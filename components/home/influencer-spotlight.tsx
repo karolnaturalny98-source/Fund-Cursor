@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Section } from "@/components/layout/section";
@@ -12,6 +12,8 @@ import type { InfluencerProfile } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { useUserPanel } from "@/components/panels/user-panel-context";
 import { cn } from "@/lib/utils";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 export function InfluencerSpotlight({ influencers }: { influencers: InfluencerProfile[] }) {
   const { open } = useUserPanel();
@@ -31,14 +33,14 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
         <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
           Program influencerów FundedRank
         </PremiumBadge>
-        <h2 className="fluid-h2 font-semibold text-foreground">
+        <Heading level={2} variant="section">
           Twórz treści, odbieraj cashback i indywidualne kody
-        </h2>
-        <p className="fluid-copy max-w-3xl text-muted-foreground">
+        </Heading>
+        <Text variant="body" tone="muted" className="max-w-3xl">
           Dołącz do programu partnerskiego dla twórców. Zyskasz dedykowany kod,
           wcześniejszy dostęp do promocji oraz bezpłatne konta na wymianę
           punktów dla swojej społeczności.
-        </p>
+        </Text>
         <Button variant="premium" className="rounded-full font-semibold" onClick={() => open()}>
           Dołącz jako influencer
           <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
@@ -53,16 +55,16 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
             style={{ "--delay": "0ms" } as React.CSSProperties}
           >
             <CardHeader>
-              <CardTitle className="text-[clamp(1.1rem,0.6vw+0.95rem,1.3rem)] font-semibold text-foreground">
+              <Heading level={3} variant="subsectionStrong">
                 Ty możesz być pierwszy
-              </CardTitle>
+              </Heading>
             </CardHeader>
-            <CardContent className="flex flex-col fluid-stack-sm text-muted-foreground fluid-copy">
-              <p>
+            <CardContent className="flex flex-col fluid-stack-sm">
+              <Text variant="body" tone="muted">
                 Dołącz do FundedRank jako ambasador i otrzymuj materiały,
                 które pomogą Twojej społeczności lepiej wybierać konta
                 fundingowe.
-              </p>
+              </Text>
             </CardContent>
           </Card>
         ) : (
@@ -77,21 +79,25 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
             >
               <CardHeader className="flex flex-row items-center justify-between gap-[clamp(1rem,1.5vw,1.5rem)] pb-2">
                 <div>
-                  <CardTitle className="text-[clamp(0.95rem,0.5vw+0.85rem,1.1rem)] font-semibold text-foreground">
+                  <Heading level={3} variant="subsectionStrong">
                     {profile.handle}
-                  </CardTitle>
-                  <p className="fluid-caption text-muted-foreground">
+                  </Heading>
+                  <Text variant="caption" tone="muted">
                     {profile.bio ?? "Nowy ambasador FundedRank"}
-                  </p>
+                  </Text>
                 </div>
                 <PremiumBadge variant="outline" className="fluid-badge rounded-full border-primary/30">
                   {profile.platform}
                 </PremiumBadge>
               </CardHeader>
-              <CardContent className="flex flex-col fluid-stack-sm text-muted-foreground fluid-caption">
-                <div className="flex items-center gap-[clamp(0.75rem,1vw,1rem)] text-[clamp(0.85rem,0.4vw+0.75rem,0.95rem)] text-primary">
+              <CardContent className="flex flex-col fluid-stack-sm">
+                <Text
+                  variant="caption"
+                  tone="primary"
+                  className="flex items-center gap-[clamp(0.75rem,1vw,1rem)] text-primary"
+                >
                   {profile.audienceSize ? `${profile.audienceSize.toLocaleString("pl-PL")} obserwujących` : "Nowa współpraca"}
-                </div>
+                </Text>
                 {profile.socialLinks.length ? (
                   <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)]">
                     {profile.socialLinks.slice(0, 2).map((link) => (

@@ -8,6 +8,8 @@ import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton"
 import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import { Surface } from "@/components/ui/surface";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 export const metadata: Metadata = {
   title: "Analizy Firm | FundedRank",
@@ -67,14 +69,14 @@ export default async function AnalizyPage() {
             Narzędzie Analityczne
           </Badge>
 
-          <h1 className="font-bold tracking-tight text-foreground fluid-h1">
+          <Heading level={1} variant="hero">
             Zaawansowana Analiza Firm
-          </h1>
+          </Heading>
 
-          <p className="mx-auto max-w-2xl text-muted-foreground fluid-copy">
+          <Text variant="body" tone="muted" align="center" className="mx-auto max-w-2xl">
             Porównaj do 3 firm prop tradingowych jednocześnie. Analizuj ceny planów,
             warunki handlowe, opinie użytkowników i metryki wydajności w jednym miejscu.
-          </p>
+          </Text>
 
           {/* Feature Pills */}
           <div className="flex flex-wrap items-center justify-center fluid-stack-xs">
@@ -118,7 +120,9 @@ export default async function AnalizyPage() {
 
         {/* Info Section */}
         <div className="mx-auto flex max-w-4xl flex-col fluid-stack-lg">
-          <h2 className="text-center font-bold text-foreground fluid-h2">Co możesz analizować?</h2>
+          <Heading level={2} variant="section" align="center">
+            Co możesz analizować?
+          </Heading>
 
           <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
             {ANALYSIS_FEATURES.map(({ icon: Icon, title, description }) => (
@@ -131,8 +135,12 @@ export default async function AnalizyPage() {
                 <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
                   <Icon className="fluid-icon-md text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground fluid-copy">{title}</h3>
-                <p className="text-muted-foreground fluid-caption">{description}</p>
+                <Heading level={3} variant="subsection" className="text-foreground">
+                  {title}
+                </Heading>
+                <Text variant="caption" tone="muted">
+                  {description}
+                </Text>
               </Surface>
             ))}
           </div>

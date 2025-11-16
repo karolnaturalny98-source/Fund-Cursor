@@ -180,3 +180,95 @@ Kroki:
   1. Przejrzeć komponenty wykorzystujące `shadow-premium`/`shadow-soft` i zastąpić je dedykowanymi klasami w wariantach (aby w kolejnej iteracji można było uprościć `globals.css`).  
   2. Dla efektów gradientowych (`border-gradient`, `bg-gradient-card`) ustalić, czy powinny być wariantami `Surface` (np. `variant="gradient"`), żeby uniknąć ręcznego kopiowania w CTA.  
   3. Po potwierdzeniu braku zewnętrznych zależności rozważyć przeniesienie implementacji „glassowego” wariantu bezpośrednio do `cardVariants` (zamiast utilsa), aby całkowicie usunąć sekcję z `globals.css`.
+
+## Problem: niespójna typografia i nagłówki
+
+- **Hero nagłówki z manualnymi rozmiarami zamiast fluid tokens**  
+  - `app/(site)/firmy/compare/page.tsx:56-63` i `components/blog/blog-post-header.tsx:58-63` korzystają z `text-3xl sm:text-4xl` / `tracking-tight`, a otaczające akapity mają `text-sm`. Te sekcje wyglądają inaczej niż reszta landingów opartych o `fluid-h1/h2` – hero porównania firmy jest mniejszy, a blogowe nagłówki mają inną linię bazową i nie reagują tak płynnie na breakpoints.  
+  - Proponowana zasada: wszystkie hero tytuły i leady powinny używać gotowych klas fluid (`fluid-h1`, `fluid-lead`) poprzez komponent `Heading`/`Text`, żeby niezależnie od strony skalowały się z tym samym rytmem typograficznym.
+
+- **Blogowe H2/H3 definiowane ręcznie**  
+  - `components/blog/related-posts-tabs.tsx:32-54` buduje `<h2>` oraz przyciski zakładek z `text-2xl`, `text-sm font-medium`, które nie nawiązują do projektowego scale; podobny wzorzec pojawia się w kartach `BlogPostCard`. Efekt: sekcja „Powiązane artykuły” ma zupełnie inne proporcje i spacing niż sekcje `SectionHeader`, a przy przejściu na mobile nagłówki robią się za małe.  
+  - Proponowana zasada: blogowe sekcje powinny używać `SectionHeader` albo przyszłego `Heading` komponentu z wariantami (`h2`, `eyebrow`, `description`) zamiast powtarzać `text-2xl`/`text-sm`.
+
+- **Admin/newsletter dashboard ma własną skalę**  
+  - `app/admin/(tabs)/newsletter/page.tsx:199-255` używa `h1` z `text-3xl font-bold`, a statystyki to zwykłe `<div className="text-2xl font-bold">`. Przez to admin panele mają większe marginesy i inne line-height niż analogiczne karty na publicznych stronach, co utrudnia konsekwentne zastosowanie spacingu `fluid-stack`.  
+  - Proponowana zasada: także w panelu administracyjnym nagłówki i liczby powinny korzystać z tych samych komponentów (np. `Heading level="1"` na stronę, `Text variant="stat"` dla liczb), żeby czcionki i odstępy były zsynchronizowane.
+
+- **Sekcje formularzy używają `<p>` jako nagłówków**  
+  - `components/forms/company-form.tsx:489-507` oraz `components/forms/company-form.tsx:555-587` renderują tytuły sekcji formularza jako `<p className="font-semibold text-foreground fluid-copy">` zamiast semantycznych nagłówków (`h3/h4`). Screen readery tracą strukturę, a style trzeba duplikować ręcznie przy każdym kroku formularza.  
+  - Proponowana zasada: wszystkie bloki formularza powinny mieć prawidłowy heading level (`h2` dla strony, `h3` dla sekcji, `h4` dla podsekcji) i używać jednego komponentu `Heading` z wariantem `subsection`, dzięki czemu i semantyka, i wygląd będą spójne.
+
+- **Sekcje firm (challenges, payout calculator) mieszają poziomy H2/H3 i klasy `text-lg`**  
+  - `components/companies/challenges-tab-client-wrapper.tsx:92-152` pokazuje „Segmenty wyzwań” jako `h3 text-xl`, następnie `h3 text-lg`, a później `h2 text-lg`. Ta sekcja wygląda jak równy blok tekstu, bo wszystkie nagłówki mają podobny rozmiar niezależnie od hierarchii.  
+  - Proponowana zasada: przypisać konkretne klasy do poziomów (`h2 → fluid-h2`, `h3 → fluid-h3/em`), zamiast używać `text-lg`/`text-xl`, by użytkownik rozpoznawał podrzędność nagłówków po wielkości i odstępie.
+
+- **Niestandardowe `text-[clamp(...)]` w rankingach i elementach knowledge grid**  
+  - `components/rankings/rankings-explorer.tsx:904-1107` oraz `components/home/knowledge-grid.tsx:79-85` definiują lokalne `text-[clamp()]` i `gap-[clamp()]` na nagłówkach kart, mimo że istnieją `fluid-h*` i `fluid-copy`. Każdy komponent wprowadza własną mini-skalę, co sprawia, że np. tytuły kart filtrów rankingowych i tytuły kart bazy wiedzy różnią się od `CardTitle` i trudno je zsynchronizować przy zmianie designu.  
+  - Proponowana zasada: jeśli potrzebna jest specyficzna wielkość w kartach, dodajemy wariant w `Heading`/`Text` (np. `subtitle`, `eyebrow`, `stat`) zamiast kopiowania `text-[clamp()]` w komponentach – wtedy wystarczy zmienić ją raz.
+
+- **Tekst wyglądający jak nagłówek renderowany jako `span/div`**  
+  - `components/layout/site-footer.tsx:86-195`, `components/shop/shop-page-client.tsx:96-108` i podobne sekcje statystyk używają `<span>`/`<div>` z `fluid-h2` do prezentowania kluczowych liczb i podpisów. Wizualnie to nagłówki sekcji, ale brak `Heading/Text` utrudnia kontrolę spacingu i dostępność.  
+  - Proponowana zasada: nawet jeśli element to licznik, opakować go w `Heading` (np. `Heading as="p" variant="stat"`), żeby mógł odziedziczyć wspólne parametry (font-weight, letter-spacing, marginesy) i żeby AT miały logiczne etykiety.
+
+- **CSS/global overrides**  
+  - Brak dedykowanego komponentu `Heading` skutkuje tym, że projekt korzysta z mieszaniny Tailwind (`text-3xl`, `text-sm`) i własnych utili w `app/globals.css`. Wielokrotne użycie `text-[clamp(...)]` (np. `components/home/home-ranking-table.tsx:53-170`) oznacza, że każda zmiana w hierarchii typografii będzie wymagała szukania tych klas ręcznie.  
+  - Proponowana zasada: spiąć `fluid-h*`, `fluid-copy`, `fluid-caption` itp. w komponentach `Heading` i `Text`, dzięki czemu nie będziemy rozlewać utility po całym kodzie. Jeżeli naprawdę trzeba dodać nowy rozmiar, robimy to jako nową util-klasę w `globals.css`, a nie inline `text-[...]`.
+
+**Ogólna zasada typografii:**  
+Wprowadzić dedykowane komponenty `Heading` (z propsami `level` i `variant`/`tone`) oraz `Text` (np. `lead`, `body`, `caption`, `eyebrow`). Każdy poziom powinien mapować się na istniejące fluid utilities (`fluid-h1`, `fluid-h2`, `fluid-copy`, `fluid-caption`) i domyślne odstępy (`fluid-stack`). W widokach paneli i formularzy zachowujemy tę samą hierarchię (h1 na stronę, h2 na sekcje, h3 na podsieci). Zakazujemy inline `text-[...]` i `text-3xl` – jeśli potrzebny jest dodatkowy rozmiar, tworzymy wariant w komponencie lub nowy token w `globals.css`, by całość była zarządzana centralnie.
+
+## Plan refaktoru typografii
+
+**Iteracja 1 – Zdefiniowanie i udokumentowanie komponentów Heading/Text**  
+- **Cel:** wprowadzić jedyne źródło prawdy dla skali typografii (Heading level 1–4, Text variant lead/body/caption/eyebrow/stat) i oprzeć je o istniejące utilsy `fluid-*`.  
+- **Uzasadnienie:** bez komponentów nie ma sposobu, by wymusić spójność – kolejne iteracje będą znacznie prostsze, jeśli każdy widok ma gotowe API. Trzymamy się Golden Rule, bo nie zmieniamy wizualnie stylów – koduje się jedynie aktualne klasy.  
+- **Pliki:** `components/ui/heading.tsx`, `components/ui/text.tsx` (utworzenie/rozszerzenie), `components/layout/section-header.tsx` (przepisanie na nowe komponenty), ewentualnie `components/ui/card.tsx`/`components/ui/badge.tsx` (dodanie helperów `asChild`).  
+- **Typ zmian:** stworzenie komponentów bazowych z wariantami (np. `Heading` z propem `level` i `variant="hero|section|subsection"`, `Text` z `variant="lead|body|muted|caption|eyebrow|stat"`), opisanie sposobu użycia w komentarzu lub `agent-style-audit`, aktualizacja `SectionHeader`, by konsumowała nowe API. Zero nowych utili w `globals.css` (zgodnie z zakazem).  
+- **Dlaczego bezpieczna:** dotykamy wyłącznie komponentów systemowych z listy dozwolonych; brak zmian w produkcyjnych widokach. Po zmianie można testować w izolacji na Storybooku/demo bez naruszania istniejącego wyglądu (Golden Rule).
+
+**Iteracja 2 – Heroe i nagłówki publicznych stron**  
+- **Cel:** zastąpić ręczne `text-3xl/sm:text-4xl`, `tracking-tight` i ad-hoc leady w hero sekcjach nowymi `Heading`/`Text`.  
+- **Uzasadnienie:** to najbardziej widoczne miejsca (porównywarka firm, blog header, strona Analizy/Baza wiedzy). Ujednolicenie tutaj daje natychmiastową spójność.  
+- **Pliki:** `app/(site)/firmy/compare/page.tsx`, `components/blog/blog-post-header.tsx`, `components/blog/related-posts-tabs.tsx`, `app/(site)/analizy/page.tsx`, `app/(site)/baza-wiedzy/page.tsx`, `components/home/knowledge-grid.tsx` (tylko nagłówki/lead), `components/layout/site-footer.tsx` (tytuły sekcji).  
+- **Typ zmian:** zamiana `<h1 className="text-3xl ...">` → `<Heading level={1} variant="hero">`, `<p className="text-sm ...">` → `<Text variant="lead|body-muted">`; usunięcie inline `text-[clamp(...)]` tam, gdzie odpowiada istniejący wariant; upewnienie się, że `Heading` zachowuje semantykę (`asChild` dla `Link`ów). Żadnych zmian w copy ani layoutach.  
+- **Dlaczego bezpieczna:** tylko wymiana klas na komponentach, brak ingerencji w logikę czy strukturę sekcji; łatwo porównać efekt po stronie, bo nowe komponenty zachowują te same klasy co wcześniej.
+
+**Iteracja 3 – Formularze i backendowe panele**  
+- **Cel:** przywrócić semantykę i spójne rozmiary w dużych formularzach/panelach admina (obecnie `<p>` udają nagłówki i `div`y mają `text-2xl`).  
+- **Uzasadnienie:** formularze i admin to miejsca największego długu semantycznego; uporządkowanie nagłówków poprawi dostępność bez zmiany designu.  
+- **Pliki:** `components/forms/company-form.tsx`, `components/forms/company-trading-profile-form.tsx` (jeśli zawiera `<h4 className="fluid-eyebrow">`), `app/admin/(tabs)/newsletter/page.tsx`, `components/admin/content-operations-tab.tsx`, inne pliki admina wymienione w audycie (np. `components/admin/support-dashboard.tsx`).  
+- **Typ zmian:** zastąpienie `<p className="font-semibold ...">` na `<Heading level={3} variant="subsection">`, `<div className="text-2xl font-bold">` na `<Text variant="stat">`; wprowadzenie czytelnej hierarchii (h1 strona, h2 sekcje, h3 podsekcje) i usunięcie zbędnych klas `text-base/text-lg`.  
+- **Dlaczego bezpieczna:** jedynie poprawa semantyki i nazewnictwa, bez zmian w danych/akcjach; każda sekcja zachowa dotychczasowe rozmiary, bo nowe komponenty odwzorowują poprzednie klasy.
+
+**Iteracja 4 – Komponenty rankingów i kart statystyk**  
+- **Cel:** usunąć lokalne `text-[clamp(...)]` i sklejone spacingi na kartach rankingów/shopu, wiążąc je z `Heading/Text`.  
+- **Uzasadnienie:** komponenty takie jak `components/rankings/rankings-explorer.tsx`, `components/home/home-ranking-table.tsx`, `components/shop/shop-page-client.tsx`, `components/shop/shop-plan-card.tsx`, `components/companies/challenges-tab-client-wrapper.tsx` są najbardziej „rozjechane” – każdy ma inną mini-skalę.  
+- **Pliki:** wymienione powyżej (łącznie z `components/companies/challenges-tab-client-wrapper.tsx`, `components/companies/payouts-charts.tsx`, `components/companies/payouts-quick-stats.tsx`).  
+- **Typ zmian:** zamiana `text-[clamp(...)]` na odpowiednie warianty `Heading`/`Text`, przeniesienie „stat” numerów do `Text variant="stat"`, uproszczenie `gap-[clamp(...)]` tam, gdzie już istnieją `fluid-stack-*` utilities; doprowadzenie do tego, że `CardTitle` używa `Heading`, a `Surface` stat boxy stosują `Text`.  
+- **Dlaczego bezpieczna:** każda zmiana ogranicza się do małych komponentów i tylko dotyczy klas/semantyki – nie ruszamy logiki rankingów ani API. Możemy przeprowadzać refaktor komponent po komponencie, testując wizualnie.
+
+**Iteracja 5 – Audyt końcowy i blokada regresji**  
+- **Cel:** potwierdzić, że w projekcie nie ma już inline `text-[clamp(...)]` ani `text-3xl` poza komponentami bazowymi, oraz dopisać krótką dokumentację użycia typografii.  
+- **Uzasadnienie:** po wdrożeniu powyższych kroków potrzebne jest spięcie procesu – inaczej dług wróci.  
+- **Pliki:** wyszukiwanie w całym repo (np. `rg 'text-\\[clamp'`), aktualizacja `agent-style-audit.md` (sekcja TODO) i ewentualnie README z krótką notką „jak używać Heading/Text”.  
+- **Typ zmian:** usunięcie pojedynczych resztek klas, dodanie wskazówek do dokumentacji (bez modyfikowania zakazanych plików).  
+- **Dlaczego bezpieczna:** nie wpływa bezpośrednio na UI – to głównie dokumentacja i cleanup; wpisuje się w AGENTS.md, bo pilnuje spójności design systemu.
+
+### Iteracja 5 – Audyt końcowy i blokada regresji (WYKONANA)
+
+- **Stan po skanowaniu (`rg 'text-\[clamp'`, `rg 'text-3xl'`):**
+  - Po refaktorach większość hero/sekcji krytycznych korzysta z `Heading`/`Text`, ale w komponentach „drugiej linii” wciąż zostały lokalne clamps np. `components/home/influencer-spotlight.tsx`, `components/home/community-highlights-animated.tsx`, `components/rankings/rankings-page-client.tsx` (AccordionTrigger) oraz adminowe karty (`components/admin/metric-card.tsx`, `components/admin/overview-dashboard.tsx`). Statystyki produktów (np. `components/companies/offers-tab-client.tsx`, `components/companies/challenges-comparison-chart.tsx`) nadal renderują `text-2xl`/`text-xl`. To świadoma lista TODO – każdy z tych modułów wymaga migracji na `Heading/Text` w kolejnych sprincie.
+  - Utility `text-3xl` i `text-4xl` występują w komponentach eksperymentalnych (`components/ui/typewriter-effect.tsx`) i rejestracyjnych (`components/affiliate/affiliate-registration-form.tsx`). Dopóki nie zostaną przeniesione na nową skalę, traktujemy je jako wyjątki do refaktoru.
+
+- **Blokada regresji / dokumentacja:**
+  - Wszystkie nowe sekcje powinny zaczynać się od `Heading`/`Text`. Zabronione jest wprowadzanie `text-[clamp(...)]`, `text-3xl`, `text-2xl` poza plikami tymczasowymi – gdy pojawi się nowa potrzeba rozmiaru, dodajemy wariant do `Heading`/`Text` lub nowy `@utility` w `app/globals.css`.
+  - Checklist przed mergem typograficznych zmian: (1) `rg 'text-\[clamp'` nie zwraca nowych linii, (2) `Heading` użyty na każdym poziomie sekcji, (3) `Text` użyty dla leadów/statów/opisów, (4) brak ręcznego `tracking-tight` poza komponentami bazowymi.
+  - Dodaj w PR opis: „Typografia” → potwierdź, że korzystasz z `Heading`/`Text`. Jeśli nie, PR wraca do poprawy. Dzięki temu unikniemy nawrotów długu.
+
+- **Next steps / TODO (status: wykonane 2025-01-XX):**
+  - ✔️ Migracja komponentów z listy (influencer spotlight, rankings FAQ, admin metric cards, offers stats) na `Heading`/`Text`.
+  - ✔️ Rozszerzenie `Heading` o wariant `subsectionStrong` + token `fluid-h3` dla mocniejszego `h3`.
+  - ✔️ Dodanie zasad użycia `Heading`/`Text` do `project.mdc` (sekcja Coding Style + changelog).
+
+Wynik: audyt zakończony, lista pozostałych miejsc zanotowana, a zasady zapobiegania regresjom dopisane w tym pliku.

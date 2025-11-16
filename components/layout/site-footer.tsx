@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/lib/hooks/use-toast";
 import { socialLinks, contactLinks } from "@/lib/social-links";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 
 const footerNavigationLinks = [
   { label: "Rankingi", href: "/rankingi" },
@@ -83,26 +85,26 @@ export function SiteFooter() {
           {/* Logo i opis */}
           <div className="flex flex-col fluid-stack-sm">
             <Link href="/" className="inline-block">
-              <span className="fluid-h2 font-bold text-foreground">
+              <Heading level={3} variant="section" className="text-white">
                 Funded<span className="text-primary">Rank</span>
-              </span>
+              </Heading>
             </Link>
-            <p className="fluid-copy text-muted-foreground max-w-md">
+            <Text variant="body" tone="muted" className="max-w-md">
               Twój kompas w świecie prop tradingu. Porównuj firmy, zbieraj
               cashback i wymieniaj punkty 1:1 na kolejne konta tradingowe.
-            </p>
+            </Text>
           </div>
 
           {/* Newsletter */}
           <div className="flex flex-col fluid-stack-sm">
             <div className="flex flex-col fluid-stack-xs">
-              <h3 className="fluid-copy font-semibold text-foreground">
+              <Heading level={4} variant="subsection" className="text-white">
                 Zapisz się do newslettera
-              </h3>
-              <p className="fluid-caption text-muted-foreground">
+              </Heading>
+              <Text variant="caption" tone="muted">
                 Otrzymuj informacje o najlepszych ofertach i promocjach firm
                 prop tradingowych
-              </p>
+              </Text>
             </div>
             <form onSubmit={handleSubmit} className="flex fluid-stack-xs">
               <Input
@@ -124,7 +126,9 @@ export function SiteFooter() {
         <div className="grid fluid-stack-lg sm:grid-cols-2 lg:grid-cols-4 py-[clamp(1.5rem,2vw,2.5rem)]">
           {/* Nawigacja */}
           <div className="flex flex-col fluid-stack-sm">
-            <h4 className="fluid-copy font-semibold text-foreground">Nawigacja</h4>
+            <Heading level={4} variant="subsection" className="text-white">
+              Nawigacja
+            </Heading>
             <ul className="flex flex-col fluid-stack-xs">
               {footerNavigationLinks.map((link) => (
                 <li key={link.href}>
@@ -141,7 +145,9 @@ export function SiteFooter() {
 
           {/* Prawne */}
           <div className="flex flex-col fluid-stack-sm">
-            <h4 className="fluid-copy font-semibold text-foreground">Prawne</h4>
+            <Heading level={4} variant="subsection" className="text-white">
+              Prawne
+            </Heading>
             <ul className="flex flex-col fluid-stack-xs">
               {legalLinks.map((link) => (
                 <li key={link.href}>
@@ -158,7 +164,9 @@ export function SiteFooter() {
 
           {/* Kontakt */}
           <div className="flex flex-col fluid-stack-sm">
-            <h4 className="fluid-copy font-semibold text-foreground">Kontakt</h4>
+            <Heading level={4} variant="subsection" className="text-white">
+              Kontakt
+            </Heading>
             <ul className="flex flex-col fluid-stack-xs">
               {contactLinks.map((link) => (
                 <li key={link.name}>
@@ -178,9 +186,9 @@ export function SiteFooter() {
 
           {/* Social Media */}
           <div className="flex flex-col fluid-stack-sm">
-            <h4 className="fluid-copy font-semibold text-foreground">
+            <Heading level={4} variant="subsection" className="text-white">
               Śledź nas
-            </h4>
+            </Heading>
           <div className="flex flex-wrap fluid-stack-xs">
             {socialLinks.map((social) => (
               <a
@@ -200,9 +208,9 @@ export function SiteFooter() {
 
         {/* Dolna sekcja - Copyright */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-[clamp(1.25rem,1.8vw,1.75rem)] sm:flex-row sm:gap-6">
-          <p className="text-center fluid-caption text-muted-foreground sm:text-left">
+          <Text variant="caption" tone="muted" className="text-center sm:text-left">
             © {new Date().getFullYear()} FundedRank. Wszelkie prawa zastrzeżone.
-          </p>
+          </Text>
           <div className="flex flex-wrap items-center justify-center fluid-stack-xs text-muted-foreground fluid-caption">
             {legalLinks.slice(0, 2).map((link) => (
               <Link

@@ -20,6 +20,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import {
   Select,
   SelectContent,
@@ -198,10 +200,12 @@ export default function NewsletterAdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Newsletter</h1>
-        <p className="text-muted-foreground">
+        <Heading level={1} variant="page">
+          Newsletter
+        </Heading>
+        <Text variant="body" tone="muted">
           Zarządzaj subskrybentami newslettera
-        </p>
+        </Text>
       </div>
 
       {/* Statystyki */}
@@ -214,7 +218,7 @@ export default function NewsletterAdminPage() {
             <UserCheck className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.active}</div>
+            <Text variant="stat">{stats.active}</Text>
           </CardContent>
         </Card>
 
@@ -224,7 +228,7 @@ export default function NewsletterAdminPage() {
             <UserX className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.unsubscribed}</div>
+            <Text variant="stat">{stats.unsubscribed}</Text>
           </CardContent>
         </Card>
 
@@ -234,7 +238,7 @@ export default function NewsletterAdminPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.total}</div>
+            <Text variant="stat">{stats.total}</Text>
           </CardContent>
         </Card>
       </div>
@@ -369,9 +373,9 @@ export default function NewsletterAdminPage() {
           {/* Paginacja */}
           {totalPages > 1 && (
             <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
+              <Text variant="caption" tone="muted">
                 Strona {page} z {totalPages}
-              </p>
+              </Text>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
@@ -419,4 +423,3 @@ export default function NewsletterAdminPage() {
     </div>
   );
 }
-

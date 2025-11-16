@@ -9,6 +9,8 @@ import { CompareProvider } from "@/components/companies/compare-context";
 import { CompareToggle } from "@/components/companies/compare-toggle";
 import { FavoriteButton } from "@/components/companies/favorite-button";
 import { buttonVariants } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { parseCompareParam } from "@/lib/compare";
 import { getCompaniesBySlugs } from "@/lib/queries/companies";
 import type { Company, SupportedCurrency } from "@/lib/types";
@@ -54,13 +56,15 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
     <CompareProvider initialSelection={selection}>
       <div className="container space-y-8 py-12">
         <header className="space-y-3">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">
+          <Text variant="eyebrow" tone="muted">
             Porownanie firm
-          </p>
-          <h1 className="text-3xl font-bold sm:text-4xl">Porownaj firmy prop tradingowe</h1>
-          <p className="max-w-2xl text-sm text-muted-foreground">
+          </Text>
+          <Heading level={1} variant="hero">
+            Porownaj firmy prop tradingowe
+          </Heading>
+          <Text variant="body" tone="muted" className="max-w-2xl">
             Dodaj do trzech firm, aby zobaczyc najwazniejsze parametry obok siebie. Link z porownaniem mozna udostepnic znajomym.
-          </p>
+          </Text>
         </header>
 
         {companies.length === 0 ? (

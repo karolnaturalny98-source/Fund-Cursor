@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { User } from "lucide-react";
 import type { BlogPostWithRelations } from "@/lib/types";
+import { Heading } from "@/components/ui/heading";
 
 interface BlogPostHeaderProps {
   post: BlogPostWithRelations;
@@ -56,12 +57,11 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
         </div>
       </CardHeader>
       <CardContent className="pt-0">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <Heading level={1} variant="page">
           {post.title}
-        </h1>
+        </Heading>
       </CardContent>
       <Separator className="bg-border/40" />
     </Card>
   );
 }
-

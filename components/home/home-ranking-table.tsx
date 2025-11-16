@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
 import { cn } from "@/lib/utils";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { Text } from "@/components/ui/text";
 
 interface HomeRankingTableProps {
   companies: HomeRankingCompany[];
@@ -50,7 +51,7 @@ function CompanyAvatar({
     .toUpperCase();
 
   return (
-    <div className="flex h-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] w-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] items-center justify-center rounded-2xl border border-border/60 bg-white/5 text-[clamp(0.75rem,0.4vw+0.65rem,0.95rem)] font-semibold text-primary shadow-xs">
+    <div className="flex h-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] w-[clamp(2.25rem,2.4vw+1.9rem,2.9rem)] items-center justify-center rounded-2xl border border-border/60 bg-white/5 font-semibold text-primary shadow-xs fluid-copy">
       {initials}
     </div>
   );
@@ -137,16 +138,23 @@ function CompanyRow({
         <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
           <CompanyAvatar name={company.name} logoUrl={company.logoUrl} priority={isTop3} />
           <div className="flex flex-col">
-            <Link
-              href={profileHref}
-              prefetch={false}
-              className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-foreground transition-colors hover:text-primary"
+            <Text
+              asChild
+              variant="body"
+              weight="semibold"
+              className="text-foreground transition-colors hover:text-primary"
             >
-              {company.name}
-            </Link>
-            <p className="fluid-caption text-muted-foreground">{meta}</p>
+              <Link href={profileHref} prefetch={false}>
+                {company.name}
+              </Link>
+            </Text>
+            <Text variant="caption" tone="muted">
+              {meta}
+            </Text>
             {cashbackDisplay ? (
-              <p className="fluid-caption font-medium text-primary">{cashbackDisplay}</p>
+              <Text variant="caption" tone="primary" weight="semibold">
+                {cashbackDisplay}
+              </Text>
             ) : null}
           </div>
         </div>
@@ -155,10 +163,12 @@ function CompanyRow({
         <RatingBadge rating={company.rating} />
       </TableCell>
       <TableCell className="fluid-table-cell align-top text-muted-foreground fluid-caption">
-        <span className="hidden sm:inline">
-          {company.reviewCount.toLocaleString("pl-PL")} opinii
-        </span>
-        <span className="sm:hidden">{company.reviewCount.toLocaleString("pl-PL")}</span>
+        <Text asChild variant="caption" tone="muted" className="hidden sm:inline">
+          <span>{company.reviewCount.toLocaleString("pl-PL")} opinii</span>
+        </Text>
+        <Text asChild variant="caption" tone="muted" className="sm:hidden">
+          <span>{company.reviewCount.toLocaleString("pl-PL")}</span>
+        </Text>
       </TableCell>
       <TableCell className="fluid-table-cell align-top">
         {hasCashback ? (
@@ -195,7 +205,9 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
   if (companiesToShow.length === 0) {
     return (
       <Card variant="default" className="p-8 text-center">
-        <p className="text-muted-foreground fluid-copy">Brak firm do wyświetlenia.</p>
+        <Text variant="body" tone="muted">
+          Brak firm do wyświetlenia.
+        </Text>
       </Card>
     );
   }

@@ -52,6 +52,7 @@ alwaysApply: true
 - Komponenty **PascalCase**, zmienne/funkcje **camelCase**, pliki **kebab-case**.
 - Tailwind 4: w `globals.css` **@import "tailwindcss"**; brak starych dyrektyw.
 - A11y (aria, focus, `sr-only`). Przed PR: `npm run lint`.
+- **Typografia:** używamy wyłącznie komponentów `Heading` (`variant: hero/page/section/subsection/subsectionStrong`) i `Text` (`variant: lead/body/caption/eyebrow/stat`) dla nagłówków/opisów/statystyk. Zabronione są nowe inline `text-[clamp(...)]`, `text-3xl`, itp. Jeśli potrzebny inny rozmiar, dodaj wariant do komponentu lub token w `app/globals.css`.
 
 ## 5) API & Data
 - Route Handlers pod `/api/*` (REST). Walidacja **Zod**.
@@ -112,6 +113,7 @@ export async function POST(req: Request) {
   `"lint": "eslint . --ext .ts,.tsx"`.
 
 ## Changelog
+- **2025-01-XX:** Dodano zasady typografii (Heading/Text + zakaz inline font-size); zamknięto audyt spójności.
 - **2025-11-12:** Utworzono „living doc"; scalono PRD/ARCH/README do Project Rules; dodano sekcję z przykładami tagged revalidation.
 - **2025-01-XX:** Zaktualizowano wersję Next.js z 15 na 16; dostosowano konfigurację ESLint (ignorowanie .next/**, bardziej tolerancyjne reguły dla cleanup).
 @fundedrank-project
