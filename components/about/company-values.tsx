@@ -47,7 +47,7 @@ export function CompanyValues() {
         ref={sectionAnim.ref}
         className={cn("flex flex-col fluid-stack-sm", sectionAnim.className)}
       >
-        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
+        <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
           Nasze wartości
         </PremiumBadge>
         <h2 className="fluid-h2 font-semibold text-foreground">

@@ -54,7 +54,7 @@ export function CompanyHeaderSection({
             </div>
             <div className="flex flex-wrap items-center gap-[clamp(0.6rem,0.8vw,0.75rem)] fluid-caption text-muted-foreground">
               {company.rating ? (
-                <PremiumBadge variant="glow" className="fluid-badge gap-[clamp(0.2rem,0.3vw,0.25rem)] bg-amber-500/10 ring-1 ring-amber-500/20">
+                <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] gap-[clamp(0.2rem,0.3vw,0.25rem)] bg-amber-500/10 ring-1 ring-amber-500/20">
                   <Star className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)] fill-amber-400 text-amber-400 drop-shadow-xs" />
                   {company.rating.toFixed(1)}
                 </PremiumBadge>

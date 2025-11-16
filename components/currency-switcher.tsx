@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useId } from "react";
 
 import {
   SUPPORTED_CURRENCIES,
@@ -9,6 +9,13 @@ import {
 import type { SupportedCurrency } from "@/lib/types";
 
 import { useCurrency } from "@/app/providers/currency-client-provider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface CurrencySwitcherProps {
   layout?: "default" | "compact";
@@ -16,14 +23,19 @@ interface CurrencySwitcherProps {
 
 export function CurrencySwitcher({ layout = "default" }: CurrencySwitcherProps) {
   const { currency, setCurrency } = useCurrency();
+  const labelId = useId();
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const next = event.target.value as SupportedCurrency;
+    (next: SupportedCurrency) => {
       setCurrency(next, { source: "user" });
     },
     [setCurrency],
   );
+
+  const triggerClasses =
+    layout === "compact"
+      ? "h-7 min-w-[64px] rounded-md border px-2 text-[10px] font-semibold uppercase text-foreground shadow-xs"
+      : "h-9 min-w-[120px] rounded-md border px-3 text-sm font-medium text-foreground shadow-xs";
 
   return (
     <div
@@ -33,28 +45,34 @@ export function CurrencySwitcher({ layout = "default" }: CurrencySwitcherProps) 
           : "flex items-center gap-2"
       }
     >
-      <label
-        className={layout === "compact" ? "text-[9px] font-semibold" : "text-xs font-semibold uppercase text-muted-foreground"}
-        htmlFor="currency-switcher"
-      >
-        {layout === "compact" ? "" : "Waluta"}
-      </label>
-      <select
-        id="currency-switcher"
-        value={currency}
-        onChange={handleChange}
+      <span
+        id={labelId}
         className={
           layout === "compact"
-            ? "rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold text-foreground shadow-xs focus:outline-hidden focus:ring-1 focus:ring-primary/60"
-            : "rounded-md border bg-background px-3 py-1 text-sm font-medium text-foreground shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary/60"
+            ? "text-[9px] font-semibold tracking-wide text-muted-foreground"
+            : "text-xs font-semibold uppercase tracking-wide text-muted-foreground"
         }
       >
-        {SUPPORTED_CURRENCIES.map((code) => (
-          <option key={code} value={code}>
-            {layout === "compact" ? code : `${formatCurrencyLocalized(1, code).replace(/[0-9\s.,]/g, "").trim() || code} (${code})`}
-          </option>
-        ))}
-      </select>
+        Waluta
+      </span>
+      <Select value={currency} onValueChange={(value) => handleChange(value as SupportedCurrency)}>
+        <SelectTrigger
+          aria-labelledby={labelId}
+          aria-label="Wybierz walutę"
+          className={`${triggerClasses} focus-visible:ring-2 focus-visible:ring-primary/60`}
+        >
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent align="end">
+          {SUPPORTED_CURRENCIES.map((code) => (
+            <SelectItem key={code} value={code}>
+              {layout === "compact"
+                ? code
+                : `${formatCurrencyLocalized(1, code).replace(/[0-9\s.,]/g, "").trim() || code} (${code})`}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

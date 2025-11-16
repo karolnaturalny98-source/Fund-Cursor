@@ -9,6 +9,13 @@ import { PremiumIcon } from "@/components/custom/premium-icon";
 import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyPlan } from "@/lib/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PayoutCalculatorProps {
   plans: CompanyPlan[];
@@ -87,17 +94,18 @@ export function PayoutCalculator({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <label className="flex flex-col text-xs uppercase text-muted-foreground">
             Plan
-            <select
-              value={selectedPlanId}
-              onChange={(event) => setSelectedPlanId(event.target.value)}
-              className="mt-1 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 text-sm font-medium text-foreground shadow-xs transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:border-primary/40"
-            >
-              {plans.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            <Select value={selectedPlanId} onValueChange={setSelectedPlanId}>
+              <SelectTrigger className="mt-1 rounded-lg border border-border/60 bg-card/72 backdrop-blur-[36px]! px-3 py-2 text-sm font-semibold text-foreground shadow-xs focus-visible:ring-2 focus-visible:ring-ring">
+                <SelectValue placeholder="Wybierz plan" />
+              </SelectTrigger>
+              <SelectContent>
+                {plans.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </label>
           <label className="flex flex-col text-xs uppercase text-muted-foreground">
             Zysk brutto ({plan.currency})

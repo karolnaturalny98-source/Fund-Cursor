@@ -119,7 +119,7 @@ export function AnalysisLayout({
 
           <div className="flex flex-wrap items-center fluid-stack-sm">
             <h1 className="fluid-h1 font-bold">Analiza porównawcza</h1>
-            <Badge variant="outline" className="fluid-badge font-semibold">
+            <Badge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
               {companies.length} {companies.length === 1 ? "firma" : "firmy"}
             </Badge>
           </div>
@@ -160,12 +160,12 @@ export function AnalysisLayout({
                   )}
                   <div className="mt-2 flex flex-wrap gap-2">
                     {card.country ? (
-                      <Badge variant="outline" className="fluid-pill text-xs font-medium">
+                      <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                         {getCountryFlag(card.country)} {card.country}
                       </Badge>
                     ) : null}
                     {card.highlights.map((highlight) => (
-                      <Badge key={`${card.id}-${highlight.label}`} variant="secondary" className="fluid-pill text-xs font-medium">
+                      <Badge key={`${card.id}-${highlight.label}`} variant="secondary" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                         {highlight.label}: {highlight.value}
                       </Badge>
                     ))}
@@ -189,7 +189,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="overview"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
@@ -202,7 +202,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="plans"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
@@ -215,7 +215,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="trading"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
@@ -228,7 +228,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="reviews"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
@@ -241,7 +241,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="payouts"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}
@@ -254,7 +254,7 @@ export function AnalysisLayout({
             <TabsTrigger
               value="company"
               className={cn(
-                "fluid-pill border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
+                "inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border border-transparent bg-muted/30 text-sm font-semibold text-muted-foreground transition-all",
                 "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
                 "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
               )}

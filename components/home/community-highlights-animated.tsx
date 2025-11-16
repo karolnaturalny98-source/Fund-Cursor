@@ -4,6 +4,7 @@ import { Quote } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
+import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import type { ReviewHighlight } from "@/lib/types";
@@ -59,7 +60,7 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
             zakupu.
           </p>
         </div>
-        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
+        <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
           1 punkt = 1 USD cashback
         </PremiumBadge>
       </div>
@@ -78,14 +79,14 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
           <div className="flex items-center gap-[clamp(0.65rem,1vw,1rem)]">
                 <RatingBadgeClient rating={review.rating} />
                 {review.experienceLevel ? (
-              <PremiumBadge variant="outline" className="fluid-badge rounded-full border-primary/30 font-semibold">
+              <PremiumBadge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full border-primary/30 font-semibold">
                     {EXPERIENCE_LABELS[review.experienceLevel] ?? review.experienceLevel}
                   </PremiumBadge>
                 ) : null}
                 {review.recommended !== null ? (
                   <PremiumBadge
                     variant={review.recommended ? "glow" : "outline-solid"}
-                className={`fluid-badge rounded-full font-semibold ${review.recommended ? "border-primary/30" : "border-destructive/30 text-destructive"}`}
+                className={`px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold ${review.recommended ? "border-primary/30" : "border-destructive/30 text-destructive"}`}
                   >
                     {review.recommended ? "Poleca" : "Nie poleca"}
                   </PremiumBadge>
@@ -112,11 +113,11 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
               </div>
           <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground/80 fluid-caption">
                 {review.resourceLinks.slice(0, 2).map((link) => (
-                  <PremiumBadge asChild key={link} variant="chip" className="text-primary">
+                  <Badge asChild key={link} variant="chip" className="text-primary">
                     <a href={link} target="_blank" rel="noreferrer">
                       Materiał dowodowy
                     </a>
-                  </PremiumBadge>
+                  </Badge>
                 ))}
               </div>
           <div className="flex items-center justify-between text-muted-foreground/80 fluid-caption">

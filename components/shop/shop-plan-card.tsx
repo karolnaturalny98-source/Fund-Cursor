@@ -46,13 +46,13 @@ export function ShopPlanCard({
                 {plan.name}
               </Heading>
               {isSelected && (
-                <Badge variant="default" className="fluid-pill text-xs font-medium">
+                <Badge variant="default" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                   <Check className="mr-1 fluid-icon-sm" />
                   Wybrany
                 </Badge>
               )}
               {isBestValue && !isSelected && (
-                <Badge variant="outline" className="fluid-pill text-xs font-medium">
+                <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                   <Sparkles className="mr-1 fluid-icon-sm" />
                   Najlepsza wartość
                 </Badge>

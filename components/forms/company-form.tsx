@@ -13,6 +13,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 const optionalUrl = z
   .string()
@@ -521,15 +529,20 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
                 name="verificationStatus"
                 control={control}
                 render={({ field }) => (
-                  <select
-                    {...field}
-                    className="flex h-auto min-h-[2.75rem] w-full rounded-2xl border border-input bg-background px-[clamp(0.85rem,1.2vw,1.05rem)] py-[clamp(0.5rem,0.8vw,0.65rem)] fluid-caption ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  <Select
+                    value={field.value ?? ""}
+                    onValueChange={(value) => field.onChange(value || undefined)}
                   >
-                    <option value="">Nie wybrano</option>
-                    <option value="VERIFIED">Zweryfikowana</option>
-                    <option value="PENDING">W trakcie weryfikacji</option>
-                    <option value="UNVERIFIED">Niezweryfikowana</option>
-                  </select>
+                    <SelectTrigger className="h-11 w-full rounded-2xl border border-input bg-background px-[clamp(0.85rem,1.2vw,1.05rem)] text-sm shadow-xs focus-visible:ring-2 focus-visible:ring-ring">
+                      <SelectValue placeholder="Nie wybrano" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="">Nie wybrano</SelectItem>
+                      <SelectItem value="VERIFIED">Zweryfikowana</SelectItem>
+                      <SelectItem value="PENDING">W trakcie weryfikacji</SelectItem>
+                      <SelectItem value="UNVERIFIED">Niezweryfikowana</SelectItem>
+                    </SelectContent>
+                  </Select>
                 )}
               />
             </Field>
@@ -638,25 +651,30 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
   );
 }
 
-function Field({
-  label,
-  description,
-  error,
-  children,
-}: {
+type FieldProps = {
   label: string;
   description?: string;
   error?: string;
   children: React.ReactNode;
-}) {
+  layout?: "stack" | "inline";
+};
+
+function Field({ label, description, error, children, layout = "stack" }: FieldProps) {
   return (
-    <label className="flex flex-col gap-[clamp(0.35rem,0.6vw,0.5rem)] text-foreground fluid-caption">
-      <span className="font-medium text-foreground fluid-copy">{label}</span>
-      {description ? (
-        <span className="text-muted-foreground fluid-caption">{description}</span>
-      ) : null}
-      {children}
-      {error ? <span className="text-destructive fluid-caption">{error}</span> : null}
+    <label
+      className={cn(
+        "flex gap-2 text-sm text-foreground",
+        layout === "inline" ? "flex-col sm:flex-row sm:items-start sm:gap-4" : "flex-col",
+      )}
+    >
+      <div className="flex flex-col gap-1">
+        <span className="font-semibold">{label}</span>
+        {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
+      </div>
+      <div className="flex flex-col gap-1">
+        {children}
+        {error ? <span className="text-xs text-destructive">{error}</span> : null}
+      </div>
     </label>
   );
 }

@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/layout/section";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
 import type { InfluencerProfile } from "@/lib/types";
@@ -30,7 +31,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
       size="lg"
     >
       <div ref={sectionAnim.ref} className={cn("flex flex-col fluid-stack-md", sectionAnim.className)}>
-        <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
+        <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
           Program influencerów FundedRank
         </PremiumBadge>
         <Heading level={2} variant="section">
@@ -86,7 +87,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                     {profile.bio ?? "Nowy ambasador FundedRank"}
                   </Text>
                 </div>
-                <PremiumBadge variant="outline" className="fluid-badge rounded-full border-primary/30">
+                <PremiumBadge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full border-primary/30">
                   {profile.platform}
                 </PremiumBadge>
               </CardHeader>
@@ -101,7 +102,12 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                 {profile.socialLinks.length ? (
                   <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)]">
                     {profile.socialLinks.slice(0, 2).map((link) => (
-                      <PremiumBadge asChild key={link} variant="chip" className="gap-2 px-[clamp(0.9rem,1.2vw,1.2rem)] text-primary">
+                      <Badge
+                        asChild
+                        key={link}
+                        variant="chip"
+                        className="gap-2 px-[clamp(0.9rem,1.2vw,1.2rem)] text-primary"
+                      >
                         <Link href={link} target="_blank" rel="noreferrer">
                           Link
                           <PremiumIcon
@@ -112,7 +118,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                             hoverGlow
                           />
                         </Link>
-                      </PremiumBadge>
+                      </Badge>
                     ))}
                   </div>
                 ) : null}

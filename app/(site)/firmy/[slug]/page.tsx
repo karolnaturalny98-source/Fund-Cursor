@@ -283,7 +283,7 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
                       {company.name}
                     </Link>
                     <div className="mt-[clamp(0.2rem,0.3vw,0.25rem)]">
-                      <PremiumBadge variant="glow" className="fluid-badge font-semibold">
+                      <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                         Cashback do {company.cashbackRate ?? 0} pkt
                       </PremiumBadge>
                     </div>
@@ -298,7 +298,7 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
                 {models.length ? (
                   <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.5rem)]">
                     {models.map((model) => (
-                      <PremiumBadge key={model} variant="outline" className="fluid-badge font-semibold">
+                      <PremiumBadge key={model} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                         {renderModelLabel(model)}
                       </PremiumBadge>
                     ))}

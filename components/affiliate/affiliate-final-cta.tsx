@@ -23,7 +23,7 @@ export function AffiliateFinalCta() {
     <Section size="lg" className="flex flex-col fluid-stack-xl">
       <Card ref={ctaAnim.ref} className={`rounded-3xl border border-primary/50 bg-card/72 shadow-md backdrop-blur-[36px]! ${ctaAnim.className}`}>
         <CardHeader className="flex flex-col fluid-stack-md text-center">
-          <PremiumBadge variant="glow" className="mx-auto w-fit rounded-full fluid-badge font-semibold">
+          <PremiumBadge variant="glow" className="mx-auto w-fit rounded-full px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
             Gotowy do startu?
           </PremiumBadge>
           <CardTitle className="font-semibold text-foreground fluid-h2">

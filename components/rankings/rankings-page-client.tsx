@@ -59,7 +59,7 @@ export function RankingsPageClient({
     <>
       <div ref={heroAnim.ref} className={`flex flex-col gap-[clamp(1rem,1.5vw,1.5rem)] ${heroAnim.className}`}>
         <div ref={badgeAnim.ref} className={badgeAnim.className}>
-          <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-wide">
+          <Badge variant="outline" className="w-fit rounded-full px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] uppercase tracking-wide">
             Rankingi
           </Badge>
         </div>

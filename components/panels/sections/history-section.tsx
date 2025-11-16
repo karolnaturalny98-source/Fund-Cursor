@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -114,15 +115,16 @@ export function HistorySection({
                 </SelectContent>
               </Select>
             </Label>
-            <Label className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] cursor-pointer text-foreground">
-              <input
+            <div className="flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] text-foreground">
+              <Checkbox
+                id="history-only-redeem"
                 checked={onlyRedeem}
-                className="h-[clamp(1rem,0.45vw+0.9rem,1.15rem)] w-[clamp(1rem,0.45vw+0.9rem,1.15rem)] rounded border-input text-primary focus:ring-primary"
-                type="checkbox"
-                onChange={(event) => onToggleRedeem(event.target.checked)}
+                onCheckedChange={(checked) => onToggleRedeem(checked === true)}
               />
-              <span className="font-medium">Tylko wnioski o konto</span>
-            </Label>
+              <label htmlFor="history-only-redeem" className="cursor-pointer font-medium">
+                Tylko wnioski o konto
+              </label>
+            </div>
           </div>
 
           {error ? (
@@ -176,7 +178,7 @@ export function HistorySection({
                       <span>{formatDate(transaction.createdAt)}</span>
                       <Badge
                         variant="outline"
-                        className="fluid-badge rounded-full font-medium"
+                        className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-medium"
                       >
                         {statusLabels[transaction.status]}
                       </Badge>

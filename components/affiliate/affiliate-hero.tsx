@@ -25,7 +25,7 @@ export function AffiliateHero() {
         className={`container relative z-10 flex flex-col fluid-stack-xl py-[clamp(3rem,4vw,4.25rem)] lg:flex-row lg:items-center lg:justify-between ${heroAnim.className}`}
       >
         <div className="flex max-w-2xl flex-col fluid-stack-lg">
-          <PremiumBadge variant="glow" className="fluid-badge rounded-full font-semibold">
+          <PremiumBadge variant="glow" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
             Program Affilacyjny FundedRank
           </PremiumBadge>
           <div className="flex flex-col fluid-stack-md">

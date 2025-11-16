@@ -115,7 +115,7 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
                   {isBest && (
                     <Badge 
                       variant="default" 
-                      className="bg-primary/90 text-primary-foreground flex items-center gap-[clamp(0.3rem,0.4vw,0.4rem)] fluid-badge"
+                      className="bg-primary/90 text-primary-foreground flex items-center gap-[clamp(0.3rem,0.4vw,0.4rem)] px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)]"
                     >
                       <Trophy className="h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)]" />
                       TOP
@@ -327,7 +327,7 @@ export function MetricsDashboard({ metrics, regulationCards }: MetricsDashboardP
                     <p className="mb-[clamp(0.4rem,0.6vw,0.55rem)] text-muted-foreground fluid-caption font-medium">Licencje</p>
                     <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                       {company.licenses.map((license, idx) => (
-                        <Badge key={idx} variant="outline" className="fluid-badge font-medium">
+                        <Badge key={idx} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                           {license}
                         </Badge>
                       ))}

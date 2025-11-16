@@ -172,7 +172,7 @@ function CompanyRow({
       </TableCell>
       <TableCell className="fluid-table-cell align-top">
         {hasCashback ? (
-          <PremiumBadge variant="glow" className="w-fit fluid-badge font-semibold">
+          <PremiumBadge variant="glow" className="w-fit px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
             {Math.round(cashbackRate)}%
           </PremiumBadge>
         ) : (

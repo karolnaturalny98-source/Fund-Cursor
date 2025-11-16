@@ -87,7 +87,7 @@ function TimelineItem({ item, index, isVisible, isLast: _isLast }: TimelineItemP
             {item.type && (
               <PremiumBadge
                 variant="outline"
-                className={cn("fluid-badge rounded-full font-semibold", typeColor)}
+                className={cn("px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold", typeColor)}
               >
                 {typeLabel}
               </PremiumBadge>

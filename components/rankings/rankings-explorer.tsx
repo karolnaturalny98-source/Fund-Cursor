@@ -32,7 +32,9 @@ import type {
 import { cn } from "@/lib/utils";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -752,7 +754,7 @@ export function RankingsExplorer({
         </div>
         <PremiumBadge
           variant="outline"
-          className="fluid-badge border-primary/30 bg-secondary/20 text-secondary-foreground"
+          className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] border-primary/30 bg-secondary/20 text-secondary-foreground"
         >
           Dane odswiezone: {new Date(data.generatedAt).toLocaleString("pl-PL")}
         </PremiumBadge>
@@ -917,42 +919,34 @@ function FilterPanel({
           <Text variant="caption" tone="muted" className="uppercase tracking-wider">
             Szybkie filtry:
           </Text>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
+          <Badge
+            variant="chip-ghost"
             onClick={() => onQuickFilter("top10")}
-            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="px-4 py-2 text-sm font-semibold text-muted-foreground"
           >
             Top 10
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
+          </Badge>
+          <Badge
+            variant="chip-ghost"
             onClick={() => onQuickFilter("highest-cashback")}
-            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="px-4 py-2 text-sm font-semibold text-muted-foreground"
           >
             Najwyższy cashback
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
+          </Badge>
+          <Badge
+            variant="chip-ghost"
             onClick={() => onQuickFilter("most-popular")}
-            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="px-4 py-2 text-sm font-semibold text-muted-foreground"
           >
             Najpopularniejsze
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
+          </Badge>
+          <Badge
+            variant="chip-ghost"
             onClick={() => onQuickFilter("most-reviews")}
-            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="px-4 py-2 text-sm font-semibold text-muted-foreground"
           >
             Najwięcej opinii
-          </Button>
+          </Badge>
         </div>
         <form
           className="flex flex-col gap-4"
@@ -1004,7 +998,7 @@ function FilterPanel({
             <Surface
               variant="muted"
               padding="md"
-              className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl text-muted-foreground fluid-caption"
+              className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl text-muted-foreground text-sm"
             >
               <Text variant="caption" tone="muted" className="font-semibold uppercase tracking-wide">
                 Aktywne filtry
@@ -1016,8 +1010,6 @@ function FilterPanel({
                   className="gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                   onClick={() => onFilterRemove(chip.key)}
                   aria-label={`Usun filtr ${chip.label}`}
-                  role="button"
-                  tabIndex={0}
                 >
                   {chip.label}
                   <X className="h-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)] w-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)]" />
@@ -1026,7 +1018,7 @@ function FilterPanel({
             </Surface>
           ) : null}
           <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
-            <label className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground fluid-copy">
+            <label className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-sm text-muted-foreground">
               Min. opinii
               <Surface asChild variant="panel" padding="xs" className="w-24">
                 <Input
@@ -1042,18 +1034,19 @@ function FilterPanel({
                 />
               </Surface>
             </label>
-            <Surface asChild variant="pill-muted" padding="pill">
-              <label className="flex cursor-pointer items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground transition hover:text-foreground fluid-caption">
-                <input
-                  type="checkbox"
+            <Surface variant="pill-muted" padding="pill">
+              <div className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-sm text-muted-foreground">
+                <Checkbox
+                  id="filter-has-cashback"
                   checked={filters.hasCashback}
-                  onChange={(event) =>
-                    onFiltersChange({ hasCashback: event.target.checked })
+                  onCheckedChange={(checked) =>
+                    onFiltersChange({ hasCashback: checked === true })
                   }
-                  className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] rounded border-border/60 text-primary focus:ring-primary"
                 />
-                Tylko firmy z cashback
-              </label>
+                <label htmlFor="filter-has-cashback" className="cursor-pointer hover:text-foreground">
+                  Tylko firmy z cashback
+                </label>
+              </div>
             </Surface>
             <div className="ml-auto flex items-center gap-[clamp(0.65rem,1vw,1rem)]">
               <Button
@@ -1276,7 +1269,7 @@ const RankingRow = memo(function RankingRow({
           <PremiumBadge
             variant="glow"
             title="Firma w Top 5 wzrostu"
-            className="mt-2 w-fit border-emerald-500/30 bg-emerald-500/10 fluid-badge font-semibold text-emerald-300"
+            className="mt-2 w-fit border-emerald-500/30 bg-emerald-500/10 px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold text-emerald-300"
           >
             Top rosnacy
           </PremiumBadge>
@@ -1427,7 +1420,7 @@ function ScoreBadge({ score }: { score: number }) {
       variant="glow"
       title={score.toFixed(1) + " / 100"}
       className={cn(
-        "fluid-badge font-semibold",
+        "px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold",
         getScoreTone(score),
       )}
     >
@@ -1444,7 +1437,7 @@ function RatingBadge({ rating }: { rating: number | null }) {
     <PremiumBadge
       variant="glow"
       title={rating.toFixed(2) + " / 5"}
-      className="border-primary/30 bg-primary/10 fluid-badge font-semibold text-primary"
+      className="border-primary/30 bg-primary/10 px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold text-primary"
     >
       {rating.toFixed(1)}
     </PremiumBadge>
@@ -1465,7 +1458,7 @@ function CategoryBadge({
     <PremiumBadge
       variant="outline"
       title={label + ": " + value.toFixed(2) + " / 5"}
-      className="border-primary/30 bg-secondary/20 fluid-badge font-semibold text-secondary-foreground"
+      className="border-primary/30 bg-secondary/20 px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold text-secondary-foreground"
     >
       {value.toFixed(1)}
     </PremiumBadge>

@@ -80,7 +80,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
       <div className="flex flex-col fluid-stack-lg">
         <div className="flex flex-col items-center fluid-stack-md text-center">
           <div ref={badgeAnim.ref} className={badgeAnim.className}>
-            <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
+            <Badge variant="outline" className="w-fit rounded-full px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] uppercase tracking-[0.2em]">
               Sklep
             </Badge>
           </div>

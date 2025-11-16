@@ -14,6 +14,13 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -278,15 +285,17 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
                 name="position"
                 control={control}
                 render={({ field }) => (
-                  <select
-                    {...field}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <option value="">Nie wybrano</option>
-                    <option value="left">Lewo</option>
-                    <option value="center">Środek</option>
-                    <option value="right">Prawo</option>
-                  </select>
+                  <Select value={field.value ?? ""} onValueChange={(value) => field.onChange(value || undefined)}>
+                    <SelectTrigger className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:ring-2 focus-visible:ring-ring">
+                      <SelectValue placeholder="Nie wybrano" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="">Nie wybrano</SelectItem>
+                      <SelectItem value="left">Lewo</SelectItem>
+                      <SelectItem value="center">Środek</SelectItem>
+                      <SelectItem value="right">Prawo</SelectItem>
+                    </SelectContent>
+                  </Select>
                 )}
               />
             </div>
@@ -425,5 +434,4 @@ export function TeamManagementForm({ companySlug }: TeamManagementFormProps) {
     </div>
   );
 }
-
 

@@ -130,7 +130,7 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
                           <span>{formatDate(transaction.createdAt)}</span>
                           <Badge
                             variant="outline"
-                            className="fluid-badge rounded-full font-medium"
+                            className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-medium"
                           >
                             {statusLabels[transaction.status]}
                           </Badge>

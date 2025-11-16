@@ -3,12 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nazwa planu jest wymagana."),
@@ -85,6 +94,7 @@ export function CreateCompanyPlanForm({
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
@@ -401,56 +411,73 @@ export function CreateCompanyPlanForm({
         </Field>
 
         <div className="grid fluid-stack-sm sm:grid-cols-3">
-          <label
-            htmlFor="trailingDrawdown"
-            className="flex items-center fluid-stack-xs fluid-caption text-foreground"
-          >
-            <input
-              id="trailingDrawdown"
-              type="checkbox"
-              className="h-4 w-4"
-              {...register("trailingDrawdown", {
-                setValueAs: (value) => value === true || value === "true" || value === "on",
-              })}
-            />
-            Trailing drawdown
-          </label>
-          <label
-            htmlFor="refundableFee"
-            className="flex items-center fluid-stack-xs fluid-caption text-foreground"
-          >
-            <input
-              id="refundableFee"
-              type="checkbox"
-              className="h-4 w-4"
-              {...register("refundableFee", {
-                setValueAs: (value) => value === true || value === "true" || value === "on",
-              })}
-            />
-            Refundacja opłaty
-          </label>
-          <label htmlFor="scalingPlan" className="flex items-center fluid-stack-xs text-sm text-foreground">
-            <input
-              id="scalingPlan"
-              type="checkbox"
-              className="h-4 w-4"
-              {...register("scalingPlan", {
-                setValueAs: (value) => value === true || value === "true" || value === "on",
-              })}
-            />
-            Program scaling
-          </label>
+          <Controller
+            name="trailingDrawdown"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center gap-3 text-sm text-foreground">
+                <Checkbox
+                  id="trailingDrawdown"
+                  checked={Boolean(field.value)}
+                  onCheckedChange={(checked) => field.onChange(checked === true)}
+                />
+                <label htmlFor="trailingDrawdown" className="cursor-pointer">
+                  Trailing drawdown
+                </label>
+              </div>
+            )}
+          />
+          <Controller
+            name="refundableFee"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center gap-3 text-sm text-foreground">
+                <Checkbox
+                  id="refundableFee"
+                  checked={Boolean(field.value)}
+                  onCheckedChange={(checked) => field.onChange(checked === true)}
+                />
+                <label htmlFor="refundableFee" className="cursor-pointer">
+                  Refundacja opłaty
+                </label>
+              </div>
+            )}
+          />
+          <Controller
+            name="scalingPlan"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center gap-3 text-sm text-foreground">
+                <Checkbox
+                  id="scalingPlan"
+                  checked={Boolean(field.value)}
+                  onCheckedChange={(checked) => field.onChange(checked === true)}
+                />
+                <label htmlFor="scalingPlan" className="cursor-pointer">
+                  Program scaling
+                </label>
+              </div>
+            )}
+          />
         </div>
 
         <Field label="Model oceny" error={errors.evaluationModel?.message}>
-          <select
-            className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-full rounded-md border border-input bg-background px-[clamp(0.6rem,0.8vw,0.75rem)] py-[clamp(0.4rem,0.6vw,0.5rem)] fluid-caption shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-            {...register("evaluationModel")}
-          >
-            <option value="one-step">1-etapowe wyzwanie</option>
-            <option value="two-step">2-etapowe wyzwanie</option>
-            <option value="instant-funding">Instant funding</option>
-          </select>
+          <Controller
+            name="evaluationModel"
+            control={control}
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger className="h-11 w-full rounded-2xl border border-input bg-background px-4 text-sm shadow-xs focus-visible:ring-2 focus-visible:ring-ring">
+                  <SelectValue placeholder="Wybierz model oceny" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="one-step">1-etapowe wyzwanie</SelectItem>
+                  <SelectItem value="two-step">2-etapowe wyzwanie</SelectItem>
+                  <SelectItem value="instant-funding">Instant funding</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
         </Field>
 
         {serverMessage ? (
@@ -473,20 +500,30 @@ export function CreateCompanyPlanForm({
   );
 }
 
-function Field({
-  label,
-  error,
-  children,
-}: {
+type FieldProps = {
   label: string;
   error?: string;
+  description?: string;
   children: React.ReactNode;
-}) {
+  layout?: "stack" | "inline";
+};
+
+function Field({ label, error, description, children, layout = "stack" }: FieldProps) {
   return (
-    <label className="flex flex-col fluid-stack-xs fluid-caption">
-      <span className="font-medium text-foreground">{label}</span>
-      {children}
-      {error ? <span className="fluid-caption text-destructive">{error}</span> : null}
+    <label
+      className={cn(
+        "flex gap-2 text-sm text-foreground",
+        layout === "inline" ? "flex-col sm:flex-row sm:items-center sm:gap-4" : "flex-col",
+      )}
+    >
+      <div className="flex flex-col gap-1 text-foreground">
+        <span className="font-semibold">{label}</span>
+        {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
+      </div>
+      <div className="flex flex-col gap-1">
+        {children}
+        {error ? <span className="text-xs text-destructive">{error}</span> : null}
+      </div>
     </label>
   );
 }

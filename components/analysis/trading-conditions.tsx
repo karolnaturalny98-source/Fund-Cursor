@@ -61,7 +61,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
                         )}
                         <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                           {group.instruments.map((instrument, instIdx) => (
-                            <Badge key={instIdx} variant="secondary" className="fluid-badge font-medium">
+                            <Badge key={instIdx} variant="secondary" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                               {instrument}
                             </Badge>
                           ))}
@@ -72,7 +72,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
                 ) : company.instruments && company.instruments.length > 0 ? (
                   <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     {company.instruments.map((instrument, instIdx) => (
-                      <Badge key={instIdx} variant="secondary" className="fluid-badge font-medium">
+                      <Badge key={instIdx} variant="secondary" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                         {instrument}
                       </Badge>
                     ))}
@@ -135,7 +135,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
                           )}
                         </div>
                         {tier.maxLeverage && (
-                          <Badge variant="default" className="fluid-badge font-semibold">
+                          <Badge variant="default" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                             {tier.maxLeverage}:1
                           </Badge>
                         )}
@@ -229,7 +229,7 @@ export function TradingConditions({ companies }: TradingConditionsProps) {
                 {company.platforms && company.platforms.length > 0 ? (
                   <div className="flex flex-wrap gap-[clamp(0.4rem,0.6vw,0.55rem)]">
                     {company.platforms.map((platform, platIdx) => (
-                      <Badge key={platIdx} variant="outline" className="fluid-badge font-medium">
+                      <Badge key={platIdx} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                         {platform}
                       </Badge>
                     ))}

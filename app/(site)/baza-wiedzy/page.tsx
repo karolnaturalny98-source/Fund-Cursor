@@ -28,7 +28,7 @@ export default async function BlogPage() {
     <Section size="lg" className="relative z-10 flex flex-col fluid-stack-xl">
       {/* Hero Section */}
       <div className="flex flex-col fluid-stack-md">
-        <Badge variant="outline" className="w-fit rounded-full fluid-badge uppercase tracking-[0.2em]">
+        <Badge variant="outline" className="w-fit rounded-full px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] uppercase tracking-[0.2em]">
           Baza wiedzy
         </Badge>
         <div className="flex flex-col fluid-stack-xs">

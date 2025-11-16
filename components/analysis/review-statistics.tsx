@@ -110,7 +110,7 @@ export function ReviewStatistics({ companies, reviewStatistics }: ReviewStatisti
                   <ShieldCheck className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
                   Zweryfikowane
                 </div>
-                <Badge variant="secondary" className="fluid-badge font-semibold">
+                <Badge variant="secondary" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                   {stat.verifiedCount}
                 </Badge>
               </div>

@@ -117,7 +117,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                   <p className="font-semibold text-foreground fluid-caption">Plusy</p>
                   <div className="flex flex-wrap gap-[clamp(0.35rem,0.6vw,0.5rem)]">
                     {review.pros.map((item) => (
-                      <Badge key={item} variant="outline" className="fluid-badge rounded-full">
+                      <Badge key={item} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full">
                         {item}
                       </Badge>
                     ))}
@@ -129,7 +129,7 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                   <p className="font-semibold text-foreground fluid-caption">Minusy</p>
                   <div className="flex flex-wrap gap-[clamp(0.35rem,0.6vw,0.5rem)]">
                     {review.cons.map((item) => (
-                      <Badge key={item} variant="outline" className="fluid-badge rounded-full">
+                      <Badge key={item} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full">
                         {item}
                       </Badge>
                     ))}

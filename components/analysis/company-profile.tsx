@@ -153,7 +153,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                   {company.verificationStatus && (
                     <div>
                       <p className="text-muted-foreground fluid-caption">Status weryfikacji</p>
-                      <Badge variant="default" className="mt-[clamp(0.35rem,0.5vw,0.45rem)] fluid-badge font-semibold">
+                      <Badge variant="default" className="mt-[clamp(0.35rem,0.5vw,0.45rem)] px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-semibold">
                         {company.verificationStatus}
                       </Badge>
                     </div>
@@ -164,7 +164,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                       <p className="mb-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">Licencje</p>
                       <div className="flex flex-wrap gap-[clamp(0.35rem,0.55vw,0.5rem)]">
                         {company.licenses.map((license, licIdx) => (
-                          <Badge key={licIdx} variant="outline" className="fluid-badge font-medium">
+                          <Badge key={licIdx} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                             {license}
                           </Badge>
                         ))}
@@ -390,7 +390,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
                 {company.paymentMethods && company.paymentMethods.length > 0 ? (
                   <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.65rem)]">
                     {company.paymentMethods.map((method, methodIdx) => (
-                      <Badge key={methodIdx} variant="outline" className="fluid-badge font-medium">
+                      <Badge key={methodIdx} variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] font-medium">
                         {method}
                       </Badge>
                     ))}

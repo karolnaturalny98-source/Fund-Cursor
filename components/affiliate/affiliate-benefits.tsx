@@ -83,7 +83,7 @@ export function AffiliateBenefits() {
                 <div className="mt-0.5 rounded-lg bg-primary/10 p-[clamp(0.6rem,0.85vw,0.75rem)] text-primary transition-transform group-hover:scale-110 group-hover:bg-primary/20">
                   <PremiumIcon icon={benefit.icon} variant="glow" size="md" hoverGlow />
                 </div>
-                <PremiumBadge variant="outline" className="fluid-badge rounded-full font-semibold">
+                <PremiumBadge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold">
                   {benefit.badge}
                 </PremiumBadge>
               </div>

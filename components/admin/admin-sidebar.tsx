@@ -178,7 +178,7 @@ export function AdminSidebar({ items = ADMIN_SECTIONS, onNavigate }: AdminSideba
               <Badge
                 variant={isActive ? "default" : "outline-solid"}
                 className={cn(
-                  "ml-auto fluid-badge min-w-[clamp(1.75rem,2.4vw,2rem)] justify-center font-semibold transition-all duration-200",
+                  "ml-auto px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] min-w-[clamp(1.75rem,2.4vw,2rem)] justify-center font-semibold transition-all duration-200",
                   isActive && "bg-primary text-primary-foreground"
                 )}
               >

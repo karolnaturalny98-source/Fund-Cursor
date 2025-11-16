@@ -10,6 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -488,7 +495,7 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
             )}
           </div>
         </div>
-        <Badge variant="outline" className={cn("fluid-badge rounded-full", STATUS_BADGES[dispute.status])}>
+        <Badge variant="outline" className={cn("px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full", STATUS_BADGES[dispute.status])}>
           {STATUS_LABELS[dispute.status]}
         </Badge>
       </header>
@@ -529,17 +536,18 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
       <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] lg:grid-cols-[200px_1fr]">
         <label className="flex flex-col fluid-stack-xs text-xs font-medium text-foreground">
           <span>Status sprawy</span>
-          <select
-            className="h-auto w-full rounded-2xl border border-input bg-background px-[clamp(0.75rem,1.1vw,1rem)] py-[clamp(0.4rem,0.65vw,0.55rem)] text-foreground fluid-caption shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
-            value={statusDraft}
-            onChange={(event) => setStatusDraft(event.target.value as DisputeStatus)}
-          >
-            {STATUS_OPTIONS.filter((option) => option !== "ALL").map((option) => (
-              <option key={option} value={option}>
-                {STATUS_LABELS[option]}
-              </option>
-            ))}
-          </select>
+          <Select value={statusDraft} onValueChange={(value) => setStatusDraft(value as DisputeStatus)}>
+            <SelectTrigger className="h-11 w-full rounded-2xl border border-input bg-background px-[clamp(0.75rem,1.1vw,1rem)] text-foreground text-sm shadow-xs focus-visible:ring-2 focus-visible:ring-ring">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {STATUS_OPTIONS.filter((option) => option !== "ALL").map((option) => (
+                <SelectItem key={option} value={option}>
+                  {STATUS_LABELS[option]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </label>
         <label className="flex flex-col fluid-stack-xs text-xs font-medium text-foreground">
           <span>Notatka dla zespolu (opcjonalnie)</span>

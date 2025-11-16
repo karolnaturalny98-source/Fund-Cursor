@@ -104,7 +104,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
               variant="ghost"
               size="sm"
               onClick={handleClear}
-              className="fluid-pill font-medium text-primary hover:bg-primary/10"
+              className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full font-medium text-primary hover:bg-primary/10"
             >
               Wyczyść wszystkie
             </Button>
@@ -153,7 +153,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                         </div>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="fluid-pill text-xs font-medium">
+                        <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                           {company.country}
                         </Badge>
                       )}
@@ -224,7 +224,7 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
                         <span>⭐ {company.rating.toFixed(1)}</span>
                       )}
                       {company.country && (
-                        <Badge variant="outline" className="fluid-pill text-xs font-medium">
+                        <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-xs font-medium">
                           {company.country}
                         </Badge>
                       )}

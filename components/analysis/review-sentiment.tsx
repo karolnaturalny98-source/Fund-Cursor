@@ -159,7 +159,7 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
                     {data.topPros.map((pro, idx) => (
                       <li key={idx} className="flex items-start justify-between gap-2">
                         <span className="fluid-copy">{pro.text}</span>
-                        <Badge variant="secondary" className="shrink-0 fluid-pill font-semibold">
+                        <Badge variant="secondary" className="shrink-0 inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full font-semibold">
                           {pro.count}
                         </Badge>
                       </li>
@@ -181,7 +181,7 @@ export function ReviewSentiment({ companies }: ReviewSentimentProps) {
                     {data.topCons.map((con, idx) => (
                       <li key={idx} className="flex items-start justify-between gap-2">
                         <span className="fluid-copy">{con.text}</span>
-                        <Badge variant="secondary" className="shrink-0 fluid-pill font-semibold">
+                        <Badge variant="secondary" className="shrink-0 inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full font-semibold">
                           {con.count}
                         </Badge>
                       </li>

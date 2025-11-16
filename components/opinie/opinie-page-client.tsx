@@ -24,7 +24,7 @@ export function OpiniePageClient({ totalReviews, newReviews30d, averageRating }:
         ref={heroAnim.ref}
         className={`flex flex-col gap-[clamp(1.25rem,1.8vw,1.6rem)] ${heroAnim.className}`}
       >
-        <Badge variant="outline" className="fluid-badge w-fit uppercase tracking-[0.28em] text-muted-foreground">
+        <Badge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] w-fit uppercase tracking-[0.28em] text-muted-foreground">
           Opinie spolecznosci
         </Badge>
         <div className="max-w-3xl space-y-[clamp(0.45rem,0.7vw,0.65rem)]">
@@ -97,7 +97,7 @@ export function OpinieBadgeClient() {
   return (
     <Badge
       variant="outline"
-      className="inline-flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] fluid-badge rounded-full font-semibold"
+      className="inline-flex items-center gap-[clamp(0.4rem,0.6vw,0.55rem)] px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-semibold"
     >
       <Sparkles className="h-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)] w-[clamp(0.95rem,0.35vw+0.85rem,1.1rem)]" />
       Dane weryfikowane recznie

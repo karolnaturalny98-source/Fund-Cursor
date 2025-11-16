@@ -103,7 +103,7 @@ export function TransactionsSection({
                       </p>
                       <div className="flex flex-wrap items-center gap-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-caption">
                         <span>{formatDate(transaction.createdAt)}</span>
-                        <Badge variant="outline" className="fluid-badge rounded-full font-medium">
+                        <Badge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] rounded-full font-medium">
                           {statusLabels[transaction.status]}
                         </Badge>
                       </div>

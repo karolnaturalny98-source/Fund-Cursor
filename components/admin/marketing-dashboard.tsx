@@ -563,12 +563,12 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                     <div className="flex flex-col gap-[clamp(0.4rem,0.6vw,0.5rem)]">
                       <div className="flex flex-wrap items-center gap-[clamp(0.4rem,0.6vw,0.5rem)]">
                         {spotlight.badgeLabel && (
-                          <Badge variant="outline" className="fluid-badge bg-primary/10 text-primary">
+                          <Badge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] bg-primary/10 text-primary">
                             {spotlight.badgeLabel}
                           </Badge>
                         )}
                         {!spotlight.isActive && (
-                          <Badge variant="outline" className="fluid-badge bg-muted/60 text-muted-foreground">
+                          <Badge variant="outline" className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] bg-muted/60 text-muted-foreground">
                             Wstrzymane
                           </Badge>
                         )}

@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/layout/section";
 import type { InfluencerProfile } from "@/lib/types";
 import { useFadeIn, useStaggerAnimation, useScrollAnimation } from "@/lib/animations";
@@ -89,7 +90,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
                   {affiliate.bio ?? "Affilat FundedRank"}
                 </p>
               </div>
-              <PremiumBadge variant="outline" className="rounded-full border-primary/30 fluid-badge">
+              <PremiumBadge variant="outline" className="rounded-full border-primary/30 px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)]">
                 {affiliate.platform}
               </PremiumBadge>
             </CardHeader>
@@ -106,7 +107,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
               {affiliate.socialLinks.length > 0 ? (
                 <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.6rem)]">
                   {affiliate.socialLinks.slice(0, 2).map((link) => (
-                    <PremiumBadge
+                    <Badge
                       key={link}
                       asChild
                       variant="chip"
@@ -122,7 +123,7 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
                           hoverGlow
                         />
                       </Link>
-                    </PremiumBadge>
+                    </Badge>
                   ))}
                 </div>
               ) : null}

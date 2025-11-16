@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Search, TrendingUp, Star, CheckCircle2, ArrowUpDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Surface } from "@/components/ui/surface";
 import {
@@ -151,7 +150,7 @@ export function ShopCompanyCards({
               asChild
               variant="pill"
               padding="none"
-              className="fluid-select-width px-4 py-2 shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)]"
+              className="w-[clamp(9rem,8vw+4rem,10rem)] px-4 py-2 shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)]"
             >
               <SelectTrigger className="border-none bg-transparent p-0 shadow-none focus:ring-0 focus-visible:ring-0">
                 <ArrowUpDown className="mr-2 fluid-icon-md" />
@@ -172,32 +171,32 @@ export function ShopCompanyCards({
         <span className="text-muted-foreground/70 fluid-eyebrow">
           Szybkie filtry:
         </span>
-        <Button
-          variant={filterBy === "all" ? "default" : "ghost"}
-          size="sm"
+        <Badge
+          variant="chip-ghost"
+          pressed={filterBy === "all"}
           onClick={() => setFilterBy("all")}
-          className="fluid-pill font-medium"
+          className="px-4 py-2 text-sm font-semibold"
         >
           Wszystkie
-        </Button>
-        <Button
-          variant={filterBy === "highest-cashback" ? "default" : "ghost"}
-          size="sm"
+        </Badge>
+        <Badge
+          variant="chip-ghost"
+          pressed={filterBy === "highest-cashback"}
           onClick={() => setFilterBy("highest-cashback")}
-          className="fluid-pill font-medium"
+          className="px-4 py-2 text-sm font-semibold"
         >
-          <TrendingUp className="mr-1 fluid-icon-sm" />
+          <TrendingUp className="mr-1 h-4 w-4" />
           Najwyższy cashback
-        </Button>
-        <Button
-          variant={filterBy === "popular" ? "default" : "ghost"}
-          size="sm"
+        </Badge>
+        <Badge
+          variant="chip-ghost"
+          pressed={filterBy === "popular"}
           onClick={() => setFilterBy("popular")}
-          className="fluid-pill font-medium"
+          className="px-4 py-2 text-sm font-semibold"
         >
-          <Star className="mr-1 fluid-icon-sm" />
+          <Star className="mr-1 h-4 w-4" />
           Najpopularniejsze
-        </Button>
+        </Badge>
       </div>
 
       {/* Companies Grid */}
@@ -246,18 +245,18 @@ export function ShopCompanyCards({
                       )}
                       <div className="flex flex-wrap items-center gap-2">
                         {cashbackRate > 0 && (
-                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
+                          <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border-border/60 text-xs font-medium">
                             {cashbackRate}% cashback
                           </Badge>
                         )}
                         {rating && (
-                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
+                          <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border-border/60 text-xs font-medium">
                             <Star className="mr-1 fluid-icon-sm fill-yellow-500 text-yellow-500" />
                             {rating.toFixed(1)}
                           </Badge>
                         )}
                         {company.plans.length > 0 && (
-                          <Badge variant="outline" className="fluid-pill border-border/60 text-xs font-medium">
+                          <Badge variant="outline" className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full border-border/60 text-xs font-medium">
                             {company.plans.length} plan{company.plans.length !== 1 ? "ów" : ""}
                           </Badge>
                         )}

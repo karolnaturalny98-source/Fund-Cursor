@@ -70,7 +70,7 @@ export function AdminTabsNav({ tabs }: AdminTabsNavProps) {
               {tab.badge !== undefined && tab.badge !== null && (
                 <Badge
                   variant="outline"
-                  className="fluid-badge min-w-[clamp(1.5rem,2.2vw,1.9rem)] justify-center font-semibold group-data-[state=active]:bg-primary/20 group-data-[state=active]:text-primary"
+                  className="px-[clamp(0.63rem,1.26vw,0.84rem)] py-[clamp(0.294rem,0.84vw,0.42rem)] text-[clamp(0.588rem,0.336vw+0.504rem,0.63rem)] min-w-[clamp(1.5rem,2.2vw,1.9rem)] justify-center font-semibold group-data-[state=active]:bg-primary/20 group-data-[state=active]:text-primary"
                 >
                   {tab.badge}
                 </Badge>

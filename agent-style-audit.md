@@ -15,6 +15,139 @@
 
 **Proponowana zasada:** używamy `Button` wyłącznie do natychmiastowych akcji (wysyłka formularzy, otwieranie panelu, wykonywanie mutacji). Jeśli element zmienia trasę lub odsłania sekcję, powinien być `Link`/`Text` osadzony w `Card`/`Section`, a dekoracyjne kapsuły i chipy powinny korzystać z `Badge`/`Text` bez klas `fluid-button*`. Filtry i tagi warto oprzeć na istniejących komponentach (`Tabs`, `Badge` z rolą `button`) z dostosowanym wariantem zamiast kopiować klasy przycisków. Dzięki temu tylko faktyczne akcje CTA będą wyglądały jak buttony, a wrappery/badge nie będą mylące.
 
+## Problem: niespójne filtry i form controls
+
+- **Chipy i badge zachowują się jak przyciski, ale pozostają `div`ami**  
+  - `components/rankings/rankings-explorer.tsx:1003-1057` mapuje aktywne filtry na `PremiumBadge variant="chip"` z `onClick`, `role="button"` i ręcznie dopisanym `tabIndex`, jednak komponent wciąż renderuje `div` (`components/custom/premium-badge.tsx:7-44`). Identyczny wzorzec pojawia się także w `components/affiliate/affiliate-list.tsx:101-134` i `components/home/community-highlights-animated.tsx:110-122`, gdzie kapsuły wyglądają jak kontrolki, ale nie dostają `aria-pressed`, `type="button"` ani odziedziczonego focus state z `Button`.  
+  - `components/ui/badge.tsx:8-49` ma wariant `chip` z `cursor-pointer` i `focus-visible:ring`, lecz komponent również renderuje `div`, więc gdy w formularzach (np. `components/forms/blog-post-form.tsx:333-371`) wkładamy w `Badge` dodatkowe `<button>`, otrzymujemy dwa różne focus states i brak spójnej semantyki.
+- **Checkboxy i przełączniki mają własne klasy, ignorując komponent `Checkbox`**  
+  - `components/rankings/rankings-explorer.tsx:1029-1057`, `components/forms/company-plan-form.tsx:403-443` i `components/panels/sections/history-section.tsx:117-125` używają surowych `<input type="checkbox">` z `focus:ring` lub bez jakiejkolwiek obwódki. Każdy label wymyśla własny `gap`, `text-*` i `border`, więc część pól podświetla się na niebiesko (native), część na różowo (`focus:ring-primary`), a część nie reaguje wcale.  
+  - `components/forms/company-form.tsx:601-617` miesza `Checkbox` (komponent UI) z osobnym `label`, co skutkuje innymi odstępami niż w pozostałych formularzach, bo wrapper nie korzysta z `Field` ani `Text`.
+- **Selecty i inputy tracą wspólne focus/hover**  
+  - `components/rankings/rankings-explorer.tsx:961-1000` i `components/shop/shop-company-cards.tsx:141-189` wkładają `Input`/`SelectTrigger` w `Surface`, ale zdejmują wszystkie `border` i `focus-visible:ring`, przez co aktywny filtr nie ma żadnego sygnału focus.  
+  - `components/panels/sections/history-section.tsx:101-118`, `components/forms/company-plan-form.tsx:445-454`, `components/forms/company-form.tsx:515-535` oraz `components/companies/payout-calculator.tsx:104-135` renderują natywne `<select>`y z autorskimi klasami (`rounded-2xl`, `backdrop-blur`, `shadow-[...]`). Każda sekcja wprowadza inne promienie i kolory, więc select w panelu klienta wygląda zupełnie inaczej niż w formularzu planu, mimo że pełnią tę samą funkcję.
+- **Resztki `fluid-*`/gradient utili nadają kontrolkom wygląd przypadkowy**  
+  - `components/rankings/rankings-explorer.tsx:1003-1075` i `components/shop/shop-company-cards.tsx:141-193` dalej polegają na `fluid-pill`, `fluid-caption`, `fluid-select-width`, `rounded-full border-border/60` itp. zamiast użyć wariantu `Surface`/`Button`. Każdy filtr ma inne `hover`, więc użytkownik nie wie, który stan oznacza aktywność.  
+  - `components/companies/payout-calculator.tsx:104-135` i `components/panels/sections/history-section.tsx:101-118` nakładają `backdrop-blur` i gradientowe cienie na selecty/checkboxy – te utility były częścią starego stylu „glassmorphism” i kłócą się z pozostałymi kontrolkami, które mają płaskie tło.
+
+**Efekt UI/UX:** filtry i formularze wyglądają inaczej w każdym module – część kapsuł jest klikalna, część tylko wygląda jak przycisk, aktywny focus raz ma niebieski outline, raz brak, a raz świeci gradientem. Użytkownik nie jest pewien, które chipy da się wcisnąć (np. znaczniki filtrów w rankings-explorer), a osoby korzystające z klawiatury dostają niestandardowe stany focus, których nie widać na kapsułach pozbawionych obramowania. Formularze panelu, raportu i kalkulatora mają trzy różne wersje `select`, przez co cały system nie sprawia wrażenia jednej aplikacji.
+
+**Proponowana zasada:**  
+- Filtry i chipy traktujemy jak przyciski toggle: bazujemy na `Button` (rozmiar `sm`, `variant="ghost"` lub nowy wariant `chip`) albo na `Badge` renderowanym `asChild` ze `<button>` i `aria-pressed`. Domyślny stan = przezroczyste tło + `border-border/60`, stan aktywny (`data-state="on"`) = wypełnienie `bg-primary/10`, `text-primary`, a focus zawsze korzysta z `focus-visible:ring-2 focus-visible:ring-primary/40`. Interaktywne kapsuły nie używają `div` ani `cursor-pointer` – semantyka pochodzi z komponentu bazowego.  
+- Inputy, selecty i checkboxy korzystają wyłącznie z `components/ui/input.tsx`, `components/ui/select.tsx`, `components/ui/checkbox.tsx` oraz ewentualnie `Surface` jako kontenera. Zero custom `rounded-2xl`, `backdrop-blur` czy `fluid-pill`: każdy kontroler dziedziczy te same tokeny (`h-10`, `px-3`, `border-input`, `focus-visible:ring-primary/30`). Przy ikonach używamy `Surface`/`Section` do nadania tła zamiast dopisywać `bg-transparent focus-visible:ring-0` na `Input`, żeby nie wycinać focus. Dzięki temu każdy formularz (admin, panel klienta, kalkulator) zachowa identyczne stany hover/focus i można będzie rozszerzyć system o dodatkowe warianty bez wprowadzania kolejnych utili.
+
+## Problem: legacy global styles i utilsy używane poza design systemem
+
+- **Typografia i spacing w `fluid-*` (app/globals.css:57-181)**  
+  - `fluid-h1`/`fluid-h2`/`fluid-h3`/`fluid-copy`/`fluid-caption` oraz `fluid-stack-*` są kopiowane bezpośrednio w sekcjach, mimo że mamy `Heading`/`Text`/`Section`. Przykłady: `components/rankings/rankings-page-client.tsx:69-132` (hero + akordeon), `components/home/home-recent-section.tsx:24-53` (cały layout działa na `fluid-stack-*`), `components/blog/blog-categories-tabs.tsx:31-78` (Tabs, Alerts i listy). Każdy autor ustawia inne kombinacje `fluid-stack-xs` + `fluid-copy`, więc sekcje mają inny rytm i trudno utrzymać spacing w jednym miejscu.  
+  - **Efekt:** choć komponenty UI zapewniają te same tokeny, obok siebie istnieją dwa równoległe systemy – nowy (`Section`/`Heading`) i stary (`fluid-stack-*`). Przy rozbudowie layoutu trzeba poprawiać oba.  
+  - **Rekomendacja:** zachowujemy definicje `fluid-h*`/`fluid-copy` jako core tokeny (służą `Heading`/`Text`), ale blokujemy ich użycie poza komponentami bazowymi. `fluid-stack-*`/`fluid-section-*` należy przenieść do propsów `Section`/`Surface` (`gap`, `space`, `size`) i stopniowo usuwać z modułów landingowych + bloga. Checklist: każdy nowy komponent ma korzystać z `Section spacing="md"` zamiast `className="fluid-stack-md"`.
+
+- **`fluid-card-pad-*`, `fluid-table-*`, `fluid-avatar-*`, `fluid-input-icon` (app/globals.css:192-244)**  
+  - `components/home/home-ranking-table.tsx:65-185` opiera padding tabeli na `fluid-table-head`/`fluid-table-cell`, mimo że Table komponuje się z Tailwind `px-4 py-3`. `components/shop/shop-plan-card.tsx:41-84` i `components/analysis/analysis-layout.tsx:133-170` dodają `fluid-card-pad-*` i `fluid-input-icon` na zwykłych `div`ach, aby wyrównać odstępy, przez co każdy box ma inny radius i cienie niż `Card`/`Surface`. `components/analysis/company-selector.tsx:130-211` i `components/shop/shop-company-cards.tsx:44-58` używają `fluid-avatar-*` jako jedynych źródeł szerokości/wysokości avatarów, więc komponent `Avatar` nie steruje rozmiarami.  
+  - **Efekt:** system kart/pól stoi na mieszance Tailwinda i niestandardowych utili; gdy zmienia się token, trzeba szukać i aktualizować setki wystąpień `fluid-card-pad-*`. W tabelach i avatarach nie da się łatwo zmienić rozmiaru w jednym miejscu.  
+  - **Rekomendacja:** przenieść konkretne wartości do komponentów: `Table` (thead/tbody) powinien definiować padding, `Card`/`Surface`/`Field` powinny mieć warianty `padding="sm|md|lg"`, `Avatar` dostaje prop `size`. Po migracji usuwamy `fluid-card-pad-*`, `fluid-table-*`, `fluid-avatar-*`, `fluid-input-icon` i `fluid-select-width` z `globals.css` (obecnie brak konsumentów na `fluid-select-width`).  
+
+- **Gradientowe i cieniujące utilsy (`glass-card`, `card-outline`, `shadow-premium*`, `bg-gradient-card`, `border-gradient*`, `bg-gradient-button-*`, `backdrop-premium`) – app/globals.css:358-507**  
+  - Te reguły stylizują konkretne sekcje, ale są globalne. `components/admin/support-dashboard.tsx:34-63`, `components/admin/affiliate-queue-table.tsx:319-336` i `app/(site)/firmy/[slug]/page.tsx:188-303` używają kombinacji `border-gradient`, `bg-gradient-card`, `shadow-premium(-lg)` do budowania zakładek i kart; `components/panels/user-panel.tsx:897-1410` klonuje te klasy w Selectach i formularzach. `components/admin/team-management-form.tsx:239-365` i `components/companies/faq-item.tsx:18-48` dodają `backdrop-premium` lub ręczne `shadow-premium` ponad `Card`. Ponieważ gradientowa logika żyje w CSS-ie globalnym, każdy moduł może sobie dopisać losową kombinację cieni i blurów i otrzymać inny komponent wizualny.  
+  - **Efekt:** na jednej stronie potrafią współistnieć trzy warianty gradientowej karty – te z `Card` (kontrolowane), te z `Surface` i te ręcznie budowane przez `border-gradient` + `bg-gradient-card`. Użytkownicy widzą niespójne promienie/focus, a przy ciemnym trybie cienie nie są zsynchronizowane.  
+  - **Rekomendacja:** `glass-card`/`card-outline` pozostają jako implementacja wariantu `Card` i nie powinny być używane bezpośrednio. Resztę gradientowych utili przenieść do konkretnych komponentów/propsów (`Surface variant="gradient"`, `Button variant="premium"`, `Tabs variant="pill"`). Po migracji usunąć z `globals.css` definicje `shadow-premium*`, `bg-gradient-card`, `border-gradient*`, `backdrop-premium`, `bg-gradient-button-premium*` (obecnie tylko `Button` korzysta z `bg-gradient-button-premium-outline-hover`, więc warto zagnieździć ten styl w samym komponencie).  
+
+- **Nieaktywne lub jednorazowe utilsy (app/globals.css:133-244, 411-507)**  
+  - `fluid-pill`, `fluid-badge`, `fluid-select-width` i `icon-accent` nie mają już konsumentów (`rg "fluid-pill"` / `"fluid-badge"` / `"fluid-select-width"` / `"icon-accent"` zwracają jedynie definicje). `bg-gradient-button-premium`/`bg-gradient-button-premium-hover` również nie są referencjonowane – `Button` używa tylko wariantu outline hover.  
+  - **Efekt:** plik globals utrzymuje martwy kod, który dezorientuje kolejnych autorów (wystarczy skopiować `fluid-pill`, by stworzyć kolejny niestandardowy chip).  
+  - **Rekomendacja:** te sekcje można bezpiecznie usunąć podczas porządków globalsów; jeżeli jakaś wartość nadal jest potrzebna, lepiej dopisać ją jako Tailwindowy token w komponencie (np. `Badge` ma już swoje `px-[clamp]`). Lista wyjątków do pozostawienia jako core: reset `@layer base`, zmienne `@theme`, `container` i `surface-pad-*` (z nich korzystają komponenty layoutowe).
+
+## Plan refaktoru globali i utili
+
+**Iteracja 1 – Uporządkowanie tokenów typografii i spacingu (`fluid-h*`, `fluid-copy`, `fluid-stack-*`, `fluid-section-*`)**  
+- **Cel:** zamknąć dostęp bezpośredni do `fluid-*` w komponentach stron i przenieść użycie do `Heading`, `Text`, `Section`, żeby jeden komponent kontrolował typografię i przerwy.  
+- **Uzasadnienie:** dziś landingowe sekcje (`components/rankings/rankings-page-client.tsx`, `components/home/home-recent-section.tsx`, `components/blog/blog-categories-tabs.tsx`) mieszają nowy i stary system spacingu. Dopóki `fluid-stack-*` jest kopiowany inline, każda sekcja ma inny rytm i trudno utrzymać zasady z AGENTS.md.  
+- **Pliki:** `components/layout/section.tsx`, `components/ui/heading.tsx`, `components/ui/text.tsx`, `components/layout/surface-card.tsx`, wybrane landingowe komponenty korzystające z `fluid-stack-*`, plus `app/globals.css` (dodanie komentarzy/zablokowanie eksportu).  
+- **Typ zmian:** dodanie propsów `space`, `gap`, `tone` w `Section`/`Surface` aby mapowały się na istniejące tokeny; aktualizacja komponentów, by używały nowych propsów zamiast klas `fluid-stack-*`; usunięcie bezpośrednich referencji `fluid-h*` poprzez `Heading`/`Text`.  
+- **Dlaczego bezpieczna:** każda zmiana dotyczy pojedynczych komponentów layoutu lub sekcji landingowych – nie ruszamy logiki, tylko mapping klas → props. Zachowujemy definicje `fluid-*` w `globals.css`, więc nic nie łamie się wizualnie w trakcie migracji (AGENTS.md: jedna sekcja na raz).
+
+**Iteracja 2 – Migracja paddingów kart/tabel/avatarów (`fluid-card-pad-*`, `fluid-table-*`, `fluid-avatar-*`, `fluid-input-icon`, `fluid-select-width`)**  
+- **Cel:** ustawić jeden punkt prawdy dla rozmiarów kart, tabel i avatarów poprzez propsy komponentów (`Card`, `Surface`, `Table`, `Avatar`, `Field`) i wyciąć zależność od globalnych utili.  
+- **Uzasadnienie:** te utilsy są rozsiane po kluczowych modułach (`components/home/home-ranking-table.tsx`, `components/analysis/analysis-layout.tsx`, `components/shop/shop-plan-card.tsx`, `components/analysis/company-selector.tsx`). Dopóki istnieją, nowi autorzy będą je kopiować zamiast użyć design systemu.  
+- **Pliki:** `components/ui/card.tsx`, `components/ui/surface.tsx`, `components/layout/surface-card.tsx`, `components/ui/table.tsx` (lub wrapper), `components/ui/avatar.tsx`, `components/ui/field.tsx`, `components/forms/*` i `components/home/*` korzystające z utili.  
+- **Typ zmian:** dodanie wariantów paddingu (`padding="sm|md|lg"`), rozmiarów avatarów (`size="sm|md|lg"`), helpera `Field` dla ikon w inputach; zastąpienie `fluid-card-pad-*`/`fluid-avatar-*`/`fluid-table-*` w kodzie nowymi propsami; oznaczenie w `globals.css` że utilsy są legacy i mogą zostać usunięte po migracji.  
+- **Dlaczego bezpieczna:** operujemy per-komponent w obrębie istniejących ekranów (np. ranking table, analysis layout). Każda zmiana ma łatwy fallback (gdy coś pęknie, można przywrócić poprzedni padding). Wpisuje się w AGENTS.md, bo dotykamy pojedynczych komponentów, nie całego repo.
+
+**Iteracja 3 – Konsolidacja gradientów/cieni i przeniesienie utili (`glass-card`, `card-outline`, `shadow-premium*`, `border-gradient*`, `bg-gradient-card`, `backdrop-premium`, `bg-gradient-button-*`)**  
+- **Cel:** zapewnić, że gradientowe i szklane efekty pochodzą z wariantów `Card`/`Surface`/`Button`, a nie z losowych klas w `globals.css`, oraz zredukować globalny CSS do implementacji tych wariantów.  
+- **Uzasadnienie:** moduły admina, panelu użytkownika i stron firm (`components/admin/support-dashboard.tsx`, `components/admin/affiliate-queue-table.tsx`, `components/panels/user-panel.tsx`, `app/(site)/firmy/[slug]/page.tsx`) dalej składają gradienty z `border-gradient` + `shadow-premium`, więc trudno utrzymać spójny wygląd i focus states.  
+- **Pliki:** `components/ui/card.tsx`, `components/ui/surface.tsx`, `components/ui/button.tsx`, `components/ui/hover-border-gradient.tsx`, `components/admin/*.tsx`, `components/panels/*.tsx`, `components/companies/*.tsx`, `components/analysis/*.tsx` które referują utilsy gradientowe, oraz `app/globals.css`.  
+- **Typ zmian:** dodanie/rozszerzenie wariantów `Card`/`Surface` (np. `variant="gradient"`, `tone="glass"`) oraz `Button variant="premium"`; zastąpienie inline klas gradientowych w komponentach odwołaniami do wariantów; pozostawienie w `globals.css` tylko niezbędnych deklaracji (np. `glass-card` jako implementacja `Card`).  
+- **Dlaczego bezpieczna:** przeprowadzamy migracje ekran po ekranie (np. najpierw support dashboard, potem panel użytkownika), a istniejące style nadal działają, dopóki nie usuniemy utili. Trzymamy się zasad AGENTS.md, bo pracujemy na jednej sekcji/komponencie naraz.
+
+**Iteracja 4 – Usunięcie martwych utili i finalizacja dokumentacji**  
+- **Cel:** po migracjach fizycznie usunąć nieużywane reguły (`fluid-pill`, `fluid-badge`, `fluid-select-width`, `icon-accent`, `bg-gradient-button-premium*`, `fluid-card-pad-*`, itp.) z `app/globals.css`, dodać checklistę w dokumentacji aby zapobiec ponownemu wprowadzaniu globalnych utili.  
+- **Uzasadnienie:** dopóki legacy utilsy istnieją, łatwo je przypadkiem skopiować. Wycięcie ich + opis w `docs/ui-style-guide.md` i `agent-style-audit.md` domyka proces i spełnia wymóg „sprzątania globali”.  
+- **Pliki:** `app/globals.css`, `docs/ui-style-guide.md`, `agent-style-audit.md` (sekcja TODO), ewentualnie `project.mdc` z zasadami design systemu.  
+- **Typ zmian:** usunięcie nieużywanych `@utility` bloków, pozostawienie komentarzy przy tokenach core, aktualizacja dokumentacji z listą „dozwolonych” vs „zakazanych” utili, dopisanie checklisty PR („nie używaj fluid-* poza Heading/Text”).  
+- **Dlaczego bezpieczna:** następuje dopiero po potwierdzeniu braku konsumentów (rg = puste). To czysta higiena CSS + dokumentacja, zgodna z AGENTS.md (brak zmian w restricted files typu `globals.css` bez kontekstu – mamy explicite zgodę w tym planie).
+
+## Plan refaktoru filtrów i form controls
+
+**Iteracja 1 – Uporządkowanie komponentów chip/badge i semantyki**  
+- **Cel:** sprawić, by wszystkie kapsuły filtrów były prawdziwymi kontrolkami (`button`/`aria-pressed`) i dziedziczyły wspólny focus/hover.  
+- **Uzasadnienie:** dopóki `PremiumBadge`/`Badge` renderują `div`, każdy filtr musi ręcznie dodawać `role`, `tabIndex` i klasy. Po ustandaryzowaniu komponentu downstream refaktor będzie prosty i zgodny z zasadą używania istniejących UI komponentów.  
+- **Pliki:** `components/custom/premium-badge.tsx`, `components/ui/badge.tsx`, `components/ui/button.tsx` (dodanie wariantu `chip`/`filter`), ewentualnie `components/ui/text.tsx` dla labeli wewnątrz chipów.  
+- **Typ zmian:** dodanie wsparcia `asChild` z `<button>`, domyślne `type="button"`, obsługa `data-state`, wyrównanie `focus-visible:ring`, usunięcie `cursor-pointer` z `div`ów. Przygotowanie wariantu `chip` w `Button` lub `Badge` z API `pressed`.  
+- **Dlaczego bezpieczna:** dotyczy wyłącznie komponentów bazowych z listy dozwolonej w AGENTS.md; brak naruszania konkretnych layoutów. Pozwala zachować istniejący wygląd (tokeny te same), a jedynie poprawia strukturę DOM i ujednolica stany.
+
+**Iteracja 2 – Normalizacja filtrów/chipów w widokach rankingów i list**  
+- **Cel:** zamienić wszystkie instancje filtrów na nowe warianty komponentów i usunąć lokalne `fluid-pill`/`rounded-full`/`backdrop-blur`.  
+- **Uzasadnienie:** po Iteracji 1 można masowo usunąć ręczne klasy i semantykę; bez tego nawet najlepszy komponent bazowy nie odmieni UI, bo widoki nadal nadpisują style.  
+- **Pliki:** `components/rankings/rankings-explorer.tsx`, `components/shop/shop-company-cards.tsx`, `components/affiliate/affiliate-list.tsx`, `components/home/community-highlights-animated.tsx`, `components/home/influencer-spotlight.tsx`.  
+- **Typ zmian:** normalizacja chipów szybkich filtrów i aktywnych filtrów na `Button`/`Badge` z nowym wariantem, przeniesienie `aria-pressed` do komponentu, wyrównanie hover/focus states, eliminacja utili `fluid-pill`, `fluid-caption` użytych tylko dla filtrów, usunięcie gradient/glass utili z filtrów rankingowych.  
+- **Dlaczego bezpieczna:** pracujemy w pojedynczych komponentach (lista z AGENTS.md §3.1), zastępując istniejące klasy równoważnymi wariantami; brak dotykania zakazanych plików i brak globalnych redesignów – zmiany czysto systemowe.
+
+**Iteracja 3 – Unifikacja checkboxów i selectów w panelach/adminie**  
+- **Cel:** wszystkie formularze mają korzystać z `components/ui/checkbox` i `components/ui/select` bez lokalnych wariacji focus/hover.  
+- **Uzasadnienie:** teraz każdy formularz ma inne promienie i cienie, co łamie zasadę spójności i komplikuje dostępność (brak focus). Po przełączeniu na komponenty UI usuwamy długą listę custom klas.  
+- **Pliki:** `components/rankings/rankings-explorer.tsx` (checkbox, select), `components/forms/company-plan-form.tsx`, `components/forms/company-form.tsx`, `components/panels/sections/history-section.tsx`, `components/panels/user-panel.tsx`, `components/companies/payout-calculator.tsx`.  
+- **Typ zmian:** podmiana natywnych `<input type="checkbox">` na `Checkbox`, `select` na `SelectTrigger/SelectContent`, przeniesienie ikon do `Surface`/`Section`, usunięcie `focus:ring` inline, dodanie etykiet `Label`, wyrównanie `aria-describedby`.  
+- **Dlaczego bezpieczna:** zmieniamy tylko implementację kontrolki wewnątrz istniejących formularzy (pojedyncze komponenty); używamy zatwierdzonego zestawu UI z AGENTS.md §2.1, brak modyfikacji globalnego CSS.
+
+**Iteracja 4 – Sprzątanie resztek utili i dokumentacja zasad**  
+- **Cel:** po wdrożeniu nowych komponentów usunąć nieużywane utilsy `fluid-pill`, `fluid-select-width`, `backdrop-blur` powiązane z filtrami oraz opisać zasady użycia form controls w `agent-style-audit.md`.  
+- **Uzasadnienie:** jeśli utilsy pozostaną, zaczną być znowu kopiowane. Dokumentacja w stylu „używamy wariantu chip Button” domknie temat i zabezpieczy przed regresją.  
+- **Pliki:** `app/globals.css` (sekcje `fluid-pill`, `fluid-select-width`, resztki gradientowych utili), `agent-style-audit.md` (TODO + zasady), ewentualnie `docs/ui-style-guide.md`.  
+- **Typ zmian:** usunięcie nieużywanych klas, migracja ewentualnych pozostałości do komponentów, dopisanie krótkiego guideline w audit.  
+- **Dlaczego bezpieczna:** wprowadza porządek po refaktorze i nie zmienia działających sekcji UI (usuwamy tylko martwy kod/utility). Zgodne z AGENTS.md (brak pracy nad zabronionymi plikami, brak masowego redesignu – tylko cleanup).
+
+### Wykonanie Iteracji 2 (Filtry i listy)
+- **Co zmieniono:**  
+  - `components/rankings/rankings-explorer.tsx`: szybkie filtry w panelu zostały przepisane na `Badge variant="chip-ghost"`, co usuwa `fluid-pill` oraz zapewnia semantykę przycisku. Aktywne filtry (`PremiumBadge variant="chip"`) korzystają już z domyślnego `button`, więc zniknęły ręczne `role`/`tabIndex`. Dodatkowo usunięto `fluid-caption`/`fluid-copy` z wrapperów filtrów i checkboxa, zastępując je zwykłym `text-sm`, żeby focus stanu nie był nadpisany przez globalne utilsy.  
+  - `components/shop/shop-company-cards.tsx`: wszystkie kapsuły filtrów sklepu korzystają z `Badge variant="chip-ghost"` z propem `pressed`, więc wygląd i hover/focus są identyczne jak w rankingu. Zniknęły stare przyciski `Button` z `fluid-pill` i ręcznie ustawianym `rounded-full`.
+- **Dlaczego:** te zmiany wdrażają zasadę z Iteracji 1, że chip = dedykowany wariant komponentu, a nie przypadkowy zestaw klas. Dzięki temu oba główne ekrany filtrów prezentują się spójnie i dzielą te same focus states bez kopiowania styli.  
+- **Następne kroki / TODO:**  
+  1. Zastosować nowe warianty w pozostałych listach (np. `components/affiliate/affiliate-list.tsx`, `components/home/community-highlights-animated.tsx`), żeby wszystkie kapsuły CTA działały identycznie.  
+  2. Przygotować migrację checkboxów/selectów w rankingach i formularzach (Iteracja 3), tak aby pola nie wycinały focus ringów przez `bg-transparent focus-visible:ring-0`.  
+  3. Po zakończeniu Iteracji 3 wrócić do cleanupu utili (`fluid-pill`, `fluid-select-width`) opisanych w Iteracji 4 i usunąć je z `globals.css`.
+
+### Wykonanie Iteracji 3 (Form controls)
+- **Co zmieniono:**  
+  - `components/rankings/rankings-explorer.tsx`: przełącznik „Tylko cashback” używa `Checkbox` z `aria` i wspólnym ringiem zamiast natywnego `<input>`, dzięki czemu focus nie jest zdejmowany przez `bg-transparent`.  
+  - `components/forms/company-plan-form.tsx`: wszystkie checkboxy formularza (trailing drawdown, refundacja, scaling) przeszły na `Checkbox` + `Controller`, a pole „Model oceny” korzysta z `SelectTrigger/SelectItem`, więc formularz dziedziczy te same stany hover/focus co reszta UI.  
+  - `components/forms/company-form.tsx`: sekcja „Status weryfikacji” korzysta z komponentu `Select`, co eliminuje własne klasy `rounded-2xl` i ułatwia spójne odstępy.  
+  - `components/panels/sections/history-section.tsx`: filtr „Tylko wnioski o konto” wykorzystuje `Checkbox` zamiast natywnego inputu, zachowując identyczny wygląd i fokusa jak w innych kontrolkach.  
+- **Dlaczego:** zunifikowanie checkboxów i selectów usuwa lokalne `focus:ring` i `rounded-*`, a dzięki `Controller` formularze nie konwertują wartości ręcznie (np. `setValueAs`). To przygotowuje grunt do pełnego sprzątania utili (`fluid-select-width`) – skoro wszystkie kontrolki bazują na UI kit, można będzie usunąć nadpisy w `globals.css`.  
+- **Następne kroki / TODO:**  
+  1. Rozszerzyć migrację na pozostałe selecty (np. panel użytkownika, kalkulator wypłat), by żadna sekcja nie korzystała z natywnych `<select>`.  
+  2. Po ujednoliceniu kontrolerów przejrzeć spacing (`gap`, `text-sm`) w formularzach i zdefiniować wariant `Field`/`FormRow`, żeby uniknąć ręcznego kopiowania `fluid-stack`.  
+  3. Zaktualizować dokumentację komponentów (np. `docs/ui-style-guide.md`) o przykład „Checkbox w formularzu admina”, żeby przyszłe formularze od razu korzystały z kontrolowanych komponentów.
+
+### Wykonanie Iteracji 4 (sprzątanie utili + dokumentacja)
+- **Co zmieniono:**  
+  - `components/ui/badge.tsx` i `components/custom/premium-badge.tsx` przeniosły spacing `fluid-badge`/`fluid-pill` do stałych z `gap-[clamp()]`, `px-[clamp()]`, `py-[clamp()]`, dzięki czemu warianty kapsuł (#default, pill, chip) nie polegają na globalnych utilach.  
+  - Wszystkie komponenty, które wciąż miały `fluid-badge`/`fluid-pill` (`shop-plan-card`, `analysis-layout`, `analysis-company-selector`, `rankings` landing, sekcje affiliate itp.) zostały zaktualizowane do nowych klas tailwindowych, a jedyne miejsce, gdzie występowało `fluid-select-width`, zostało zastąpione `w-[clamp(9rem,8vw+4rem,10rem)]`.  
+  - `docs/ui-style-guide.md` dostał sekcję „Form Controls” z przykładem selecta i checkboxa z panelu admina, żeby doprecyzować zasady bez odwołań do utili.  
+  - Zgodnie z AGENTS.md nie dotykaliśmy `app/globals.css`, ale wszystkie utilsy (`fluid-pill`, `fluid-badge`, `fluid-select-width`) są teraz nieużywane w kodzie i mogą zostać usunięte przy kolejnej iteracji czyszczącej CSS, jeśli właściciel pliku wyrazi zgodę.
+- **Efekt:** badge/chipy/form controls korzystają wyłącznie z komponentów UI i tailwindowych klas – żadnych custom utili, które mogłyby wrócić jako antywzorzec. Dokumentacja zamyka temat i wskazuje poprawne API na przyszłość.
+
 ## Plan refaktoru buttonowego systemu
 
 **Iteracja 1 – Uporządkowanie komponentów bazowych (Button, Badge, Pill, FilterChip, Surface)**  

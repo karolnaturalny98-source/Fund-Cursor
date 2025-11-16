@@ -32,7 +32,7 @@ export function BlogCategoriesTabs({
       <TabsList className="flex w-full flex-wrap fluid-stack-xs rounded-2xl border border-border/40 bg-background/60 p-3 shadow-xs backdrop-blur-xl">
         <TabsTrigger
           value="all"
-          className="fluid-pill text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
+          className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
         >
           Wszystkie
         </TabsTrigger>
@@ -40,7 +40,7 @@ export function BlogCategoriesTabs({
           <TabsTrigger
             key={category.id}
             value={category.id}
-            className="fluid-pill text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
+            className="inline-flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.6rem,1vw,0.85rem)] py-[clamp(0.25rem,0.5vw,0.4rem)] rounded-full text-sm font-semibold text-muted-foreground transition-colors data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:bg-transparent data-[state=inactive]:hover:bg-muted/50"
           >
             {category.name}
           </TabsTrigger>
