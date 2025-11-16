@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -57,6 +57,8 @@ interface DisputeCompanyOption {
 
 export default function UserPanelPage() {
   const { open: openWallet } = useUserPanel();
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [view, setView] = useState<PanelView>(() => {
     const requested = searchParams.get("view");
@@ -64,10 +66,16 @@ export default function UserPanelPage() {
   });
   useEffect(() => {
     const requested = searchParams.get("view");
-    if (isPanelView(requested) && requested !== view) {
-      setView(requested);
-    }
-  }, [searchParams, view]);
+    setView((current) => {
+      if (isPanelView(requested)) {
+        return requested === current ? current : requested;
+      }
+      if (requested === null) {
+        return current === "overview" ? current : "overview";
+      }
+      return current;
+    });
+  }, [searchParams]);
 
   const {
     data: summaryData,
@@ -272,6 +280,19 @@ export default function UserPanelPage() {
                 onValueChange={(value) => {
                   if (isPanelView(value)) {
                     setView(value);
+                    const nextParams = new URLSearchParams(
+                      searchParams.toString(),
+                    );
+                    if (value === "overview") {
+                      nextParams.delete("view");
+                    } else {
+                      nextParams.set("view", value);
+                    }
+                    const query = nextParams.toString();
+                    void router.replace(
+                      query ? `${pathname}?${query}` : pathname,
+                      { scroll: false },
+                    );
                   }
                 }}
                 className="w-full space-y-[clamp(1.25rem,2vw,1.75rem)]"

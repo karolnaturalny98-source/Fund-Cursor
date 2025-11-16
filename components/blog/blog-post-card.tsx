@@ -47,7 +47,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               {post.excerpt}
             </Text>
           )}
-          <Text asChild variant="caption" tone="muted" className="flex items-center justify-between">
+          <Text variant="caption" tone="muted" className="flex items-center justify-between">
             <span>
               {post.publishedAt &&
                 format(new Date(post.publishedAt), "d MMMM yyyy")}

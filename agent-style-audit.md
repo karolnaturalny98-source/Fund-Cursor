@@ -444,9 +444,19 @@ Wprowadzić dedykowane komponenty `Heading` (z propsami `level` i `variant`/`ton
 - **Next steps / TODO (status: wykonane 2025-01-XX):**
   - ✔️ Migracja komponentów z listy (influencer spotlight, rankings FAQ, admin metric cards, offers stats) na `Heading`/`Text`.
   - ✔️ Rozszerzenie `Heading` o wariant `subsectionStrong` + token `fluid-h3` dla mocniejszego `h3`.
-  - ✔️ Dodanie zasad użycia `Heading`/`Text` do `project.mdc` (sekcja Coding Style + changelog).
+- ✔️ Dodanie zasad użycia `Heading`/`Text` do `project.mdc` (sekcja Coding Style + changelog).
 
 Wynik: audyt zakończony, lista pozostałych miejsc zanotowana, a zasady zapobiegania regresjom dopisane w tym pliku.
+
+### Wykonane zmiany – Final polish runtime fix
+- **Co:** `components/blog/blog-post-card.tsx` przestał używać `Text asChild` w sekcji meta. `Text` renderuje domyślny `<p>` z flex klasami, a wewnątrz znajdują się dwa `<span>` – dzięki temu React nie zgłasza błędu „React.Children.only” podczas renderowania kart wpisów.
+- **Dlaczego:** Slot (`asChild`) w `Text` wymaga pojedynczego dziecka; poprzednia implementacja przekazywała dwa rodzeństwa (`<span>` z datą oraz `<span>` z czasem czytania), co eksplodowało na prodzie (Next 16 / Turbopack). Zmiana przywraca działanie katalogu wiedzy.
+- **Next steps / TODO:** Trzymać się zasady, że `Text asChild` zawsze opakowuje pojedynczy element (np. `<span>`), a zagnieżdżone elementy lądują wewnątrz tego wrappera. Jeśli potrzebny jest układ z wieloma dziećmi, lepiej renderować domyślny element `Text`.
+
+### Wykonane zmiany – Panel /panel (tabs)
+- **Co:** `app/panel/page.tsx` aktualizuje teraz stan zakładek i adres URL w sposób synchronizowany. Usunęliśmy zależność `view` z efektu obserwującego `searchParams`, żeby nie nadpisywał wyboru użytkownika, oraz dodaliśmy `router.replace` + `URLSearchParams`, by klik w zakładkę ustawiało `?view=...` (lub usuwało parametr dla „Przegląd”). Dzięki temu Radix Tabs nie są resetowane przez cykl efektu.
+- **Dlaczego:** Po wejściu przez link `/panel?view=disputes` efekt `useEffect` posiadał `view` w deps i każda próba kliknięcia innej zakładki natychmiast wracała do „Zgłoszenia”. Synchronizacja adresu i usunięcie zbędnej zależności przywraca działanie zakładek „Przegląd”, „Wymiana”, „Ulubione”, „Influencer”.
+- **Next steps / TODO:** Jeśli w przyszłości dodamy kolejne widoki, pamiętać o aktualizacji `PANEL_VIEWS` i utrzymaniu analogicznej obsługi search params + router.replace, aby deep linki działały spójnie.
 
 ## Final summary
 
