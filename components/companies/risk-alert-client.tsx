@@ -5,6 +5,7 @@ import { PremiumIcon } from "@/components/custom/premium-icon";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Surface } from "@/components/ui/surface";
 
 interface RiskAlert {
   id: string;
@@ -48,17 +49,19 @@ export function RiskAlertCard({ alert }: RiskAlertCardProps) {
   const style = severityStyles[alert.severity];
 
   return (
-    <Alert
-      variant={style.variant}
+    <Surface
+      asChild
+      variant="gradient"
       className={cn(
-        "rounded-2xl border-gradient bg-gradient-card shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg",
+        "rounded-2xl transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]",
         style.className,
       )}
     >
-      <PremiumIcon icon={Icon} variant="glow" size="md" className={style.iconColor} />
-      <AlertTitle className="text-sm font-semibold">{alert.title}</AlertTitle>
-      <AlertDescription className="mt-2 text-xs leading-relaxed">{alert.description}</AlertDescription>
-    </Alert>
+      <Alert variant={style.variant} className="rounded-2xl border-transparent bg-transparent shadow-none">
+        <PremiumIcon icon={Icon} variant="glow" size="md" className={style.iconColor} />
+        <AlertTitle className="text-sm font-semibold">{alert.title}</AlertTitle>
+        <AlertDescription className="mt-2 text-xs leading-relaxed">{alert.description}</AlertDescription>
+      </Alert>
+    </Surface>
   );
 }
-

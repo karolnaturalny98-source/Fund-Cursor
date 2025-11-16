@@ -92,3 +92,91 @@ Kroki:
 4. Zaktualizować `agent-style-audit.md → TODO` (jeśli wymagane) i przekazać w PR listę komponentów dotkniętych refaktorem.
 
 Status: gradientowe utilities usunięte wraz z `components/ui/gradient-button.tsx`, demo korzysta z wariantów `Button`, a `fluid-button*` pozostają tylko jako rozmiary w `Button` (z komentarzem w `globals.css`).  
+
+## Problem: layout / card / surface styles używane niespójnie
+
+- **Powielone kafle informacyjne w Analizy**  
+  - `app/(site)/analizy/page.tsx:88-147` renderuje sześć „kafelków” jako zwykłe `div`y z pakietem klas `rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs backdrop-blur-xl`. Każdy blok kopiuje ten sam gradient, padding i cień zamiast użyć `Card`/`Surface` i wariantu z ikoną. Efekt: mikro-różnice wynikające z copy-paste (inne marginesy, dodatkowe `transition-all`) powodują, że kafle wyglądają inaczej niż pozostałe karty na stronie (np. w sekcji z selektorem firm), więc widok jest patchworkowy.
+- **Statystyki & filtry Sklepu mają własne obramowania**  
+  - `components/shop/shop-page-client.tsx:95-108` prezentuje trzy statystyki z customowymi `rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs backdrop-blur` mimo że obok główna część już używa `Card`.  
+  - `components/shop/shop-company-cards.tsx:124-205` powtarza identyczne klasy w licznikach, pustym stanie i polu wyszukiwania, przez co jedna sekcja miesza `Card` z ręcznie składanymi kaflami; użytkownik widzi trzy różne warianty paneli (statystyki, lista firm, filtry) w obrębie jednego ekranu.
+- **Podsumowanie zamówienia ma własny „Surface”**  
+  - `components/shop/shop-purchase-form.tsx:92-148` buduje kontenery ceny/cashbacku oraz informację o zalogowanym użytkowniku na `div`ach z `rounded-2xl border ... bg-card/72 fluid-card-pad-sm shadow-xs`. To de facto `Surface` w wariancie „muted”, ale pisany inline i z dodatkowymi gradientami. W efekcie formularz miesza trzy różne typy boxów: gradientowy wrapper, dwa kafle i alert, przez co trudno wskazać, co jest głównym panelem, a co tylko dekoracją.
+- **Rankings Explorer ma własne pudełka na tabelę**  
+  - `components/rankings/rankings-explorer.tsx:1120-1178` owija całą tabelę w `div` z `overflow-hidden rounded-3xl border border-border/60 bg-card/72 shadow-xs ...` i powtarza te same klasy dla błędów (`:898-914`) oraz wskaźników w filtrach. Ten widok równolegle korzysta z `Card` (panel filtrów), `Surface` (aktywne filtry) i ręcznych `div`ów, więc każdy panel ma inny radius i cień mimo że wszystkie powinny być jednolitą siatką kart.
+- **Równoległy system utility w CSS**  
+  - `app/globals.css:352-470` definiuje `@utility glass-card`, `glass-panel`, `shadow-premium*`, `card-outline`, czyli kompletny zestaw stylów dla kart niezależny od `Card`/`Surface`. Te utilsy są następnie używane bezpośrednio w komponentach jak `components/custom/discount-coupon.tsx:56-94` czy nawet `components/analysis/analysis-layout.tsx:127-174` (gdzie `Card` dostaje dodatkowe `rounded-3xl ... shadow-premium`), przez co każda karta ma inny promień i inny cień w zależności od autora.
+
+**Efekt UI/UX:** ekran sklepu i rankingi pokazują jednocześnie 2–3 rodzaje paneli – część wygląda jak „prawdziwe” karty, część jak chipy lub szkło z gradientem. Użytkownik nie odróżnia, które boxy są klikalne (np. statystyki kontra listy firm), a które to wiersze tabeli; brak powtarzalnej hierarchii wizualnej utrudnia zeskanowanie strony i może sugerować, że poszczególne bloki należą do innych layoutów.
+
+**Proponowana zasada:**  
+- `Card` = podstawowy kafel danych i całe sekcje w obrębie kontenera. Wszelkie klasy `rounded-* border border-border/* bg-card/* shadow-*` są zarezerwowane dla `Card` (przez `className` lub wariant w komponencie), a nie dla zwykłych `div`.  
+- `Surface` (lub `SurfaceCard`) = wszystkie stany „panel / chip / zmutowany box”. Tworzymy wariant `stats`, `pill`, `glass` wewnątrz komponentu zamiast nowych utili.  
+- `Section` = jedyne miejsce gdzie ustawiamy makro padding/margines; sekcje nie powinny doklejać własnych cieni ani obramowań.  
+- Zakaz kopiowania inline klas `rounded-2xl border border-border/60 bg-card/72 shadow-xs`, `border-gradient*`, `backdrop-blur-*` — jeśli projekt wymaga takiego efektu, dopisujemy wariant w `Card`/`Surface` i używamy go konsekwentnie. Dzięki temu każdy ekran będzie miał jednolitą siatkę kafli, a użytkownicy będą wiedzieli, które elementy są głównymi panelami, a które tylko dekoracją.
+
+## Plan refaktoru layout / card / surface
+
+**Iteracja 1 – Zdefiniowanie wariantów Surface/Card oraz audyt utili**  
+Cel: przygotować kontrolowane warianty (`Card` + `Surface/SurfaceCard`) odzwierciedlające aktualne potrzeby (stats, glass, pill, outline) i rozrysować mapę użyć utili z `globals.css`.  
+Pliki: `components/ui/card.tsx`, `components/ui/surface.tsx`, `components/layout/surface-card.tsx`, `app/globals.css`.  
+Ryzyka: zmiana domyślnych styli kart może dotknąć istniejące ekrany, dlatego najpierw tworzymy dodatkowe warianty i dokumentujemy je w komentarzu/README.  
+Kroki:  
+1. Opracować listę wariantów (`stats`, `muted`, `glass`, `pill`) razem z zestawem klas (radius, border, blur).  
+2. W `Surface` i `Card` dodać brakujące warianty/paddingi, zachowując kompatybilność.  
+3. Sprawdzić `globals.css` pod kątem utili typu `glass-card`, `shadow-premium*`, `card-outline` – oznaczyć które zostaną przeniesione do wariantów, które są legacy.  
+4. Uzupełnić `agent-style-audit.md → TODO` lub komentarz w kodzie, że od kolejnej iteracji tylko warianty komponentów są źródłem prawdy.
+
+**Iteracja 2 – Refaktor sklepu (statystyki, filtry, karty firm)**  
+Cel: usunąć ręczne `div`y z klasami kart w całym flow sklepu i zastąpić je `Card`/`Surface` z nowymi wariantami.  
+Pliki: `components/shop/shop-page-client.tsx`, `components/shop/shop-company-cards.tsx`, `components/shop/shop-purchase-form.tsx`, `components/shop/shop-plan-card.tsx`.  
+Ryzyka: zmiana radiusów/paddingów może naruszyć siatkę gridów, szczególnie w mobile.  
+Kroki:  
+1. Na dashboardzie sklepu (statystyki + Tabs) zamienić kostki na `Surface variant="stats"` i sprawdzić responsywność.  
+2. W `shop-company-cards` użyć `Card`/`Surface` dla liczników, pustych stanów i wyszukiwarki; `SelectTrigger` powinien dostać dedykowany wariant `surface-pill`.  
+3. W `shop-purchase-form` przenieść kontenery ceny/cashbacku do `Surface` i usunąć zduplikowane gradienty.  
+4. W `shop-plan-card` ograniczyć inline `rounded-2xl ...` do `Card` + wariant `hoverable`.  
+5. Po zmianach manualnie porównać UI ze stagingiem lub screenshotami.
+
+**Iteracja 3 – Porządkowanie sekcji Analizy i Rankingów**  
+Cel: w widokach „Analizy” i „Rankings Explorer” scalić wszystkie kafle/tabele w jeden system layoutów.  
+Pliki: `app/(site)/analizy/page.tsx`, `components/analysis/analysis-layout.tsx`, `components/rankings/rankings-explorer.tsx`, `components/rankings/ranking-tabs-section.tsx`.  
+Ryzyka: tabele w rankingach korzystają z niestandardowych blurów i mogą wymagać dopasowania `overflow` po zmianie wrappera.  
+Kroki:  
+1. W Analizach zamienić grid sześciu bloków na `Surface` (stats/glass) z ikoną i odrębnym wariantem gradientowym.  
+2. W `analysis-layout` pozostawić `Card` bez dodatkowych klas `rounded-3xl`/`shadow-premium`; jeśli potrzebne, dodać wariant `highlight` do `Card`.  
+3. `rankings-explorer` – panel filtrów, błędów i wrapper tabeli powinny wszystkie używać `Card`/`Surface`. Usunąć ręczne `rounded-3xl border-border/60`.  
+4. Po modyfikacjach przejrzeć stany loading/error, czy zachowały to samo wyrównanie.
+
+**Iteracja 4 – Konsolidacja utili i cleanup CSS**  
+Cel: po wdrożeniu komponentowych wariantów usunąć lub ograniczyć utilsy, które dublowały styly kart.  
+Pliki: `app/globals.css`, `components/custom/discount-coupon.tsx`, `components/ui/demo.tsx`, `components/layout/site-header.tsx` (jeśli korzysta z `glass-card`).  
+Ryzyka: niektóre elementy marketingowe mogą nadal polegać na `glass-card` – trzeba zostawić fallback.  
+Kroki:  
+1. Przejść przez `rg "glass-card"` / `rg "shadow-premium"` i zamienić użycia na `Surface`/`Card` z odpowiednim wariantem.  
+2. Gdy util nie ma już konsumentów, usunąć go z `globals.css` i dodać komentarz o docelowym wzorcu.  
+3. Zaktualizować dokumentację (np. `docs/design-system`), że jedynym sposobem na karty są komponenty UI.  
+4. Uruchomić `npm run lint`/`tsc` oraz zweryfikować w UI (np. `next dev`) główne ekrany.
+
+### Wykonanie Iteracji 3 (Analizy + Rankingi)
+- **Co zmieniono:**  
+  - `app/(site)/analizy/page.tsx`: sekcję „Co możesz analizować?” przebudowano na mapę `Surface variant="panel"`, dzięki czemu wszystkie kafelki korzystają z projektowych wariantów zamiast powielonych klas `rounded-2xl border ...`.  
+  - `components/analysis/analysis-layout.tsx`: karty wybranych firm używają wariantu `Card variant="elevated"` i prostych klas układu (`flex`, `gap`), eliminując ręczne `rounded-3xl`/`shadow-premium`.  
+  - `components/rankings/rankings-explorer.tsx`: panel filtrów, komunikat błędu i wrapper tabeli korzystają z `Card`/`Surface` (warianty `elevated`/`outline`), dzięki czemu cały ekran rankingów ma jeden system paneli i cieni.
+- **Dlaczego:** wyrównanie warstwy layoutów podnosi spójność wizualną (kafelki analizy wyglądają jak część design systemu, a ranking nie miesza własnych „szklanych” boxów z komponentami UI). To przygotowuje grunt pod Iterację 4, gdzie planujemy wygasić utilsy `glass-card`/`shadow-premium`.
+- **Następne kroki / TODO:**  
+  1. Dostosować pozostałe obszary rankingów (np. chipy filtrów, input search) do nowych wariantów `Surface` żeby zniknęły pozostałe `rounded-full border-border/60`.  
+  2. Sprawdzić ekranów marketingowych korzystających z `glass-card` i ustalić, które potrzebują dedykowanego wariantu (`surfaceVariants.glass`).  
+  3. Po zebraniu listy konsumentów rozpocząć Iterację 4 – usuwanie legacy utili z `globals.css`.
+
+### Wykonanie Iteracji 4 (konsolidacja utili glass/surface)
+- **Co zmieniono:**  
+  - Rankingi: pasek wyszukiwania, selektory i pola liczby opinii w `components/rankings/rankings-explorer.tsx` korzystają teraz z `Surface variant="panel"`/`Surface asChild`, więc żaden fragment nie używa już ręcznych `rounded-full border-border/60`.  
+  - Marketingowe kafle: `components/home/home-ranking-table.tsx`, `components/companies/purchase-card.tsx`, `components/companies/compare-bar.tsx`, `components/analysis/metrics-dashboard.tsx`, `components/analysis/payout-analysis.tsx` i cały panel użytkownika (`components/panels/user-panel.tsx`) podmieniły `glass-card`/`glass-panel` na `Card`/`Surface` warianty. Pozostały tylko te utilsy, które są wewnątrz `Card` (`glass-card`).  
+  - `app/globals.css`: usunięto definicje `glass-panel` i `glass-premium`, bo nie są już używane; komentarz przy `glass-card` podkreśla, że pozostaje jedynie jako implementacja wariantu `Card`.
+- **Follow-up:** dodano warianty `gradient` i nowe cienie w `Card`/`Surface`/`SurfaceCard` oraz uproszczono `Button` tak, żeby nie korzystał z utili `shadow-soft`/`shadow-premium`. Wszystkie gradientowe komponenty (coupon, sidebar, ekrany logowania, panele admina, panel użytkownika) zostały zmigrowane, a utilsy `border-gradient*` i `shadow-premium*` usunięto z `app/globals.css`.
+- **Efekt:** wszystkie powierzchnie (sticky zakup, porównywarka, tooltips wykresów) dzielą ten sam system cieni i radiusów. Dzięki temu przyszłe zmiany można wdrażać przez warianty `Card`/`Surface`, a nie kopiowanie utili.
+- **Następne kroki:**  
+  1. Przejrzeć komponenty wykorzystujące `shadow-premium`/`shadow-soft` i zastąpić je dedykowanymi klasami w wariantach (aby w kolejnej iteracji można było uprościć `globals.css`).  
+  2. Dla efektów gradientowych (`border-gradient`, `bg-gradient-card`) ustalić, czy powinny być wariantami `Surface` (np. `variant="gradient"`), żeby uniknąć ręcznego kopiowania w CTA.  
+  3. Po potwierdzeniu braku zewnętrznych zależności rozważyć przeniesienie implementacji „glassowego” wariantu bezpośrednio do `cardVariants` (zamiast utilsa), aby całkowicie usunąć sekcję z `globals.css`.

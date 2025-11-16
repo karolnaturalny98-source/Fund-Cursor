@@ -24,7 +24,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
     <div className="flex flex-col fluid-stack-md">
       {/* Główne metryki */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-medium text-muted-foreground">
             Revenue
@@ -43,7 +43,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
         </CardContent>
       </Card>
 
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-medium text-muted-foreground">
             Koszty cashbacku
@@ -67,7 +67,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
         </CardContent>
       </Card>
 
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-medium text-muted-foreground">
             Zarobek
@@ -86,7 +86,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
         </CardContent>
       </Card>
 
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-medium text-muted-foreground">
             Zamówienia
@@ -108,7 +108,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
 
       {/* Nowe KPI - Conversion i Performance */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Conversion Rate
@@ -127,7 +127,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Średnia wartość zamówienia (AOV)
@@ -146,7 +146,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Wskaźnik zatwierdzeń
@@ -165,7 +165,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Wskaźnik odrzuceń
@@ -187,7 +187,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
 
       {/* Średnie wartości i aktywność */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Średni cashback na zamówienie
@@ -206,7 +206,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Średnia prowizja na zamówienie
@@ -225,7 +225,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Aktywni użytkownicy
@@ -244,7 +244,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Revenue per Click (RPC)
@@ -266,7 +266,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
 
       {/* ROI i marże */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               ROI
@@ -285,7 +285,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Marża zysku
@@ -304,7 +304,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Wskaźnik cashbacku
@@ -323,7 +323,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Wskaźnik prowizji
@@ -345,7 +345,7 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
 
       {/* Czas zatwierdzenia */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-sm">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Średni czas zatwierdzenia
@@ -367,4 +367,3 @@ export function ShopStatistics({ stats }: ShopStatisticsProps) {
     </div>
   );
 }
-

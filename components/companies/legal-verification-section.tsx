@@ -3,6 +3,7 @@
 import { ShieldCheck, FileCheck, ExternalLink, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Surface } from "@/components/ui/surface";
 import { Separator } from "@/components/ui/separator";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import type { Company } from "@/lib/types";
@@ -91,13 +92,14 @@ export function LegalVerificationSection({ company, withoutCard = false }: Legal
             </div>
             <div className="flex flex-wrap gap-2">
               {company.licenses.map((license, index) => (
-                <Badge
+                <Surface
                   key={index}
-                  variant="outline"
-                  className="rounded-full border-gradient bg-gradient-card text-xs font-medium"
+                  variant="gradient"
+                  padding="pill"
+                  className="rounded-full text-xs font-medium"
                 >
                   {license}
-                </Badge>
+                </Surface>
               ))}
             </div>
           </div>
@@ -177,7 +179,7 @@ export function LegalVerificationSection({ company, withoutCard = false }: Legal
   }
 
   return (
-    <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
+    <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]!">
       <CardHeader>
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-5 w-5 text-primary" />
@@ -193,4 +195,3 @@ export function LegalVerificationSection({ company, withoutCard = false }: Legal
     </Card>
   );
 }
-

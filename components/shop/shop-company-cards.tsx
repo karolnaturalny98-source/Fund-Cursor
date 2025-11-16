@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Surface } from "@/components/ui/surface";
 import {
   Select,
   SelectContent,
@@ -121,35 +122,42 @@ export function ShopCompanyCards({
     <div className="flex flex-col fluid-stack-lg">
       {/* Stats */}
       <div className="grid grid-cols-2 fluid-stack-sm">
-        <div className="rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
+        <Surface variant="stats" padding="sm">
           <div className="text-muted-foreground fluid-caption">Firm</div>
           <div className="font-semibold text-foreground fluid-h2">{totalCompanies}</div>
-        </div>
-        <div className="rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
+        </Surface>
+        <Surface variant="stats" padding="sm">
           <div className="text-muted-foreground fluid-caption">Planów</div>
           <div className="font-semibold text-foreground fluid-h2">{totalPlans}</div>
-        </div>
+        </Surface>
       </div>
 
       {/* Search and Sort */}
       <div className="flex flex-col fluid-stack-sm lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-1 items-center fluid-stack-xs">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 fluid-icon-md -translate-y-1/2 text-muted-foreground" />
+          <Surface variant="panel" padding="sm" className="flex flex-1 items-center gap-3">
+            <Search className="fluid-icon-md text-muted-foreground" />
             <Input
               placeholder="Szukaj firm..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]! fluid-caption fluid-input-icon"
+              className="border-none bg-transparent p-0 text-foreground shadow-none focus-visible:ring-0"
             />
-          </div>
+          </Surface>
         </div>
         <div className="flex flex-wrap items-center fluid-stack-xs">
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-            <SelectTrigger className="fluid-select-width rounded-full border border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
-              <ArrowUpDown className="mr-2 fluid-icon-md" />
-              <SelectValue />
-            </SelectTrigger>
+            <Surface
+              asChild
+              variant="pill"
+              padding="none"
+              className="fluid-select-width px-4 py-2 shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)]"
+            >
+              <SelectTrigger className="border-none bg-transparent p-0 shadow-none focus:ring-0 focus-visible:ring-0">
+                <ArrowUpDown className="mr-2 fluid-icon-md" />
+                <SelectValue />
+              </SelectTrigger>
+            </Surface>
             <SelectContent>
               <SelectItem value="name">Nazwa</SelectItem>
               <SelectItem value="cashback">Cashback</SelectItem>
@@ -194,9 +202,13 @@ export function ShopCompanyCards({
 
       {/* Companies Grid */}
       {filteredAndSortedCompanies.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-muted/40 fluid-card-pad-lg text-center text-muted-foreground fluid-copy">
+        <Surface
+          variant="outline"
+          padding="lg"
+          className="border-dashed text-center text-muted-foreground fluid-copy"
+        >
           Brak firm spełniających kryteria wyszukiwania.
-        </div>
+        </Surface>
       ) : (
         <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
           {filteredAndSortedCompanies.map((company) => {
@@ -207,9 +219,11 @@ export function ShopCompanyCards({
             return (
               <Card
                 key={company.id}
+                variant={isSelected ? "elevated" : "muted"}
                 className={cn(
-                  "cursor-pointer transition-all hover:border-primary/50 hover:shadow-md",
-                  isSelected && "border-primary bg-primary/5 shadow-md"
+                  "cursor-pointer transition-all",
+                  !isSelected && "hover:border-primary/40 hover:shadow-md",
+                  isSelected && "border-primary/60 ring-2 ring-primary/20"
                 )}
                 onClick={() => onCompanyChange(company.id)}
               >

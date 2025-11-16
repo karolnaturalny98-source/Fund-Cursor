@@ -20,13 +20,19 @@ import {
 
 // Lazy loaded sections for better performance
 const WalletSection = dynamic(() => import("./sections/wallet-section").then(mod => ({ default: mod.WalletSection })), {
-  loading: () => <div className="glass-panel h-64 animate-pulse rounded-3xl" />,
+  loading: () => (
+    <div className="h-64 animate-pulse rounded-3xl border border-border/45 bg-background/75 backdrop-blur" />
+  ),
 });
 const TransactionsSection = dynamic(() => import("./sections/transactions-section").then(mod => ({ default: mod.TransactionsSection })), {
-  loading: () => <div className="glass-panel h-64 animate-pulse rounded-3xl" />,
+  loading: () => (
+    <div className="h-64 animate-pulse rounded-3xl border border-border/45 bg-background/75 backdrop-blur" />
+  ),
 });
 const HistorySection = dynamic(() => import("./sections/history-section").then(mod => ({ default: mod.HistorySection })), {
-  loading: () => <div className="glass-panel h-96 animate-pulse rounded-3xl" />,
+  loading: () => (
+    <div className="h-96 animate-pulse rounded-3xl border border-border/45 bg-background/75 backdrop-blur" />
+  ),
 });
 
 import { useUserSummary } from "@/components/panels/hooks/use-user-summary";
@@ -54,6 +60,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { Surface } from "@/components/ui/surface";
 import type {
   Company,
   DisputeCase,
@@ -588,7 +595,7 @@ export function UserPanel() {
                 if (value === "overview") setView("overview");
                 else if (value === "history") handleShowHistory();
               }} className="w-full">
-                <TabsList className="glass-panel grid w-full grid-cols-2 rounded-2xl p-1 shadow-glass">
+                <TabsList className="grid w-full grid-cols-2 rounded-2xl border border-border/45 bg-background/80 p-1 shadow-[0_20px_45px_-25px_rgba(15,23,42,0.4)] backdrop-blur">
                   <TabsTrigger 
                     value="overview"
                     className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -615,7 +622,7 @@ export function UserPanel() {
                     onCopyCode={handleCopyCode}
                     copiedTransactionId={copiedTransactionId}
                   />
-                  <div className="rounded-2xl border border-border/40 bg-background/70 p-4 shadow-glass space-y-3">
+                  <Surface variant="panel" padding="md" className="space-y-3">
                     <div className="space-y-1">
                       <p className="text-sm font-semibold text-foreground">Pełne operacje cashback</p>
                       <p className="text-sm text-muted-foreground">
@@ -648,7 +655,7 @@ export function UserPanel() {
                         Otwórz panel
                       </Link>
                     </div>
-                  </div>
+                  </Surface>
                 </TabsContent>
 
                 <TabsContent value="history" className="mt-6">
@@ -876,7 +883,7 @@ function DisputesSection({
 
   return (
     <div className="space-y-4">
-      <Card className="border-gradient shadow-premium">
+      <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Zgłoszenia i pomoc
@@ -887,7 +894,7 @@ function DisputesSection({
             <Label className="flex items-center gap-2">
               <span>Status</span>
               <Select value={status} onValueChange={(value) => onStatusChange(value as DisputeStatusFilter)}>
-                <SelectTrigger className="h-9 w-[160px] rounded-lg border-gradient bg-gradient-card shadow-premium">
+                <SelectTrigger className="h-9 w-[160px] rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -903,7 +910,7 @@ function DisputesSection({
             {companiesLoading ? (
               <span className="text-xs text-muted-foreground">Ładowanie firm…</span>
             ) : companiesError ? (
-              <Alert variant="destructive" className="py-2 border-gradient">
+              <Alert variant="destructive" className="py-2 border border-border/40">
                 <AlertDescription className="flex items-center gap-2">
                   <span>{companiesError}</span>
                   <Button size="sm" variant="premium-outline" onClick={onReloadCompanies} disabled={companiesLoading} className="rounded-full">
@@ -915,7 +922,7 @@ function DisputesSection({
           </div>
 
           {error ? (
-            <Alert variant="destructive" className="mt-4 border-gradient">
+            <Alert variant="destructive" className="mt-4 border border-border/40">
               <AlertDescription>
                 <div className="flex items-center justify-between">
                   <span>{error}</span>
@@ -932,7 +939,7 @@ function DisputesSection({
       {/* List */}
       <div className="space-y-3">
         {disputes.map((item) => (
-          <Card key={item.id} className="border-gradient shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+          <Card key={item.id} className="border border-border/40 shadow-premium transition-all hover:border border-border/40-premium hover:shadow-premium-lg">
             <CardContent className="p-4">
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-3">
@@ -998,19 +1005,19 @@ function DisputesSection({
       </div>
 
       {/* Create form */}
-      <Card className="border-gradient shadow-premium">
+      <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
         <CardHeader>
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Zgłoś problem</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {message ? (
-            <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-gradient">
+            <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-border/40">
               <AlertDescription>{message}</AlertDescription>
             </Alert>
           ) : null}
 
           {formError ? (
-            <Alert variant="destructive" className="border-gradient">
+            <Alert variant="destructive" className="border border-border/40">
               <AlertDescription>{formError}</AlertDescription>
             </Alert>
           ) : null}
@@ -1027,7 +1034,7 @@ function DisputesSection({
                 disabled={submitting || companiesLoading || noCompaniesAvailable}
                 required
               >
-                <SelectTrigger className="rounded-lg border-gradient bg-gradient-card shadow-premium">
+                <SelectTrigger className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -1043,37 +1050,37 @@ function DisputesSection({
             <div className="grid gap-3 md:grid-cols-2">
               <div className="space-y-2">
                 <Label>Tytuł</Label>
-                <Input value={form.title} onChange={handleChange("title")} required className="border-gradient" />
+                <Input value={form.title} onChange={handleChange("title")} required className="border border-border/40" />
               </div>
               <div className="space-y-2">
                 <Label>Kategoria</Label>
-                <Input value={form.category} onChange={handleChange("category")} required className="border-gradient" />
+                <Input value={form.category} onChange={handleChange("category")} required className="border border-border/40" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label>Opis</Label>
-              <Textarea rows={4} value={form.description} onChange={handleChange("description")} required className="border-gradient" />
+              <Textarea rows={4} value={form.description} onChange={handleChange("description")} required className="border border-border/40" />
             </div>
 
             <div className="grid gap-3 md:grid-cols-3">
               <div className="space-y-2">
                 <Label>Kwota roszczenia (opcjonalnie)</Label>
-                <Input inputMode="decimal" placeholder="np. 99.99" value={form.requestedAmount} onChange={handleChange("requestedAmount")} className="border-gradient" />
+                <Input inputMode="decimal" placeholder="np. 99.99" value={form.requestedAmount} onChange={handleChange("requestedAmount")} className="border border-border/40" />
               </div>
               <div className="space-y-2">
                 <Label>Waluta</Label>
-                <Input maxLength={3} value={form.requestedCurrency} onChange={handleChange("requestedCurrency")} className="border-gradient" />
+                <Input maxLength={3} value={form.requestedCurrency} onChange={handleChange("requestedCurrency")} className="border border-border/40" />
               </div>
               <div className="space-y-2">
                 <Label>ID planu (opcjonalnie)</Label>
-                <Input value={form.planId} onChange={handleChange("planId")} placeholder="cuid planu" className="border-gradient" />
+                <Input value={form.planId} onChange={handleChange("planId")} placeholder="cuid planu" className="border border-border/40" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label>Linki dowodów (po jednym w wierszu)</Label>
-              <Textarea rows={3} value={form.evidenceLinks} onChange={handleChange("evidenceLinks")} className="border-gradient" />
+              <Textarea rows={3} value={form.evidenceLinks} onChange={handleChange("evidenceLinks")} className="border border-border/40" />
             </div>
 
             <CardFooter className="px-0 pb-0 flex justify-end gap-2">
@@ -1307,7 +1314,7 @@ function RedeemSection({
   const companyFieldError = lowerError.includes("firm");
 
   return (
-    <Card className="border-gradient shadow-premium">
+    <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -1320,12 +1327,12 @@ function RedeemSection({
       </CardHeader>
       <CardContent className="space-y-4">
         {formError ? (
-          <Alert variant="destructive" id="wallet-redeem-error" className="border-gradient">
+          <Alert variant="destructive" id="wallet-redeem-error" className="border border-border/40">
             <AlertDescription>{formError}</AlertDescription>
           </Alert>
         ) : null}
         {statusMessage ? (
-          <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-gradient" id="wallet-redeem-status">
+          <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-border/40" id="wallet-redeem-status">
             <AlertDescription>{statusMessage}</AlertDescription>
           </Alert>
         ) : null}
@@ -1337,7 +1344,7 @@ function RedeemSection({
           </div>
         ) : null}
         {offersState === "error" ? (
-          <Alert variant="destructive" className="border-gradient">
+          <Alert variant="destructive" className="border border-border/40">
             <AlertDescription>
               <div className="flex items-center justify-between">
                 <span>{offersError ?? "Nie udało się pobrać listy ofert."}</span>
@@ -1363,7 +1370,7 @@ function RedeemSection({
                 onValueChange={handleCompanyChange}
                 disabled={submitting || offersState === "loading" || offersState === "error" || !offers?.length}
               >
-                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border-gradient bg-gradient-card shadow-premium">
+                <SelectTrigger id={companySelectId} aria-invalid={companyFieldError || undefined} aria-describedby={companyFieldError ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder="Wybierz firmę" />
                 </SelectTrigger>
                 <SelectContent>
@@ -1383,7 +1390,7 @@ function RedeemSection({
                 onValueChange={handlePlanChange}
                 disabled={submitting || !availablePlans.length}
               >
-                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border-gradient bg-gradient-card shadow-premium">
+                <SelectTrigger id={planSelectId} aria-invalid={lowerError.includes("plan") || undefined} aria-describedby={lowerError.includes("plan") ? "wallet-redeem-error" : undefined} className="rounded-lg border border-transparent bg-gradient-card shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
                   <SelectValue placeholder={selectedCompany ? "Wybierz plan" : "Najpierw wybierz firmę"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -1411,7 +1418,7 @@ function RedeemSection({
             </p>
           ) : null}
           {insufficientPoints ? (
-            <Alert variant="destructive" className="border-gradient">
+            <Alert variant="destructive" className="border border-border/40">
               <AlertDescription>
                 Masz {available.toLocaleString("pl-PL")} punktów, potrzebujesz {planCost?.toLocaleString("pl-PL")} punktów.
               </AlertDescription>
@@ -1430,7 +1437,7 @@ function RedeemSection({
                 aria-readonly
                 aria-invalid={lowerError.includes("punkt") || undefined}
                 aria-describedby={lowerError.includes("punkt") ? "wallet-redeem-error" : undefined}
-                className="border-gradient"
+                className="border border-border/40"
               />
             </div>
 
@@ -1443,7 +1450,7 @@ function RedeemSection({
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
                 disabled={submitting}
-                className="border-gradient"
+                className="border border-border/40"
               />
             </div>
           </div>
@@ -1614,7 +1621,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
   const statusClass = profile ? INFLUENCER_STATUS_STYLES[profile.status] : "bg-muted text-muted-foreground";
 
   return (
-    <Card className="border-gradient shadow-premium">
+    <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="influencer-program" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">
@@ -1635,7 +1642,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
           <AccordionContent>
             <CardContent className="px-6 pb-6 pt-0">
               {profile?.referralCode ? (
-                <Alert className="mb-4 border-dashed border-primary/40 bg-primary/5 border-gradient">
+                <Alert className="mb-4 border-dashed border-primary/40 bg-primary/5 border border-border/40">
                   <AlertDescription className="text-primary">
                     Kod polecający: <span className="font-semibold">{profile.referralCode}</span>
                   </AlertDescription>
@@ -1651,7 +1658,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                       value={formState.platform}
                       onChange={handleChange("platform")}
                       required
-                      className="border-gradient"
+                      className="border border-border/40"
                     />
                   </div>
 
@@ -1662,7 +1669,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                       value={formState.handle}
                       onChange={handleChange("handle")}
                       required
-                      className="border-gradient"
+                      className="border border-border/40"
                     />
                   </div>
 
@@ -1673,7 +1680,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                       inputMode="numeric"
                       value={formState.audienceSize}
                       onChange={handleChange("audienceSize")}
-                      className="border-gradient"
+                      className="border border-border/40"
                     />
                   </div>
 
@@ -1683,7 +1690,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                       placeholder="np. media@twojadomena.com"
                       value={formState.contactEmail}
                       onChange={handleChange("contactEmail")}
-                      className="border-gradient"
+                      className="border border-border/40"
                     />
                   </div>
                 </div>
@@ -1695,7 +1702,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                     placeholder="Opisz swoją społeczność, format treści i doświadczenie."
                     value={formState.bio}
                     onChange={handleChange("bio")}
-                    className="border-gradient"
+                    className="border border-border/40"
                   />
                 </div>
 
@@ -1706,7 +1713,7 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                     placeholder="https://youtube.com/..."
                     value={formState.socialLinks}
                     onChange={handleChange("socialLinks")}
-                    className="border-gradient"
+                    className="border border-border/40"
                   />
                 </div>
 
@@ -1717,18 +1724,18 @@ function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps) {
                     placeholder="np. apex, fundingpips"
                     value={formState.preferredCompanies}
                     onChange={handleChange("preferredCompanies")}
-                    className="border-gradient"
+                    className="border border-border/40"
                   />
                 </div>
 
                 {error ? (
-                  <Alert variant="destructive" className="border-gradient">
+                  <Alert variant="destructive" className="border border-border/40">
                     <AlertDescription>{error}</AlertDescription>
                   </Alert>
                 ) : null}
 
                 {statusMessage ? (
-                  <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-gradient">
+                  <Alert className="border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-border/40">
                     <AlertDescription>{statusMessage}</AlertDescription>
                   </Alert>
                 ) : null}
@@ -1758,7 +1765,7 @@ function splitMultiline(value: string) {
 function FavoritesSection({ favorites }: { favorites: Company[] }) {
   if (!favorites.length) {
     return (
-      <Card className="border-gradient shadow-premium">
+      <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -1785,7 +1792,7 @@ function FavoritesSection({ favorites }: { favorites: Company[] }) {
   }
 
   return (
-    <Card className="border-gradient shadow-premium">
+    <Card className="shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -1805,7 +1812,7 @@ function FavoritesSection({ favorites }: { favorites: Company[] }) {
       <CardContent>
         <div className="space-y-3">
           {favorites.map((company) => (
-            <Card key={company.id} className="border-gradient shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+            <Card key={company.id} className="border border-border/40 shadow-premium transition-all hover:border border-border/40-premium hover:shadow-premium-lg">
               <CardContent className="p-4">
                 <Link
                   className="font-medium hover:underline hover:text-primary transition-colors"
@@ -1850,7 +1857,7 @@ function LoadingState() {
 
 function ErrorState({ message }: { message: string | null }) {
   return (
-    <div className="rounded-lg border-gradient border-destructive bg-destructive/10 p-4 text-sm text-destructive shadow-premium">
+    <div className="rounded-lg border border-border/40 border-destructive bg-destructive/10 p-4 text-sm text-destructive shadow-premium">
       {message ?? "Nie udało się pobrać danych użytkownika."}
     </div>
   );
@@ -1858,7 +1865,7 @@ function ErrorState({ message }: { message: string | null }) {
 
 function EmptyState() {
   return (
-    <div className="rounded-lg border-gradient bg-gradient-card p-6 text-center text-sm text-muted-foreground shadow-premium">
+    <div className="rounded-lg border border-border/40 bg-gradient-card p-6 text-center text-sm text-muted-foreground shadow-premium">
       Nie znaleziono danych cashback. Zacznij od dodania pierwszej transakcji.
     </div>
   );
@@ -1902,8 +1909,6 @@ function logWalletEvent(event: string, detail?: string) {
     console.warn("[wallet] telemetry error", error);
   }
 }
-
-
 
 
 

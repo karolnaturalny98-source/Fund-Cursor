@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Layers, MessageSquare, ShoppingCart } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Surface } from "@/components/ui/surface";
 import { Button } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { CompanyPopularityChart } from "@/components/companies/company-popularity-chart";
@@ -61,7 +62,7 @@ export function OverviewSidebar({
       )}
 
       {hasTechnicalDetails && (
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]!">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Szczegóły techniczne</CardTitle>
             <p className="text-xs text-muted-foreground">
@@ -102,8 +103,9 @@ export function OverviewSidebar({
                   label="Profil dźwigni"
                   count={company.leverageTiers.length}
                 >
-                  <div className="overflow-x-auto rounded-xl border-gradient bg-gradient-card pt-2 shadow-premium">
+                  <Surface variant="gradient" padding="xs" className="overflow-x-auto rounded-xl pt-2">
                     <Table>
+
                       <TableHeader>
                         <TableRow>
                           <TableHead className="px-3 py-2 text-left text-xs">Segment</TableHead>
@@ -131,7 +133,7 @@ export function OverviewSidebar({
                         ))}
                       </TableBody>
                     </Table>
-                  </div>
+                  </Surface>
                 </AccordionItemClient>
               ) : null}
 
@@ -173,7 +175,7 @@ export function OverviewSidebar({
         </Card>
       )}
 
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]! transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]">
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Szybkie linki</CardTitle>
           <p className="text-xs text-muted-foreground">
@@ -204,7 +206,7 @@ export function OverviewSidebar({
           <Button
             asChild
             variant="premium"
-            className="w-full justify-start gap-2 rounded-full shadow-premium"
+            className="w-full justify-start gap-2 rounded-full shadow-[0_22px_45px_-30px_rgba(15,23,42,0.5)]"
           >
             <Link href="#offers">
               <PremiumIcon icon={ShoppingCart} variant="glow" size="sm" />
@@ -223,4 +225,3 @@ export function OverviewSidebar({
     </div>
   );
 }
-

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Surface } from "@/components/ui/surface";
 import { Loader2 } from "lucide-react";
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import type { CompanyWithPlans } from "@/lib/queries/companies";
@@ -95,7 +96,11 @@ export function ShopPurchaseForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col fluid-stack-lg">
       <div className="flex flex-col fluid-stack-md">
-        <div className="rounded-2xl border border-primary/30 bg-linear-to-br from-primary/10 to-primary/5 fluid-card-pad-md">
+        <Surface
+          variant="panel"
+          padding="lg"
+          className="border border-primary/30 bg-linear-to-br from-primary/10 to-primary/5"
+        >
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Firma</div>
@@ -107,20 +112,20 @@ export function ShopPurchaseForm({
             </div>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-4">
-            <div className="rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
+            <Surface variant="stats" padding="sm">
               <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Cena</div>
               <div className="mt-2 font-semibold text-foreground fluid-h2">
                 ${price.toLocaleString("pl-PL")}
               </div>
-            </div>
-            <div className="rounded-2xl border border-primary/30 bg-primary/10 fluid-card-pad-sm shadow-xs">
+            </Surface>
+            <Surface variant="stats" padding="sm" className="border border-primary/30 bg-primary/10">
               <div className="font-medium uppercase tracking-[0.2em] text-muted-foreground fluid-caption">Cashback</div>
               <div className="mt-2 font-semibold text-primary fluid-h2">
                 ${cashbackAmount.toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
-            </div>
+            </Surface>
           </div>
-        </div>
+        </Surface>
 
         <SignedOut>
           <div className="flex flex-col fluid-stack-xs">
@@ -142,7 +147,7 @@ export function ShopPurchaseForm({
         </SignedOut>
 
         <SignedIn>
-          <div className="flex flex-col rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs">
+          <Surface variant="panel" padding="sm" className="flex flex-col gap-2">
             <div className="font-medium text-muted-foreground fluid-caption">Zalogowany jako</div>
             <div className="mt-2 font-semibold text-foreground fluid-copy">
               {user?.emailAddresses[0]?.emailAddress}
@@ -150,7 +155,7 @@ export function ShopPurchaseForm({
             <p className="mt-2 text-muted-foreground fluid-caption">
               Zamówienie zostanie automatycznie powiązane z Twoim kontem.
             </p>
-          </div>
+          </Surface>
         </SignedIn>
       </div>
 

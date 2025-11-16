@@ -58,7 +58,10 @@ function MetricCard({ title, icon, values, unit = "", higherIsBetter = true }: M
   const range = bestValue - worstValue;
 
   return (
-    <Card className="group relative overflow-hidden glass-card transition-all duration-300 hover:border-primary/45 hover:shadow-premium before:absolute before:inset-y-4 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50">
+    <Card
+      variant="elevated"
+      className="group relative overflow-hidden transition-all duration-300 hover:border-primary/45 before:absolute before:inset-y-4 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50"
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-[clamp(0.75rem,1.1vw,1rem)]">
         <CardTitle className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-medium text-muted-foreground transition-colors group-hover:text-foreground">
           {title}
@@ -216,7 +219,10 @@ export function MetricsDashboard({ metrics, regulationCards }: MetricsDashboardP
       {(pricingMetrics.length > 0 || featuresMetrics.length > 0) && (
         <Accordion type="multiple" className="space-y-[clamp(1rem,1.5vw,1.4rem)]">
           {pricingMetrics.length > 0 && (
-            <AccordionItem value="pricing" className="glass-panel px-[clamp(1rem,1.4vw,1.3rem)]">
+            <AccordionItem
+              value="pricing"
+              className="rounded-[1.2rem] border border-border/45 bg-background/80 px-[clamp(1rem,1.4vw,1.3rem)] backdrop-blur transition-all"
+            >
               <AccordionTrigger className="py-[clamp(0.9rem,1.3vw,1.2rem)] hover:no-underline">
                 <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
                   <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)]">
@@ -248,7 +254,10 @@ export function MetricsDashboard({ metrics, regulationCards }: MetricsDashboardP
           )}
 
           {featuresMetrics.length > 0 && (
-            <AccordionItem value="features" className="glass-panel px-[clamp(1rem,1.4vw,1.3rem)]">
+            <AccordionItem
+              value="features"
+              className="rounded-[1.2rem] border border-border/45 bg-background/80 px-[clamp(1rem,1.4vw,1.3rem)] backdrop-blur transition-all"
+            >
               <AccordionTrigger className="py-[clamp(0.9rem,1.3vw,1.2rem)] hover:no-underline">
                 <div className="flex items-center gap-[clamp(0.75rem,1.1vw,1rem)]">
                   <div className="rounded-lg bg-primary/10 p-[clamp(0.6rem,0.9vw,0.75rem)]">
@@ -288,7 +297,7 @@ export function MetricsDashboard({ metrics, regulationCards }: MetricsDashboardP
           {regulationCards.map((company) => (
             <Card
               key={company.id}
-              className="group relative overflow-hidden glass-panel transition-all duration-300 hover:border-primary/45 hover:shadow-premium before:absolute before:inset-y-5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50"
+              className="group relative overflow-hidden rounded-[1.2rem] border border-border/45 bg-background/80 transition-all duration-300 hover:border-primary/45 before:absolute before:inset-y-5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary/20 group-hover:before:bg-primary/50"
             >
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-[clamp(0.55rem,0.8vw,0.7rem)] text-[clamp(0.95rem,0.45vw+0.85rem,1.1rem)]">

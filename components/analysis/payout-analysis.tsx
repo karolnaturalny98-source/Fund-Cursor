@@ -10,6 +10,7 @@ import {
   ChartTooltip,
 } from "@/components/ui/chart";
 import { Badge } from "@/components/ui/badge";
+import { Surface } from "@/components/ui/surface";
 import { getCompareColor } from "@/lib/compare";
 import type { CompanyWithDetails } from "@/lib/types";
 
@@ -221,12 +222,12 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="glass-panel border border-border/60 p-3">
+                          <Surface variant="panel" padding="sm" className="border border-border/60">
                             <p className="font-semibold text-foreground">{data.name}</p>
                             <p className="text-sm text-foreground">
                               {typeof payload[0].value === 'number' ? `${payload[0].value.toFixed(1)} dni` : payload[0].value}
                             </p>
-                          </div>
+                          </Surface>
                         );
                       }
                       return null;
@@ -279,12 +280,12 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="glass-panel border border-border/60 p-3">
+                          <Surface variant="panel" padding="sm" className="border border-border/60">
                             <p className="font-semibold text-foreground">{data.name}</p>
                             <p className="text-sm text-foreground">
                               {typeof payload[0].value === 'number' ? `${payload[0].value.toFixed(1)}%` : payload[0].value}
                             </p>
-                          </div>
+                          </Surface>
                         );
                       }
                       return null;
@@ -355,4 +356,3 @@ export function PayoutAnalysis({ companies }: PayoutAnalysisProps) {
     </div>
   );
 }
-

@@ -5,7 +5,7 @@ import { PremiumBadge } from "@/components/custom/premium-badge";
 export default function SignUpPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
-      <Card className="w-full max-w-md border-gradient bg-gradient-card shadow-premium">
+      <Card variant="gradient" className="w-full max-w-md">
         <CardHeader className="space-y-3 pb-4">
           <div className="flex items-center gap-3">
             <div className="rounded-lg bg-primary/10 p-2 text-primary">
@@ -39,4 +39,3 @@ export default function SignUpPage() {
     </div>
   );
 }
-

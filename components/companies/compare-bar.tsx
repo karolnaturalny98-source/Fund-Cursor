@@ -20,7 +20,7 @@ export function CompareBar() {
   return (
     <div className="safe-area-bottom fixed inset-x-0 bottom-0 z-40 px-4">
       <div className="mx-auto w-full max-w-[min(90vw,520px)]">
-        <Card className="glass-panel shadow-premium">
+        <Card variant="elevated" className="backdrop-blur">
           <CardContent className="flex flex-col gap-[clamp(0.85rem,1.2vw,1.2rem)] p-[clamp(1.15rem,1.6vw,1.5rem)] sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-copy">
               <p className="font-semibold text-foreground">

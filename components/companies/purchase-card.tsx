@@ -12,6 +12,7 @@ import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyCopyMetrics, CompanyPlan } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Surface } from "@/components/ui/surface";
 
 interface PurchaseCardProps {
   companySlug: string;
@@ -98,8 +99,13 @@ export function PurchaseCard({
   }
 
   return (
-    <aside className="glass-card sticky top-6 flex h-fit flex-col gap-[clamp(1rem,1.5vw,1.5rem)] p-[clamp(1.5rem,2vw,1.85rem)]">
-      <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
+    <aside className="sticky top-6 h-fit">
+      <Surface
+        variant="glass"
+        padding="lg"
+        className="flex flex-col gap-[clamp(1rem,1.5vw,1.5rem)]"
+      >
+        <div className="space-y-[clamp(0.6rem,0.9vw,0.85rem)]">
         <p className="text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] font-semibold text-muted-foreground">
           Kod rabatowy
         </p>
@@ -150,7 +156,11 @@ export function PurchaseCard({
       </div>
 
       {showChecklist ? (
-        <div className="glass-panel space-y-[clamp(0.45rem,0.7vw,0.65rem)] border border-emerald-500/30 bg-emerald-500/10 p-[clamp(1rem,1.4vw,1.3rem)] text-emerald-200 fluid-caption">
+        <Surface
+          variant="panel"
+          padding="md"
+          className="space-y-[clamp(0.45rem,0.7vw,0.65rem)] border border-emerald-500/30 bg-emerald-500/10 text-emerald-200 fluid-caption"
+        >
           <p className="flex items-center gap-[clamp(0.5rem,0.8vw,0.7rem)] font-semibold">
             <PremiumIcon icon={CheckCircle} variant="glow" size="sm" className="text-emerald-600" />
             Kod skopiowany. Pamietaj:
@@ -160,11 +170,15 @@ export function PurchaseCard({
             <li>2. Zaloguj sie tym samym mailem co w FundedRank.</li>
             <li>3. Przeslij potwierdzenie w panelu cashback.</li>
           </ul>
-        </div>
+        </Surface>
       ) : null}
 
       {defaultPlan ? (
-        <div className="glass-panel relative overflow-hidden p-[clamp(1.25rem,1.6vw,1.5rem)]">
+        <Surface
+          variant="panel"
+          padding="lg"
+          className="relative overflow-hidden"
+        >
           <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
           <p className="relative text-[clamp(1rem,0.45vw+0.9rem,1.15rem)] font-semibold text-foreground">Najpopularniejszy plan</p>
           <p className="relative mt-[clamp(0.4rem,0.6vw,0.6rem)] fluid-copy text-muted-foreground">{defaultPlan.name}</p>
@@ -181,7 +195,7 @@ export function PurchaseCard({
               ({defaultPlanPricing.originalLabel})
             </p>
           ) : null}
-        </div>
+        </Surface>
       ) : null}
 
       <div className="space-y-[clamp(0.75rem,1.2vw,1.1rem)]">
@@ -201,6 +215,7 @@ export function PurchaseCard({
           </PurchaseButton>
         ) : null}
       </div>
+      </Surface>
     </aside>
   );
 }

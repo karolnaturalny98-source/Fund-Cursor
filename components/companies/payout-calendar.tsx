@@ -88,7 +88,7 @@ export function PayoutCalendar({ company }: PayoutCalendarProps) {
             variant="outline"
             size="icon"
             onClick={previousMonth}
-            className="h-8 w-8 rounded-lg border-border/40 hover:border-gradient-premium hover:bg-gradient-card"
+            className="h-8 w-8 rounded-lg border border-border/40 hover:border-primary/50 hover:bg-primary/10"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -96,7 +96,7 @@ export function PayoutCalendar({ company }: PayoutCalendarProps) {
             variant="outline"
             size="icon"
             onClick={nextMonth}
-            className="h-8 w-8 rounded-lg border-border/40 hover:border-gradient-premium hover:bg-gradient-card"
+            className="h-8 w-8 rounded-lg border border-border/40 hover:border-primary/50 hover:bg-primary/10"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -129,7 +129,7 @@ export function PayoutCalendar({ company }: PayoutCalendarProps) {
                 key={index}
                 className={cn(
                   "group relative flex aspect-square cursor-pointer items-center justify-center rounded-lg border transition-all",
-                  "hover:border-gradient-premium hover:shadow-premium",
+                  "hover:border-primary/50 hover:shadow-[0_30px_65px_-40px_rgba(15,23,42,0.55)]",
                   isToday(day) && "border-primary bg-primary/10 ring-2 ring-primary/20",
                   isPayoutDate(day) && !isToday(day) && "border-emerald-500/30 bg-emerald-500/10",
                   !isToday(day) && !isPayoutDate(day) && "border-border/40 hover:bg-muted/30"

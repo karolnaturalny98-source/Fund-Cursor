@@ -6,6 +6,7 @@ import { PremiumIcon } from "@/components/custom/premium-icon";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Surface } from "@/components/ui/surface";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -45,8 +46,9 @@ export function PersonaCardClient({ persona }: PersonaCardClientProps) {
 
   return (
     <Card
+      variant="gradient"
       className={cn(
-        "group relative h-full overflow-hidden rounded-2xl border-gradient bg-gradient-card shadow-premium transition-all duration-200 hover:border-gradient-premium hover:shadow-premium-lg",
+        "group relative h-full overflow-hidden rounded-2xl transition-all duration-200 hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]",
         colorClasses[persona.color as keyof typeof colorClasses] || colorClasses.sky,
       )}
     >
@@ -74,7 +76,7 @@ export function PersonaCardClient({ persona }: PersonaCardClientProps) {
       </CardContent>
       {persona.planName ? (
         <CardFooter className="pt-0">
-          <div className="flex w-full items-center justify-between rounded-lg border-gradient bg-gradient-card px-3 py-2 shadow-premium">
+          <Surface variant="gradient" padding="sm" className="flex w-full items-center justify-between rounded-lg px-3 py-2">
             <div className="flex-1 min-w-0">
               <p className="text-xs text-muted-foreground">Polecany plan</p>
               <p className="text-sm font-semibold text-foreground">{persona.planName}</p>
@@ -84,10 +86,9 @@ export function PersonaCardClient({ persona }: PersonaCardClientProps) {
                 <PremiumIcon icon={ExternalLink} variant="glow" size="sm" />
               </Link>
             </Button>
-          </div>
+          </Surface>
         </CardFooter>
       ) : null}
     </Card>
   );
 }
-

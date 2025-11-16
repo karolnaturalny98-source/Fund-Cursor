@@ -129,7 +129,8 @@ export function AnalysisLayout({
             {companyCards.map((card) => (
               <Card
                 key={card.id}
-                className="group flex items-center gap-4 rounded-3xl border border-border/60 bg-card/72 backdrop-blur-xl fluid-card-pad-md shadow-xs transition-all hover:border-gradient hover:shadow-premium"
+                variant="elevated"
+                className="group flex items-center gap-4 fluid-card-pad-md transition-all hover:border-primary/40"
               >
                 {card.logoUrl ? (
                   <Avatar className="fluid-avatar-lg rounded-xl border-2 border-primary/20 shadow-md ring-2 ring-primary/10">

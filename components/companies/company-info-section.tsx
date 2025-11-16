@@ -23,7 +23,7 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
   }
 
   return (
-    <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
+    <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]!">
       <CardHeader className="space-y-[clamp(0.5rem,0.75vw,0.7rem)]">
         <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
           <Building2 className="h-[clamp(1.2rem,0.5vw+1rem,1.4rem)] w-[clamp(1.2rem,0.5vw+1rem,1.4rem)] text-primary" />
@@ -115,4 +115,3 @@ export function CompanyInfoSection({ company }: CompanyInfoSectionProps) {
     </Card>
   );
 }
-

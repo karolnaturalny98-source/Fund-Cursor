@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Surface } from "@/components/ui/surface";
 
 interface DiscountCouponProps {
   code: string | null;
@@ -56,10 +57,7 @@ export function DiscountCoupon({
   return (
     <button
       onClick={handleCopy}
-      className={cn(
-        "group relative flex w-full flex-col overflow-hidden rounded-xl border-gradient bg-gradient-card shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg",
-        className,
-      )}
+      className={cn("group", className)}
       aria-label={`Skopiuj kod zniżkowy ${code}`}
     >
       {/* Top section with gradient */}
@@ -70,7 +68,11 @@ export function DiscountCoupon({
       </div>
       
       {/* Bottom section with action */}
-      <div className="flex items-center justify-center gap-2 bg-card/82 px-3 py-2">
+      <Surface
+        variant="gradient"
+        padding="xs"
+        className="flex items-center justify-center gap-2 rounded-xl border border-transparent px-3 py-2"
+      >
         <span
           className={cn(
             "text-[10px] font-bold uppercase tracking-wider text-white",
@@ -89,8 +91,7 @@ export function DiscountCoupon({
             <Copy className="h-1.5 w-1.5 text-white" />
           </div>
         </div>
-      </div>
+      </Surface>
     </button>
   );
 }
-

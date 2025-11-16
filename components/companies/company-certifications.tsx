@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import Link from "next/link";
 import type { CompanyCertification } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 interface CompanyCertificationsProps {
   certifications: CompanyCertification[];
@@ -44,10 +43,8 @@ export function CompanyCertifications({ certifications, withoutCard = false }: C
             return (
               <Card
                 key={cert.id}
-                className={cn(
-                  "group relative overflow-hidden rounded-xl border-gradient bg-gradient-card p-4 shadow-premium transition-all",
-                  "hover:border-gradient-premium hover:shadow-premium-lg",
-                )}
+                variant="gradient"
+                className="group relative overflow-hidden rounded-xl p-4 transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]"
               >
                 {cert.imageUrl ? (
                   <div className="relative mb-3 aspect-video w-full overflow-hidden rounded-lg border border-border/40 bg-muted/20">
@@ -131,7 +128,7 @@ export function CompanyCertifications({ certifications, withoutCard = false }: C
   }
 
   return (
-    <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
+    <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]!">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Award className="h-5 w-5 text-primary" />
@@ -147,4 +144,3 @@ export function CompanyCertifications({ certifications, withoutCard = false }: C
     </Card>
   );
 }
-

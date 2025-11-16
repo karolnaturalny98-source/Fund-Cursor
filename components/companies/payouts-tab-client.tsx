@@ -24,7 +24,10 @@ export function PayoutHighlightCard({ item }: PayoutHighlightCardProps) {
   const Icon = IconMap[item.id] || IconMap.default;
 
   return (
-    <Card className="group relative overflow-hidden rounded-2xl border-gradient bg-gradient-card shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+    <Card
+      variant="gradient"
+      className="group relative overflow-hidden rounded-2xl transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]"
+    >
       <CardHeader className="space-y-3 pb-3">
         <div className="flex items-center gap-3">
           <div className="rounded-lg bg-primary/10 p-2 text-primary transition-colors group-hover:bg-primary/20">
@@ -39,4 +42,3 @@ export function PayoutHighlightCard({ item }: PayoutHighlightCardProps) {
     </Card>
   );
 }
-

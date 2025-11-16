@@ -87,7 +87,7 @@ export function OverviewHeroSection({
   return (
     <div className="grid gap-[clamp(1rem,1.5vw,1.5rem)] lg:grid-cols-3">
       {/* Kolumna 1: Wykres compact + statystyki */}
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]! transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-[clamp(0.65rem,0.9vw,0.85rem)]">
             <TrendingUp className="h-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] text-primary" />
@@ -178,7 +178,7 @@ export function OverviewHeroSection({
 
       {/* Kolumna 2: Alerty ryzyka */}
       {alerts.length > 0 ? (
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]! transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-[clamp(0.65rem,0.9vw,0.85rem)]">
               <AlertTriangle className="h-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] w-[clamp(1.2rem,0.4vw+1.1rem,1.35rem)] text-amber-500" />
@@ -200,7 +200,7 @@ export function OverviewHeroSection({
           </CardContent>
         </Card>
       ) : (
-        <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]!">
+        <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]!">
           <CardContent className="flex h-full items-center justify-center py-8">
             <div className="text-center">
               <PremiumIcon icon={Shield} variant="glow" size="lg" className="mx-auto mb-2 text-primary" />
@@ -212,7 +212,7 @@ export function OverviewHeroSection({
       )}
 
       {/* Kolumna 3: Quick actions */}
-      <Card className="rounded-2xl border-gradient bg-gradient-card shadow-premium backdrop-blur-[36px]! transition-all hover:border-gradient-premium hover:shadow-premium-lg">
+      <Card variant="gradient" className="rounded-2xl backdrop-blur-[36px]! transition-all hover:shadow-[0_35px_80px_-35px_rgba(15,23,42,0.55)]">
         <CardHeader className="pb-3">
           <CardTitle className="text-[clamp(1.05rem,0.5vw+0.95rem,1.25rem)] font-semibold">Szybkie linki</CardTitle>
           <p className="fluid-caption text-muted-foreground">

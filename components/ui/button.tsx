@@ -14,21 +14,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary text-primary-foreground shadow-soft hover:bg-primary/90 hover:shadow-premium focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:translate-y-0",
+          "bg-primary text-primary-foreground shadow-[0_20px_35px_-25px_rgba(15,23,42,0.4)] hover:bg-primary/90 hover:shadow-[0_30px_55px_-30px_rgba(15,23,42,0.45)] active:translate-y-0",
         default:
-          "bg-primary text-primary-foreground shadow-soft hover:bg-primary/90 hover:shadow-premium focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:translate-y-0",
+          "bg-primary text-primary-foreground shadow-[0_20px_35px_-25px_rgba(15,23,42,0.4)] hover:bg-primary/90 hover:shadow-[0_30px_55px_-30px_rgba(15,23,42,0.45)] active:translate-y-0",
         premium:
-          "bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(var(--primary)/0.7)_100%)] text-primary-foreground shadow-glass hover:brightness-115 hover:-translate-y-px hover:shadow-[0_0_18px_hsl(var(--primary)/0.25)] active:translate-y-0",
+          "bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(var(--primary)/0.7)_100%)] text-primary-foreground shadow-[0_25px_55px_-30px_hsl(var(--primary)/0.55)] hover:brightness-115 hover:-translate-y-px hover:shadow-[0_35px_70px_-35px_hsl(var(--primary)/0.6)] active:translate-y-0",
         secondary:
-          "border border-border/60 bg-card/60 text-foreground/90 backdrop-blur-xs hover:bg-card/80 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+          "border border-border/60 bg-card/60 text-foreground/90 backdrop-blur-xs hover:bg-card/80 hover:shadow-[0_20px_35px_-25px_rgba(15,23,42,0.3)] active:translate-y-0",
         outline:
-          "border border-border/70 bg-transparent text-foreground/90 hover:bg-card/40 hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+          "border border-border/70 bg-transparent text-foreground/90 hover:bg-card/40 hover:shadow-[0_18px_30px_-20px_rgba(15,23,42,0.25)] active:translate-y-0",
         "outline-solid":
-          "border border-border/80 bg-transparent text-foreground hover:bg-card/50 hover:border-border hover:shadow-soft focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 active:translate-y-0",
+          "border border-border/80 bg-transparent text-foreground hover:bg-card/50 hover:border-border hover:shadow-[0_18px_30px_-20px_rgba(15,23,42,0.25)] active:translate-y-0",
         ghost:
           "text-muted-foreground hover:text-foreground hover:bg-card/30 focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-soft hover:bg-destructive/85 focus-visible:ring-2 focus-visible:ring-destructive/80 focus-visible:ring-offset-2 active:translate-y-0",
+          "bg-destructive text-destructive-foreground shadow-[0_20px_35px_-25px_rgba(255,82,82,0.5)] hover:bg-destructive/85 active:translate-y-0",
         link: "text-primary underline-offset-4 hover:underline",
         "premium-outline":
           "border-gradient-premium bg-transparent text-primary shadow-glass hover:bg-gradient-button-premium-outline-hover hover:text-primary-foreground hover:-translate-y-px",

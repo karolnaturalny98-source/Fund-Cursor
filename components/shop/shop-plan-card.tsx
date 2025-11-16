@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Surface } from "@/components/ui/surface";
 import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { CompanyWithPlans } from "@/lib/queries/companies";
@@ -27,9 +28,11 @@ export function ShopPlanCard({
 
   return (
     <Card
+      variant={isSelected ? "elevated" : "muted"}
       className={cn(
-        "cursor-pointer transition-all duration-200 hover:border-primary/50 hover:shadow-md hover:scale-[1.02]",
-        isSelected && "border-primary bg-primary/5 shadow-md ring-2 ring-primary/20"
+        "cursor-pointer transition-all duration-200",
+        !isSelected && "hover:border-primary/50 hover:shadow-md",
+        isSelected && "border-primary/60 ring-2 ring-primary/20"
       )}
       onClick={onSelect}
     >
@@ -68,12 +71,12 @@ export function ShopPlanCard({
         </div>
 
         {/* Prominent Cashback Display */}
-        <div
+        <Surface
+          variant={isSelected ? "stats" : "panel"}
+          padding="sm"
           className={cn(
-            "rounded-2xl border fluid-card-pad-sm transition-colors",
-            isSelected
-              ? "border-primary/50 bg-primary/10"
-              : "border-border/60 bg-linear-to-br from-primary/5 to-primary/10",
+            "transition-colors",
+            isSelected ? "border-primary/40 bg-primary/10" : "bg-linear-to-br from-primary/5 to-primary/10"
           )}
         >
           <div className="flex items-center justify-between gap-4">
@@ -98,7 +101,7 @@ export function ShopPlanCard({
               </div>
             )}
           </div>
-        </div>
+        </Surface>
       </div>
     </Card>
   );

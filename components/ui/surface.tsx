@@ -14,6 +14,10 @@ const surfaceVariants = cva(
       variant: {
         default: "bg-card/72 text-foreground backdrop-blur-[28px]!",
         muted: "bg-muted/40 text-foreground/90 backdrop-blur",
+        panel:
+          "border-border/50 bg-[var(--surface-base)]/90 text-foreground shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
+        stats:
+          "border-border/40 bg-[var(--surface-highlight)]/18 text-foreground shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
         glass:
           "border-white/15 bg-white/5 text-white/90 shadow-[0_35px_120px_-45px_rgba(255,255,255,0.85)] backdrop-blur-[42px]",
         ghost: "border-transparent bg-transparent shadow-none",
@@ -23,7 +27,11 @@ const surfaceVariants = cva(
         "pill-muted":
           "rounded-full border-border/50 bg-muted/40 text-muted-foreground shadow-[0_8px_30px_-20px_rgba(15,23,42,0.3)]",
         elevated:
-          "bg-background/80 text-foreground shadow-[0_18px_60px_-35px_rgba(16,24,40,0.55)] backdrop-blur",
+          "bg-background/80 text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] backdrop-blur",
+        gradient:
+          "border-transparent bg-gradient-card text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.4)] backdrop-blur",
+        "gradient-outline":
+          "border-gradient bg-gradient-card text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.4)] backdrop-blur",
       },
       padding: {
         none: "p-0",

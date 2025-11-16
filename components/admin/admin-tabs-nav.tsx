@@ -58,12 +58,12 @@ export function AdminTabsNav({ tabs }: AdminTabsNavProps) {
           <TabsTrigger
             key={tab.value}
             value={tab.value}
-            className={cn(
-              "group relative inline-flex min-w-[clamp(7.5rem,12vw,9.5rem)] items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)] rounded-full border px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.55rem,0.8vw,0.75rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all",
-              "border-transparent bg-muted/30 text-muted-foreground",
-              "data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-              "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium"
-            )}
+      className={cn(
+        "group relative inline-flex min-w-[clamp(7.5rem,12vw,9.5rem)] items-start justify-between gap-[clamp(0.55rem,0.85vw,0.8rem)] rounded-full border px-[clamp(1rem,1.6vw,1.35rem)] py-[clamp(0.55rem,0.8vw,0.75rem)] text-[clamp(0.85rem,0.35vw+0.75rem,0.95rem)] font-semibold transition-all",
+        "border-transparent bg-muted/30 text-muted-foreground",
+        "data-[state=inactive]:hover:border-primary/40 data-[state=inactive]:hover:bg-primary/10 data-[state=inactive]:hover:shadow-[0_30px_65px_-40px_rgba(15,23,42,0.45)]",
+        "data-[state=active]:border-primary/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]"
+      )}
           >
             <div className="flex w-full items-center justify-between gap-[clamp(0.45rem,0.7vw,0.65rem)]">
               <span className="font-medium text-[clamp(0.88rem,0.35vw+0.78rem,0.98rem)]">{tab.label}</span>

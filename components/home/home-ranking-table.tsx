@@ -6,6 +6,7 @@ import { ArrowUpRight, Star, Trophy, Medal } from "lucide-react";
 import type { HomeRankingCompany } from "@/lib/queries/companies";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
+import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
@@ -193,14 +194,14 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
 
   if (companiesToShow.length === 0) {
     return (
-      <div className="glass-card card-outline p-8 text-center">
+      <Card variant="default" className="p-8 text-center">
         <p className="text-muted-foreground fluid-copy">Brak firm do wyświetlenia.</p>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div className="glass-card card-outline overflow-hidden">
+    <Card variant="default" className="overflow-hidden">
       <div className="-mx-2 overflow-x-auto md:mx-0">
         <Table className="min-w-full table-fixed" aria-label="Ranking premium">
           <TableHeader className="bg-card/48">
@@ -233,6 +234,6 @@ export function HomeRankingTable({ companies }: HomeRankingTableProps) {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </Card>
   );
 }

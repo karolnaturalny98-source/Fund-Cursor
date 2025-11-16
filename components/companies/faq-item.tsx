@@ -20,8 +20,8 @@ export function FaqItem({ id: _id, question, answer, companySlug: _companySlug, 
     <AccordionItem
       value={value}
       className={cn(
-        "group rounded-2xl border-gradient bg-gradient-card p-4 text-sm shadow-premium transition-all hover:border-gradient-premium hover:shadow-premium-lg",
-        "border-b-0 data-[state=open]:border-gradient-premium"
+        "group rounded-2xl border border-border/50 bg-gradient-card p-4 text-sm shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)] transition-all",
+        "border-b-0 data-[state=open]:border-primary/50"
       )}
     >
       <AccordionTrigger className="cursor-pointer list-none font-medium text-foreground hover:no-underline [&[data-state=open]>svg]:rotate-180">

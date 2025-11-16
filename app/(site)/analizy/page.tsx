@@ -7,12 +7,47 @@ import { CompanySelector } from "@/components/analysis/company-selector";
 import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton";
 import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
+import { Surface } from "@/components/ui/surface";
 
 export const metadata: Metadata = {
   title: "Analizy Firm | FundedRank",
   description:
     "Zaawansowane narzędzie do porównywania firm prop tradingowych. Analizuj ceny, plany, opinie i wiele więcej.",
 };
+
+const ANALYSIS_FEATURES = [
+  {
+    icon: TrendingUp,
+    title: "Ceny i Historia",
+    description:
+      "Porównaj ceny planów, śledź zmiany historyczne i znajdź najlepsze oferty.",
+  },
+  {
+    icon: FileText,
+    title: "Warunki Handlowe",
+    description: "Analizuj maksymalne obciążenie, cele zysku, dźwignię i inne parametry.",
+  },
+  {
+    icon: Award,
+    title: "Opinie i Oceny",
+    description: "Zobacz średnie oceny, rozkład opinii i rekomendacje użytkowników.",
+  },
+  {
+    icon: BarChart3,
+    title: "Metryki Kluczowe",
+    description: "Porównaj cashback, liczbę planów, metody płatności i dostępne instrumenty.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Wypłaty",
+    description: "Analizuj częstotliwość wypłat, czas oczekiwania i podział zysków.",
+  },
+  {
+    icon: Award,
+    title: "Profile Firm",
+    description: "Sprawdź regulacje, licencje, zespoły i certyfikaty bezpieczeństwa.",
+  },
+];
 
 async function CompanySelectorWrapper() {
   const companies = await getCompanyOptions();
@@ -86,65 +121,20 @@ export default async function AnalizyPage() {
           <h2 className="text-center font-bold text-foreground fluid-h2">Co możesz analizować?</h2>
 
           <div className="grid fluid-stack-sm sm:grid-cols-2 lg:grid-cols-3">
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <TrendingUp className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Ceny i Historia</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Porównaj ceny planów, śledź zmiany historyczne i znajdź najlepsze oferty.
-              </p>
-            </div>
-
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <FileText className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Warunki Handlowe</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Analizuj maksymalne obciążenie, cele zysku, dźwignię i inne parametry.
-              </p>
-            </div>
-
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <Award className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Opinie i Oceny</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Zobacz średnie oceny, rozkład opinii i rekomendacje użytkowników.
-              </p>
-            </div>
-
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <BarChart3 className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Metryki Kluczowe</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Porównaj cashback, liczbę planów, metody płatności i dostępne instrumenty.
-              </p>
-            </div>
-
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <TrendingUp className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Wypłaty</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Analizuj częstotliwość wypłat, czas oczekiwania i podział zysków.
-              </p>
-            </div>
-
-            <div className="flex flex-col fluid-stack-sm rounded-2xl border border-border/60 bg-card/72 fluid-card-pad-sm shadow-xs transition-all hover:shadow-md backdrop-blur-xl">
-              <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
-                <Award className="fluid-icon-md text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground fluid-copy">Profile Firm</h3>
-              <p className="text-muted-foreground fluid-caption">
-                Sprawdź regulacje, licencje, zespoły i certyfikaty bezpieczeństwa.
-              </p>
-            </div>
+            {ANALYSIS_FEATURES.map(({ icon: Icon, title, description }) => (
+              <Surface
+                key={title}
+                variant="panel"
+                padding="lg"
+                className="flex flex-col fluid-stack-sm transition-all hover:border-primary/40"
+              >
+                <div className="flex items-center justify-center fluid-icon-card bg-primary/10">
+                  <Icon className="fluid-icon-md text-primary" />
+                </div>
+                <h3 className="font-semibold text-foreground fluid-copy">{title}</h3>
+                <p className="text-muted-foreground fluid-caption">{description}</p>
+              </Surface>
+            ))}
           </div>
         </div>
       </Section>

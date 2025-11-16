@@ -31,8 +31,8 @@ const TabsTrigger = React.forwardRef<
     className={cn(
       "group inline-flex min-w-[clamp(7.5rem,11vw,9rem)] items-center justify-between whitespace-nowrap rounded-full border font-semibold transition-all duration-200 gap-[clamp(0.294rem,0.672vw,0.504rem)] h-[clamp(1.89rem,1.092vw+1.512rem,2.1rem)] px-[clamp(0.84rem,1.176vw+0.63rem,1.26rem)] text-[clamp(0.63rem,0.336vw+0.546rem,0.714rem)]",
       "border-transparent bg-muted/30 text-muted-foreground",
-      "data-[state=inactive]:text-muted-foreground/80 data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-gradient data-[state=inactive]:hover:bg-gradient-card data-[state=inactive]:hover:shadow-premium",
-      "data-[state=active]:border-gradient-premium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-premium",
+      "data-[state=inactive]:text-muted-foreground/80 data-[state=inactive]:hover:text-foreground data-[state=inactive]:hover:border-primary/40 data-[state=inactive]:hover:bg-primary/10 data-[state=inactive]:hover:shadow-[0_30px_65px_-40px_rgba(15,23,42,0.45)]",
+      "data-[state=active]:border-primary/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45)]",
       className,
     )}
     {...props}

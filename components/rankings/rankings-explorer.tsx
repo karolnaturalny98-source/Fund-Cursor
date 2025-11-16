@@ -793,9 +793,13 @@ export function RankingsExplorer({
             </p>
 
             {error ? (
-              <div className="rounded-3xl border border-destructive/40 bg-destructive/10 px-5 py-3 text-sm text-destructive">
+              <Surface
+                variant="outline"
+                padding="md"
+                className="rounded-3xl border-destructive/40 bg-destructive/10 text-sm text-destructive"
+              >
                 {error}
-              </div>
+              </Surface>
             ) : null}
 
             <div className="flex items-center justify-between gap-[clamp(0.85rem,1.2vw,1.25rem)]">
@@ -895,7 +899,7 @@ function FilterPanel({
   }
 
   return (
-    <Card className="rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs">
+    <Card variant="elevated" className="rounded-3xl backdrop-blur-xl">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)] text-[clamp(1.05rem,0.6vw+0.95rem,1.25rem)] font-semibold">
           <Filter className="h-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] w-[clamp(1.2rem,0.5vw+1.05rem,1.35rem)] text-primary" />
@@ -949,15 +953,19 @@ function FilterPanel({
           onSubmit={(event) => event.preventDefault()}
         >
           <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
-            <div className="relative min-w-[220px] flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] -translate-y-1/2 text-muted-foreground" />
+            <Surface
+              variant="panel"
+              padding="sm"
+              className="flex min-w-[220px] flex-1 items-center gap-3"
+            >
+              <Search className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] text-muted-foreground" />
               <Input
                 value={searchDraft}
                 onChange={(event) => onSearchDraftChange(event.target.value)}
                 placeholder="Szukaj firmy po nazwie lub slugu..."
-                className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] rounded-full border border-border/60 bg-card/72 backdrop-blur-[36px]! pl-9 shadow-xs text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)]"
+                className="h-auto flex-1 border-0 bg-transparent p-0 text-[clamp(0.95rem,0.4vw+0.85rem,1.05rem)] shadow-none focus-visible:ring-0"
               />
-            </div>
+            </Surface>
             <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
               <FilterSelect
                 label="Kraj"
@@ -1014,17 +1022,19 @@ function FilterPanel({
           <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
             <label className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground fluid-copy">
               Min. opinii
-              <Input
-                type="number"
-                min={0}
-                value={filters.minReviews}
-                onChange={(event) =>
-                  onFiltersChange({
-                    minReviews: Math.max(0, Number(event.target.value) || 0),
-                  })
-                }
-                className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] w-24 rounded-full border-border/60 text-center text-[clamp(0.9rem,0.35vw+0.8rem,1rem)]"
-              />
+              <Surface asChild variant="panel" padding="xs" className="w-24">
+                <Input
+                  type="number"
+                  min={0}
+                  value={filters.minReviews}
+                  onChange={(event) =>
+                    onFiltersChange({
+                      minReviews: Math.max(0, Number(event.target.value) || 0),
+                    })
+                  }
+                  className="h-auto border-none bg-transparent p-0 text-center text-[clamp(0.9rem,0.35vw+0.8rem,1rem)] shadow-none focus-visible:ring-0"
+                />
+              </Surface>
             </label>
             <Surface asChild variant="pill-muted" padding="pill">
               <label className="flex cursor-pointer items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground transition hover:text-foreground fluid-caption">
@@ -1082,14 +1092,18 @@ function FilterSelect({
   icon?: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <div className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)]">
+    <Surface
+      variant="panel"
+      padding="sm"
+      className="flex items-center gap-[clamp(0.6rem,0.9vw,0.85rem)] w-[clamp(10.5rem,14vw,12.5rem)]"
+    >
       {Icon && (
         <div className="rounded-lg bg-primary/10 p-[clamp(0.55rem,0.8vw,0.7rem)] text-primary">
           <Icon className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
         </div>
       )}
       <Select value={value || "all"} onValueChange={(val) => onChange(val === "all" ? "" : val)}>
-        <SelectTrigger className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] w-[clamp(10.5rem,14vw,12.5rem)] rounded-full border-border/60 bg-background/60 text-[clamp(0.9rem,0.35vw+0.8rem,1rem)]">
+        <SelectTrigger className="h-auto flex-1 border-none bg-transparent p-0 text-[clamp(0.9rem,0.35vw+0.8rem,1rem)] shadow-none focus:ring-0 focus-visible:ring-0">
           <SelectValue placeholder={label} />
         </SelectTrigger>
         <SelectContent>
@@ -1101,7 +1115,7 @@ function FilterSelect({
           ))}
         </SelectContent>
       </Select>
-    </div>
+    </Surface>
   );
 }
 function RankingDesktopTable({
@@ -1123,7 +1137,13 @@ function RankingDesktopTable({
           <span>Odświeżanie danych...</span>
         </div>
       )}
-      <div className={`overflow-hidden rounded-3xl border border-border/60 bg-card/72 backdrop-blur-[36px]! shadow-xs ${loading && items.length > 0 ? "opacity-60" : ""}`}>
+      <Card
+        variant="elevated"
+        className={cn(
+          "overflow-hidden rounded-3xl",
+          loading && items.length > 0 ? "opacity-60" : "",
+        )}
+      >
         <div className="max-h-[70vh] overflow-x-auto">
           <Table className="min-w-full table-fixed" aria-busy={loading}>
             <TableHeader className="bg-card/82">
@@ -1199,7 +1219,7 @@ function RankingDesktopTable({
             </TableBody>
           </Table>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }

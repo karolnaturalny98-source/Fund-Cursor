@@ -5,6 +5,7 @@ import { ShopCompanyCards } from "./shop-company-cards";
 import { ShopPlanCard } from "./shop-plan-card";
 import { ShopPurchaseForm } from "./shop-purchase-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Surface } from "@/components/ui/surface";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useFadeIn } from "@/lib/animations";
@@ -93,18 +94,18 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
 
         {/* Stats */}
         <div className="mx-auto grid max-w-3xl grid-cols-3 fluid-stack-sm">
-          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+          <Surface variant="stats" padding="lg" className="text-center">
             <div className="font-semibold text-foreground fluid-h2">{totalCompanies}</div>
             <div className="text-muted-foreground fluid-caption">Firm</div>
-          </div>
-          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+          </Surface>
+          <Surface variant="stats" padding="lg" className="text-center">
             <div className="font-semibold text-foreground fluid-h2">{totalPlans}</div>
             <div className="text-muted-foreground fluid-caption">Planów</div>
-          </div>
-          <div className="rounded-2xl border border-border/40 bg-background/60 fluid-card-pad-md shadow-xs transition-all hover:border-border/60 hover:bg-card/66 backdrop-blur-[36px]!">
+          </Surface>
+          <Surface variant="stats" padding="lg" className="text-center">
             <div className="font-semibold text-primary fluid-h2">{avgCashback}%</div>
             <div className="text-muted-foreground fluid-caption">Śr. cashback</div>
-          </div>
+          </Surface>
         </div>
       </div>
 
@@ -125,7 +126,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-6 lg:mt-8">
-          <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+          <Card variant="elevated">
             <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz firmę</CardTitle>
               <CardDescription className="fluid-caption">
@@ -147,7 +148,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
       {selectedCompany && (
         <>
           <Separator />
-          <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+          <Card variant="elevated">
             <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Wybierz plan</CardTitle>
               <CardDescription className="fluid-caption">
@@ -175,7 +176,7 @@ export function ShopPageClient({ companies, userId }: ShopPageClientProps) {
       {selectedPlan && selectedCompany && (
         <>
           <Separator />
-          <Card className="border-border/60 bg-card/72 shadow-xs backdrop-blur-[36px]!">
+          <Card variant="elevated">
             <CardHeader className="p-4 pb-2">
               <CardTitle className="font-semibold text-foreground fluid-copy">Kup teraz</CardTitle>
               <CardDescription className="fluid-caption">
