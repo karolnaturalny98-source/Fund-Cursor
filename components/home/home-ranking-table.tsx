@@ -141,7 +141,7 @@ function CompanyRow({
               asChild
               variant="body"
               weight="semibold"
-              className="text-foreground transition-colors hover:text-primary"
+              className="text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:text-primary focus-visible:underline"
             >
               <Link href={profileHref} prefetch={false}>
                 {company.name}

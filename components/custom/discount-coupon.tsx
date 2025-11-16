@@ -56,8 +56,12 @@ export function DiscountCoupon({
 
   return (
     <button
+      type="button"
       onClick={handleCopy}
-      className={cn("group", className)}
+      className={cn(
+        "group block overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        className,
+      )}
       aria-label={`Skopiuj kod zniżkowy ${code}`}
     >
       {/* Top section with gradient */}
@@ -71,9 +75,11 @@ export function DiscountCoupon({
       <Surface
         variant="gradient"
         padding="xs"
-        className="flex items-center justify-center gap-2 rounded-xl border border-transparent px-3 py-2"
+        className="flex items-center justify-center gap-2 border border-transparent px-3 py-2"
       >
         <span
+          role="status"
+          aria-live="polite"
           className={cn(
             "text-[10px] font-bold uppercase tracking-wider text-white",
             "glitch-text",

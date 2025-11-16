@@ -447,3 +447,10 @@ Wprowadzić dedykowane komponenty `Heading` (z propsami `level` i `variant`/`ton
   - ✔️ Dodanie zasad użycia `Heading`/`Text` do `project.mdc` (sekcja Coding Style + changelog).
 
 Wynik: audyt zakończony, lista pozostałych miejsc zanotowana, a zasady zapobiegania regresjom dopisane w tym pliku.
+
+## Final summary
+
+- Design system jest scalony: Button/Badge/Section/Card/Text zapewniają wszystkie wcześniej zdublowane warianty (gradient, pill, chip, stack), a formularze korzystają z kontrolowanych komponentów (`Field`, `Checkbox`, `Select`), więc nowe funkcje nie muszą sięgać po utilsy `fluid-*`.
+- Legacy utilsy i globalne hacki zostały ograniczone do tokenów typografii/spacingu; `app/globals.css` nie zawiera już komponentów-utility, a ostatnie użycia (`fluid-pill`, `gradient-button`, `shadow-premium`) zostały zastąpione wariantami UI kit-u.
+- Wizualne chipy/filtry są semantycznymi przyciskami (`Badge`/`PremiumBadge`), wszystkie selecty/checkboxy mają spójne hover/focus states, a spacing sekcji został przeniesiony do `Section stack` + `Heading/Text`.
+- Etap final polish dopina szczegóły: `components/custom/discount-coupon.tsx` dostał poprawny `type="button"` + ring focus, linki w `components/home/home-ranking-table.tsx` i `components/home/community-highlights-animated.tsx` mają teraz takie same stany hover/focus jak CTA, a tekstowe metadane recenzji układają się responsywnie bez ręcznych marginesów.

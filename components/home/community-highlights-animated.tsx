@@ -94,7 +94,10 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
                 ) : null}
               </div>
           <CardTitle className="text-[clamp(1rem,0.6vw+0.9rem,1.3rem)] font-semibold text-foreground">
-                <Link href={`/firmy/${review.company.slug}`} className="hover:underline">
+                <Link
+                  href={`/firmy/${review.company.slug}`}
+                  className="hover:underline focus-visible:outline-none focus-visible:text-primary focus-visible:underline"
+                >
                   {review.company.name}
                 </Link>
               </CardTitle>
@@ -109,13 +112,13 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
             asChild
             variant="caption"
             tone="muted"
-            className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground"
+            className="flex flex-wrap items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground"
           >
                 <div>
                   {review.tradingStyle ? <span>Styl: {review.tradingStyle}</span> : null}
-                  {review.timeframe ? <span className="ml-3">Interwał: {review.timeframe}</span> : null}
+                  {review.timeframe ? <span>Interwał: {review.timeframe}</span> : null}
                   {typeof review.monthsWithCompany === "number" ? (
-                    <span className="ml-3">{review.monthsWithCompany} mies. z firmą</span>
+                    <span>{review.monthsWithCompany} mies. z firmą</span>
                   ) : null}
                 </div>
               </Text>
@@ -139,13 +142,15 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
             asChild
             variant="caption"
             tone="muted"
-            className="flex items-center justify-between text-muted-foreground/80"
+            className="flex flex-col gap-1 text-muted-foreground/80 sm:flex-row sm:items-center sm:justify-between"
           >
                 <div>
                   <span className="font-semibold text-foreground">
                     {review.user?.displayName ?? `@${review.user?.clerkId ?? "anon"}`}
                   </span>
-                  <span>{dateFormatter.format(new Date(review.publishedAt ?? review.createdAt))}</span>
+                  <span className="text-muted-foreground/70">
+                    {dateFormatter.format(new Date(review.publishedAt ?? review.createdAt))}
+                  </span>
                 </div>
               </Text>
             </CardContent>
