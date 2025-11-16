@@ -4,7 +4,7 @@ import { SiteNavbar } from "@/components/layout/site-navbar";
 
 export default function MarketingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#050505] text-white">
+    <div className="flex min-h-screen flex-col bg-[var(--surface-base)] text-foreground">
       <SiteNavbar />
       <main className="flex-1">{children}</main>
     </div>

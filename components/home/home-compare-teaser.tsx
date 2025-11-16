@@ -23,7 +23,11 @@ export function HomeCompareTeaser({ companies }: HomeCompareTeaserProps) {
 
   return (
     <Section size="lg" stack="lg">
-      <SurfaceCard variant="glass" padding="lg" className="flex flex-col gap-10 border border-white/10 bg-[#080808]">
+      <SurfaceCard
+        variant="glass"
+        padding="lg"
+        className="flex flex-col gap-10 border border-border/40 bg-[var(--surface-muted)]/75"
+      >
         <SectionHeader
           eyebrow="Porównywarka"
           title="Porównaj 2–3 firmy jednocześnie"
@@ -52,7 +56,11 @@ export function HomeCompareTeaser({ companies }: HomeCompareTeaserProps) {
 
 function CompareCard({ company }: { company: HomeRankingCompany }) {
   return (
-    <SurfaceCard variant="glass" padding="md" className="flex flex-col gap-4 border border-white/10 bg-[#0b0b0b]">
+    <SurfaceCard
+      variant="glass"
+      padding="md"
+      className="flex flex-col gap-4 border border-border/40 bg-[var(--surface-muted)]/80"
+    >
       <div className="flex items-center justify-between">
         <Text variant="body" weight="semibold">
           {company.name}

@@ -29,7 +29,7 @@ export function HomeMarketingSpotlights({ section }: HomeMarketingSpotlightsProp
         eyebrowTone="accent"
       />
 
-      <div className="rounded-[32px] border border-white/5 bg-[#080808] p-6">
+    <div className="rounded-[32px] border border-border/40 bg-[var(--surface-muted)]/70 p-6">
         <div className="grid gap-6 md:grid-cols-3">
           {section.spotlights.slice(0, 6).map((spotlight) => (
             <SpotlightCard key={spotlight.id} spotlight={spotlight} />
@@ -52,7 +52,7 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
     <SurfaceCard
       variant="glass"
       padding="md"
-      className="flex h-full flex-col justify-between gap-5 border border-white/10 bg-[#0b0b0b] hover:border-white/30"
+      className="flex h-full flex-col justify-between gap-5 border border-border/40 bg-[var(--surface-muted)]/80 hover:border-primary/40"
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -76,7 +76,7 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
         </div>
         <div className="flex items-center gap-3">
           {spotlight.company?.logoUrl ? (
-            <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/10 bg-[#050505]">
+          <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-border/40 bg-[var(--surface-base)]">
               <Image src={spotlight.company.logoUrl} alt={spotlight.company.name} fill sizes="40px" className="object-contain" />
             </div>
           ) : null}

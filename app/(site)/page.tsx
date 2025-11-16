@@ -44,7 +44,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <CompareProvider initialSelection={selection}>
-      <div className="relative min-h-screen bg-[#050505]">
+    <div className="relative min-h-screen bg-[var(--surface-muted)]">
         <div className="relative z-10 flex flex-col gap-[clamp(2rem,3vw,3.5rem)] py-[clamp(2rem,3vw,4rem)]">
           <HomeHero metrics={metrics} />
           <HomeRankingSection tabs={rankingTabs} />

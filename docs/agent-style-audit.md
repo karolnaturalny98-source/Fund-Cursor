@@ -461,7 +461,8 @@ Wynik: audyt zakończony, lista pozostałych miejsc zanotowana, a zasady zapobie
 ## Problem: niespójne kolory tła, kart i obramowań
 
 - **Layout vs. tokens:** `app/(site)/layout.tsx:5-10` i `app/(site)/page.tsx:45-58` owijają całą marketingową ścieżkę w `bg-[#050505]`, mimo że `body` w `app/globals.css` korzysta z `bg-background` i że design tokens z `theme.css.md` dostarczają `background`/`surface-*`. W efekcie hero i kolejne sekcje nie „opisują” się stopniami tej samej palety, tylko każda wiedzie własną ciemną nóżkę, co utrudnia dodanie np. „podbitej” sekcji (każda wymaga nowego hexa).
-- **Brak tokenowego dna w header/footer:** `components/layout/site-navbar.tsx:31-86`, `components/layout/site-header.tsx:21-136` oraz `components/layout/site-footer.tsx:80-205` stosują `bg-[#050505]`, `bg-[#080808]`, `bg-[#0a0a0a]`, `bg-black/60` i `border-white/10`/`border-white/15` zamiast `bg-[var(--surface-base/muted)]` i `border-border`. Nawigacja, nagłówek i stopka są warstwą, która nie dzieli „wagi” z `Section`/`Surface`, więc cały układ hero/CTA wygląda jak osobny produkt nałożony na SPA, a nie jak kolejny segment tej samej palety.
+- **Brak tokenowego dna w header/footer:** `components/layout/site-navbar.tsx:31-86`, `components/layout/site-header.tsx:21-136` oraz `components/layout/site-footer.tsx:80-205` stosują `bg-[#050505]`, `bg-[#080808]`, `bg-[#0a0a0a]`, `bg-black/60` i `border-white/10`/`border-white/15` zamiast `bg-[var(--surface-base)]`
+ i `border-border`. Nawigacja, nagłówek i stopka są warstwą, która nie dzieli „wagi” z `Section`/`Surface`, więc cały układ hero/CTA wygląda jak osobny produkt nałożony na SPA, a nie jak kolejny segment tej samej palety.
 - **Karty z home:** `components/home/home-marketing-spotlights.tsx:23-102`, `components/home/home-compare-teaser.tsx:24-90`, `components/home/top-cashback-section.tsx:30-105` i `components/home/live-cashback-banner.tsx:47-74` dokładają do `SurfaceCard`/`Surface` klasy `bg-[#080808]`, `bg-[#0b0b0b]`, `bg-[#090909]`, `bg-[#050505]` i `border border-white/10`. Takie ręczne wartości pomijają glass/muted surface i sprawiają, że identyczne layoutowo bloki mają różne „ciemności” oraz inne cienie – efekt jest taki, że porównywarka, spotlights i cashback mają różne wizualne wagi mimo tej samej hierarchii.
 - **Tokeny robią pętlę:** `app/globals.css:20-38` definiuje `--surface-*` jako mieszanki tokenów, ale `app/globals.css:305-360` ponownie ustawia `--background`, `--card`, `--primary`, `--muted` itd. na konkretne HSL, a `app/globals.css:398-405` zostawia stare `.page-shell`/`.section-shell`. W praktyce mamy dwa „źródła prawdy” (TweakCN vs. dole w CSS) i żadne nie zniechęca do hardcodowania `bg-[#...]` – skoro można ustawić własny `--background`, łatwo pomylić się co jest głównym planem kolorystycznym. Widok: `body` odwołuje się do nowej wartości, a komponenty samodzielnie decydują, czy wziąć `bg-card` czy ciemniejszy heks, więc wygląd jest niespójny.
 - **Stan pozostałych stron:** każda pozostała marketingowa ścieżka trzyma się tokenów:
@@ -480,6 +481,52 @@ Wynik: audyt zakończony, lista pozostałych miejsc zanotowana, a zasady zapobie
   3. **Wyróżnione karty/CTA:** używamy istniejących wariantów (`Surface`/`Card` z `variant="gradient"|"stats"` albo `className` z `bg-primary/10`, `border-primary/50`, `shadow-premium`) dla ważnych akcji i statystyk. To powoduje wzrost kontrastu bez mieszania heksów, ponieważ możemy zmieniać tylko `variant`/`className`, nie wymyślać nowego `bg-[#...]`.
 
 Wynik: celem audytu jest zidentyfikowanie miejsc, gdzie stosujemy własne hexy i białe obramowania zamiast tokenów, oraz ustalenie wspólnego tonu dla sekcji, kart i CTA. Rekomendacja: przejść przez powyższe pliki, zastąpić `bg-[#...]` klasami z `Card`/`Surface` i usuwać drugie definicje tokenów w `app/globals.css`.
+
+## Plan refaktoru kolorów tła, kart i obramowań
+
+### Iteracja 1: Ujednolicenie warstwy layout/header/footer
+- **Zakres i cel:** zmiana bazowej klasy `bg-[#050505]` w `app/(site)/layout.tsx`, usunięcie ciemnych heksów w `site-navbar.tsx`, `site-header.tsx` i `site-footer.tsx`, oraz zastąpienie `border-white/*` tokenem `border-border`. Chcemy zbudować wspólny fundament kolorystyczny – header/nav/footer powinny korzystać z `var(--surface-muted)`/`var(--surface-base)` zamiast własnych heksów.
+- **Uzasadnienie:** to jedyne miejsca, gdzie poza kartami pojawiają się czarne, nieopisane kolory; zmiana sprawi, że hero/sekcje będą po prostu kolejną warstwą palety tokenów.
+- **Pliki:** `app/(site)/layout.tsx`, `components/layout/site-navbar.tsx`, `components/layout/site-header.tsx`, `components/layout/site-footer.tsx`.
+- **Typ zmian:** zamiana hexowych `bg-[#...]`/`bg-black/*` i `border-white/*` na `bg-[var(--surface-base)]`/`bg-[var(--surface-muted)]`/`bg-transparent` z `border-border`; zachowanie stylów gradientowych buttonów, ale opakowanie ich w `Button`/`Badge` z tokenami.
+- **Dlaczego bezpieczna:** zmiany dotykają wyłącznie klas CSS w komponentach layoutu; nie ingerują w logikę (AGENTS: pracujemy tylko na componentach/layoutach), nie trzeba aktualizować backendu, a efekt widać od razu w nagłówku bez ryzyka zwrotu.
+
+### Iteracja 2: Konsolidacja kolorów hero i home cards
+- **Zakres i cel:** zastąpić `bg-[#080808]`, `bg-[#0b0b0b]`, `bg-[#090909]`, `bg-[#050505]` oraz `border-white/10` w `components/home/home-marketing-spotlights.tsx`, `home-compare-teaser.tsx`, `top-cashback-section.tsx`, `live-cashback-banner.tsx` klasami Surface/Card korzystającymi z tokenów (np. `bg-card/72`, `bg-[var(--surface-muted)]/80`) i ujednoliconym `border-border/60`.
+- **Uzasadnienie:** znajdując się zaraz pod headerem, te sekcje powinny najczęściej dziedziczyć ten sam „podbity” odcień; obecnie każda narzuca własny poziom ciemności, co psuje wizualną hierarchię.
+- **Pliki:** wymienione komponenty home.
+- **Typ zmian:** zamiana hexów na tokeny (`bg-card`, `bg-[var(--surface-muted)]`, `bg-[var(--surface-elevated)]`), ujednolicenie borderów (zamiast `border-white/10` korzystać z `border-border/60`), obniżenie nadrzędnego `text-white` do `text-foreground` tam, gdzie nie jest potrzebne (np. opis).
+- **Dlaczego bezpieczna:** zmiany ograniczone do klas wizualnych w komponentach home, nie wpływają na dane ani logikę; wprowadzenie tokenów daje natychmiastowy efekt bez refaktoru JS/TS.
+
+### Wykonane – Iteracja 2 (home cards)
+- **Co:** `components/home/home-marketing-spotlights.tsx`, `home-compare-teaser.tsx`, `top-cashback-section.tsx`, `live-cashback-banner.tsx` przestawiły się z `bg-[#0something]` i `border-white/*` na tokenowe `bg-[var(--surface-muted)]`/`bg-[var(--surface-base)]` i `border-border/*`; badge/hero/Linki w tych sekcjach nadal są czytelne dzięki zachowaniu białych tekstów, ale tła pochodzą już z `surface-muted/base`.
+- **Dlaczego:** dzięki temu wszystkie key home cardy używają tego samego poziomu ciemności i cienia, a nie wariują: porównywarka, spotlights, cashback i hero wyglądają spójnie względem nowych layout/headerów.
+
+### Iteracja 3: Usunięcie duplikatów tokenów w app/globals.css
+- **Zakres i cel:** wyczyścić nadmiarowe definicje HSL w dolnej części `app/globals.css`, zostawić tylko te generowane przez `theme.css.md`/Tailwind i ewentualnie przenieść `--surface-*`, `.page-shell`, `.section-shell` do jednego miejsca, żeby jasno wiedzieć, które tokeny należy odnosić w komponentach.
+- **Uzasadnienie:** duplikaty `@layer utilities :root` wprowadzają redundantną „drugą paletę”, więc łatwo o lokalne heksy – usuwając je, zmusimy wszystkie komponenty do odwołania do jednego źródła.
+- **Pliki:** `app/globals.css` (sekcje `:root` w `@layer utilities` i `.page-shell`, `.section-shell`).
+- **Typ zmian:** usunięcie powtórzeń `--background`, `--card`, `--primary`, `--muted`, `--surface-glass`, pozostawienie jedynie potrzebnych utility (np. `.section-shell` → dopasować do Section); ewentualnie dodać komentarz, że tokeny pochodzą z `theme.css.md`.
+- **Dlaczego bezpieczna:** dotyczy wyłącznie definicji CSS w jednym pliku; usunięcie duplikatów nie zmienia faktycznego wyglądu, jeśli pozostawimy to samo HSL – ale ułatwia przyszłe odwołania i zapobiega kolejnym hardkodom (zgodne z rule „nie mieszamy design tokenów”).
+
+### Wykonane – Iteracja 3 (duplikaty tokenów)
+- **Co:** zredukowano `app/globals.css`, usuwając wtórny `@layer utilities` z powtórzonymi `:root`/`.dark` definicjami (kolory bazowe teraz pochodzą tylko z `theme.css.md`), dzięki czemu nie ma już dwóch źródeł prawdy; `.page-shell`/`.section-shell` nadal istnieją w `@layer base`, więc spacingy nie ucierpiały.
+- **Dlaczego:** eliminacja poprzedniego bloku zabrała marynę do doklejania kolejnych heksów – teraz każdy komponent musi sięgnąć po wspólne tokeny, co ułatwia utrzymanie spójności w kolejnych iteracjach.
+
+### Iteracja 4: Weryfikacja i drobne poprawki na reszcie stron
+- **Zakres i cel:** przetestować wszystkie strony (`/firmy`, `/sklep`, `/rankingi`, `/opinie`, `/baza-wiedzy`, `/analizy`, `/o-nas`) pod kątem przypadków, gdzie mimo poprawnej bazy drag-in dodawane są lokalne hex/border; poprawić ewentualne przypadki (np. w `Studio` – `filter panel`, `tabs`, `cards`), by przywrócić `bg-card`/`border-border`.
+- **Uzasadnienie:** choć analiza pokazała, że większość stron trzyma się tokenów, warto to potwierdzić i skorygować ewentualne przypadki (np. `buttonVariants`, `PremiumBadge`) gdzie ktoś mógł dodać `bg-white/5`.
+- **Pliki:** w zależności od wykrytych odchyłów (`components/rankings/ranking-tabs-section.tsx`, `components/opinie/opinie-page-client.tsx`, `components/companies/*`, `components/shop/*`, `components/blog/*`, `components/about/*`), ale tylko te gdzie nadal pojawi się ręczny hex/border.
+- **Typ zmian:** zamiana lokalnych `bg-[#...]`/`border-white`/`shadow-[...]` na tokeny (np. `bg-card/72`, `bg-background/60`, `border-border/40`), usunięcie gradientów z nieklasyfikowanych elementów i zastąpienie existing `Surface`/`Card`.
+- **Dlaczego bezpieczna:** dotyczy wyłącznie detali wizualnych w komponentach, bez dotykania danych, logiki czy stylów globalnych (AGENTS: tylko konkretne komponenty, małe zmiany w CSS). Celem jest finalna konsolidacja palety, więc zmiany są ograniczone do klas Tailwind.
+
+### Wykonane – Iteracja 4 (anty-hexy na reszcie stron)
+- **Co:** `app/(site)/page.tsx` przestało używać `bg-[#050505]` na całej sekcji, a `components/layout/site-header.tsx` docelowo zastąpił wszystkie `border-white/*`, `bg-white/*` i gradienty buttonów klasami `border-border/*`, `bg-card/72` oraz tokenowymi hoverami, tak by również mobile nav używał tej samej palety; zatem żadna z marketingowych podstron nie dokłada nowych heksów poza tokenami.
+- **Dlaczego:** dzięki temu iteracja 4 zamyka plan – sprawdziliśmy i usunęliśmy ostatnie `bg-[#...]` i `border-white` w nagłówku/top-level home, zostawiając resztę stron na tokenach `Card`/`Surface`.
+
+### Wykonane – Iteracja 1 (layout + header/footer)
+- **Co:** `app/(site)/layout.tsx` nie używa już `bg-[#050505]`, a komponenty nawigacyjne (`site-navbar.tsx`, `site-header.tsx`, `site-footer.tsx`) bazują na `bg-[var(--surface-muted)]`, `bg-card/72` i `border-border/*` zamiast czarnych heksów i `border-white/*`; stopka i inputy zszedł do `text-foreground` oraz `bg-card/80`.
+- **Dlaczego:** dzięki temu cała warstwa layoutu/nawigacji respektuje jedną paletę surface-tokenów, tworząc stabilny fundament przed kolejnymi iteracjami kolorów.
 
 ## Final summary
 

@@ -59,14 +59,14 @@ export function TopCashbackSection({ companies }: TopCashbackSectionProps) {
 
 function CompanyCard({ company, className }: { company: TopCashbackCompany; className?: string }) {
   return (
-    <SurfaceCard
-      variant="glass"
-      padding="sm"
-      className={cn(
-        "flex flex-col items-center text-center gap-3 border border-white/10 bg-[#090909]",
-        className,
-      )}
-    >
+      <SurfaceCard
+        variant="glass"
+        padding="sm"
+        className={cn(
+          "flex flex-col items-center text-center gap-3 border border-border/40 bg-[var(--surface-muted)]/75",
+          className,
+        )}
+      >
       <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-border/40 bg-[var(--surface-base)]">
         {company.logoUrl ? (
           <Image
@@ -93,10 +93,10 @@ function CompanyCard({ company, className }: { company: TopCashbackCompany; clas
       <Link
         href={`/firmy/${company.slug}`}
         prefetch={false}
-        className={cn(
-          buttonVariants({ size: "sm" }),
-          "w-full rounded-full border border-white/20 bg-transparent text-white",
-        )}
+          className={cn(
+            buttonVariants({ size: "sm" }),
+            "w-full rounded-full border border-border/40 bg-transparent text-white",
+          )}
       >
         Odbierz cashback
       </Link>

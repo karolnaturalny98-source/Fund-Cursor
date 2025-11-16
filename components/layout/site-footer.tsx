@@ -77,7 +77,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="bg-[#050505] border-t border-white/10 text-white">
+    <footer className="bg-[var(--surface-base)]/90 border-t border-border/40 text-foreground">
       <div className="w-full px-2 md:px-4 xl:px-0 fluid-section-lg">
         <div className="mx-auto flex max-w-screen-xl flex-col fluid-stack-xl">
         {/* Górna sekcja - Logo + Newsletter */}
@@ -85,7 +85,7 @@ export function SiteFooter() {
           {/* Logo i opis */}
           <div className="flex flex-col fluid-stack-sm">
             <Link href="/" className="inline-block">
-              <Heading level={3} variant="section" className="text-white">
+              <Heading level={3} variant="section" className="text-foreground">
                 Funded<span className="text-primary">Rank</span>
               </Heading>
             </Link>
@@ -98,7 +98,7 @@ export function SiteFooter() {
           {/* Newsletter */}
           <div className="flex flex-col fluid-stack-sm">
             <div className="flex flex-col fluid-stack-xs">
-              <Heading level={4} variant="subsection" className="text-white">
+              <Heading level={4} variant="subsection" className="text-foreground">
                 Zapisz się do newslettera
               </Heading>
               <Text variant="caption" tone="muted">
@@ -113,7 +113,7 @@ export function SiteFooter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="bg-[#080808] border-white/15 text-white placeholder:text-white/40 focus:border-white/40"
+                className="bg-card/80 border-border/40 text-foreground placeholder:text-muted-foreground focus:border-primary/40 focus-visible:ring-primary/30"
               />
               <Button type="submit" disabled={loading} variant="premium" className="rounded-full">
                 {loading ? "Zapisuję..." : "Zapisz się"}
@@ -126,7 +126,7 @@ export function SiteFooter() {
         <div className="grid fluid-stack-lg sm:grid-cols-2 lg:grid-cols-4 py-[clamp(1.5rem,2vw,2.5rem)]">
           {/* Nawigacja */}
           <div className="flex flex-col fluid-stack-sm">
-            <Heading level={4} variant="subsection" className="text-white">
+            <Heading level={4} variant="subsection" className="text-foreground">
               Nawigacja
             </Heading>
             <ul className="flex flex-col fluid-stack-xs">
@@ -145,7 +145,7 @@ export function SiteFooter() {
 
           {/* Prawne */}
           <div className="flex flex-col fluid-stack-sm">
-            <Heading level={4} variant="subsection" className="text-white">
+            <Heading level={4} variant="subsection" className="text-foreground">
               Prawne
             </Heading>
             <ul className="flex flex-col fluid-stack-xs">
@@ -164,7 +164,7 @@ export function SiteFooter() {
 
           {/* Kontakt */}
           <div className="flex flex-col fluid-stack-sm">
-            <Heading level={4} variant="subsection" className="text-white">
+            <Heading level={4} variant="subsection" className="text-foreground">
               Kontakt
             </Heading>
             <ul className="flex flex-col fluid-stack-xs">
@@ -186,7 +186,7 @@ export function SiteFooter() {
 
           {/* Social Media */}
           <div className="flex flex-col fluid-stack-sm">
-            <Heading level={4} variant="subsection" className="text-white">
+            <Heading level={4} variant="subsection" className="text-foreground">
               Śledź nas
             </Heading>
           <div className="flex flex-wrap fluid-stack-xs">
@@ -197,7 +197,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] items-center justify-center rounded-full border border-white/15 bg-[#0a0a0a] text-muted-foreground transition-all hover:border-white/40 hover:text-white hover:scale-110"
+                  className="flex h-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] w-[clamp(2.25rem,1.3vw+1.8rem,2.5rem)] items-center justify-center rounded-full border border-border/40 bg-card/72 text-muted-foreground transition-all hover:border-border/60 hover:text-foreground hover:scale-110"
                 >
                   <social.icon className="h-[clamp(0.9rem,0.5vw+0.8rem,1rem)] w-[clamp(0.9rem,0.5vw+0.8rem,1rem)]" />
                 </a>

@@ -30,7 +30,7 @@ export function SiteNavbar() {
 
   return (
     <Navbar className="sticky inset-x-0 top-4 z-40 w-full px-4 text-white">
-      <NavBody className="border border-white/10 bg-[#050505]/80 text-white shadow-none backdrop-blur">
+      <NavBody className="border border-border/40 bg-[var(--surface-muted)]/80 text-white shadow-none backdrop-blur">
         <Link href="/" className="text-lg font-semibold tracking-tight text-white">
           Funded<span className="text-emerald-400">Rank</span>
         </Link>
@@ -68,7 +68,7 @@ export function SiteNavbar() {
         </div>
       </NavBody>
 
-      <MobileNav className="bg-[#050505]/90 text-white">
+      <MobileNav className="bg-[var(--surface-muted)]/90 text-white">
         <MobileNavHeader>
           <Link href="/" className="text-lg font-semibold tracking-tight text-white">
             Funded<span className="text-emerald-400">Rank</span>
@@ -82,7 +82,7 @@ export function SiteNavbar() {
         <MobileNavMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          className="bg-[#050505] text-white"
+          className="bg-[var(--surface-muted)]/90 text-white"
         >
           {NAV_ITEMS.map((item) => (
             <Link
