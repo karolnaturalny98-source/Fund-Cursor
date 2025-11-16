@@ -346,7 +346,7 @@ export function AdminDisputesDashboard({
             onChange={(event) => setSearchValue(event.target.value)}
             className="h-auto min-h-[2.75rem] rounded-full border border-border/60 bg-card/72 px-[clamp(1rem,1.4vw,1.25rem)] py-[clamp(0.5rem,0.8vw,0.65rem)] shadow-xs backdrop-blur-[36px]! fluid-caption"
           />
-          <Button type="submit" className="h-auto rounded-full fluid-button-sm">
+          <Button type="submit" className="h-auto rounded-full">
             Filtruj
           </Button>
         </div>
@@ -400,7 +400,7 @@ export function AdminDisputesDashboard({
           disabled={loadingMore}
           onClick={() => void handleLoadMore()}
           variant="outline"
-          className="fluid-button"
+          className="rounded-full"
         >
           {loadingMore ? "Wczytywanie..." : "Wczytaj wiecej"}
         </Button>
@@ -563,20 +563,14 @@ function AdminDisputeRow({ dispute, saving, onSave, onAssign, onDelete }: AdminD
       ) : null}
 
       <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.7rem)]">
-        <Button
-          type="button"
-          variant="outline"
-          disabled={saving}
-          onClick={handleAssignClick}
-          className="fluid-button-sm"
-        >
+        <Button type="button" variant="outline" disabled={saving} onClick={handleAssignClick} className="rounded-full">
           Przejmij
         </Button>
-        <Button type="button" disabled={saving} onClick={handleSaveClick} className="fluid-button-sm">
+        <Button type="button" disabled={saving} onClick={handleSaveClick} className="rounded-full">
           {saving ? "Zapisywanie..." : "Zapisz zmiany"}
         </Button>
         {(dispute.status === "RESOLVED" || dispute.status === "REJECTED") && (
-          <Button type="button" variant="destructive" disabled={saving} onClick={onDelete} className="fluid-button-sm">
+          <Button type="button" variant="destructive" disabled={saving} onClick={onDelete} className="rounded-full">
             <Trash2 className="mr-2 h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)]" />
             Usuń
           </Button>
@@ -608,4 +602,3 @@ function formatAmount(amount: number, currency: string) {
     return `${amount.toFixed(2)} ${currency.toUpperCase()}`;
   }
 }
-

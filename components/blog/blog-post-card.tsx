@@ -27,11 +27,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         <CardContent className="flex flex-col fluid-stack-sm p-5">
           <div className="flex flex-wrap gap-2">
             {post.categories.map((category) => (
-              <Badge
-                key={category.id}
-                variant="outline"
-                className="fluid-pill border-border/60 text-xs font-medium"
-              >
+              <Badge key={category.id} variant="pill-outline" className="text-xs font-medium">
                 {category.name}
               </Badge>
             ))}

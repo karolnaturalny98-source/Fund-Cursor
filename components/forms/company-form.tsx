@@ -621,7 +621,7 @@ export function CreateCompanyForm({ editSlug, initialData, onSuccess }: CompanyF
           </Alert>
         ) : null}
 
-        <Button className="w-full justify-center fluid-button" disabled={isSubmitting} type="submit">
+        <Button className="w-full justify-center" disabled={isSubmitting} type="submit">
           {isSubmitting ? "Zapisywanie..." : isEditMode ? "Zaktualizuj firme" : "Dodaj firme"}
         </Button>
       </form>

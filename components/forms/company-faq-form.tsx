@@ -87,7 +87,7 @@ export function CompanyFaqForm({ companySlug }: CompanyFaqFormProps) {
         </label>
       </div>
       {feedback ? <p className="text-destructive fluid-caption">{feedback}</p> : null}
-      <Button type="submit" disabled={isSubmitting} className="fluid-button-sm">
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Zapisywanie..." : "Dodaj pytanie"}
       </Button>
     </form>

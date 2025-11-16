@@ -6,7 +6,8 @@ import { ArrowUpRight, Star, Trophy, Medal } from "lucide-react";
 import type { HomeRankingCompany } from "@/lib/queries/companies";
 import { PremiumBadge } from "@/components/custom/premium-badge";
 import { PremiumIcon } from "@/components/custom/premium-icon";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { DiscountCoupon } from "@/components/custom/discount-coupon";
 import { cn } from "@/lib/utils";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
@@ -73,10 +74,10 @@ function RatingBadge({ rating }: { rating: number | null }) {
     return <span className="fluid-caption text-muted-foreground">-</span>;
   }
   return (
-    <div className="fluid-pill border border-primary/30 bg-primary/10 text-primary fluid-caption font-semibold">
+    <Badge variant="pill" className="gap-2 border-primary/30 bg-primary/10 text-primary fluid-caption font-semibold">
       <Star className="fluid-icon-sm fill-primary text-primary" />
       {rating.toFixed(1)}
-    </div>
+    </Badge>
   );
 }
 
@@ -171,12 +172,17 @@ function CompanyRow({
         <DiscountCoupon code={company.discountCode} slug={company.slug} />
       </TableCell>
       <TableCell className="fluid-table-cell align-top">
-        <Button asChild variant="ghost-dark" className="fluid-button w-full justify-center rounded-full">
-          <Link href={profileHref} prefetch={false}>
-            Przejdź
-            <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-1" hoverGlow />
-          </Link>
-        </Button>
+        <Link
+          href={profileHref}
+          prefetch={false}
+          className={cn(
+            buttonVariants({ variant: "ghost-dark" }),
+            "w-full justify-center rounded-full",
+          )}
+        >
+          Przejdź
+          <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-1" hoverGlow />
+        </Link>
       </TableCell>
     </TableRow>
   );

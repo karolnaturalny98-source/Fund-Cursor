@@ -108,12 +108,7 @@ export function CompanyFaqItemForm({
       {feedback ? <p className="text-destructive fluid-caption">{feedback}</p> : null}
 
       <div className="flex items-center gap-[clamp(0.45rem,0.7vw,0.6rem)]">
-        <Button
-          size="sm"
-          disabled={isPending}
-          onClick={handleSave}
-          className="fluid-button-sm"
-        >
+        <Button size="sm" disabled={isPending} onClick={handleSave}>
           Zapisz zmiany
         </Button>
         <Button
@@ -121,7 +116,6 @@ export function CompanyFaqItemForm({
           variant="outline"
           disabled={isPending}
           onClick={handleDelete}
-          className="fluid-button-sm"
         >
           Usun
         </Button>

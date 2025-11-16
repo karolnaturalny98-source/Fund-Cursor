@@ -13,10 +13,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { RiskAlertCard } from "@/components/companies/risk-alert-client";
 import type { CompanyRankingHistory, Company } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface RiskAlert {
   id: string;
@@ -219,40 +220,39 @@ export function OverviewHeroSection({
           </p>
         </CardHeader>
         <CardContent className="space-y-[clamp(0.75rem,1.1vw,1rem)]">
-          <Button
-            asChild
-            variant="premium-outline"
-            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full fluid-button"
+          <Link
+            href="#challenges"
+            className={cn(
+              buttonVariants({ variant: "premium-outline" }),
+              "w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full",
+            )}
           >
-            <Link href={`#challenges`}>
-              <PremiumIcon icon={Layers} variant="glow" size="sm" />
-              Wyzwania
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="premium-outline"
-            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full fluid-button"
+            <PremiumIcon icon={Layers} variant="glow" size="sm" />
+            Wyzwania
+          </Link>
+          <Link
+            href="#reviews"
+            className={cn(
+              buttonVariants({ variant: "premium-outline" }),
+              "w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full",
+            )}
           >
-            <Link href={`#reviews`}>
-              <PremiumIcon icon={MessageSquare} variant="glow" size="sm" />
-              Opinie
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="premium"
-            className="w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full shadow-premium fluid-button"
+            <PremiumIcon icon={MessageSquare} variant="glow" size="sm" />
+            Opinie
+          </Link>
+          <Link
+            href="#offers"
+            className={cn(
+              buttonVariants({ variant: "premium" }),
+              "w-full justify-start gap-[clamp(0.65rem,0.9vw,0.85rem)] rounded-full shadow-premium",
+            )}
           >
-            <Link href={`#offers`}>
-              <PremiumIcon icon={ShoppingCart} variant="glow" size="sm" />
-              Oferty
-              <ArrowRight className="ml-auto h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
-            </Link>
-          </Button>
+            <PremiumIcon icon={ShoppingCart} variant="glow" size="sm" />
+            Oferty
+            <ArrowRight className="ml-auto h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
+          </Link>
         </CardContent>
       </Card>
     </div>
   );
 }
-

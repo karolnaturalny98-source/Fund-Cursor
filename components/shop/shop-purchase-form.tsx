@@ -160,7 +160,7 @@ export function ShopPurchaseForm({
         </Alert>
       )}
 
-      <Button type="submit" variant="premium" className="w-full fluid-button" disabled={isSubmitting}>
+      <Button type="submit" variant="premium" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
             <Loader2 className="mr-2 fluid-icon-md animate-spin" />

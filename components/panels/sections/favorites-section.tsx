@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Company } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface FavoritesSectionProps {
   favorites: Company[];
@@ -19,9 +20,15 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
             <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
               Ulubione firmy
             </CardTitle>
-            <Button asChild size="sm" variant="outline" className="fluid-button-sm rounded-full">
-              <Link href="/firmy">Otwórz ranking</Link>
-            </Button>
+            <Link
+              href="/firmy"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "rounded-full",
+              )}
+            >
+              Otwórz ranking
+            </Link>
           </div>
         </CardHeader>
         <CardContent className="space-y-[clamp(0.55rem,0.85vw,0.8rem)]">
@@ -40,9 +47,15 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
           <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             Ulubione firmy
           </CardTitle>
-          <Button asChild size="sm" variant="outline" className="fluid-button-sm rounded-full">
-            <Link href="/firmy">Otwórz ranking</Link>
-          </Button>
+          <Link
+            href="/firmy"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "rounded-full",
+            )}
+          >
+            Otwórz ranking
+          </Link>
         </div>
       </CardHeader>
       <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)]">
@@ -71,4 +84,3 @@ export function FavoritesSection({ favorites }: FavoritesSectionProps) {
     </Card>
   );
 }
-

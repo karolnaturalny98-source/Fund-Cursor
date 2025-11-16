@@ -95,7 +95,7 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
             Ostatnie 5 transakcji cashback.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={openWallet} className="fluid-button-sm rounded-full">
+        <Button variant="outline" size="sm" onClick={openWallet} className="rounded-full">
           Zobacz wszystkie
         </Button>
       </div>
@@ -155,4 +155,3 @@ export function UserDashboardRecent({ transactions, onShowHistory: _onShowHistor
     </section>
   );
 }
-

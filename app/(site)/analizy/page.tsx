@@ -6,6 +6,7 @@ import { getCompanyOptions } from "@/lib/queries/companies";
 import { CompanySelector } from "@/components/analysis/company-selector";
 import { CompanySelectorSkeleton } from "@/components/analysis/loading-skeleton";
 import { Section } from "@/components/layout/section";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Analizy Firm | FundedRank",
@@ -23,10 +24,13 @@ export default async function AnalizyPage() {
     <Section size="lg" className="flex flex-col fluid-stack-xl animate-in fade-in duration-500">
       {/* Hero Section */}
       <div className="flex flex-col fluid-stack-lg text-center">
-          <div className="inline-flex fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs backdrop-blur-xl">
+          <Badge
+            variant="pill"
+            className="mx-auto w-fit gap-2 border-border/60 bg-card/72 text-primary shadow-xs backdrop-blur-xl"
+          >
             <BarChart3 className="fluid-icon-md" />
             Narzędzie Analityczne
-          </div>
+          </Badge>
 
           <h1 className="font-bold tracking-tight text-foreground fluid-h1">
             Zaawansowana Analiza Firm
@@ -39,22 +43,34 @@ export default async function AnalizyPage() {
 
           {/* Feature Pills */}
           <div className="flex flex-wrap items-center justify-center fluid-stack-xs">
-            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+            <Badge
+              variant="pill"
+              className="gap-2 border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl"
+            >
               <TrendingUp className="fluid-icon-md text-primary" />
               <span>Wykresy cenowe</span>
-            </div>
-            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+            </Badge>
+            <Badge
+              variant="pill"
+              className="gap-2 border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl"
+            >
               <FileText className="fluid-icon-md text-primary" />
               <span>Porównanie planów</span>
-            </div>
-            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+            </Badge>
+            <Badge
+              variant="pill"
+              className="gap-2 border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl"
+            >
               <Award className="fluid-icon-md text-primary" />
               <span>Analiza opinii</span>
-            </div>
-            <div className="fluid-pill border border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl fluid-caption">
+            </Badge>
+            <Badge
+              variant="pill"
+              className="gap-2 border-border/60 bg-card/72 text-primary shadow-xs transition-all hover:bg-card/80 backdrop-blur-xl"
+            >
               <BarChart3 className="fluid-icon-md text-primary" />
               <span>Metryki wydajności</span>
-            </div>
+            </Badge>
           </div>
         </div>
 

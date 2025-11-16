@@ -5,6 +5,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+const baseGradient =
+  "relative appearance-none cursor-pointer transition-[transform,shadow] focus-visible:outline-hidden focus-visible:ring-white/80 focus-visible:ring-2 focus-visible:ring-offset-2";
+
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap font-medium transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 ring-offset-background",
   {
@@ -33,6 +36,14 @@ const buttonVariants = cva(
           "bg-white text-secondary-foreground border border-white/30 shadow-[0_30px_60px_-30px_rgba(255,255,255,0.95)] hover:-translate-y-0.5 hover:shadow-[0_45px_80px_-35px_rgba(255,255,255,0.95)] focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2",
         "ghost-dark":
           "bg-[rgba(5,5,5,0.75)] text-foreground border border-white/15 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-[rgba(10,10,10,0.85)] hover:border-white/25 focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2",
+        "cta-gradient":
+          `${baseGradient} h-auto min-h-0 rounded-[1.35rem] px-8 py-3 font-semibold text-white shadow-[0_25px_55px_-30px_hsl(var(--accent)/0.95)] bg-[radial-gradient(var(--spread-x,100%)_var(--spread-y,100%)_at_var(--pos-x,0%)_var(--pos-y,100%),#f77bb6_var(--stop-1,0%),#ed6c79_var(--stop-2,13.38%),#f7832f_var(--stop-3,26.45%),#390e0c_var(--stop-4,72.25%),#050505_var(--stop-5,100%))]`,
+        "cta-gradient-variant":
+          `${baseGradient} h-auto min-h-0 rounded-[1.35rem] px-8 py-3 font-semibold text-white shadow-[0_25px_55px_-30px_rgba(3,169,244,0.6)] bg-[radial-gradient(var(--spread-x,100%)_var(--spread-y,100%)_at_var(--pos-x,0%)_var(--pos-y,100%),#0b0f26_var(--stop-1,0%),#152554_var(--stop-2,40%),#1f4aa8_var(--stop-3,70%),#24d6ff_var(--stop-4,100%))]`,
+        nav:
+          "h-auto min-h-0 rounded-full border border-white/20 bg-white/5 px-6 py-2 text-sm font-semibold text-white/80 shadow-[0_0_1px_rgba(255,255,255,0.2)] backdrop-blur-md transition-colors hover:text-white hover:bg-white/10 focus-visible:ring-white/30 focus-visible:ring-2 focus-visible:ring-offset-2",
+        "nav-ghost":
+          "h-auto min-h-0 rounded-full px-4 py-2 text-sm font-semibold text-white/70 hover:text-white hover:bg-white/10 focus-visible:ring-white/30 focus-visible:ring-2 focus-visible:ring-offset-2",
       },
       size: {
         default: "fluid-button",
@@ -40,6 +51,7 @@ const buttonVariants = cva(
         lg: "fluid-button-lg",
         icon: "fluid-button-icon",
         link: "fluid-copy fluid-stack-2xs h-auto min-h-0 p-0",
+        none: "h-auto min-h-0 rounded-none p-0",
       },
     },
     defaultVariants: {
@@ -58,7 +70,13 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    const resolvedSize = variant === "link" && size === undefined ? "link" : size;
+    const resolvedSize =
+      size ??
+      (variant === "link"
+        ? "link"
+        : variant && ["cta-gradient", "nav", "nav-ghost"].includes(variant)
+          ? "none"
+          : undefined);
 
     return (
       <Comp

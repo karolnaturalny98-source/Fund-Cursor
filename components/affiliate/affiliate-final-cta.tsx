@@ -35,12 +35,7 @@ export function AffiliateFinalCta() {
           </p>
         </CardHeader>
         <CardContent className="flex justify-center">
-          <Button
-            size="lg"
-            variant="premium"
-            className="fluid-button"
-            onClick={scrollToForm}
-          >
+          <Button size="lg" variant="premium" onClick={scrollToForm}>
             Złóż zgłoszenie
             <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
           </Button>
@@ -49,4 +44,3 @@ export function AffiliateFinalCta() {
     </Section>
   );
 }
-

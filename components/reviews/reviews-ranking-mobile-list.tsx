@@ -161,7 +161,7 @@ function RankingCard({
       <Button
         asChild
         variant="premium-outline"
-        className="mt-[clamp(1rem,1.4vw,1.25rem)] w-full justify-center rounded-full fluid-button"
+        className="mt-[clamp(1rem,1.4vw,1.25rem)] w-full justify-center rounded-full"
       >
         <Link href={`/firmy/${item.companySlug}#opinie`} prefetch={false}>
           Zobacz opinie

@@ -27,11 +27,7 @@ export function AboutCta() {
         </div>
 
         <div className="flex flex-col fluid-stack-sm sm:flex-row sm:items-center sm:justify-center">
-          <Button
-            asChild
-            variant="premium"
-            className="fluid-button rounded-full"
-          >
+          <Button asChild variant="premium" className="rounded-full">
             <Link href="/rankingi">
               Przeglądaj ranking
               <PremiumIcon icon={Sparkles} variant="glow" size="sm" className="ml-2" hoverGlow />
@@ -40,7 +36,7 @@ export function AboutCta() {
           <Button
             asChild
             variant="premium-outline"
-            className="fluid-button rounded-full"
+            className="rounded-full"
           >
             <Link href="/baza-wiedzy">
               Dowiedz się więcej
@@ -52,4 +48,3 @@ export function AboutCta() {
     </Section>
   );
 }
-

@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import type { TopCashbackCompany } from "@/lib/types";
 
 interface TopCashbackSectionProps {
@@ -85,11 +85,16 @@ function CompanyCard({ company, className }: { company: TopCashbackCompany; clas
           ${company.minCashback} - ${company.maxCashback} cashback
         </p>
       </div>
-      <Button asChild size="sm" className="w-full rounded-full border border-white/20 bg-transparent text-white">
-        <Link href={`/firmy/${company.slug}`} prefetch={false}>
-          Odbierz cashback
-        </Link>
-      </Button>
+      <Link
+        href={`/firmy/${company.slug}`}
+        prefetch={false}
+        className={cn(
+          buttonVariants({ size: "sm" }),
+          "w-full rounded-full border border-white/20 bg-transparent text-white",
+        )}
+      >
+        Odbierz cashback
+      </Link>
       <p className="text-muted-foreground fluid-caption">
         Przejdź z kodem, a część naszej prowizji wróci do Ciebie.
       </p>

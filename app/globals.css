@@ -88,6 +88,7 @@
   font-weight: 600;
 }
 
+/* Reserved for Button component sizing variants only */
 @utility fluid-button {
   height: clamp(2.31rem, 1.68vw + 1.89rem, 2.73rem);
   padding-inline: clamp(1.05rem, 1.68vw + 0.63rem, 1.89rem);
@@ -565,103 +566,6 @@
   background-color: hsl(var(--card) / 0.86);
 }
 
-@utility gradient-button {
-  @apply relative appearance-none cursor-pointer;
-  background: radial-gradient(
-    var(--spread-x) var(--spread-y) at var(--pos-x) var(--pos-y),
-    var(--color-1) var(--stop-1),
-    var(--color-2) var(--stop-2),
-    var(--color-3) var(--stop-3),
-    var(--color-4) var(--stop-4),
-    var(--color-5) var(--stop-5)
-  );
-  transition:
-    --pos-x 0.3s,
-    --pos-y 0.3s,
-    --spread-x 0.3s,
-    --spread-y 0.3s,
-    --color-1 0.3s,
-    --color-2 0.3s,
-    --color-3 0.3s,
-    --color-4 0.3s,
-    --color-5 0.3s,
-    --border-angle 0.3s,
-    --border-color-1 0.3s,
-    --border-color-2 0.3s,
-    --stop-1 0.3s,
-    --stop-2 0.3s,
-    --stop-3 0.3s,
-    --stop-4 0.3s,
-    --stop-5 0.3s;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      var(--border-angle),
-      var(--border-color-1),
-      var(--border-color-2)
-    );
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  &:hover {
-    --pos-x: 0%;
-    --pos-y: 91.51%;
-    --spread-x: 120.24%;
-    --spread-y: 103.18%;
-    --color-1: #c96287;
-    --color-2: #c66c64;
-    --color-3: #cc7d23;
-    --color-4: #37140a;
-    --color-5: #000;
-    --border-angle: 190deg;
-    --border-color-1: hsla(340, 78%, 90%, 0.1);
-    --border-color-2: hsla(340, 75%, 90%, 0.6);
-    --stop-1: 0%;
-    --stop-2: 8.8%;
-    --stop-3: 21.44%;
-    --stop-4: 71.34%;
-    --stop-5: 85.76%;
-  }
-}
-
-@utility gradient-button-variant {
-  --color-1: #0b0f26;
-  --color-2: #152554;
-  --color-3: #1f4aa8;
-  --color-4: #24d6ff;
-  --border-angle: 205deg;
-  --border-color-1: hsla(265, 85%, 75%, 0.6);
-  --border-color-2: hsla(195, 80%, 70%, 0.3);
-
-  &:hover {
-    --pos-x: 0%;
-    --pos-y: 92%;
-    --spread-x: 115%;
-    --spread-y: 120%;
-    --color-1: #101435;
-    --color-2: #2b4dde;
-    --color-3: #50e4ff;
-    --color-4: #1a2d5f;
-    --color-5: #0b0f26;
-    --stop-1: 0%;
-    --stop-2: 12%;
-    --stop-3: 38%;
-    --stop-4: 70%;
-    --stop-5: 95%;
-    --border-angle: 215deg;
-    --border-color-1: hsla(265, 85%, 80%, 0.4);
-    --border-color-2: hsla(195, 85%, 80%, 0.8);
-  }
-}
 
 @layer utilities {
   :root {

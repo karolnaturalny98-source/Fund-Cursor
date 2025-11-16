@@ -5,9 +5,10 @@ import { ArrowRight, Percent, Star } from "lucide-react";
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface HomeMarketingSpotlightsProps {
   section: MarketingSpotlightSection | null;
@@ -88,12 +89,18 @@ function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
       <div className="flex items-center justify-between border-t border-border/30 pt-4">
         <div className="font-semibold text-foreground fluid-copy">{spotlight.company?.name ?? "Oferta"}</div>
         {spotlight.ctaUrl ? (
-          <Button asChild variant="ghost" size="sm" className="gap-1 text-white">
-            <Link href={spotlight.ctaUrl} target="_blank" rel="noopener noreferrer">
-              {spotlight.ctaLabel ?? "Sprawdź"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
+          <Link
+            href={spotlight.ctaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "gap-1 text-white",
+            )}
+          >
+            {spotlight.ctaLabel ?? "Sprawdź"}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         ) : null}
       </div>
     </SurfaceCard>

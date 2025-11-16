@@ -106,15 +106,23 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
               {affiliate.socialLinks.length > 0 ? (
                 <div className="flex flex-wrap gap-[clamp(0.45rem,0.7vw,0.6rem)]">
                   {affiliate.socialLinks.slice(0, 2).map((link) => (
-                    <Link
+                    <PremiumBadge
                       key={link}
-                      href={link}
-                      className="inline-flex items-center gap-[clamp(0.35rem,0.5vw,0.45rem)] rounded-full border border-primary/30 px-[clamp(0.9rem,1.3vw,1.2rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] text-primary fluid-caption transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
-                      target="_blank"
-                      rel="noreferrer"
+                      asChild
+                      variant="chip"
+                      className="gap-[clamp(0.35rem,0.5vw,0.45rem)] px-[clamp(0.9rem,1.3vw,1.2rem)] text-primary"
                     >
-                      Link <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]" hoverGlow />
-                    </Link>
+                      <Link href={link} target="_blank" rel="noreferrer">
+                        Link{" "}
+                        <PremiumIcon
+                          icon={ArrowUpRight}
+                          variant="glow"
+                          size="sm"
+                          className="h-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)] w-[clamp(0.75rem,0.45vw+0.6rem,0.9rem)]"
+                          hoverGlow
+                        />
+                      </Link>
+                    </PremiumBadge>
                   ))}
                 </div>
               ) : null}
@@ -127,4 +135,3 @@ export function AffiliateList({ affiliates }: AffiliateListProps) {
     </Section>
   );
 }
-

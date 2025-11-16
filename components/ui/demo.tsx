@@ -1,13 +1,12 @@
-import { GradientButton } from "@/components/ui/gradient-button"
+import { Button } from "@/components/ui/button"
 
 function Demo() {
   return (
     <div className="flex gap-8">
-      <GradientButton>Get Started</GradientButton>
-      <GradientButton variant="variant">Get Started</GradientButton>
+      <Button variant="cta-gradient">Get Started</Button>
+      <Button variant="cta-gradient-variant">Get Started</Button>
     </div>
   )
 }
 
 export { Demo }
-

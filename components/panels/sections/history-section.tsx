@@ -131,7 +131,7 @@ export function HistorySection({
                 <div className="space-y-[clamp(0.25rem,0.4vw,0.35rem)]">
                   <span>{error}</span>
                 </div>
-                <Button className="fluid-button-sm rounded-full" size="sm" variant="outline" onClick={onRetry}>
+                <Button className="rounded-full" size="sm" variant="outline" onClick={onRetry}>
                   Spróbuj ponownie
                 </Button>
               </AlertDescription>
@@ -206,7 +206,7 @@ export function HistorySection({
                               transaction.company?.discountCode ?? "",
                             )
                           }
-                          className="fluid-button-sm rounded-full"
+                          className="rounded-full"
                         >
                           {copiedTransactionId === transaction.id
                             ? "Skopiowano"
@@ -238,12 +238,7 @@ export function HistorySection({
       ) : null}
 
       {!error && hasMore ? (
-        <Button
-          className="w-full fluid-button-sm rounded-full"
-          size="sm"
-          variant="outline"
-          onClick={onLoadMore}
-        >
+        <Button className="w-full rounded-full" size="sm" variant="outline" onClick={onLoadMore}>
           Wczytaj więcej
         </Button>
       ) : null}
@@ -252,4 +247,3 @@ export function HistorySection({
 }
 
 export type { HistoryStatusFilter };
-

@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { ArrowRight, TrendingUp, Building2, MessageSquare, Award, Trophy, Medal, BarChart3, Info } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFadeIn, useStaggerAnimation } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 import {
   Accordion,
   AccordionContent,
@@ -80,27 +81,27 @@ export function RankingsPageClient({
           ref={buttonsAnim.ref}
           className={`flex flex-wrap items-center gap-[clamp(0.75rem,1vw,1rem)] ${buttonsAnim.className}`}
         >
-          <Button
-            asChild
-            variant="primary"
-            className="group rounded-full transition-transform duration-300 hover:scale-105 fluid-button"
-            size="lg"
+          <Link
+            href="/firmy"
+            prefetch={false}
+            className={cn(
+              buttonVariants({ variant: "primary", size: "lg" }),
+              "group rounded-full transition-transform duration-300 hover:scale-105",
+            )}
           >
-            <Link href="/firmy" prefetch={false} className="flex items-center">
-              Przejdz do listy firm
-              <ArrowRight className="ml-2 h-[clamp(1rem,0.45vw+0.9rem,1.1rem)] w-[clamp(1rem,0.45vw+0.9rem,1.1rem)] transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="premium-outline"
-            className="rounded-full transition-transform duration-300 hover:scale-105 fluid-button"
-            size="lg"
+            Przejdz do listy firm
+            <ArrowRight className="ml-2 h-[clamp(1rem,0.45vw+0.9rem,1.1rem)] w-[clamp(1rem,0.45vw+0.9rem,1.1rem)] transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+          <Link
+            href="/opinie"
+            prefetch={false}
+            className={cn(
+              buttonVariants({ variant: "premium-outline", size: "lg" }),
+              "rounded-full transition-transform duration-300 hover:scale-105",
+            )}
           >
-            <Link href="/opinie" prefetch={false}>
-              Zobacz opinie spolecznosci
-            </Link>
-          </Button>
+            Zobacz opinie spolecznosci
+          </Link>
         </div>
       </div>
 
@@ -381,4 +382,3 @@ export function RankingsMethodologyClient({
     </>
   );
 }
-

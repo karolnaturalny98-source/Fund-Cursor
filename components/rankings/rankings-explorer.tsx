@@ -52,6 +52,7 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
+import { Surface } from "@/components/ui/surface";
 
 interface RankingsExplorerProps {
   initialData: RankingsDataset;
@@ -911,7 +912,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("top10")}
-            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Top 10
           </Button>
@@ -920,7 +921,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("highest-cashback")}
-            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najwyższy cashback
           </Button>
@@ -929,7 +930,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("most-popular")}
-            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najpopularniejsze
           </Button>
@@ -938,7 +939,7 @@ function FilterPanel({
             variant="ghost"
             size="sm"
             onClick={() => onQuickFilter("most-reviews")}
-            className="fluid-button-sm rounded-full bg-transparent text-muted-foreground hover:text-primary"
+            className="rounded-full bg-transparent text-muted-foreground hover:text-primary"
           >
             Najwięcej opinii
           </Button>
@@ -986,23 +987,29 @@ function FilterPanel({
             </div>
           </div>
           {activeChips.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl border border-border/50 bg-background/60 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.75rem,1.1vw,1.1rem)] text-muted-foreground fluid-caption">
+            <Surface
+              variant="muted"
+              padding="md"
+              className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,1rem)] rounded-2xl text-muted-foreground fluid-caption"
+            >
               <span className="font-semibold uppercase tracking-wide text-muted-foreground/80">
                 Aktywne filtry
               </span>
               {activeChips.map((chip) => (
                 <PremiumBadge
-                  variant="outline"
+                  variant="chip"
                   key={chip.key}
-                  className="flex items-center gap-[clamp(0.35rem,0.6vw,0.5rem)] rounded-full px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.3rem,0.5vw,0.45rem)] fluid-caption font-semibold cursor-pointer transition-colors hover:bg-destructive/10 hover:text-destructive hover:border-destructive/50"
+                  className="gap-[clamp(0.35rem,0.6vw,0.5rem)] px-[clamp(0.85rem,1.2vw,1.1rem)] py-[clamp(0.35rem,0.5vw,0.45rem)] font-semibold text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                   onClick={() => onFilterRemove(chip.key)}
                   aria-label={`Usun filtr ${chip.label}`}
+                  role="button"
+                  tabIndex={0}
                 >
                   {chip.label}
                   <X className="h-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)] w-[clamp(0.7rem,0.35vw+0.6rem,0.8rem)]" />
                 </PremiumBadge>
               ))}
-            </div>
+            </Surface>
           ) : null}
           <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.2vw,1.25rem)]">
             <label className="flex items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground fluid-copy">
@@ -1019,24 +1026,26 @@ function FilterPanel({
                 className="h-[clamp(2.75rem,2.2vw+2.1rem,3.1rem)] w-24 rounded-full border-border/60 text-center text-[clamp(0.9rem,0.35vw+0.8rem,1rem)]"
               />
             </label>
-            <label className="flex cursor-pointer items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] rounded-full border border-border/60 bg-background/60 px-[clamp(1rem,1.4vw,1.4rem)] py-[clamp(0.6rem,0.9vw,0.85rem)] text-muted-foreground transition hover:border-primary/50 hover:text-foreground fluid-caption">
-              <input
-                type="checkbox"
-                checked={filters.hasCashback}
-                onChange={(event) =>
-                  onFiltersChange({ hasCashback: event.target.checked })
-                }
-                className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] rounded border-border/60 text-primary focus:ring-primary"
-              />
-              Tylko firmy z cashback
-            </label>
+            <Surface asChild variant="pill-muted" padding="pill">
+              <label className="flex cursor-pointer items-center gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground transition hover:text-foreground fluid-caption">
+                <input
+                  type="checkbox"
+                  checked={filters.hasCashback}
+                  onChange={(event) =>
+                    onFiltersChange({ hasCashback: event.target.checked })
+                  }
+                  className="h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)] rounded border-border/60 text-primary focus:ring-primary"
+                />
+                Tylko firmy z cashback
+              </label>
+            </Surface>
             <div className="ml-auto flex items-center gap-[clamp(0.65rem,1vw,1rem)]">
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
                 onClick={() => onFiltersChange({})}
-                className="rounded-full border border-border/60 px-[clamp(0.85rem,1.2vw,1.2rem)] text-muted-foreground transition hover:border-primary/40 hover:text-primary fluid-button-sm"
+                className="rounded-full border border-border/60 px-[clamp(0.85rem,1.2vw,1.2rem)] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
               >
                 <RefreshCw className="mr-1 h-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)] w-[clamp(0.75rem,0.35vw+0.65rem,0.85rem)]" />
                 Odswiez
@@ -1044,13 +1053,13 @@ function FilterPanel({
               {hasActiveFilters ? (
                 <Button
                   type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={resetFilters}
-                  className="rounded-full border border-destructive/40 px-[clamp(0.85rem,1.2vw,1.2rem)] text-destructive transition hover:border-destructive hover:bg-destructive/10 fluid-button-sm"
-                >
-                  Wyczysc filtry
-                </Button>
+                variant="ghost"
+                size="sm"
+                onClick={resetFilters}
+                className="rounded-full border border-destructive/40 px-[clamp(0.85rem,1.2vw,1.2rem)] text-destructive transition hover:border-destructive hover:bg-destructive/10"
+              >
+                Wyczysc filtry
+              </Button>
               ) : null}
             </div>
           </div>
@@ -1262,7 +1271,7 @@ const RankingRow = memo(function RankingRow({
         <Button
           asChild
           variant="premium-outline"
-          className="fluid-button w-full justify-center rounded-full"
+          className="w-full justify-center rounded-full"
         >
           <Link href={getCompanyHref(company)} prefetch={false}>
             Przejdz

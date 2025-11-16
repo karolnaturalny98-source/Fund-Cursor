@@ -48,7 +48,7 @@ export function TransactionsSection({
             <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
               Ostatnie zakupy
             </CardTitle>
-            <Button variant="outline" size="sm" onClick={onShowHistory} className="fluid-button-sm rounded-full">
+            <Button variant="outline" size="sm" onClick={onShowHistory} className="rounded-full">
               Historia
             </Button>
           </div>
@@ -69,7 +69,7 @@ export function TransactionsSection({
           <CardTitle className="text-[clamp(0.95rem,0.45vw+0.85rem,1.05rem)] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             Ostatnie zakupy
           </CardTitle>
-          <Button variant="outline" size="sm" onClick={onShowHistory} className="fluid-button-sm rounded-full">
+          <Button variant="outline" size="sm" onClick={onShowHistory} className="rounded-full">
             Historia
           </Button>
         </div>
@@ -127,7 +127,7 @@ export function TransactionsSection({
                                 transaction.company?.discountCode ?? "",
                               )
                             }
-                            className="fluid-button-sm rounded-full"
+                            className="rounded-full"
                           >
                             {copiedTransactionId === transaction.id
                               ? "Skopiowano"
@@ -154,4 +154,3 @@ export function TransactionsSection({
     </Card>
   );
 }
-

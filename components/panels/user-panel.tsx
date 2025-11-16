@@ -31,7 +31,7 @@ const HistorySection = dynamic(() => import("./sections/history-section").then(m
 
 import { useUserSummary } from "@/components/panels/hooks/use-user-summary";
 import { PremiumBadge } from "@/components/custom/premium-badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -623,15 +623,30 @@ export function UserPanel() {
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <Button asChild size="sm" className="rounded-full">
-                        <Link href="/panel?view=redeem">Wymień punkty</Link>
-                      </Button>
-                      <Button asChild size="sm" variant="outline" className="rounded-full">
-                        <Link href="/panel?view=disputes">Zgłoszenia</Link>
-                      </Button>
-                      <Button asChild size="sm" variant="ghost" className="rounded-full">
-                        <Link href="/panel">Otwórz panel</Link>
-                      </Button>
+                      <Link
+                        href="/panel?view=redeem"
+                        className={cn(buttonVariants({ size: "sm" }), "rounded-full")}
+                      >
+                        Wymień punkty
+                      </Link>
+                      <Link
+                        href="/panel?view=disputes"
+                        className={cn(
+                          buttonVariants({ variant: "outline", size: "sm" }),
+                          "rounded-full",
+                        )}
+                      >
+                        Zgłoszenia
+                      </Link>
+                      <Link
+                        href="/panel"
+                        className={cn(
+                          buttonVariants({ variant: "ghost", size: "sm" }),
+                          "rounded-full",
+                        )}
+                      >
+                        Otwórz panel
+                      </Link>
                     </div>
                   </div>
                 </TabsContent>
@@ -1749,9 +1764,15 @@ function FavoritesSection({ favorites }: { favorites: Company[] }) {
             <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               Ulubione firmy
             </CardTitle>
-            <Button asChild size="sm" variant="premium-outline" className="rounded-full">
-              <Link href="/firmy">Otwórz ranking</Link>
-            </Button>
+            <Link
+              href="/firmy"
+              className={cn(
+                buttonVariants({ variant: "premium-outline", size: "sm" }),
+                "rounded-full",
+              )}
+            >
+              Otwórz ranking
+            </Link>
           </div>
         </CardHeader>
         <CardContent>
@@ -1770,9 +1791,15 @@ function FavoritesSection({ favorites }: { favorites: Company[] }) {
           <CardTitle className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Ulubione firmy
           </CardTitle>
-          <Button asChild size="sm" variant="premium-outline" className="rounded-full">
-            <Link href="/firmy">Otwórz ranking</Link>
-          </Button>
+          <Link
+            href="/firmy"
+            className={cn(
+              buttonVariants({ variant: "premium-outline", size: "sm" }),
+              "rounded-full",
+            )}
+          >
+            Otwórz ranking
+          </Link>
         </div>
       </CardHeader>
       <CardContent>
@@ -1875,8 +1902,6 @@ function logWalletEvent(event: string, detail?: string) {
     console.warn("[wallet] telemetry error", error);
   }
 }
-
-
 
 
 

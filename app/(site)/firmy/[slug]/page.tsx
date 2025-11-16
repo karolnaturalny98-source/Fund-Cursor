@@ -21,7 +21,7 @@ import { CompanyPlansSection } from "@/components/companies/company-plans-sectio
 import { CompanyOffersSection } from "@/components/companies/company-offers-section";
 import { CompanyPayoutsSection } from "@/components/companies/company-payouts-section";
 import { CompanyReviewsSection } from "@/components/companies/company-reviews-section";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Breadcrumb,
@@ -309,9 +309,12 @@ function SimilarCompaniesSection({ companies }: { companies: SimilarCompany[] })
                 </p>
               </div>
               <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <Button asChild variant="premium-outline" className="w-full sm:w-auto rounded-full">
-                  <Link href={`/firmy/${company.slug}`}>Szczegóły</Link>
-                </Button>
+                <Link
+                  href={`/firmy/${company.slug}`}
+                  className={cn(buttonVariants({ variant: "premium-outline" }), "w-full sm:w-auto rounded-full")}
+                >
+                  Szczegóły
+                </Link>
                 {company.websiteUrl ? (
                   <PurchaseButton companySlug={company.slug} href={company.websiteUrl}>
                     Strona partnera

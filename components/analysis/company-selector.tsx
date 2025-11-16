@@ -165,11 +165,11 @@ export function CompanySelector({ companies, initialSelection = [] }: CompanySel
           </div>
 
           <Button
-            onClick={handleStartAnalysis}
-            disabled={selected.length === 0}
-            size="lg"
-            className="w-full fluid-button rounded-full justify-center"
-          >
+          onClick={handleStartAnalysis}
+          disabled={selected.length === 0}
+          size="lg"
+          className="w-full rounded-full justify-center"
+        >
             <TrendingUp className="mr-2 h-4 w-4" />
             Rozpocznij analizę ({selected.length})
           </Button>

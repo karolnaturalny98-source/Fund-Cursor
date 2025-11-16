@@ -274,7 +274,7 @@ export function RedeemSection({
             <AlertDescription className="flex flex-wrap items-center justify-between gap-[clamp(0.65rem,1vw,0.9rem)] fluid-caption text-destructive-foreground">
               <span>{offersError ?? "Nie udało się pobrać listy ofert."}</span>
               <Button
-                className="fluid-button-sm rounded-full"
+                className="rounded-full"
                 size="sm"
                 variant="outline"
                 type="button"
@@ -404,12 +404,7 @@ export function RedeemSection({
           </div>
 
           <CardFooter className="flex flex-wrap gap-[clamp(0.65rem,1vw,0.9rem)] px-0 pb-0">
-            <Button
-              disabled={!canRedeemSubmit}
-              type="submit"
-              variant="default"
-              className="fluid-button rounded-full"
-            >
+            <Button disabled={!canRedeemSubmit} type="submit" variant="default" className="rounded-full">
               {submitting ? "Wysyłanie..." : "Wyślij wniosek"}
             </Button>
             <Button
@@ -417,7 +412,7 @@ export function RedeemSection({
               variant="outline"
               onClick={clearForm}
               disabled={submitting}
-              className="fluid-button-sm rounded-full"
+              className="rounded-full"
             >
               Wyczyść
             </Button>
@@ -427,4 +422,3 @@ export function RedeemSection({
     </Card>
   );
 }
-

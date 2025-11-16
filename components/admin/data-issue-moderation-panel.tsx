@@ -135,7 +135,7 @@ export function DataIssueModerationPanel({
                 variant="outline"
                 disabled={isPending}
                 onClick={() => updateStatus(report.id, "DISMISSED")}
-                className="fluid-button-sm"
+                className="rounded-full"
               >
                 Odrzuć
               </Button>
@@ -143,7 +143,7 @@ export function DataIssueModerationPanel({
                 size="sm"
                 disabled={isPending}
                 onClick={() => updateStatus(report.id, "RESOLVED")}
-                className="fluid-button-sm"
+                className="rounded-full"
               >
                 Oznacz jako rozwiązane
               </Button>
@@ -152,7 +152,7 @@ export function DataIssueModerationPanel({
                 variant="destructive"
                 disabled={isPending}
                 onClick={() => setDeleteDialog(report.id)}
-                className="fluid-button-sm"
+                className="rounded-full"
               >
                 <Trash2 className="h-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)]" />
               </Button>
@@ -171,10 +171,10 @@ export function DataIssueModerationPanel({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="fluid-button-sm">
+            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="rounded-full">
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="fluid-button-sm">
+            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="rounded-full">
               {isPending ? "Usuwanie..." : "Usuń"}
             </Button>
           </DialogFooter>

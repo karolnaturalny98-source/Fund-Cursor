@@ -39,11 +39,7 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
           wcześniejszy dostęp do promocji oraz bezpłatne konta na wymianę
           punktów dla swojej społeczności.
         </p>
-        <Button
-          variant="premium"
-          className="fluid-button rounded-full font-semibold"
-          onClick={() => open()}
-        >
+        <Button variant="premium" className="rounded-full font-semibold" onClick={() => open()}>
           Dołącz jako influencer
           <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
         </Button>
@@ -99,22 +95,18 @@ export function InfluencerSpotlight({ influencers }: { influencers: InfluencerPr
                 {profile.socialLinks.length ? (
                   <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)]">
                     {profile.socialLinks.slice(0, 2).map((link) => (
-                      <Link
-                        key={link}
-                        href={link}
-                        className="fluid-pill border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs fluid-caption"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Link
-                        <PremiumIcon
-                          icon={ArrowUpRight}
-                          variant="glow"
-                          size="sm"
-                          className="fluid-icon-sm"
-                          hoverGlow
-                        />
-                      </Link>
+                      <PremiumBadge asChild key={link} variant="chip" className="gap-2 px-[clamp(0.9rem,1.2vw,1.2rem)] text-primary">
+                        <Link href={link} target="_blank" rel="noreferrer">
+                          Link
+                          <PremiumIcon
+                            icon={ArrowUpRight}
+                            variant="glow"
+                            size="sm"
+                            className="fluid-icon-sm"
+                            hoverGlow
+                          />
+                        </Link>
+                      </PremiumBadge>
                     ))}
                   </div>
                 ) : null}

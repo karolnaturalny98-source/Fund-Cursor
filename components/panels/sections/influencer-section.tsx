@@ -303,7 +303,7 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
                     disabled={submitting || !influencerFormValid}
                     type="submit"
                     variant="default"
-                    className="fluid-button rounded-full"
+                    className="rounded-full"
                   >
                     {submitting ? "Zapisywanie..." : profile ? "Aktualizuj profil" : "Wyślij zgłoszenie"}
                   </Button>
@@ -316,4 +316,3 @@ export function InfluencerSection({ profile, onUpdated }: InfluencerSectionProps
     </Card>
   );
 }
-

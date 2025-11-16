@@ -11,6 +11,7 @@ import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-van
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { SparklesCore } from "@/components/ui/sparkles";
+import { Badge } from "@/components/ui/badge";
 import type { HomepageMetrics } from "@/lib/types";
 
 const SEARCH_PLACEHOLDERS = [
@@ -121,11 +122,11 @@ export function HomeHero({ metrics }: HomeHeroProps) {
             </div>
           </div>
           <div className="relative z-10 flex flex-col items-center gap-8 text-center">
-            <div className="inline-flex w-fit items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-white/70">
+            <Badge variant="hero" className="w-fit gap-3 border-white/10 text-white/80">
               FundedRank
               <span className="h-1 w-1 rounded-full bg-emerald-400" />
               Live
-            </div>
+            </Badge>
             <div className="space-y-4">
               <TypewriterEffectSmooth
                 words={HERO_WORDS}
@@ -151,12 +152,13 @@ export function HomeHero({ metrics }: HomeHeroProps) {
               >
                 Zobacz ranking
               </HoverBorderGradient>
-              <Link
-                href="/affilacja"
-                className="inline-flex items-center rounded-full border border-white/15 px-6 py-2 text-sm text-white/80 transition hover:text-white"
+              <Badge
+                asChild
+                variant="hero"
+                className="rounded-full border-white/15 px-6 py-2 text-sm font-semibold text-white/80 transition hover:text-white"
               >
-                Program cashback
-              </Link>
+                <Link href="/affilacja">Program cashback</Link>
+              </Badge>
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center gap-6">

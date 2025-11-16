@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, MessageSquare, TrendingUp, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFadeIn } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 interface OpiniePageClientProps {
   totalReviews: number;
@@ -37,19 +38,19 @@ export function OpiniePageClient({ totalReviews, newReviews30d, averageRating }:
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-[clamp(0.65rem,1vw,0.9rem)]">
-          <Button asChild variant="primary" className="fluid-button rounded-full">
-            <Link href="/firmy">
-              Odkryj firmy
-              <ArrowRight className="ml-[clamp(0.4rem,0.6vw,0.55rem)] h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="premium-outline"
-            className="fluid-button rounded-full"
+          <Link
+            href="/firmy"
+            className={cn(buttonVariants({ variant: "primary" }), "rounded-full")}
           >
-            <Link href="#ranking">Jak liczymy ranking?</Link>
-          </Button>
+            Odkryj firmy
+            <ArrowRight className="ml-[clamp(0.4rem,0.6vw,0.55rem)] h-[clamp(1rem,0.4vw+0.9rem,1.1rem)] w-[clamp(1rem,0.4vw+0.9rem,1.1rem)]" />
+          </Link>
+          <Link
+            href="#ranking"
+            className={cn(buttonVariants({ variant: "premium-outline" }), "rounded-full")}
+          >
+            Jak liczymy ranking?
+          </Link>
         </div>
       </div>
 
@@ -103,4 +104,3 @@ export function OpinieBadgeClient() {
     </Badge>
   );
 }
-

@@ -306,7 +306,7 @@ export function InfluencerApplicationsPanel({
                       variant="outline"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleSaveDetails(profile.id)}
-                      className="fluid-button-sm justify-center"
+                      className="justify-center rounded-full"
                     >
                       Zapisz kod/notatkę
                     </Button>
@@ -315,7 +315,7 @@ export function InfluencerApplicationsPanel({
                       variant="outline"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "PENDING")}
-                      className="fluid-button-sm justify-center"
+                      className="justify-center rounded-full"
                     >
                       Oznacz jako pending
                     </Button>
@@ -323,7 +323,7 @@ export function InfluencerApplicationsPanel({
                       size="sm"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "APPROVED")}
-                      className="fluid-button-sm justify-center"
+                      className="justify-center rounded-full"
                     >
                       Zatwierdź
                     </Button>
@@ -332,7 +332,7 @@ export function InfluencerApplicationsPanel({
                       variant="destructive"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => handleStatus(profile.id, "REJECTED")}
-                      className="fluid-button-sm justify-center"
+                      className="justify-center rounded-full"
                     >
                       Odrzuć
                     </Button>
@@ -341,7 +341,7 @@ export function InfluencerApplicationsPanel({
                       variant="destructive"
                       disabled={isPending && currentActionId === profile.id}
                       onClick={() => setDeleteDialog(profile.id)}
-                      className="mt-[clamp(0.35rem,0.5vw,0.45rem)] fluid-button-sm justify-center"
+                      className="mt-[clamp(0.35rem,0.5vw,0.45rem)] justify-center rounded-full"
                     >
                       <Trash2 className="mr-2 h-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)] w-[clamp(0.9rem,0.5vw+0.75rem,1.05rem)]" />
                       Usuń
@@ -363,10 +363,10 @@ export function InfluencerApplicationsPanel({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="fluid-button-sm">
+            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="rounded-full">
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="fluid-button-sm">
+            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="rounded-full">
               {isPending ? "Usuwanie..." : "Usuń"}
             </Button>
           </DialogFooter>
@@ -375,4 +375,3 @@ export function InfluencerApplicationsPanel({
     </div>
   );
 }
-

@@ -61,7 +61,7 @@ export function KnowledgeGrid() {
             przeczytać jako pierwsze.
           </p>
         </div>
-        <Button variant="premium-outline" className="fluid-button w-full rounded-full sm:w-auto">
+        <Button variant="premium-outline" className="w-full rounded-full sm:w-auto">
           Zgłoś temat artykułu
         </Button>
       </div>

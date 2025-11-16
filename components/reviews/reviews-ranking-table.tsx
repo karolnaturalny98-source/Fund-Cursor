@@ -208,7 +208,7 @@ const RankingRow = memo(function RankingRow({
         <Button
           asChild
           variant="premium-outline"
-          className="w-full justify-center rounded-full fluid-button-sm"
+          className="w-full justify-center rounded-full"
         >
           <Link href={`/firmy/${item.companySlug}#opinie`} prefetch={false}>
             Zobacz opinie

@@ -4,8 +4,9 @@ import { Sparkles, Star, ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import type { RecentCompanySummary } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface HomeLatestCompaniesProps {
   companies: RecentCompanySummary[];
@@ -47,12 +48,14 @@ export function HomeLatestCompanies({ companies }: HomeLatestCompaniesProps) {
               </div>
             </div>
             <div className="flex flex-col fluid-stack-2xs border-t border-border/30 pt-4">
-              <Button asChild size="sm" className="w-full rounded-full">
-                <Link href={`/firmy/${company.slug}`} prefetch={false} className="inline-flex items-center gap-2">
-                  Przejdź z kodem
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+              <Link
+                href={`/firmy/${company.slug}`}
+                prefetch={false}
+                className={cn(buttonVariants({ size: "sm" }), "w-full rounded-full inline-flex items-center gap-2")}
+              >
+                Przejdź z kodem
+                <ArrowRight className="h-4 w-4" />
+              </Link>
               <p className="text-muted-foreground fluid-caption">
                 Cashback dostępny po przejściu z naszego linka.
               </p>

@@ -101,12 +101,7 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
 
               {/* Website */}
               {company.websiteUrl && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full fluid-button rounded-full"
-                  asChild
-                >
+                <Button variant="outline" size="sm" className="w-full rounded-full" asChild>
                   <a
                     href={company.websiteUrl}
                     target="_blank"
@@ -413,4 +408,3 @@ export function CompanyProfile({ companies }: CompanyProfileProps) {
     </div>
   );
 }
-

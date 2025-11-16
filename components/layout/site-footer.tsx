@@ -113,12 +113,7 @@ export function SiteFooter() {
                 disabled={loading}
                 className="bg-[#080808] border-white/15 text-white placeholder:text-white/40 focus:border-white/40"
               />
-              <Button
-                type="submit"
-                disabled={loading}
-                variant="premium"
-                className="fluid-button-sm rounded-full"
-              >
+              <Button type="submit" disabled={loading} variant="premium" className="rounded-full">
                 {loading ? "Zapisuję..." : "Zapisz się"}
               </Button>
             </form>

@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { CheckCircle, ExternalLink } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { PremiumIcon } from "@/components/custom/premium-icon";
 import { CopyDiscountButton } from "@/components/companies/copy-discount-button";
 import { PurchaseButton } from "@/components/companies/purchase-button";
 import { useCurrency } from "@/app/providers/currency-client-provider";
 import { convertCurrency, formatCurrencyLocalized } from "@/lib/currency";
 import type { CompanyCopyMetrics, CompanyPlan } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface PurchaseCardProps {
   companySlug: string;
@@ -184,9 +185,15 @@ export function PurchaseCard({
       ) : null}
 
       <div className="space-y-[clamp(0.75rem,1.2vw,1.1rem)]">
-        <Button asChild variant="premium-outline" className="w-full rounded-full fluid-button">
-          <Link href="#plany">Przejdz do planow</Link>
-        </Button>
+        <Link
+          href="#plany"
+          className={cn(
+            buttonVariants({ variant: "premium-outline" }),
+            "w-full rounded-full",
+          )}
+        >
+          Przejdz do planow
+        </Link>
         {websiteUrl ? (
           <PurchaseButton companySlug={companySlug} href={websiteUrl}>
             Zakup z kodem

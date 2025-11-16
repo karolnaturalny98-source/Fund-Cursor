@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCompare } from "@/components/companies/compare-context";
+import { cn } from "@/lib/utils";
 
 export function CompareBar() {
   const { selection, clear, maxItems } = useCompare();
@@ -41,9 +42,17 @@ export function CompareBar() {
               <Button variant="ghost" size="sm" className="rounded-full px-5" onClick={clear}>
                 Wyczysc
               </Button>
-              <Button asChild disabled={!hasEnoughItems} size="sm" className="rounded-full px-5">
-                <Link href={hasEnoughItems ? compareUrl : "#"}>Porownaj</Link>
-              </Button>
+              <Link
+                href={hasEnoughItems ? compareUrl : "#"}
+                className={cn(
+                  buttonVariants({ size: "sm" }),
+                  "rounded-full px-5",
+                  !hasEnoughItems && "pointer-events-none opacity-60",
+                )}
+                aria-disabled={!hasEnoughItems}
+              >
+                Porownaj
+              </Link>
             </div>
           </CardContent>
         </Card>

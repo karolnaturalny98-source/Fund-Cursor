@@ -112,15 +112,11 @@ export function CommunityHighlightsAnimated({ reviews }: { reviews: ReviewHighli
               </div>
           <div className="flex flex-wrap gap-[clamp(0.5rem,0.8vw,0.75rem)] text-muted-foreground/80 fluid-caption">
                 {review.resourceLinks.slice(0, 2).map((link) => (
-                  <a
-                    key={link}
-                    href={link}
-                    target="_blank"
-                    rel="noreferrer"
-                className="fluid-pill border border-primary/30 text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-xs"
-                  >
-                    Materiał dowodowy
-                  </a>
+                  <PremiumBadge asChild key={link} variant="chip" className="text-primary">
+                    <a href={link} target="_blank" rel="noreferrer">
+                      Materiał dowodowy
+                    </a>
+                  </PremiumBadge>
                 ))}
               </div>
           <div className="flex items-center justify-between text-muted-foreground/80 fluid-caption">

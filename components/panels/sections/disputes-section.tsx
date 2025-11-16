@@ -276,7 +276,7 @@ export function DisputesSection({
                     variant="outline"
                     onClick={onReloadCompanies}
                     disabled={companiesLoading}
-                    className="fluid-button-sm rounded-full"
+                    className="rounded-full"
                   >
                     Spróbuj ponownie
                   </Button>
@@ -291,7 +291,7 @@ export function DisputesSection({
                 <div className="space-y-[clamp(0.25rem,0.4vw,0.35rem)]">
                   <span>{error}</span>
                 </div>
-                <Button size="sm" variant="outline" onClick={onRetry} className="fluid-button-sm rounded-full">
+                <Button size="sm" variant="outline" onClick={onRetry} className="rounded-full">
                   Spróbuj ponownie
                 </Button>
               </AlertDescription>
@@ -376,7 +376,7 @@ export function DisputesSection({
         ) : null}
 
         {!error && hasMore ? (
-          <Button className="w-full fluid-button-sm rounded-full" size="sm" variant="outline" onClick={onLoadMore}>
+          <Button className="w-full rounded-full" size="sm" variant="outline" onClick={onLoadMore}>
             Wczytaj więcej
           </Button>
         ) : null}
@@ -519,7 +519,7 @@ export function DisputesSection({
             </div>
 
             <CardFooter className="flex justify-end gap-[clamp(0.65rem,1vw,0.9rem)] px-0 pb-0">
-              <Button type="submit" disabled={!canSubmit} variant="default" className="fluid-button rounded-full">
+              <Button type="submit" disabled={!canSubmit} variant="default" className="rounded-full">
                 {submitting ? "Wysyłanie..." : "Wyślij zgłoszenie"}
               </Button>
             </CardFooter>

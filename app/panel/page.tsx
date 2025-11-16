@@ -228,7 +228,7 @@ export default function UserPanelPage() {
                 Zarządzaj swoimi punktami, wymianą i zgłoszeniami
               </p>
             </div>
-            <Button variant="outline" onClick={openWallet} className="fluid-button-sm rounded-full">
+            <Button variant="outline" onClick={openWallet} className="rounded-full">
               Otwórz portfel
             </Button>
           </div>
@@ -243,7 +243,7 @@ export default function UserPanelPage() {
                   Zaloguj się, aby zarządzać swoimi punktami cashback, wymianą i zgłoszeniami.
                 </p>
                 <SignInButton>
-                  <Button variant="default" className="fluid-button rounded-full">
+                  <Button variant="default" className="rounded-full">
                     Zaloguj się z Clerk
                   </Button>
                 </SignInButton>
@@ -261,11 +261,7 @@ export default function UserPanelPage() {
               <Card className="rounded-2xl border border-destructive/40 bg-destructive/10 shadow-xs">
                 <CardContent className="space-y-[clamp(0.85rem,1.2vw,1.1rem)] p-[clamp(1.5rem,2.3vw,2.15rem)]">
                   <p className="fluid-copy text-destructive">{summaryError}</p>
-                  <Button
-                    onClick={() => void refreshSummary(true)}
-                    variant="outline"
-                    className="fluid-button-sm rounded-full"
-                  >
+                  <Button onClick={() => void refreshSummary(true)} variant="outline" className="rounded-full">
                     Spróbuj ponownie
                   </Button>
                 </CardContent>

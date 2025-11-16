@@ -4,9 +4,10 @@ import { ArrowRight, Layers, Percent, Receipt, Star } from "lucide-react";
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import type { HomeRankingCompany } from "@/lib/queries/companies";
 import { formatCurrencyLocalized } from "@/lib/currency";
+import { cn } from "@/lib/utils";
 
 interface HomeCompareTeaserProps {
   companies: HomeRankingCompany[];
@@ -34,12 +35,14 @@ export function HomeCompareTeaser({ companies }: HomeCompareTeaserProps) {
         </div>
 
         <div className="flex justify-center">
-          <Button asChild className="rounded-full">
-            <Link href="/analizy" prefetch={false}>
-              Uruchom pełną porównywarkę
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <Link
+            href="/analizy"
+            prefetch={false}
+            className={cn(buttonVariants({ variant: "primary" }), "rounded-full")}
+          >
+            Uruchom pełną porównywarkę
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </SurfaceCard>
     </Section>

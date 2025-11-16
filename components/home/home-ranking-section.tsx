@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SurfaceCard } from "@/components/layout/surface-card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { RankingTabsSection } from "@/components/rankings/ranking-tabs-section";
 import type { HomeRankingTab } from "@/lib/types/rankings";
+import { cn } from "@/lib/utils";
 
 interface HomeRankingSectionProps {
   tabs: HomeRankingTab[];
@@ -25,11 +26,16 @@ export function HomeRankingSection({ tabs }: HomeRankingSectionProps) {
           title="Najważniejsze zestawienia"
           description="Jeden widok, wiele rankingów: reputacja, cashback, cena wejścia i doświadczenie wypłat. Każda zakładka to 10 najlepszych firm w danej kategorii."
         />
-        <Button asChild variant="outline" className="rounded-full border-border/60 text-foreground">
-          <Link href="/rankingi" prefetch={false}>
-            Przejdź do pełnego rankingu →
-          </Link>
-        </Button>
+        <Link
+          href="/rankingi"
+          prefetch={false}
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "rounded-full border-border/60 text-foreground",
+          )}
+        >
+          Przejdź do pełnego rankingu →
+        </Link>
       </div>
 
       <SurfaceCard variant="glass" padding="lg" className="border border-border/40">

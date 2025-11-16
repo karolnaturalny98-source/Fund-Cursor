@@ -150,7 +150,6 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                   variant="outline"
                   disabled={isPending}
                   onClick={() => updateStatus(review.id, "REJECTED")}
-                  className="fluid-button-sm"
                 >
                   Odrzuć
                 </Button>
@@ -158,7 +157,6 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                   size="sm"
                   disabled={isPending}
                   onClick={() => updateStatus(review.id, "APPROVED")}
-                  className="fluid-button-sm"
                 >
                   Zatwierdź
                 </Button>
@@ -167,7 +165,6 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
                   variant="destructive"
                   disabled={isPending}
                   onClick={() => setDeleteDialog(review.id)}
-                  className="fluid-button-sm"
                 >
                   <Trash2 className="h-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)] w-[clamp(0.95rem,0.5vw+0.8rem,1.1rem)]" />
                 </Button>
@@ -187,10 +184,10 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending} className="fluid-button-sm">
+            <Button variant="outline" onClick={() => setDeleteDialog(null)} disabled={isPending}>
               Anuluj
             </Button>
-            <Button variant="destructive" onClick={handleDelete} disabled={isPending} className="fluid-button-sm">
+            <Button variant="destructive" onClick={handleDelete} disabled={isPending}>
               {isPending ? "Usuwanie..." : "Usuń"}
             </Button>
           </DialogFooter>
@@ -199,4 +196,3 @@ export function ReviewModerationPanel({ reviews }: ReviewModerationPanelProps) {
     </>
   );
 }
-

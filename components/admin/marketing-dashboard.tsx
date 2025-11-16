@@ -467,7 +467,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
         <div className="flex flex-wrap items-center gap-[clamp(0.55rem,0.85vw,0.75rem)]">
           <Button
             variant="outline"
-            className="fluid-button-sm"
+            className="rounded-full"
             onClick={() => void refreshFromServer()}
             disabled={isReordering}
           >
@@ -479,7 +479,7 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
             />
             Odśwież
           </Button>
-          <Button className="fluid-button-sm" onClick={openCreateDialog}>
+          <Button className="rounded-full" onClick={openCreateDialog}>
             <Plus className="h-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)] w-[clamp(1.05rem,0.4vw+0.95rem,1.2rem)]" />
             Dodaj spotlight
           </Button>
@@ -987,13 +987,13 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
                 <Button
                   type="button"
                   variant="outline"
-                  className="fluid-button-sm"
+                  className="rounded-full"
                   onClick={closeDialog}
                   disabled={isSaving}
                 >
                   Anuluj
                 </Button>
-                <Button type="submit" disabled={isSaving} className="fluid-button-sm">
+                <Button type="submit" disabled={isSaving} className="rounded-full">
                   {isSaving ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1022,10 +1022,10 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" className="fluid-button-sm" onClick={() => setDeleteTarget(null)}>
+            <Button variant="outline" className="rounded-full" onClick={() => setDeleteTarget(null)}>
               Anuluj
             </Button>
-            <Button variant="destructive" className="fluid-button-sm" onClick={() => void handleDelete()}>
+            <Button variant="destructive" className="rounded-full" onClick={() => void handleDelete()}>
               Usuń
             </Button>
           </DialogFooter>
@@ -1034,6 +1034,5 @@ export function MarketingDashboard({ section, companies, defaultSlug }: Marketin
     </div>
   );
 }
-
 
 

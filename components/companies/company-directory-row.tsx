@@ -7,7 +7,7 @@ import { ArrowUpRight, ExternalLink, Percent, Star } from "lucide-react";
 
 import type { Company, CompanyPlan } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/companies/favorite-button";
 import { CompareToggle } from "@/components/companies/compare-toggle";
 import { PurchaseButton } from "@/components/companies/purchase-button";
@@ -253,9 +253,12 @@ export const CompanyDirectoryRow = memo(function CompanyDirectoryRow({
               CTA
             </div>
             <div className="flex flex-col gap-2">
-              <Button asChild variant="secondary" className="w-full rounded-full">
-                <Link href={`/firmy/${company.slug}`}>Zobacz szczegóły</Link>
-              </Button>
+              <Link
+                href={`/firmy/${company.slug}`}
+                className={cn(buttonVariants({ variant: "secondary" }), "w-full rounded-full")}
+              >
+                Zobacz szczegóły
+              </Link>
               <PurchaseButton
                 companySlug={company.slug}
                 href={fallbackWebsite}

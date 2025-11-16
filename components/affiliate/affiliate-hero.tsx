@@ -39,19 +39,13 @@ export function AffiliateHero() {
             </p>
           </div>
           <div className="flex flex-col fluid-stack-sm sm:flex-row sm:items-center">
-            <Button 
-              size="lg" 
-              variant="premium" 
-              className="fluid-button"
-              onClick={scrollToForm}
-            >
+            <Button size="lg" variant="premium" onClick={scrollToForm}>
               Zostań affilatem
               <PremiumIcon icon={ArrowUpRight} variant="glow" size="sm" className="ml-2" hoverGlow />
             </Button>
             <Button
               size="lg"
               variant="premium-outline"
-              className="fluid-button"
               onClick={() => {
                 const benefitsSection = document.getElementById("affiliate-benefits");
                 if (benefitsSection) {
@@ -95,4 +89,3 @@ export function AffiliateHero() {
     </Section>
   );
 }
-

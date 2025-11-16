@@ -109,11 +109,7 @@ export function OverviewDashboard({
         description="Najczęściej używane funkcje panelu administracyjnego"
       >
         <div className="grid gap-[clamp(0.75rem,1.1vw,1rem)] sm:grid-cols-2 lg:grid-cols-3">
-          <Button
-            variant="outline"
-            asChild
-            className="fluid-button w-full items-start justify-start text-left"
-          >
+          <Button variant="outline" asChild className="w-full items-start justify-start text-left">
             <Link href="/admin/cashback">
               <AlertCircle className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
               <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
@@ -126,11 +122,7 @@ export function OverviewDashboard({
               </div>
             </Link>
           </Button>
-          <Button
-            variant="outline"
-            asChild
-            className="fluid-button w-full items-start justify-start text-left"
-          >
+          <Button variant="outline" asChild className="w-full items-start justify-start text-left">
             <Link href="/admin/community">
               <Users className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
               <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
@@ -144,11 +136,7 @@ export function OverviewDashboard({
               </div>
             </Link>
           </Button>
-          <Button
-            variant="outline"
-            asChild
-            className="fluid-button w-full items-start justify-start text-left"
-          >
+          <Button variant="outline" asChild className="w-full items-start justify-start text-left">
             <Link href="/admin/shop">
               <TrendingUp className="h-[clamp(1.1rem,0.45vw+1rem,1.25rem)] w-[clamp(1.1rem,0.45vw+1rem,1.25rem)] text-primary" />
               <div className="flex flex-col gap-[clamp(0.25rem,0.4vw,0.35rem)] text-left">
@@ -166,5 +154,4 @@ export function OverviewDashboard({
     </div>
   );
 }
-
 

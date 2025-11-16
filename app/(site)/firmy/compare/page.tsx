@@ -8,7 +8,7 @@ import { CompareBar } from "@/components/companies/compare-bar";
 import { CompareProvider } from "@/components/companies/compare-context";
 import { CompareToggle } from "@/components/companies/compare-toggle";
 import { FavoriteButton } from "@/components/companies/favorite-button";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { parseCompareParam } from "@/lib/compare";
 import { getCompaniesBySlugs } from "@/lib/queries/companies";
 import type { Company, SupportedCurrency } from "@/lib/types";
@@ -22,6 +22,7 @@ import {
   type CurrencyRates,
 } from "@/lib/currency";
 import { getCurrencyRates } from "@/lib/currency/rates";
+import { cn } from "@/lib/utils";
 
 interface ComparePageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -83,9 +84,9 @@ function EmptyComparisonState() {
     <div className="rounded-2xl border border-dashed bg-muted/30 p-12 text-center text-sm text-muted-foreground">
       Brak firm do porownania. Wybierz je z listy lub strony szczegolow.
       <div className="mt-4">
-        <Button asChild>
-          <Link href="/firmy">Wroc do listy firm</Link>
-        </Button>
+        <Link href="/firmy" className={buttonVariants({ variant: "primary" })}>
+          Wroc do listy firm
+        </Link>
       </div>
     </div>
   );
@@ -230,15 +231,21 @@ function buildComparisonRows(
       label: "Linki",
       values: companies.map((company) => (
         <div className="flex flex-col gap-2" key={company.slug}>
-          <Button asChild size="sm" variant="outline">
-            <Link href={`/firmy/${company.slug}`}>Szczegoly</Link>
-          </Button>
+          <Link
+            href={`/firmy/${company.slug}`}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full")}
+          >
+            Szczegoly
+          </Link>
           {company.websiteUrl ? (
-            <Button asChild size="sm">
-              <Link href={company.websiteUrl} target="_blank" rel="noreferrer">
-                Strona partnera
-              </Link>
-            </Button>
+            <Link
+              href={company.websiteUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ size: "sm" }), "rounded-full")}
+            >
+              Strona partnera
+            </Link>
           ) : null}
         </div>
       )),

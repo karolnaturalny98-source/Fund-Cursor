@@ -387,7 +387,7 @@ function FiltersPanel({
                   variant="outline"
                   size="sm"
                   onClick={resetFilters}
-                  className="fluid-button-sm rounded-full"
+                  className="rounded-full"
                 >
                   Wyczysc filtry
                 </Button>
@@ -438,7 +438,7 @@ function FiltersPanel({
               variant="outline"
               size="sm"
               onClick={toggleSortDirection}
-              className="fluid-button-sm rounded-full"
+              className="rounded-full"
             >
               <ArrowUpDown className="mr-[clamp(0.35rem,0.55vw,0.5rem)] h-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)] w-[clamp(0.9rem,0.35vw+0.8rem,1.05rem)]" />
               {filters.sortDirection === "desc" ? "Malejaco" : "Rosnaco"}
@@ -447,7 +447,7 @@ function FiltersPanel({
               type="button"
               variant="outline"
               size="sm"
-              className="fluid-button-sm rounded-full"
+              className="rounded-full"
               onClick={() => onFiltersChange((prev) => ({ ...prev }))}
               disabled={loading}
             >
@@ -465,4 +465,3 @@ function FiltersPanel({
     </Card>
   );
 }
-
