@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Text } from "@/components/ui/text";
 import { useCompare } from "@/components/companies/compare-context";
 import { cn } from "@/lib/utils";
 
@@ -22,40 +23,44 @@ export function CompareBar() {
       <div className="mx-auto w-full max-w-[min(90vw,520px)]">
         <Card variant="elevated" className="backdrop-blur">
           <CardContent className="flex flex-col gap-[clamp(0.85rem,1.2vw,1.2rem)] p-[clamp(1.15rem,1.6vw,1.5rem)] sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-[clamp(0.45rem,0.7vw,0.65rem)] text-muted-foreground fluid-copy">
-              <p className="font-semibold text-foreground">
-                Wybrane do porownania ({selection.length}/{maxItems})
-              </p>
-              <p className="text-foreground/80">{selection.join(" | ")}</p>
-              {hasEnoughItems ? (
-                <p className="fluid-caption text-muted-foreground">
-                  Udostepnij link:{" "}
-                  <span className="break-all font-medium text-foreground">{compareUrl}</span>
-                </p>
-              ) : (
-                <p className="fluid-caption">
-                  Wybierz co najmniej dwie firmy, aby otworzyc widok porownania.
-                </p>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button variant="ghost" size="sm" className="rounded-full px-5" onClick={clear}>
-                Wyczysc
-              </Button>
+          <div className="space-y-1 text-muted-foreground">
+            <Text variant="body" weight="semibold" className="text-foreground">
+              Wybrane do porownania ({selection.length}/{maxItems})
+            </Text>
+            <Text variant="body" tone="muted">
+              {selection.join(" | ")}
+            </Text>
+            {hasEnoughItems ? (
+              <Text variant="caption" tone="muted" className="break-all font-medium text-foreground">
+                Udostepnij link: {compareUrl}
+              </Text>
+            ) : (
+              <Text variant="caption" tone="muted">
+                Wybierz co najmniej dwie firmy, aby otworzyc widok porownania.
+              </Text>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="ghost" size="sm" className="rounded-full px-5" onClick={clear}>
+              Wyczysc
+            </Button>
+            <Button
+              asChild
+              variant="primary"
+              size="sm"
+              className="rounded-full px-5"
+            >
               <Link
                 href={hasEnoughItems ? compareUrl : "#"}
-                className={cn(
-                  buttonVariants({ size: "sm" }),
-                  "rounded-full px-5",
-                  !hasEnoughItems && "pointer-events-none opacity-60",
-                )}
                 aria-disabled={!hasEnoughItems}
+                className={cn(!hasEnoughItems && "pointer-events-none opacity-60")}
               >
                 Porownaj
               </Link>
-            </div>
-          </CardContent>
-        </Card>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
       </div>
     </div>
   );

@@ -21,10 +21,10 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative h-screen overflow-hidden bg-background text-foreground">
       <AdminScrollLock />
-      {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-black" />
+      {/* Surface background */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[var(--surface-muted)]/80 backdrop-blur-[20px]" />
       <div className="relative z-10 h-full">
         {children}
       </div>

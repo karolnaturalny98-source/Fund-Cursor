@@ -25,7 +25,6 @@ import { useComparisonData } from "@/components/analysis/hooks/use-comparison-da
 import { useComparisonCharts } from "@/components/analysis/hooks/use-comparison-charts";
 import { getCountryFlag } from "@/lib/country";
 
-const Aurora = dynamic(() => import("@/components/Aurora"), { ssr: false });
 import { PlanFeaturesMatrix } from "./plan-features-matrix";
 import { ReviewSentiment } from "./review-sentiment";
 import { ReviewStatistics as ReviewStatisticsComponent } from "./review-statistics";
@@ -77,15 +76,8 @@ export function AnalysisLayout({
 
   return (
     <div className="relative">
-      {/* Aurora background */}
-      <div className="fixed inset-0 -z-10 h-screen">
-        <Aurora
-          colorStops={["#34D399", "#a78bfa", "#3b82f6"]}
-          blend={0.35}
-          amplitude={0.7}
-          speed={0.5}
-        />
-      </div>
+      {/* Background token layer */}
+      <div className="fixed inset-0 -z-10 bg-[var(--surface-muted)]/80" />
 
       <div className="container flex flex-col fluid-stack-3xl fluid-section-pad">
         {/* Header */}
