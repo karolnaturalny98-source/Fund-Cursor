@@ -63,6 +63,18 @@ Agent deklaratywnie potrafi:
 - radius-xl,
 - mocne hover states.
 
+
+NAZWY KOMPONETÓW KTÓRE MNIE INTERESUJĄ I ICH STYL I OBOWIĄZKOWE MUSIMY ICH UŻYĆ.:
+@aceternity/canvas-reveal-effect
+@aceternity/compare @aceternity/sparkles
+@aceternity/evervault-card
+@aceternity/expandable-card-demo-standard @aceternity/expandable-card-demo-grid
+@aceternity/bento-grid
+@aceternity/dotted-glow-background
+@aceternity/features-section-demo-3
+@aceternity/features-section-demo-2
+@aceternity/infinite-moving-cards
+@aceternity/wobble-card
 ---
 
 ## 🔧 PROCES DZIAŁANIA AGENTA
