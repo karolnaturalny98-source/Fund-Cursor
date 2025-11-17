@@ -141,6 +141,28 @@ Zasada jest prosta:
 
 ---
 
+## 🔍 Praca z registry (zgodnie z oficjalnymi instrukcjami)
+
+- Registry (w tym @aceternity) jest skonfigurowane w `components.json`
+  zgodnie z dokumentacją shadcn/ui (namespaced registries, URL z {name}.json).
+
+- Kiedy potrzebujesz danych z registry, używaj WYŁĄCZNIE narzędzi MCP:
+  - `shadcn.list_items_in_registries`
+  - `shadcn.search_items_in_registries`
+  - `shadcn.view_items_in_registries`
+  - `shadcn.get_item_examples_from_registries`
+
+- Nie buduj ręcznie URL-i i nie używaj `curl` do pobierania JSON z registry.
+  To jest już obsłużone przez MCP i konfigurację z `components.json`.
+
+- Zakładaj, że nazwy typu `@aceternity/wobble-card` czy `@aceternity/dotted-glow-background`
+  odpowiadają itemom w registry zgodnie z oficjalnym formatem `registry-item.json`
+  (name, type, files, cssVars itd.).
+
+- Styl i informacje o komponentach, które odczytasz z registry,
+  streszczaj w `theme-refactor.md` zamiast przepisywać cały kod.
+
+
 ##  PROTOKÓŁ INTERAKCJI
 
 1. Agent przygotowuje plan zmian.  
