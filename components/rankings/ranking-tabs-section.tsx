@@ -1,38 +1,38 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  ArrowDownRight,
   Star,
-  TrendingUp,
   BadgePercent,
-  Banknote,
   Clock3,
+  Zap,
+  Turtle,
+  Check,
 } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import type { HomeRankingTab, RankingCompanySnapshot } from "@/lib/types/rankings";
 import { cn } from "@/lib/utils";
-import {
-  buildCompanyHref,
-  formatCompanyPrice,
-  formatPayoutMetric,
-} from "@/lib/rankings/home-ranking-utils";
+import { buildCompanyHref, formatCompanyPrice, formatPayoutMetric } from "@/lib/rankings/home-ranking-utils";
 
 export type RankingTabsSectionProps = {
   tabs: HomeRankingTab[];
   variant?: "home" | "full";
-};
-
-type MetricDefinition = {
-  label: string;
-  value: string;
-  helper?: string;
-  icon?: typeof Star;
 };
 
 export function RankingTabsSection({
@@ -52,54 +52,416 @@ export function RankingTabsSection({
 
 function HomeRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
   const logClick = useAffiliateClickLogger("home_ranking_section");
+  const [accountTypeFilter, setAccountTypeFilter] = useState("");
+  const [evaluationFilter, setEvaluationFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
+  const [cashbackFilter, setCashbackFilter] = useState("");
+  const [verifiedFilter, setVerifiedFilter] = useState(false);
+  const [payoutSpeedFilter, setPayoutSpeedFilter] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const accountTypeOptions = useMemo(() => {
+    const values = new Set<string>();
+    tabs.forEach((tab) =>
+      tab.companies.forEach((company) =>
+        company.accountTypes.forEach((type) => {
+          if (type) {
+            values.add(type);
+          }
+        }),
+      ),
+    );
+    return Array.from(values);
+  }, [tabs]);
+
+  const evaluationModelOptions = useMemo(() => {
+    const values = new Set<string>();
+    tabs.forEach((tab) =>
+      tab.companies.forEach((company) =>
+        company.evaluationModels.forEach((model) => {
+          if (model) {
+            values.add(model);
+          }
+        }),
+      ),
+    );
+    return Array.from(values);
+  }, [tabs]);
+
+  const countryOptions = useMemo(() => {
+    const values = new Set<string>();
+    tabs.forEach((tab) =>
+      tab.companies.forEach((company) => {
+        if (company.country) {
+          values.add(company.country);
+        }
+      }),
+    );
+    return Array.from(values);
+  }, [tabs]);
+
+  const filteredTabs = useMemo(() => {
+    const tier = CASHBACK_TIERS.find((item) => item.value === cashbackFilter);
+
+    return tabs.map((tab) => ({
+      ...tab,
+      companies: tab.companies.filter((company) => {
+        const matchesAccountType =
+          !accountTypeFilter || company.accountTypes.includes(accountTypeFilter);
+        const matchesEvaluation =
+          !evaluationFilter || company.evaluationModels.includes(evaluationFilter);
+        const matchesCountry =
+          !countryFilter || (company.country ?? "") === countryFilter;
+        const matchesCashback =
+          !tier || (company.cashbackRate ?? 0) >= tier.min;
+        const matchesVerified =
+          !verifiedFilter || Boolean(company.cashbackRedeemRate);
+        const matchesPayoutSpeed =
+          !payoutSpeedFilter || getPayoutSpeed(company.cashbackPayoutHours).value === payoutSpeedFilter;
+
+        return (
+          matchesAccountType &&
+          matchesEvaluation &&
+          matchesCountry &&
+          matchesCashback &&
+          matchesVerified &&
+          matchesPayoutSpeed
+        );
+      }),
+    }));
+  }, [
+    tabs,
+    accountTypeFilter,
+    evaluationFilter,
+    countryFilter,
+    cashbackFilter,
+    verifiedFilter,
+    payoutSpeedFilter,
+  ]);
+
+  const [activeTab, setActiveTab] = useState(tabs[0]?.id ?? "");
+
+  useEffect(() => {
+    if (!filteredTabs.length) {
+      setActiveTab("");
+      return;
+    }
+    if (!filteredTabs.some((tab) => tab.id === activeTab)) {
+      setActiveTab(filteredTabs[0].id);
+    }
+  }, [filteredTabs, activeTab]);
+
+  const activeTabData = filteredTabs.find((tab) => tab.id === activeTab);
 
   return (
-    <Tabs defaultValue={tabs[0]?.id ?? ""} className="w-full">
-      <div className="relative">
-        <TabsList className="flex w-full flex-wrap gap-2 overflow-x-auto rounded-full border border-white/25 bg-black/70 p-1 pr-6">
-          {tabs.map((tab) => (
-            <TabsTrigger
-              key={tab.id}
-              value={tab.id}
-              className="rounded-full px-4 py-2 text-sm font-medium text-white/70 transition data-[state=active]:bg-white data-[state=active]:text-black"
-            >
-              {tab.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        <span className="pointer-events-none absolute right-0 top-0 h-full w-12 rounded-r-full bg-gradient-to-l from-black/80 to-transparent" />
+    <div className="space-y-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-white/70">
+          {activeTabData?.description ?? tabs[0]?.description ?? ""}
+        </p>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/rankingi"
+            prefetch={false}
+            className="text-sm font-semibold text-white/80 transition hover:text-white"
+          >
+            Pełny ranking
+            <ArrowRight className="ml-2 inline-block h-4 w-4" />
+          </Link>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="rounded-full border border-white/20 px-4 text-white/80 hover:border-white"
+            onClick={() => setFiltersOpen((prev) => !prev)}
+          >
+            {filtersOpen ? "Ukryj filtry" : "Pokaż filtry"}
+          </Button>
+        </div>
       </div>
 
-      {tabs.map((tab) => (
-        <TabsContent key={tab.id} value={tab.id} className="mt-6 space-y-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-white/70">{tab.description}</p>
-            <Link
-              href="/rankingi"
-              prefetch={false}
-              className="text-sm font-semibold text-white/80 transition hover:text-white"
-            >
-              Pelny ranking
-              <ArrowRight className="ml-2 inline-block h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="space-y-4">
-            {tab.companies.map((company, index) => (
-              <HomeRankingRow
-                key={company.id}
-                company={company}
-                index={index}
-                tabId={tab.id}
-                onAffiliateClick={(intent) =>
-                  logClick(company.slug, intent ?? "primary")
-                }
+      <div className="flex flex-col gap-4 lg:flex-row">
+        {filtersOpen && (
+          <aside className="w-full lg:w-72">
+            <div className="sticky top-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+              <RankingFilterColumn
+                accountTypes={accountTypeOptions}
+                evaluationModels={evaluationModelOptions}
+                countries={countryOptions}
+                cashbackTiers={CASHBACK_TIERS}
+                filters={{
+                  accountType: accountTypeFilter,
+                  evaluationModel: evaluationFilter,
+                  country: countryFilter,
+                  cashback: cashbackFilter,
+                  verified: verifiedFilter,
+                  payoutSpeed: payoutSpeedFilter,
+                }}
+                onFiltersChange={({
+                  accountType,
+                  evaluationModel,
+                  country,
+                  cashback,
+                  verified,
+                  payoutSpeed,
+                }) => {
+                  if (accountType !== undefined) setAccountTypeFilter(accountType);
+                  if (evaluationModel !== undefined) setEvaluationFilter(evaluationModel);
+                  if (country !== undefined) setCountryFilter(country);
+                  if (cashback !== undefined) setCashbackFilter(cashback);
+                  if (verified !== undefined) setVerifiedFilter(verified);
+                  if (payoutSpeed !== undefined) setPayoutSpeedFilter(payoutSpeed);
+                }}
               />
+            </div>
+          </aside>
+        )}
+
+        <div className="flex-1">
+          <Tabs
+            value={activeTab}
+            onValueChange={(value) => setActiveTab(value)}
+            className="w-full"
+          >
+            <div className="relative">
+              <TabsList className="flex w-full flex-wrap gap-2 overflow-x-auto">
+                {filteredTabs.map((tab) => (
+                  <TabsTrigger
+                    key={tab.id}
+                    value={tab.id}
+                    className="flex items-center justify-center rounded-full border border-white/20 bg-black/70 px-6 py-2 text-sm font-semibold text-white/80 transition-all duration-200 data-[state=inactive]:text-white/70 data-[state=active]:border-white data-[state=active]:bg-black/80 data-[state=active]:text-white data-[state=active]:shadow-none hover:border-white/40"
+                  >
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              <span className="pointer-events-none absolute right-0 top-0 h-full w-12 rounded-r-full bg-gradient-to-l from-black via-black/60 to-transparent" />
+            </div>
+
+            {filteredTabs.map((tab) => (
+              <TabsContent key={tab.id} value={tab.id} className="mt-6 space-y-4">
+                {tab.companies.length === 0 ? (
+                  <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-6 text-center text-sm text-white/70">
+                    Brak firm spełniających wybrane filtry. Zresetuj filtry, aby zobaczyć wszystkie firmy.
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {tab.companies.map((company, index) => (
+                      <HomeRankingRow
+                        key={company.id}
+                        company={company}
+                        index={index}
+                        tabId={tab.id}
+                        onAffiliateClick={(intent) =>
+                          logClick(company.slug, intent ?? "primary")
+                        }
+                      />
+                    ))}
+                  </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RankingFilterColumn({
+  accountTypes,
+  evaluationModels,
+  countries,
+  cashbackTiers,
+  filters,
+  onFiltersChange,
+}: {
+  accountTypes: string[];
+  evaluationModels: string[];
+  countries: string[];
+  cashbackTiers: CashbackTier[];
+  filters: FilterValues;
+  onFiltersChange: (values: Partial<FilterValues>) => void;
+}) {
+  return (
+    <Accordion type="single" collapsible defaultValue="account"> 
+      <AccordionItem value="account">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Rodzaj konta</span>
+          <span className="text-xs text-white/40">
+            {filters.accountType || "wszystkie"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <FilterSelect
+            value={filters.accountType}
+            onChange={(value) => onFiltersChange({ accountType: value })}
+            options={accountTypes}
+            placeholder="Wybierz typ konta"
+          />
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="evaluation">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Rodzaj challenge’u</span>
+          <span className="text-xs text-white/40">
+            {filters.evaluationModel || "wszystkie"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <FilterSelect
+            value={filters.evaluationModel}
+            onChange={(value) => onFiltersChange({ evaluationModel: value })}
+            options={evaluationModels}
+            placeholder="Wybierz model"
+          />
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="country">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Kraj</span>
+          <span className="text-xs text-white/40">
+            {filters.country || "dowolny"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <FilterSelect
+            value={filters.country}
+            onChange={(value) => onFiltersChange({ country: value })}
+            options={countries}
+            placeholder="Wybierz kraj"
+          />
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="cashback">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Cashback</span>
+          <span className="text-xs text-white/40">
+            {cashbackTiers.find((tier) => tier.value === filters.cashback)?.label ?? "dowolny"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <Select
+            value={filters.cashback || ""}
+            onValueChange={(value) => onFiltersChange({ cashback: value })}
+          >
+            <SelectTrigger className="w-full rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs font-semibold text-white/80">
+              <SelectValue placeholder="Wybierz zakres" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Dowolny</SelectItem>
+              {cashbackTiers.map((tier) => (
+                <SelectItem key={tier.value} value={tier.value}>
+                  {tier.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="verified">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Verified partner</span>
+          <span className="text-xs text-white/40">
+            {filters.verified ? "tak" : "nie"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <Button
+            variant={filters.verified ? "nav" : "ghost"}
+            size="sm"
+            className="w-full rounded-full border border-white/20"
+            onClick={() => onFiltersChange({ verified: !filters.verified })}
+          >
+            {filters.verified ? "Tylko verified" : "Włącz verified"}
+          </Button>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="payout">
+        <AccordionTrigger className="flex items-center justify-between text-sm font-semibold text-white">
+          <span>Szybkość wypłat</span>
+          <span className="text-xs text-white/40">
+            {filters.payoutSpeed || "dowolna"}
+          </span>
+        </AccordionTrigger>
+        <AccordionContent>
+          <div className="flex flex-wrap gap-2">
+            {PAYOUT_SPEED_OPTIONS.map((option) => (
+              <Button
+                key={option.value}
+                variant={filters.payoutSpeed === option.value ? "solid" : "ghost"}
+                size="sm"
+                className="rounded-full border border-white/20 px-3 text-xs text-white"
+                onClick={() => onFiltersChange({ payoutSpeed: option.value })}
+              >
+                {option.label}
+              </Button>
             ))}
           </div>
-        </TabsContent>
-      ))}
-    </Tabs>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+const FILTER_CLEAR_VALUE = "__all__";
+
+type FilterValues = {
+  accountType: string;
+  evaluationModel: string;
+  country: string;
+  cashback: string;
+  verified: boolean;
+  payoutSpeed: string;
+};
+
+type CashbackTier = {
+  value: string;
+  label: string;
+  min: number;
+};
+
+const CASHBACK_TIERS: CashbackTier[] = [
+  { value: "gte15", label: ">= 15%", min: 15 },
+  { value: "gte10", label: ">= 10%", min: 10 },
+  { value: "gte5", label: ">= 5%", min: 5 },
+];
+
+const PAYOUT_SPEED_OPTIONS = [
+  { value: "fast", label: "Fast payouts" },
+  { value: "normal", label: "Normal payouts" },
+  { value: "slow", label: "Slow payouts" },
+];
+
+function FilterSelect({
+  value,
+  onChange,
+  options,
+  placeholder,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+  placeholder: string;
+}) {
+  const triggerValue = value || FILTER_CLEAR_VALUE;
+
+  return (
+    <Select
+      value={triggerValue}
+      onValueChange={(v) => onChange(v === FILTER_CLEAR_VALUE ? "" : v)}
+    >
+      <SelectTrigger className="w-full min-w-[160px] rounded-full border border-white/15 bg-black/60 px-3 py-2 text-xs font-semibold text-white/80 h-9">
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent className="w-full max-w-[220px]">
+        <SelectItem value={FILTER_CLEAR_VALUE}>Wszystkie</SelectItem>
+        {options.map((option) => (
+          <SelectItem key={option} value={option}>
+            {option}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }
 
@@ -114,16 +476,56 @@ function HomeRankingRow({
   tabId: HomeRankingTab["id"];
   onAffiliateClick: (intent: "primary" | "details") => void;
 }) {
-  const metrics = buildRowMetrics(tabId, company);
-  const trendValue =
-    typeof company.trendRatio === "number" && Number.isFinite(company.trendRatio)
-      ? `${company.trendRatio >= 0 ? "+" : ""}${company.trendRatio.toFixed(1)}%`
+  const isTopRank = index === 0;
+  const cashbackValue =
+    typeof company.cashbackRate === "number"
+      ? `${company.cashbackRate.toFixed(0)}%`
       : "—";
-  const score =
+  const scoreValue =
     typeof company.scores?.overall === "number"
       ? company.scores.overall.toFixed(1)
       : "—";
-
+  const priceValue = formatCompanyPrice(company);
+  const ratingValue =
+    typeof company.averageRating === "number"
+      ? company.averageRating.toFixed(1)
+      : "—";
+  const reviewCount = company.reviewCount
+    ? company.reviewCount.toLocaleString("pl-PL")
+    : "0";
+  const payoutLabel =
+    typeof company.cashbackPayoutHours === "number"
+      ? `${company.cashbackPayoutHours}h payout`
+      : "Payout TBD";
+  const accountTypeLabel = company.accountTypes[0] ?? "Dowolny typ";
+  const evaluationTypeLabel = getEvaluationLabel(company.evaluationModels[0]);
+  const discountLabel = company.discountCode
+    ? `Kod ${company.discountCode}`
+    : "Cashback ready";
+  const trendRatio =
+    typeof company.trendRatio === "number" && Number.isFinite(company.trendRatio)
+      ? company.trendRatio
+      : null;
+  const trendIcon = trendRatio !== null && trendRatio >= 0 ? (
+    <ArrowUpRight className="h-3 w-3" />
+  ) : (
+    <ArrowDownRight className="h-3 w-3" />
+  );
+  const trendColor =
+    trendRatio === null
+      ? "text-white/50"
+      : trendRatio >= 0
+      ? "text-emerald-300"
+      : "text-rose-300";
+  const cashbackProgress = Math.min(Math.max(company.cashbackRate ?? 0, 0), 100);
+  const verifiedPartner = typeof company.cashbackRedeemRate === "number";
+  const payoutSpeed = getPayoutSpeed(company.cashbackPayoutHours);
+  const challengeLabel =
+    typeof company.recommendedRatio === "number"
+      ? `Challenge ${company.recommendedRatio.toFixed(0)}%`
+      : "Challenge data";
+  const uspCopy = company.headline ?? "Prosty onboarding i szybkie wypłaty";
+  const countryInfo = getCountryDisplay(company.country, company.foundedYear);
   const affiliateHref = buildCompanyHref(company.slug, {
     intent: "primary",
     tabId,
@@ -136,96 +538,123 @@ function HomeRankingRow({
   });
 
   return (
-    <article className="flex flex-col gap-5 rounded-3xl border border-white/20 bg-black/70 px-5 py-5 text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)] transition hover:-translate-y-0.5 hover:border-white/40">
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex items-center gap-4">
-          <div className="rounded-full border border-white/30 px-3 py-1 text-xs font-semibold tracking-[0.2em]">
-            #{index + 1}
-          </div>
-          <div className="flex items-center gap-3">
-            <CompanyLogo name={company.name} logoUrl={company.logoUrl} />
-            <div className="space-y-0.5">
+    <article
+      className={cn(
+        "group relative flex flex-col gap-3 rounded-2xl border border-white/15 bg-black/70 px-4 py-3 text-white transition duration-200",
+        isTopRank
+          ? "border-amber-300/40 bg-gradient-to-r from-black/80 via-black/60 to-emerald-950/70 shadow-[0_25px_40px_rgba(16,185,129,0.35)]"
+          : "hover:-translate-y-[2px] hover:border-white/40 hover:bg-white/5 hover:shadow-[0_16px_25px_rgba(16,185,129,0.25)]",
+      )}
+    >
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-5">
+        <div className="flex flex-1 min-w-0 gap-3">
+          <CompanyLogo name={company.name} logoUrl={company.logoUrl} sizeClass="h-9 w-9" />
+          <div className="flex flex-1 flex-col gap-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 text-sm font-semibold">
               <Link
                 href={`/firmy/${company.slug}`}
-                className="text-base font-semibold text-white transition hover:opacity-90"
+                className={cn(
+                  "max-w-full truncate transition hover:opacity-90",
+                  isTopRank
+                    ? "relative text-white after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-px after:bg-amber-200/70"
+                    : "text-white/90",
+                )}
                 prefetch={false}
               >
                 {company.name}
               </Link>
-              <p className="text-xs text-white/60 line-clamp-1">
-                {company.headline ?? company.country ?? "Globalny rynek"}
-              </p>
+              <span className="rounded-full border border-white/20 px-2 py-0.5 text-[11px] uppercase tracking-[0.2em] text-white/70">
+                #{index + 1}
+              </span>
+              {isTopRank && (
+                <span className="rounded-full bg-amber-400/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200">
+                  Top wybór
+                </span>
+              )}
+              <span className="rounded-md bg-white/5 px-2 py-0.5 text-[11px] font-semibold text-white/70">
+                Wynik: {scoreValue}
+              </span>
+            </div>
+            {verifiedPartner && (
+              <div className="flex items-center gap-1 text-[10px] text-emerald-300/90">
+                <Check className="h-3 w-3" />
+                Verified partner
+              </div>
+            )}
+            <div className="text-xs text-white/50">
+              {countryInfo}
+            </div>
+            <p className="text-sm text-white/70 line-clamp-2">
+              {uspCopy}
+            </p>
+            <div className="flex flex-wrap items-center gap-2 text-[11px] text-white/60">
+              <span className="rounded-md bg-white/5 px-2 py-0.5 font-semibold uppercase tracking-[0.2em] text-white/70">
+                {evaluationTypeLabel}
+              </span>
+              <span className="rounded-md bg-white/5 px-2 py-0.5 font-semibold uppercase tracking-[0.2em] text-white/70">
+                {accountTypeLabel}
+              </span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/70">
-            Wynik {score}
-          </span>
-          <span className="rounded-full border border-emerald-300/40 bg-emerald-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-emerald-200">
-            {company.discountCode ? `Kod ${company.discountCode}` : "Cashback ready"}
-          </span>
+        <div className="flex flex-1 min-w-0 flex-col gap-1">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/50">Cashback</p>
+              <p className="text-2xl font-semibold text-emerald-300">{cashbackValue}</p>
+            </div>
+          </div>
+          <div className="h-1.5 w-[60px] overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full bg-emerald-400"
+              style={{ width: `${cashbackProgress}%` }}
+            />
+          </div>
+          <p className="text-sm font-semibold text-white/90">Plan od {priceValue}</p>
+          <div className="flex flex-wrap items-center gap-2 text-[11px] text-white/65">
+            <FeaturePill
+              icon={<Star className="h-3 w-3 text-amber-300" />}
+              label={`${ratingValue} (${reviewCount} opinii)`}
+            />
+            <FeaturePill icon={payoutSpeed.icon} label={payoutLabel} />
+            <FeaturePill icon={<BadgePercent className="h-3 w-3" />} label={challengeLabel} />
+          </div>
+          <div className={cn(
+            "mt-1 flex items-center gap-2 text-[11px] uppercase tracking-[0.3em]",
+            trendColor,
+          )}>
+            {trendIcon}
+            Trend 30d {trendRatio !== null ? `${trendRatio >= 0 ? "+" : ""}${trendRatio.toFixed(1)}%` : "—"}
+          </div>
         </div>
-      </header>
 
-      <div className="grid gap-3 md:grid-cols-3">
-        {metrics.map((metric) => (
-          <HomeRankingMetric key={metric.label} {...metric} />
-        ))}
-      </div>
-
-      <div className="flex flex-wrap items-center gap-3 text-xs text-white/70">
-        <HomeRankingSocialStat
-          icon={Star}
-          label="Srednia ocena"
-          value={
-            typeof company.averageRating === "number"
-              ? company.averageRating.toFixed(1)
-              : "—"
-          }
-        />
-        <HomeRankingSocialStat
-          icon={BadgePercent}
-          label="Opinie"
-          value={`${company.reviewCount.toLocaleString("pl-PL")}`}
-        />
-        <HomeRankingSocialStat
-          icon={TrendingUp}
-          label="Trend 30d"
-          value={trendValue}
-        />
-      </div>
-
-      <div className="flex flex-col gap-3 border-t border-white/10 pt-4 lg:flex-row lg:items-center lg:justify-between">
-        <p className="text-sm text-white/65">
-          Kliknij, aby przejsc przez monitorowany link affiliate. Cashback naliczymy po zakupie planu u partnera.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href={affiliateHref}
-            prefetch={false}
-            className={cn(
-              buttonVariants({ variant: "premium", size: "sm" }),
-              "rounded-full px-6 text-sm font-semibold",
-            )}
-            onClick={() => onAffiliateClick("primary")}
-            aria-label={`Przejdz do firmy ${company.name} i odbierz cashback`}
+        <div className="flex w-full flex-col items-start gap-2 pt-2 text-sm lg:w-auto lg:items-end lg:justify-center lg:pt-4">
+          <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
+            {discountLabel}
+          </span>
+          <Button
+            asChild
+            size="sm"
+            variant="premium"
+            className="w-full rounded-full px-5 py-2 font-semibold text-white lg:w-auto"
           >
-            Odbierz cashback
-            <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Link>
+            <Link
+              href={affiliateHref}
+              prefetch={false}
+              onClick={() => onAffiliateClick("primary")}
+              aria-label={`Przejdz do firmy ${company.name} i odbierz cashback`}
+            >
+              Odbierz cashback
+            </Link>
+          </Button>
           <Link
             href={detailsHref}
             prefetch={false}
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "rounded-full border border-white/20 bg-transparent px-4 text-sm text-white/80 hover:text-white",
-            )}
+            className="text-xs font-semibold text-white/60 transition hover:text-white"
             onClick={() => onAffiliateClick("details")}
-            aria-label={`Szczegoly firmy ${company.name}`}
           >
-            Szczegoly firmy
+            Szczegóły / Recenzja
           </Link>
         </div>
       </div>
@@ -233,121 +662,74 @@ function HomeRankingRow({
   );
 }
 
-function buildRowMetrics(
-  tabId: HomeRankingTab["id"],
-  company: RankingCompanySnapshot,
-): MetricDefinition[] {
-  const metrics: MetricDefinition[] = [
-    getPrimaryMetric(tabId, company),
-    {
-      label: "Cashback",
-      value:
-        typeof company.cashbackRate === "number"
-          ? `${company.cashbackRate.toFixed(0)}%`
-          : "—",
-      helper: company.discountCode ? `Kod ${company.discountCode}` : "Zwrot po kliknieciu",
-      icon: BadgePercent,
-    },
-    {
-      label: "Cena planu",
-      value: formatCompanyPrice(company),
-      helper: company.accountTypes[0] ?? "Dowolny rachunek",
-      icon: Banknote,
-    },
-  ];
-
-  return metrics;
+function FeaturePill({
+  icon,
+  label,
+}: {
+  icon?: ReactNode;
+  label: string;
+}) {
+  return (
+    <span className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-white/70">
+      {icon}
+      {label}
+    </span>
+  );
 }
 
-function getPrimaryMetric(
-  tabId: HomeRankingTab["id"],
-  company: RankingCompanySnapshot,
-): MetricDefinition {
-  switch (tabId) {
-    case "cashback":
-      return {
-        label: "Priorytet rankingu",
-        value:
-          typeof company.cashbackRate === "number"
-            ? `${company.cashbackRate.toFixed(0)}%`
-            : "—",
-        helper: "Zweryfikowany cashback FundedRank",
-        icon: BadgePercent,
-      };
-    case "price":
-      return {
-        label: "Najtanszy plan",
-        value: formatCompanyPrice(company),
-        helper: company.evaluationModels[0] ?? "Dowolny model",
-        icon: Banknote,
-      };
-    case "payouts":
-      return {
-        label: "Srednia wyplata",
-        value: formatPayoutMetric(company),
-        helper: "Deklarowane SLA partnera",
-        icon: Clock3,
-      };
-    case "opinions":
-      return {
-        label: "Srednia ocena",
-        value:
-          typeof company.averageRating === "number"
-            ? company.averageRating.toFixed(1)
-            : "—",
-        helper: `${company.reviewCount.toLocaleString("pl-PL")} opinii`,
-        icon: Star,
-      };
+function getEvaluationLabel(model?: string | null) {
+  switch (model) {
+    case "one-step":
+      return "1-step";
+    case "two-step":
+      return "2-step";
+    case "instant":
+      return "Instant funded";
     default:
-      return {
-        label: "Wynik ogolny",
-        value: company.scores?.overall
-          ? company.scores.overall.toFixed(1)
-          : "—",
-        helper: "Model laczacy wyplaty, hype i reputacje",
-        icon: TrendingUp,
-      };
+      return model ? model : "Typ konta";
   }
 }
 
-function HomeRankingMetric({
-  label,
-  value,
-  helper,
-  icon: Icon,
-}: MetricDefinition) {
-  return (
-    <div className="rounded-2xl border border-white/15 bg-white/5 p-3">
-      <div className="flex items-center gap-2">
-        {Icon ? (
-          <span className="rounded-full border border-white/20 bg-white/10 p-1.5">
-            <Icon className="h-4 w-4 text-white/80" />
-          </span>
-        ) : null}
-        <p className="text-xs uppercase tracking-[0.2em] text-white/45">{label}</p>
-      </div>
-      <p className="mt-2 text-xl font-semibold text-white">{value}</p>
-      {helper ? <p className="text-xs text-white/60">{helper}</p> : null}
-    </div>
-  );
+function getPayoutSpeed(hours?: number | null) {
+  if (typeof hours !== "number" || Number.isNaN(hours)) {
+    return {
+      icon: <Clock3 className="h-3 w-3" />,
+      label: "Payout unknown",
+      value: "unknown",
+    };
+  }
+
+  if (hours <= 24) {
+    return { icon: <Zap className="h-3 w-3" />, label: "Fast payouts", value: "fast" };
+  }
+
+  if (hours <= 72) {
+    return { icon: <Clock3 className="h-3 w-3" />, label: "Normal payouts", value: "normal" };
+  }
+
+  return { icon: <Turtle className="h-3 w-3" />, label: "Slow payouts", value: "slow" };
 }
 
-function HomeRankingSocialStat({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof Star;
-  label: string;
-  value: string;
-}) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1">
-      <Icon className="h-3.5 w-3.5 text-white/80" />
-      <span className="text-white/60">{label}:</span>
-      <span className="font-semibold text-white">{value}</span>
-    </span>
-  );
+function getCountryDisplay(country?: string | null, foundedYear?: number | null) {
+  const flag = getFlagEmoji(country);
+  const countryName = country ?? "Globalny rynek";
+  const year = foundedYear ? ` • ${foundedYear}` : "";
+  return `${flag ? `${flag} ` : ""}${countryName}${year}`;
+}
+
+function getFlagEmoji(country?: string | null) {
+  if (!country) return "";
+  const code = country
+    .slice(0, 2)
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "");
+  if (code.length < 2) {
+    return "";
+  }
+
+  const first = code.codePointAt(0)! - 65 + 0x1f1e6;
+  const second = code.codePointAt(1)! - 65 + 0x1f1e6;
+  return String.fromCodePoint(first, second);
 }
 
 function useAffiliateClickLogger(source: string) {
@@ -470,17 +852,25 @@ function FullRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
   );
 }
 
-function CompanyLogo({ name, logoUrl }: { name: string; logoUrl: string | null }) {
+function CompanyLogo({
+  name,
+  logoUrl,
+  sizeClass = "h-10 w-10",
+}: {
+  name: string;
+  logoUrl: string | null;
+  sizeClass?: string;
+}) {
   if (logoUrl) {
     return (
-      <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/25 bg-black/40">
+      <div className={cn("relative overflow-hidden rounded-lg border border-white/25 bg-black/40", sizeClass)}>
         <Image src={logoUrl} alt={name} fill className="object-contain" sizes="40px" />
       </div>
     );
   }
 
   return (
-    <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/25 bg-black/50 text-xs font-semibold uppercase text-white">
+    <div className={cn("flex items-center justify-center rounded-lg border border-white/25 bg-black/50 text-xs font-semibold uppercase text-white", sizeClass)}>
       {name
         .split(" ")
         .slice(0, 2)

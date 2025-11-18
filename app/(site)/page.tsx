@@ -8,7 +8,7 @@ import { HomeEducationGrid } from "@/components/home/home-education-grid";
 import { HomeRecentSection } from "@/components/home/home-recent-section";
 import { HomeLatestCompanies } from "@/components/home/home-latest-companies";
 import { parseCompareParam } from "@/lib/compare";
-import { getHomeRanking, getHomepageMetrics, getRecentCompanies, getTopCashbackCompanies } from "@/lib/queries/companies";
+import { getHomepageMetrics, getRecentCompanies, getTopCashbackCompanies } from "@/lib/queries/companies";
 import { getRecentPublicReviews } from "@/lib/queries/reviews";
 import { getHomeRankingTabs } from "@/lib/queries/rankings";
 import { getHomepageMarketingSection } from "@/lib/queries/marketing";
@@ -27,7 +27,6 @@ export default async function Home({ searchParams }: HomeProps) {
     rankingTabs,
     topCashbackCompanies,
     recentReviews,
-    homeRanking,
     marketingSection,
     recentCompanies,
   ] = await Promise.all([
@@ -35,12 +34,9 @@ export default async function Home({ searchParams }: HomeProps) {
     getHomeRankingTabs(10),
     getTopCashbackCompanies(6),
     getRecentPublicReviews(4),
-    getHomeRanking(10),
     getHomepageMarketingSection(6),
     getRecentCompanies(6),
   ]);
-
-  const compareCompanies = homeRanking.topRated;
 
   return (
     <CompareProvider initialSelection={selection}>
@@ -51,7 +47,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <TopCashbackSection companies={topCashbackCompanies} />
           <HomeMarketingSpotlights section={marketingSection} />
           <HomeLatestCompanies companies={recentCompanies} />
-          <HomeCompareTeaser companies={compareCompanies} />
+          <HomeCompareTeaser />
           <HomeEducationGrid />
           <HomeRecentSection reviews={recentReviews} />
         </div>

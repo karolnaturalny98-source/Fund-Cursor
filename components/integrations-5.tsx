@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { Gemini, Replit, MagicUI, VSCodium, MediaWiki, GooglePaLM } from '@/components/logos'
 import { LogoIcon } from '@/components/logo'
 import { cn } from '@/lib/utils'
@@ -49,15 +50,13 @@ export default function IntegrationsSection() {
                         </div>
                     </div>
                     <div className="bg-linear-to-t from-background relative z-20 mx-auto mt-12 max-w-lg space-y-6 from-55% text-center">
-                        <h2 className="text-balance text-3xl font-semibold md:text-4xl">Integrate with your favorite tools</h2>
-                        <p className="text-muted-foreground">Connect seamlessly with popular platforms and services to enhance your workflow.</p>
+                        <h2 className="text-balance text-3xl font-semibold md:text-4xl">Złóż idealny zestaw firm w 30 sekund</h2>
+                        <p className="text-muted-foreground">Wybierz 2–3 firmy, zobacz różnice w ratingach i cashbacku, a następnie przenieś porównanie do pełnej analizy.</p>
 
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            asChild>
-                            <Link href="#">Get Started</Link>
+                        <Button variant="outline" size="sm" asChild>
+                            <Link href="/analizy">Przejdź do analiz</Link>
                         </Button>
+
                     </div>
                 </div>
             </div>
@@ -65,7 +64,7 @@ export default function IntegrationsSection() {
     )
 }
 
-const IntegrationCard = ({ children, className, isCenter = false }: { children: React.ReactNode; className?: string; position?: 'left-top' | 'left-middle' | 'left-bottom' | 'right-top' | 'right-middle' | 'right-bottom'; isCenter?: boolean }) => {
+const IntegrationCard = ({ children, className, isCenter = false }: { children: ReactNode; className?: string; position?: 'left-top' | 'left-middle' | 'left-bottom' | 'right-top' | 'right-middle' | 'right-bottom'; isCenter?: boolean }) => {
     return (
         <div className={cn('relative z-30 flex size-12 rounded-full border bg-white shadow-sm shadow-black/5 dark:bg-white/5 dark:backdrop-blur-md', className)}>
             <div className={cn('m-auto size-fit *:size-5', isCenter && '*:size-8')}>{children}</div>
