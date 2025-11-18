@@ -20,6 +20,7 @@ type OrbitConfig = {
   size: number;
   duration: number;
   padding: number;
+  direction: 1 | -1;
   borderStyle?: "dashed" | "solid";
 };
 
@@ -32,12 +33,13 @@ type OrbitFirm = {
   angle: number;
   initials: string;
   accent: string;
+  tag?: string;
 };
 
 const ORBIT_CONFIGS: OrbitConfig[] = [
-  { id: 1, size: 58, duration: 32, padding: 7, borderStyle: "dashed" },
-  { id: 2, size: 78, duration: 42, padding: 6, borderStyle: "solid" },
-  { id: 3, size: 96, duration: 54, padding: 5, borderStyle: "dashed" },
+  { id: 1, size: 75, duration: 22, padding: 7, direction: 1, borderStyle: "dashed" },
+  { id: 2, size: 90, duration: 38, padding: 6, direction: -1, borderStyle: "solid" },
+  { id: 3, size: 100, duration: 30, padding: 5, direction: 1, borderStyle: "dashed" },
 ];
 
 const ORBIT_FIRMS: OrbitFirm[] = [
@@ -50,6 +52,7 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 20,
     initials: "FF",
     accent: "from-emerald-300 to-cyan-300",
+    tag: "Instant funding",
   },
   {
     id: 2,
@@ -60,6 +63,7 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 120,
     initials: "ET",
     accent: "from-cyan-300 to-sky-500",
+    tag: "Cashback max",
   },
   {
     id: 3,
@@ -70,6 +74,7 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 230,
     initials: "RC",
     accent: "from-emerald-200 to-emerald-400",
+    tag: "24h payout",
   },
   {
     id: 4,
@@ -80,6 +85,7 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 310,
     initials: "NP",
     accent: "from-cyan-200 to-emerald-200",
+    tag: "2-step",
   },
   {
     id: 5,
@@ -90,6 +96,7 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 45,
     initials: "CL",
     accent: "from-teal-200 to-emerald-300",
+    tag: "Community top",
   },
   {
     id: 6,
@@ -100,7 +107,14 @@ const ORBIT_FIRMS: OrbitFirm[] = [
     angle: 200,
     initials: "OF",
     accent: "from-cyan-200 to-white",
+    tag: "1-step",
   },
+];
+
+const ORBIT_RING_STYLES = [
+  { id: "inner", scale: "scale-75", border: "border-white/10" },
+  { id: "middle", scale: "scale-90", border: "border-white/7" },
+  { id: "outer", scale: "scale-100", border: "border-white/5" },
 ];
 
 export function HomeHero({ metrics }: HomeHeroProps) {
@@ -127,7 +141,11 @@ export function HomeHero({ metrics }: HomeHeroProps) {
 
             <div className="space-y-4">
               <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Twój skrót do najlepszych firm prop.
+                Twój skrót do{" "}
+                <span className="bg-gradient-to-r from-white via-emerald-100/80 to-cyan-100/90 bg-clip-text text-transparent">
+                  najlepszych
+                </span>{" "}
+                firm prop.
               </h1>
               <p className="max-w-xl text-base text-white/70 sm:text-lg">
                 Porównujemy warunki planów, cashback i opinie traderów, żeby wybrać tylko realnych liderów
@@ -135,7 +153,7 @@ export function HomeHero({ metrics }: HomeHeroProps) {
               </p>
             </div>
 
-            <p className="text-sm font-medium text-white/70">
+            <p className="text-sm font-medium text-white/80">
               {stats.join(" • ")}
             </p>
 
@@ -170,35 +188,31 @@ function PropTradingPlanet() {
   return (
     <div className="flex items-center justify-center">
       <div className="relative mx-auto aspect-square w-full max-w-md">
-        <div
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle,#020205_0%,rgba(1,2,5,0.85)_55%,transparent_80%)]"
-          aria-hidden="true"
-        />
-        <div className="relative h-full w-full">
-          {ORBIT_CONFIGS.map((orbit) => (
-            <div
-              key={`ring-${orbit.id}`}
-              className={cn(
-                "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border",
-                orbit.id === 2 ? "border-white/15" : "border-white/10",
-                orbit.borderStyle === "dashed" ? "border-dashed" : "border-solid",
-              )}
-              style={{
-                width: `${orbit.size}%`,
-                height: `${orbit.size}%`,
-                opacity: orbit.id === 2 ? 0.25 : 0.18,
-              }}
-            />
-          ))}
+        <div className="pointer-events-none absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.03),transparent_70%)]" />
+        <div className="relative h-full w-full rounded-[3rem] bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)]">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="h-2/5 w-2/5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_80%)]" />
+          </div>
 
-          <PlanetCore />
+          <div className="absolute inset-0">
+            {ORBIT_RING_STYLES.map((ring) => (
+              <div
+                key={ring.id}
+                className={cn(
+                  "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-full rounded-full border border-white/10 origin-center",
+                  ring.scale,
+                  ring.border,
+                )}
+              />
+            ))}
+          </div>
 
           {ORBIT_CONFIGS.map((orbit) => (
             <motion.div
               key={`orbit-${orbit.id}`}
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
               style={{ width: `${orbit.size}%`, height: `${orbit.size}%` }}
-              animate={{ rotate: 360 }}
+              animate={{ rotate: orbit.direction === -1 ? -360 : 360 }}
               transition={{ duration: orbit.duration, repeat: Infinity, ease: "linear" }}
             >
               <div className="relative h-full w-full">
@@ -210,43 +224,6 @@ function PropTradingPlanet() {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function PlanetCore() {
-  return (
-    <div className="absolute left-1/2 top-1/2 z-10 flex h-72 w-72 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-      <motion.div
-        className="absolute h-72 w-72 rounded-full bg-[radial-gradient(circle,#00f5a0_0%,#00d9f5_45%,rgba(0,30,60,0.2)_100%)] blur-[2px]"
-        animate={{
-          scale: [0.98, 1.02, 0.99],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <div className="absolute h-80 w-80 rounded-full bg-emerald-400/15 blur-[140px]" />
-      <div className="absolute h-96 w-96 rounded-full border border-cyan-200/10" />
-      <motion.div
-        className="relative h-48 w-48 rounded-full bg-[radial-gradient(circle,#0b1f29_0%,#07131a_65%,rgba(2,6,10,0.4)_100%)] shadow-[0_0_120px_rgba(0,214,255,0.25)]"
-        animate={{
-          scale: [0.96, 1, 0.97],
-          rotate: [0, 6, -4, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute h-64 w-64 rounded-full border border-cyan-200/20"
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 38, repeat: Infinity, ease: "linear" }}
-      />
     </div>
   );
 }
@@ -263,31 +240,27 @@ function OrbitFirmChip({ firm, orbitPadding }: { firm: OrbitFirm; orbitPadding: 
         <motion.div
           className="absolute -translate-x-1/2 -translate-y-1/2"
           style={{ left, top }}
-          animate={{ y: ["-4px", "4px", "-4px"] }}
-          transition={{ duration: 6 + firm.orbit, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ scale: 1.05 }}
+          animate={{ y: ["-2px", "2px", "-2px"], x: ["-1px", "1px", "-1px"] }}
+          transition={{ duration: 7 + firm.orbit, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.15 }}
         >
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white shadow-[0_20px_55px_rgba(1,3,12,0.75)] backdrop-blur-xl">
-            <Avatar className="h-9 w-9 rounded-full border border-white/20 bg-gradient-to-br from-white/10 to-transparent text-[0.7rem] font-semibold uppercase text-white/90 shadow-[0_0_20px_rgba(0,214,255,0.45)]">
-              <AvatarFallback className={`bg-gradient-to-br ${firm.accent} text-[0.65rem] font-semibold uppercase text-slate-950`}>
-                {firm.initials}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col leading-tight">
-              <span className="text-[11px] font-semibold text-white">{firm.name}</span>
-              <span className="text-[10px] text-emerald-200">{firm.cashback}</span>
-            </div>
-          </div>
+          <Avatar className="h-11 w-11 rounded-full border border-white/40 bg-transparent text-[0.8rem] font-semibold uppercase text-black/80 shadow-[0_0_12px_rgba(0,0,0,0.7)]">
+            <AvatarFallback className={cn("bg-gradient-to-br text-[0.75rem] font-semibold uppercase text-black/80", firm.accent)}>
+              {firm.initials}
+            </AvatarFallback>
+          </Avatar>
         </motion.div>
       </TooltipTrigger>
       <TooltipContent
         side="top"
         align="center"
-        className="max-w-xs border border-white/15 bg-slate-950/90 px-4 py-3 text-white shadow-[0_25px_65px_rgba(0,0,0,0.8)] backdrop-blur-2xl"
+        className="max-w-xs border border-white/15 bg-[#03060a]/90 px-4 py-3 text-white shadow-[0_30px_70px_rgba(0,0,0,0.85)] backdrop-blur-2xl"
       >
-        <p className="text-xs font-semibold text-white">{firm.name}</p>
+        <p className="text-xs uppercase tracking-[0.35em] text-white/40">Prop firma</p>
+        <p className="text-sm font-semibold text-white">{firm.name}</p>
         <p className="text-[11px] text-emerald-200">{firm.cashback}</p>
         <p className="text-[11px] text-white/70">{firm.planFrom}</p>
+        {firm.tag ? <p className="text-[11px] text-white/50">{firm.tag}</p> : null}
       </TooltipContent>
     </Tooltip>
   );
