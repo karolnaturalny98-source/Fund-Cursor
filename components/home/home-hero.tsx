@@ -132,20 +132,21 @@ export function HomeHero({ metrics }: HomeHeroProps) {
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
-              <div className="flex w-full flex-col gap-1">
+              <div className="flex w-full flex-col">
                 <Button
                   asChild
-                  variant="primary"
-                  className="w-full rounded-full sm:w-auto"
+                  size="none"
+                  variant="ghost"
+                  className="inline-flex h-12 animate-shimmer items-center justify-center !rounded-[0.75rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 text-sm font-semibold text-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 sm:w-auto"
                 >
                   <Link href="/rankingi">Zobacz ranking firm</Link>
                 </Button>
-                <p className="text-xs font-medium text-white/60">Na podstawie analizy z radaru AI</p>
               </div>
               <Button
                 asChild
-                variant="outline"
-                className="w-full rounded-full border-white/30 text-white hover:bg-white/10 sm:w-auto"
+                size="none"
+                variant="ghost"
+                className="inline-flex h-12 animate-shimmer items-center justify-center !rounded-[0.75rem] border border-slate-800 bg-[linear-gradient(110deg,#050b13,45%,#111c24,55%,#050b13)] bg-[length:200%_100%] px-6 text-sm font-semibold text-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 sm:w-auto"
               >
                 <Link href="/affilacja">Program cashback</Link>
               </Button>
