@@ -86,18 +86,18 @@ export const AnimatedTooltip = ({ items, className }: AnimatedTooltipProps) => {
                   rotate: rotate,
                   whiteSpace: "nowrap",
                 }}
-                className="absolute -top-16 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center justify-center rounded-md bg-black px-4 py-2 text-xs shadow-xl"
+                className="absolute -top-16 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.08] px-4 py-2 text-xs text-white/90 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.6)] backdrop-blur-md"
               >
                 <div className="absolute inset-x-10 -bottom-px z-30 h-px w-[20%] bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
                 <div className="absolute -bottom-px left-10 z-30 h-px w-[40%] bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
-                <div className="relative z-30 text-base font-bold text-white">
+                <div className="relative z-30 text-base font-semibold text-white">
                   {item.name}
                 </div>
-                <div className="text-xs text-white">{item.designation}</div>
+                <div className="text-xs text-white/75">{item.designation}</div>
               </motion.div>
             )}
           </AnimatePresence>
-          <div className="relative h-16 w-16 overflow-hidden rounded-[32%] border-2 border-white bg-black/40">
+          <div className="relative h-16 w-16 overflow-hidden rounded-[32%] border border-white/20 bg-white/[0.04]">
             <Image
               onMouseMove={handleMouseMove}
               alt={item.name}

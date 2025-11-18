@@ -51,9 +51,7 @@ export default function RootLayout({
               __html: `
                 (function() {
                   try {
-                    const theme = localStorage.getItem('theme') || 'system';
-                    const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                    document.documentElement.classList.toggle('dark', isDark);
+                    document.documentElement.classList.add('dark');
                   } catch (e) {}
                 })();
               `,
@@ -61,8 +59,8 @@ export default function RootLayout({
           />
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="dark"
+            enableSystem={false}
             disableTransitionOnChange
           >
             <CurrencyProvider>

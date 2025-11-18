@@ -2091,6 +2091,7 @@ export const getTopCashbackCompanies = unstable_cache(
         slug: true,
         logoUrl: true,
         cashbackRate: true,
+        discountCode: true,
         plans: {
           select: {
             price: true,
@@ -2133,6 +2134,13 @@ export const getTopCashbackCompanies = unstable_cache(
           cashbackRate: company.cashbackRate,
           minCashback: Math.round(minCashback * 100) / 100,
           maxCashback: Math.round(maxCashback * 100) / 100,
+          discountCode: company.discountCode ?? null,
+          minPlanPrice: Number.isFinite(minPrice)
+            ? Math.round(minPrice * 100) / 100
+            : null,
+          maxPlanPrice: Number.isFinite(maxPrice)
+            ? Math.round(maxPrice * 100) / 100
+            : null,
         };
       })
       .filter((company): company is NonNullable<typeof company> => company !== null)

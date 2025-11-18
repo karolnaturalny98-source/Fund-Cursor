@@ -18,24 +18,68 @@
 }
 
 :root {
-  --surface-base: color-mix(in srgb, var(--background) 92%, var(--foreground) 8%);
-  --surface-muted: color-mix(in srgb, var(--background) 88%, var(--foreground) 12%);
-  --surface-elevated: color-mix(in srgb, var(--background) 80%, var(--foreground) 20%);
-  --surface-glass: color-mix(in srgb, var(--background) 70%, var(--accent) 30%);
-  --surface-ring: color-mix(in srgb, var(--accent) 60%, var(--primary) 40%);
-  --surface-highlight: color-mix(in srgb, var(--accent) 30%, white 70%);
+  color-scheme: dark;
+  --background: 220 10% 2.5%;
+  --foreground: 0 0% 96%;
+  --card: 220 10% 4.5%;
+  --card-foreground: 0 0% 96%;
+  --popover: 220 10% 4%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 156 81% 60%;
+  --primary-foreground: 0 0% 2%;
+  --secondary: 0 0% 9%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 220 8% 11%;
+  --muted-foreground: 220 3% 68%;
+  --accent: 200 85% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 2 84% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 200 85% 60%;
+  --shadow-soft: 220 34% 8%;
+  --shadow-strong: 210 40% 4%;
+  --surface-base: hsl(0 0% 5%);
+  --surface-muted: hsl(0 0% 7.5%);
+  --surface-elevated: hsl(0 0% 11%);
+  --surface-glass: hsla(0, 0%, 100%, 0.05);
+  --surface-ring: hsla(200, 85%, 60%, 0.65);
+  --surface-highlight: hsla(0, 0%, 100%, 0.09);
   --surface-pad-sm: clamp(0.9rem, 0.85vw + 0.65rem, 1.25rem);
   --surface-pad-md: clamp(1.15rem, 1vw + 0.9rem, 1.6rem);
   --surface-pad-lg: clamp(1.45rem, 1.2vw + 1.1rem, 2.15rem);
 }
 
 .dark {
-  --surface-base: color-mix(in srgb, var(--background) 80%, white 20%);
-  --surface-muted: color-mix(in srgb, var(--background) 72%, white 28%);
-  --surface-elevated: color-mix(in srgb, var(--background) 65%, white 35%);
-  --surface-glass: color-mix(in srgb, var(--background) 55%, var(--accent) 45%);
-  --surface-ring: color-mix(in srgb, var(--accent) 70%, white 30%);
-  --surface-highlight: color-mix(in srgb, var(--accent) 25%, white 75%);
+  color-scheme: dark;
+  --background: 220 10% 2.5%;
+  --foreground: 0 0% 96%;
+  --card: 220 10% 4.5%;
+  --card-foreground: 0 0% 96%;
+  --popover: 220 10% 4%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 156 81% 60%;
+  --primary-foreground: 0 0% 2%;
+  --secondary: 0 0% 9%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 220 8% 11%;
+  --muted-foreground: 220 3% 68%;
+  --accent: 200 85% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 2 84% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 200 85% 60%;
+  --shadow-soft: 220 34% 8%;
+  --shadow-strong: 210 40% 4%;
+  --surface-base: hsl(0 0% 5%);
+  --surface-muted: hsl(0 0% 7.5%);
+  --surface-elevated: hsl(0 0% 11%);
+  --surface-glass: hsla(0, 0%, 100%, 0.05);
+  --surface-ring: hsla(200, 85%, 60%, 0.65);
+  --surface-highlight: hsla(0, 0%, 100%, 0.09);
 }
 
 @utility surface-pad-sm {
@@ -310,6 +354,7 @@
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
     background: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   .page-shell {
@@ -464,5 +509,59 @@
     box-shadow:
       0 18px 42px -28px hsl(var(--shadow-soft) / 0.35),
       0 12px 28px -24px hsl(var(--shadow-soft) / 0.22);
+  }
+}
+
+.cashback-marquee-track {
+  animation-name: cashback-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.cashback-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cashback-marquee-track {
+    animation: none;
+    transform: none !important;
+  }
+}
+
+@keyframes cashback-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.latest-cards-marquee {
+  animation-name: latest-cards-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.latest-cards-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .latest-cards-marquee {
+    animation: none;
+    transform: none !important;
+  }
+}
+
+@keyframes latest-cards-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

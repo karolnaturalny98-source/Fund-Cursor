@@ -35,16 +35,16 @@ export default async function Home({ searchParams }: HomeProps) {
     getHomeRankingTabs(10),
     getTopCashbackCompanies(6),
     getRecentPublicReviews(4),
-    getHomeRanking(4),
+    getHomeRanking(10),
     getHomepageMarketingSection(6),
     getRecentCompanies(6),
   ]);
 
-  const compareCompanies = homeRanking.topRated.slice(0, 2);
+  const compareCompanies = homeRanking.topRated;
 
   return (
     <CompareProvider initialSelection={selection}>
-    <div className="relative min-h-screen bg-[var(--surface-muted)]">
+    <div className="relative min-h-screen bg-background">
         <div className="relative z-10 flex flex-col gap-[clamp(2rem,3vw,3.5rem)] py-[clamp(2rem,3vw,4rem)]">
           <HomeHero metrics={metrics} />
           <HomeRankingSection tabs={rankingTabs} />

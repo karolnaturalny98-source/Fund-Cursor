@@ -98,3 +98,19 @@ export interface HomeRankingTab {
   description: string;
   companies: RankingCompanySnapshot[];
 }
+
+export interface HomeRankingInsight {
+  id: string;
+  title: string;
+  description: string;
+  metricLabel: string;
+  metricValue: string;
+  contextLabel: string;
+  contextValue: string;
+  company: {
+    id: string;
+    name: string;
+    slug: string;
+    logoUrl: string | null;
+  };
+}

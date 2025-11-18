@@ -16,14 +16,13 @@ export const ButtonsCard = ({
     <div
       onClick={onClick}
       className={cn(
-        "h-60 w-full bg-white rounded-xl border border-neutral-100 dark:bg-black dark:border-white/20 hover:border-neutral-200 group/btn overflow-hidden relative flex items-center justify-center",
-        className
-      )}
-    >
-      <div className="absolute inset-0 dark:bg-dot-white/[0.1] bg-dot-black/[0.1]" />
-      <Clipboard className="absolute top-2 right-2 text-neutral-300 group-hover/btn:block hidden h-4 w-4 transition duration-200" />
+        "relative flex h-60 w-full items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-[var(--surface-base)] text-white transition duration-200 hover:border-white/25",
+      className
+    )}
+  >
+      <div className="absolute inset-0 bg-dot-white/[0.08]" />
+      <Clipboard className="absolute right-2 top-2 hidden h-4 w-4 text-white/60 transition duration-200 group-hover/btn:block" />
       <div className="relative z-40">{children}</div>
     </div>
   );
 };
-

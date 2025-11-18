@@ -11,21 +11,14 @@ interface SurfaceCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const VARIANT_CLASSES: Record<SurfaceVariant, string> = {
-  base:
-    "border border-border/60 bg-[var(--surface-base)] shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)]",
-  muted:
-    "border border-border/50 bg-[var(--surface-muted)] shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)]",
-  panel:
-    "border border-border/45 bg-background/85 shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
-  stats:
-    "border border-border/40 bg-[var(--surface-highlight)]/18 shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
-  elevated:
-    "border border-border/40 bg-[var(--surface-elevated)] shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)]",
-  glass:
-    "border border-border/30 bg-[var(--surface-glass)]/80 shadow-[0_32px_70px_-38px_rgba(0,0,0,0.45)] backdrop-blur-[28px]",
-  outline: "border border-border/45 bg-transparent",
-  pill:
-    "rounded-full border border-border/60 bg-[var(--surface-base)]/95 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.45)]",
+  base: "border-white/25 bg-black/65",
+  muted: "border-white/20 bg-black/55",
+  panel: "border-white/15 bg-black/45",
+  stats: "border-white/20 bg-black/50",
+  elevated: "border-white/30 bg-black/35",
+  glass: "border-white/35 bg-black/30 backdrop-blur-sm",
+  outline: "border-white/30 bg-transparent",
+  pill: "rounded-full border-white/25 bg-black/60",
 };
 
 const PADDING_CLASSES: Record<SurfacePadding, string> = {
@@ -45,7 +38,7 @@ export function SurfaceCard({
   return (
     <div
       className={cn(
-        "rounded-[calc(var(--radius)*3)] transition-shadow duration-200",
+        "relative rounded-[1.8rem] border border-white/25 text-white shadow-[0_45px_95px_-55px_rgba(0,0,0,0.9)] backdrop-blur-sm transition-colors duration-200 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-white/5 before:opacity-50",
         VARIANT_CLASSES[variant],
         PADDING_CLASSES[padding],
         className,

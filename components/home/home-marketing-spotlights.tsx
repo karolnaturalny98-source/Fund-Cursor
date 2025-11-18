@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Percent, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Gift, Percent, Star } from "lucide-react";
 
 import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/layout/section-header";
-import { SurfaceCard } from "@/components/layout/surface-card";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
+import { GlareCard } from "@/components/ui/glare-card";
 import type { MarketingSpotlight, MarketingSpotlightSection } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -29,96 +29,91 @@ export function HomeMarketingSpotlights({ section }: HomeMarketingSpotlightsProp
         eyebrowTone="accent"
       />
 
-    <div className="rounded-[32px] border border-border/40 bg-[var(--surface-muted)]/70 p-6">
-        <div className="grid gap-6 md:grid-cols-3">
-          {section.spotlights.slice(0, 6).map((spotlight) => (
-            <SpotlightCard key={spotlight.id} spotlight={spotlight} />
-          ))}
-        </div>
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {section.spotlights.slice(0, 6).map((spotlight) => (
+          <SpotlightCard key={spotlight.id} spotlight={spotlight} />
+        ))}
       </div>
     </Section>
   );
 }
 
 function SpotlightCard({ spotlight }: { spotlight: MarketingSpotlight }) {
-  const ratingLabel = spotlight.rating
-    ? `${spotlight.rating.toFixed(1)} / 5`
-    : "Brak ocen";
+  const ratingLabel = spotlight.rating ? `${spotlight.rating.toFixed(1)} / 5` : "Brak ocen";
   const ratingCount = spotlight.ratingCount ? `${spotlight.ratingCount} opinii` : "nowość";
-  const discountLabel = typeof spotlight.discountValue === "number" ? `${spotlight.discountValue}%` : null;
+  const discountLabel =
+    typeof spotlight.discountValue === "number" ? `${spotlight.discountValue}%` : null;
   const badgeTone = getBadgeTone(spotlight.badgeTone);
+  const highlights = [
+    spotlight.headline ?? spotlight.company?.name,
+    spotlight.benefits?.[0],
+    spotlight.benefits?.[1],
+  ].filter(Boolean);
 
   return (
-    <SurfaceCard
-      variant="glass"
-      padding="md"
-      className="flex h-full flex-col justify-between gap-5 border border-border/40 bg-[var(--surface-muted)]/80 hover:border-primary/40"
-    >
+    <GlareCard className="flex h-full flex-col justify-between gap-5 rounded-3xl border border-white/10 bg-black p-5">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center justify-between">
           <Badge variant="outline" className={cn("rounded-full text-[0.7rem] font-semibold", badgeTone)}>
             {spotlight.badgeLabel ?? "Specjalna oferta"}
           </Badge>
-          {discountLabel ? (
-            <Text
-              asChild
-              variant="caption"
-              tone="primary"
-              weight="semibold"
-              className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5"
-            >
-              <span>
-                <Percent className="h-3 w-3" />
-                {discountLabel}
-              </span>
-            </Text>
-          ) : null}
+          <div className="flex items-center gap-2 text-xs text-white/70">
+            <Star className="h-3 w-3 text-amber-400" />
+            {ratingLabel} • {ratingCount}
+          </div>
         </div>
         <div className="flex items-center gap-3">
           {spotlight.company?.logoUrl ? (
-          <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-border/40 bg-[var(--surface-base)]">
+            <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/20 bg-black/60">
               <Image src={spotlight.company.logoUrl} alt={spotlight.company.name} fill sizes="40px" className="object-contain" />
             </div>
-          ) : null}
-          <div className="flex flex-col gap-1.5">
-            <Text variant="body" weight="semibold" className="text-foreground">
+          ) : (
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-xs font-semibold uppercase text-white">
+              {spotlight.company?.name?.slice(0, 2) ?? "FR"}
+            </div>
+          )}
+          <div className="space-y-1">
+            <Text variant="body" weight="semibold" className="text-white">
               {spotlight.title}
             </Text>
-            <Text variant="caption" tone="muted" className="line-clamp-2">
-              {spotlight.headline ?? spotlight.company?.name ?? "Sprawdź szczegóły"}
-            </Text>
+            <p className="text-xs text-white/60 line-clamp-2">{spotlight.headline ?? "Poznaj szczegóły"}</p>
           </div>
         </div>
-        <Text asChild variant="caption" tone="muted" className="flex flex-wrap items-center gap-3 text-muted-foreground">
-          <div>
-            <span className="inline-flex items-center gap-1">
-              <Star className="h-3 w-3 text-amber-500" />
-              {ratingLabel}
-            </span>
-            <span className="ml-3">{ratingCount}</span>
-          </div>
-        </Text>
+        <ul className="space-y-1 text-xs text-white/70">
+          {discountLabel ? (
+            <li className="flex items-center gap-1">
+              <Gift className="h-3.5 w-3.5 text-primary" />
+              Kod {discountLabel}
+            </li>
+          ) : null}
+          {highlights.slice(0, 2).map((highlight, index) => (
+            <li key={`${highlight}-${index}`} className="flex items-center gap-1 text-white/70">
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" />
+              {highlight}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="flex items-center justify-between border-t border-border/30 pt-4">
-        <Text variant="body" weight="semibold" className="text-foreground">
-          {spotlight.company?.name ?? "Oferta"}
-        </Text>
+      <div className="flex items-center justify-between border-t border-white/10 pt-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.3em] text-white/50">Firma</p>
+          <p className="text-sm font-semibold text-white">
+            {spotlight.company?.name ?? "Oferta FundedRank"}
+          </p>
+        </div>
         {spotlight.ctaUrl ? (
           <Link
             href={spotlight.ctaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "gap-1 text-white",
-            )}
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-1 rounded-full bg-white/10 px-4 text-white")}
           >
-            {spotlight.ctaLabel ?? "Sprawdź"}
+            {spotlight.ctaLabel ?? "Odbierz"}
             <ArrowRight className="h-4 w-4" />
           </Link>
         ) : null}
       </div>
-    </SurfaceCard>
+    </GlareCard>
   );
 }
 

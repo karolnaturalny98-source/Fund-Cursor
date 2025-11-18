@@ -103,22 +103,26 @@ export function HomeHero({ metrics }: HomeHeroProps) {
   );
 
   return (
-    <Section size="lg" bleed className="relative px-0 py-[clamp(2rem,3vw,3.5rem)]">
+    <Section
+      size="lg"
+      bleed
+      className="relative isolate overflow-hidden bg-background px-0 py-[clamp(2rem,3vw,3.5rem)]"
+    >
       <div className="relative mx-auto flex max-w-5xl flex-col gap-12 px-4 text-white">
         <div className="relative flex flex-col items-center gap-12">
-          <div className="pointer-events-none absolute -top-16 left-1/2 h-32 w-full max-w-4xl -translate-x-1/2">
+          <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-full max-w-6xl -translate-x-1/2">
             <div className="relative h-full w-full">
               <div className="absolute left-1/2 top-0 h-[2px] w-4/5 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
               <div className="absolute left-1/2 top-1 h-[4px] w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-emerald-400 to-transparent blur-sm" />
               <SparklesCore
                 background="transparent"
-                minSize={0.5}
-                maxSize={1.2}
-                particleDensity={900}
-                particleColor="#C0E7FF"
-                className="absolute top-[18px] h-full w-full"
+                minSize={0.4}
+                maxSize={1}
+                particleDensity={1200}
+                particleColor="#ffffff"
+                className="pointer-events-none absolute inset-0 h-full w-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 h-full w-full bg-[hsl(var(--background))] [mask-image:radial-gradient(520px_320px_at_top,transparent_20%,white)]" />
             </div>
           </div>
           <div className="relative z-10 flex flex-col items-center gap-8 text-center">

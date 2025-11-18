@@ -8,30 +8,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const surfaceVariants = cva(
-  "relative rounded-2xl border border-border/60 bg-card/72 text-foreground shadow-xs transition-colors duration-300",
+  "relative rounded-[1.75rem] border border-white/25 bg-black/60 text-white shadow-[0_45px_95px_-55px_rgba(0,0,0,0.9)] backdrop-blur-sm transition-colors duration-200 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-white/5 before:opacity-40",
   {
     variants: {
       variant: {
-        default: "bg-card/72 text-foreground backdrop-blur-[28px]!",
-        muted: "bg-muted/40 text-foreground/90 backdrop-blur",
-        panel:
-          "border-border/50 bg-[var(--surface-base)]/90 text-foreground shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
-        stats:
-          "border-border/40 bg-[var(--surface-highlight)]/20 text-foreground shadow-[0_28px_60px_-40px_rgba(15,23,42,0.32),0_12px_32px_-32px_rgba(15,23,42,0.24)] backdrop-blur",
-        glass:
-          "border-white/15 bg-white/5 text-white/90 shadow-[0_35px_120px_-45px_rgba(255,255,255,0.85)] backdrop-blur-[42px]",
-        ghost: "border-transparent bg-transparent shadow-none",
-        outline: "border-dashed border-border/50 bg-transparent",
+        default: "border-white/25 bg-black/60",
+        muted: "border-white/20 bg-black/50",
+        panel: "border-white/18 bg-black/40",
+        stats: "border-white/20 bg-black/45",
+        glass: "border-white/30 bg-black/35 backdrop-blur",
+        ghost: "border-transparent bg-transparent text-white/70 shadow-none",
+        outline: "border-white/20 bg-transparent",
         pill:
-          "rounded-full border-border/60 bg-card/70 text-foreground shadow-[0_8px_30px_-20px_rgba(15,23,42,0.45)]",
+          "rounded-full border-white/12 bg-black/35 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset]",
         "pill-muted":
-          "rounded-full border-border/50 bg-muted/40 text-muted-foreground shadow-[0_8px_30px_-20px_rgba(15,23,42,0.3)]",
-        elevated:
-          "bg-background/80 text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.45),0_14px_34px_-30px_rgba(15,23,42,0.28)] backdrop-blur",
+          "rounded-full border-white/10 bg-black/25 text-white/75 shadow-[0_0_0_1px_rgba(255,255,255,0.025)_inset]",
+        elevated: "border-white/35 bg-black/25",
         gradient:
-          "border border-transparent bg-[linear-gradient(145deg,hsl(var(--accent)/0.12),hsl(var(--primary)/0.16))] text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.4)] backdrop-blur",
+          "border border-white/30 bg-black/20",
         "gradient-outline":
-          "border border-transparent bg-[linear-gradient(hsl(var(--card)),hsl(var(--card)))_padding-box,linear-gradient(130deg,hsl(var(--accent)),hsl(var(--primary)))_border-box] text-foreground shadow-[0_32px_70px_-38px_rgba(15,23,42,0.4)] backdrop-blur",
+          "border border-white/30 bg-transparent",
       },
       padding: {
         none: "p-0",

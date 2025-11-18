@@ -193,6 +193,9 @@ export interface TopCashbackCompany {
   cashbackRate: number;
   minCashback: number;
   maxCashback: number;
+  discountCode: string | null;
+  minPlanPrice: number | null;
+  maxPlanPrice: number | null;
 }
 
 export interface FaqItem {
