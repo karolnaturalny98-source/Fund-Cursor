@@ -133,14 +133,14 @@ export function HomeHero({ metrics }: HomeHeroProps) {
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
               <div className="flex w-full flex-col">
-                <Button
-                  asChild
-                  size="none"
-                  variant="ghost"
-                  className="inline-flex h-12 animate-shimmer items-center justify-center !rounded-[0.75rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 text-sm font-semibold text-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 sm:w-auto"
-                >
-                  <Link href="/rankingi">Zobacz ranking firm</Link>
-                </Button>
+                <div className="group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-[0.75rem] p-[2px] before:absolute before:inset-0 before:rounded-[0.75rem] before:bg-gradient-to-r before:from-emerald-400 before:via-cyan-400 before:to-emerald-500 before:opacity-100 sm:w-auto">
+                  <Link
+                    href="/rankingi"
+                    className="relative inline-flex h-full w-full items-center justify-center rounded-[0.65rem] bg-[#061015] px-6 text-sm font-semibold text-emerald-50 transition duration-200 group-hover:bg-transparent"
+                  >
+                    Zobacz ranking firm
+                  </Link>
+                </div>
               </div>
               <Button
                 asChild
@@ -188,7 +188,7 @@ function AITradingRadar() {
         }}
         className="relative w-full max-w-sm will-change-transform"
       >
-        <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#041b1b]/80 via-[#030c16]/80 to-[#020205] p-6 shadow-[0_40px_80px_rgba(6,182,212,0.25)]">
+        <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#041b1b]/80 via-[#030c16]/80 to-[#020205] p-6 shadow-[0_55px_110px_rgba(30,42,56,0.45)]">
           <div className="pointer-events-none absolute inset-0" aria-hidden="true">
             {[0.7, 0.85, 1].map((scaleValue, index) => (
               <div

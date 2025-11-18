@@ -47,10 +47,16 @@ export function RankingTabsSection({
     return <FullRankingTabs tabs={tabs} />;
   }
 
-  return <HomeRankingTabs tabs={tabs} />;
+  return <HomeRankingTabs tabs={tabs} variant={variant} />;
 }
 
-function HomeRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
+function HomeRankingTabs({
+  tabs,
+  variant = "home",
+}: {
+  tabs: HomeRankingTab[];
+  variant?: "home" | "full";
+}) {
   const logClick = useAffiliateClickLogger("home_ranking_section");
   const [accountTypeFilter, setAccountTypeFilter] = useState("");
   const [evaluationFilter, setEvaluationFilter] = useState("");
@@ -156,18 +162,7 @@ function HomeRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-white/70">
-          {activeTabData?.description ?? tabs[0]?.description ?? ""}
-        </p>
-        <div className="flex items-center gap-3">
-          <Link
-            href="/rankingi"
-            prefetch={false}
-            className="text-sm font-semibold text-white/80 transition hover:text-white"
-          >
-            Pełny ranking
-            <ArrowRight className="ml-2 inline-block h-4 w-4" />
-          </Link>
+        <div className="flex flex-wrap items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
@@ -176,7 +171,18 @@ function HomeRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
           >
             {filtersOpen ? "Ukryj filtry" : "Pokaż filtry"}
           </Button>
+          <p className="text-sm text-white/70">
+            {activeTabData?.description ?? tabs[0]?.description ?? ""}
+          </p>
         </div>
+        {variant !== "home" && (
+          <Button asChild variant="nav-ghost" className="text-sm font-semibold text-white">
+            <Link href="/rankingi" prefetch={false}>
+              Zobacz ranking
+              <ArrowRight className="ml-2 inline-block h-4 w-4" />
+            </Link>
+          </Button>
+        )}
       </div>
 
       <div className="flex flex-col gap-4 lg:flex-row">
@@ -228,7 +234,7 @@ function HomeRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className="flex items-center justify-center rounded-full border border-white/20 bg-black/70 px-6 py-2 text-sm font-semibold text-white/80 transition-all duration-200 data-[state=inactive]:text-white/70 data-[state=active]:border-white data-[state=active]:bg-black/80 data-[state=active]:text-white data-[state=active]:shadow-none hover:border-white/40"
+                    className="relative flex items-center justify-center overflow-hidden rounded-[0.85rem] border border-white/20 bg-black/60 px-6 py-2 text-sm font-semibold text-white/70 transition-colors duration-200 hover:border-white/40 data-[state=inactive]:shadow-none data-[state=active]:border-emerald-200/60 data-[state=active]:bg-black/80 data-[state=active]:text-white data-[state=active]:shadow-[0_16px_40px_rgba(8,20,33,0.45)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:opacity-90 data-[state=active]:after:content-['']"
                   >
                     {tab.label}
                   </TabsTrigger>
@@ -540,10 +546,10 @@ function HomeRankingRow({
   return (
     <article
       className={cn(
-        "group relative flex flex-col gap-3 rounded-2xl border border-white/15 bg-black/70 px-4 py-3 text-white transition duration-200",
+        "group relative flex flex-col gap-3 rounded-2xl border border-white/15 bg-[#05090f]/80 px-4 py-3 text-white transition duration-200",
         isTopRank
-          ? "border-amber-300/40 bg-gradient-to-r from-black/80 via-black/60 to-emerald-950/70 shadow-[0_25px_40px_rgba(16,185,129,0.35)]"
-          : "hover:-translate-y-[2px] hover:border-white/40 hover:bg-white/5 hover:shadow-[0_16px_25px_rgba(16,185,129,0.25)]",
+          ? "border-white/25 bg-gradient-to-br from-[#0b1321] via-[#111d30] to-[#060b14] shadow-[0_35px_70px_-30px_rgba(10,20,35,0.85)]"
+          : "hover:-translate-y-px hover:border-white/30 hover:bg-white/5 hover:shadow-[0_22px_38px_-28px_rgba(10,20,33,0.65)]",
       )}
     >
       <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-5">
@@ -633,21 +639,23 @@ function HomeRankingRow({
           <span className="rounded-full border border-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
             {discountLabel}
           </span>
-          <Button
-            asChild
-            size="sm"
-            variant="premium"
-            className="w-full rounded-full px-5 py-2 font-semibold text-white lg:w-auto"
-          >
+          <div className="w-full lg:w-auto">
             <Link
               href={affiliateHref}
               prefetch={false}
               onClick={() => onAffiliateClick("primary")}
               aria-label={`Przejdz do firmy ${company.name} i odbierz cashback`}
+              className="relative inline-flex h-11 w-full items-center justify-center overflow-hidden rounded-[0.8rem] p-[1px] text-sm font-semibold text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
-              Odbierz cashback
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-[-130%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#34d399_0%,#0ea5e9_50%,#34d399_100%)] opacity-70"
+              />
+              <span className="relative inline-flex h-full w-full items-center justify-center rounded-[0.65rem] bg-[#050b13] px-5 py-2 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] transition-colors duration-200 hover:bg-transparent">
+                Odbierz cashback
+              </span>
             </Link>
-          </Button>
+          </div>
           <Link
             href={detailsHref}
             prefetch={false}
@@ -768,7 +776,7 @@ function FullRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
           <TabsTrigger
             key={tab.id}
             value={tab.id}
-            className="rounded-full px-4 py-2 text-sm font-medium text-white/70 transition data-[state=active]:bg-white data-[state=active]:text-black"
+            className="relative flex items-center justify-center overflow-hidden rounded-full border border-transparent px-4 py-2 text-sm font-medium text-white/70 transition-colors duration-200 hover:border-white/30 data-[state=active]:border-white/40 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-[0_10px_25px_rgba(8,20,30,0.35)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:content-['']"
           >
             {tab.label}
           </TabsTrigger>
@@ -779,13 +787,15 @@ function FullRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
         <TabsContent key={tab.id} value={tab.id} className="mt-6 space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-white/70">{tab.description}</p>
-            <Button asChild variant="nav-ghost" className="text-sm font-semibold text-white">
-              <Link href="/rankingi" prefetch={false}>
-                Pelny ranking
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+        <Link
+          href="/rankingi"
+          prefetch={false}
+          className="text-sm font-semibold text-white/80 transition hover:text-white"
+        >
+          Zobacz ranking
+          <ArrowRight className="ml-2 inline-block h-4 w-4" />
+        </Link>
+      </div>
 
           <div className="space-y-3">
             {tab.companies.map((company, index) => (
