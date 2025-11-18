@@ -1,185 +1,271 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import type { FormEvent } from "react";
-import { useCallback, useState } from "react";
+import { motion } from "framer-motion";
 
 import { Section } from "@/components/layout/section";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
-import { SparklesCore } from "@/components/ui/sparkles";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { HomepageMetrics } from "@/lib/types";
-
-const SEARCH_PLACEHOLDERS = [
-  "np. Funding Pips",
-  "Alpha Capital",
-  "Smart Prop",
-  "The Funded Trader",
-];
-
-const HERO_WORDS = [
-  { text: "Twój" },
-  { text: "kompas" },
-  { text: "w" },
-  { text: "prop" },
-  { text: "tradingu.", className: "text-emerald-400" },
-];
-
-const PEOPLE = [
-  {
-    id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
-  },
-  {
-    id: 2,
-    name: "Robert Johnson",
-    designation: "Product Manager",
-    image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 3,
-    name: "Jane Smith",
-    designation: "Data Scientist",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    designation: "UX Designer",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 5,
-    name: "Tyler Durden",
-    designation: "Soap Developer",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80",
-  },
-  {
-    id: 6,
-    name: "Dora",
-    designation: "The Explorer",
-    image:
-      "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3534&q=80",
-  },
-];
 
 interface HomeHeroProps {
   metrics: HomepageMetrics;
 }
 
+type RadarFirm = {
+  id: number;
+  name: string;
+  cashback: string;
+  planFrom: string;
+  rank: number;
+  angle: number;
+  radius: number;
+  highlight: string;
+};
+
+const RADAR_FIRMS: RadarFirm[] = [
+  {
+    id: 1,
+    name: "Flash Funding",
+    cashback: "3% cashback",
+    planFrom: "Plan od 499 USD",
+    rank: 1,
+    angle: 12,
+    radius: 88,
+    highlight: "Instant funding bez limitu czasu",
+  },
+  {
+    id: 2,
+    name: "Elite Traders",
+    cashback: "8% cashback",
+    planFrom: "Plan od 250 USD",
+    rank: 2,
+    angle: 140,
+    radius: 120,
+    highlight: "Najwyższy cashback",
+  },
+  {
+    id: 3,
+    name: "Rapid Capital",
+    cashback: "6% cashback",
+    planFrom: "Plan od 299 USD",
+    rank: 3,
+    angle: 255,
+    radius: 140,
+    highlight: "Szybkie wypłaty 24h",
+  },
+  {
+    id: 4,
+    name: "Nova Prop",
+    cashback: "4% cashback",
+    planFrom: "Plan od 199 USD",
+    rank: 4,
+    angle: 315,
+    radius: 105,
+    highlight: "2-step challenge",
+  },
+  {
+    id: 5,
+    name: "Core FX Labs",
+    cashback: "5% cashback",
+    planFrom: "Plan od 450 USD",
+    rank: 5,
+    angle: 70,
+    radius: 155,
+    highlight: "Top ocena społeczności",
+  },
+];
+
 export function HomeHero({ metrics }: HomeHeroProps) {
-  const router = useRouter();
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearchChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchValue(event.target.value);
-    },
-    [],
-  );
-
-  const handleSearchSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const query = searchValue.trim();
-      if (!query) return;
-      const params = new URLSearchParams();
-      params.set("search", query);
-      router.push(`/firmy?${params.toString()}`);
-      setSearchValue("");
-    },
-    [router, searchValue],
-  );
+  const stats = [
+    `${Math.max(metrics.totalCompanies, 40)}+ firm w bazie`,
+    `${Math.max(metrics.totalReviews, 800)}+ opinii`,
+    "do 8% cashbacku",
+  ];
 
   return (
-    <Section
-      size="lg"
-      bleed
-      className="relative isolate overflow-hidden bg-background px-0 py-[clamp(2rem,3vw,3.5rem)]"
-    >
-      <div className="relative mx-auto flex max-w-5xl flex-col gap-12 px-4 text-white">
-        <div className="relative flex flex-col items-center gap-12">
-          <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-full max-w-6xl -translate-x-1/2">
-            <div className="relative h-full w-full">
-              <div className="absolute left-1/2 top-0 h-[2px] w-4/5 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-              <div className="absolute left-1/2 top-1 h-[4px] w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-emerald-400 to-transparent blur-sm" />
-              <SparklesCore
-                background="transparent"
-                minSize={0.4}
-                maxSize={1}
-                particleDensity={1200}
-                particleColor="#ffffff"
-                className="pointer-events-none absolute inset-0 h-full w-full"
-              />
-              <div className="pointer-events-none absolute inset-0 h-full w-full bg-[hsl(var(--background))] [mask-image:radial-gradient(520px_320px_at_top,transparent_20%,white)]" />
-            </div>
-          </div>
-          <div className="relative z-10 flex flex-col items-center gap-8 text-center">
+    <TooltipProvider delayDuration={150}>
+      <Section
+        size="lg"
+        bleed
+        className="relative isolate overflow-hidden bg-background px-0 py-16 sm:py-20"
+      >
+        <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 md:grid-cols-2 lg:gap-16">
+          <div className="flex flex-col gap-6 text-white">
             <Badge variant="hero" className="w-fit gap-3 border-white/10 text-white/80">
-              FundedRank
-              <span className="h-1 w-1 rounded-full bg-emerald-400" />
-              Live
+              FUNDEDRANK
+              <span className="h-1 w-1 rounded-full bg-emerald-400" aria-hidden="true" />
+              LIVE
             </Badge>
+
             <div className="space-y-4">
-              <TypewriterEffectSmooth
-                words={HERO_WORDS}
-                className="text-white"
-                cursorClassName="bg-emerald-400"
-              />
-              <p className="max-w-2xl text-base text-white/70">
-                Porównuj firmy prop, poluj na cashback i przechodź od razu do kont dostosowanych
-                pod Twój styl tradingu. Wszystkie dane — ceny, opinie i promocje — aktualizowane na bieżąco.
+              <h1 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Twój skrót do najlepszych firm prop.
+              </h1>
+              <p className="max-w-xl text-base text-white/70 sm:text-lg">
+                Porównujemy warunki planów, cashback i opinie traderów, żeby wybrać tylko realnych liderów
+                rynku prop tradingu.
               </p>
             </div>
-            <PlaceholdersAndVanishInput
-              placeholders={SEARCH_PLACEHOLDERS}
-              onChange={handleSearchChange}
-              onSubmit={handleSearchSubmit}
-            />
-            <div className="flex flex-wrap gap-4">
-              <HoverBorderGradient
-                as={Link}
-                href="/rankingi"
-                className="text-white text-sm"
-                containerClassName="rounded-full"
-              >
-                Zobacz ranking
-              </HoverBorderGradient>
-              <Badge
+
+            <p className="text-sm font-medium text-white/60">
+              {stats.join(" • ")}
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <Button
                 asChild
-                variant="hero"
-                className="rounded-full border-white/15 px-6 py-2 text-sm font-semibold text-white/80 transition hover:text-white"
+                variant="primary"
+                className="w-full rounded-full sm:w-auto"
+              >
+                <Link href="/rankingi">Zobacz ranking firm</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full rounded-full border-white/30 text-white hover:bg-white/10 sm:w-auto"
               >
                 <Link href="/affilacja">Program cashback</Link>
-              </Badge>
+              </Button>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center gap-6">
-                <AnimatedTooltip items={PEOPLE} />
-                <div className="flex items-center gap-2 pl-5">
-                  {[...Array(5)].map((_, index) => (
-                    <span key={`star-${index}`} className="text-emerald-300 text-xl">★</span>
-                  ))}
-                </div>
-              </div>
-              <div className="text-sm text-white/70">
-                Trusted by {metrics.totalReviews.toLocaleString("pl-PL")}+ traderów
-              </div>
-            </div>
+          </div>
+
+          <AITradingRadar />
+        </div>
+      </Section>
+    </TooltipProvider>
+  );
+}
+
+function AITradingRadar() {
+  return (
+    <div className="flex items-center justify-center">
+      <div className="relative w-full max-w-sm">
+        <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#041b1b]/80 via-[#030c16]/80 to-[#020205] p-6 shadow-[0_40px_80px_rgba(6,182,212,0.25)]">
+          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+            {[0, 1, 2, 3].map((index) => (
+              <div
+                key={`ring-${index}`}
+                className="absolute inset-0 rounded-[2.5rem] border border-white/5"
+                style={{
+                  inset: `${index * 8 + 8}px`,
+                }}
+              />
+            ))}
+            <div className="absolute inset-x-1/2 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+            <div className="absolute inset-y-1/2 w-full -translate-y-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          </div>
+
+          <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/60">
+            AI Radar
+          </div>
+
+          <div className="relative flex h-full w-full items-center justify-center">
+            <RadarCore />
+            {RADAR_FIRMS.map((firm) => (
+              <RadarPoint key={firm.id} firm={firm} />
+            ))}
           </div>
         </div>
       </div>
-    </Section>
+    </div>
   );
+}
+
+function RadarCore() {
+  return (
+    <div className="relative flex h-24 w-24 items-center justify-center">
+      {[0, 1, 2].map((index) => (
+        <motion.div
+          key={`pulse-${index}`}
+          className="absolute h-full w-full rounded-full border border-emerald-400/30"
+          animate={{
+            opacity: [0.9, 0.2, 0],
+            scale: [0.6 + index * 0.1, 1.1 + index * 0.15, 1.2 + index * 0.2],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            delay: index * 0.4,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+      <motion.div
+        className="relative h-16 w-16 rounded-full bg-gradient-to-br from-emerald-400 via-emerald-300 to-cyan-400 shadow-[0_0_40px_rgba(16,185,129,0.7)]"
+        animate={{
+          scale: [0.95, 1, 0.97],
+          rotate: [0, 5, -3, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute h-20 w-20 rounded-full border border-emerald-400/30"
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+    </div>
+  );
+}
+
+function RadarPoint({ firm }: { firm: RadarFirm }) {
+  const { x, y } = polarToCartesian(firm.angle, firm.radius);
+  const highlightColor =
+    firm.rank === 1 ? "bg-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.65)]" : "bg-white/70 shadow-[0_0_15px_rgba(255,255,255,0.35)]";
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <motion.div
+          className={`absolute z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ${highlightColor}`}
+          style={{
+            top: `calc(50% + ${y}px)`,
+            left: `calc(50% + ${x}px)`,
+          }}
+          animate={{
+            y: ["-4px", "4px", "-4px"],
+          }}
+          transition={{
+            duration: 3.5 + firm.rank * 0.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <span className="sr-only">{firm.name}</span>
+        </motion.div>
+      </TooltipTrigger>
+      <TooltipContent
+        side="top"
+        align="center"
+        className="border border-white/20 bg-black/85 p-0 text-white"
+      >
+        <Card variant="ghost" className="border-white/15 bg-white/5 p-4 shadow-[0_20px_45px_rgba(7,89,133,0.35)]">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-white/50">#{firm.rank}</p>
+          <p className="text-sm font-semibold text-white">{firm.name}</p>
+          <p className="text-xs text-white/70">{firm.cashback}</p>
+          <p className="text-xs text-white/70">{firm.planFrom}</p>
+          <p className="text-xs text-white/60">{firm.highlight}</p>
+        </Card>
+      </TooltipContent>
+    </Tooltip>
+  );
+}
+
+function polarToCartesian(angle: number, radius: number) {
+  const radians = (angle * Math.PI) / 180;
+  const x = Math.cos(radians) * radius;
+  const y = Math.sin(radians) * radius;
+  return { x, y };
 }
