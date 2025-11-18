@@ -14,6 +14,7 @@ import {
   Zap,
   Turtle,
   Check,
+  Filter,
 } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -65,6 +66,19 @@ function HomeRankingTabs({
   const [verifiedFilter, setVerifiedFilter] = useState(false);
   const [payoutSpeedFilter, setPayoutSpeedFilter] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const activeFiltersCount = useMemo(
+    () =>
+      [
+        accountTypeFilter,
+        evaluationFilter,
+        countryFilter,
+        cashbackFilter,
+        verifiedFilter ? "verified" : "",
+        payoutSpeedFilter,
+      ].filter(Boolean).length,
+    [accountTypeFilter, evaluationFilter, countryFilter, cashbackFilter, verifiedFilter, payoutSpeedFilter],
+  );
+  const hasActiveFilters = activeFiltersCount > 0;
 
   const accountTypeOptions = useMemo(() => {
     const values = new Set<string>();
@@ -166,12 +180,21 @@ function HomeRankingTabs({
           <Button
             variant="ghost"
             size="sm"
-            className="rounded-full border border-white/20 px-4 text-white/80 hover:border-white"
+            className={cn(
+              "inline-flex w-full items-center gap-2 rounded-[0.85rem] border border-white/20 bg-white/5 px-4 text-white/85 shadow-[0_8px_20px_rgba(7,15,20,0.35)] transition hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 sm:w-auto",
+              hasActiveFilters && "border-emerald-300/70 bg-emerald-500/10 text-white",
+            )}
             onClick={() => setFiltersOpen((prev) => !prev)}
           >
+            <Filter className="h-4 w-4" />
             {filtersOpen ? "Ukryj filtry" : "Pokaż filtry"}
+            {hasActiveFilters ? (
+              <span className="inline-flex h-5 min-w-[1.5rem] items-center justify-center rounded-full bg-white/20 px-2 text-xs font-semibold text-white">
+                {activeFiltersCount}
+              </span>
+            ) : null}
           </Button>
-          <p className="text-sm text-white/70">
+          <p className="text-sm text-white/65">
             {activeTabData?.description ?? tabs[0]?.description ?? ""}
           </p>
         </div>
@@ -234,7 +257,7 @@ function HomeRankingTabs({
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className="relative flex items-center justify-center overflow-hidden rounded-[0.85rem] border border-white/20 bg-black/60 px-6 py-2 text-sm font-semibold text-white/70 transition-colors duration-200 hover:border-white/40 data-[state=inactive]:shadow-none data-[state=active]:border-emerald-200/60 data-[state=active]:bg-black/80 data-[state=active]:text-white data-[state=active]:shadow-[0_16px_40px_rgba(8,20,33,0.45)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:opacity-90 data-[state=active]:after:content-['']"
+                    className="relative flex items-center justify-center overflow-hidden rounded-[0.85rem] border border-white/20 bg-black/60 px-6 py-2 text-sm font-semibold text-white/70 transition-colors duration-200 hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white data-[state=inactive]:shadow-none data-[state=active]:border-emerald-200/60 data-[state=active]:bg-black/80 data-[state=active]:text-white data-[state=active]:shadow-[0_16px_40px_rgba(8,20,33,0.45)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:opacity-90 data-[state=active]:after:content-['']"
                   >
                     {tab.label}
                   </TabsTrigger>
@@ -529,7 +552,7 @@ function HomeRankingRow({
   const challengeLabel =
     typeof company.recommendedRatio === "number"
       ? `Challenge ${company.recommendedRatio.toFixed(0)}%`
-      : "Challenge data";
+      : "Brak danych";
   const uspCopy = company.headline ?? "Prosty onboarding i szybkie wypłaty";
   const countryInfo = getCountryDisplay(company.country, company.foundedYear);
   const affiliateHref = buildCompanyHref(company.slug, {
@@ -584,7 +607,7 @@ function HomeRankingRow({
             {verifiedPartner && (
               <div className="flex items-center gap-1 text-[10px] text-emerald-300/90">
                 <Check className="h-3 w-3" />
-                Verified partner
+                Zweryfikowany partner
               </div>
             )}
             <div className="text-xs text-white/50">
@@ -776,7 +799,7 @@ function FullRankingTabs({ tabs }: { tabs: HomeRankingTab[] }) {
           <TabsTrigger
             key={tab.id}
             value={tab.id}
-            className="relative flex items-center justify-center overflow-hidden rounded-full border border-transparent px-4 py-2 text-sm font-medium text-white/70 transition-colors duration-200 hover:border-white/30 data-[state=active]:border-white/40 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-[0_10px_25px_rgba(8,20,30,0.35)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:content-['']"
+            className="relative flex items-center justify-center overflow-hidden rounded-full border border-transparent px-4 py-2 text-sm font-medium text-white/70 transition-colors duration-200 hover:border-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white data-[state=active]:border-white/40 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-[0_10px_25px_rgba(8,20,30,0.35)] data-[state=active]:after:absolute data-[state=active]:after:left-1/2 data-[state=active]:after:top-0 data-[state=active]:after:h-[2px] data-[state=active]:after:w-2/3 data-[state=active]:after:-translate-x-1/2 data-[state=active]:after:bg-gradient-to-r data-[state=active]:after:from-transparent data-[state=active]:after:via-emerald-300 data-[state=active]:after:to-transparent data-[state=active]:after:content-['']"
           >
             {tab.label}
           </TabsTrigger>
